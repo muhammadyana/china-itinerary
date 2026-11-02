@@ -1,0 +1,312 @@
+{
+  "checkedAt": "2026-11-03",
+  "summary": "Four optimized photo assets ready, including one verified October 2026 capture. Two existing photo fallbacks complete six on-route destinations. Publication date is never presented as capture date.",
+  "newPhotos": [
+    {
+      "id": "highlight-jiuzhaigou",
+      "destination": "Jiuzhaigou",
+      "date": "2026-11-09",
+      "author": "Kent Chin",
+      "source": "https://www.pexels.com/photo/scenic-autumn-reflection-in-jiuzhaigou-valley-37302353/",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "origin": "Pexels",
+      "publishedAt": "2026-04-28",
+      "capturedAt": "2025-11-06",
+      "originalDimensions": [
+        3894,
+        5841
+      ],
+      "photoNote": "Foto kawasan Jiuzhaigou; sumber tidak menamai danau tertentu. Diambil 6 November 2025, diterbitkan 28 April 2026.",
+      "width": 1600,
+      "height": 2400,
+      "sizes": [
+        480,
+        960,
+        1440
+      ],
+      "status": "ready",
+      "downloadedAt": "2026-11-03",
+      "files": [
+        "photos/highlight-jiuzhaigou-480.webp",
+        "photos/highlight-jiuzhaigou-960.webp",
+        "photos/highlight-jiuzhaigou-1440.webp"
+      ]
+    },
+    {
+      "id": "highlight-siguniang",
+      "destination": "Siguniangshan",
+      "date": "2026-11-10",
+      "author": "Oli Liao",
+      "source": "https://www.pexels.com/photo/majestic-view-of-siguniang-mountain-range-40267914/",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "origin": "Pexels",
+      "publishedAt": "2026-10-14",
+      "capturedAt": "2026-10-14",
+      "originalDimensions": [
+        10608,
+        14144
+      ],
+      "photoNote": "Panorama Siguniangshan menurut sumber. Diambil dan diterbitkan 14 Oktober 2026. Sudut foto bukan verifikasi titik Maobiliang atau lembah Shuangqiao.",
+      "width": 1600,
+      "height": 2133,
+      "sizes": [
+        480,
+        960,
+        1440
+      ],
+      "status": "ready",
+      "downloadedAt": "2026-11-03",
+      "files": [
+        "photos/highlight-siguniang-480.webp",
+        "photos/highlight-siguniang-960.webp",
+        "photos/highlight-siguniang-1440.webp"
+      ]
+    },
+    {
+      "id": "highlight-blue-moon",
+      "destination": "Blue Moon Valley",
+      "date": "2026-11-19",
+      "author": "Richard L",
+      "source": "https://www.pexels.com/photo/stunning-view-of-jade-dragon-snow-mountain-and-blue-moon-valley-38718349/",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "origin": "Pexels",
+      "publishedAt": "2026-07-25",
+      "capturedAt": null,
+      "originalDimensions": [
+        4207,
+        6310
+      ],
+      "photoNote": "Diterbitkan 25 Juli 2026. Tanggal pengambilan tidak dicantumkan oleh sumber.",
+      "width": 1600,
+      "height": 2400,
+      "sizes": [
+        480,
+        960,
+        1440
+      ],
+      "status": "ready",
+      "downloadedAt": "2026-11-03",
+      "files": [
+        "photos/highlight-blue-moon-480.webp",
+        "photos/highlight-blue-moon-960.webp",
+        "photos/highlight-blue-moon-1440.webp"
+      ]
+    },
+    {
+      "id": "highlight-erhai",
+      "destination": "Danau Erhai",
+      "date": "2026-11-20",
+      "author": "ShuQizhe",
+      "source": "https://commons.wikimedia.org/wiki/File:Erhai_20260220-1.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "origin": "Wikimedia Commons",
+      "publishedAt": "2026-02-21",
+      "capturedAt": "2026-02-20",
+      "originalDimensions": [
+        3264,
+        2448
+      ],
+      "photoNote": "Diambil 20 Februari 2026. Foto Danau Erhai, bukan verifikasi titik Dermaga Caicun. Diunduh ulang dari berkas resolusi penuh untuk highlight.",
+      "width": 3264,
+      "height": 2448,
+      "sizes": [
+        480,
+        960,
+        1440
+      ],
+      "status": "ready",
+      "downloadedAt": "2026-11-03",
+      "files": [
+        "photos/highlight-erhai-480.webp",
+        "photos/highlight-erhai-960.webp",
+        "photos/highlight-erhai-1440.webp"
+      ]
+    }
+  ],
+  "existingFallbacks": [
+    {
+      "id": "tagong",
+      "width": 1280,
+      "height": 853,
+      "sizes": [
+        480,
+        960,
+        1280
+      ],
+      "author": "Valerian Guillot from Cambridge, United Kingdom",
+      "source": "https://commons.wikimedia.org/wiki/File:Grasslands_in_Tagong_county,_Sichuan,_China_(41077322430).jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "origin": "Wikimedia Commons",
+      "destination": "Padang rumput Tagong",
+      "date": "2026-11-12",
+      "capturedAt": "2018-06-17",
+      "status": "existing fallback",
+      "photoNote": "Foto lokasi sebenarnya; arsip Juni 2018, bukan kondisi Oktober 2026."
+    },
+    {
+      "id": "luorong",
+      "width": 4032,
+      "height": 3024,
+      "sizes": [
+        480,
+        960,
+        1600
+      ],
+      "author": "rheins",
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%B4%9B%E7%BB%92%E7%89%9B%E5%9C%BA_-_Luorong_Pasture_-_2012.10_-_panoramio_(1).jpg",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "origin": "Wikimedia Commons",
+      "destination": "Padang Luorong, Yading",
+      "date": "2026-11-16",
+      "capturedAt": "2012-10",
+      "status": "existing fallback",
+      "photoNote": "Foto lokasi sebenarnya pada Oktober 2012. Tidak membuktikan kondisi atau akses saat perjalanan."
+    }
+  ],
+  "excludedRecentSources": [
+    {
+      "source": "https://en.tibet3.com/travel/2026-10/27/content_500556691.html",
+      "destination": "Jiuzhaigou",
+      "publishedAt": "2026-10-27",
+      "captureEvidence": "First photo caption October20; other dates unspecified.",
+      "reason": "All Rights Reserved; recent reference link only, not downloaded for publication."
+    },
+    {
+      "source": "https://www.sightunpacked.com/destinations/china/lijiang/blue-moon-valley/",
+      "destination": "Blue Moon Valley",
+      "captureEvidence": "Page describes late September2026 photos.",
+      "reason": "No reuse license established; not downloaded for publication."
+    },
+    {
+      "source": "https://photocontest.smithsonianmag.com/photocontest/detail/autumn-nourished-by-snow-capped-mountains/",
+      "destination": "Yading",
+      "capturedAt": "2025-10",
+      "publishedAt": "2025-11",
+      "reason": "Copyright Zehao Qiu, no reuse license; not downloaded for publication."
+    },
+    {
+      "source": "https://www.pexels.com/photo/scenic-view-of-lake-erhai-and-mountains-36552425/",
+      "destination": "Erhai",
+      "capturedAt": "2023-11-05",
+      "publishedAt": "2026-03-13",
+      "reason": "Existing Wikimedia photo was captured more recently, February2026."
+    }
+  ],
+  "usage": [
+    "Use Jiuzhaigou as park-level highlight, not named-lake proof.",
+    "Use Siguniangshan panorama for November10, not a verified Shuangqiao image.",
+    "Huanglong is excluded: not in the PDF main route.",
+    "No claim that all photos were taken in October2026.",
+    "Retain photographer, source, license and resize/crop notice in credits."
+  ],
+  "assetVerification": {
+    "passed": true,
+    "files": [
+      {
+        "file": "photos/highlight-jiuzhaigou-480.webp",
+        "width": 480,
+        "height": 720,
+        "bytes": 86772,
+        "sha256": "8ff3696e45e0892e7f2771bbbff787dfa17c453c0bebf775f2849ac5f919aaec"
+      },
+      {
+        "file": "photos/highlight-jiuzhaigou-960.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 288830,
+        "sha256": "52f9e6fc6b5eaccbe1e40133a3342bf56a71eaa423c07d845ec6cbd92845b322"
+      },
+      {
+        "file": "photos/highlight-jiuzhaigou-1440.webp",
+        "width": 1440,
+        "height": 2160,
+        "bytes": 547174,
+        "sha256": "14746cb860c3273688744675baab7e4feab4c9c7e8bcb0520716cd75af093edf"
+      },
+      {
+        "file": "photos/highlight-siguniang-480.webp",
+        "width": 480,
+        "height": 640,
+        "bytes": 79780,
+        "sha256": "989217de75d5521ec04f3b5b6bc63b5e05b75abb93a4ca59e5777785ffa76eff"
+      },
+      {
+        "file": "photos/highlight-siguniang-960.webp",
+        "width": 960,
+        "height": 1280,
+        "bytes": 293026,
+        "sha256": "6fe4af89202aac9b840a34206ca4ffcabe2c48dc398819e3ff042f71d98c027c"
+      },
+      {
+        "file": "photos/highlight-siguniang-1440.webp",
+        "width": 1440,
+        "height": 1920,
+        "bytes": 611668,
+        "sha256": "78a219bce97507fcc946499ec9e395ddcdb74002ecf3d93b3484eb002f750a49"
+      },
+      {
+        "file": "photos/highlight-blue-moon-480.webp",
+        "width": 480,
+        "height": 720,
+        "bytes": 65116,
+        "sha256": "f1e03d0b8ba75029ae1dd41984eb59b10bad02849d45f4d754ad7009459ab1b7"
+      },
+      {
+        "file": "photos/highlight-blue-moon-960.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 223352,
+        "sha256": "e8c7e0ed0709a168769d14c3e9193d86d44b5f461659d2a3b8a83ef26291051b"
+      },
+      {
+        "file": "photos/highlight-blue-moon-1440.webp",
+        "width": 1440,
+        "height": 2160,
+        "bytes": 433004,
+        "sha256": "bf013982e08de4242bf4f5160c2b215c00c8e5e0c641da30b69c68b00acec750"
+      },
+      {
+        "file": "photos/highlight-erhai-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 19838,
+        "sha256": "282dd4b72e620c3701f380a286b91190a9ed48e3758bb2aeea323e71f6c4ed6a"
+      },
+      {
+        "file": "photos/highlight-erhai-960.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 76548,
+        "sha256": "9dee640428376cea5fc742561d1fcf1a90cb51d6d86ca3ce6246e024868bbefa"
+      },
+      {
+        "file": "photos/highlight-erhai-1440.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 147294,
+        "sha256": "87112ea886f0dcee5ba7825e9a162c516d227d141658c912db2b6b6ddf3aedf0"
+      }
+    ],
+    "totalBytes": 2872402,
+    "noExifOrXmp": true
+  },
+  "researchQueries": [
+    "Jiuzhaigou autumn October 2026 photo",
+    "site.pexels.com/photo Jiuzhaigou 2026 autumn",
+    "site.pexels.com/photo Blue Moon Valley Lijiang",
+    "site.pexels.com \"Siguniang\" \"2026\"",
+    "site.pexels.com/photo \"Yading\" \"Date\"",
+    "site.pexels.com/photo \"Daocheng\"",
+    "site.pexels.com/photo \"Tagong\" \"2026\"",
+    "site.pexels.com/photo \"Shuangqiao\"",
+    "Yading autumn photo 2026 creative commons",
+    "site.pexels.com/photo \"Lijiang\" \"Oct\" \"2026\"",
+    "site.pexels.com/photo \"Erhai\" \"2026\""
+  ]
+}
