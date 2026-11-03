@@ -1,0 +1,139 @@
+{
+  "checkedAt": "2026-11-03",
+  "sourceType": "user-supplied attachments",
+  "userPhotos": {
+    "user-impression-lijiang-1": {
+      "id": "user-impression-lijiang-1",
+      "width": 1200,
+      "height": 797,
+      "sizes": [
+        480,
+        960,
+        1200
+      ],
+      "sourceFilename": "becac626-86cb-437f-a03d-689af209a72f-b6a0180b-c1d2-4cdf-903b-727ba567760e.png",
+      "alt": "Pemandangan lebar pertunjukan Impression Lijiang: penampil di panggung merah bertingkat, penonton di bagian depan, serta puncak bersalju di bawah awan putih.",
+      "credit": "Foto yang dikirim pengguna",
+      "origin": "Unggahan pengguna",
+      "takenAt": null,
+      "location": "Impression Lijiang, Yulong, Lijiang",
+      "title": "Panggung merah di kaki gunung",
+      "caption": "Penampil memenuhi teras merah Impression Lijiang, dengan penonton di depan dan Jade Dragon Snow Mountain di balik awan."
+    },
+    "user-impression-lijiang-2": {
+      "id": "user-impression-lijiang-2",
+      "width": 1200,
+      "height": 796,
+      "sizes": [
+        480,
+        960,
+        1200
+      ],
+      "sourceFilename": "becac626-86cb-437f-a03d-689af209a72f-cded2887-c282-450a-8f0c-a2aa87e459ba.png",
+      "alt": "Barisan penampil membentang di teras merah dan jembatan panggung Impression Lijiang, dengan pegunungan bersalju dan langit biru di belakangnya.",
+      "credit": "Foto yang dikirim pengguna",
+      "origin": "Unggahan pengguna",
+      "takenAt": null,
+      "location": "Impression Lijiang, Yulong, Lijiang",
+      "title": "Impression Lijiang di bawah langit biru",
+      "caption": "Barisan penampil di panggung merah terbuka dengan latar puncak Jade Dragon Snow Mountain dan langit biru."
+    }
+  },
+  "descriptions": {
+    "user-impression-lijiang-1": "Pemandangan lebar pertunjukan Impression Lijiang: penampil di panggung merah bertingkat, penonton di bagian depan, serta puncak bersalju di bawah awan putih.",
+    "user-impression-lijiang-2": "Barisan penampil membentang di teras merah dan jembatan panggung Impression Lijiang, dengan pegunungan bersalju dan langit biru di belakangnya."
+  },
+  "sources": [
+    {
+      "id": "user-impression-lijiang-1",
+      "path": "/Users/yana/.t3/userdata/attachments/becac626-86cb-437f-a03d-689af209a72f-b6a0180b-c1d2-4cdf-903b-727ba567760e.png",
+      "filename": "becac626-86cb-437f-a03d-689af209a72f-b6a0180b-c1d2-4cdf-903b-727ba567760e.png",
+      "width": 1200,
+      "height": 797,
+      "bytes": 1477954,
+      "sha256": "76ca1c8b0332a45b99285f4d32299bed9e8522c1815182baf3654861a55e2788",
+      "photographer": null,
+      "captureDate": null,
+      "publicationDate": null,
+      "outputs": [
+        {
+          "path": "public/photos/user-impression-lijiang-1-480.webp",
+          "width": 480,
+          "height": 319,
+          "bytes": 53074,
+          "sha256": "0b4afdcca1443a6af3d842394a0e9adb0a172859a3a9bbdefd9710c0139eee96"
+        },
+        {
+          "path": "public/photos/user-impression-lijiang-1-960.webp",
+          "width": 960,
+          "height": 638,
+          "bytes": 159766,
+          "sha256": "ceedd21eb64751f4402735dd84cdbfcf763f7e61c75e19d8135f31050a9fa7af"
+        },
+        {
+          "path": "public/photos/user-impression-lijiang-1-1200.webp",
+          "width": 1200,
+          "height": 797,
+          "bytes": 154632,
+          "sha256": "a98eaf413fb425b9721da614cf2864f73b3b47e8d6438ef8b0c5228a874d2dca"
+        }
+      ]
+    },
+    {
+      "id": "user-impression-lijiang-2",
+      "path": "/Users/yana/.t3/userdata/attachments/becac626-86cb-437f-a03d-689af209a72f-cded2887-c282-450a-8f0c-a2aa87e459ba.png",
+      "filename": "becac626-86cb-437f-a03d-689af209a72f-cded2887-c282-450a-8f0c-a2aa87e459ba.png",
+      "width": 1200,
+      "height": 796,
+      "bytes": 1207359,
+      "sha256": "81dbcbb566fcf7a732894916cca426484551e3faf290b2e770c66e3aba7d160c",
+      "photographer": null,
+      "captureDate": null,
+      "publicationDate": null,
+      "outputs": [
+        {
+          "path": "public/photos/user-impression-lijiang-2-480.webp",
+          "width": 480,
+          "height": 318,
+          "bytes": 38522,
+          "sha256": "8bfd41ab319c77687e49578b00205f42195a28b8f45fcf4442d1e0677d860d13"
+        },
+        {
+          "path": "public/photos/user-impression-lijiang-2-960.webp",
+          "width": 960,
+          "height": 637,
+          "bytes": 134706,
+          "sha256": "852748c9dfaecd4a70d4e3fbc0ae86fe744ba7d2f4759a75b70a9150c7d99037"
+        },
+        {
+          "path": "public/photos/user-impression-lijiang-2-1200.webp",
+          "width": 1200,
+          "height": 796,
+          "bytes": 152298,
+          "sha256": "c763bf87293fdf862eb8157333f13a9afd0a4f9c641f5e127231b40e62ec93aa"
+        }
+      ]
+    }
+  ],
+  "processing": {
+    "fullFramePreserved": true,
+    "colorAdjustment": false,
+    "crop": null,
+    "upscaled": false,
+    "generatedContent": false,
+    "operations": [
+      "EXIF orientation normalization",
+      "RGB conversion",
+      "Lanczos downsampling for 480px and 960px variants",
+      "WebP encoding at quality 90, method 6; native 1200px variant retains source dimensions"
+    ]
+  },
+  "provenanceNote": "The user explicitly supplied both photographs and requested their inclusion in the Impression Lijiang gallery. No photographer, capture date, source publication date or license ownership is inferred. An associated Trip.com reference does not establish the photographer.",
+  "verification": {
+    "sourceImagesViewed": true,
+    "exported960pxVariantsViewed": true,
+    "allSixFilesDecode": true,
+    "dimensionsMatchManifest": true,
+    "noUpscaling": true
+  }
+}

@@ -1,6 +1,6 @@
-import { days, photos, places, pdfPath } from './itinerary.ts';
+import { days, photos, places, pdfPath, userPhotos } from './itinerary.ts';
 import { coverPhoto, galleryPhotos, guideDates, guides, pageBySlug, pageForPlace, placePath, type PlacePage } from './guides.ts';
-import { escapeHtml as e, icon, photoImage } from './render.ts';
+import { escapeHtml as e, icon, photoImage, userPhotoDetail } from './render.ts';
 
 const external = (label: string, url: string) => `<a href="${e(url)}" target="_blank" rel="noopener noreferrer">${e(label)}<span class="visually-hidden"> (buka tab baru)</span>${icon('share')}</a>`;
 const shortDate = (date: string) => `${Number(date.slice(-2))} November`;
@@ -10,6 +10,7 @@ export function guidePhotoDetail(page: PlacePage, index: number) {
   const gallery = galleryPhotos(page);
   const item = gallery[index];
   if (!item) return '';
+  if (userPhotos[item.id]) return userPhotoDetail(item.id, 'guide-photo-title');
   const photo = photos[item.id];
   return `<figure class="guide-photo-detail">${photoImage(item.id, item.alt, true, '(min-width: 960px) 1080px, calc(100vw - 32px)')}<figcaption><h2 id="guide-photo-title">${e(item.title)}</h2>${item.note ? `<p>${e(item.note)}</p>` : ''}${photo.photoNote && photo.photoNote !== item.note ? `<p>${e(photo.photoNote)}</p>` : ''}<p>Foto referensi. Warna daun, cuaca, dan akses dapat berbeda saat kunjungan.</p><div class="guide-photo-credit">${external(`Foto: ${photo.author}`, photo.source)}${external(photo.license, photo.licenseUrl)}<p>Ukuran disesuaikan ke WebP. Pemotongan hanya pada bingkai galeri.</p></div></figcaption></figure>`;
 }
@@ -43,7 +44,7 @@ export function guideView(page: PlacePage) {
     <div class="guide-body" id="guide-info">
       <div class="guide-main-column">
         <section class="guide-panel" id="getting-there" aria-labelledby="transport-heading"><h2 id="transport-heading">${icon('pin')}Cara ke sana</h2><p class="guide-origin">Dari ${e(guide.gettingThere.origin)}</p><ol class="guide-steps">${guide.gettingThere.steps.map(step => `<li>${e(step)}</li>`).join('')}</ol>${page.placeId && guide.stopAccess?.[page.placeId] ? `<div class="guide-last-leg"><h3>Menuju ${e(page.name)}</h3><p>${e(guide.stopAccess[page.placeId])}</p></div>` : ''}<p class="guide-duration">${icon('clock')}<span>${e(guide.gettingThere.duration)}</span></p><div class="guide-references"><h3>Sumber rute</h3><div>${sourceLinks}</div></div></section>
-        <section class="guide-panel" id="costs" aria-labelledby="cost-heading"><h2 id="cost-heading">${icon('wallet')}Biaya kunjungan</h2>${page.placeId ? `<p class="guide-cost-context">Tarif kawasan ${e(guide.name)}. Tiket bersama tidak perlu dihitung ulang untuk tiap pemberhentian.</p>` : ''}<p class="guide-cost-note">Dalam yuan China (CNY). ${publishedCost ? 'Perhatikan komponen, musim, dan status harga.' : 'Tarif yang belum memiliki rujukan pasti ditandai untuk konfirmasi.'}</p><dl class="guide-costs">${guide.costs.map(cost => `<div><dt>${e(cost.label)}<span class="cost-status ${cost.status}">${cost.status === 'published' ? 'Tarif terpublikasi' : cost.status === 'estimate' ? 'Anggaran acuan' : 'Perlu konfirmasi'}</span></dt><dd><strong>${e(cost.amount)}</strong><p>${e(cost.detail)}</p>${cost.source ? external(`Sumber tarif: ${sourceTitle(cost.source)}`, cost.source) : ''}</dd></div>`).join('')}</dl><p class="guide-checked">Diperiksa ${checked}. Harga dan operasional dapat berubah; cocokkan dengan tanggal kunjungan sebelum membayar.</p></section>
+        <section class="guide-panel" id="costs" aria-labelledby="cost-heading"><h2 id="cost-heading">${icon('wallet')}Biaya kunjungan</h2>${page.placeId ? `<p class="guide-cost-context">Tarif kawasan ${e(guide.name)}. Tiket bersama tidak perlu dihitung ulang untuk tiap pemberhentian.</p>` : ''}<p class="guide-cost-note">Mata uang tercantum pada setiap harga. ${publishedCost ? 'Perhatikan komponen, musim, dan status harga.' : 'Tarif yang belum memiliki rujukan pasti ditandai untuk konfirmasi.'}</p><dl class="guide-costs">${guide.costs.map(cost => `<div><dt>${e(cost.label)}<span class="cost-status ${cost.status}">${cost.status === 'published' ? 'Tarif terpublikasi' : cost.status === 'estimate' ? 'Anggaran acuan' : 'Perlu konfirmasi'}</span></dt><dd><strong>${e(cost.amount)}</strong><p>${e(cost.detail)}</p>${cost.source ? external(`Sumber tarif: ${sourceTitle(cost.source)}`, cost.source) : ''}</dd></div>`).join('')}</dl><p class="guide-checked">Diperiksa ${checked}. Harga dan operasional dapat berubah; cocokkan dengan tanggal kunjungan sebelum membayar.</p></section>
       </div>
       <aside class="guide-side-column" aria-label="Rencana kunjungan">
         <section class="guide-panel guide-timing" aria-labelledby="timing-heading"><h2 id="timing-heading">Rencanakan waktumu</h2><dl><div><dt>${icon('clock')}${page.placeId ? 'Waktu untuk kawasan' : 'Waktu di lokasi'}</dt><dd>${e(guide.visitDuration)}</dd></div><div><dt>${icon('sun')}Waktu terbaik</dt><dd>${e(guide.bestTime)}</dd></div></dl><p class="guide-editorial-note">Alokasi waktu adalah saran untuk itinerary ini. <a href="#sources">Rujukan jam buka & akses</a></p></section>

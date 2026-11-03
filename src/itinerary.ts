@@ -13,7 +13,7 @@ export interface Place {
   name: string; chinese?: string; description: string; page?: number;
   photo?: string; alt?: string; photoNote?: string;
 }
-export type VisitStatus = 'Opsional' | 'Perlu konfirmasi' | 'Jika jalur dibuka' | 'Alternatif' | 'Terkonfirmasi';
+export type VisitStatus = 'Wajib' | 'Opsional' | 'Perlu konfirmasi' | 'Jika jalur dibuka' | 'Alternatif' | 'Terkonfirmasi';
 export type Event =
   | { kind: 'stop'; place: string; time: string; note?: string; status?: VisitStatus }
   | { kind: 'transfer'; mode: 'car' | 'train' | 'bus' | 'walk' | 'plane' | 'cable'; title: string; detail?: string; status?: VisitStatus };
@@ -78,7 +78,8 @@ export const places: Record<string, Place> = {
   sifangjie: { name: 'Sifangjie', chinese: '四方街', description: 'Gang-gang kota tua bertemu di lapangan berbatu yang menjadi tujuan jalan malam di Lijiang.', page: 22 },
   'cable-car': { name: 'Big Cable Car', description: 'Gondola membawa pengunjung dari hutan di lereng bawah menuju tebing dan salju Glacier Park.', page: 24 },
   'jade-dragon': { name: 'Glacier Park, Jade Dragon', chinese: '玉龙雪山', description: 'Jalur kayu dan gardu pandang di stasiun atas menghadap punggung gunung bersalju.', page: 24, photo: 'jade-dragon', alt: 'Gunung bersalju dan kawasan gletser Jade Dragon.' },
-  'blue-moon': { name: 'Blue Moon Valley', chinese: '蓝月谷', description: 'Rangkaian danau toska berada di kaki Jade Dragon, untuk berjalan di tepi air setelah turun dari gletser.', page: 24, photo: 'highlight-blue-moon', alt: 'Danau toska Blue Moon Valley di kaki Jade Dragon Snow Mountain.' },
+  'impression-lijiang': { name: 'Impression Lijiang', chinese: '印象丽江', description: 'Panggung merah terbuka di Ganhaizi menjadi latar pertunjukan musik dan tari, dengan Jade Dragon Snow Mountain menjulang di belakang para pemain.', photo: 'impression-lijiang', alt: 'Pemain pertunjukan Impression Lijiang di panggung merah bertingkat dengan latar pegunungan bersalju.' },
+  'blue-moon': { name: 'Blue Moon Valley', chinese: '蓝月谷', description: 'Rangkaian danau toska di kaki Jade Dragon menjadi tempat jalan santai setelah menonton Impression Lijiang.', page: 24, photo: 'highlight-blue-moon', alt: 'Danau toska Blue Moon Valley di kaki Jade Dragon Snow Mountain.' },
   'dali-station': { name: 'Stasiun Dali (Xiaguan)', chinese: '大理站', description: 'Stasiun di Xiaguan dihubungkan dengan hotel dekat kota tua menggunakan taksi.', page: 23 },
   erhai: { name: 'Danau Erhai', chinese: '洱海', description: 'Jalan pagi di tepi barat danau dimulai dari Dermaga Caicun, sekitar 3–4 km dari gerbang timur kota tua.', page: 25, photo: 'highlight-erhai', alt: 'Pemandangan Danau Erhai dengan garis pegunungan di seberang.', photoNote: 'Foto memperlihatkan Danau Erhai, bukan verifikasi pin Dermaga Caicun.' },
   caicun: { name: 'Dermaga Caicun', chinese: '才村码头', description: 'Titik mulai menyusuri tepi barat Erhai sebelum kembali ke Kota Tua Dali.', page: 23 },
@@ -323,8 +324,39 @@ export const days: Day[] = [
  {date:'2026-11-15',title:'Dari Litang ke gerbang Yading',shortTitle:'Haizi Shan & Riwa',region:'Sichuan',route:['Litang','Haizi Shan','Daocheng','Riwa'],overnight:{name:'Riwa',area:'Shangri-La Town, Sichuan',elevation:'2.900 m',detail:'Malam pertama dari dua malam. Konfirmasikan kamar berpemanas untuk 15 dan 16 November.'},transport:'Mobil ±5 jam / ±220 km',intro:'Melintasi dataran bekas gletser, lalu turun ke basis kunjungan Yading.',events:[t('car','Litang ke Haizi Shan'),s('haizi','Pagi','Dataran sekitar 4.500 m.'),s('sister-lakes','Jika mengambil detur','Letaknya di G318 arah Batang. Bukan pemberhentian pada jalur langsung ke Daocheng.','Perlu konfirmasi'),t('car','Lanjut ke Daocheng'),s('daocheng','Siang','Isi ulang bekal halal untuk dua malam dan hari trek.'),t('car','Daocheng ke Riwa'),s('riwa','Sore–malam')],practical:[{title:'Riwa bukan kota Shangri-La',text:'Riwa / Shangri-La Town (香格里拉镇) berada di Sichuan. Kota Shangri-La di Yunnan baru dituju pada 17 November.',copy:'香格里拉镇'},{title:'Sister Lakes',text:'Konfirmasikan tambahan jarak dan waktu detur ke arah Batang dengan sopir. Utamakan rute Haizi Shan–Daocheng–Riwa.'},{title:'Bekal dan penginapan',text:'Beli bekal halal sebelum Riwa; pastikan kamar memiliki pemanas.'},snow],pages:[3,12,16,28,30]},
  {date:'2026-11-16',title:'Menjelajahi lembah Yading',shortTitle:'Yading & jalur danau',region:'Sichuan',route:['Riwa','Chonggu','Luorong','Yading','Riwa'],overnight:{name:'Riwa',area:'Hotel yang sama di Shangri-La Town, Sichuan',elevation:'2.900 m',detail:'Malam kedua. Istirahat sebelum perjalanan panjang ke Yunnan.'},transport:'Bus taman, jalan kaki, trek bersyarat',intro:'Rute danau atas bergantung pada pembukaan jalur dan kondisi tubuh.',events:[t('bus','Riwa ke titik turun bus taman'),s('zhaguanbeng','Pagi'),t('walk','Berjalan menuju Chonggu'),s('chonggu','Pagi'),s('luorong','Pagi–siang'),t('walk','Trek danau atas','Sekitar 5–6 jam pulang-pergi dari Luorong, hanya jika dibuka.','Jika jalur dibuka'),s('milk-lake','Siang','Sekitar 4.600 m; bukan akses yang sudah dikonfirmasi.','Jika jalur dibuka'),s('five-colour','Siang','Sekitar 4.700 m; ikuti keputusan petugas taman.','Jika jalur dibuka'),s('pearl-lake','Pilihan jalur pendek','Pilih Chonggu dan Pearl Lake jika jalur pendek dibuka dan jalur atas tidak sesuai kondisi hari itu.','Alternatif'),t('bus','Kembali ke hotel di Riwa')],practical:[{title:'Akses taman',text:'Pesan tiket 16 November dan cek jalur yang dibuka. Jangan menganggap Milk Lake atau Five-Colour Lake pasti dapat dicapai.'},{title:'Bekal trek',text:'Bawa makanan halal dan air untuk seharian.'},{title:'Dingin dan ketinggian',text:'PDF memperkirakan suhu trek −3 hingga 5 °C; di sekitar 4.700 m dapat lebih dingin. Pilih jalur pendek bila tubuh perlu istirahat.'}],pages:[3,17,18,19,28,30]},
  {date:'2026-11-17',title:'Menyeberang ke Shangri-La',shortTitle:'Riwa ke Yunnan',region:'Sichuan ke Yunnan',route:['Riwa','Xiangcheng','Daxueshan','Dukezong'],overnight:{name:'Shangri-La',area:'Dukezong, Yunnan',elevation:'3.300 m',detail:'Satu malam di kota Shangri-La, Yunnan; bukan Riwa di Sichuan.'},transport:'Mobil sekitar 8 jam, di luar berhenti',intro:'Etape terakhir bersama sopir menyeberangi provinsi menuju Dukezong.',events:[t('car','Berangkat dari Riwa','Target 07.00. Alokasikan sekitar 8 jam, belum termasuk makan dan perubahan kondisi jalan.'),s('xiangcheng','Pagi–siang'),s('daxueshan','Siang','Akses lintasan mengikuti salju dan kondisi jalan.','Perlu konfirmasi'),t('car','Lanjut ke Shangri-La, Yunnan'),s('dukezong','Sore–malam','Check-in sebelum berjalan santai.'),s('guishan','Jika masih terang','Kunjungi roda doa bila tiba cukup awal.','Opsional')],practical:[{title:'Jika jalan tertutup',text:'Sepakati tempat bermalam dengan sopir. Esoknya prioritaskan sambungan ke Lijiang; Songzanlin hanya jika waktu cukup.'},{title:'Sopir satu arah',text:'Konfirmasikan izin lintas provinsi dan drop-off di Dukezong. Bila perlu dua sopir, rencanakan pergantian di Riwa.'},{title:'Bekal perjalanan',text:'Bawa bekal halal dari Riwa dan periksa tanda 清真 sebelum makan di Dukezong.'},snow],pages:[3,17,20,28,30]},
- {date:'2026-11-18',title:'Songzanlin ke kanal Lijiang',shortTitle:'Songzanlin & Dayan',region:'Yunnan',route:['Shangri-La','Songzanlin','Lijiang','Dayan'],overnight:{name:'Lijiang',area:'Sekitar Kota Tua Dayan',elevation:'2.400 m',detail:'Sepakati penjemputan Jade Dragon besok pagi serta pengambilan bagasi sebelum ke stasiun.'},transport:'Mobil lokal dan kereta siang / sore',intro:'Aula biara beratap emas, lalu kereta menuju gang dan kanal Kota Tua Lijiang.',events:[s('songzanlin','Pagi','Jika perjalanan kemarin tertunda, utamakan sambungan ke Lijiang.'),t('car','Ambil bagasi dan menuju stasiun'),s('shangrila-station','Siang / sore'),t('train','Shangri-La ke Lijiang','Pilih jadwal setelah kunjungan dan makan; jam serta kursi perlu dicek.','Perlu konfirmasi'),s('lijiang-station','Sore'),t('car','Stasiun ke hotel sekitar Dayan'),s('dayan','Sore'),s('sifangjie','Malam')],practical:[{title:'Tiket kereta',text:'Periksa nama stasiun, jam, dan kursi sebelum menentukan waktu kunjungan Songzanlin.',link:rail},{title:'Makan halal',text:'Cari kedai Hui di sekitar kota tua. Foto khusus Old Town Beef / Ha’s Beef belum terverifikasi dalam PDF.'},{title:'Siapkan besok',text:'Atur penjemputan pagi ke Jade Dragon dan cara mengambil koper sebelum kereta ke Dali.'}],pages:[3,17,21,22,28,30]},
- {date:'2026-11-19',title:'Jade Dragon & Blue Moon Valley',shortTitle:'Jade Dragon, lalu Dali',region:'Yunnan',route:['Lijiang','Jade Dragon','Blue Moon Valley','Dali'],overnight:{name:'Dali',area:'Dekat gerbang Kota Tua Dali',elevation:'±2.000 m',detail:'Beri tahu hotel jika tiba malam. Lokasi dekat kota tua memudahkan pagi di Erhai.'},transport:'Mobil, cable car, lalu kereta 2–2½ jam',intro:'Dari pegunungan bersalju ke danau toska, lalu berangkat ke Dali malam ini.',events:[s('cable-car','Pagi','Pesan slot pagi; operasional mengikuti kondisi setempat.','Perlu konfirmasi'),t('cable','Naik ke Glacier Park'),s('jade-dragon','Pagi','Area stasiun atas sekitar 4.506 m.'),t('bus','Turun menuju Blue Moon Valley'),s('blue-moon','Siang','Jika cable car tertunda, prioritaskan lembah dan waktu menuju stasiun.'),t('car','Ambil bagasi dan ke Stasiun Lijiang'),t('train','Lijiang ke Dali','Kereta langsung sore / malam sekitar 2–2½ jam. Harus tiba di Dali pada 19 November.','Perlu konfirmasi'),s('dali-station','Malam'),t('car','Taksi ke hotel dekat Kota Tua Dali')],practical:[{title:'Cable car dan cuaca',text:'Cari slot pagi untuk 19 November. Jika tertunda, prioritaskan Blue Moon Valley agar sambungan kereta tetap terkejar.'},{title:'Kereta ke Dali',text:'Pastikan tanggal tiba tetap 19 November dan sisakan waktu untuk mengambil bagasi.',link:rail},{title:'Bekal halal',text:'Bawa bekal untuk Jade Dragon; di Dali cari kedai halal sekitar Bo’ai Road.'}],pages:[3,23,24,28,30]},
+ {date:'2026-11-18',title:'Songzanlin ke kanal Lijiang',shortTitle:'Songzanlin & Dayan',region:'Yunnan',route:['Shangri-La','Songzanlin','Lijiang','Dayan'],overnight:{name:'Lijiang',area:'Sekitar Kota Tua Dayan',elevation:'2.400 m',detail:'Sepakati penjemputan Jade Dragon besok pagi serta pengambilan bagasi sebelum ke stasiun.'},transport:'Mobil lokal dan kereta siang / sore',intro:'Aula biara beratap emas, lalu kereta menuju gang dan kanal Kota Tua Lijiang.',events:[s('songzanlin','Pagi','Jika perjalanan kemarin tertunda, utamakan sambungan ke Lijiang.'),t('car','Ambil bagasi dan menuju stasiun'),s('shangrila-station','Siang / sore'),t('train','Shangri-La ke Lijiang','Pilih jadwal setelah kunjungan dan makan; jam serta kursi perlu dicek.','Perlu konfirmasi'),s('lijiang-station','Sore'),t('car','Stasiun ke hotel sekitar Dayan'),s('dayan','Sore'),s('sifangjie','Malam')],practical:[{title:'Tiket kereta',text:'Periksa nama stasiun, jam, dan kursi sebelum menentukan waktu kunjungan Songzanlin.',link:rail},{title:'Makan halal',text:'Cari kedai Hui di sekitar kota tua. Foto khusus Old Town Beef / Ha’s Beef belum terverifikasi dalam PDF.'},{title:'Siapkan besok',text:'Pastikan sesi Impression Lijiang untuk besok, cocokkan slot gondola pagi, lalu atur jemputan serta pengambilan koper sebelum kereta malam ke Dali.'}],pages:[3,17,21,22,28,30]},
+ {
+  date: '2026-11-19',
+  title: 'Jade Dragon & Impression Lijiang',
+  shortTitle: 'Impression Lijiang, lalu Dali',
+  region: 'Yunnan',
+  route: ['Lijiang', 'Jade Dragon', 'Impression Lijiang', 'Blue Moon Valley', 'Dali'],
+  overnight: { name: 'Dali', area: 'Dekat gerbang Kota Tua Dali', elevation: '±2.000 m', detail: 'Beri tahu hotel jika tiba malam. Lokasi dekat kota tua memudahkan pagi di Erhai.' },
+  transport: 'Mobil, shuttle kawasan, cable car, lalu kereta ke Dali',
+  intro: 'Pagi di pegunungan, menonton Impression Lijiang sebagai agenda utama, lalu singgah di danau toska sebelum bermalam di Dali.',
+  events: [
+    t('car', 'Berangkat pagi dari hotel Lijiang', 'Sepakati jemputan dan penitipan koper sebelum masuk kawasan Jade Dragon.'),
+    s('cable-car', 'Pagi', 'Pilih slot pagi yang memberi waktu cukup untuk kembali ke teater sesuai tiket pertunjukan.', 'Perlu konfirmasi'),
+    t('cable', 'Naik ke Glacier Park'),
+    s('jade-dragon', 'Pagi', 'Area stasiun atas sekitar 4.506 m. Batasi durasi agar sesi pertunjukan tetap terkejar.'),
+    t('bus', 'Menuju teater Impression Lijiang di Ganhaizi', 'Ikuti shuttle kawasan dan arahan petugas menuju 印象丽江演出剧场.'),
+    s('impression-lijiang', '13.20 utama / 14.50 cadangan', 'Agenda wajib. Trip.com menampilkan dua pilihan sesi untuk 19 November, waktu China (UTC+8). Utamakan 13.20 dan tiba 30–60 menit lebih awal. Tiket belum dipesan; jika memilih 14.50, persingkat Blue Moon Valley dan cek sambungan ke Dali.', 'Wajib'),
+    t('bus', 'Lanjut ke Blue Moon Valley'),
+    s('blue-moon', 'Setelah pertunjukan', 'Jalan singkat di tepi danau. Durasi mengikuti waktu selesai pertunjukan dan kereta malam.'),
+    t('car', 'Ambil bagasi dan ke Stasiun Lijiang', 'Hitung perjalanan dari kawasan, pengambilan koper, dan pemeriksaan stasiun sebelum memilih kereta.'),
+    t('train', 'Lijiang ke Dali', 'Pilih kereta malam yang tiba di Dali pada 19 November. Cocokkan keberangkatan dengan sesi pertunjukan yang berhasil dipesan.', 'Perlu konfirmasi'),
+    s('dali-station', 'Malam'),
+    t('car', 'Taksi ke hotel dekat Kota Tua Dali'),
+  ],
+  practical: [
+    { title: 'Tiket Impression Lijiang', text: 'Pilihan 19 November pada tangkapan layar Trip.com: 13.20 atau 14.50, mulai Rp462.162. Utamakan 13.20. Harga kalender adalah acuan terendah, bukan harga final kursi biasa/VIP; cek total dan ketersediaan sebelum memesan.', link: { label: 'Cek sesi & tiket di Trip.com', url: 'https://id.trip.com/travel-guide/attraction/yulong/impressions-lijiang-performance-10758688/' } },
+    { title: 'Jika antrean gondola panjang', text: 'Persingkat atau lewati Glacier Park agar pertunjukan tetap terkejar. Blue Moon Valley menyesuaikan sisa waktu; jangan menghabiskan jeda masuk teater untuk antrean tambahan.' },
+    { title: 'Kereta dan bagasi', text: 'Koper dititipkan di hotel Lijiang. Sisakan waktu mengambilnya dan menuju stasiun; pilih kedatangan Dali tetap 19 November.', link: rail },
+    { title: 'Bekal halal', text: 'Bawa bekal untuk satu hari di Jade Dragon. Di Dali, cari kedai halal sekitar Bo’ai Road setelah tiba.' },
+  ],
+  pages: [3, 23, 24, 28, 30],
+  sourceNote: 'Itinerary web diperbarui: Impression Lijiang menjadi agenda wajib pada 19 November. Urutan kunjungan dan kereta mengikuti sesi pertunjukan yang dipesan; PDF tetap tersedia sebagai arsip rute awal.',
+ },
  {date:'2026-11-20',title:'Danau Erhai & Kota Tua Dali',shortTitle:'Erhai, Dali & Kunming',region:'Yunnan',route:['Caicun','Danau Erhai','Kota Tua Dali','Kunming'],overnight:{name:'Kunming',area:'Kawasan Shuncheng',elevation:'1.900 m',detail:'Malam terakhir dekat kawasan makan halal, sebelum penerbangan besok.'},transport:'Taksi lokal, jalan kaki, kereta 2–3 jam',intro:'Pagi di tepi danau, siang di kota tua, sore berangkat ke Kunming.',events:[t('car','Hotel ke Dermaga Caicun','Sekitar 3–4 km dari gerbang timur kota tua.'),s('erhai','Pagi','Mulai dari Dermaga Caicun di tepi barat Erhai.'),s('caicun','Pagi'),t('car','Kembali ke Kota Tua Dali'),s('dali-old-town','Siang','Makan halal di Bo’ai Road; sisihkan waktu untuk salat Jumat.'),s('wuhua','Siang'),t('car','Ambil koper, lalu ke Stasiun Dali','Sisihkan sekitar 90 menit dari hotel sampai keberangkatan kereta.'),t('train','Dali ke Kunming','Pilih kereta sore, sekitar 2–3 jam. Cek apakah tiba di Kunming atau Kunming South.','Perlu konfirmasi'),s('kunming-station','Sore / malam','Foto memperlihatkan Stasiun Kunming di pusat kota; cocokkan tujuan pada tiket.'),t('car','Lanjut ke penginapan di Shuncheng'),s('shuncheng','Malam'),s('nancheng','Malam','Patokan kawasan makan halal, bukan lokasi salat Jumat hari ini.')],practical:[{title:'Salat Jumat di Dali',text:'Minta hotel mengonfirmasi masjid dan waktu setempat sejak malam sebelumnya. Sisihkan waktu siang sebelum ke stasiun.'},{title:'Nama tempat untuk Amap',text:'Dermaga Caicun adalah titik mulai perjalanan pagi di tepi barat Erhai.',copy:'才村码头'},{title:'Stasiun kedatangan',text:'Kunming dan Kunming South berbeda. Cocokkan tiket sebelum mengatur jemputan ke Shuncheng.',link:rail},{title:'Makan halal',text:'Bo’ai Road di Dali untuk siang; kawasan Shuncheng dan Masjid Nancheng di Kunming untuk malam.'}],pages:[3,23,25,26,28,29,30]},
  {date:'2026-11-21',title:'Pagi terakhir, pulang ke Jakarta',shortTitle:'Kunming & penerbangan pulang',region:'Yunnan',route:['Kunming','Changshui (KMG)','Jakarta'],overnight:null,transport:'Transfer bandara dan penerbangan',intro:'Jadwal pagi mengikuti tiket pulang; tidak ada sambungan kereta antarkota hari ini.',events:[s('shuncheng','Pagi','Sarapan jika jadwal penerbangan memungkinkan.','Opsional'),s('green-lake','Pagi','Hanya jika penerbangan sore / malam. Untuk penerbangan pagi, langsung ke bandara.','Opsional'),t('car','Hotel ke Bandara Changshui','Atur transfer sesuai jam tiket dan ketentuan check-in maskapai.','Perlu konfirmasi'),s('kmg','Sesuai tiket','Jam berangkat dan sambungan penerbangan belum dikonfirmasi dalam PDF.','Perlu konfirmasi'),t('plane','KMG ke Jakarta','Jadwal dan kemungkinan transit mengikuti tiket yang dipesan.','Perlu konfirmasi')],practical:[{title:'Jam pulang belum tercantum',text:'PDF menetapkan kepulangan 21 November, tanpa jam keberangkatan terkonfirmasi. Periksa tiket sebelum merencanakan Green Lake.'},{title:'Penerbangan',text:'PDF menyebut penerbangan langsung belum tentu tersedia tanggal ini; alternatif transit perlu diperiksa saat memesan.'},{title:'Sarapan halal',text:'Kawasan Shuncheng dapat menjadi tempat sarapan terakhir jika jadwal memungkinkan.'}],pages:[3,23,27,28,30]},
 ];
@@ -350,6 +382,12 @@ export const bookingOptions = [
 
 // PHOTO_DATA_START
 export const photos: Record<string, Photo> = {
+  'impression-lijiang': {
+    id: 'impression-lijiang', width: 6720, height: 4480, sizes: [480, 960, 1440],
+    author: 'JIN Qin', source: 'https://unsplash.com/photos/a-group-of-people-standing-on-top-of-a-red-structure-OXeuIsqPvUM',
+    license: 'Unsplash License', licenseUrl: 'https://unsplash.com/license', origin: 'Unsplash',
+    photoNote: 'Pertunjukan Impression Lijiang di panggung merah terbuka dengan latar Jade Dragon Snow Mountain. Dipublikasikan 22 Mei 2023; tanggal pengambilan tidak tersedia. Foto arsip, bukan konfirmasi kondisi November 2026.',
+  },
   ...chengduGuidePhotos,
   ...northernGuidePhotos,
   ...westernGuidePhotos,
@@ -884,6 +922,42 @@ export const photos: Record<string, Photo> = {
 
 export interface UserPhoto { id: string; width: number; height: number; sizes: number[]; sourceFilename: string; alt: string; title: string; caption: string; credit: string; origin: string; takenAt: null; location: string | null; provenanceFilename?: string; }
 export const userPhotos: Record<string, UserPhoto> = {
+  "user-impression-lijiang-1": {
+    "id": "user-impression-lijiang-1",
+    "width": 1200,
+    "height": 797,
+    "sizes": [
+      480,
+      960,
+      1200
+    ],
+    "sourceFilename": "becac626-86cb-437f-a03d-689af209a72f-b6a0180b-c1d2-4cdf-903b-727ba567760e.png",
+    "alt": "Pemandangan lebar pertunjukan Impression Lijiang: penampil di panggung merah bertingkat, penonton di bagian depan, serta puncak bersalju di bawah awan putih.",
+    "credit": "Foto yang dikirim pengguna",
+    "origin": "Unggahan pengguna",
+    "takenAt": null,
+    "location": "Impression Lijiang, Yulong, Lijiang",
+    "title": "Panggung merah di kaki gunung",
+    "caption": "Penampil memenuhi teras merah Impression Lijiang, dengan penonton di depan dan Jade Dragon Snow Mountain di balik awan."
+  },
+  "user-impression-lijiang-2": {
+    "id": "user-impression-lijiang-2",
+    "width": 1200,
+    "height": 796,
+    "sizes": [
+      480,
+      960,
+      1200
+    ],
+    "sourceFilename": "becac626-86cb-437f-a03d-689af209a72f-cded2887-c282-450a-8f0c-a2aa87e459ba.png",
+    "alt": "Barisan penampil membentang di teras merah dan jembatan panggung Impression Lijiang, dengan pegunungan bersalju dan langit biru di belakangnya.",
+    "credit": "Foto yang dikirim pengguna",
+    "origin": "Unggahan pengguna",
+    "takenAt": null,
+    "location": "Impression Lijiang, Yulong, Lijiang",
+    "title": "Impression Lijiang di bawah langit biru",
+    "caption": "Barisan penampil di panggung merah terbuka dengan latar puncak Jade Dragon Snow Mountain dan langit biru."
+  },
   "user-autumn-01": {
     "id": "user-autumn-01",
     "width": 1500,

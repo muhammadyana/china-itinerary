@@ -1,0 +1,77 @@
+{
+  "checkedAt": "2026-11-03",
+  "status": "prepared-for-integration",
+  "photo": {
+    "id": "impression-lijiang",
+    "width": 6720,
+    "height": 4480,
+    "sizes": [
+      480,
+      960,
+      1440
+    ],
+    "author": "JIN Qin",
+    "source": "https://unsplash.com/photos/a-group-of-people-standing-on-top-of-a-red-structure-OXeuIsqPvUM",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "origin": "Unsplash",
+    "photoNote": "Pertunjukan Impression Lijiang di panggung merah terbuka dengan latar Jade Dragon Snow Mountain. Dipublikasikan 22 Mei 2023; tanggal pengambilan tidak tersedia. Foto arsip, bukan konfirmasi kondisi November 2026."
+  },
+  "caption": "Impression Lijiang — panggung merah di kaki Jade Dragon Snow Mountain",
+  "alt": "Barisan penampil berpakaian warna-warni memenuhi panggung merah bertingkat Impression Lijiang dengan puncak Jade Dragon Snow Mountain bersalju di belakangnya.",
+  "sourceImage": {
+    "photographerProfile": "https://unsplash.com/@jinq22",
+    "photoId": "OXeuIsqPvUM",
+    "imageUrl": "https://images.unsplash.com/photo-1684764546274-b01907447618?fm=jpg&q=95",
+    "path": "artifacts/impression-lijiang-photo-research/impression-lijiang-original.jpg",
+    "width": 6720,
+    "height": 4480,
+    "bytes": 3726378,
+    "sha256": "8bb37e51805ba1fc1c777a442d35b6ca0c0c96c24fafc4e523a91c60c620e9b8"
+  },
+  "verification": {
+    "location": "The photographer caption explicitly says The Impression on Lijiang, directed by Yimou Zhang, and locates the photo at Jade Dragon Snow Mountain, Yulong Naxi Autonomous County, Lijiang, China. The distinctive red terraced open-air stage, performers and mountain backdrop are visible.",
+    "publishedDate": "2023-05-22",
+    "captureDate": null,
+    "dateNote": "Publication date is verified on the source page. A capture date was not supplied; publication is not represented as capture.",
+    "reuse": "Official source page explicitly provides the photograph under the Unsplash License; the license permits download, copy, modification, distribution and use. Retained source and photographer credit.",
+    "camera": "Canon EOS 5D Mark IV as reported by source page",
+    "visualReview": "Compared six Commons/Unsplash candidates; selected this photograph because it shows the whole show context, performers across multiple red terraces, and a clear snow-mountain backdrop without a large foreground obstruction."
+  },
+  "processing": {
+    "operations": [
+      "EXIF orientation normalization",
+      "RGB conversion",
+      "Lanczos downsampling",
+      "WebP encoding quality 87, method 6"
+    ],
+    "crop": null,
+    "colorAdjustment": false,
+    "upscaled": false,
+    "generatedContent": false,
+    "fullFramePreserved": true
+  },
+  "outputs": [
+    {
+      "path": "public/photos/impression-lijiang-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 28130,
+      "sha256": "6beecd4ce986d54c081948ce6072d94c8ad2fc25ffebebc1f17987131a7444cd"
+    },
+    {
+      "path": "public/photos/impression-lijiang-960.webp",
+      "width": 960,
+      "height": 640,
+      "bytes": 92072,
+      "sha256": "539dac822a0265d2b61520de9156d186369dc87942702a12f2a32888648c70ef"
+    },
+    {
+      "path": "public/photos/impression-lijiang-1440.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 171028,
+      "sha256": "f27191ffcccd9719be747e34f3e8c4c975784b788c12c5952ec4c7e86e1dd2c9"
+    }
+  ]
+}

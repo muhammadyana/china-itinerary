@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { guides, placePages, pageForPlace, galleryPhotos, guideDates, placePath } from '../src/guides';
-import { days, places, photos } from '../src/itinerary';
+import { days, places, photos, userPhotos } from '../src/itinerary';
 
 const nonSightseeingStops = new Set([
   'tfu', 'chengdu-east', 'huanglongjiuzhai', 'jiuzhaigou-hotel', 'rilong', 'danba',
@@ -44,7 +44,7 @@ test('destination coverage preserves every sightseeing stop and research provena
   for (const destination of placePages) {
     expect(galleryPhotos(destination).length, `${destination.slug}: empty gallery`).toBeGreaterThan(0);
     for (const item of galleryPhotos(destination)) {
-      expect(photos[item.id], `${destination.slug}: ${item.id}`).toBeDefined();
+      expect(photos[item.id] || userPhotos[item.id], `${destination.slug}: ${item.id}`).toBeDefined();
       expect(item.alt.trim()).not.toBe('');
     }
   }

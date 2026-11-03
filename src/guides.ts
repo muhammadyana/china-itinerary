@@ -1,4 +1,4 @@
-import { days, highlights, photos, places } from './itinerary.ts';
+import { days, highlights, photos, places, userPhotos } from './itinerary.ts';
 import { northernGuides } from './guides/sichuan-north.ts';
 import { westernGuides } from './guides/sichuan-west.ts';
 import { yunnanGuides } from './guides/yunnan.ts';
@@ -35,6 +35,7 @@ export const guideDates = (page: PlacePage) => days.filter(day => day.events.som
 
 export interface GalleryPhoto { id: string; title: string; alt: string; note?: string }
 const extraPhotos: Record<string, GalleryPhoto[]> = {
+  'impression-lijiang': Object.values(userPhotos).filter(photo => photo.location === 'Impression Lijiang, Yulong, Lijiang').map(photo => ({ id: photo.id, title: photo.title, alt: photo.alt })),
   chengdu: [{ id: 'chengdu-taikoo', title: 'Malam di Taikoo Li', alt: 'Jalur pejalan kaki dan bangunan Taikoo Li diterangi cahaya malam, dengan gedung tinggi di belakangnya.', note: photos['chengdu-taikoo'].photoNote }],
   jiuzhaigou: [{ id: 'highlight-jiuzhaigou', title: 'Musim gugur di Jiuzhaigou', alt: 'Hutan musim gugur memantul di danau Jiuzhaigou.' }],
   siguniangshan: [{ id: 'highlight-siguniang', title: 'Panorama Siguniangshan', alt: 'Puncak bersalju di kawasan Siguniangshan.' }],

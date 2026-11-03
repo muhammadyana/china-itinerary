@@ -9,7 +9,7 @@ description: "A photographic Sichuan and Yunnan field guide with Liquid Glass-in
 
 The photographs supply the autumn colors. Warm cream reading surfaces keep route details legible, while translucent navigation floats over the content. This is a CSS interpretation of Apple's Liquid Glass material, not a native Apple component or an Apple-branded product.
 
-The interface stays in Bahasa Indonesia. Code identifiers, comments, tests, and developer documentation use English. The supplied PDF remains the archived base for dates, destinations, captions, and conditional branches. Explicit traveler revisions take precedence: 8 November is a Chengdu city walk with an overnight stay in Chengdu; 9 November combines a morning transfer, a shorter Jiuzhaigou visit with entry before the published 14:00 admission cutoff, and one overnight in Jiuzhaigou. All later dates remain unchanged.
+The interface stays in Bahasa Indonesia. Code identifiers, comments, tests, and developer documentation use English. The supplied PDF remains the archived base for dates, destinations, captions, and conditional branches. Explicit traveler revisions take precedence: 8 November is a Chengdu city walk with an overnight stay in Chengdu; 9 November combines a morning transfer, a shorter Jiuzhaigou visit with entry before the published 14:00 admission cutoff, and one overnight in Jiuzhaigou. The website also adds Impression Lijiang as a required stop on 19 November, after the morning glacier visit and before Blue Moon Valley and the evening transfer to Dali. The preferred session is 13:20; 14:50 is a backup that requires tighter transfer planning. Tickets remain unbooked.
 
 ## Tokens and typography
 
