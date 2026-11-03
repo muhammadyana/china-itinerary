@@ -63,23 +63,32 @@ function sourceLink(source: string, label: string): string {
   return escapeHtml(label);
 }
 
-export function renderWeather(locationId: string): string {
+export function renderWeather(locationId: string, instanceId?: string): string {
   const location = findLocation(locationId);
   if (!location) {
-    return '<section class="weather-panel" aria-label="Cuaca"><h3>Cuaca</h3><p>Lokasi acuan cuaca belum tersedia.</p></section>';
+    return '<span class="weather-panel weather-unavailable">Suhu belum tersedia</span>';
   }
+  const detailsId = `weather-details-${encodeURIComponent(instanceId ?? locationId)}`;
 
-  return `<section class="weather-panel" data-weather-location="${escapeHtml(locationId)}" data-weather-state="idle" aria-label="Cuaca di ${escapeHtml(location.name)}">
-    <header class="weather-header"><h3>Cuaca di ${escapeHtml(location.name)}</h3><button type="button" class="weather-refresh" data-weather-refresh disabled>Perbarui</button></header>
-    <div class="weather-reading" data-weather-reading hidden><p class="weather-temperature" data-weather-temperature></p><p class="weather-feels-like">Terasa seperti <span data-weather-feels-like></span></p></div>
-    <div class="weather-placeholder" data-weather-placeholder aria-hidden="true" hidden><span></span><span></span></div>
-    <p class="weather-status" data-weather-status role="status" aria-live="polite" aria-atomic="true">Estimasi cuaca belum dimuat.</p>
-    <time class="weather-time" data-weather-time hidden></time>
-    <p class="weather-disclaimer">Estimasi cuaca saat ini, bukan prakiraan tanggal perjalanan.</p>
-    ${location.note ? `<p class="weather-location-note">${escapeHtml(location.note)}</p>` : ''}
-    <p class="weather-source">Sumber: <a href="${WEATHER_DOCUMENTATION}" target="_blank" rel="noopener noreferrer">Open-Meteo</a> · ${sourceLink(location.source, 'Lokasi acuan')}<span>Estimasi model cuaca, bukan pengukuran langsung di lokasi.</span></p>
-    <noscript><p class="weather-no-script">Aktifkan JavaScript untuk memuat estimasi cuaca saat ini.</p></noscript>
-  </section>`;
+  return `<div class="weather-panel" data-weather-location="${escapeHtml(locationId)}" data-weather-state="idle">
+    <button type="button" class="weather-open" data-weather-open popovertarget="${detailsId}" aria-haspopup="dialog">
+      <span class="weather-sr-only">Cuaca di ${escapeHtml(location.name)}: </span>
+      <span class="weather-reading" data-weather-reading hidden><span class="weather-temperature" data-weather-temperature></span><span aria-hidden="true">·</span><span class="weather-feels-like">Terasa <span data-weather-feels-like></span></span></span>
+      <span class="weather-placeholder" data-weather-placeholder aria-hidden="true" hidden><span></span><span></span></span>
+      <span data-weather-label>Suhu belum dimuat</span>
+      <span class="weather-stale" data-weather-stale hidden>Data lama</span>
+    </button>
+    <div class="weather-details" data-weather-details id="${detailsId}" popover="auto" role="dialog" aria-labelledby="${detailsId}-title">
+      <header class="weather-header"><h3 id="${detailsId}-title">Cuaca saat ini</h3><button type="button" class="weather-close" data-weather-close popovertarget="${detailsId}" popovertargetaction="hide" aria-label="Tutup detail cuaca" autofocus>Tutup</button></header>
+      <p class="weather-reference">Area acuan: ${sourceLink(location.source, location.name)}.</p>
+      <time class="weather-time" data-weather-time hidden></time>
+      <p class="weather-disclaimer">Estimasi cuaca saat ini, bukan prakiraan tanggal perjalanan.</p>
+      ${location.note ? `<p class="weather-location-note">${escapeHtml(location.note)}</p>` : ''}
+      <p class="weather-source">Sumber: <a href="${WEATHER_DOCUMENTATION}" target="_blank" rel="noopener noreferrer">Open-Meteo</a><span>Estimasi model cuaca, bukan pengukuran langsung di lokasi.</span></p>
+      <div class="weather-actions"><button type="button" class="weather-refresh" data-weather-refresh disabled>Perbarui</button><p class="weather-status" data-weather-status role="status" aria-live="polite" aria-atomic="true">Estimasi cuaca belum dimuat.</p></div>
+      <noscript><p class="weather-no-script">Aktifkan JavaScript untuk memuat estimasi cuaca saat ini.</p></noscript>
+    </div>
+  </div>`;
 }
 
 function parseReading(value: unknown): WeatherReading {
@@ -150,18 +159,25 @@ function errorMessage(error: unknown): string {
 
 async function updatePanel(panel: HTMLElement, location: WeatherLocation, force = false): Promise<void> {
   const button = panel.querySelector<HTMLButtonElement>('[data-weather-refresh]');
+  const openButton = panel.querySelector<HTMLButtonElement>('[data-weather-open]');
   const readingElement = panel.querySelector<HTMLElement>('[data-weather-reading]');
   const placeholder = panel.querySelector<HTMLElement>('[data-weather-placeholder]');
+  const label = panel.querySelector<HTMLElement>('[data-weather-label]');
+  const staleLabel = panel.querySelector<HTMLElement>('[data-weather-stale]');
   const temperature = panel.querySelector<HTMLElement>('[data-weather-temperature]');
   const feelsLike = panel.querySelector<HTMLElement>('[data-weather-feels-like]');
   const status = panel.querySelector<HTMLElement>('[data-weather-status]');
   const time = panel.querySelector<HTMLTimeElement>('[data-weather-time]');
-  if (!button || !readingElement || !placeholder || !temperature || !feelsLike || !status || !time) return;
+  if (!button || !openButton || !readingElement || !placeholder || !label || !staleLabel
+    || !temperature || !feelsLike || !status || !time) return;
 
   panel.dataset.weatherState = 'loading';
   readingElement.hidden = true;
   time.hidden = true;
   placeholder.hidden = false;
+  label.hidden = true;
+  staleLabel.hidden = true;
+  openButton.setAttribute('aria-busy', 'true');
   button.disabled = true;
   button.setAttribute('aria-busy', 'true');
   button.textContent = 'Memuat';
@@ -173,12 +189,13 @@ async function updatePanel(panel: HTMLElement, location: WeatherLocation, force 
     const stale = Date.now() - reading.validAt > STALE_AFTER_MS;
     panelReadings.set(panel, reading);
     panel.dataset.weatherState = stale ? 'stale' : 'ready';
-    temperature.textContent = `${temperatureFormatter.format(reading.temperature)} °C`;
-    feelsLike.textContent = `${temperatureFormatter.format(reading.feelsLike)} °C`;
+    temperature.textContent = `${temperatureFormatter.format(reading.temperature)}°C`;
+    feelsLike.textContent = `${temperatureFormatter.format(reading.feelsLike)}°C`;
     time.dateTime = new Date(reading.validAt).toISOString();
     time.textContent = `Waktu data: ${timeFormatter.format(reading.validAt)} (UTC+8)`;
     time.hidden = false;
     readingElement.hidden = false;
+    staleLabel.hidden = !stale;
     button.textContent = 'Perbarui';
     status.textContent = stale
       ? STALE_MESSAGE
@@ -190,11 +207,14 @@ async function updatePanel(panel: HTMLElement, location: WeatherLocation, force 
     time.removeAttribute('datetime');
     time.textContent = '';
     status.textContent = errorMessage(error);
+    label.textContent = 'Suhu belum tersedia';
+    label.hidden = false;
     button.textContent = 'Coba lagi';
   } finally {
     placeholder.hidden = true;
     button.disabled = false;
     button.removeAttribute('aria-busy');
+    openButton.removeAttribute('aria-busy');
   }
 }
 
@@ -205,6 +225,8 @@ function updateFreshness(): void {
     panel.dataset.weatherState = 'stale';
     const status = panel.querySelector<HTMLElement>('[data-weather-status]');
     if (status) status.textContent = STALE_MESSAGE;
+    const staleLabel = panel.querySelector<HTMLElement>('[data-weather-stale]');
+    if (staleLabel) staleLabel.hidden = false;
   }
 }
 

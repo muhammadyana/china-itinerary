@@ -5,6 +5,7 @@ import type { PhotoContent } from './photo-viewer.ts';
 import { renderWeather } from './weather.ts';
 import { weatherLocationForGuide } from './weather-locations.ts';
 import { currencyText, hasCnyAmount, renderExchangeRate } from './currency.ts';
+import { renderSiteNavigation } from './site-navigation.ts';
 
 const external = (label: string, url: string) => `<a href="${e(url)}" target="_blank" rel="noopener noreferrer">${e(label)}<span class="visually-hidden"> (buka tab baru)</span>${icon('share')}</a>`;
 const shortDate = (date: string) => `${Number(date.slice(-2))} November`;
@@ -38,17 +39,17 @@ export function guideView(page: PlacePage) {
   const sourceLinks = guide.gettingThere.sources.map(url => external(sourceTitle(url), url)).join('');
   const nearby = guides.filter(item => item.region === guide.region && item !== guide).slice(0, 4);
   return `<a class="skip-link" href="#guide-info">Langsung ke info praktis</a>
-  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a><nav aria-label="Navigasi utama"><a class="nav-link" href="/#${date.date}">${icon('calendar')}<span>Itinerary</span></a><a class="nav-link" href="/places/">Tempat</a></nav></header>
+  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation()}</header>
   <main class="container guide-page" data-guide="${e(page.slug)}">
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="/places/#${guide.region.toLowerCase()}">${guide.region}</a>${page.placeId ? `${icon('right')}<a href="${placePath(guide.slug)}">${e(guide.name)}</a>` : ''}</nav>
     <section class="guide-hero ${photo ? '' : 'guide-hero-text'}" aria-labelledby="place-title">
       ${photo ? photoImage(photo.id, photo.alt, true, '(min-width: 1280px) 1200px, calc(100vw - 32px)') : ''}
+      ${renderWeather(weatherLocationForGuide[guide.slug], `guide-${page.slug}`)}
       <div class="guide-hero-content"><h1 id="place-title">${e(page.name)}</h1><div class="guide-hero-meta"><span>${guide.region}</span><a href="/#${date.date}">${icon('calendar')}${shortDate(date.date)}${icon('right')}</a>${gallery.length ? `<a href="#gallery">${icon('expand')}${gallery.length} foto</a>` : ''}</div></div>
     </section>
     ${photo?.note ? `<p class="guide-location-note">${e(photo.note)}</p>` : ''}
     <div class="guide-intro"><p>${e(description)}</p><a class="guide-date-link" href="/#${date.date}">${icon('bed')}<span>${date.overnight ? `Malamnya di ${e(date.overnight.name)}` : 'Hari kepulangan'}<small>Buka jadwal ${shortDate(date.date)}</small></span>${icon('right')}</a></div>
     <div class="guide-provenance"><a href="#sources">${icon('info')}Sumber & pembaruan</a><span>Riset diperiksa <time datetime="${e(guide.checkedAt)}">${checked}</time></span></div>
-    ${renderWeather(weatherLocationForGuide[guide.slug])}
     <nav class="guide-section-nav glass-surface" aria-label="Bagian panduan"><a href="#getting-there">${icon('car')}Cara ke sana</a><a href="#costs">${icon('wallet')}Biaya</a><a href="#gallery">${icon('image')}Galeri</a><a href="#tips">${icon('bulb')}Tips</a></nav>
     <div class="guide-body" id="guide-info">
       <div class="guide-main-column">
@@ -71,5 +72,5 @@ export function guideView(page: PlacePage) {
 }
 
 export function placesIndex() {
-  return `<a class="skip-link" href="#places-title">Langsung ke daftar tempat</a><header class="site-header container"><a class="wordmark" href="/">${icon('mountain')}China 2026</a><a class="nav-link" href="/">${icon('left')}Kembali ke perjalanan</a></header><main class="container places-index"><h1 id="places-title">Tempat yang akan kita jelajahi.</h1><p class="lead">Cara ke sana, biaya, foto, dan bekal praktis untuk setiap pemberhentian wisata.</p>${(['Sichuan', 'Yunnan'] as const).map(region => `<section id="${region.toLowerCase()}"><h2>${region}</h2><div class="destination-index">${guides.filter(guide => guide.region === region).map(guide => { const page = pageBySlug.get(guide.slug)!; const photo = coverPhoto(page); return `<article><a href="${placePath(guide.slug)}">${photo ? photoImage(photo.id, photo.alt) : ''}<span><h3>${e(guide.name)}</h3><small>${guideDates(page).map(day => shortDate(day.date)).join(', ')}</small></span>${icon('right')}</a>${guide.placeIds.length > 1 ? `<ul>${guide.placeIds.map(id => {const target = pageForPlace.get(id); return target ? `<li><a href="${placePath(target.slug)}">${e(places[id].name)}</a></li>` : '';}).join('')}</ul>` : ''}</article>`; }).join('')}</div></section>`).join('')}</main><footer class="container guide-footer"><a href="/">Kembali ke itinerary 14 hari</a>${siteCredit()}</footer>`;
+  return `<a class="skip-link" href="#places-title">Langsung ke daftar tempat</a><header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation()}</header><main class="container places-index"><h1 id="places-title">Tempat yang akan kita jelajahi.</h1><p class="lead">Cara ke sana, biaya, foto, dan bekal praktis untuk setiap pemberhentian wisata.</p>${(['Sichuan', 'Yunnan'] as const).map(region => `<section id="${region.toLowerCase()}"><h2>${region}</h2><div class="destination-index">${guides.filter(guide => guide.region === region).map(guide => { const page = pageBySlug.get(guide.slug)!; const photo = coverPhoto(page); return `<article><a href="${placePath(guide.slug)}">${photo ? photoImage(photo.id, photo.alt) : ''}<span><h3>${e(guide.name)}</h3><small>${guideDates(page).map(day => shortDate(day.date)).join(', ')}</small></span>${icon('right')}</a>${guide.placeIds.length > 1 ? `<ul>${guide.placeIds.map(id => {const target = pageForPlace.get(id); return target ? `<li><a href="${placePath(target.slug)}">${e(places[id].name)}</a></li>` : '';}).join('')}</ul>` : ''}</article>`; }).join('')}</div></section>`).join('')}</main><footer class="container guide-footer"><a href="/">Kembali ke itinerary 14 hari</a>${siteCredit()}</footer>`;
 }

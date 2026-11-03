@@ -4,7 +4,9 @@ import './date-picker.css';
 import './weather.css';
 import { initializeWeather } from './weather.ts';
 import './currency.css';
+import './site-navigation.css';
 import { initializeCurrency } from './currency.ts';
+import { initializeSiteNavigation } from './site-navigation.ts';
 import { initializeGuide } from './guide-main.ts';
 import { initializePhotoLoading } from './photo-loading.ts';
 import { updatePhotoContent } from './photo-viewer.ts';
@@ -42,6 +44,7 @@ function moveHero(direction: number) {
 
 function dateFromHash() {
   const date = window.location.hash.slice(1);
+  if (date === 'itinerary' && daysByDate.has(history.state?.date)) return history.state.date as string;
   return daysByDate.has(date) ? date : days[0].date;
 }
 function announce(message: string) {
@@ -140,6 +143,11 @@ document.addEventListener('click', event => {
   if (!button || (button instanceof HTMLButtonElement && button.disabled)) return;
   const action = button.dataset.action;
   if (action === 'skip') { event.preventDefault(); $('#day-heading').focus(); }
+  else if (action === 'itinerary' && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
+    event.preventDefault();
+    if (location.hash !== '#itinerary') history.pushState({date:current}, '', '#itinerary');
+    $('#itinerary').scrollIntoView({block:'start', behavior:'instant'});
+  }
   else if (action === 'hero-next') moveHero(1);
   else if (action === 'hero-previous') moveHero(-1);
   else if (action === 'region') {
@@ -150,7 +158,6 @@ document.addEventListener('click', event => {
   else if (action === 'pick-day') {
     $('#picker-days').innerHTML = pickerItems(current,'modal'); openDialog(picker,button);
   } else if (action === 'close') button.closest('dialog')?.close();
-  else if (action === 'gallery') { const gallery=$<HTMLDetailsElement>('#user-gallery'); gallery.open=true; gallery.scrollIntoView({block:'start',behavior:'instant'}); $('#gallery-heading').focus({preventScroll:true}); }
   else if (action === 'user-photo') {
     const index = userPhotoIds.indexOf(button.dataset.photo!);
     if (index < 0) return;
@@ -186,7 +193,10 @@ document.addEventListener('error', event => {
   message.textContent = 'Foto belum termuat. Ketuk untuk melihat keterangan dan sumbernya.';
   image.parentElement?.append(message);
 },true);
-const historyChanged = () => { const date = dateFromHash(); if(date !== current) showDay(date,{scroll:true}); };
+const historyChanged = () => {
+  const date = dateFromHash();
+  if (date !== current) showDay(date,{scroll:location.hash !== '#itinerary'});
+};
 window.addEventListener('popstate',historyChanged);
 window.addEventListener('hashchange',historyChanged);
 document.documentElement.classList.add('js');
@@ -199,4 +209,5 @@ if (document.getElementById('day-view')) initializeItinerary();
 else initializeGuide();
 initializeWeather();
 initializeCurrency();
+initializeSiteNavigation();
 document.documentElement.classList.add('js');

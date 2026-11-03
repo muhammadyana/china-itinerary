@@ -145,21 +145,3 @@ export const weatherLocationForGuide: Record<string, string> = {
   'kunming-old-town': 'kunming',
   'green-lake': 'kunming',
 };
-
-// Daily weather follows the overnight area; the departure day uses Kunming.
-export const weatherLocationForDate: Record<string, string> = {
-  '2026-11-08': 'chengdu',
-  '2026-11-09': 'jiuzhaigou',
-  '2026-11-10': 'rilong',
-  '2026-11-11': 'danba',
-  '2026-11-12': 'xinduqiao',
-  '2026-11-13': 'xinduqiao',
-  '2026-11-14': 'litang',
-  '2026-11-15': 'riwa',
-  '2026-11-16': 'riwa',
-  '2026-11-17': 'shangri-la',
-  '2026-11-18': 'lijiang',
-  '2026-11-19': 'dali',
-  '2026-11-20': 'kunming',
-  '2026-11-21': 'kunming',
-};

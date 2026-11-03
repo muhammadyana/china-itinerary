@@ -1,0 +1,147 @@
+import { expect, test } from '@playwright/test';
+import { days } from '../src/itinerary';
+import { pageForPlace, placePath } from '../src/guides';
+
+const excludedStops = new Set([
+  'tfu', 'chengdu-east', 'huanglongjiuzhai', 'jiuzhaigou-hotel', 'rilong', 'danba',
+  'kangding-road', 'riwa', 'zhaguanbeng', 'shangrila-station', 'lijiang-station',
+  'cable-car', 'dali-station', 'kunming-station', 'kmg',
+]);
+const sightseeingStops = [...new Set(days.flatMap(day => day.events.flatMap(event =>
+  event.kind === 'stop' && !excludedStops.has(event.place) ? [event.place] : [],
+)))];
+
+test.use({ viewport: { width: 390, height: 844 } });
+test.beforeEach(async ({ page }) => {
+  await page.route('https://api.open-meteo.com/**', route => route.abort());
+  await page.route('https://api.frankfurter.dev/**', route => route.abort());
+});
+
+test('all three page types expose every sightseeing stop once in regional itinerary order', async ({ page }) => {
+  expect(sightseeingStops).toHaveLength(48);
+  for (const id of sightseeingStops) expect(pageForPlace.has(id), id).toBe(true);
+
+  for (const path of ['/', '/places/', '/places/impression-lijiang/']) {
+    await page.goto(path);
+    const navigation = page.getByRole('navigation', { name: 'Navigasi utama', exact: true });
+    await expect(navigation.getByRole('link', { name: 'Beranda', exact: true })).toHaveAttribute('href', '/');
+    await expect(navigation.getByRole('link', { name: 'Itinerary', exact: true })).toHaveAttribute('href', '/#itinerary');
+    await navigation.locator('summary').click();
+    await expect(navigation.getByRole('link', { name: 'Lihat semua tempat' })).toHaveAttribute('href', '/places/');
+    const links = await navigation.locator('.place-menu-group a').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')));
+    expect(links).toHaveLength(48);
+    expect(new Set(links).size).toBe(48);
+    expect(links).toEqual(sightseeingStops.map(id => placePath(pageForPlace.get(id)!.slug)));
+    await expect(navigation.locator('.place-menu-group h2')).toHaveText(['Sichuan', 'Yunnan']);
+
+    for (const region of ['Sichuan', 'Yunnan']) {
+      const group = navigation.locator('.place-menu-group').filter({ has: page.getByRole('heading', { name: region, exact: true }) });
+      const expected = sightseeingStops.filter(id => pageForPlace.get(id)!.guide.region === region).map(id => placePath(pageForPlace.get(id)!.slug));
+      expect(await group.locator('a').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')))).toEqual(expected);
+    }
+  }
+});
+
+test('destination links open Impression Lijiang and Dali directly', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('.place-menu > summary').click();
+  await page.locator('.place-menu').getByRole('link', { name: 'Impression Lijiang', exact: true }).click();
+  await expect(page).toHaveURL(/\/places\/impression-lijiang\/$/);
+  await expect(page.locator('#place-title')).toHaveText('Impression Lijiang');
+
+  await page.locator('.place-menu > summary').click();
+  await page.locator('.place-menu').getByRole('link', { name: 'Kota Tua Dali', exact: true }).click();
+  await expect(page).toHaveURL(/\/places\/dali-old-town\/$/);
+  await expect(page.locator('#place-title')).toHaveText('Kota Tua Dali');
+});
+
+for (const width of [320, 390]) {
+  test(`${width}px: places remain inside the viewport with usable targets and scrolling to the last stop`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 844 });
+    for (const path of ['/', '/places/', '/places/impression-lijiang/']) {
+      await test.step(path, async () => {
+        await page.goto(path);
+        await page.evaluate(() => document.fonts.ready);
+        await page.locator('.place-menu > summary').click();
+        const panel = page.locator('.place-menu-panel');
+        const bounds = (await panel.boundingBox())!;
+        expect(bounds.x).toBeGreaterThanOrEqual(0);
+        expect(bounds.x + bounds.width).toBeLessThanOrEqual(width);
+        expect(bounds.height).toBeLessThanOrEqual(844 * 0.6 + 1);
+        expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+
+        const targets = await page.locator('.site-navigation a, .site-navigation summary').evaluateAll(nodes => nodes.map(node => {
+          const rect = node.getBoundingClientRect();
+          return { label: node.textContent, width: rect.width, height: rect.height };
+        }));
+        for (const target of targets) {
+          expect(target.width, target.label ?? '').toBeGreaterThanOrEqual(44);
+          expect(target.height, target.label ?? '').toBeGreaterThanOrEqual(44);
+        }
+        const lastStop = page.locator('.place-menu-group a').last();
+        await lastStop.scrollIntoViewIfNeeded();
+        await expect(lastStop).toHaveText('Green Lake (Cuihu)');
+        await expect(lastStop).toBeInViewport({ ratio: 1 });
+        expect(await panel.evaluate(node => node.scrollTop)).toBeGreaterThan(0);
+      });
+    }
+  });
+}
+
+test('native keyboard traversal, Escape focus restoration, and outside click work together', async ({ page }) => {
+  await page.goto('/');
+  const summary = page.locator('.place-menu > summary');
+  const menu = page.locator('.place-menu');
+  await summary.focus();
+  await page.keyboard.press('Enter');
+  await expect(menu).toHaveJSProperty('open', true);
+  await page.keyboard.press('Tab');
+  await expect(menu.getByRole('link', { name: 'Lihat semua tempat' })).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(menu.getByRole('link', { name: 'Jalan sore di Chengdu', exact: true })).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(menu).toHaveJSProperty('open', false);
+  await expect(summary).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(menu).toHaveJSProperty('open', true);
+  await page.mouse.click(2, 100);
+  await expect(menu).toHaveJSProperty('open', false);
+});
+
+test('the native places disclosure and destination links work without JavaScript', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 320, height: 844 } });
+  try {
+    const page = await context.newPage();
+    await page.goto('http://127.0.0.1:4173/places/');
+    await page.locator('.place-menu > summary').click();
+    await expect(page.locator('.place-menu-panel')).toBeVisible();
+    await page.locator('.place-menu').getByRole('link', { name: 'Impression Lijiang', exact: true }).click();
+    await expect(page).toHaveURL(/\/places\/impression-lijiang\/$/);
+    await expect(page.locator('#place-title')).toHaveText('Impression Lijiang');
+  } finally {
+    await context.close();
+  }
+});
+
+test('the Itinerary anchor restores its selected day through Back and reload', async ({ page }) => {
+  await page.goto('/#2026-11-19');
+  const dayDate = page.locator('#day-view .date-line time');
+  await expect(dayDate).toHaveAttribute('datetime', '2026-11-19');
+  await page.locator('.site-navigation').getByRole('link', { name: 'Itinerary', exact: true }).click();
+  await expect(page).toHaveURL(/\/#itinerary$/);
+  await expect(dayDate).toHaveAttribute('datetime', '2026-11-19');
+  await expect(page.locator('#itinerary')).toBeInViewport();
+
+  await page.locator('#mobile-picker').click();
+  await page.locator('#picker-days [data-date="2026-11-20"]').click();
+  await expect(page).toHaveURL(/\/#2026-11-20$/);
+  await expect(dayDate).toHaveAttribute('datetime', '2026-11-20');
+
+  await page.goBack();
+  await expect(page).toHaveURL(/\/#itinerary$/);
+  await expect(dayDate).toHaveAttribute('datetime', '2026-11-19');
+
+  await page.reload();
+  await expect(page).toHaveURL(/\/#itinerary$/);
+  await expect(dayDate).toHaveAttribute('datetime', '2026-11-19');
+});

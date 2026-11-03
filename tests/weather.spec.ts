@@ -4,6 +4,7 @@ import { days } from '../src/itinerary';
 const weatherApi = /^https:\/\/api\.open-meteo\.com\/v1\/forecast(?:\?|$)/;
 const chengduCoordinates = [30.66667, 104.06667];
 const jiuzhaigouCoordinates = [33.29597, 103.86495];
+const ganhaiziCoordinates = [27.1006879, 100.2564517];
 
 test.use({ viewport: { width: 390, height: 844 } });
 test.beforeEach(async ({ page }) => {
@@ -43,9 +44,34 @@ async function chooseDay(page: Page, date: string) {
 async function expectReading(panel: Locator, location: string, temperature: string, feelsLike: string) {
   await expect(panel).toHaveAttribute('data-weather-location', location);
   await expect(panel).toHaveAttribute('data-weather-state', 'ready');
-  await expect(panel.locator('[data-weather-temperature]')).toHaveText(`${temperature} °C`);
-  await expect(panel.locator('[data-weather-feels-like]')).toHaveText(`${feelsLike} °C`);
+  await expect(panel.locator('[data-weather-temperature]')).toHaveText(`${temperature}°C`);
+  await expect(panel.locator('[data-weather-feels-like]')).toHaveText(`${feelsLike}°C`);
   await expect(panel.locator('[data-weather-placeholder]')).toBeHidden();
+  await expect(panel.locator('[data-weather-label]')).toBeHidden();
+  await expect(panel.locator('[data-weather-stale]')).toBeHidden();
+}
+
+async function openWeather(panel: Locator) {
+  const details = panel.locator('[data-weather-details]');
+  if (!await details.isVisible()) await panel.locator('[data-weather-open]').click();
+  await expect(details).toBeVisible();
+  return details;
+}
+
+async function expectCompactOverlay(panel: Locator, photo: Locator) {
+  const trigger = panel.locator('[data-weather-open]');
+  await trigger.scrollIntoViewIfNeeded();
+  const [badgeBox, photoBox] = await Promise.all([trigger.boundingBox(), photo.boundingBox()]);
+  expect(badgeBox!.width).toBeGreaterThanOrEqual(44);
+  expect(badgeBox!.height).toBeGreaterThanOrEqual(44);
+  expect(badgeBox!.x).toBeGreaterThanOrEqual(photoBox!.x);
+  expect(badgeBox!.y).toBeGreaterThanOrEqual(photoBox!.y);
+  expect(badgeBox!.x + badgeBox!.width).toBeLessThanOrEqual(photoBox!.x + photoBox!.width);
+  expect(badgeBox!.y + badgeBox!.height).toBeLessThanOrEqual(photoBox!.y + photoBox!.height);
+  expect(badgeBox!.width * badgeBox!.height).toBeLessThan(photoBox!.width * photoBox!.height / 4);
+  await expect(panel.locator('[data-weather-details]')).toBeHidden();
+  await expect(panel.locator('[data-weather-time]')).toBeHidden();
+  await expect(panel.locator('.weather-source')).toBeHidden();
 }
 
 test('selected-day weather uses its own coordinates and a late prior response cannot replace the current location', async ({ page }) => {
@@ -73,12 +99,13 @@ test('selected-day weather uses its own coordinates and a late prior response ca
   try {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     await firstRequested.promise;
-    const panel = page.locator('#day-view [data-weather-location]');
+    const panel = page.locator('#day-view [data-weather-location]').first();
     await expect(panel).toHaveAttribute('data-weather-state', 'loading');
     await expect(panel.locator('[data-weather-placeholder]')).toBeVisible();
     await expect(panel.locator('[data-weather-reading]')).toBeHidden();
     await expect(panel.locator('[data-weather-refresh]')).toBeDisabled();
     await expect(panel.locator('[data-weather-status]')).toHaveText('Memuat estimasi cuaca…');
+    await expect(panel.locator('[data-weather-details]')).toBeHidden();
 
     await chooseDay(page, '2026-11-09');
     await expectReading(panel, 'jiuzhaigou', '7', '4');
@@ -125,9 +152,12 @@ test('revisiting a day shares its pending request and cached reading while manua
   try {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     await firstRequested.promise;
-    const panel = page.locator('#day-view [data-weather-location]');
+    const panel = page.locator('#day-view [data-weather-location]').first();
     await chooseDay(page, '2026-11-09');
     await expectReading(panel, 'jiuzhaigou', '7', '4');
+    const nearbyBadges = page.locator('#day-view [data-weather-location="jiuzhaigou"]');
+    expect(await nearbyBadges.count()).toBeGreaterThan(1);
+    for (const badge of await nearbyBadges.all()) await expectReading(badge, 'jiuzhaigou', '7', '4');
     await chooseDay(page, '2026-11-08');
     await expect(panel).toHaveAttribute('data-weather-state', 'loading');
     releaseFirst.resolve();
@@ -141,6 +171,7 @@ test('revisiting a day shares its pending request and cached reading while manua
     expect(chengduRequests).toBe(1);
     expect(jiuzhaigouRequests).toBe(1);
 
+    await openWeather(panel);
     await panel.getByRole('button', { name: 'Perbarui', exact: true }).click();
     await refreshRequested.promise;
     await expect(panel).toHaveAttribute('data-weather-state', 'loading');
@@ -167,13 +198,17 @@ test('a guide rejects null temperatures, recovers after provider failure, and do
   });
 
   await page.goto('/places/jiuzhaigou/');
-  const panel = page.locator('.guide-page [data-weather-location]');
+  const panel = page.locator('.guide-hero [data-weather-location]').first();
   await expect(panel).toHaveAttribute('data-weather-state', 'error');
   await expect(panel.locator('[data-weather-status]')).toHaveText('Data cuaca dari penyedia belum lengkap. Coba lagi.');
   await expect(panel.locator('[data-weather-temperature]')).toBeEmpty();
   await expect(panel.locator('[data-weather-reading]')).toBeHidden();
   await expect(panel.locator('[data-weather-placeholder]')).toBeHidden();
+  await expect(panel.locator('[data-weather-label]')).toHaveText('Suhu belum tersedia');
+  await expect(panel.locator('[data-weather-label]')).toBeVisible();
+  await expect(panel.locator('[data-weather-details]')).toBeHidden();
 
+  await openWeather(panel);
   await panel.getByRole('button', { name: 'Coba lagi', exact: true }).click();
   await expect(panel.locator('[data-weather-status]')).toHaveText('Cuaca belum bisa dimuat. Coba lagi.');
   await expect(panel.locator('[data-weather-refresh]')).toBeEnabled();
@@ -194,10 +229,14 @@ test('outdated model data is labeled with its actual China-time timestamp and th
   const staleTimestamp = Math.floor(Date.now() / 1000) - 2 * 60 * 60;
   await page.route(weatherApi, route => fulfillWeather(route, -3, -7, staleTimestamp));
   await page.goto('/places/jiuzhaigou/');
-  const panel = page.locator('.guide-page [data-weather-location]');
+  const panel = page.locator('.guide-hero [data-weather-location]').first();
   await expect(panel).toHaveAttribute('data-weather-state', 'stale');
-  await expect(panel.locator('[data-weather-temperature]')).toHaveText('-3 °C');
-  await expect(panel.locator('[data-weather-feels-like]')).toHaveText('-7 °C');
+  await expect(panel.locator('[data-weather-temperature]')).toHaveText('-3°C');
+  await expect(panel.locator('[data-weather-feels-like]')).toHaveText('-7°C');
+  await expect(panel.locator('[data-weather-stale]')).toHaveText('Data lama');
+  await expect(panel.locator('[data-weather-stale]')).toBeVisible();
+  await expect(panel.locator('[data-weather-time]')).toBeHidden();
+  await openWeather(panel);
   await expect(panel.locator('[data-weather-status]')).toHaveText('Data cuaca belum terbaru. Perbarui sebelum mengandalkannya.');
   await expect(panel.locator('[data-weather-time]')).toHaveAttribute('datetime', new Date(staleTimestamp * 1000).toISOString());
   await expect(panel.locator('[data-weather-time]')).toContainText('UTC+8');
@@ -210,9 +249,13 @@ test('outdated model data is labeled with its actual China-time timestamp and th
   try {
     const noScriptPage = await context.newPage();
     await noScriptPage.goto(new URL('/places/jiuzhaigou/', baseURL).href);
-    const noScriptPanel = noScriptPage.locator('[data-weather-location]');
+    const noScriptPanel = noScriptPage.locator('.guide-hero [data-weather-location]').first();
     await expect(noScriptPanel).toHaveAttribute('data-weather-state', 'idle');
+    await expect(noScriptPanel.locator('[data-weather-label]')).toHaveText('Suhu belum dimuat');
+    await expect(noScriptPanel.locator('[data-weather-details]')).toBeHidden();
+    await openWeather(noScriptPanel);
     await expect(noScriptPanel.locator('.weather-no-script')).toHaveText('Aktifkan JavaScript untuk memuat estimasi cuaca saat ini.');
+    await expect(noScriptPanel.locator('.weather-no-script')).toBeVisible();
     await expect(noScriptPanel.locator('[data-weather-reading]')).toBeHidden();
     await expect(noScriptPanel.locator('[data-weather-placeholder]')).toBeHidden();
     await expect(noScriptPage.locator('.guide-date-link')).toHaveAttribute('href', '/#2026-11-09');
@@ -231,7 +274,7 @@ test('a fresh reading becomes visibly outdated as time passes without polling th
     await fulfillWeather(route, 12, 10, timestamp);
   });
   await page.goto('/places/jiuzhaigou/');
-  const panel = page.locator('.guide-page [data-weather-location]');
+  const panel = page.locator('.guide-hero [data-weather-location]').first();
   await expectReading(panel, 'jiuzhaigou', '12', '10');
   await expect(panel.locator('[data-weather-time]')).toHaveAttribute('datetime', new Date(timestamp * 1000).toISOString());
   expect(requests).toBe(1);
@@ -239,8 +282,58 @@ test('a fresh reading becomes visibly outdated as time passes without polling th
   await page.clock.fastForward(46 * 60 * 1000);
   await expect(panel).toHaveAttribute('data-weather-state', 'stale');
   await expect(panel.locator('[data-weather-status]')).toHaveText('Data cuaca belum terbaru. Perbarui sebelum mengandalkannya.');
-  await expect(panel.locator('[data-weather-temperature]')).toHaveText('12 °C');
+  await expect(panel.locator('[data-weather-temperature]')).toHaveText('12°C');
+  await expect(panel.locator('[data-weather-stale]')).toBeVisible();
+  await expect(panel.locator('[data-weather-details]')).toBeHidden();
   await expect(panel.locator('[data-weather-time]')).toHaveAttribute('datetime', new Date(timestamp * 1000).toISOString());
   await expect(panel.locator('[data-weather-refresh]')).toBeEnabled();
   expect(requests).toBe(1);
 });
+
+for (const width of [320, 390]) {
+  test(`${width}px: compact photo weather opens metadata on demand and uses each stop's area instead of the overnight city`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 844 });
+    const requestedLocations: number[][] = [];
+    await page.route(weatherApi, async route => {
+      const location = coordinates(route.request().url());
+      requestedLocations.push(location);
+      if (location[0] === ganhaiziCoordinates[0]) {
+        expect(location).toEqual(ganhaiziCoordinates);
+        await fulfillWeather(route, 1, -3);
+      } else {
+        expect(location).toEqual(jiuzhaigouCoordinates);
+        await fulfillWeather(route, 9, 6);
+      }
+    });
+
+    await page.goto('/places/jiuzhaigou/');
+    const guideBadge = page.locator('.guide-hero [data-weather-location]').first();
+    await expectReading(guideBadge, 'jiuzhaigou', '9', '6');
+    await expectCompactOverlay(guideBadge, page.locator('.guide-hero > img'));
+    const trigger = guideBadge.locator('[data-weather-open]');
+    const details = await openWeather(guideBadge);
+    await expect(details.locator('[data-weather-time]')).toBeVisible();
+    await expect(details.getByRole('link', { name: 'Open-Meteo', exact: true })).toBeVisible();
+    await expect(details).toContainText('bukan prakiraan tanggal perjalanan');
+    await expect(details.locator('[data-weather-refresh]')).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(details).toBeHidden();
+    await expect(trigger).toBeFocused();
+    await openWeather(guideBadge);
+    await details.locator('[data-weather-close]').click();
+    await expect(details).toBeHidden();
+    await expect(trigger).toBeFocused();
+
+    await page.goto('/#2026-11-19');
+    await expect(page.locator('#day-view .sleep-summary')).toContainText('Menginap di Dali');
+    for (const id of ['jade-dragon', 'impression-lijiang', 'blue-moon']) {
+      const stop = page.locator(`#day-view li[id^="stop-${id}-"]`);
+      const badge = stop.locator('[data-weather-location]');
+      await expectReading(badge, 'ganhaizi', '1', '-3');
+      await expectCompactOverlay(badge, stop.locator('img').first());
+    }
+    await expect(page.locator('#day-view [data-weather-location="dali"]')).toHaveCount(0);
+    expect(requestedLocations.filter(location => location[0] === ganhaiziCoordinates[0])).toHaveLength(1);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
+  });
+}

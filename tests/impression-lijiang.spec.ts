@@ -81,7 +81,7 @@ test('phone visitors choose 19 November, open the sourced show guide and gallery
   await page.getByRole('button', { name: 'Pilih hari', exact: true }).click();
   await page.locator(`#picker-days [data-date="${visitDate}"]`).click();
   const stop = page.locator(`#day-view li[id^="stop-${placeId}-"]`);
-  await expect(stop.locator('h3')).toHaveText(places[placeId].name);
+  await expect(stop.getByRole('heading', { name: places[placeId].name, exact: true })).toHaveText(places[placeId].name);
   await expect(stop.locator('.state')).toHaveText('Wajib');
   await expect(stop.locator('.state.confirmed')).toHaveCount(0);
   await expect(stop.locator('.stop-time')).toContainText('13.20');

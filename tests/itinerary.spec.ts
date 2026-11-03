@@ -332,7 +332,7 @@ test('every photo source exists with explicit responsive dimensions and attribut
  }
 });
 
-test('user gallery: open below the hero, navigation reopens it, photo source and contained scroll',async({page})=>{
+test('user gallery: open below the hero, summary reopens it, photo source and contained scroll',async({page})=>{
  await page.setViewportSize({width:390,height:844});
  await page.goto('/');
  const firstHeroPhoto=photoRegistry[highlights[0].photo||places[highlights[0].place].photo!];
@@ -341,7 +341,7 @@ test('user gallery: open below the hero, navigation reopens it, photo source and
  await expect(page.locator('#user-gallery + .home-arrival')).toBeAttached();
  await page.locator('#gallery-heading').click();
  await expect(page.locator('#user-gallery')).not.toHaveAttribute('open','');
- await page.getByRole('button',{name:'Galeri',exact:true}).click();
+ await page.locator('#gallery-heading').click();
  await expect(page.locator('#user-gallery')).toHaveAttribute('open','');
  await expect(page.locator('#gallery-heading')).toBeFocused();
  await expect(page.locator('.gallery-photo')).toHaveCount(Object.keys(userPhotos).length);
