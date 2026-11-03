@@ -25,6 +25,8 @@ export interface Day {
   sourceNote?: string;
 }
 export const pdfPath = 'China-Itinerary-8-21-November-2026.pdf';
+// Refresh the download cache key for every build and browser session.
+export const pdfDownloadUrl = `/${pdfPath}?v=${Date.now()}`;
 export const railUrl = 'https://www.12306.cn/en/index.html';
 export const places: Record<string, Place> = {
   tfu: { name: 'Chengdu Tianfu (TFU)', chinese: '成都天府国际机场', description: 'Terminal 1 menjadi pintu masuk perjalanan. Setelah imigrasi dan bagasi, menuju hotel di Chengdu sebelum jalan sore di kota.', page: 5, photo: 'tfu', alt: 'Area dalam Terminal 1 Bandara Chengdu Tianfu dengan papan petunjuk dan pengunjung.' },

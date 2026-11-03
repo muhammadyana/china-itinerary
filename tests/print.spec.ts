@@ -3,8 +3,14 @@ import { days, pdfPath, places } from '../src/itinerary';
 import { guides, pageForPlace, placePath } from '../src/guides';
 import { chengduEveningMalls } from '../src/chengdu-evening';
 
-test('the build publishes a newly generated PDF separately from the archived source', async ({ request }) => {
-  const response = await request.get(`/${pdfPath}`);
+test('the build publishes a newly generated PDF separately from the archived source', async ({ page, request }) => {
+  await page.goto('/');
+  const download = await page.locator('footer a[download]').getAttribute('href');
+  const downloadUrl = new URL(download!, 'http://127.0.0.1:4173');
+  expect(downloadUrl.pathname).toBe(`/${pdfPath}`);
+  expect(downloadUrl.searchParams.get('v')).toMatch(/^\d+$/);
+  await expect(page.locator('.site-navigation a[href*=".pdf"]')).toHaveCount(0);
+  const response = await request.get(downloadUrl.href);
   expect(response.ok()).toBe(true);
   expect(response.headers()['content-type']).toContain('pdf');
   const document = await response.body();

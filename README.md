@@ -38,7 +38,7 @@ The destination directory uses the shared `renderDestinationCard` renderer, wide
 
 The initial page is prerendered so the first day and PDF link remain available without JavaScript. Selecting a day requires JavaScript. Each date uses a `#YYYY-MM-DD` fragment; Back/Forward restores the corresponding date.
 
-`npm run build` exports a script-free print document and generates the downloadable PDF with Playwright Chromium. The development server generates the PDF on request from freshly loaded source data; concurrent downloads share the in-progress generation. Both paths use local resources only and include a generation timestamp and author credit.
+`npm run build` exports a script-free print document and generates the downloadable PDF with Playwright Chromium. Download links receive a fresh cache key per build and browser session so a CDN cannot retain an earlier itinerary at the same URL. The development server generates the PDF on request from freshly loaded source data; concurrent downloads share the in-progress generation. Both paths use local resources only and include a generation timestamp and author credit.
 
 ## Current temperature
 
