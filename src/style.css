@@ -207,7 +207,15 @@ dialog::backdrop { background: var(--color-backdrop); }
 .booking-option p { font-size: 14px; }
 .photo-dialog { max-width: 920px; padding: 0; }
 .photo-detail-figure { margin: 0; }
-.photo-detail-figure > img { width: 100%; max-height: 60dvh; object-fit: contain; background: var(--color-autumn); }
+.photo-stage { display: grid; grid-template-columns: 56px minmax(0,1fr) 56px; align-items: center; column-gap: var(--space-2xs); }
+.photo-stage > .icon-button { width: 44px; height: 44px; min-width: 44px; min-height: 44px; justify-self: center; grid-row: 1; }
+.photo-stage > .icon-button:focus-visible { outline-offset: -3px; }
+.photo-previous { grid-column: 1; }
+.photo-next { grid-column: 3; }
+.photo-frame { grid-column: 2; grid-row: 1; min-width: 0; overflow: hidden; border-radius: var(--space-xs); }
+.photo-frame > img { width: 100%; max-height: 65dvh; object-fit: contain; background: var(--color-paper-2); }
+.photo-stage > [hidden] { display: none; }
+.photo-previous[hidden] ~ .photo-frame { grid-column: 1 / -1; }
 .photo-detail-figure figcaption { padding: var(--space-lg) 28px; }
 .photo-detail-figure h2 { font-variant-numeric: tabular-nums; font-size: 34px; margin-bottom: var(--space-md); }
 .photo-detail-figure p { font-size: 15px; }
@@ -327,6 +335,7 @@ dialog::backdrop { background: var(--color-backdrop); }
  .picker-days .choice-title { font-size: 11px; line-height: 1.35; }
  .picker-days .choice-meta { font-size: 10px; }
  .photo-dialog { width: calc(100% - 24px); max-height: calc(100dvh - 32px); }
+ .photo-stage { grid-template-columns: 44px minmax(0,1fr) 44px; }
  .photo-detail-figure figcaption { padding: 20px; }
  .photo-detail-figure h2 { font-size: 30px; }
  .overview-dialog { padding: 20px; }

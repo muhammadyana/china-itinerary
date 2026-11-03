@@ -1,12 +1,12 @@
 import { pageBySlug, galleryPhotos } from './guides.ts';
 import { guidePhotoDetail } from './guide-render.ts';
+import { updatePhotoContent } from './photo-viewer.ts';
 
 export function initializeGuide() {
   const slug = document.querySelector<HTMLElement>('[data-guide]')?.dataset.guide;
   const page = slug ? pageBySlug.get(slug) : undefined;
   if (!page) return;
   const dialog = document.querySelector<HTMLDialogElement>('#guide-photo-dialog')!;
-  const content = document.querySelector<HTMLElement>('#guide-photo-content')!;
   const counter = document.querySelector<HTMLElement>('#guide-photo-count')!;
   const gallery = galleryPhotos(page);
   let current = 0;
@@ -14,7 +14,7 @@ export function initializeGuide() {
 
   const showPhoto = (index: number) => {
     current = (index + gallery.length) % gallery.length;
-    content.innerHTML = guidePhotoDetail(page, current);
+    updatePhotoContent(dialog, guidePhotoDetail(page, current));
     counter.textContent = `${current + 1} / ${gallery.length}`;
     dialog.querySelectorAll<HTMLButtonElement>('[data-guide-action$="-photo"]').forEach(button => {
       if (button.dataset.guideAction !== 'close-photo') button.disabled = gallery.length < 2;

@@ -162,14 +162,11 @@ dialog { background: var(--color-glass-solid); border: 1px solid var(--color-gla
 .guide-footer { flex-wrap: wrap; }
 .guide-footer > .site-credit { flex-basis: 100%; }
 .guide-page + .guide-footer { padding-bottom: calc(var(--space-3xl) + var(--space-md) + env(safe-area-inset-bottom)); }
-.guide-photo-dialog { max-width: 1120px; width: calc(100% - 32px); padding: var(--space-md); }
-.photo-toolbar { display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1; background: var(--color-glass-solid); padding-bottom: var(--space-sm); }
-.photo-toolbar > div { display: flex; gap: var(--space-xs); }
-.photo-toolbar [hidden] { display: none; }
-.home-photo-toolbar { padding: var(--space-sm) var(--space-md); }
+.guide-photo-dialog { max-width: 1120px; width: calc(100% - 32px); padding: 0; }
+.photo-toolbar { display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1; background: var(--color-glass-solid); padding: var(--space-xs) var(--space-sm); }
+.photo-toolbar > span { padding-left: var(--space-xs); font-size: var(--text-sm); color: var(--color-muted); font-variant-numeric: tabular-nums; }
 .guide-photo-detail { margin: 0; }
-.guide-photo-detail img { width: 100%; max-height: 65dvh; object-fit: contain; border-radius: 16px; }
-.guide-photo-detail figcaption { padding: var(--space-lg) var(--space-sm); }
+.guide-photo-detail figcaption { padding: var(--space-lg); }
 .guide-photo-detail h2 { font-size: 28px; }
 .guide-photo-detail p { font-size: 14px; color: var(--color-ink-2); margin-top: var(--space-sm); }
 .guide-photo-credit { margin-top: var(--space-lg); font-size: 13px; }
@@ -260,7 +257,7 @@ dialog { background: var(--color-glass-solid); border: 1px solid var(--color-gla
  .guide-next h2 { font-size: 34px; }
  .guide-footer { flex-direction: column; gap: var(--space-lg); padding-block: var(--space-xl) var(--space-2xl); }
  .guide-footer nav { justify-content: start; font-size: 14px; }
- .guide-photo-dialog { padding: var(--space-sm); width: calc(100% - 16px); }
+ .guide-photo-dialog { width: calc(100% - 16px); }
  .guide-photo-detail h2 { font-size: 24px; }
  .places-index { padding-top: var(--space-lg); }
  .places-index h1 { font-size: 44px; }

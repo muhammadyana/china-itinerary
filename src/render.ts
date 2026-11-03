@@ -2,6 +2,7 @@ import { guideForPlace, pageForPlace, placePath } from './guides.ts';
 import { renderWeather } from './weather.ts';
 import { weatherLocationForDate } from './weather-locations.ts';
 import { currencyText, hasCnyAmount, renderExchangeRate } from './currency.ts';
+import type { PhotoContent } from './photo-viewer.ts';
 import {days, places, photos, userPhotos, highlights, pdfPath, bookingOptions, type Day, type Event, type Highlight} from './itinerary.ts';
 export const escapeHtml = (value: string) => value.replace(/[&<>"']/g,c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
 const e = escapeHtml;
@@ -32,6 +33,16 @@ const external = (label: string, url: string) => `<a class="text-link" href="${e
 export function siteCredit() {
  return '<p class="site-credit">© 2026 by <a href="https://muhammadyana.me" target="_blank" rel="noopener noreferrer">muhammadyana.me<span class="visually-hidden"> (buka tab baru)</span></a></p>';
 }
+export function renderPhotoDialog(kind: 'home' | 'guide') {
+ const isGuide = kind === 'guide';
+ const prefix = isGuide ? 'guide-photo' : 'photo';
+ const actionAttribute = isGuide ? 'data-guide-action' : 'data-action';
+ const previousAction = isGuide ? 'previous-photo' : 'photo-previous';
+ const nextAction = isGuide ? 'next-photo' : 'photo-next';
+ const closeAction = isGuide ? 'close-photo' : 'close';
+ const hidden = isGuide ? '' : ' hidden';
+ return `<dialog id="${prefix}-dialog" class="photo-dialog${isGuide ? ' guide-photo-dialog' : ''}" aria-labelledby="${prefix}-title"><header class="photo-toolbar"><span id="${prefix}-count" aria-live="polite" aria-atomic="true"></span><button type="button" class="icon-button" ${actionAttribute}="${closeAction}" aria-label="Tutup foto" autofocus>${icon('close')}</button></header><div id="${prefix}-content"><figure class="${isGuide ? 'guide-photo-detail' : 'photo-detail-figure'}"><div class="photo-stage"><button type="button" class="icon-button photo-previous" ${actionAttribute}="${previousAction}" aria-label="Foto sebelumnya"${hidden}>${icon('left')}</button><div class="photo-frame" data-photo-frame></div><button type="button" class="icon-button photo-next" ${actionAttribute}="${nextAction}" aria-label="Foto berikutnya"${hidden}>${icon('right')}</button></div><figcaption data-photo-caption></figcaption></figure></div></dialog>`;
+}
 export function photoImage(id: string, alt: string, eager = false, sizes = '(min-width: 960px) 340px, calc(100vw - 48px)') {
  const p = photos[id] || userPhotos[id]; if(!p) return '';
  const max = p.sizes[p.sizes.length-1];
@@ -61,14 +72,20 @@ export function dayView(day: Day) {
 export function overviewContent(current: string) {
  return `<p class="dialog-intro">14 hari, 13 malam. Sembilan malam di Sichuan, empat di Yunnan.</p><ol class="overview-list">${days.map(day=>`<li><a href="#${day.date}" data-date="${day.date}" ${current===day.date?'aria-current="date"':''}><time datetime="${day.date}">${day.date.slice(-2)} Nov</time><span><strong>${e(day.title)}</strong><span>${day.overnight?`Menginap di ${e(day.overnight.name)}`:'Penerbangan pulang'}</span></span>${icon('right')}</a></li>`).join('')}</ol><details class="booking-options"><summary>Mobil & alternatif paket${icon('down')}</summary>${bookingOptions.map((o,i)=>`<div class="booking-option"><h3>${e(o.title)}</h3><p>${e(o.description)}</p>${external(i===0?'Lihat penyedia mobil':'Lihat paket alternatif',o.url)}</div>`).join('')}</details>`;
 }
-export function photoDetail(placeId: string) {
+export function photoDetail(placeId: string): PhotoContent {
  const p=places[placeId];const photo=p.photo?photos[p.photo]:undefined;
- if(!photo) return `<h2 id="photo-title">${e(p.name)}</h2><p>Foto belum tersedia.</p>`;
- return `<figure class="photo-detail-figure">${photoImage(photo.id,p.alt||p.name,true,'(min-width: 960px) 850px, calc(100vw - 40px)')}<figcaption><h2 id="photo-title">${e(p.name)}</h2><p>${e(p.description)}</p>${p.photoNote?`<p class="photo-note">${e(p.photoNote)}</p>`:''}${photo.photoNote?`<p class="photo-note">${e(photo.photoNote)}</p>`:''}<p class="photo-note">Foto referensi; warna daun dan kondisi lapangan dapat berbeda saat perjalanan.</p>${copyPlace(placeId)}<div class="photo-credit" data-credits>Foto: ${e(photo.author)}. ${external(photo.license,photo.licenseUrl)}<br>${external('Buka sumber foto',photo.source)}<span>Diubah ukurannya ke WebP; tampilan daftar dipotong sesuai bingkai. Lisensi asal tetap berlaku.</span></div></figcaption></figure>`;
+ if(!photo) return { image: '', caption: `<h2 id="photo-title">${e(p.name)}</h2><p>Foto belum tersedia.</p>` };
+ return {
+  image: photoImage(photo.id,p.alt||p.name,true,'(min-width: 960px) 850px, calc(100vw - 40px)'),
+  caption: `<h2 id="photo-title">${e(p.name)}</h2><p>${e(p.description)}</p>${p.photoNote?`<p class="photo-note">${e(p.photoNote)}</p>`:''}${photo.photoNote?`<p class="photo-note">${e(photo.photoNote)}</p>`:''}<p class="photo-note">Foto referensi; warna daun dan kondisi lapangan dapat berbeda saat perjalanan.</p>${copyPlace(placeId)}<div class="photo-credit" data-credits>Foto: ${e(photo.author)}. ${external(photo.license,photo.licenseUrl)}<br>${external('Buka sumber foto',photo.source)}<span>Diubah ukurannya ke WebP; tampilan daftar dipotong sesuai bingkai. Lisensi asal tetap berlaku.</span></div>`,
+ };
 }
-export function userPhotoDetail(id: string, titleId = 'photo-title') {
- const photo=userPhotos[id]; if(!photo) return '';
- return `<figure class="photo-detail-figure">${photoImage(id,photo.alt,true,'(min-width: 960px) 850px, calc(100vw - 40px)')}<figcaption><h2 id="${e(titleId)}">${e(photo.title)}</h2><p>${e(photo.caption)}</p><div class="photo-credit">${e(photo.credit)}<span>Foto dikirim dan disetujui pengguna untuk halaman ini. Tanggal pengambilan tidak dicantumkan.</span><span>Ukuran disesuaikan ke WebP; warna foto dipertahankan.</span></div></figcaption></figure>`;
+export function userPhotoDetail(id: string, titleId = 'photo-title'): PhotoContent {
+ const photo=userPhotos[id]; if(!photo) return { image: '', caption: '' };
+ return {
+  image: photoImage(id,photo.alt,true,'(min-width: 960px) 850px, calc(100vw - 128px)'),
+  caption: `<h2 id="${e(titleId)}">${e(photo.title)}</h2><p>${e(photo.caption)}</p><div class="photo-credit">${e(photo.credit)}<span>Foto dikirim dan disetujui pengguna untuk halaman ini. Tanggal pengambilan tidak dicantumkan.</span><span>Ukuran disesuaikan ke WebP; warna foto dipertahankan.</span></div>`,
+ };
 }
 function userGallery() {
  return `<details class="journey-gallery" id="user-gallery" open><summary id="gallery-heading"><span>Galeri pilihanmu</span><span>${Object.keys(userPhotos).length} foto ${icon('down')}</span></summary><p class="gallery-intro">Warna yang ingin ditemui di perjalanan. Geser untuk melihat koleksi foto pilihanmu.</p><div class="gallery-track" role="region" aria-label="Koleksi foto musim gugur">${Object.values(userPhotos).map(p=>`<button class="gallery-photo" type="button" data-action="user-photo" data-photo="${p.id}" aria-label="Perbesar ${e(p.title)}">${photoImage(p.id,p.alt,false,'(min-width: 960px) 300px, 260px')}<span>${e(p.title)}</span>${p.location==='Bipenggou'?'<small>Inspirasi di luar rute</small>':''}</button>`).join('')}</div></details>`;
@@ -112,7 +129,7 @@ export function shell() {
  <nav class="mobile-daybar" aria-label="Pemilih hari"><button type="button" class="icon-button" data-action="previous" aria-label="Hari sebelumnya" disabled>${icon('left')}</button><button type="button" class="mobile-picker" id="mobile-picker" data-action="pick-day"><span><strong id="current-date">8 November</strong><span id="current-count">Hari 1 dari 14</span></span>${icon('down')}</button><button type="button" class="icon-button" data-action="next" aria-label="Hari berikutnya">${icon('right')}</button></nav>
  <dialog id="day-picker" class="day-picker" aria-labelledby="picker-title"><header class="dialog-header"><div><h2 id="picker-title">Pilih hari perjalanan</h2><p>November 2026</p></div><button type="button" class="icon-button" data-action="close" aria-label="Tutup pemilih hari" autofocus>${icon('close')}</button></header><ol id="picker-days" class="picker-days">${pickerItems(days[0].date,'modal')}</ol></dialog>
  <dialog id="overview-dialog" class="overview-dialog" aria-labelledby="overview-title"><header class="dialog-header"><h2 id="overview-title">Dari Chengdu ke Kunming</h2><button type="button" class="icon-button" data-action="close" aria-label="Tutup ringkasan rute" autofocus>${icon('close')}</button></header><div id="overview-content"></div></dialog>
- <dialog id="photo-dialog" class="photo-dialog" aria-labelledby="photo-title"><header class="photo-toolbar home-photo-toolbar"><span id="photo-count" aria-live="polite" aria-atomic="true"></span><div><button type="button" class="icon-button" data-action="photo-previous" aria-label="Foto sebelumnya" hidden>${icon('left')}</button><button type="button" class="icon-button" data-action="photo-next" aria-label="Foto berikutnya" hidden>${icon('right')}</button><button type="button" class="icon-button" data-action="close" aria-label="Tutup foto" autofocus>${icon('close')}</button></div></header><div id="photo-content"></div></dialog>
+ ${renderPhotoDialog('home')}
  <dialog id="copy-dialog" class="copy-dialog" aria-labelledby="copy-title"><header class="dialog-header"><h2 id="copy-title">Salin secara manual</h2><button type="button" class="icon-button" data-action="close" aria-label="Tutup salin manual">${icon('close')}</button></header><p>Penyalinan otomatis tidak tersedia. Pilih teks di bawah, lalu salin.</p><label for="manual-copy">Teks untuk disalin</label><input id="manual-copy" readonly></dialog>
  <div class="status-message" id="status" role="status" aria-live="polite" aria-atomic="true"></div>`;
 }

@@ -30,6 +30,8 @@ Upload the contents of `dist/` to a static host. Assets use root-relative paths;
 
 Homepage cards and hero slides use shared image resolution and dedicated render functions, so a new highlight is added once to the data registry. The date picker reuses the same date-choice renderer as the sidebar; `src/date-picker.css` owns its scoped layout. Phones show one readable column in a scrollable list beneath a fixed dialog header; larger screens use two columns. Selection, Escape, focus restoration, and date history retain the existing behavior.
 
+Homepage and destination photo dialogs share `renderPhotoDialog` and `src/photo-viewer.ts`. Previous/next buttons sit in dedicated side gutters at the picture's vertical midpoint, with 44px touch targets and no overlap on the image. The counter and close button remain separate above it. Paging replaces only the image and caption, preserving button focus, keyboard navigation, and the complete photo. Single itinerary photos hide the paging controls and use the full available width.
+
 The initial page is prerendered so the first day and PDF link remain available without JavaScript. Selecting a day requires JavaScript. Each date uses a `#YYYY-MM-DD` fragment; Back/Forward restores the corresponding date.
 
 ## Current temperature

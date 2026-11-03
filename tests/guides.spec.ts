@@ -129,6 +129,14 @@ test('destination gallery supports keyboard paging, close, source attribution, a
   await expect(dialog.locator('img')).not.toHaveAttribute('src', firstImage!);
   await page.keyboard.press('ArrowLeft');
   await expect(page.locator('#guide-photo-count')).toHaveText(`1 / ${count}`);
+  const next = dialog.getByRole('button', { name: 'Foto berikutnya', exact: true });
+  await next.click();
+  await expect(page.locator('#guide-photo-count')).toHaveText(`2 / ${count}`);
+  await expect(next).toBeFocused();
+  const previous = dialog.getByRole('button', { name: 'Foto sebelumnya', exact: true });
+  await previous.click();
+  await expect(page.locator('#guide-photo-count')).toHaveText(`1 / ${count}`);
+  await expect(previous).toBeFocused();
   await expect(dialog.locator('.guide-photo-credit')).toContainText('Foto:');
   expect(await dialog.locator('img').evaluate(async node => { await (node as HTMLImageElement).decode(); return (node as HTMLImageElement).naturalWidth; })).toBeGreaterThan(0);
   await page.keyboard.press('Escape');

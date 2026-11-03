@@ -7,6 +7,7 @@ import './currency.css';
 import { initializeCurrency } from './currency.ts';
 import { initializeGuide } from './guide-main.ts';
 import { initializePhotoLoading } from './photo-loading.ts';
+import { updatePhotoContent } from './photo-viewer.ts';
 import { days, daysByDate, places, userPhotos } from './itinerary.ts';
 import { dayView, pickerItems, photoDetail, userPhotoDetail, overviewContent, icon, fullDate } from './render.ts';
 
@@ -79,10 +80,9 @@ function openDialog(dialog: HTMLDialogElement, opener: HTMLElement) {
 }
 function showUserPhoto(index: number) {
   userPhotoIndex = (index + userPhotoIds.length) % userPhotoIds.length;
-  $('#photo-content').innerHTML = userPhotoDetail(userPhotoIds[userPhotoIndex]);
+  updatePhotoContent(photoDialog, userPhotoDetail(userPhotoIds[userPhotoIndex]));
   photoCounter.textContent = `${userPhotoIndex + 1} / ${userPhotoIds.length}`;
   photoNavigation.forEach(button => { button.hidden = false; button.disabled = userPhotoIds.length < 2; });
-  photoDialog.scrollTop = 0;
 }
 photoDialog.addEventListener('keydown', event => {
   if (userPhotoIndex === null || (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft')) return;
@@ -165,7 +165,7 @@ document.addEventListener('click', event => {
     userPhotoIndex = null;
     photoCounter.textContent = '';
     photoNavigation.forEach(control => { control.hidden = true; });
-    $('#photo-content').innerHTML = photoDetail(button.dataset.place!);
+    updatePhotoContent(photoDialog, photoDetail(button.dataset.place!));
     openDialog(photoDialog,button);
   }
   else if (action === 'previous' || action === 'next') {

@@ -1,6 +1,7 @@
 import { days, photos, places, pdfPath, userPhotos } from './itinerary.ts';
 import { coverPhoto, galleryPhotos, guideDates, guides, pageBySlug, pageForPlace, placePath, type PlacePage } from './guides.ts';
-import { escapeHtml as e, icon, photoImage, userPhotoDetail, siteCredit } from './render.ts';
+import { escapeHtml as e, icon, photoImage, userPhotoDetail, siteCredit, renderPhotoDialog } from './render.ts';
+import type { PhotoContent } from './photo-viewer.ts';
 import { renderWeather } from './weather.ts';
 import { weatherLocationForGuide } from './weather-locations.ts';
 import { currencyText, hasCnyAmount, renderExchangeRate } from './currency.ts';
@@ -9,13 +10,16 @@ const external = (label: string, url: string) => `<a href="${e(url)}" target="_b
 const shortDate = (date: string) => `${Number(date.slice(-2))} November`;
 const fullDate = (date: string) => new Intl.DateTimeFormat('id-ID', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${date}T12:00:00Z`));
 
-export function guidePhotoDetail(page: PlacePage, index: number) {
+export function guidePhotoDetail(page: PlacePage, index: number): PhotoContent {
   const gallery = galleryPhotos(page);
   const item = gallery[index];
-  if (!item) return '';
+  if (!item) return { image: '', caption: '' };
   if (userPhotos[item.id]) return userPhotoDetail(item.id, 'guide-photo-title');
   const photo = photos[item.id];
-  return `<figure class="guide-photo-detail">${photoImage(item.id, item.alt, true, '(min-width: 960px) 1080px, calc(100vw - 32px)')}<figcaption><h2 id="guide-photo-title">${e(item.title)}</h2>${item.note ? `<p>${e(item.note)}</p>` : ''}${photo.photoNote && photo.photoNote !== item.note ? `<p>${e(photo.photoNote)}</p>` : ''}<p>Foto referensi. Warna daun, cuaca, dan akses dapat berbeda saat kunjungan.</p><div class="guide-photo-credit">${external(`Foto: ${photo.author}`, photo.source)}${external(photo.license, photo.licenseUrl)}<p>Ukuran disesuaikan ke WebP. Pemotongan hanya pada bingkai galeri.</p></div></figcaption></figure>`;
+  return {
+    image: photoImage(item.id, item.alt, true, '(min-width: 960px) 1000px, calc(100vw - 128px)'),
+    caption: `<h2 id="guide-photo-title">${e(item.title)}</h2>${item.note ? `<p>${e(item.note)}</p>` : ''}${photo.photoNote && photo.photoNote !== item.note ? `<p>${e(photo.photoNote)}</p>` : ''}<p>Foto referensi. Warna daun, cuaca, dan akses dapat berbeda saat kunjungan.</p><div class="guide-photo-credit">${external(`Foto: ${photo.author}`, photo.source)}${external(photo.license, photo.licenseUrl)}<p>Ukuran disesuaikan ke WebP. Pemotongan hanya pada bingkai galeri.</p></div>`,
+  };
 }
 
 export function guideView(page: PlacePage) {
@@ -63,7 +67,7 @@ export function guideView(page: PlacePage) {
     <section class="guide-next"><div><h2>Lanjutkan perjalanan.</h2><p>Kembali ke tanggal kunjungan untuk melihat transportasi dan lokasi menginap.</p></div><div class="guide-visit-dates">${dates.map(day => `<a class="quiet-button" href="/#${day.date}">${icon('calendar')}<span>${shortDate(day.date)}<small>${e(day.title)}</small></span>${icon('right')}</a>`).join('')}</div></section>
   </main>
   <footer class="container guide-footer"><a class="wordmark" href="/">${icon('mountain')}China 2026</a><nav aria-label="Destinasi lainnya">${nearby.map(item => `<a href="${placePath(item.slug)}">${e(item.name)}</a>`).join('')}</nav>${siteCredit()}</footer>
-  <dialog class="photo-dialog guide-photo-dialog" id="guide-photo-dialog" aria-labelledby="guide-photo-title"><header class="photo-toolbar"><span id="guide-photo-count" aria-live="polite"></span><div><button type="button" class="icon-button" data-guide-action="previous-photo" aria-label="Foto sebelumnya">${icon('left')}</button><button type="button" class="icon-button" data-guide-action="next-photo" aria-label="Foto berikutnya">${icon('right')}</button><button type="button" class="icon-button" data-guide-action="close-photo" aria-label="Tutup foto" autofocus>${icon('close')}</button></div></header><div id="guide-photo-content"></div></dialog>`;
+  ${renderPhotoDialog('guide')}`;
 }
 
 export function placesIndex() {
