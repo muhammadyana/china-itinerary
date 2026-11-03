@@ -43,7 +43,9 @@ Desktop highlights use two columns. Phone highlights retain native horizontal sc
 
 ## Destination pages
 
-A real destination photograph, title, and itinerary date lead the page. The overnight link follows immediately. A glass section navigation jumps to directions, costs, gallery, and tips.
+A real destination photograph, title, and itinerary date lead the page. The overnight link follows immediately. A glass section navigation stays fixed at the bottom of the viewport and jumps to directions, costs, gallery, and tips using native anchors. The dock respects the device safe area; footer clearance keeps the final links reachable.
+
+The date picker uses a single aligned date column on phones, 16px destination labels, a fixed dialog header, and an internally scrollable list. Desktop keeps two columns. Restrained glass rows and one amber selected state replace tightly packed pills. The scoped component stylesheet is `src/date-picker.css`; date content and selection wiring remain shared with the existing itinerary.
 
 Directions and ticket rows occupy the main desktop column; timing, tips, and cautions form the side column. They stack in reading order on phones. Costs distinguish published rates, estimates, and unconfirmed amounts in text, not color alone. Sources and the check date stay visible alongside the practical information. Route references are expanded; the source section is always visible and linked near the page introduction. Publication dates are distinct from the date information was checked.
 

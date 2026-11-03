@@ -26,7 +26,9 @@ Upload the contents of `dist/` to a static host. Assets use root-relative paths;
 
 ## Update the itinerary
 
-`src/itinerary.ts` is the single source of truth for dates, places with stable IDs, captions, photos, credits, transfers, practical notes, and overnight stays. The date picker, route overview, nine regional highlights, hero, and daily view share this data. `src/render.ts` renders the same HTML during the build and when a date is selected. `src/main.ts` handles DOM interactions, dialogs, the clipboard, and URL history.
+`src/itinerary.ts` is the single source of truth for dates, places with stable IDs, captions, photos, credits, transfers, practical notes, and overnight stays. The date picker, route overview, ten regional highlights, hero, and daily view share this data. `src/render.ts` renders the same HTML during the build and when a date is selected. `src/main.ts` handles DOM interactions, dialogs, the clipboard, and URL history.
+
+Homepage cards and hero slides use shared image resolution and dedicated render functions, so a new highlight is added once to the data registry. The date picker reuses the same date-choice renderer as the sidebar; `src/date-picker.css` owns its scoped layout. Phones show one readable column in a scrollable list beneath a fixed dialog header; larger screens use two columns. Selection, Escape, focus restoration, and date history retain the existing behavior.
 
 The initial page is prerendered so the first day and PDF link remain available without JavaScript. Selecting a day requires JavaScript. Each date uses a `#YYYY-MM-DD` fragment; Back/Forward restores the corresponding date.
 
@@ -60,7 +62,7 @@ Previous link checks: 12306 and two Jiuzhaigou pages returned HTTP 200. Three or
 
 ## Homepage and travel journal
 
-The homepage has nine hero slides and two explicitly named destination groups. Sichuan includes Jiuzhaigou, Siguniangshan, Tagong, and Yading. Yunnan includes Shangri-La, Lijiang Old Town, Blue Moon Valley, Lake Erhai, and Dali Old Town. Region buttons scroll to and focus the matching heading. Each highlight card opens its destination guide. Hero captions still open travel dates; guides link back to the matching itinerary date and overnight base. Hero slides alternate provinces before ending in Dali, display the region in their captions, and support swipe and previous/next controls without autoplay.
+The homepage has ten hero slides and two explicitly named destination groups. Sichuan includes Jiuzhaigou, Siguniangshan, Tagong, and Yading. Yunnan includes Shangri-La, Lijiang Old Town, Impression Lijiang, Blue Moon Valley, Lake Erhai, and Dali Old Town. Region buttons scroll to and focus the matching heading. Each highlight card opens its destination guide. Hero captions still open travel dates; guides link back to the matching itinerary date and overnight base. Hero slides begin by alternating provinces before continuing through Yunnan and ending in Dali, display the region in their captions, and support swipe and previous/next controls without autoplay.
 
 Use English for code identifiers, comments, test descriptions, and developer-facing messages. User-facing interface copy remains Bahasa Indonesia.
 

@@ -1,5 +1,6 @@
 import './style.css';
 import './glass.css';
+import './date-picker.css';
 import { initializeGuide } from './guide-main.ts';
 import { initializePhotoLoading } from './photo-loading.ts';
 import { days, daysByDate, places, userPhotos } from './itinerary.ts';

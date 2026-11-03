@@ -1,0 +1,256 @@
+/* Hallmark · component: date picker · genre: modern-minimal · theme: locked warm cream Liquid Glass · states: 8 · contrast: inherited tokens · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H5 E4 S4 R5 V3 · weakest: variety; a single-column date index replaces repeated pill tiles while preserving the native dialog */
+/* Hallmark · answered F6 · date numerals use tabular figures for an aligned reading column */
+/* Hallmark · answered F25 · all 14 dates remain in one scrollable list at every viewport height */
+
+:root {
+  --picker-width: 44rem;
+  --picker-height: 44rem;
+  --picker-row-radius: 16px;
+  --picker-row-height: 76px;
+  --picker-date-width: 2.5rem;
+  --picker-row-shine: inset 0 1px 0 var(--color-glass-inset);
+}
+
+.day-picker {
+  position: fixed;
+  inset: 0;
+  width: min(var(--picker-width), calc(100% - var(--space-lg)));
+  height: min(var(--picker-height), calc(100dvh - var(--space-lg)));
+  max-width: var(--picker-width);
+  max-height: calc(100dvh - var(--space-lg));
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--color-glass-solid);
+  color: var(--color-ink);
+}
+
+.day-picker[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.day-picker .dialog-header {
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: var(--space-lg) var(--space-md) var(--space-md);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.day-picker .dialog-header > div {
+  min-width: 0;
+}
+
+.day-picker .dialog-header h2 {
+  min-width: 0;
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-lg), 5.5vw, var(--text-xl));
+  font-weight: 600;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+.day-picker .dialog-header p {
+  margin-top: var(--space-2xs);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.day-picker .dialog-header .icon-button {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  margin: 0;
+  box-shadow: var(--picker-row-shine);
+}
+
+.day-picker .picker-days {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: var(--space-xs);
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 0;
+  padding: var(--space-md) var(--space-sm);
+  padding-bottom: max(var(--space-md), env(safe-area-inset-bottom));
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--color-rule-2) var(--color-glass-solid);
+  scroll-padding-block: var(--space-md);
+}
+
+.day-picker .picker-days > li {
+  min-width: 0;
+}
+
+.day-picker .date-choice {
+  display: grid;
+  grid-template-columns: var(--picker-date-width) minmax(0, 1fr) 1rem;
+  align-items: center;
+  gap: var(--space-sm);
+  min-width: 0;
+  min-height: var(--picker-row-height);
+  height: 100%;
+  padding: var(--space-sm);
+  border: 1px solid var(--color-transparent);
+  border-radius: var(--picker-row-radius);
+  background-color: var(--color-glass);
+  background-image: var(--glass-reflection);
+  box-shadow: var(--picker-row-shine);
+  color: var(--color-ink);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  text-decoration: none;
+  transform: none;
+  transition: background-color var(--dur-micro) var(--ease-out);
+}
+
+.day-picker .date-number {
+  width: auto;
+  font-family: var(--font-body);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.day-picker .date-choice-text {
+  min-width: 0;
+}
+
+.day-picker .choice-meta {
+  margin-bottom: var(--space-3xs);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--color-muted);
+}
+
+.day-picker .choice-title {
+  font-size: var(--text-md);
+  font-weight: 500;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+.day-picker .date-choice > svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  color: var(--color-muted);
+}
+
+.day-picker .date-choice[aria-current="date"],
+.day-picker .date-choice.is-success {
+  background-color: var(--color-gold);
+  border-color: var(--color-accent);
+}
+
+.day-picker .date-choice[aria-current="date"] :is(.date-number, .choice-title),
+.day-picker .date-choice.is-success :is(.date-number, .choice-title) {
+  font-weight: 600;
+}
+
+.day-picker .date-choice[aria-current="date"] :is(.choice-meta, svg),
+.day-picker .date-choice.is-success :is(.choice-meta, svg) {
+  color: var(--color-ink-2);
+}
+
+.day-picker .date-choice.is-hover {
+  background-color: var(--color-paper-2);
+}
+
+@media (hover: hover) {
+  .day-picker .date-choice:hover:not([aria-disabled="true"]) {
+    background-color: var(--color-paper-2);
+    box-shadow: var(--picker-row-shine);
+  }
+
+  .day-picker .date-choice[aria-current="date"]:hover {
+    background-color: var(--color-gold-hover);
+  }
+}
+
+.day-picker .date-choice:focus-visible,
+.day-picker .date-choice.is-focus,
+.day-picker .dialog-header .icon-button:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: -3px;
+}
+
+.day-picker .date-choice:active:not([aria-disabled="true"]),
+.day-picker .date-choice.is-active {
+  background-color: var(--color-glass-pressed);
+  box-shadow: var(--picker-row-shine);
+  transform: none;
+}
+
+.day-picker .date-choice[aria-disabled="true"],
+.day-picker .date-choice.is-disabled {
+  opacity: .55;
+  cursor: not-allowed;
+  background-color: var(--color-paper-2);
+  box-shadow: none;
+}
+
+.day-picker .date-choice[aria-busy="true"],
+.day-picker .date-choice.is-loading {
+  cursor: progress;
+  border-color: var(--color-rule-2);
+}
+
+.day-picker .date-choice[aria-invalid="true"],
+.day-picker .date-choice.is-error {
+  border-color: var(--color-error);
+}
+
+@media (min-width: 640px) {
+  .day-picker .dialog-header {
+    padding-inline: var(--space-lg);
+  }
+
+  .day-picker .picker-days {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-inline: var(--space-md);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .day-picker .date-choice {
+    transition: none;
+    scroll-behavior: auto;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .day-picker,
+  .day-picker .date-choice,
+  .day-picker .dialog-header .icon-button {
+    background: var(--color-glass-solid);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+
+  .day-picker .date-choice {
+    border-color: var(--color-rule-2);
+  }
+
+  .day-picker .date-choice[aria-current="date"],
+  .day-picker .date-choice.is-success {
+    background: var(--color-gold);
+    border-color: var(--color-accent);
+  }
+}

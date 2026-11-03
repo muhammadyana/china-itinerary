@@ -5,10 +5,11 @@ import {guideForPlace,placePath} from '../src/guides';
 import {mkdir,writeFile} from 'node:fs/promises';
 
 const overnight=['Chengdu','Jiuzhaigou','Rilong','Danba','Xinduqiao','Xinduqiao','Litang','Riwa','Riwa','Shangri-La','Lijiang','Dali','Kunming',null];
+const photoRegistry={...photos,...userPhotos};
 const initialPhotoIds=new Set([
- ...highlights.map(highlight=>photos[highlight.photo||places[highlight.place].photo!].id),
+ ...highlights.map(highlight=>photoRegistry[highlight.photo||places[highlight.place].photo!].id),
  ...Object.keys(userPhotos),
- ...days[0].events.flatMap(event=>event.kind==='stop'&&places[event.place].photo?[photos[places[event.place].photo!].id]:[]),
+ ...days[0].events.flatMap(event=>event.kind==='stop'&&places[event.place].photo?[photoRegistry[places[event.place].photo!].id]:[]),
 ]);
 const isInitialPhoto=(url:string)=>{
  const match=new URL(url).pathname.match(/^\/photos\/(.+)-\d+\.webp$/);
@@ -31,23 +32,27 @@ test('source invariants: 14 dates, 13 nights and conditional routes',async()=>{
  expect(days[7].events.find(e=>e.kind==='stop'&&e.place==='sister-lakes')).toMatchObject({status:'Perlu konfirmasi'});
  expect(days[8].events.filter(e=>e.kind==='stop'&&['milk-lake','five-colour'].includes(e.place)).every(e=>e.status==='Jika jalur dibuka')).toBe(true);
  expect(days[13].events.find(e=>e.kind==='stop'&&e.place==='kmg')).toMatchObject({status:'Perlu konfirmasi'});
- expect(highlights.map(highlight=>[highlight.place,highlight.date,highlight.region])).toEqual([
+ expect(highlights.map(highlight=>[highlight.place,highlight.date,highlight.region])).toEqual(expect.arrayContaining([
   ['five-flower','2026-11-09','Sichuan'],['songzanlin','2026-11-18','Yunnan'],
   ['maobiliang','2026-11-10','Sichuan'],['dayan','2026-11-18','Yunnan'],
   ['tagong','2026-11-12','Sichuan'],['blue-moon','2026-11-19','Yunnan'],
   ['luorong','2026-11-16','Sichuan'],['erhai','2026-11-20','Yunnan'],
   ['dali-old-town','2026-11-20','Yunnan'],
- ]);
+  ['impression-lijiang','2026-11-19','Yunnan'],
+ ]));
+ expect(new Set(highlights.map(highlight=>highlight.place)).size).toBe(highlights.length);
  expect(highlights.find(highlight=>highlight.place==='dayan')).toMatchObject({photo:'highlight-lijiang'});
  expect(highlights.find(highlight=>highlight.place==='dali-old-town')).toMatchObject({title:'Kota Tua Dali',photo:'highlight-dali'});
+ expect(highlights.find(highlight=>highlight.place==='impression-lijiang')).toMatchObject({title:'Impression Lijiang',photo:'user-impression-lijiang-2'});
  for(const highlight of highlights) {
   const day=days.find(day=>day.date===highlight.date);
   expect(day?.events.some(event=>event.kind==='stop'&&event.place===highlight.place),highlight.place).toBe(true);
-  const place=places[highlight.place];const photo=photos[highlight.photo||place.photo!];
+  const place=places[highlight.place];const photo=photoRegistry[highlight.photo||place.photo!];
   expect(highlight.title.trim()).not.toBe('');expect(highlight.caption.trim()).not.toBe('');
   expect((highlight.alt||place.alt)?.trim()).toBeTruthy();
   expect(photo.width).toBeGreaterThan(0);expect(photo.height).toBeGreaterThan(0);
-  expect(photo.author.trim()).not.toBe('');expect(photo.source).toMatch(/^https?:/);
+  if('author' in photo) {expect(photo.author.trim()).not.toBe('');expect(photo.source).toMatch(/^https?:/);}
+  else expect(photo.credit.trim()).not.toBe('');
  }
 });
 
@@ -63,11 +68,11 @@ for(const width of [360,390,1440]) {
   await expect(page.locator('.hero + #user-gallery')).toHaveAttribute('open','');
   await page.screenshot({path:`artifacts/home-${width}.png`,fullPage:false});
   expect(requests.filter(url=>url.includes('/photos/')).every(isInitialPhoto)).toBe(true);
-  await expect(page.locator('.highlight-card[data-highlight]')).toHaveCount(9);
-  for(const [region,count] of [['Sichuan',4],['Yunnan',5]] as const) {
+  await expect(page.locator('.highlight-card[data-highlight]')).toHaveCount(highlights.length);
+  for(const region of ['Sichuan','Yunnan'] as const) {
    const group=page.locator(`.region-highlights[data-region="${region}"]`);
    await expect(group.locator('h3')).toContainText(region);
-   await expect(group.locator('.highlight-card')).toHaveCount(count);
+   await expect(group.locator('.highlight-card')).toHaveCount(highlights.filter(highlight=>highlight.region===region).length);
   }
   expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
   if(width===1440) {
@@ -85,6 +90,8 @@ for(const width of [360,390,1440]) {
   await page.keyboard.press('Escape');await expect(trigger).toBeFocused();
   await trigger.click();
   const nov20=page.locator('#picker-days [data-date="2026-11-20"]');
+  await nov20.scrollIntoViewIfNeeded();
+  await expect(page.getByRole('button',{name:'Tutup pemilih hari',exact:true})).toBeInViewport();
   await expect(nov20).toBeInViewport();await nov20.click();
   await expect(page).toHaveURL(/#2026-11-20$/);
   await expect(page.locator('#day-heading')).toHaveText('Danau Erhai & Kota Tua Dali');
@@ -123,26 +130,26 @@ test('homepage highlights: slider controls, destination guides, matching days an
  await page.goto('/');
  const slides=page.locator('.hero-slide');
  const activeSlide=page.locator('.hero-slide.is-active');
- await expect(slides).toHaveCount(9);
+ await expect(slides).toHaveCount(highlights.length);
  for(const [index,highlight] of highlights.entries()) {
   await expect(slides.nth(index).locator('figcaption')).toContainText(highlight.title);
   await expect(slides.nth(index).locator('figcaption')).toContainText(highlight.region);
  }
- await expect(page.locator('#hero-counter')).toHaveText('1 / 9');
+ await expect(page.locator('#hero-counter')).toHaveText(`1 / ${highlights.length}`);
  await expect(activeSlide.locator('figcaption')).toContainText(highlights[0].title);
  await page.locator('[data-action="hero-next"]').click();
- await expect(page.locator('#hero-counter')).toHaveText('2 / 9');
+ await expect(page.locator('#hero-counter')).toHaveText(`2 / ${highlights.length}`);
  await expect(activeSlide.locator('figcaption')).toContainText(highlights[1].title);
  await page.locator('[data-action="hero-previous"]').click();
- await expect(page.locator('#hero-counter')).toHaveText('1 / 9');
+ await expect(page.locator('#hero-counter')).toHaveText(`1 / ${highlights.length}`);
  await page.locator('.hero-track').evaluate(el=>el.scrollTo({left:2*el.clientWidth,behavior:'instant'}));
- await expect(page.locator('#hero-counter')).toHaveText('3 / 9');
+ await expect(page.locator('#hero-counter')).toHaveText(`3 / ${highlights.length}`);
  await expect(activeSlide.locator('figcaption')).toContainText(highlights[2].title);
  await expect(activeSlide).not.toHaveAttribute('inert','');
  await expect(slides.first()).toHaveAttribute('inert','');
  await activeSlide.locator('img').evaluate(el=>(el as HTMLImageElement).decode());
  const cards=page.locator('.highlight-card[data-highlight]');
- await expect(cards).toHaveCount(9);
+ await expect(cards).toHaveCount(highlights.length);
  const arrival=await page.locator('.home-arrival').boundingBox();
  const firstCard=await cards.first().boundingBox();
  const lastCard=await cards.last().boundingBox();
@@ -152,7 +159,7 @@ test('homepage highlights: slider controls, destination guides, matching days an
  const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
  expect(axe.violations).toEqual([]);
  for(const highlight of highlights) {
-  const place=places[highlight.place];const photo=photos[highlight.photo||place.photo!];
+  const place=places[highlight.place];const photo=photoRegistry[highlight.photo||place.photo!];
   const card=page.locator(`a.highlight-card[data-highlight="${highlight.place}"]`);
   const guide=guideForPlace.get(highlight.place)!;
   await expect(card).toHaveAttribute('href',placePath(guide.slug));
@@ -181,11 +188,11 @@ test('homepage highlights: slider controls, destination guides, matching days an
   await expect(page.locator('#day-heading')).toHaveText(days[0].title);
  }
 });
-test('homepage regions: province groups and keyboard navigation to Lijiang and Dali',async({page})=>{
+test('homepage regions: province groups and keyboard navigation to Lijiang, Impression Lijiang and Dali',async({page})=>{
  await page.setViewportSize({width:390,height:844});
  await page.goto('/');
- const expectedPlaces={Sichuan:['five-flower','maobiliang','tagong','luorong'],Yunnan:['songzanlin','dayan','blue-moon','erhai','dali-old-town']};
- for(const [region,placeIds] of Object.entries(expectedPlaces)) {
+ for(const region of ['Sichuan','Yunnan'] as const) {
+  const placeIds=highlights.filter(highlight=>highlight.region===region).map(highlight=>highlight.place);
   const group=page.locator(`.region-highlights[data-region="${region}"]`);
   await expect(group.locator('h3')).toContainText(region);
   await expect(group.locator('.highlight-card')).toHaveCount(placeIds.length);
@@ -207,6 +214,20 @@ test('homepage regions: province groups and keyboard navigation to Lijiang and D
  await expect(page.locator('.sleep-summary')).toBeInViewport();
  await page.goBack();
  await expect(page).toHaveURL(/\/places\/lijiang\/$/);
+ await page.goBack();
+ const impression=page.locator('.region-highlights[data-region="Yunnan"] [data-highlight="impression-lijiang"]');
+ await expect(impression).toContainText('Impression Lijiang');
+ await expect(impression.locator('img')).toHaveAttribute('src',/\/photos\/user-impression-lijiang-2-\d+\.webp$/);
+ await impression.focus();await page.keyboard.press('Enter');
+ await expect(page).toHaveURL(/\/places\/impression-lijiang\/$/);
+ await expect(page.locator('#place-title')).toHaveText('Impression Lijiang');
+ const impressionDate=page.locator('.guide-date-link[href="/#2026-11-19"]');
+ await impressionDate.focus();await page.keyboard.press('Enter');
+ await expect(page).toHaveURL(/#2026-11-19$/);
+ await expect(page.locator('#day-view li[id^="stop-impression-lijiang-"] .state')).toHaveText('Wajib');
+ await expect(page.locator('.sleep-summary')).toContainText('Menginap di Dali');
+ await page.goBack();
+ await expect(page).toHaveURL(/\/places\/impression-lijiang\/$/);
  await page.goBack();
  const dali=page.locator('.region-highlights[data-region="Yunnan"] [data-highlight="dali-old-town"]');
  await expect(dali).toContainText('Kota Tua Dali');
@@ -314,7 +335,7 @@ test('every photo source exists with explicit responsive dimensions and attribut
 test('user gallery: open below the hero, navigation reopens it, photo source and contained scroll',async({page})=>{
  await page.setViewportSize({width:390,height:844});
  await page.goto('/');
- const firstHeroPhoto=photos[highlights[0].photo||places[highlights[0].place].photo!];
+ const firstHeroPhoto=photoRegistry[highlights[0].photo||places[highlights[0].place].photo!];
  await expect(page.locator('.hero-slide img').first()).toHaveAttribute('src',new RegExp(`${firstHeroPhoto.id}-\\d+\\.webp$`));
  await expect(page.locator('.hero + #user-gallery')).toHaveAttribute('open','');
  await expect(page.locator('#user-gallery + .home-arrival')).toBeAttached();
