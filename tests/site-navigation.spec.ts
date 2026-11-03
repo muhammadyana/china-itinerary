@@ -42,13 +42,14 @@ test('the daily navigation stays compact when the mobile safe area changes durin
     }
   }
 
-  await page.setViewportSize({ width: 390, height: 844 });
+  await page.setViewportSize({ width: 320, height: 760 });
   await page.locator('#mobile-picker').click();
   await expect(page.locator('#day-picker')).toBeVisible();
   await page.locator('#day-picker [data-date="2026-11-19"]').click();
   await expect(page.locator('#current-date')).toHaveText('19 November');
   await bar.getByRole('button', { name: 'Hari berikutnya', exact: true }).click();
   await expect(page.locator('#current-date')).toHaveText('20 November');
+  expect((await bar.boundingBox())!.height).toBeCloseTo(initial.height, 1);
   await bar.getByRole('button', { name: 'Hari sebelumnya', exact: true }).click();
   await expect(page.locator('#current-date')).toHaveText('19 November');
 });

@@ -260,8 +260,8 @@ dialog::backdrop { background: var(--color-backdrop); }
  .day-sidebar { display: none; }
  .mobile-daybar { position: fixed; display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); inset: auto 16px calc(var(--space-sm) + env(safe-area-inset-bottom, 0px)); z-index: 300; padding: var(--space-xs); background: var(--color-paper); color: var(--color-ink); border-radius: 22px; box-shadow: 0 8px 30px var(--color-dock-shadow); }
  .mobile-daybar > .icon-button { border: 0; }
- .mobile-picker { display: flex; align-items: center; justify-content: center; gap: 20px; min-height: 48px; padding: 0 var(--space-sm); flex: 1; border-radius: 14px; background: var(--color-paper-2); color: var(--color-ink); }
- .mobile-picker strong { display: block; font-size: 15px; font-weight: 600; }
+ .mobile-picker { display: flex; align-items: center; justify-content: center; gap: var(--space-sm); min-width: 0; min-height: 48px; padding: 0 var(--space-xs); flex: 1; border-radius: 14px; background: var(--color-paper-2); color: var(--color-ink); }
+ .mobile-picker strong { display: block; font-size: 15px; font-weight: 600; white-space: nowrap; }
  #current-count { display: block; font-size: 11px; color: var(--color-muted); }
  .day-pagination { display: none; }
  .site-footer { padding-bottom: 108px; }
