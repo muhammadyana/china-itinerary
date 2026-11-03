@@ -25,7 +25,7 @@ body.print-document { margin: 0; padding: 0; background: var(--color-glass-solid
 .print-document li { margin-block: 1mm; }
 .print-document svg { width: 10pt; height: 10pt; }
 .print-document a { color: var(--color-accent); text-decoration: none; overflow-wrap: anywhere; }
-.print-document a[data-print-url]::after { content: attr(data-print-url); display: inline-block; max-width: 100%; margin-left: 1.4mm; color: var(--color-muted); font-size: 6.5pt; font-weight: 400; letter-spacing: 0; overflow-wrap: anywhere; }
+.print-document a[data-print-url]::after { content: attr(data-print-url); display: inline; margin-left: 1.4mm; color: var(--color-muted); font-size: 6.5pt; font-weight: 400; letter-spacing: 0; overflow-wrap: anywhere; }
 .print-document time,.print-time,.print-sequence,.print-index-number { font-variant-numeric: tabular-nums; }
 .print-section-intro { max-width: 150mm; color: var(--color-ink-2); }
 .print-photo-note { color: var(--color-muted); font-size: 6.8pt; line-height: 1.35; }
@@ -52,14 +52,16 @@ body.print-document { margin: 0; padding: 0; background: var(--color-glass-solid
 .print-index a { display: grid; grid-template-columns: 21mm minmax(0, 1fr) 42mm; gap: 5mm; align-items: center; padding: 2.4mm 0; color: var(--color-ink); }
 .print-index-number { color: var(--color-accent); font-size: 30pt; font-weight: 600; line-height: 1; letter-spacing: -.04em; }
 .print-index-copy { display: grid; gap: .6mm; min-width: 0; }
-.print-index-copy time { color: var(--color-accent); font-size: 8pt; }
 .print-index-copy strong { font-size: 13.5pt; font-weight: 600; line-height: 1.15; letter-spacing: -.02em; text-wrap: balance; }
 .print-index-copy > span { color: var(--color-ink-2); font-size: 8.5pt; }
+.print-index-copy > span time { color: var(--color-accent); }
 .print-index img { width: 42mm; height: 26mm; max-width: none; object-fit: cover; border-radius: 2.5mm; }
 
 /* Day opener: photo band, title, then the chestnut stay-and-transport panel. */
-.print-day,.print-appendix,.print-booking { break-before: page; }
-.print-day-header { break-inside: avoid; break-after: avoid; }
+/* Days flow on from the previous day's notes when the whole opener (photo to route) fits, so no page ends nearly empty. */
+.print-appendix,.print-booking,.print-overview + .print-day { break-before: page; }
+.print-day + .print-day { margin-top: 14mm; }
+.print-day-opening { break-inside: avoid; }
 .print-band { position: relative; height: 84mm; margin: 0; overflow: hidden; border-radius: 3.5mm; background: var(--color-paper-3); }
 .print-band img { width: 100%; height: 100%; max-width: none; object-fit: cover; }
 .print-band::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, var(--color-hero-clear) 52%, var(--color-hero-base)); }
@@ -94,9 +96,7 @@ body.print-document { margin: 0; padding: 0; background: var(--color-glass-solid
 .print-stop.print-photo-left { grid-template-columns: 55mm minmax(0, 1fr); }
 .print-stop.print-photo-left .print-stop-photo { grid-column: 1; grid-row: 1; }
 .print-stop.print-photo-left .print-stop-text { grid-column: 2; grid-row: 1; }
-.print-stop.print-text-stop { margin-left: 3.6mm; padding-left: 5mm; border-left: 1px solid var(--color-rule); }
 .print-stop.print-text-stop .print-stop-text { max-width: 145mm; }
-.print-stop.print-text-stop .print-sequence { font-size: 15pt; }
 .print-stop-text { min-width: 0; }
 .print-document .print-stop-meta { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2.4mm; margin: 0 0 1.2mm; }
 .print-sequence { color: var(--color-accent); font-size: 19pt; font-weight: 600; line-height: 1; letter-spacing: -.03em; }
@@ -117,14 +117,14 @@ body.print-document { margin: 0; padding: 0; background: var(--color-glass-solid
 .print-document .print-transfer-detail { margin: .8mm 0 0; color: var(--color-muted); font-size: 8pt; }
 
 /* Practical notes, overnight detail, and the Chengdu evening choices. */
-/* Practical notes move as one block so a single card never strands on its own page. */
-.print-practical { margin-top: 5mm; break-inside: avoid; }
+/* Practical cards break only between rows; three cards share one row so none is left alone. */
+.print-practical { margin-top: 5mm; }
 .print-practical-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3mm; margin-top: 2.5mm; }
+.print-practical-grid:has(> :last-child:nth-child(3)) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .print-practical-grid > div { padding: 2.6mm 3.6mm; border-radius: 3mm; background: var(--color-paper-2); break-inside: avoid; }
-.print-practical-grid > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .print-practical-grid h4 { margin-top: 0; }
 .print-practical-grid p { font-size: 8.5pt; }
-.print-document .print-night { display: flex; align-items: flex-start; gap: 2.4mm; margin: 4mm 0 0; color: var(--color-ink-2); break-inside: avoid; }
+.print-document .print-night { display: flex; align-items: flex-start; gap: 2.4mm; margin: 4mm 0 0; color: var(--color-ink-2); break-inside: avoid; break-before: avoid; }
 .print-night svg { margin-top: .4mm; color: var(--color-accent); }
 .print-revision,.print-day-link { color: var(--color-muted); font-size: 8.3pt; }
 .print-document details { display: block; }
@@ -132,18 +132,22 @@ body.print-document { margin: 0; padding: 0; background: var(--color-glass-solid
 .print-document button { display: none; }
 .print-document [class*="chengdu-evening"] { box-shadow: none; backdrop-filter: none; }
 .print-document .chengdu-evening { margin-block: 7mm 0; }
-.print-document .chengdu-evening-header { break-after: avoid; }
-.print-document .chengdu-evening-header { margin-bottom: 3mm; }
+.print-document .chengdu-evening-header { margin-bottom: 3mm; break-inside: avoid; break-after: avoid; }
 .print-document .chengdu-evening-header h3 { margin: 0 0 1.5mm; font-size: 17pt; }
 .print-document .chengdu-evening-date,.print-document .chengdu-evening-header > p:last-child { margin: 0 0 1mm; font-size: 8.5pt; }
-.print-document .chengdu-evening-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3mm; }
-.print-document .chengdu-evening-card { border-radius: 3mm; break-inside: avoid; }
-.print-document .chengdu-evening-card > summary { padding: 3mm 3.5mm 0; min-height: 0; }
+/* One full-width card per mall: name line, then appeal, hours, and route side by side. */
+.print-document .chengdu-evening-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2.5mm; }
+.print-document .chengdu-evening-card { border: 0; border-radius: 3mm; background: var(--color-paper-2); break-inside: avoid; }
+.print-document .chengdu-evening-card > summary { padding: 3mm 4mm 0; min-height: 0; }
+.print-document .chengdu-evening-card .chengdu-evening-name { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 2.4mm; }
 .print-document .chengdu-evening-name strong { font-size: 11pt; }
-.print-document .chengdu-evening-name > [lang],.print-document .chengdu-evening-label { font-size: 7.5pt; }
-.print-document .chengdu-evening-content { padding: 0 3.5mm 3mm; }
+.print-document .chengdu-evening-name > [lang],.print-document .chengdu-evening-card .chengdu-evening-label { font-size: 7.5pt; color: var(--color-muted); }
+.print-document .chengdu-evening-card .chengdu-evening-label { order: 1; }
+.print-document .chengdu-evening-card > .chengdu-evening-content { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto 1fr; align-items: start; column-gap: 5mm; padding: 1.2mm 4mm 3mm; }
+.print-document .chengdu-evening-appeal { grid-column: 1; grid-row: 1; }
+.print-document .chengdu-evening-content > .chengdu-evening-map { grid-column: 1; grid-row: 2; }
 .print-document .chengdu-evening-appeal,.print-document .chengdu-evening-fact p,.print-document .chengdu-evening-budget p,.print-document .chengdu-evening-checked { font-size: 7.8pt; line-height: 1.4; }
-.print-document .chengdu-evening-fact { margin-top: 2mm; padding-top: 2mm; }
+.print-document .chengdu-evening-content > .chengdu-evening-fact { grid-row: 1 / span 2; margin: 0; padding: 0; border: 0; }
 .print-document .chengdu-evening-fact h4,.print-document .chengdu-evening-budget h4 { margin: 0 0 1mm; font-size: 8.3pt; }
 .print-document .chengdu-evening-fact h4 svg,.print-document .chengdu-evening-budget h4 svg { width: 9pt; height: 9pt; color: var(--color-accent); }
 .print-document .chengdu-evening-sources { margin-top: 1mm; }
@@ -152,7 +156,7 @@ body.print-document { margin: 0; padding: 0; background: var(--color-glass-solid
 .print-document .chengdu-evening-budget { margin-top: 3mm; padding: 3mm 4mm; border-radius: 3mm; break-inside: avoid; }
 .print-document .chengdu-evening-checked { margin-top: 2mm; color: var(--color-muted); }
 
-/* Guides appendix: short cover-photo band, then two balanced columns. */
+/* Guides appendix: short cover-photo band, then two balanced columns that never start without it. */
 .print-guide { margin-top: 9mm; }
 .print-guide-header { break-inside: avoid; break-after: avoid; }
 .print-guide-header.print-with-photo { position: relative; height: 45mm; overflow: hidden; border-radius: 3.5mm; background: var(--color-paper-3); }
@@ -160,7 +164,9 @@ body.print-document { margin: 0; padding: 0; background: var(--color-glass-solid
 .print-guide-header.print-with-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, var(--color-hero-clear) 35%, var(--color-hero-base)); }
 .print-document .print-guide-header h3 { font-size: 19pt; letter-spacing: -.03em; }
 .print-document .print-guide-header.print-with-photo h3 { position: absolute; z-index: 1; inset: auto 5mm 4mm; color: var(--color-on-autumn); }
-.print-guide-lead { max-width: 160mm; margin-top: 2.5mm; break-before: avoid; color: var(--color-ink-2); }
+/* Chrome ignores break-after: avoid into a multicol body, so the lead reserves 20 mm of transparent space for it:
+   if the band, lead, and the start of the columns do not fit, all three move to the next page together. */
+.print-guide-lead { max-width: 160mm; margin: 2.5mm 0 -20mm; padding-bottom: 20mm; break-before: avoid; break-inside: avoid; color: var(--color-ink-2); }
 .print-guide-body { columns: 2; column-gap: 7mm; margin-top: 1mm; font-size: 8.5pt; }
 .print-guide-body > h4:first-child { margin-top: 1.5mm; }
 .print-costs { margin: 1.5mm 0; }
@@ -181,5 +187,4 @@ body.print-document { margin: 0; padding: 0; background: var(--color-glass-solid
 .print-document .print-photo-credits li p { margin: 0; color: var(--color-ink-2); }
 .print-document .print-photo-credits .print-photo-credit-title { color: var(--color-ink); font-weight: 600; }
 .print-document .print-photo-credits .print-photo-note { color: var(--color-muted); font-size: 6.6pt; }
-.print-document main > footer.print-credit { margin-top: 6mm; color: var(--color-muted); font-size: 8pt; }
 @media screen { .print-document main { max-width: 182mm; margin: 0 auto; padding: 8mm 0; } }

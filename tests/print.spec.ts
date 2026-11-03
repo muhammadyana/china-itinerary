@@ -78,17 +78,35 @@ test('the printable journal embeds same-origin photographs and credits each one 
   await expect(cover).toHaveAttribute('src', /^\/photos\/highlight-jiuzhaigou-\d+\.webp$/);
   await expect(cover).toHaveAttribute('alt', /\S/);
 
+  const photoId = (src: string | null) => src?.match(/^\/photos\/([a-z0-9-]+)-\d+\.webp$/)?.[1];
   for (const day of days) {
+    await expect(page.locator(`.print-index a[href="#print-${day.date}"]`)).toHaveCount(1);
     const section = page.locator(`[data-print-date="${day.date}"]`);
-    const stopPhotos = day.events.flatMap(event => {
+    const stopPlaces = day.events.flatMap(event => {
       if (event.kind !== 'stop') return [];
       const place = places[event.place];
-      return place.photo && photos[place.photo] ? [place.alt || place.name] : [];
+      return place.photo && photos[place.photo] ? [place] : [];
     });
-    await expect(section.locator('.print-band img')).toHaveCount(stopPhotos.length ? 1 : 0);
+    await expect(section.locator('.print-band img')).toHaveCount(stopPlaces.length ? 1 : 0);
     const alts = await section.locator('img').evaluateAll(images => images.map(image => image.getAttribute('alt')));
-    for (const alt of stopPhotos) expect(alts, `${day.date} shows a photo for "${alt}"`).toContain(alt);
+    for (const place of stopPlaces) {
+      expect(alts, `${day.date} shows a photo for "${place.name}"`).toContain(place.alt || place.name);
+      // Captions carry both the place note and the photo's own date or archive caveat.
+      for (const note of [place.photoNote, photos[place.photo!].photoNote]) if (note) await expect(section).toContainText(note);
+    }
+    if (!stopPlaces.length) continue;
+    const lead = photoId(await section.locator('.print-band img').getAttribute('src'));
+    const thumbnails = await section.locator('.print-stop-photo img').evaluateAll(images => images.map(image => image.getAttribute('src')));
+    expect(thumbnails.map(photoId), `${day.date} does not repeat its lead photo`).not.toContain(lead);
   }
+
+  // The PDF footer comes from @page margin boxes; the browser must parse them.
+  const footer = await page.evaluate(() => {
+    const pageRule = [...document.styleSheets].flatMap(sheet => [...sheet.cssRules]).find(rule => rule instanceof CSSPageRule && !rule.selectorText) as CSSPageRule | undefined;
+    return Object.fromEntries([...(pageRule?.cssRules ?? [])].map(rule => [(rule as CSSMarginRule).name, (rule as CSSMarginRule).style.content]));
+  });
+  expect(footer['bottom-left']).toContain('© @muhammad_yana');
+  expect(footer['bottom-right']).toContain('counter(pages)');
 
   const sources = await page.locator('main img').evaluateAll(images => images.map(image => ({
     src: image.getAttribute('src') ?? '', resolved: (image as HTMLImageElement).src, loading: image.getAttribute('loading'),
@@ -114,10 +132,12 @@ test('the printable journal embeds same-origin photographs and credits each one 
       continue;
     }
     await expect(credit).toContainText(photo.author);
-    // PDF document material links its license and source to the same archive page; the license link comes first.
     await expect(credit.locator(`a[href="${photo.licenseUrl}"]`).first()).toHaveText(photo.license);
-    await expect(credit.locator(`a[href="${photo.source}"]`).last()).toHaveText('Sumber foto');
-    if (photo.origin === 'PDF') await expect(credit).toContainText('materi dokumen pengguna dari PDF sumber arsip');
+    // PDF document material shares one archive link for its license and source.
+    if (photo.licenseUrl !== photo.source) await expect(credit.locator(`a[href="${photo.source}"]`)).toHaveText('Sumber foto');
+    if (photo.license === 'Dokumen pengguna') await expect(credit).toContainText('materi dokumen pengguna dari PDF sumber arsip');
+    else if (photo.origin === 'PDF') await expect(credit).toContainText('gambar dari PDF sumber arsip; berkas asli dan lisensinya di');
     else await expect(credit).toContainText(photo.origin);
+    if (photo.license !== 'Dokumen pengguna') await expect(credit).not.toContainText('materi dokumen pengguna');
   }
 });

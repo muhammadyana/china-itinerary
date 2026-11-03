@@ -7,10 +7,11 @@ import { CHENGDU_EVENING_DATE, renderChengduEvening } from './chengdu-evening.ts
 const siteOrigin = 'https://china.muhammadyana.me';
 const COVER_PHOTO_ID = 'highlight-jiuzhaigou';
 // Rendition targets by printed size; ops/generate-pdf.mjs then resamples each image to its printed box.
-const RENDITION = { cover: 1600, band: 1440, guideBand: 960, thumbnail: 480 } as const;
-const MAX_PRINTED_URL = 56;
-// Visual-check override: the rule picks the TFU terminal interior, a weak opener for the Chengdu evening walk.
-const leadOverrides: Record<string, string> = { '2026-11-08': 'chengdu' };
+const RENDITION = { cover: 1600, band: 1440, guideBand: 1440, thumbnail: 480 } as const;
+// Visual-check overrides: the rule picks the TFU terminal interior on 8 November and a hazy, mostly empty Erhai sky on 20 November.
+const leadOverrides: Record<string, string> = { '2026-11-08': 'chengdu', '2026-11-20': 'dali-old-town' };
+// Visual-check focus: a centred crop of the square Chunxi Road photo makes its hotel billboard the subject.
+const photoFocus: Record<string, string> = { 'chengdu-chunxi': '50% 78%' };
 const sourceLink = (label: string, url: string) => `<a href="${e(url)}">${e(label)}</a>`;
 const paragraph = (text: string) => `<p>${currencyText(text)}</p>`;
 const list = (items: string[]) => `<ul>${items.map(item => `<li>${currencyText(item)}</li>`).join('')}</ul>`;
@@ -32,6 +33,7 @@ const placePhoto = (placeId: string) => {
 /** Records every embedded photograph so the credits appendix lists each one exactly once. */
 function createPhotoLedger() {
   const labels = new Map<string, string[]>();
+  const captioned = new Set<string>();
   return {
     image(id: string, alt: string, target: number, label: string): string {
       const photo = photoById(id);
@@ -39,8 +41,16 @@ function createPhotoLedger() {
       const known = labels.get(id) ?? [];
       labels.set(id, known.includes(label) ? known : [...known, label]);
       const width = photo.sizes.find(size => size >= target) ?? photo.sizes[photo.sizes.length - 1];
-      return `<img src="/photos/${id}-${width}.webp" width="${photo.width}" height="${photo.height}" alt="${e(alt)}">`;
+      const focus = photoFocus[id] ? ` style="object-position: ${photoFocus[id]}"` : '';
+      return `<img src="/photos/${id}-${width}.webp" width="${photo.width}" height="${photo.height}" alt="${e(alt)}"${focus}>`;
     },
+    /** Caption text for a place photo: the place note plus the photo's own date or archive caveat, as on the website's photo detail. */
+    caption(placeId: string): string {
+      const notes = [...new Set([places[placeId].photoNote, placePhoto(placeId)?.photoNote])].filter((note): note is string => Boolean(note));
+      notes.forEach(note => captioned.add(note));
+      return notes.map(e).join(' ');
+    },
+    isCaptioned: (note: string) => captioned.has(note),
     entries: () => [...labels],
   };
 }
@@ -48,16 +58,13 @@ type PhotoLedger = ReturnType<typeof createPhotoLedger>;
 
 /** Lead photo: landscape first, then the widest available rendition; ties keep the earliest stop. */
 function leadPlace(day: Day): string | undefined {
-  if (leadOverrides[day.date]) return leadOverrides[day.date];
   const isLandscape = (photo: Photo) => photo.width > photo.height;
   const widest = (photo: Photo) => photo.sizes[photo.sizes.length - 1];
   const beats = (candidate: Photo, best: Photo) => isLandscape(candidate) !== isLandscape(best) ? isLandscape(candidate) : widest(candidate) > widest(best);
   const candidates = day.events.flatMap(event => event.kind === 'stop' && placePhoto(event.place) ? [event.place] : []);
+  // A stale override (place no longer on that day or without a photo) falls back to the rule.
+  if (candidates.includes(leadOverrides[day.date])) return leadOverrides[day.date];
   return candidates.reduce<string | undefined>((best, placeId) => best === undefined || beats(placePhoto(placeId)!, placePhoto(best)!) ? placeId : best, undefined);
-}
-
-function photoCaption(text?: string) {
-  return text ? `<p class="print-photo-note">${e(text)}</p>` : '';
 }
 
 function printTransfer(event: Extract<Event, { kind: 'transfer' }>): string {
@@ -67,8 +74,9 @@ function printTransfer(event: Extract<Event, { kind: 'transfer' }>): string {
 function printStop(event: Extract<Event, { kind: 'stop' }>, sequence: number, photoSide: 'left' | 'right' | undefined, ledger: PhotoLedger): string {
   const place = places[event.place];
   const page = pageForPlace.get(event.place);
+  const caption = photoSide ? ledger.caption(event.place) : '';
   const figure = photoSide
-    ? `<figure class="print-stop-photo">${ledger.image(place.photo!, place.alt || place.name, RENDITION.thumbnail, place.name)}${place.photoNote ? `<figcaption>${e(place.photoNote)}</figcaption>` : ''}</figure>`
+    ? `<figure class="print-stop-photo">${ledger.image(place.photo!, place.alt || place.name, RENDITION.thumbnail, place.name)}${caption ? `<figcaption>${caption}</figcaption>` : ''}</figure>`
     : '';
   const classes = ['print-stop', photoSide ? `print-with-photo print-photo-${photoSide}` : 'print-text-stop'].join(' ');
   return `<li class="${classes}"><div class="print-stop-text"><p class="print-stop-meta"><span class="print-sequence" aria-label="Pemberhentian ${sequence}">${twoDigits(sequence)}</span><span class="print-time">${e(event.time)}</span>${event.status ? `<span class="print-status">${e(event.status)}</span>` : ''}</p><h3>${e(place.name)}</h3>${place.chinese ? `<p class="print-chinese" lang="zh-Hans">${e(place.chinese)}</p>` : ''}<p class="print-description">${currencyText(place.description)}</p>${event.note ? `<p class="print-note">${currencyText(event.note)}</p>` : ''}${page ? `<p class="print-guide-link">${sourceLink('Panduan tempat', `${siteOrigin}${placePath(page.slug)}`)}</p>` : ''}</div>${figure}</li>`;
@@ -90,22 +98,23 @@ function printDayHeader(day: Day, index: number, lead: string | undefined, ledge
   const meta = `<span class="print-day-count">Hari ${index + 1} dari ${days.length}</span><time datetime="${day.date}">${e(fullDate(day.date))}</time>`;
   if (!lead) return `<header class="print-day-header"><p class="print-day-meta">${meta}</p><h2>${e(day.title)}</h2></header>`;
   const place = places[lead];
-  return `<header class="print-day-header"><figure class="print-band">${ledger.image(place.photo!, place.alt || place.name, RENDITION.band, place.name)}<figcaption><span class="print-band-meta">${meta}</span><span class="print-band-place">${e(place.name)}</span></figcaption></figure>${photoCaption(place.photoNote)}<h2>${e(day.title)}</h2></header>`;
+  const caption = ledger.caption(lead);
+  return `<header class="print-day-header"><figure class="print-band">${ledger.image(place.photo!, place.alt || place.name, RENDITION.band, place.name)}<figcaption><span class="print-band-meta">${meta}</span><span class="print-band-place">${e(place.name)}</span></figcaption></figure>${caption ? `<p class="print-photo-note">${caption}</p>` : ''}<h2>${e(day.title)}</h2></header>`;
 }
 
 function printEssentials(day: Day): string {
   const stay = day.overnight
     ? `<dt>${icon('bed')}Menginap</dt><dd><strong>${e(day.overnight.name)}</strong><span>${e(day.overnight.area)}</span>${day.overnight.elevation ? `<span class="print-elevation">${e(day.overnight.elevation)}</span>` : ''}</dd>`
     : `<dt>${icon('plane')}Kepulangan</dt><dd><strong>Pulang ke Jakarta</strong></dd>`;
-  return `<dl class="print-essentials"><div>${stay}</div><div><dt>${icon('train')}Transportasi</dt><dd>${e(day.transport)}</dd></div></dl>`;
+  return `<dl class="print-essentials"><div>${stay}</div><div><dt>${icon('train')}Transportasi</dt><dd><strong>${e(day.transport)}</strong></dd></div></dl>`;
 }
 
 function printDay(day: Day, index: number, ledger: PhotoLedger): string {
   const lead = leadPlace(day);
   return `<section class="print-day" id="print-${day.date}" data-print-date="${day.date}">
-    ${printDayHeader(day, index, lead, ledger)}
+    <div class="print-day-opening">${printDayHeader(day, index, lead, ledger)}
     ${printEssentials(day)}
-    <p class="print-intro">${currencyText(day.intro)}</p><ol class="print-route" aria-label="Rute hari ini">${day.route.map((stop, i) => `<li>${i ? icon('right') : ''}<span>${e(stop)}</span></li>`).join('')}</ol>
+    <p class="print-intro">${currencyText(day.intro)}</p><ol class="print-route" aria-label="Rute hari ini">${day.route.map((stop, i) => `<li>${i ? icon('right') : ''}<span>${e(stop)}</span></li>`).join('')}</ol></div>
     <ol class="print-events">${printEvents(day, lead, ledger)}</ol>
     <section class="print-practical"><h3>Info praktis</h3><div class="print-practical-grid">${day.practical.map(item => `<div><h4>${e(item.title)}</h4>${paragraph(item.text)}${item.copy ? `<p lang="zh-Hans">${e(item.copy)}</p>` : ''}${item.link ? `<p>${sourceLink(item.link.label, item.link.url)}</p>` : ''}</div>`).join('')}</div></section>
     ${day.overnight ? `<p class="print-night">${icon('bed')}<span>${e(day.overnight.detail)}</span></p>` : ''}
@@ -119,8 +128,9 @@ function printIndex(ledger: PhotoLedger): string {
   return `<section class="print-overview" aria-labelledby="print-overview-heading"><h2 id="print-overview-heading">Ringkasan perjalanan</h2><ol class="print-index">${days.map((day, index) => {
     const lead = leadPlace(day);
     const place = lead ? places[lead] : undefined;
-    const thumbnail = place ? ledger.image(place.photo!, place.alt || place.name, RENDITION.thumbnail, place.name) : '';
-    return `<li><a href="#print-${day.date}"><span class="print-index-number">${twoDigits(index + 1)}</span><span class="print-index-copy"><time datetime="${day.date}">${e(indexDate(day.date))}</time><strong>${e(day.title)}</strong><span>${day.overnight ? `Menginap di ${e(day.overnight.name)}` : 'Pulang ke Jakarta'}</span></span>${thumbnail}</a></li>`;
+    // Decorative here: the same photo opens the day page with its full description.
+    const thumbnail = place ? ledger.image(place.photo!, '', RENDITION.thumbnail, place.name) : '';
+    return `<li><a href="#print-${day.date}"><span class="print-index-number">${twoDigits(index + 1)}</span><span class="print-index-copy"><strong>${e(day.title)}</strong><span><time datetime="${day.date}">${e(indexDate(day.date))}</time> · ${day.overnight ? `Menginap di ${e(day.overnight.name)}` : 'Pulang ke Jakarta'}</span></span>${thumbnail}</a></li>`;
   }).join('')}</ol></section>`;
 }
 
@@ -143,24 +153,42 @@ function printGuides(ledger: PhotoLedger): string {
   }).join('')}</section>`;
 }
 
-function creditEntry(id: string, labels: string[]): string {
+const DOCUMENT_LICENSE = 'Dokumen pengguna';
+function hostName(url: string): string {
+  const host = new URL(url).hostname;
+  return host === 'commons.wikimedia.org' ? 'Wikimedia Commons' : host;
+}
+
+/** Origin 'PDF' marks images found in the archived PDF; only 'Dokumen pengguna' ones lack a traced third-party source. */
+function creditOrigin(photo: Photo): string {
+  if (photo.license === DOCUMENT_LICENSE) return 'materi dokumen pengguna dari PDF sumber arsip, bukan foto lapangan yang baru diverifikasi';
+  if (photo.origin === 'PDF') return `gambar dari PDF sumber arsip; berkas asli dan lisensinya di ${hostName(photo.source)}`;
+  return photo.origin;
+}
+
+function creditEntry(id: string, labels: string[], ledger: PhotoLedger): string {
   const photo = photoById(id)!;
   const title = `<p class="print-photo-credit-title">${e(labels.join(', '))}</p>`;
   if (!('author' in photo)) {
     return `<li data-credit-photo="${e(id)}">${title}<p>${e(photo.credit)}</p><p>Asal: ${e(photo.origin)}. Foto dikirim dan disetujui pengguna untuk halaman ini; tanggal pengambilan tidak dicantumkan.</p></li>`;
   }
-  const origin = photo.origin === 'PDF' ? 'materi dokumen pengguna dari PDF sumber arsip, bukan foto lapangan yang baru diverifikasi' : photo.origin;
-  return `<li data-credit-photo="${e(id)}">${title}<p>Foto: ${e(photo.author)}</p><p>Lisensi: ${sourceLink(photo.license, photo.licenseUrl)}</p><p>${sourceLink('Sumber foto', photo.source)}</p><p>Asal: ${e(origin)}</p>${photo.photoNote ? `<p class="print-photo-note">${e(photo.photoNote)}</p>` : ''}</li>`;
+  const links = photo.licenseUrl === photo.source
+    ? `<p>Lisensi dan sumber: ${sourceLink(photo.license, photo.source)}</p>`
+    : `<p>Lisensi: ${sourceLink(photo.license, photo.licenseUrl)}</p><p>${sourceLink('Sumber foto', photo.source)}</p>`;
+  // Notes already printed under a photo are not repeated here.
+  const note = photo.photoNote && !ledger.isCaptioned(photo.photoNote) ? `<p class="print-photo-note">${e(photo.photoNote)}</p>` : '';
+  return `<li data-credit-photo="${e(id)}">${title}<p>Foto: ${e(photo.author)}</p>${links}<p>Asal: ${e(creditOrigin(photo))}</p>${note}</li>`;
 }
 
 function printCredits(ledger: PhotoLedger): string {
-  return `<section class="print-photo-credits" id="print-photo-credits"><h2>Kredit foto</h2><p class="print-section-intro">Setiap foto dalam PDF ini tercantum sekali di bawah. Ukuran foto disesuaikan dan dipotong mengikuti bingkai cetak; lisensi asal tetap berlaku. Foto menggambarkan tempat, bukan jaminan cuaca atau akses saat kunjungan.</p><ol>${ledger.entries().map(([id, labels]) => creditEntry(id, labels)).join('')}</ol></section>`;
+  return `<section class="print-photo-credits" id="print-photo-credits"><h2>Kredit foto</h2><p class="print-section-intro">Setiap foto dalam PDF ini tercantum sekali di bawah. Ukuran foto disesuaikan dan dipotong mengikuti bingkai cetak; lisensi asal tetap berlaku. Foto menggambarkan tempat, bukan jaminan cuaca atau akses saat kunjungan.</p><ol>${ledger.entries().map(([id, labels]) => creditEntry(id, labels, ledger)).join('')}</ol></section>`;
 }
 
 function printCover(ledger: PhotoLedger): string {
   const highlight = highlights.find(item => item.photo === COVER_PHOTO_ID);
+  if (!highlight) throw new Error(`Cover photo ${COVER_PHOTO_ID} is not a homepage highlight`);
   const nights = days.filter(day => day.overnight).length;
-  const image = ledger.image(COVER_PHOTO_ID, highlight?.alt ?? 'Musim gugur di Jiuzhaigou', RENDITION.cover, `Sampul: ${highlight?.title ?? 'Jiuzhaigou'}`);
+  const image = ledger.image(COVER_PHOTO_ID, highlight.alt || places[highlight.place].alt || highlight.title, RENDITION.cover, `Sampul: ${highlight.title}`);
   return `<header class="print-cover">${image}<div class="print-cover-copy"><h1>Musim Gugur di China</h1><p class="print-cover-meta">Sichuan & Yunnan · 8–21 November 2026 · ${days.length} hari, ${nights} malam</p><p class="print-credit">© @muhammad_yana</p></div></header>`;
 }
 
@@ -168,19 +196,19 @@ function printColophon(generatedLabel: string): string {
   return `<section class="print-colophon" aria-label="Tentang PDF ini"><div><p>PDF dibuat otomatis dari itinerary website pada ${e(generatedLabel)} WIB. Revisi website menjadi acuan perjalanan; PDF sumber awal disimpan sebagai arsip.</p><p>${sourceLink('china.muhammadyana.me', siteOrigin)}</p></div><div>${renderExchangeRate()}<p>Perkiraan rupiah memakai kurs tersimpan yang tercantum di atas. PDF tidak mengambil kurs atau cuaca langsung saat dicetak.</p></div></section>`;
 }
 
-function readablePath(pathname: string): string {
+function readable(text: string): string {
   try {
-    return decodeURI(pathname);
+    return decodeURI(text);
   } catch {
-    return pathname; // Malformed escapes stay encoded; the href is unchanged either way.
+    return text; // Malformed escapes stay encoded; the href is unchanged either way.
   }
 }
 
-/** Short, protocol-free label printed after external links; the full address stays in href. */
+/** Complete, protocol-free address printed after external links so paper readers can still type it. */
 function printedUrl(href: string): string {
   const url = new URL(href.replaceAll('&amp;', '&'));
-  const text = `${url.hostname.replace(/^www\./, '')}${url.pathname === '/' ? '' : readablePath(url.pathname)}${url.hash}`;
-  return text.length > MAX_PRINTED_URL ? `${text.slice(0, MAX_PRINTED_URL - 1)}…` : text;
+  const rest = `${url.pathname}${url.search}${url.hash}`;
+  return `${url.hostname.replace(/^www\./, '')}${rest === '/' ? '' : readable(rest)}`;
 }
 
 export function renderPrintDocument(styles: string, stylesheetLinks: string, generatedAt: string): string {
@@ -193,7 +221,8 @@ export function renderPrintDocument(styles: string, stylesheetLinks: string, gen
     ${printGuides(ledger)}
     <section class="print-booking"><h2>Rujukan transportasi</h2>${bookingOptions.map(option => `<article><h3>${e(option.title)}</h3>${paragraph(option.description)}<p>${sourceLink('Buka penyedia', option.url)}</p></article>`).join('')}</section>`;
   // Credits render last so the ledger already holds every photograph above.
-  const content = `${body}${printCredits(ledger)}<footer class="print-credit">© @muhammad_yana</footer>`;
+  // The author credit prints on the cover and in every later page footer (see @page in src/print.css).
+  const content = `${body}${printCredits(ledger)}`;
   const absoluteContent = content
     .replace(/href="\/(?!\/)([^"]*)"/g, `href="${siteOrigin}/$1"`)
     .replace(/<a\b([^>]*?)\shref="(https?:\/\/[^"]+)"([^>]*)>([\s\S]*?)<\/a>/g, (match, before: string, href: string, after: string, label: string) => {

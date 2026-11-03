@@ -9,7 +9,7 @@ const contentTypes = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; c
 // 182 mm A4 content width at 96 CSS px per inch, so measured image boxes match their printed size.
 const PRINT_VIEWPORT = { width: 688, height: 1123 };
 const PRINT_PIXEL_RATIO = 2; // about 192 dpi at the printed size
-const JPEG_QUALITY = 0.76;
+const JPEG_QUALITY = 0.7;
 // The deploy archive is capped; the photographic journal targets 8 MB and must never exceed 10 MB.
 const MAX_PDF_BYTES = 10_000_000;
 
@@ -37,8 +37,12 @@ export async function generatePdfFromUrl(url) {
       const box = image.getBoundingClientRect();
       if (!box.width || !box.height) throw new Error(`Printable image has no size: ${image.currentSrc}`);
       const { naturalWidth, naturalHeight } = image;
-      const aspect = getComputedStyle(image).objectFit === 'cover' ? box.width / box.height : naturalWidth / naturalHeight;
-      // shortcut: crops around the centre, matching the default object-position every print image uses.
+      const style = getComputedStyle(image);
+      const aspect = style.objectFit === 'cover' ? box.width / box.height : naturalWidth / naturalHeight;
+      const [focusX, focusY] = style.objectPosition.split(' ').map(value => {
+        if (!value.endsWith('%')) throw new Error(`Printable image object-position must use percentages: ${image.currentSrc}`);
+        return parseFloat(value) / 100;
+      });
       const sourceWidth = Math.min(naturalWidth, naturalHeight * aspect);
       const sourceHeight = sourceWidth / aspect;
       const canvas = document.createElement('canvas');
@@ -46,7 +50,7 @@ export async function generatePdfFromUrl(url) {
       canvas.height = Math.round(canvas.width / aspect);
       const context = canvas.getContext('2d');
       context.imageSmoothingQuality = 'high';
-      context.drawImage(image, (naturalWidth - sourceWidth) / 2, (naturalHeight - sourceHeight) / 2, sourceWidth, sourceHeight, 0, 0, canvas.width, canvas.height);
+      context.drawImage(image, (naturalWidth - sourceWidth) * focusX, (naturalHeight - sourceHeight) * focusY, sourceWidth, sourceHeight, 0, 0, canvas.width, canvas.height);
       image.src = canvas.toDataURL('image/jpeg', quality);
       await image.decode();
     }));
@@ -54,6 +58,13 @@ export async function generatePdfFromUrl(url) {
   const dayCount = Number(await page.locator('meta[name="itinerary-day-count"]').getAttribute('content'));
   if (dayCount !== 14 || await page.locator('[data-print-date]').count() !== dayCount) throw new Error('Printable itinerary must contain all 14 days');
   if (!(await page.locator('.print-credit').first().textContent())?.includes('© @muhammad_yana')) throw new Error('Printable itinerary is missing its author credit');
+  // The page footer (credit and page count) exists only if this browser parsed the @page margin boxes.
+  const footer = await page.evaluate(() => {
+    const pageRule = [...document.styleSheets].flatMap(sheet => [...sheet.cssRules]).find(rule => rule instanceof CSSPageRule && !rule.selectorText);
+    const margins = Object.fromEntries([...(pageRule?.cssRules ?? [])].map(rule => [rule.name, rule.style.content]));
+    return Boolean(margins['bottom-left']?.includes('© @muhammad_yana') && margins['bottom-right']?.includes('counter(pages)'));
+  });
+  if (!footer) throw new Error('Browser does not support the @page footer with the author credit and page count');
   if (failures.length) throw new Error(failures.join('\n'));
   const filename = await page.locator('meta[name="itinerary-pdf-path"]').getAttribute('content');
   if (!filename || !/^[A-Za-z0-9][A-Za-z0-9._-]*\.pdf$/.test(filename)) throw new Error('Invalid generated PDF filename');
