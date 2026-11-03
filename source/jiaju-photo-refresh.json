@@ -1,0 +1,98 @@
+{
+  "checkedAt": "2026-11-03",
+  "photos": [
+    {
+      "id": "jiaju-refreshed",
+      "selectedAs": "primary",
+      "title": "CH9296 甲居藏寨",
+      "source": "https://www.flickr.com/photos/losk/35845571552/",
+      "originalUrl": "https://live.staticflickr.com/4312/35845571552_c3f1a6f60e_o.jpg",
+      "author": "Sek Keung Lo (S.K. LO / losk)",
+      "authorUrl": "https://www.flickr.com/photos/losk/",
+      "license": "CC BY-NC 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc/2.0/",
+      "reuseCondition": "Attribution required; noncommercial use only. Preserve source, title, creator, license, and modification notice. Reassess if the site becomes commercial.",
+      "capturedAt": "2017-07-01",
+      "capturedAtEvidence": "Flickr visible taken-date label and photo-stats dateTaken value: 2017-07-01 17:08:01.",
+      "originalWidth": 3600,
+      "originalHeight": 2400,
+      "originalSha256": "6ff04d4f1370a598c014c13def03cdfa0e645ac9e17b4581da5453ebd27e4a43",
+      "caption": "Rumah-rumah Tibet Jiaju tersebar di antara pepohonan dan ladang di lereng Danba.",
+      "alt": "Panorama Desa Jiaju dengan rumah Tibet berbingkai putih-merah, ladang hijau, dan jalan berkelok di lereng bukit.",
+      "photoNote": "CH9296 甲居藏寨 — Jiaju, dipotret 1 Juli 2017. Foto arsip musim panas, bukan kondisi Oktober atau November 2026.",
+      "focalPosition": "50% 47%",
+      "cropRecommendation": "Use the full 3:2 image in the gallery. A centered 16:10 or 4:3 cover frame with object-position 50% 47% retains the central house cluster and winding path. Avoid a tall portrait crop that removes the hillside settlement context.",
+      "transform": "EXIF orientation, proportional downsize, WebP encoding. No upscaling, color changes, object removal, or compositing. CSS frame cropping may apply.",
+      "derivatives": [
+        {
+          "path": "public/photos/jiaju-refreshed-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 64772,
+          "sha256": "4b3888462136195657642f58f22d9632fdf3250a6b33a452d9ad56539e3695bf"
+        },
+        {
+          "path": "public/photos/jiaju-refreshed-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 238570,
+          "sha256": "6c93329d94d6b2e3f54ad71e7505edec290b34d58c2fca21a79df71fb7565dcb"
+        },
+        {
+          "path": "public/photos/jiaju-refreshed-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 498556,
+          "sha256": "771f7e5e858b97da12cdb03ffd8cd2626425e87dea855ee9435b85e75b67f724"
+        }
+      ],
+      "evidence": {
+        "pageRetrieval": "Successful direct HTTPS request; web text tool could not load the page.",
+        "pageSha256": "81da36407068a2147e8d7c4c20b4a019cd75a021abf4416be34b4b7a54ca20f4",
+        "photoTitle": "CH9296 甲居藏寨",
+        "flickrOwnerDisplayname": "Sek Keung Lo",
+        "flickrLicenseId": 2,
+        "jsonLdLicense": "https://creativecommons.org/licenses/by-nc/2.0/",
+        "dateTaken": "2017-07-01 17:08:01"
+      }
+    }
+  ],
+  "selectionNote": "Selected after visually comparing 11 Commons candidates and 35 Flickr candidates. This precise Jiaju view has sharp architecture, multiple houses across the hillside, a legible winding path, and no dominant rooftop appliance foreground. It outranks newer but soft autumn phone images. No October 2026 capture date or autumn color claim is made.",
+  "alternatives": [
+    {
+      "source": "https://commons.wikimedia.org/wiki/File:四川_丹巴-甲居-藏寨_-_panoramio.jpg",
+      "title": "四川 丹巴-甲居-藏寨 - panoramio.jpg",
+      "author": "Nyx Ning",
+      "license": "CC BY-SA 3.0",
+      "capturedAt": "2013-03-29",
+      "width": 3648,
+      "height": 2736,
+      "decision": "Authentic and reusable commercially with license conditions; lower contrast spring overview was less attractive than the selected photo."
+    },
+    {
+      "source": "https://www.flickr.com/photos/rduta/3161588774/",
+      "title": "Jiaju Zangzhai Panoramic",
+      "author": "rduta",
+      "license": "CC BY 2.0",
+      "capturedAt": "2008-10-16",
+      "width": 7715,
+      "height": 2613,
+      "decision": "Very wide authentic October panorama but pale sky and distant houses lose impact in mobile cards."
+    },
+    {
+      "source": "https://www.flickr.com/photos/emmanuellee/44905421854/",
+      "title": "丹巴甲居藏寨",
+      "author": "emmanuellee",
+      "license": "CC BY-NC 2.0",
+      "capturedAt": "2018-10-18",
+      "width": 4032,
+      "height": 3024,
+      "decision": "Verified autumn archive but visibly soft detail and weaker composition."
+    },
+    {
+      "source": "https://www.danba.gov.cn/yzdb/article/739105",
+      "publishedAt": "2026-10-05",
+      "decision": "Recent article found; a reusable photo license and individual image capture date were not established. Publication date is not a capture date."
+    }
+  ]
+}

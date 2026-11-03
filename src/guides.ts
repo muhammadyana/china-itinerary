@@ -63,5 +63,6 @@ export function coverPhoto(page: PlacePage): GalleryPhoto | undefined {
       return { id: highlight.photo || place.photo!, title: highlight.title, alt: highlight.alt || place.alt || place.name, note: place.photoNote };
     }
   }
-  return galleryPhotos(page)[0];
+  const gallery = galleryPhotos(page);
+  return gallery.find(item => item.id === places[page.slug]?.photo) ?? gallery[0];
 }

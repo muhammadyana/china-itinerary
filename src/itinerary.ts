@@ -6,7 +6,7 @@ import { chengduGuidePhotos } from './guide-photos-chengdu.ts';
 export interface Photo {
   id: string; width: number; height: number; sizes: number[];
   author: string; source: string; license: string; licenseUrl: string;
-  origin: 'PDF' | 'Wikimedia Commons' | 'Pexels';
+  origin: 'PDF' | 'Wikimedia Commons' | 'Pexels' | 'Flickr' | 'Unsplash';
   photoNote?: string;
 }
 export interface Place {
@@ -36,9 +36,9 @@ export const places: Record<string, Place> = {
   shuzheng: { name: 'Danau Shuzheng', chinese: '树正群海', description: 'Danau-danau kecil tersusun bertingkat di antara hutan, diikuti jalur kayu sepanjang lembah.', page: 6, photo: 'shuzheng', alt: 'Danau biru Shuzheng di antara pulau-pulau kecil dan dedaunan kuning, jingga, serta hijau.' },
   maobiliang: { name: 'Maobiliang & Siguniangshan', chinese: '猫鼻梁', description: 'Saat cuaca cerah, puncak-puncak Siguniangshan berderet membentuk siluet “Empat Saudari”.', page: 8, photo: 'siguniang', alt: 'Puncak bersalju Siguniangshan menjulang di atas pegunungan.', photoNote: 'Foto pengganti memperlihatkan Siguniangshan; sudut Maobiliang tidak diklaim.' },
   rilong: { name: 'Rilong', chinese: '日隆镇', description: 'Kota kecil di kaki Siguniangshan dengan penginapan dan toko di sepanjang jalan utama.', page: 8 },
-  shuangqiao: { name: 'Shuangqiao Valley', chinese: '双桥沟', description: 'Turun dari shuttle untuk mengikuti jalur kayu dan sungai di antara tebing serta hutan.', page: 9, photo: 'shuangqiao', alt: 'Puncak bersalju, bebatuan, dan pepohonan kuning di Lembah Shuangqiao.' },
+  shuangqiao: { name: 'Shuangqiao Valley', chinese: '双桥沟', description: 'Turun dari shuttle untuk mengikuti jalur kayu dan sungai di antara tebing serta hutan.', page: 9, photo: 'shuangqiao-refreshed', alt: 'Panorama Shuangqiao dekat Longzhucuo: sungai berkelok di antara pepohonan menguning dan puncak bersalju.' },
   hongshan: { name: 'Hutan Hongshan', description: 'Bagian atas Shuangqiao menjadi patokan turun bus; lokasi air terjun pada jadwal belum terkonfirmasi.', page: 9 },
-  jiaju: { name: 'Jiaju Tibetan Village', chinese: '甲居藏寨', description: 'Rumah-rumah Tibet bertingkat tersebar di lereng, mengikuti kontur bukit Danba.', page: 9, photo: 'jiaju', alt: 'Rumah-rumah khas Tibet di lereng Desa Jiaju.' },
+  jiaju: { name: 'Jiaju Tibetan Village', chinese: '甲居藏寨', description: 'Rumah-rumah Tibet bertingkat tersebar di lereng, mengikuti kontur bukit Danba.', page: 9, photo: 'jiaju-refreshed', alt: 'Panorama Desa Jiaju dengan rumah Tibet berbingkai putih-merah, ladang hijau, dan jalan berkelok di lereng bukit.' },
   danba: { name: 'Danba', chinese: '丹巴', description: 'Pusat kota mengikuti sungai di dasar lembah dan menjadi basis menuju desa-desa Tibet di lereng.', page: 9 },
   zhonglu: { name: 'Zhonglu Tibetan Village', chinese: '中路藏寨', description: 'Desa pertanian di atas lembah Danba memperlihatkan rumah batu, ladang, dan menara pengawas.', page: 10, photo: 'zhonglu', alt: 'Rumah putih, menara batu, dan ladang setelah panen di Jikayi, kawasan Zhonglu.', photoNote: 'Foto memperlihatkan Jikayi di kawasan Zhonglu, diambil pada Oktober 2025.' },
   moshi: { name: 'Moshi Park', chinese: '墨石公园', description: 'Jalur taman membawa kamu mendekati punggung batu bergerigi dan hutan batu kelabu di Bamei.', page: 10, photo: 'moshi', alt: 'Formasi batu kelabu bergerigi di Moshi Park.' },
@@ -316,7 +316,7 @@ export const days: Day[] = [
   "sourceNote": "Revisi perjalanan: 8 November jalan-jalan dan menginap di Chengdu. Perjalanan ke Jiuzhaigou dipindahkan ke pagi 9 November; jadwal ini menggantikan bagian awal PDF."
 },
  {date:'2026-11-10',title:'Menuju Siguniangshan',shortTitle:'Perjalanan ke Rilong',region:'Sichuan',route:['Jiuzhaigou','Siguniangshan','Rilong'],overnight:{name:'Rilong',area:'Kaki Siguniangshan',elevation:'3.200 m',detail:'Satu malam sebelum menjelajahi Shuangqiao Valley besok pagi.'},transport:'Mobil dengan sopir, 7–9 jam / ±456 km',intro:'Etape darat panjang menuju kaki gunung; sisakan waktu makan dan istirahat.',events:[t('car','Hotel Jiuzhaigou ke Siguniangshan','Berangkat pagi. Alokasikan 7–9 jam termasuk makan dan istirahat; sepakati jalur dengan sopir.'),s('maobiliang','Sore','Singgah hanya jika cuaca cerah dan waktunya cukup.','Opsional'),t('car','Lanjut ke penginapan di Rilong'),s('rilong','Sore–malam')],practical:[{title:'Mulai sewa mobil',text:'Rute privat 10–17 November dimulai dari hotel Jiuzhaigou dan berakhir di Dukezong, Yunnan. Konfirmasikan biaya satu arah dan lintas provinsi.'},halal,snow],pages:[3,7,8,28,30]},
- {date:'2026-11-11',title:'Shuangqiao & rumah Tibet Danba',shortTitle:'Shuangqiao & Jiaju',region:'Sichuan',route:['Rilong','Shuangqiao','Jiaju','Danba'],overnight:{name:'Danba',area:'Kota di dasar lembah',elevation:'2.000 m',detail:'Turun dari Rilong untuk bermalam; lanjut ke Zhonglu besok pagi.'},transport:'Shuttle taman, lalu mobil ±3 jam',intro:'Pagi di lembah pegunungan, sore di antara rumah-rumah Tibet di lereng.',events:[t('bus','Shuttle menuju ujung Shuangqiao','Turun bertahap di pemberhentian yang dibuka.'),s('hongshan','Pagi','Foto pada PDF menunjukkan hutan; lokasi “Hongshan Waterfall” belum terkonfirmasi.','Perlu konfirmasi'),s('shuangqiao','Pagi'),t('car','Shuangqiao ke Danba','Sekitar 3 jam; lanjut singgah di Jiaju.'),s('jiaju','Sore'),s('danba','Malam')],practical:[{title:'Di lembah',text:'Gunakan shuttle dan jalur kayu sesuai pengaturan taman. Warna gugur pada pertengahan November belum tentu sama dengan foto.'},halal],pages:[3,7,9,28]},
+ {date:'2026-11-11',title:'Shuangqiao & rumah Tibet Danba',shortTitle:'Shuangqiao & Jiaju',region:'Sichuan',route:['Rilong','Shuangqiao','Jiaju','Danba'],overnight:{name:'Danba',area:'Kota di dasar lembah',elevation:'2.000 m',detail:'Turun dari Rilong untuk bermalam; lanjut ke Zhonglu besok pagi.'},transport:'Shuttle taman, lalu mobil ±3 jam',intro:'Pagi di lembah pegunungan, sore di antara rumah-rumah Tibet di lereng.',events:[t('bus','Shuttle menuju ujung Shuangqiao','Turun bertahap di pemberhentian yang dibuka.'),s('hongshan','Pagi','Foto referensi kawasan Shuangqiao; bukan verifikasi titik Hutan Hongshan atau “Hongshan Waterfall”.','Perlu konfirmasi'),s('shuangqiao','Pagi'),t('car','Shuangqiao ke Danba','Sekitar 3 jam; lanjut singgah di Jiaju.'),s('jiaju','Sore'),s('danba','Malam')],practical:[{title:'Di lembah',text:'Gunakan shuttle dan jalur kayu sesuai pengaturan taman. Warna gugur pada pertengahan November belum tentu sama dengan foto.'},halal],pages:[3,7,9,28]},
  {date:'2026-11-12',title:'Dari Danba ke padang Tagong',shortTitle:'Zhonglu, Moshi & Tagong',region:'Sichuan',route:['Danba','Zhonglu','Moshi Park','Tagong','Xinduqiao'],overnight:{name:'Xinduqiao',area:'Basis untuk perjalanan sekitar Kangding',elevation:'3.300 m',detail:'Malam pertama dari dua malam. Siapkan keberangkatan sangat pagi besok.'},transport:'Mobil ±5 jam / ±180 km',intro:'Rumah batu, hutan batu kelabu, lalu padang rumput yang menghadap Yala.',events:[s('zhonglu','Pagi'),t('car','Danba ke Bamei','Perjalanan dilanjutkan ke Moshi Park.'),s('moshi','Siang','Taman berada sekitar 3.500 m.'),t('car','Moshi Park ke Tagong'),s('tagong','Sore','Lihat Gunung Yala dari padang; PDF menyebut kawasan Yala sendiri tutup musim dingin.'),s('muya','Sore'),t('car','Lanjut ke Xinduqiao'),s('xinduqiao','Malam')],practical:[{title:'Bekal siang',text:'Pilihan halal di Tagong dan Xinduqiao terbatas. Siapkan bekal dan cari 兰州拉面 di jalan utama.',copy:'兰州拉面'},{title:'Ketinggian',text:'Naik lagi dari Danba sekitar 2.000 m ke basis Xinduqiao sekitar 3.300 m. Sisakan waktu istirahat.'},snow],pages:[3,7,10,11,28,30]},
  {date:'2026-11-13',title:'Kangding & cahaya pegunungan',shortTitle:'Kangding & salat Jumat',region:'Sichuan',route:['Xinduqiao','Yuzixi','Kangding','Jiagenba','Xinduqiao'],overnight:{name:'Xinduqiao',area:'Kembali ke hotel yang sama',elevation:'3.300 m',detail:'Malam kedua di Xinduqiao sebelum melanjutkan G318 ke Litang.'},transport:'Mobil, loop ±250 km',intro:'Prioritas hari ini: tiba di Kangding sebelum 12.30 untuk salat Jumat.',events:[s('yuzixi','06.30','Target dalam PDF untuk cahaya pertama; konfirmasikan jam berangkat dan kondisi akses dengan sopir.'),t('car','Melalui S434 menuju Kangding'),s('honghaizi','Pagi'),s('kangding-road','Pagi'),s('kangding','Sebelum 12.30'),s('kangding-mosque','Siang','Salat Jumat dan makan di kluster Hui sekitar masjid. Pin serta jam salat perlu dicek.','Perlu konfirmasi'),t('car','Kembali lewat Zheduo Pass'),s('zheduo','Siang–sore','Lintasan sekitar 4.298 m, rawan es.'),s('jiagenba','Sore'),s('zimei','Jika sempat','Jalan tanah dan lintasan tinggi; jangan mengorbankan waktu salat atau keselamatan jalan.','Opsional'),t('car','Kembali ke Xinduqiao')],practical:[{title:'Salat Jumat',text:'Sepakati Kangding sebelum 12.30 sebagai titik wajib. Konfirmasikan masjid dan jam setempat; foto masjid pada PDF belum terverifikasi.',copy:'康定清真寺'},{title:'Makan halal',text:'Cari kluster Hui di sekitar masjid untuk makan siang dan mengisi bekal.'},snow],pages:[3,12,13,14,28,30]},
  {date:'2026-11-14',title:'Menelusuri G318 ke Litang',shortTitle:'G318 & Biara Litang',region:'Sichuan',route:['Xinduqiao','Gao’ersi Shan','Tianlu 18 Bends','Litang'],overnight:{name:'Litang',area:'Kota dataran tinggi',elevation:'4.014 m',detail:'Malam menginap tertinggi dalam perjalanan. Pilih aktivitas sore yang ringan.'},transport:'Mobil ±4 jam / ±150 km',intro:'Jalan pegunungan berkelok dan padang tinggi, ditutup kunjungan ringan ke biara.',events:[t('car','Xinduqiao ke Litang melalui G318','Sekitar 4 jam, mengikuti kondisi jalan.'),s('gaoersi','Pagi','Lintasan pada jadwal sekitar 4.412 m.'),s('tianlu','Siang'),s('litang','Sore','Jalan santai; tidak ada trek hari ini.'),s('litang-monastery','Sore')],practical:[{title:'Malam dingin',text:'Perkiraan dalam PDF untuk Litang: siang 1–8 °C, malam −15 hingga −8 °C. Ini perkiraan musiman, bukan prakiraan langsung.'},halal,snow],pages:[3,12,15,28,30]},
@@ -590,35 +590,37 @@ export const photos: Record<string, Photo> = {
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "origin": "Wikimedia Commons"
   },
-  "shuangqiao": {
-    "id": "shuangqiao",
-    "width": 980,
-    "height": 664,
+  "shuangqiao-refreshed": {
+    "id": "shuangqiao-refreshed",
+    "width": 5267,
+    "height": 3944,
     "sizes": [
       480,
       960,
-      980
+      1440
     ],
-    "author": "landagent",
-    "source": "https://commons.wikimedia.org/wiki/File:%E5%9B%9B%E5%A7%91%E5%A8%98%E5%B1%B1%E5%8F%8C%E6%A1%A5%E6%B2%9F_-_panoramio.jpg",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "origin": "Wikimedia Commons"
+    "author": "Yang Yu's Album (yuyang226)",
+    "source": "https://www.flickr.com/photos/yuyang226/54080128670/",
+    "license": "CC BY-NC-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+    "origin": "Flickr",
+    "photoNote": "四姑娘山秋日 — Shuangqiao dekat Longzhucuo, 19 Oktober 2024. Foto arsip; lokasi dicocokkan dari koordinat foto dan peta OpenStreetMap. Bukan kondisi Oktober 2026."
   },
-  "jiaju": {
-    "id": "jiaju",
-    "width": 1280,
-    "height": 960,
+  "jiaju-refreshed": {
+    "id": "jiaju-refreshed",
+    "width": 3600,
+    "height": 2400,
     "sizes": [
       480,
       960,
-      1280
+      1440
     ],
-    "author": "Nyx Ning",
-    "source": "https://commons.wikimedia.org/wiki/File:%E5%9B%9B%E5%B7%9D_%E4%B8%B9%E5%B7%B4-%E7%94%B2%E5%B1%85%E6%98%A5%E8%89%B2_-_panoramio.jpg",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "origin": "Wikimedia Commons"
+    "author": "Sek Keung Lo",
+    "source": "https://www.flickr.com/photos/losk/35845571552/",
+    "license": "CC BY-NC 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-nc/2.0/",
+    "origin": "Flickr",
+    "photoNote": "CH9296 甲居藏寨 — Jiaju, dipotret 1 Juli 2017. Foto arsip musim panas, bukan kondisi Oktober atau November 2026."
   },
   "tagong": {
     "id": "tagong",

@@ -37,7 +37,7 @@ Photos reserve their layout dimensions and show a warm skeleton while loading. N
 
 ## Homepage
 
-Nine photographs rotate through Sichuan and Yunnan in the hero. The first-night arrival summary remains directly below it and identifies Chengdu as the overnight base. Region sections lead to destination guides; hero captions and the date picker still select itinerary days. The 14-day journal and all overnight summaries remain available with approved traveler revisions applied.
+Nine photographs rotate through Sichuan and Yunnan in the hero. The open user gallery sits directly below it, followed by the first-night arrival summary identifying Chengdu as the overnight base. Region sections lead to destination guides; hero captions and the date picker still select itinerary days. The 14-day journal and all overnight summaries remain available with approved traveler revisions applied.
 
 Desktop highlights use two columns. Phone highlights retain native horizontal scrolling. The desktop date sidebar collapses into the existing mobile picker and floating dock.
 
@@ -53,6 +53,6 @@ The gallery shows locally hosted responsive photographs and opens the full frame
 
 ## Preservation and verification
 
-The redesign preserves the manual hero, all 14 dates, the 13-night total, route overview, clipboard fallback, the archived PDF download, optional user gallery, native dialog focus, and history behavior. The revised overnight sequence begins with Chengdu on 8 November and Jiuzhaigou on 9 November. Destination-card navigation intentionally changes from a date jump to a guide page; guide links return to the matching travel day.
+The redesign preserves the manual hero, all 14 dates, the 13-night total, route overview, clipboard fallback, the archived PDF download, user gallery, native dialog focus, and history behavior. The user gallery is open by default immediately below the hero, including without JavaScript; its photographs remain lazy-loaded. The revised overnight sequence begins with Chengdu on 8 November and Jiuzhaigou on 9 November. Destination-card navigation intentionally changes from a date jump to a guide page; guide links return to the matching travel day.
 
 Verification includes mobile widths 320, 360, and 390px, desktop 1440px, fixed light appearance under both system color preferences, reduced transparency, no-JavaScript documents, direct nested-route reloads, source/asset coverage, and aXe checks. Local evidence belongs in ignored `artifacts/`; Hallmark comparisons belong in `.hallmark/`.

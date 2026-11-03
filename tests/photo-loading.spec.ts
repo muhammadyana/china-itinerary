@@ -1,5 +1,6 @@
 import { expect, test, type Locator, type Page, type Route } from '@playwright/test';
 import { coverPhoto, pageBySlug } from '../src/guides';
+import { places } from '../src/itinerary';
 
 async function holdPhotoRequests(page: Page, photoId: string) {
   let resolveRequest!: () => void;
@@ -68,7 +69,7 @@ test('guide hero shows a loading skeleton until its real image arrives without m
 });
 
 test('date-switched photos settle after loading and remain ready when opened in a fresh dialog', async ({ page }) => {
-  const gate = await holdPhotoRequests(page, 'shuangqiao');
+  const gate = await holdPhotoRequests(page, places.shuangqiao.photo!);
   try {
     await page.goto('/');
     await page.evaluate(() => document.fonts.ready);

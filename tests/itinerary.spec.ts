@@ -7,6 +7,7 @@ import {mkdir,writeFile} from 'node:fs/promises';
 const overnight=['Chengdu','Jiuzhaigou','Rilong','Danba','Xinduqiao','Xinduqiao','Litang','Riwa','Riwa','Shangri-La','Lijiang','Dali','Kunming',null];
 const initialPhotoIds=new Set([
  ...highlights.map(highlight=>photos[highlight.photo||places[highlight.place].photo!].id),
+ ...Object.keys(userPhotos),
  ...days[0].events.flatMap(event=>event.kind==='stop'&&places[event.place].photo?[photos[places[event.place].photo!].id]:[]),
 ]);
 const isInitialPhoto=(url:string)=>{
@@ -59,7 +60,7 @@ for(const width of [360,390,1440]) {
   await page.goto('/');await page.evaluate(()=>document.fonts.ready);
   await expect(page.locator('h1')).toHaveText('Musim Gugur di China');
   await expect(page.locator('.home-arrival .arrival-stay')).toContainText('Menginap di Chengdu');
-  if(width<600) {const sleep=await page.locator('.home-arrival .arrival-stay').boundingBox();const dock=await page.locator('.mobile-daybar').boundingBox();expect(sleep!.y+sleep!.height).toBeLessThan(dock!.y);}
+  await expect(page.locator('.hero + #user-gallery')).toHaveAttribute('open','');
   await page.screenshot({path:`artifacts/home-${width}.png`,fullPage:false});
   expect(requests.filter(url=>url.includes('/photos/')).every(isInitialPhoto)).toBe(true);
   await expect(page.locator('.highlight-card[data-highlight]')).toHaveCount(9);
@@ -218,7 +219,7 @@ test('homepage regions: province groups and keyboard navigation to Lijiang and D
  await expect(page.locator('.sleep-summary')).toContainText('Menginap di Kunming');
  await expect(page.locator('.sleep-summary')).toBeInViewport();
 });
-test('production on mobile network: does not fetch unopened galleries',async({page,context})=>{
+test('production on mobile network: the open gallery loads nearby photos lazily',async({page,context})=>{
  await page.setViewportSize({width:390,height:844});
  const cdp=await context.newCDPSession(page);
  await cdp.send('Network.enable');await cdp.send('Network.setCacheDisabled',{cacheDisabled:true});
@@ -232,7 +233,11 @@ test('production on mobile network: does not fetch unopened galleries',async({pa
  expect(imageUrls.every(isInitialPhoto)).toBe(true);
  const uniquePhotoIds=new Set(imageUrls.map(url=>new URL(url).pathname.match(/^\/photos\/(.+)-\d+\.webp$/)?.[1]));
  expect(uniquePhotoIds.size).toBeLessThanOrEqual(12);
- expect(imageUrls.filter(url=>url.includes('user-autumn-'))).toEqual([]);
+ const galleryRequests=imageUrls.filter(url=>url.includes('user-autumn-'));
+ expect(galleryRequests.length).toBeGreaterThan(0);
+ expect(galleryRequests.length).toBeLessThan(Object.keys(userPhotos).length);
+ await expect(page.locator('.hero + #user-gallery')).toHaveAttribute('open','');
+ for(const image of await page.locator('.gallery-photo img').all()) await expect(image).toHaveAttribute('loading','lazy');
  await writeFile('artifacts/network.json',JSON.stringify({profile:'1.6 Mbps down, 750 Kbps up, 150 ms latency; cold cache',elapsedMs:Date.now()-start,images:imageUrls,resources:responseBytes},null,2));
  await page.getByRole('button',{name:'Pilih hari',exact:true}).click();
  await page.locator('#picker-days [data-date="2026-11-20"]').click();
@@ -289,6 +294,8 @@ test('server-rendered first day and PDF survive disabled JavaScript',async({brow
  await page.goto('http://127.0.0.1:4173/');
  await expect(page.locator('#day-heading')).toHaveText(days[0].title);
  await expect(page.locator('.sleep-summary')).toContainText('Chengdu');
+ await expect(page.locator('.hero + #user-gallery')).toHaveAttribute('open','');
+ await expect(page.locator('.gallery-photo').first()).toBeVisible();
  await expect(page.locator('.no-script')).toContainText('rencana awal 14 hari');
  await expect(page.locator('.day-source-note')).toContainText('9 November');
  const pdf=await page.request.get('http://127.0.0.1:4173/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf');
@@ -304,13 +311,15 @@ test('every photo source exists with explicit responsive dimensions and attribut
  }
 });
 
-test('user gallery: on-demand images, photo source, focus and contained horizontal scroll',async({page})=>{
+test('user gallery: open below the hero, navigation reopens it, photo source and contained scroll',async({page})=>{
  await page.setViewportSize({width:390,height:844});
- const images:string[]=[];page.on('request',r=>{if(r.resourceType()==='image')images.push(r.url());});
  await page.goto('/');
  const firstHeroPhoto=photos[highlights[0].photo||places[highlights[0].place].photo!];
  await expect(page.locator('.hero-slide img').first()).toHaveAttribute('src',new RegExp(`${firstHeroPhoto.id}-\\d+\\.webp$`));
- expect(images.filter(url=>url.includes('user-autumn-'))).toEqual([]);
+ await expect(page.locator('.hero + #user-gallery')).toHaveAttribute('open','');
+ await expect(page.locator('#user-gallery + .home-arrival')).toBeAttached();
+ await page.locator('#gallery-heading').click();
+ await expect(page.locator('#user-gallery')).not.toHaveAttribute('open','');
  await page.getByRole('button',{name:'Galeri',exact:true}).click();
  await expect(page.locator('#user-gallery')).toHaveAttribute('open','');
  await expect(page.locator('#gallery-heading')).toBeFocused();

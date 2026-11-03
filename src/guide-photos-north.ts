@@ -1,22 +1,23 @@
 import type { Photo } from './itinerary.ts';
 
-// PDF derivatives preserve native resolution and their source-page references.
+// Sourced photographs and PDF derivatives preserve their original attribution.
 // The Caicun image is explicitly labeled as an Erhai reference, not a verified pier photograph.
 export const northernGuidePhotos: Record<string, Photo> = {
-  "guide-n-hongshan": {
-    "id": "guide-n-hongshan",
-    "width": 740,
-    "height": 491,
+  "hongshan-refreshed": {
+    "id": "hongshan-refreshed",
+    "width": 4032,
+    "height": 3024,
     "sizes": [
       480,
-      740
+      960,
+      1440
     ],
-    "author": "PDF perjalanan pengguna",
-    "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=9",
-    "license": "Dokumen pengguna",
-    "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=9",
-    "origin": "PDF",
-    "photoNote": "Hutan di area Hongshan, Shuangqiao, sesuai foto berlabel dalam PDF perjalanan. Tanggal pengambilan mengikuti sumber PDF; bukan konfirmasi kondisi saat kunjungan."
+    "author": "Yushan Wang",
+    "source": "https://unsplash.com/@dalkeith",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "origin": "Unsplash",
+    "photoNote": "Referensi pegunungan dan hutan Shuangqiao; bukan verifikasi titik Hutan Hongshan atau air terjun. Tanggal pengambilan tidak tersedia; bukan konfirmasi kondisi November 2026."
   },
   "guide-n-moshi": {
     "id": "guide-n-moshi",
@@ -48,20 +49,21 @@ export const northernGuidePhotos: Record<string, Photo> = {
     "origin": "PDF",
     "photoNote": "Kompleks Muya Monastery dengan latar pegunungan, sesuai PDF perjalanan. Tanggal pengambilan mengikuti sumber PDF; bukan konfirmasi kondisi saat kunjungan."
   },
-  "guide-n-guishan": {
-    "id": "guide-n-guishan",
-    "width": 650,
-    "height": 418,
+  "guishan-refreshed": {
+    "id": "guishan-refreshed",
+    "width": 4000,
+    "height": 5328,
     "sizes": [
       480,
-      650
+      960,
+      1440
     ],
-    "author": "PDF perjalanan pengguna",
-    "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=20",
-    "license": "Dokumen pengguna",
-    "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=20",
-    "origin": "PDF",
-    "photoNote": "Roda doa emas di Bukit Guishan, Dukezong. Tanggal pengambilan mengikuti sumber PDF; bukan konfirmasi kondisi saat kunjungan."
+    "author": "瑞丽江的河水",
+    "source": "https://commons.wikimedia.org/wiki/File:%E9%A6%99%E6%A0%BC%E9%87%8C%E6%8B%89%E5%A4%A7%E4%BD%9B%E5%AF%BA_-_%E8%BD%AC%E7%BB%8F%E7%AD%92_-_2025-05-09_01.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "origin": "Wikimedia Commons",
+    "photoNote": "Roda doa emas di Bukit Guishan, Dukezong; diambil 9 Mei 2025. Foto arsip, bukan kondisi November 2026."
   },
   "guide-n-sifangjie": {
     "id": "guide-n-sifangjie",
@@ -141,10 +143,10 @@ export const northernGuidePhotos: Record<string, Photo> = {
 };
 
 export const northernPlacePhotoIds: Record<string, string> = {
-  "hongshan": "guide-n-hongshan",
+  "hongshan": "hongshan-refreshed",
   "moshi": "guide-n-moshi",
   "muya": "guide-n-muya",
-  "guishan": "guide-n-guishan",
+  "guishan": "guishan-refreshed",
   "sifangjie": "guide-n-sifangjie",
   "wuhua": "guide-n-wuhua",
   "caicun": "guide-n-caicun",
@@ -153,10 +155,10 @@ export const northernPlacePhotoIds: Record<string, string> = {
 };
 
 export const northernPhotoDescriptions: Record<string, string> = {
-  "guide-n-hongshan": "Hutan di area Hongshan, Shuangqiao, sesuai foto berlabel dalam PDF perjalanan.",
+  "hongshan-refreshed": "Puncak berbatu berselimut salju di atas deretan pohon konifer Shuangqiao, dengan langit biru dan awan tipis.",
   "guide-n-moshi": "Formasi batu abu-abu di Moshi Park, sesuai PDF perjalanan.",
   "guide-n-muya": "Kompleks Muya Monastery dengan latar pegunungan, sesuai PDF perjalanan.",
-  "guide-n-guishan": "Roda doa emas di Bukit Guishan, Dukezong.",
+  "guishan-refreshed": "Roda doa emas raksasa di Bukit Guishan berdiri di antara pepohonan dengan langit biru dan pengunjung di bagian bawahnya.",
   "guide-n-sifangjie": "Bangunan di alun-alun Sifangjie, Kota Tua Lijiang.",
   "guide-n-wuhua": "Pemandangan Kota Tua Dali dari Menara Wuhua, sesuai keterangan PDF.",
   "guide-n-caicun": "Referensi pemandangan Danau Erhai dari PDF; foto ini tidak memastikan tampilan Dermaga Caicun.",
