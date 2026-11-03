@@ -233,7 +233,7 @@ test('production on mobile network: the open gallery loads nearby photos lazily'
  expect(imageUrls.every(isInitialPhoto)).toBe(true);
  const uniquePhotoIds=new Set(imageUrls.map(url=>new URL(url).pathname.match(/^\/photos\/(.+)-\d+\.webp$/)?.[1]));
  expect(uniquePhotoIds.size).toBeLessThanOrEqual(12);
- const galleryRequests=imageUrls.filter(url=>url.includes('user-autumn-'));
+ const galleryRequests=[...uniquePhotoIds].filter(id=>id && userPhotos[id]);
  expect(galleryRequests.length).toBeGreaterThan(0);
  expect(galleryRequests.length).toBeLessThan(Object.keys(userPhotos).length);
  await expect(page.locator('.hero + #user-gallery')).toHaveAttribute('open','');
@@ -323,7 +323,7 @@ test('user gallery: open below the hero, navigation reopens it, photo source and
  await page.getByRole('button',{name:'Galeri',exact:true}).click();
  await expect(page.locator('#user-gallery')).toHaveAttribute('open','');
  await expect(page.locator('#gallery-heading')).toBeFocused();
- await expect(page.locator('.gallery-photo')).toHaveCount(12);
+ await expect(page.locator('.gallery-photo')).toHaveCount(Object.keys(userPhotos).length);
  await page.locator('.gallery-photo img').first().evaluate(img=>(img as HTMLImageElement).decode());
  await page.screenshot({path:'artifacts/autumn-gallery-390.png'});
  const bipeng=page.locator('.gallery-photo[data-photo="user-autumn-08"]');
