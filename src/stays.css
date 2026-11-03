@@ -36,7 +36,9 @@
 .stay-chinese { margin-top: calc(var(--space-xs) * -1); color: var(--color-ink-2); font-size: 15px; }
 .stay-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-xs) var(--space-sm); }
 .stay-meta .state { font-size: 12px; font-weight: 500; }
-.stay-meta strong { font-size: 17px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.stay-meta strong { flex-basis: 100%; font-size: 17px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.stay-room { color: var(--color-ink-2); font-size: 13px; }
+.stay-meta .stay-over-budget { background: var(--color-warning-surface); color: var(--color-warning); }
 .stay-reason { color: var(--color-ink-2); }
 .stay-facts { display: grid; gap: 0; margin: var(--space-xs) 0 0; }
 .stay-facts > div { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: var(--space-sm); padding-block: var(--space-sm); border-top: 1px solid var(--color-rule); }

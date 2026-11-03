@@ -3,7 +3,7 @@ import { coverPhoto, guides, pageBySlug, pageForPlace, placePath } from './guide
 import { currencyText, renderExchangeRate } from './currency.ts';
 import { escapeHtml as e, fullDate, icon } from './render.ts';
 import { CHENGDU_EVENING_DATE, renderChengduEvening } from './chengdu-evening.ts';
-import { stayBaseForDate, stayBases, stayNights, type Stay } from './stays.ts';
+import { stayBaseForDate, stayBases, stayBudget, stayNights, type Stay } from './stays.ts';
 
 const siteOrigin = 'https://china.muhammadyana.me';
 const COVER_PHOTO_ID = 'highlight-jiuzhaigou';
@@ -216,11 +216,11 @@ function printedUrl(href: string): string {
 
 function printStay(stay: Stay): string {
   const listing = stay.links.find(link => link.gallery) ?? stay.links[0];
-  return `<div class="print-stay"><p class="print-stay-kind">${e(stay.kind)} · <strong>${currencyText(stay.price)}</strong></p><h4>${e(stay.name)}</h4>${stay.chinese ? `<p lang="zh-Hans">${e(stay.chinese)}</p>` : ''}${stay.chineseAddress ? `<p lang="zh-Hans">${e(stay.chineseAddress)}</p>` : ''}${paragraph(stay.location)}${paragraph(stay.foreignGuests)}${stay.rooms ? paragraph(stay.rooms) : ''}${stay.halal ? paragraph(stay.halal) : ''}<p>${sourceLink(`Foto & kamar di ${listing.label}`, listing.url)}</p></div>`;
+  return `<div class="print-stay"><p class="print-stay-kind">${e(stay.kind)} · ${e(stay.room)}${stay.overBudget ? ` · di atas ${stayBudget.rupiah}` : ''} · <strong>${currencyText(stay.price)}</strong></p><h4>${e(stay.name)}</h4>${stay.chinese ? `<p lang="zh-Hans">${e(stay.chinese)}</p>` : ''}${stay.chineseAddress ? `<p lang="zh-Hans">${e(stay.chineseAddress)}</p>` : ''}${paragraph(stay.location)}${paragraph(stay.foreignGuests)}${stay.rooms ? paragraph(stay.rooms) : ''}${stay.halal ? paragraph(stay.halal) : ''}<p>${sourceLink(`Foto & kamar di ${listing.label}`, listing.url)}</p></div>`;
 }
 
 function printStays(): string {
-  return `<section class="print-stays" id="print-stays"><h2>Penginapan per malam</h2><p>Satu hotel dan satu hostel atau guesthouse untuk setiap kota menginap, dicek 3 November 2026. Semua menerima paspor asing menurut sumbernya. Harga adalah perkiraan kamar per malam dan belum dipesan; cek ulang tanggal 2026 di penyedia.</p>
+  return `<section class="print-stays" id="print-stays"><h2>Penginapan per malam</h2><p>Satu hotel hemat dan satu hostel atau guesthouse untuk setiap kota menginap dengan batas ${stayBudget.rupiah} per malam, dicek 3 November 2026. Semua menerima paspor asing menurut sumbernya. Harga adalah perkiraan kamar per malam dan belum dipesan; cek ulang tanggal 2026 di penyedia.</p>
   ${stayBases.map(base => `<article id="print-stays-${e(base.id)}"><h3>${e(base.name)} <span>${stayNights(base).map(day => `${Number(day.date.slice(-2))} November`).join(' & ')}</span></h3><p class="print-stays-area">${e(base.area)}</p>${base.notes.map(paragraph).join('')}<div class="print-stays-pair">${printStay(base.hotel)}${printStay(base.hostel)}</div></article>`).join('')}</section>`;
 }
 

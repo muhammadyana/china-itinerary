@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { days, photos } from '../src/itinerary';
 import { guideDates, pageBySlug, placePages, placePath } from '../src/guides';
-import { stayBaseForDate, stayBases, stayNights, staysPath } from '../src/stays';
+import { stayBaseForDate, stayBases, stayBudget, stayNights, staysPath } from '../src/stays';
 
 test.beforeEach(async ({ page }) => {
   await page.route('https://api.open-meteo.com/**', route => route.abort());
@@ -16,10 +16,13 @@ test('every overnight night maps to one researched base with a hotel and a hoste
   for (const base of stayBases) {
     expect(base.id).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
     expect(photos[base.areaPhoto.id], `${base.id} area photo`).toBeDefined();
-    expect(base.hotel.kind).toBe('Hotel');
+    // Dali has no hotel under the cap near the old-town gates, so its hotel slot is a private-room guesthouse.
+    expect(['Hotel', 'Guesthouse']).toContain(base.hotel.kind);
     expect(['Hostel', 'Guesthouse']).toContain(base.hostel.kind);
     for (const stay of [base.hotel, base.hostel]) {
       expect(stay.price, stay.name).toMatch(/CNY \d/);
+      const amounts = [...stay.price.matchAll(/\d+/g)].map(match => Number(match[0]));
+      if (!stay.overBudget) expect(Math.max(...amounts), `${stay.name} exceeds the nightly budget`).toBeLessThanOrEqual(stayBudget.cny);
       expect(stay.foreignGuests, stay.name).toBeTruthy();
       expect(stay.links.length, stay.name).toBeGreaterThan(0);
       expect(stay.sources.length, stay.name).toBeGreaterThan(0);

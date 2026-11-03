@@ -1,5 +1,5 @@
 import { photos } from './itinerary.ts';
-import { stayBaseForDate, stayBases, stayNights, staysCheckedAt, staysPath, type Stay, type StayBase } from './stays.ts';
+import { stayBaseForDate, stayBases, stayBudget, stayNights, staysCheckedAt, staysPath, type Stay, type StayBase } from './stays.ts';
 import { escapeHtml as e, icon, photoImage, siteCredit } from './render.ts';
 import { currencyText, renderExchangeRate } from './currency.ts';
 import { renderSiteNavigation } from './site-navigation.ts';
@@ -23,7 +23,7 @@ function stayCard(stay: Stay, base: StayBase, compact = false) {
     <div class="stay-card-body">
       <h3 id="${headingId}">${e(stay.name)}</h3>
       ${stay.chinese ? `<p class="stay-chinese" lang="zh-Hans">${e(stay.chinese)}</p>` : ''}
-      <p class="stay-meta"><span class="state${stay.kind === 'Hotel' ? ' confirmed' : ''}">${e(stay.kind)}</span><strong>${currencyText(stay.price)}</strong></p>
+      <p class="stay-meta"><span class="state${stay.kind === 'Hotel' ? ' confirmed' : ''}">${e(stay.kind)}</span><span class="stay-room">${e(stay.room)}</span>${stay.overBudget ? `<span class="state stay-over-budget">Di atas ${stayBudget.rupiah}</span>` : ''}<strong>${currencyText(stay.price)}</strong></p>
       <p class="stay-reason">${e(stay.reason)}</p>
       ${compact ? '' : `<dl class="stay-facts">
         <div><dt>${icon('pin')}Lokasi</dt><dd>${e(stay.location)}${stay.chineseAddress ? `<span lang="zh-Hans">${e(stay.chineseAddress)}</span>` : ''}</dd></div>
@@ -61,7 +61,7 @@ export function staysView() {
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="/places/">Tempat</a>${icon('right')}<span>Hotel & hostel</span></nav>
     <div class="stays-intro">
       <h1 id="stays-title">Tempat tidur, malam demi malam.</h1>
-      <p class="lead">Satu hotel dan satu hostel untuk setiap kota menginap, dari Chengdu sampai Kunming. Semua pilihan menerima tamu berpaspor asing menurut sumber yang dicek ${checked}.</p>
+      <p class="lead">Satu hotel hemat dan satu hostel untuk setiap kota menginap, dari Chengdu sampai Kunming, dengan batas ${stayBudget.rupiah} per malam. Semua pilihan menerima tamu berpaspor asing menurut sumber yang dicek ${checked}.</p>
       <p>Harga adalah perkiraan kamar per malam dan belum dipesan. Bandingkan tanggal 2026 langsung di penyedia sebelum membayar. Foto properti hanya ditampilkan bila lisensinya mengizinkan; selebihnya, buka galeri penyedia.</p>
       ${renderExchangeRate()}
     </div>
@@ -75,5 +75,5 @@ export function staysView() {
 export function renderStaySummary(date: string) {
   const base = stayBaseForDate(date);
   if (!base) return '';
-  return `<section class="guide-stays" aria-labelledby="guide-stays-heading"><div class="guide-section-heading"><h2 id="guide-stays-heading">Menginap di ${e(base.name)}.</h2><p>${nightLabel(base)}. Satu hotel dan satu hostel yang menerima paspor asing.</p></div><div class="stay-pair">${stayCard(base.hotel, base, true)}${stayCard(base.hostel, base, true)}</div><a class="text-link stays-all-link" href="${staysPath}#${e(base.id)}">Semua penginapan di rute${icon('right')}</a></section>`;
+  return `<section class="guide-stays" aria-labelledby="guide-stays-heading"><div class="guide-section-heading"><h2 id="guide-stays-heading">Menginap di ${e(base.name)}.</h2><p>${nightLabel(base)}. Satu hotel hemat dan satu hostel di bawah ${stayBudget.rupiah} per malam yang menerima paspor asing.</p></div><div class="stay-pair">${stayCard(base.hotel, base, true)}${stayCard(base.hostel, base, true)}</div><a class="text-link stays-all-link" href="${staysPath}#${e(base.id)}">Semua penginapan di rute${icon('right')}</a></section>`;
 }
