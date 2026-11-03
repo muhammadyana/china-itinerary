@@ -1,10 +1,10 @@
-# Musim Gugur di China
+# Autumn in China
 
-Panduan perjalanan statis dalam Bahasa Indonesia untuk 8–21 November 2026. Dibangun dengan Vite, TypeScript, HTML semantik, dan CSS biasa.
+A static travel guide with a Bahasa Indonesia interface for 8–21 November 2026. Built with Vite, TypeScript, semantic HTML, and plain CSS.
 
-Alamat publik: [china.muhammadyana.me](https://china.muhammadyana.me). Rilis dengan slider dan highlight destinasi sudah diverifikasi pada URL publik ini, termasuk tampilan ponsel 360 dan 390 px.
+Public website: [china.muhammadyana.me](https://china.muhammadyana.me). The release with the destination slider and highlights has been verified at this public URL, including mobile layouts at 360 and 390 px.
 
-## Jalankan
+## Run locally
 
 ```sh
 git clone https://github.com/muhammadyana/china-itinerary.git
@@ -13,65 +13,65 @@ npm install
 npm run dev
 ```
 
-## Build dan pratinjau produksi
+## Build and preview production
 
 ```sh
 npm run build
 npm run preview -- --host 127.0.0.1 --port 4173
 ```
 
-Buka <http://127.0.0.1:4173/>. Untuk langsung ke 20 November: <http://127.0.0.1:4173/#2026-11-20>.
+Open <http://127.0.0.1:4173/>. To jump directly to 20 November, open <http://127.0.0.1:4173/#2026-11-20>.
 
-Unggah isi `dist/` ke hosting statis. Aset memakai path relatif; tidak ada backend, API key, pemuatan font dari layanan pihak ketiga, atau layanan gambar saat halaman dipakai. PDF hanya diunduh ketika tautannya dibuka.
+Upload the contents of `dist/` to a static host. Assets use relative paths; the site requires no backend, API keys, third-party font loading, or runtime image service. The PDF is downloaded only when its link is opened.
 
-## Ubah itinerary
+## Update the itinerary
 
-`src/itinerary.ts` adalah satu sumber data untuk tanggal, tempat ber-ID stabil, caption, foto, kredit, perpindahan, catatan praktis, dan tempat menginap. The date picker, route overview, nine regional highlights, hero, and daily view share this data. `src/render.ts` merender HTML yang sama saat build dan saat tanggal dipilih. `src/main.ts` menangani interaksi DOM, dialog, clipboard, dan riwayat URL.
+`src/itinerary.ts` is the single source of truth for dates, places with stable IDs, captions, photos, credits, transfers, practical notes, and overnight stays. The date picker, route overview, nine regional highlights, hero, and daily view share this data. `src/render.ts` renders the same HTML during the build and when a date is selected. `src/main.ts` handles DOM interactions, dialogs, the clipboard, and URL history.
 
-Halaman awal diprarender sehingga hari pertama dan tautan PDF tetap terbaca saat JavaScript tidak tersedia. Pemilihan hari memerlukan JavaScript. Setiap tanggal memakai fragment `#YYYY-MM-DD`; Back/Forward mengembalikan tanggal sebelumnya.
+The initial page is prerendered so the first day and PDF link remain available without JavaScript. Selecting a day requires JavaScript. Each date uses a `#YYYY-MM-DD` fragment; Back/Forward restores the corresponding date.
 
-## Pengujian
+## Testing
 
 ```sh
 npm run test:e2e
 ```
 
-Playwright memakai Google Chrome lokal dan Chromium terpasang di GitHub Actions. Perintah ini menjalankan build dan production preview jika belum ada server pada port 4173. Cakupan pengujian mencakup 360, 390, dan 1440 px, seluruh tanggal dan malam, dua ketukan ke 20 November, reload/Back, fokus dialog, clipboard dan fallback, aksesibilitas aXe, aset WebP, serta jaringan seluler yang dibatasi.
+Playwright uses local Google Chrome and installed Chromium in GitHub Actions. This command builds the site and starts a production preview if no server is already running on port 4173. Tests cover 360, 390, and 1440 px layouts, all dates and overnight stays, reaching 20 November in two taps, reload/Back navigation, dialog focus, clipboard copying and its fallback, aXe accessibility checks, WebP assets, and a throttled mobile network.
 
-Bukti pengujian ada di `artifacts/`: screenshot, hasil pengujian JSON, hasil aXe, dan catatan jaringan. File sumber dan batas bukti tercatat di `SOURCE-NOTES.md`. Hasil review desain ada di `artifacts/finish-review.md`.
+Test evidence is stored in `artifacts/`: screenshots, JSON test results, aXe results, and network records. Sources and evidence limitations are documented in `SOURCE-NOTES.md`. The design review is in `artifacts/finish-review.md`.
 
-Bukti lokal dihasilkan dalam folder `artifacts/` yang tidak dimasukkan ke Git. GitHub Actions menyimpan hasil tes sebagai artifact. Sistem visual: [DESIGN.md](DESIGN.md), dengan komponen dan token pada `.impeccable/design.json`.
+The local `artifacts/` directory is excluded from Git. GitHub Actions uploads test results as workflow artifacts. The visual system is documented in [DESIGN.md](DESIGN.md), with components and tokens in `.impeccable/design.json`.
 
-## Batas informasi
+## Information limits
 
-Waktu dan harga mengikuti PDF, bukan jadwal real-time. Kedatangan TFU pada 8 November pukul 12.20 dikonfirmasi oleh sumber. Kereta, jemputan, akses taman, masjid setempat, serta jam penerbangan pulang perlu konfirmasi sebagaimana dijelaskan di halaman. Nama penginapan yang dibukukan tidak diberikan, sehingga halaman menampilkan area menginap.
+Times and prices follow the PDF rather than live schedules. The source confirms arrival at TFU on 8 November at 12:20. Trains, transfers, park access, local mosques, and the return flight time require confirmation as described on the page. Booked accommodation names were not provided, so the guide displays overnight areas.
 
-Foto tanpa bukti izin pakai yang memadai tidak diterbitkan sebagai aset web. Tempatnya tetap ada sebagai teks; daftar gap dan asal pengganti ada di `SOURCE-NOTES.md` serta bagian sumber pada halaman. Foto berlisensi CC BY / CC BY-SA tetap memiliki atribusi, tautan lisensi, dan pemberitahuan resize/crop. Tidak ada gambar buatan AI.
+Photos without sufficient evidence of permission to reuse them are not published as web assets. Their destinations remain available as text; missing photos and replacement sources are documented in `SOURCE-NOTES.md` and the page’s source section. CC BY / CC BY-SA photos retain attribution, license links, and resize/crop notices. No AI-generated images are used.
 
-Pemeriksaan tautan: 12306 dan dua halaman Jiuzhaigou merespons HTTP 200. Tiga tautan Klook asli menolak akses otomatis dengan HTTP 403; ketersediaan paket belum terverifikasi. Rincian tersimpan di `artifacts/external-links.json`.
+Previous link checks: 12306 and two Jiuzhaigou pages returned HTTP 200. Three original Klook links rejected automated access with HTTP 403; package availability remains unverified. Details are stored in `artifacts/external-links.json`.
 
-## Beranda dan jurnal perjalanan
+## Homepage and travel journal
 
 The homepage has nine hero slides and two explicitly named destination groups. Sichuan includes Jiuzhaigou, Siguniangshan, Tagong, and Yading. Yunnan includes Shangri-La, Lijiang Old Town, Blue Moon Valley, Lake Erhai, and Dali Old Town. Region buttons scroll to and focus the matching heading. Each card opens its itinerary date; Shangri-La and Lijiang both link to 18 November. Hero slides alternate provinces before ending in Dali, display the region in their captions, and support swipe and previous/next controls without autoplay.
 
 Use English for code identifiers, comments, test descriptions, and developer-facing messages. User-facing interface copy remains Bahasa Indonesia.
 
-Ringkasan kedatangan muncul tepat setelah foto pembuka, sebelum pilihan destinasi: mulai dari Chengdu dan menginap di Jiuzhaigou. Itinerary lengkap berada setelah bagian pilihan destinasi. Tautan seperti `#2026-11-20` tetap langsung memilih dan menampilkan hari tersebut. Catatan harian memakai foto yang bergantian sisi pada desktop; pada ponsel, foto muncul sebelum uraian tempat. Ringkasan menginap dan transportasi ditampilkan dekat judul hari.
+The arrival summary appears immediately after the hero, before the destination highlights: start in Chengdu and stay overnight in Jiuzhaigou. The full itinerary follows the highlights. Links such as `#2026-11-20` directly select and display that day. Daily journal photos alternate sides on desktop; on phones, each photo appears before its destination description. Overnight and transport summaries appear near the day heading.
 
-Galeri terpisah menyimpan 12 foto kiriman pengguna. Tombol **Galeri** membuka bagian yang semula tertutup. Tiga foto Bipenggou tetap diberi kredit kapongbeer berdasarkan tangkapan layar pengguna dan ditandai sebagai inspirasi di luar rute PDF. Tanggal pengambilan foto pengguna belum diketahui. Manifest asalnya ada di `source/user-photos/manifest.json`.
+A separate gallery contains 12 user-supplied photos. The **Gallery** button, labeled **Galeri** in the interface, opens this initially collapsed section. Three Bipenggou photos retain the kapongbeer attribution from the user’s screenshot and are labeled as inspiration outside the PDF route. Capture dates for user-supplied photos remain unknown. Their source manifest is at `source/user-photos/manifest.json`.
 
-The homepage uses six sourced highlight assets and existing destination photos. Lijiang uses an archival rooftop panorama by Franklin David; Dali uses fei wang’s illuminated South Gate image. Both retain source and license credits; neither is presented as an October 2026 capture. Hanya foto Siguniangshan yang memiliki tanggal pengambilan terverifikasi pada Oktober 2026, yaitu 14 Oktober. Foto Jiuzhaigou diambil 6 November 2025, Erhai 20 Februari 2026, Tagong pada Juni 2018, dan Luorong pada Oktober 2012. Tanggal pengambilan Blue Moon Valley tidak tersedia. Rincian sumber, lisensi, dan tanggal terbit ada di `source/highlight-photos/manifest.json` serta `SOURCE-NOTES.md`.
+The homepage uses six sourced highlight assets and existing destination photos. Lijiang uses an archival rooftop panorama by Franklin David; Dali uses fei wang’s illuminated South Gate image. Both retain source and license credits; neither is presented as an October 2026 capture. Only the Siguniangshan photo has a verified October 2026 capture date: 14 October. The Jiuzhaigou photo was taken on 6 November 2025, Erhai on 20 February 2026, Tagong in June 2018, and Luorong in October 2012. The Blue Moon Valley capture date is unavailable. Sources, licenses, and publication dates are documented in `source/highlight-photos/manifest.json` and `SOURCE-NOTES.md`.
 
-Tampilan mempertahankan Geist, Bodoni Moda, palet kastanye/krem/terakota/emas, dan navigasi tanggal mengambang. Bukti revisi terbaru ada di `artifacts/highlights-verification.md`; bukti deployment publik ada di `artifacts/deployment/receipt.json`.
+The design retains Geist, Bodoni Moda, the chestnut/cream/terracotta/gold palette, and floating date navigation. Highlight revision evidence is in `artifacts/highlights-verification.md`; public deployment evidence is in `artifacts/deployment/receipt.json`.
 
-## Deployment terverifikasi
+## Verified deployment
 
-Versi highlight dan slider sudah live di [china.muhammadyana.me](https://china.muhammadyana.me). Build and 11 browser tests pass; pemeriksaan publik 360/390 px juga lulus. Rincian HTTPS, aset, bukti, dan rollback: [panduan deployment](ops/README.md).
+The highlights and slider are live at [china.muhammadyana.me](https://china.muhammadyana.me). The build and 11 browser tests pass; public checks at 360/390 px also pass. HTTPS, assets, evidence, and rollback details are in the [deployment guide](ops/README.md).
 
-## GitHub Actions dan Nginx
+## GitHub Actions and Nginx
 
-Workflow [Test and deploy](.github/workflows/deploy.yml) berjalan pada pull request dan push ke `main`. CI memasang Node 24, menjalankan build serta tes browser, lalu membuat arsip statis terverifikasi. Hanya push ke `main` atau manual run pada `main` yang boleh deploy ke environment `production`.
+The [Test and deploy](.github/workflows/deploy.yml) workflow runs on pull requests and pushes to `main`. CI installs Node 24, runs the build and browser tests, and packages a verified static archive. Only pushes to `main` or manual runs on `main` can deploy to the `production` environment.
 
-Nginx melayani folder `current/public` di server. Kunci deployment khusus dibatasi ke handler `ops/deploy.py`; tidak dapat menjalankan shell bebas. Handler memeriksa arsip dan hash, mengaktifkan release secara atomik, memeriksa HTTPS origin, dan mengembalikan release sebelumnya jika pemeriksaan gagal. Workflow juga memeriksa penanda commit melalui HTTPS publik.
+Nginx serves `current/public` on the server. The dedicated deployment key is restricted to the `ops/deploy.py` handler and cannot run arbitrary shell commands. The handler validates the archive and hashes, activates the release atomically, checks origin HTTPS, and restores the previous release if verification fails. The workflow also checks the commit marker over public HTTPS.
 
-Konfigurasi yang digunakan: [ops/nginx.conf](ops/nginx.conf). Instalasi, rahasia environment, dan rollback: [ops/README.md](ops/README.md). File mentah foto, arsip build, bukti lokal, dan kredensial tidak dimasukkan ke Git; seluruh aset WebP yang dibutuhkan build ada di `public/`.
+Nginx configuration: [ops/nginx.conf](ops/nginx.conf). Installation, environment secrets, and rollback: [ops/README.md](ops/README.md). Raw photos, build archives, local evidence, and credentials are excluded from Git; all WebP assets required for the build are in `public/`.
