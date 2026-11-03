@@ -32,6 +32,8 @@ The initial page is prerendered so the first day and PDF link remain available w
 
 The generated application module uses `data-cfasync="false"` to exclude it from Cloudflare Rocket Loader. Image-loading skeletons and navigation must initialize while photographs are still downloading, rather than waiting for the window load event. See [Cloudflare's script exclusion documentation](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/ignore-javascripts/).
 
+Sharing metadata is rendered into the HTML for crawlers that do not run JavaScript. Open Graph and large-image cards use the Jiuzhaigou autumn photograph at `/social/jiuzhaigou.jpg` (1200 × 630 JPEG); destination documents keep their own titles, descriptions, and canonical URLs. Photo provenance is recorded in `source/social-image.json`.
+
 ## Testing
 
 ```sh

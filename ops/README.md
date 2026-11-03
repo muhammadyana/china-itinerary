@@ -11,6 +11,8 @@ ssh deploy@119.28.110.221 "deploy $GITHUB_SHA" < site.tar.gz
 
 `package.py` includes the static `dist/` files, a generated `release.json` containing the full Git revision, and a checksum manifest. It refuses source files, secrets, executables and symlinks. The server independently validates the command, bounded gzip/tar sizes, paths, file types, manifest, revision and every checksum before activation.
 
+The sharing image is allowed only at `social/jiuzhaigou.jpg`; other files in that directory are rejected. The installed receiver must include this exact path before deploying a release that contains the JPEG.
+
 ## Server installation
 
 Install `ops/deploy.py` as root-owned, non-writable-by-deploy `/usr/local/lib/china-itinerary-deploy.py` with mode `0644`. Add a **dedicated** Actions SSH public key to `deploy`'s `authorized_keys`, prefixed with:

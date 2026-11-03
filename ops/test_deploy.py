@@ -93,7 +93,8 @@ class DeploymentTests(unittest.TestCase):
                      '.env', 'src/main.ts', 'assets/source.js.map', 'nginx.conf',
                      'photos/.hidden.webp', 'assets/a/b.js', 'release.json/child.js',
                      'places/../index.html', 'places/a/b/index.html', 'places/a/script.js',
-                     'places/.hidden/index.html', 'places/a--b/index.html']:
+                     'places/.hidden/index.html', 'places/a--b/index.html',
+                     'social/script.js', 'social/../index.html', 'social/.hidden.jpg']:
             with self.subTest(name=name), self.assertRaises(ValueError):
                 deploy.validate_archive(raw_archive(self.entries() + [file_entry(name)]), REVISION)
 
@@ -105,6 +106,14 @@ class DeploymentTests(unittest.TestCase):
         payload, _ = package(self.dist, REVISION)
         deploy.deploy(payload, REVISION, self.base, lambda *_: None)
         self.assertEqual((self.base / 'current/public/places/jiuzhaigou/index.html').read_text(), '<html>Destination guide</html>')
+
+    def test_social_image_round_trip(self):
+        target = self.dist / 'social/jiuzhaigou.jpg'
+        target.parent.mkdir()
+        target.write_bytes(b'\xff\xd8\xff\xd9')
+        payload, _ = package(self.dist, REVISION)
+        deploy.deploy(payload, REVISION, self.base, lambda *_: None)
+        self.assertEqual((self.base / 'current/public/social/jiuzhaigou.jpg').read_bytes(), target.read_bytes())
 
     def test_links_directories_and_executables(self):
         for member_type in [tarfile.SYMTYPE, tarfile.LNKTYPE, tarfile.DIRTYPE, tarfile.FIFOTYPE]:

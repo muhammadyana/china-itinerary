@@ -38,7 +38,7 @@ def valid_revision(revision):
 
 def allowed_path(name):
     """Only the deployed site's static file locations, never host configuration."""
-    if name in {'index.html', 'release.json', 'icons.svg', 'favicon.svg', PDF}:
+    if name in {'index.html', 'release.json', 'icons.svg', 'favicon.svg', 'social/jiuzhaigou.jpg', PDF}:
         return True
     return bool(re.fullmatch(r'assets/[A-Za-z0-9_-]+\.(?:js|css|woff2)', name)
                 or re.fullmatch(r'photos/[A-Za-z0-9_-]+\.(?:webp|avif)', name)

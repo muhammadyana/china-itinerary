@@ -7,8 +7,12 @@ import { escapeHtml } from './src/render.ts';
 function destinationHtml(html: string, page?: PlacePage) {
  const title = page ? `${page.name}: rute, biaya & galeri | China 2026` : 'Panduan tempat di Sichuan & Yunnan | China 2026';
  const description = page ? (page.placeId ? `Cara menuju ${page.name}, biaya kawasan, galeri, dan tips perjalanan November 2026.` : page.guide.summary) : 'Panduan setiap tempat wisata dalam itinerary Sichuan dan Yunnan, 8 sampai 21 November 2026.';
+ const url = `https://china.muhammadyana.me/places/${page ? `${page.slug}/` : ''}`;
  return html.replace(/<title>.*?<\/title>/s, `<title>${escapeHtml(title)}</title>`)
-  .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${escapeHtml(description)}">`)
+  .replace(/<meta (property="og:title"|name="twitter:title") content="[^"]*">/g, (_match, attribute) => `<meta ${attribute} content="${escapeHtml(title)}">`)
+  .replace(/<meta (name="description"|property="og:description"|name="twitter:description") content="[^"]*">/g, (_match, attribute) => `<meta ${attribute} content="${escapeHtml(description)}">`)
+  .replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${url}">`)
+  .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${url}">`)
   .replace(/<!--page-start-->[\s\S]*?<!--page-end-->/, `<!--page-start--><div id="app">${page ? guideView(page) : placesIndex()}</div><!--page-end-->`);
 }
 export default defineConfig({

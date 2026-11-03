@@ -1,0 +1,62 @@
+{
+  "checkedAt": "2026-11-03",
+  "purpose": "Open Graph and social sharing preview",
+  "photoId": "highlight-jiuzhaigou",
+  "output": {
+    "path": "public/social/jiuzhaigou.jpg",
+    "width": 1200,
+    "height": 630,
+    "format": "image/jpeg",
+    "bytes": 411612,
+    "sha256": "f357ed0c8443e3196aafd0b63bac8feed118db8693e302a52aaf5434c087efae"
+  },
+  "source": {
+    "localPath": "source/highlight-photos/jiuzhaigou.jpg",
+    "width": 1600,
+    "height": 2400,
+    "sha256": "8038425966a9efebc264c36c3464bf409d77c625e4b1df4ddffe39fc72f29f92",
+    "originalDimensions": [
+      3894,
+      5841
+    ],
+    "photographer": "Kent Chin",
+    "provider": "Pexels",
+    "url": "https://www.pexels.com/photo/scenic-autumn-reflection-in-jiuzhaigou-valley-37302353/",
+    "license": "Pexels License",
+    "licenseUrl": "https://www.pexels.com/license/",
+    "capturedAt": "2025-11-06",
+    "publishedAt": "2026-04-28",
+    "verification": "The live Pexels page confirms author, Jiuzhaigou location, source dimensions, publication date, and capture date. The license permits website/social use and cropping."
+  },
+  "crop": {
+    "coordinateSystem": "Pixels in the EXIF-oriented local source; right and bottom are exclusive.",
+    "left": 0,
+    "top": 740,
+    "right": 1600,
+    "bottom": 1580,
+    "width": 1600,
+    "height": 840,
+    "composition": "Landscape crop includes golden autumn trees above the shoreline and turquoise lake reflections below."
+  },
+  "processing": {
+    "orientation": "EXIF orientation applied",
+    "resize": "Proportional downsize to 1200 x 630 using Lanczos",
+    "encoding": "JPEG quality 92, optimized progressive, full chroma resolution",
+    "colorChanges": "None",
+    "textOverlay": false,
+    "upscaled": false,
+    "generatedContent": false
+  },
+  "alt": "Danau toska di Jiuzhaigou memantulkan pepohonan musim gugur berwarna keemasan.",
+  "notes": [
+    "Uses the same approved photograph as the homepage Jiuzhaigou highlight.",
+    "The source identifies Jiuzhaigou Valley, but does not name the lake.",
+    "Capture date is 6 November 2025; this is not presented as an October 2026 photograph."
+  ],
+  "verification": {
+    "jpegDecode": "passed",
+    "dimensions": "1200 x 630",
+    "visualReview": "Passed: autumn trees and turquoise lake are both clearly visible; real source colors preserved.",
+    "fileSizeBytes": 411612
+  }
+}
