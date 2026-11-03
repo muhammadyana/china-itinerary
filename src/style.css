@@ -205,7 +205,6 @@ dialog::backdrop { background: var(--color-backdrop); }
 .booking-option h3 { font-size: 23px; margin-bottom: var(--space-sm); }
 .booking-option p { font-size: 14px; }
 .photo-dialog { max-width: 920px; padding: 0; }
-.photo-close { position: absolute; right: 12px; top: 12px; z-index: 2; background: var(--color-paper); }
 .photo-detail-figure { margin: 0; }
 .photo-detail-figure > img { width: 100%; max-height: 60dvh; object-fit: contain; background: var(--color-autumn); }
 .photo-detail-figure figcaption { padding: var(--space-lg) 28px; }

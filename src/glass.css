@@ -158,8 +158,10 @@ dialog { background: var(--color-glass-solid); border: 1px solid var(--color-gla
 .guide-footer nav { display: flex; flex-wrap: wrap; justify-content: end; gap: var(--space-xs) var(--space-lg); max-width: 65ch; }
 .guide-footer a { min-height: 44px; display: inline-flex; align-items: center; text-decoration: none; }
 .guide-photo-dialog { max-width: 1120px; width: calc(100% - 32px); padding: var(--space-md); }
-.guide-photo-toolbar { display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1; background: var(--color-glass-solid); padding-bottom: var(--space-sm); }
-.guide-photo-toolbar > div { display: flex; gap: var(--space-xs); }
+.photo-toolbar { display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1; background: var(--color-glass-solid); padding-bottom: var(--space-sm); }
+.photo-toolbar > div { display: flex; gap: var(--space-xs); }
+.photo-toolbar [hidden] { display: none; }
+.home-photo-toolbar { padding: var(--space-sm) var(--space-md); }
 .guide-photo-detail { margin: 0; }
 .guide-photo-detail img { width: 100%; max-height: 65dvh; object-fit: contain; border-radius: 16px; }
 .guide-photo-detail figcaption { padding: var(--space-lg) var(--space-sm); }

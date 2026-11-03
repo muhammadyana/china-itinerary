@@ -2,7 +2,7 @@ import './style.css';
 import './glass.css';
 import { initializeGuide } from './guide-main.ts';
 import { initializePhotoLoading } from './photo-loading.ts';
-import { days, daysByDate, places } from './itinerary.ts';
+import { days, daysByDate, places, userPhotos } from './itinerary.ts';
 import { dayView, pickerItems, photoDetail, userPhotoDetail, overviewContent, icon, fullDate } from './render.ts';
 
 function initializeItinerary() {
@@ -11,6 +11,10 @@ let current = dateFromHash();
 const dayRoot = $('#day-view');
 const picker = $<HTMLDialogElement>('#day-picker');
 const photoDialog = $<HTMLDialogElement>('#photo-dialog');
+const photoCounter = $('#photo-count');
+const photoNavigation = Array.from(photoDialog.querySelectorAll<HTMLButtonElement>('[data-action="photo-previous"], [data-action="photo-next"]'));
+const userPhotoIds = Object.keys(userPhotos);
+let userPhotoIndex: number | null = null;
 const overview = $<HTMLDialogElement>('#overview-dialog');
 const copyDialog = $<HTMLDialogElement>('#copy-dialog');
 const returnFocus = new WeakMap<HTMLDialogElement, HTMLElement>();
@@ -66,6 +70,19 @@ function openDialog(dialog: HTMLDialogElement, opener: HTMLElement) {
   dialog.showModal();
   document.documentElement.classList.add('dialog-open');
 }
+function showUserPhoto(index: number) {
+  userPhotoIndex = (index + userPhotoIds.length) % userPhotoIds.length;
+  $('#photo-content').innerHTML = userPhotoDetail(userPhotoIds[userPhotoIndex]);
+  photoCounter.textContent = `${userPhotoIndex + 1} / ${userPhotoIds.length}`;
+  photoNavigation.forEach(button => { button.hidden = false; button.disabled = userPhotoIds.length < 2; });
+  photoDialog.scrollTop = 0;
+}
+photoDialog.addEventListener('keydown', event => {
+  if (userPhotoIndex === null || (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft')) return;
+  event.preventDefault();
+  showUserPhoto(userPhotoIndex + (event.key === 'ArrowRight' ? 1 : -1));
+});
+photoDialog.addEventListener('close', () => { userPhotoIndex = null; });
 const dialogs = [picker,photoDialog,overview,copyDialog];
 for (const dialog of dialogs) {
   dialog.addEventListener('close', () => {
@@ -127,9 +144,23 @@ document.addEventListener('click', event => {
     $('#picker-days').innerHTML = pickerItems(current,'modal'); openDialog(picker,button);
   } else if (action === 'close') button.closest('dialog')?.close();
   else if (action === 'gallery') { const gallery=$<HTMLDetailsElement>('#user-gallery'); gallery.open=true; gallery.scrollIntoView({block:'start',behavior:'instant'}); $('#gallery-heading').focus({preventScroll:true}); }
-  else if (action === 'user-photo') { $('#photo-content').innerHTML=userPhotoDetail(button.dataset.photo!); openDialog(photoDialog,button); }
+  else if (action === 'user-photo') {
+    const index = userPhotoIds.indexOf(button.dataset.photo!);
+    if (index < 0) return;
+    showUserPhoto(index);
+    openDialog(photoDialog,button);
+  }
+  else if (action === 'photo-previous' || action === 'photo-next') {
+    if (userPhotoIndex !== null) showUserPhoto(userPhotoIndex + (action === 'photo-next' ? 1 : -1));
+  }
   else if (action === 'overview') { $('#overview-content').innerHTML = overviewContent(current); openDialog(overview,button); }
-  else if (action === 'photo') { $('#photo-content').innerHTML = photoDetail(button.dataset.place!); openDialog(photoDialog,button); }
+  else if (action === 'photo') {
+    userPhotoIndex = null;
+    photoCounter.textContent = '';
+    photoNavigation.forEach(control => { control.hidden = true; });
+    $('#photo-content').innerHTML = photoDetail(button.dataset.place!);
+    openDialog(photoDialog,button);
+  }
   else if (action === 'previous' || action === 'next') {
     const index = days.findIndex(day => day.date === current) + (action === 'next' ? 1 : -1);
     if (days[index]) showDay(days[index].date,{push:true,scroll:true});
