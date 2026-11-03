@@ -13,6 +13,10 @@ ssh deploy@119.28.110.221 "deploy $GITHUB_SHA" < site.tar.gz
 
 The sharing image is allowed only at `social/jiuzhaigou.jpg`; other files in that directory are rejected. The installed receiver must include this exact path before deploying a release that contains the JPEG.
 
+The generated itinerary is allowed only at `China-Itinerary-8-21-November-2026.pdf`, with its static print page at `print/index.html`. The original `China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf` remains allowed for archived source and photo attribution. New builds include both PDFs and the print page. Other PDF filenames and files under `print/` are rejected; no general PDF or print-directory allowance is introduced.
+
+Every release must contain `index.html`, `release.json`, JavaScript and CSS assets, and at least one of the two exact PDF filenames. The generated PDF and print page are optional for older releases, so existing packages and rollback targets remain compatible. Update the installed receiver before deploying a build containing either new path; the release upload cannot update that receiver itself.
+
 ## Server installation
 
 Install `ops/deploy.py` as root-owned, non-writable-by-deploy `/usr/local/lib/china-itinerary-deploy.py` with mode `0644`. Add a **dedicated** Actions SSH public key to `deploy`'s `authorized_keys`, prefixed with:

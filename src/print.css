@@ -1,0 +1,67 @@
+/* Printable website snapshot; all content comes from shared itinerary and guide data. */
+@page { size: A4; margin: 16mm 14mm 20mm; }
+:root { --print-paper: #fffdf8; --print-ink: #382d25; --print-muted: #5a493c; --print-rule: #dfd3c1; --print-font: 'Geist', Arial, sans-serif; }
+html { scroll-padding: 0; }
+body.print-document { margin: 0; padding: 0; background: var(--print-paper); color: var(--print-ink); font-family: var(--print-font); font-size: 10pt; line-height: 1.45; }
+.print-document main { width: auto; max-width: 190mm; margin: 0 auto; }
+.print-document h1 { font-family: var(--print-font); font-size: 30pt; line-height: 1.1; margin: 10mm 0 6mm; }
+.print-document h2 { font-family: var(--print-font); font-size: 20pt; line-height: 1.15; margin: 0 0 4mm; }
+.print-document h3 { font-family: var(--print-font); font-size: 12pt; line-height: 1.3; margin: 0 0 2mm; }
+.print-document h4 { font-family: var(--print-font); font-size: 10pt; margin: 4mm 0 1.5mm; }
+.print-document p { margin: 2mm 0; }
+.print-document h2,.print-document h3,.print-document h4 { break-after: avoid; overflow-wrap: break-word; }
+.print-document a { color: var(--print-ink); text-decoration: none; overflow-wrap: anywhere; }
+.print-document a[href^="https://"]::after,.print-document a[href^="http://"]::after { content: 'URL: ' attr(href); display: block; color: var(--print-muted); font-size: 8pt; font-weight: 400; line-height: 1.35; overflow-wrap: anywhere; }
+.print-document ul,.print-document ol { margin: 2mm 0; padding-left: 5mm; }
+.print-document li { margin-block: 1.5mm; }
+.print-document svg { width: 12pt; height: 12pt; }
+.print-document table { border-collapse: collapse; width: 100%; font-size: 9pt; }
+.print-document th,.print-document td { border-bottom: 1px solid var(--print-rule); padding: 2mm; text-align: left; vertical-align: top; }
+.print-document thead { display: table-header-group; }
+.print-document tr { break-inside: avoid; }
+.print-cover { margin-bottom: 4mm; font-size: 9pt; line-height: 1.3; }
+.print-document .print-cover h1 { font-size: 26pt; margin: 3mm 0; }
+.print-document .print-cover p { margin-block: 1mm; }
+.print-document .print-overview h2 { font-size: 17pt; margin-bottom: 3mm; }
+.print-document .print-overview table { font-size: 8.5pt; line-height: 1.3; }
+.print-document .print-overview th,.print-document .print-overview td { padding: 1.3mm 1.5mm; }
+.print-overview th:first-child,.print-overview td:first-child { white-space: nowrap; }
+.print-credit { font-size: 9pt; color: var(--print-muted); }
+.print-day,.print-appendix,.print-booking { break-before: page; }
+.print-day > header { border-bottom: 1px solid var(--print-rule); padding-bottom: 3mm; margin-bottom: 4mm; }
+.print-essentials { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 5mm; margin: 4mm 0; padding: 3mm; border: 1px solid var(--print-rule); }
+.print-essentials dt { font-weight: 600; }
+.print-essentials dd { margin: 1mm 0 0; }
+.print-route,.print-status,.print-revision { color: var(--print-muted); }
+.print-document .print-events { padding-left: 0; list-style: none; }
+.print-events > li { padding-block: 3mm; border-bottom: 1px solid var(--print-rule); break-inside: avoid; }
+.print-event-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
+.print-event-heading > span { flex-shrink: 0; color: var(--print-muted); font-size: 9pt; }
+.print-transfer { padding-left: 4mm; }
+.print-practical > div,.print-costs > div,.print-sources > li { break-inside: avoid; }
+.print-costs { margin: 2mm 0; }
+.print-costs > div { padding-block: 2mm; border-bottom: 1px solid var(--print-rule); }
+.print-costs dt { font-weight: 600; }
+.print-costs dt span { font-weight: 400; color: var(--print-muted); }
+.print-costs dd { margin: 1mm 0 0; }
+.print-guide { margin-top: 8mm; padding-top: 4mm; border-top: 1px solid var(--print-rule); }
+.print-guide > h3 { font-size: 16pt; }
+.print-document .exchange-rate { margin-block: 4mm; padding-block: 3mm; font-size: 9pt; }
+.print-document .exchange-source a { display: block; min-width: 0; min-height: 0; margin-block: 1mm; }
+.print-document .print-cover .exchange-rate { margin-block: 2mm; padding-block: 2mm; font-size: 8pt; line-height: 1.3; }
+.print-document .currency-estimate { font-size: inherit; }
+.print-document details { display: block; }
+.print-document details > summary { display: block; }
+.print-document button { display: none; }
+.print-document [class*="chengdu-evening"] { box-shadow: none; backdrop-filter: none; }
+.print-document .chengdu-evening { margin-block: 6mm; }
+.print-document .chengdu-evening-grid { display: block; }
+.print-document .chengdu-evening-card { margin-block: 4mm; border-radius: 0; break-inside: avoid; }
+.print-document .chengdu-evening-card > summary { padding: 3mm; min-height: 0; }
+.print-document .chengdu-evening-content { padding: 0 3mm 3mm; }
+.print-document .chengdu-evening-source,.print-document .chengdu-evening-map { display: block; min-height: 0; padding: 0; margin-block: 2mm; border: 0; border-radius: 0; background: none; }
+.print-document .chengdu-evening-map > svg,.print-document .chengdu-evening-source > svg { display: none; }
+.print-document .chengdu-evening-fact { margin-top: 3mm; padding-top: 3mm; }
+.print-document .chengdu-evening-budget { padding: 3mm; border-radius: 0; }
+@media screen { .print-document { padding: 8mm; } }
+@media print { html,body.print-document { background: var(--print-paper); } }

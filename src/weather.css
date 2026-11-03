@@ -1,5 +1,5 @@
 /* Hallmark · component: photo weather badge · genre: modern-minimal · theme: locked warm cream Liquid Glass · states: loading ready stale error details · v2.0.0 */
-/* Only temperatures stay on the photograph; reference context remains in the native top-layer popover. */
+/* Hallmark · pre-emit critique: P4 H5 E4 S5 R5 V3 · weakest: bright-photo contrast; shared translucent badge material adds a local text shadow and a solid accessibility fallback */
 
 .weather-panel {
   position: absolute;
@@ -18,16 +18,21 @@
 .weather-unavailable {
   min-height: 44px;
   padding: var(--space-xs) var(--space-sm);
-  border: 1px solid var(--color-glass-edge);
   border-radius: var(--radius-pill);
-  background-color: var(--color-glass);
-  background-image: var(--glass-reflection);
-  box-shadow: var(--glass-shadow);
-  color: var(--color-ink);
   font-family: var(--font-body);
   font-size: var(--text-sm);
   line-height: 1.4;
   font-weight: 500;
+}
+
+.weather-close,
+.weather-refresh,
+.weather-unavailable {
+  border: 1px solid var(--color-glass-edge);
+  background-color: var(--color-glass);
+  background-image: var(--glass-reflection);
+  box-shadow: var(--glass-shadow);
+  color: var(--color-ink);
 }
 
 .weather-open {
@@ -37,8 +42,6 @@
   justify-content: center;
   gap: var(--space-xs);
   max-width: 100%;
-  -webkit-backdrop-filter: blur(22px) saturate(1.65);
-  backdrop-filter: blur(22px) saturate(1.65);
   cursor: pointer;
   transition: background-color var(--dur-micro) var(--ease-out);
 }
@@ -64,7 +67,7 @@
 }
 
 .weather-stale {
-  color: var(--color-warning);
+  color: inherit;
   font-size: var(--text-sm);
 }
 
@@ -88,7 +91,7 @@
   position: fixed;
   inset: 0;
   box-sizing: border-box;
-  width: min(23rem, calc(100vw - var(--space-md) * 2));
+  width: min(23rem, calc(100% - var(--space-md) * 2));
   height: fit-content;
   max-height: calc(100dvh - var(--space-md) * 2);
   margin: auto;
@@ -105,6 +108,12 @@
   font-size: var(--text-sm);
   line-height: 1.55;
   text-align: start;
+}
+
+.weather-details::backdrop {
+  background: var(--color-backdrop);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }
 
 .weather-header {
@@ -138,13 +147,11 @@
   min-width: 6rem;
 }
 
-.weather-open:hover,
 .weather-close:hover,
 .weather-refresh:hover:not(:disabled) {
   background-color: var(--color-glass-hover);
 }
 
-.weather-open:active,
 .weather-close:active,
 .weather-refresh:active:not(:disabled) {
   background-color: var(--color-glass-pressed);
@@ -254,13 +261,17 @@
 }
 
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
-  .weather-open,
   .weather-close,
   .weather-refresh,
   .weather-details {
     background: var(--color-glass-solid);
     border-color: var(--color-rule-2);
     box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .weather-details::backdrop {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }

@@ -23,6 +23,8 @@ MAX_EXPANDED = 100 * 1024 * 1024
 MAX_FILES = 512
 MANIFEST = 'manifest.json'
 PDF = 'China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf'
+GENERATED_PDF = 'China-Itinerary-8-21-November-2026.pdf'
+PRINT_INDEX = 'print/index.html'
 HASHED_ASSET = re.compile(r'.+-[A-Za-z0-9_-]{8,}\.(?:js|css|woff2)')
 
 
@@ -38,7 +40,8 @@ def valid_revision(revision):
 
 def allowed_path(name):
     """Only the deployed site's static file locations, never host configuration."""
-    if name in {'index.html', 'release.json', 'icons.svg', 'favicon.svg', 'social/jiuzhaigou.jpg', PDF}:
+    if name in {'index.html', 'release.json', 'icons.svg', 'favicon.svg',
+                'social/jiuzhaigou.jpg', PDF, GENERATED_PDF, PRINT_INDEX}:
         return True
     return bool(re.fullmatch(r'assets/[A-Za-z0-9_-]+\.(?:js|css|woff2)', name)
                 or re.fullmatch(r'photos/[A-Za-z0-9_-]+\.(?:webp|avif)', name)
@@ -87,7 +90,8 @@ def validate_archive(payload, revision):
         hashes = manifest['files']
         if not isinstance(hashes, dict) or set(hashes) != set(files):
             raise ValueError('Manifest must list every payload file exactly')
-        if not {'index.html', 'release.json', PDF} <= files.keys():
+        if (not {'index.html', 'release.json'} <= files.keys()
+                or not {PDF, GENERATED_PDF}.intersection(files)):
             raise ValueError('Required site files are missing')
         for extension in ('.js', '.css'):
             if not any(name.startswith('assets/') and name.endswith(extension) for name in files):

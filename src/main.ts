@@ -5,6 +5,8 @@ import './weather.css';
 import { initializeWeather } from './weather.ts';
 import './currency.css';
 import './site-navigation.css';
+import './destination-cards.css';
+import './chengdu-evening.css';
 import { initializeCurrency } from './currency.ts';
 import { initializeSiteNavigation } from './site-navigation.ts';
 import { initializeGuide } from './guide-main.ts';
@@ -44,7 +46,7 @@ function moveHero(direction: number) {
 
 function dateFromHash() {
   const date = window.location.hash.slice(1);
-  if (date === 'itinerary' && daysByDate.has(history.state?.date)) return history.state.date as string;
+  if (['itinerary', 'user-gallery', 'route'].includes(date) && daysByDate.has(history.state?.date)) return history.state.date as string;
   return daysByDate.has(date) ? date : days[0].date;
 }
 function announce(message: string) {
@@ -81,6 +83,14 @@ function openDialog(dialog: HTMLDialogElement, opener: HTMLElement) {
   dialog.showModal();
   document.documentElement.classList.add('dialog-open');
 }
+function openOverview(opener: HTMLElement, push = false) {
+  $('#overview-content').innerHTML = overviewContent(current);
+  if (push && location.hash !== '#route') history.pushState({date:current}, '', '#route');
+  if (!overview.open) openDialog(overview, opener);
+}
+overview.addEventListener('close', () => {
+  if (location.hash === '#route') history.replaceState({date:current}, '', `#${current}`);
+});
 function showUserPhoto(index: number) {
   userPhotoIndex = (index + userPhotoIds.length) % userPhotoIds.length;
   updatePhotoContent(photoDialog, userPhotoDetail(userPhotoIds[userPhotoIndex]));
@@ -143,10 +153,13 @@ document.addEventListener('click', event => {
   if (!button || (button instanceof HTMLButtonElement && button.disabled)) return;
   const action = button.dataset.action;
   if (action === 'skip') { event.preventDefault(); $('#day-heading').focus(); }
-  else if (action === 'itinerary' && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
+  else if ((action === 'itinerary' || action === 'gallery') && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
     event.preventDefault();
-    if (location.hash !== '#itinerary') history.pushState({date:current}, '', '#itinerary');
-    $('#itinerary').scrollIntoView({block:'start', behavior:'instant'});
+    const target = action === 'gallery' ? $('#user-gallery') : $('#itinerary');
+    if (target instanceof HTMLDetailsElement) target.open = true;
+    if (location.hash !== `#${target.id}`) history.pushState({date:current}, '', `#${target.id}`);
+    target.scrollIntoView({block:'start', behavior:'instant'});
+    target.querySelector<HTMLElement>('summary, h2')?.focus({preventScroll:true});
   }
   else if (action === 'hero-next') moveHero(1);
   else if (action === 'hero-previous') moveHero(-1);
@@ -167,7 +180,10 @@ document.addEventListener('click', event => {
   else if (action === 'photo-previous' || action === 'photo-next') {
     if (userPhotoIndex !== null) showUserPhoto(userPhotoIndex + (action === 'photo-next' ? 1 : -1));
   }
-  else if (action === 'overview') { $('#overview-content').innerHTML = overviewContent(current); openDialog(overview,button); }
+  else if (action === 'overview' && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
+    event.preventDefault();
+    openOverview(button, button instanceof HTMLAnchorElement);
+  }
   else if (action === 'photo') {
     userPhotoIndex = null;
     photoCounter.textContent = '';
@@ -195,12 +211,16 @@ document.addEventListener('error', event => {
 },true);
 const historyChanged = () => {
   const date = dateFromHash();
-  if (date !== current) showDay(date,{scroll:location.hash !== '#itinerary'});
+  if (date !== current) showDay(date,{scroll:daysByDate.has(location.hash.slice(1))});
+  if (location.hash === '#route') openOverview($('.site-navigation [data-action="overview"]'));
+  else if (overview.open) overview.close();
+  if (location.hash === '#user-gallery') $<HTMLDetailsElement>('#user-gallery').open = true;
 };
 window.addEventListener('popstate',historyChanged);
 window.addEventListener('hashchange',historyChanged);
 document.documentElement.classList.add('js');
 showDay(current,{scroll:daysByDate.has(location.hash.slice(1)),announceChange:false});
+if (location.hash === '#route') openOverview($('.site-navigation [data-action="overview"]'));
 
 }
 

@@ -24,7 +24,7 @@ export interface Day {
   transport: string; intro: string; events: Event[]; practical: Practical[]; pages: number[];
   sourceNote?: string;
 }
-export const pdfPath = 'China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf';
+export const pdfPath = 'China-Itinerary-8-21-November-2026.pdf';
 export const railUrl = 'https://www.12306.cn/en/index.html';
 export const places: Record<string, Place> = {
   tfu: { name: 'Chengdu Tianfu (TFU)', chinese: '成都天府国际机场', description: 'Terminal 1 menjadi pintu masuk perjalanan. Setelah imigrasi dan bagasi, menuju hotel di Chengdu sebelum jalan sore di kota.', page: 5, photo: 'tfu', alt: 'Area dalam Terminal 1 Bandara Chengdu Tianfu dengan papan petunjuk dan pengunjung.' },
@@ -146,7 +146,7 @@ export const days: Day[] = [
       "kind": "stop",
       "place": "chengdu",
       "time": "Sore–malam",
-      "note": "Usulan rute santai: Chunxi Road–Taikoo Li. Berhenti untuk foto dan makan; pendekkan jalan kaki jika lelah setelah penerbangan."
+      "note": "Sore jalan santai di Chunxi Road, lalu malamnya pilih IFS atau Taikoo Li untuk belanja dan makan. Daftar mal di bawah memuat pilihan lain; cukup satu kawasan sebelum kembali ke hotel."
     },
     {
       "kind": "transfer",

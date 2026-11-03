@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import {days,highlights,places,photos,userPhotos} from '../src/itinerary';
+import {days,highlights,places,photos,userPhotos,pdfPath} from '../src/itinerary';
 import {guideForPlace,placePath} from '../src/guides';
 import {mkdir,writeFile} from 'node:fs/promises';
 
@@ -317,9 +317,9 @@ test('server-rendered first day and PDF survive disabled JavaScript',async({brow
  await expect(page.locator('.sleep-summary')).toContainText('Chengdu');
  await expect(page.locator('.hero + #user-gallery')).toHaveAttribute('open','');
  await expect(page.locator('.gallery-photo').first()).toBeVisible();
- await expect(page.locator('.no-script')).toContainText('rencana awal 14 hari');
+ await expect(page.locator('.no-script')).toContainText('itinerary terbaru 14 hari');
  await expect(page.locator('.day-source-note')).toContainText('9 November');
- const pdf=await page.request.get('http://127.0.0.1:4173/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf');
+ const pdf=await page.request.get(`http://127.0.0.1:4173/${pdfPath}`);
  expect(pdf.ok()).toBe(true);expect(pdf.headers()['content-type']).toContain('pdf');await context.close();
 });
 test('every photo source exists with explicit responsive dimensions and attribution',async({request})=>{

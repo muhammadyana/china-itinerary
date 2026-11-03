@@ -12,6 +12,8 @@ import deploy
 from package import package
 
 REVISION = 'a' * 40
+GENERATED_PDF = 'China-Itinerary-8-21-November-2026.pdf'
+PRINT_INDEX = 'print/index.html'
 
 
 def raw_archive(entries):
@@ -94,9 +96,50 @@ class DeploymentTests(unittest.TestCase):
                      'photos/.hidden.webp', 'assets/a/b.js', 'release.json/child.js',
                      'places/../index.html', 'places/a/b/index.html', 'places/a/script.js',
                      'places/.hidden/index.html', 'places/a--b/index.html',
-                     'social/script.js', 'social/../index.html', 'social/.hidden.jpg']:
+                     'social/script.js', 'social/../index.html', 'social/.hidden.jpg',
+                     'alternate.pdf', 'China-Itinerary-8-22-November-2026.pdf',
+                     'print/extra.html', 'print/index.js', 'print/page/index.html',
+                     'print/../index.html', 'print/index.html/child.html']:
             with self.subTest(name=name), self.assertRaises(ValueError):
                 deploy.validate_archive(raw_archive(self.entries() + [file_entry(name)]), REVISION)
+
+    def test_original_pdf_release_remains_valid_without_print_page(self):
+        files, _ = deploy.validate_archive(self.payload, REVISION)
+        self.assertIn(deploy.PDF, files)
+        self.assertNotIn(GENERATED_PDF, files)
+        self.assertNotIn(PRINT_INDEX, files)
+
+    def test_generated_pdf_and_print_page_round_trip(self):
+        (self.dist / GENERATED_PDF).write_bytes(b'%PDF-generated-itinerary')
+        print_page = self.dist / PRINT_INDEX
+        print_page.parent.mkdir()
+        print_page.write_text('<html>Current printable itinerary</html>')
+        payload, _ = package(self.dist, REVISION)
+        deploy.deploy(payload, REVISION, self.base, lambda *_: None)
+        active = self.base / 'current/public'
+        self.assertEqual((active / GENERATED_PDF).read_bytes(), b'%PDF-generated-itinerary')
+        self.assertEqual((active / PRINT_INDEX).read_text(), '<html>Current printable itinerary</html>')
+        self.assertEqual((active / deploy.PDF).read_bytes(), b'%PDF-test')
+
+    def test_generated_pdf_can_satisfy_pdf_requirement_without_archive(self):
+        (self.dist / deploy.PDF).unlink()
+        (self.dist / GENERATED_PDF).write_bytes(b'%PDF-generated-itinerary')
+        payload, _ = package(self.dist, REVISION)
+        files, _ = deploy.validate_archive(payload, REVISION)
+        self.assertIn(GENERATED_PDF, files)
+        self.assertNotIn(deploy.PDF, files)
+
+    def test_entrypoints_and_at_least_one_pdf_remain_required(self):
+        for missing in ['index.html', 'release.json', deploy.PDF]:
+            files = {member.name: data for member, data in self.entries()
+                     if member.name not in {deploy.MANIFEST, missing}}
+            files[PRINT_INDEX] = b'<html>Print page is not a PDF</html>'
+            manifest = {'revision': REVISION,
+                        'files': {name: deploy.digest(data) for name, data in files.items()}}
+            entries = [file_entry(name, data) for name, data in files.items()]
+            entries.append(file_entry(deploy.MANIFEST, json.dumps(manifest).encode()))
+            with self.subTest(missing=missing), self.assertRaisesRegex(ValueError, 'Required site files are missing'):
+                deploy.validate_archive(raw_archive(entries), REVISION)
 
     def test_destination_pages_round_trip(self):
         for name in ['places/index.html', 'places/jiuzhaigou/index.html', 'places/blue-moon-valley/index.html']:
