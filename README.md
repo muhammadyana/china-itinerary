@@ -62,7 +62,7 @@ A separate gallery contains 12 user-supplied photos. The **Gallery** button, lab
 
 The homepage uses six sourced highlight assets and existing destination photos. Lijiang uses an archival rooftop panorama by Franklin David; Dali uses fei wang’s illuminated South Gate image. Both retain source and license credits; neither is presented as an October 2026 capture. Only the Siguniangshan photo has a verified October 2026 capture date: 14 October. The Jiuzhaigou photo was taken on 6 November 2025, Erhai on 20 February 2026, Tagong in June 2018, and Luorong in October 2012. The Blue Moon Valley capture date is unavailable. Sources, licenses, and publication dates are documented in `source/highlight-photos/manifest.json` and `SOURCE-NOTES.md`.
 
-The current visual system uses locally hosted Geist, cool neutral reading surfaces, rounded photograph frames, and Liquid Glass-inspired navigation. CSS backdrop blur, a fine highlight, and restrained shadows provide the web material. Dark mode follows the system; reduced transparency and unsupported browsers receive solid surfaces. There are no native SwiftUI APIs or animated distortion effects.
+The current visual system uses locally hosted Geist, warm cream reading surfaces, rounded photograph frames, and Liquid Glass-inspired controls. CSS backdrop blur, reflected highlights, bright edges, and soft shadows provide the web material on buttons, navigation, and badges. The site stays light under either device color preference; reduced transparency and unsupported browsers receive solid surfaces. There are no native SwiftUI APIs or animated distortion effects.
 
 ## Destination guides
 
@@ -70,9 +70,11 @@ The current visual system uses locally hosted Geist, cool neutral reading surfac
 
 `src/guides.ts` owns the route registry, itinerary-date lookup, and gallery selection. `src/guide-render.ts` renders the guide and directory; `src/guide-main.ts` enhances galleries with native dialogs, keyboard navigation, and focus restoration. `vite.config.ts` emits real static HTML for `/places/` and every `/places/<slug>/` route. Direct navigation and reload work without a client-side router. The guide content, sources, photos, and links remain available without JavaScript.
 
-New research should include source URLs, the applicable season, and the actual check date. Never promote an old quote or a temporary offer to a confirmed future price. Yading's 2026 pricing changes and weather-dependent upper-lake access require a final operator check. Private-car quotes remain unconfirmed where no reliable fare is available.
+Route references and the complete source list are visible without opening accordions. Each guide shows its research check date near the top; known source publication dates are displayed separately. Cost rows link directly to their supporting reference, while itinerary time allocations and editorial tips are distinguished from published operating rules.
 
-The browser suite covers all generated documents, complete sightseeing-stop coverage, source-linked costs, direct reloads, no-JavaScript content, gallery keyboard handling, mobile layout, dark/light contrast, and reduced transparency. The deployment tests also exercise nested destination pages and reject traversal or arbitrary files.
+New research should include source URLs, the applicable season, and the actual check date. Record `publishedAt` only when the original publication date is verified; never substitute a crawl date or research date. Never promote an old quote or a temporary offer to a confirmed future price. Yading's 2026 pricing changes and weather-dependent upper-lake access require a final operator check. Private-car quotes remain unconfirmed where no reliable fare is available.
+
+The browser suite covers all generated documents, complete sightseeing-stop coverage, source-linked costs, direct reloads, no-JavaScript content, gallery keyboard handling, mobile layout, a consistently light theme under either device color preference, and reduced transparency. The deployment tests also exercise nested destination pages and reject traversal or arbitrary files.
 
 ## GitHub Actions and Nginx
 

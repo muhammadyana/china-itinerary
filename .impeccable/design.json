@@ -7,117 +7,117 @@
       "autumn": {
         "role": "primary",
         "displayName": "Autumn",
-        "value": "#203a48"
+        "value": "#744632"
       },
       "autumn-hover": {
         "role": "primary",
         "displayName": "Autumn Hover",
-        "value": "#2a4c5e"
+        "value": "#8a543b"
       },
       "on-autumn": {
         "role": "primary",
         "displayName": "On Autumn",
-        "value": "#f7fbff"
+        "value": "#fffaf2"
       },
       "on-autumn-muted": {
         "role": "primary",
         "displayName": "On Autumn Muted",
-        "value": "#d0dfe8"
+        "value": "#f0dfc8"
       },
       "gold": {
         "role": "secondary",
         "displayName": "Gold",
-        "value": "#005bb8"
+        "value": "#f2ce8d"
       },
       "gold-hover": {
         "role": "secondary",
         "displayName": "Gold Hover",
-        "value": "#004a96"
+        "value": "#f7dca9"
       },
       "accent": {
         "role": "secondary",
         "displayName": "Accent",
-        "value": "#005bb8"
+        "value": "#884827"
       },
       "rust-wash": {
         "role": "secondary",
         "displayName": "Rust Wash",
-        "value": "#dceaf7"
+        "value": "#f3e1ca"
       },
       "focus": {
         "role": "secondary",
         "displayName": "Focus",
-        "value": "#005bb8"
+        "value": "#884827"
       },
       "paper": {
         "role": "neutral",
         "displayName": "Paper",
-        "value": "#eef2f3"
+        "value": "#fbf7ef"
       },
       "paper-2": {
         "role": "neutral",
         "displayName": "Paper 2",
-        "value": "#e2e9ed"
+        "value": "#f1e8d9"
       },
       "paper-3": {
         "role": "neutral",
         "displayName": "Paper 3",
-        "value": "#d1dce3"
+        "value": "#e8d9c4"
       },
       "ink": {
         "role": "neutral",
         "displayName": "Ink",
-        "value": "#17252e"
+        "value": "#382d25"
       },
       "ink-2": {
         "role": "neutral",
         "displayName": "Ink 2",
-        "value": "#3b4e59"
+        "value": "#5a493c"
       },
       "muted": {
         "role": "neutral",
         "displayName": "Muted",
-        "value": "#52656f"
+        "value": "#756250"
       },
       "rule": {
         "role": "neutral",
         "displayName": "Rule",
-        "value": "#c9d4dc"
+        "value": "#dfd3c1"
       },
       "rule-2": {
         "role": "neutral",
         "displayName": "Rule 2",
-        "value": "#8b9eab"
+        "value": "#ad977c"
       },
       "photo-caption": {
         "role": "neutral",
         "displayName": "Photo Caption",
-        "value": "#102c42c9"
+        "value": "#fffaf2cf"
       },
       "backdrop": {
         "role": "neutral",
         "displayName": "Backdrop",
-        "value": "#091822bd"
+        "value": "#241b148a"
       },
       "hero-clear": {
         "role": "neutral",
         "displayName": "Hero Clear",
-        "value": "#0c192000"
+        "value": "#241b1400"
       },
       "hero-mid": {
         "role": "neutral",
         "displayName": "Hero Mid",
-        "value": "#0c192052"
+        "value": "#241b143d"
       },
       "hero-base": {
         "role": "neutral",
         "displayName": "Hero Base",
-        "value": "#0c1920ed"
+        "value": "#241b14e6"
       },
       "dock-shadow": {
         "role": "neutral",
         "displayName": "Dock Shadow",
-        "value": "#15334d1f"
+        "value": "#60442a1f"
       }
     },
     "typographyMeta": {
@@ -157,8 +157,8 @@
     "shadows": [
       {
         "name": "glass-navigation",
-        "value": "0 8px 32px var(--color-glass-shadow), inset 0 1px 0 var(--color-glass-inset)",
-        "purpose": "Specular rim and functional depth for floating navigation."
+        "value": "var(--glass-shadow)",
+        "purpose": "Shared reflective upper edge, grounded lower rim, and soft shadow for glass controls."
       }
     ],
     "motion": [
@@ -200,7 +200,7 @@
       "refersTo": "button-primary",
       "description": "The blue action over the immersive trip photograph.",
       "html": "<button type=\"button\" class=\"ds-primary\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M8 2v4m8-4v4M3 10h18\"/><rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M8 14h2m4 0h2m-8 4h2\"/></svg><span>Pilih hari</span><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\"/></svg></button>",
-      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-sm,12px);min-height:52px;padding:var(--space-md,16px) var(--space-lg,24px);border:0;border-radius:var(--radius-pill,12px);background:var(--color-gold,#005bb8);color:var(--color-accent-ink,#f7fbff);font-family:var(--font-body,'Geist',system-ui,sans-serif);font-size:16px;font-weight:600;line-height:1.55;white-space:nowrap;cursor:pointer}.ds-primary svg{flex-shrink:0}.ds-primary:hover{background:var(--color-gold-hover,#004a96)}.ds-primary:focus-visible{outline:3px solid var(--color-focus,#005bb8);outline-offset:4px;}.ds-primary:active:not(:disabled){transform:translateY(1px)}.ds-primary:disabled{opacity:.4;cursor:not-allowed}"
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-sm,12px);min-height:52px;padding:var(--space-md,16px) var(--space-lg,24px);border:0;border-radius:var(--radius-pill,12px);background:var(--color-gold,#f2ce8d);color:var(--color-accent-ink,#382d25);font-family:var(--font-body,'Geist',system-ui,sans-serif);font-size:16px;font-weight:600;line-height:1.55;white-space:nowrap;cursor:pointer}.ds-primary svg{flex-shrink:0}.ds-primary:hover{background:var(--color-gold-hover,#f7dca9)}.ds-primary:focus-visible{outline:3px solid var(--color-focus,#884827);outline-offset:4px;}.ds-primary:active:not(:disabled){transform:translateY(1px)}.ds-primary:disabled{opacity:.4;cursor:not-allowed}.ds-primary{background-color:var(--color-glass,#fffaf2a8);background-image:var(--glass-reflection,linear-gradient(145deg,#ffffffad,#ffffff14 44%,#d7bd9524));border:1px solid var(--color-glass-edge,#ffffffd9);box-shadow:var(--glass-shadow,inset 0 1px 1px #fffffff2,inset 0 -1px 1px #9b774d2b,0 6px 20px #68462621);backdrop-filter:blur(22px) saturate(1.65);-webkit-backdrop-filter:blur(22px) saturate(1.65);}@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){.ds-primary{background:var(--color-glass-solid,#fffcf6);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;}}.ds-primary{background-color:var(--color-glass-tint,#f2ce8dcf)}"
     },
     {
       "name": "Quiet Action",
@@ -208,7 +208,7 @@
       "refersTo": "button-quiet",
       "description": "Outlined previous/next and PDF actions.",
       "html": "<button type=\"button\" class=\"ds-quiet\"><span>Hari berikutnya</span><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m9 5 7 7-7 7\"/></svg></button>",
-      "css": ".ds-quiet{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-sm,12px);min-height:48px;padding:var(--space-sm,12px) var(--space-md,16px);border:1px solid var(--color-rule-2,#8b9eab);border-radius:var(--radius-pill,12px);background:transparent;color:var(--color-ink,#17252e);font-family:var(--font-body,'Geist',system-ui,sans-serif);font-size:13px;line-height:1.55;white-space:nowrap;cursor:pointer}.ds-quiet svg{flex-shrink:0}.ds-quiet:hover:not(:disabled){background:var(--color-paper-2,#e2e9ed)}.ds-quiet:focus-visible{outline:3px solid var(--color-focus,#005bb8);outline-offset:4px;}.ds-quiet:active:not(:disabled){transform:translateY(1px)}.ds-quiet:disabled{opacity:.4;cursor:not-allowed}"
+      "css": ".ds-quiet{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-sm,12px);min-height:48px;padding:var(--space-sm,12px) var(--space-md,16px);border:1px solid var(--color-rule-2,#ad977c);border-radius:var(--radius-pill,12px);background:transparent;color:var(--color-ink,#382d25);font-family:var(--font-body,'Geist',system-ui,sans-serif);font-size:13px;line-height:1.55;white-space:nowrap;cursor:pointer}.ds-quiet svg{flex-shrink:0}.ds-quiet:hover:not(:disabled){background:var(--color-paper-2,#f1e8d9)}.ds-quiet:focus-visible{outline:3px solid var(--color-focus,#884827);outline-offset:4px;}.ds-quiet:active:not(:disabled){transform:translateY(1px)}.ds-quiet:disabled{opacity:.4;cursor:not-allowed}.ds-quiet{background-color:var(--color-glass,#fffaf2a8);background-image:var(--glass-reflection,linear-gradient(145deg,#ffffffad,#ffffff14 44%,#d7bd9524));border:1px solid var(--color-glass-edge,#ffffffd9);box-shadow:var(--glass-shadow,inset 0 1px 1px #fffffff2,inset 0 -1px 1px #9b774d2b,0 6px 20px #68462621);backdrop-filter:blur(22px) saturate(1.65);-webkit-backdrop-filter:blur(22px) saturate(1.65);}@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){.ds-quiet{background:var(--color-glass-solid,#fffcf6);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;}}"
     },
     {
       "name": "Icon Action",
@@ -216,7 +216,7 @@
       "refersTo": "button-icon",
       "description": "A share action with a full 44-pixel target and accessible name.",
       "html": "<button type=\"button\" class=\"ds-icon ds-share\" aria-label=\"Salin tautan hari ini\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 16V3m-5 5 5-5 5 5M5 13v8h14v-8\"/></svg></button>",
-      "css": ".ds-icon{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:var(--space-sm,12px);border:0;border-radius:var(--radius-pill,12px);background:transparent;color:var(--color-ink,#17252e);cursor:pointer}.ds-share{border:1px solid var(--color-rule-2,#8b9eab)}.ds-icon svg{flex-shrink:0}.ds-icon:hover{background:var(--color-paper-2,#e2e9ed)}.ds-icon:focus-visible{outline:3px solid var(--color-focus,#005bb8);outline-offset:4px;}.ds-icon:active:not(:disabled){transform:translateY(1px)}.ds-icon:disabled{opacity:.4;cursor:not-allowed}"
+      "css": ".ds-icon{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:var(--space-sm,12px);border:0;border-radius:var(--radius-pill,12px);background:transparent;color:var(--color-ink,#382d25);cursor:pointer}.ds-share{border:1px solid var(--color-rule-2,#ad977c)}.ds-icon svg{flex-shrink:0}.ds-icon:hover{background:var(--color-paper-2,#f1e8d9)}.ds-icon:focus-visible{outline:3px solid var(--color-focus,#884827);outline-offset:4px;}.ds-icon:active:not(:disabled){transform:translateY(1px)}.ds-icon:disabled{opacity:.4;cursor:not-allowed}.ds-icon{background-color:var(--color-glass,#fffaf2a8);background-image:var(--glass-reflection,linear-gradient(145deg,#ffffffad,#ffffff14 44%,#d7bd9524));border:1px solid var(--color-glass-edge,#ffffffd9);box-shadow:var(--glass-shadow,inset 0 1px 1px #fffffff2,inset 0 -1px 1px #9b774d2b,0 6px 20px #68462621);backdrop-filter:blur(22px) saturate(1.65);-webkit-backdrop-filter:blur(22px) saturate(1.65);}@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){.ds-icon{background:var(--color-glass-solid,#fffcf6);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;}}"
     },
     {
       "name": "Manual Copy Field",
@@ -224,7 +224,7 @@
       "refersTo": "manual-copy",
       "description": "Read-only fallback when automatic copying is unavailable.",
       "html": "<div class=\"ds-copy\"><label for=\"ds-manual-copy\">Teks untuk disalin</label><input id=\"ds-manual-copy\" readonly value=\"#2026-11-20\"></div>",
-      "css": ".ds-copy{font-family:var(--font-body,'Geist',system-ui,sans-serif);color:var(--color-ink,#17252e)}.ds-copy label{display:block;font-size:14px;margin-bottom:var(--space-xs,8px)}.ds-copy input{width:100%;min-height:48px;padding:var(--space-sm,12px);border:1px solid var(--color-rule-2,#8b9eab);background:var(--color-paper,#eef2f3);color:var(--color-ink,#17252e);font-family:var(--font-body,'Geist',system-ui,sans-serif);font-size:16px;line-height:1.55}.ds-copy input:focus-visible{outline:3px solid var(--color-focus,#005bb8);outline-offset:4px;}"
+      "css": ".ds-copy{font-family:var(--font-body,'Geist',system-ui,sans-serif);color:var(--color-ink,#382d25)}.ds-copy label{display:block;font-size:14px;margin-bottom:var(--space-xs,8px)}.ds-copy input{width:100%;min-height:48px;padding:var(--space-sm,12px);border:1px solid var(--color-rule-2,#ad977c);background:var(--color-paper,#fbf7ef);color:var(--color-ink,#382d25);font-family:var(--font-body,'Geist',system-ui,sans-serif);font-size:16px;line-height:1.55}.ds-copy input:focus-visible{outline:3px solid var(--color-focus,#884827);outline-offset:4px;}"
     },
     {
       "name": "Visit Status",
@@ -232,15 +232,15 @@
       "refersTo": "state-conditional",
       "description": "Textual status labels distinguish conditional and confirmed information.",
       "html": "<span class=\"ds-state\">Opsional</span> <span class=\"ds-state ds-confirmed\">Terkonfirmasi</span>",
-      "css": ".ds-state{display:inline-block;padding:var(--space-3xs,2px) var(--space-xs,8px);border-radius:2px;background:var(--color-rust-wash,#dceaf7);color:var(--color-accent,#005bb8);font-family:var(--font-body,'Geist',system-ui,sans-serif);font-size:11px;line-height:1.55}.ds-state.ds-confirmed{background:var(--color-paper-3,#d1dce3);color:var(--color-autumn,#203a48)}"
+      "css": ".ds-state{display:inline-block;padding:var(--space-3xs,2px) var(--space-xs,8px);border-radius:2px;background:var(--color-rust-wash,#f3e1ca);color:var(--color-accent,#884827);font-family:var(--font-body,'Geist',system-ui,sans-serif);font-size:11px;line-height:1.55}.ds-state.ds-confirmed{background:var(--color-paper-3,#e8d9c4);color:var(--color-autumn,#744632)}.ds-state{background-color:var(--color-glass,#fffaf2a8);background-image:var(--glass-reflection,linear-gradient(145deg,#ffffffad,#ffffff14 44%,#d7bd9524));border:1px solid var(--color-glass-edge,#ffffffd9);box-shadow:var(--glass-shadow,inset 0 1px 1px #fffffff2,inset 0 -1px 1px #9b774d2b,0 6px 20px #68462621);backdrop-filter:blur(22px) saturate(1.65);-webkit-backdrop-filter:blur(22px) saturate(1.65);}@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){.ds-state{background:var(--color-glass-solid,#fffcf6);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;}}.ds-state{padding:4px 12px;border-radius:100px}"
     },
     {
       "name": "Overnight and Transport",
       "kind": "card",
       "refersTo": "essentials-panel",
-      "description": "Chestnut sleep and transport essentials immediately after the selected-day heading.",
-      "html": "<div class=\"ds-essentials\"><div class=\"ds-sleep\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2 4v16m20-8v8M2 16h20M2 8h6v8m0-6h10a4 4 0 0 1 4 4v2\"/></svg><div><strong>Menginap di Jiuzhaigou</strong><p>Area hotel dekat taman</p></div></div><div class=\"ds-transport\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"5\" y=\"3\" width=\"14\" height=\"15\" rx=\"3\"/><path d=\"M5 10h14m-7-7v7m-4 8-2 3m10-3 2 3M8 14h.01M16 14h.01\"/></svg><div><span>Perjalanan hari ini</span><p>Chengdu \u2192 Huanglongjiuzhai \u2192 Jiuzhaigou</p></div></div></div>",
-      "css": ".ds-essentials{border-radius:var(--radius-card,16px);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;padding:var(--space-lg,24px);background:var(--color-autumn,#203a48);color:var(--color-on-autumn,#f7fbff);font-family:var(--font-body,'Geist',system-ui,sans-serif);line-height:1.55}.ds-sleep,.ds-transport{display:flex;align-items:flex-start;gap:var(--space-sm,12px);min-width:0}.ds-sleep>svg,.ds-transport>svg{flex-shrink:0;margin-top:var(--space-2xs,4px)}.ds-sleep strong{font-size:16px;font-weight:600}.ds-sleep p{margin:var(--space-2xs,4px) 0 0;font-size:13px;color:var(--color-on-autumn,#f7fbff)}.ds-transport{border-left:1px solid var(--color-autumn-hover,#2a4c5e);padding-left:var(--space-lg,24px)}.ds-transport span{font-size:12px;color:var(--color-on-autumn-muted,#d0dfe8)}.ds-transport p{margin:var(--space-2xs,4px) 0 0;font-size:14px}@media(max-width:599px){.ds-essentials{display:flex;flex-direction:column;padding:20px;gap:var(--space-md,16px)}.ds-transport{border-left:0;border-top:1px solid var(--color-autumn-hover,#2a4c5e);padding:var(--space-md,16px) 0 0}.ds-transport span{font-size:11px}.ds-transport p{font-size:13px;margin-top:1px}}"
+      "description": "Warm cream sleep and transport essentials immediately after the selected-day heading.",
+      "html": "<div class=\"ds-essentials\"><div class=\"ds-sleep\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2 4v16m20-8v8M2 16h20M2 8h6v8m0-6h10a4 4 0 0 1 4 4v2\"/></svg><div><strong>Menginap di Jiuzhaigou</strong><p>Area hotel dekat taman</p></div></div><div class=\"ds-transport\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"5\" y=\"3\" width=\"14\" height=\"15\" rx=\"3\"/><path d=\"M5 10h14m-7-7v7m-4 8-2 3m10-3 2 3M8 14h.01M16 14h.01\"/></svg><div><span>Perjalanan hari ini</span><p>Chengdu → Huanglongjiuzhai → Jiuzhaigou</p></div></div></div>",
+      "css": ".ds-essentials{border-radius:var(--radius-card,16px);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;padding:var(--space-lg,24px);background:var(--color-autumn,#744632);color:var(--color-on-autumn,#fffaf2);font-family:var(--font-body,'Geist',system-ui,sans-serif);line-height:1.55}.ds-sleep,.ds-transport{display:flex;align-items:flex-start;gap:var(--space-sm,12px);min-width:0}.ds-sleep>svg,.ds-transport>svg{flex-shrink:0;margin-top:var(--space-2xs,4px)}.ds-sleep strong{font-size:16px;font-weight:600}.ds-sleep p{margin:var(--space-2xs,4px) 0 0;font-size:13px;color:var(--color-on-autumn,#fffaf2)}.ds-transport{border-left:1px solid var(--color-autumn-hover,#8a543b);padding-left:var(--space-lg,24px)}.ds-transport span{font-size:12px;color:var(--color-on-autumn-muted,#f0dfc8)}.ds-transport p{margin:var(--space-2xs,4px) 0 0;font-size:14px}@media(max-width:599px){.ds-essentials{display:flex;flex-direction:column;padding:20px;gap:var(--space-md,16px)}.ds-transport{border-left:0;border-top:1px solid var(--color-autumn-hover,#8a543b);padding:var(--space-md,16px) 0 0}.ds-transport span{font-size:11px}.ds-transport p{font-size:13px;margin-top:1px}}.ds-essentials{background:var(--color-paper-2,#f1e8d9);color:var(--color-ink,#382d25)}.ds-sleep p,.ds-transport p{color:var(--color-ink-2,#5a493c)}.ds-transport span{color:var(--color-muted,#756250)}.ds-transport{border-color:var(--color-rule,#dfd3c1)}"
     },
     {
       "name": "Floating Date Dock",
@@ -248,7 +248,7 @@
       "refersTo": "date-dock",
       "description": "Persistent compact-screen navigation, lifted gently above the itinerary.",
       "html": "<nav class=\"ds-dock\" aria-label=\"Pemilih hari\"><button class=\"ds-dock-icon\" type=\"button\" aria-label=\"Hari sebelumnya\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m15 5-7 7 7 7\"/></svg></button><button class=\"ds-dock-picker\" type=\"button\"><span><strong>8 November</strong><span class=\"ds-dock-count\">Hari 1 dari 14</span></span><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\"/></svg></button><button class=\"ds-dock-icon\" type=\"button\" aria-label=\"Hari berikutnya\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m9 5 7 7-7 7\"/></svg></button></nav>",
-      "css": ".ds-dock{display:flex;align-items:center;justify-content:space-between;gap:var(--space-sm,12px);padding:var(--space-xs,8px) var(--space-xs,8px) calc(var(--space-xs,8px) + env(safe-area-inset-bottom));background:var(--color-paper,#eef2f3);color:var(--color-ink,#17252e);border-radius:22px;box-shadow:0 8px 30px var(--color-dock-shadow,#15334d1f);font-family:var(--font-body,'Geist',system-ui,sans-serif)}.ds-dock-icon{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;min-width:44px;border:0;border-radius:var(--radius-pill,12px);background:transparent;color:inherit;cursor:pointer}.ds-dock-icon:hover{background:var(--color-paper-2,#e2e9ed)}.ds-dock-picker{display:flex;align-items:center;justify-content:center;gap:20px;min-height:48px;flex:1;padding:0 var(--space-sm,12px);border:0;border-radius:14px;background:var(--color-paper-2,#e2e9ed);color:inherit;font-family:inherit;cursor:pointer}.ds-dock-picker strong{display:block;font-size:15px;font-weight:600}.ds-dock-count{display:block;font-size:11px;color:var(--color-muted,#52656f)}.ds-dock button:focus-visible{outline:3px solid var(--color-focus,#005bb8);outline-offset:4px}.ds-dock button:active:not(:disabled){transform:translateY(1px)}.ds-dock button:disabled{opacity:.4;cursor:not-allowed}.ds-dock svg{flex-shrink:0}"
+      "css": ".ds-dock{display:flex;align-items:center;justify-content:space-between;gap:var(--space-sm,12px);padding:var(--space-xs,8px) var(--space-xs,8px) calc(var(--space-xs,8px) + env(safe-area-inset-bottom));background:var(--color-paper,#fbf7ef);color:var(--color-ink,#382d25);border-radius:22px;box-shadow:0 8px 30px var(--color-dock-shadow,#60442a1f);font-family:var(--font-body,'Geist',system-ui,sans-serif)}.ds-dock-icon{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;min-width:44px;border:0;border-radius:var(--radius-pill,12px);background:transparent;color:inherit;cursor:pointer}.ds-dock-icon:hover{background:var(--color-paper-2,#f1e8d9)}.ds-dock-picker{display:flex;align-items:center;justify-content:center;gap:20px;min-height:48px;flex:1;padding:0 var(--space-sm,12px);border:0;border-radius:14px;background:var(--color-paper-2,#f1e8d9);color:inherit;font-family:inherit;cursor:pointer}.ds-dock-picker strong{display:block;font-size:15px;font-weight:600}.ds-dock-count{display:block;font-size:11px;color:var(--color-muted,#756250)}.ds-dock button:focus-visible{outline:3px solid var(--color-focus,#884827);outline-offset:4px}.ds-dock button:active:not(:disabled){transform:translateY(1px)}.ds-dock button:disabled{opacity:.4;cursor:not-allowed}.ds-dock svg{flex-shrink:0}.ds-dock{background-color:var(--color-glass,#fffaf2a8);background-image:var(--glass-reflection,linear-gradient(145deg,#ffffffad,#ffffff14 44%,#d7bd9524));border:1px solid var(--color-glass-edge,#ffffffd9);box-shadow:var(--glass-shadow,inset 0 1px 1px #fffffff2,inset 0 -1px 1px #9b774d2b,0 6px 20px #68462621);backdrop-filter:blur(22px) saturate(1.65);-webkit-backdrop-filter:blur(22px) saturate(1.65);}@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){.ds-dock{background:var(--color-glass-solid,#fffcf6);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;}}.ds-dock-picker{background:transparent;border-radius:100px}"
     },
     {
       "name": "User Photo Gallery",
@@ -256,7 +256,7 @@
       "refersTo": "gallery-frame",
       "description": "Native closed disclosure with two representative frames from the user collection; the site opens each image in its accessible photo dialog.",
       "html": "<details class=\"ds-gallery\"><summary><span>Galeri pilihanmu</span><span>2 foto <svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\"/></svg></span></summary><p class=\"ds-gallery-intro\">Warna yang ingin ditemui di perjalanan. Geser untuk melihat koleksi foto pilihanmu.</p><div class=\"ds-gallery-track\" role=\"region\" aria-label=\"Koleksi foto musim gugur\"><button class=\"ds-gallery-photo\" type=\"button\" aria-label=\"Perbesar Refleksi musim gugur\"><img src=\"photos/user-autumn-01-480.webp\" width=\"480\" height=\"640\" loading=\"lazy\" alt=\"Air danau toska memantulkan hutan kuning dan hijau.\"><span>Refleksi musim gugur</span></button><button class=\"ds-gallery-photo\" type=\"button\" aria-label=\"Perbesar Bipenggou\"><img src=\"photos/user-autumn-08-480.webp\" width=\"480\" height=\"360\" loading=\"lazy\" alt=\"Danau hijau memantulkan puncak bersalju dan deretan pohon kuning.\"><span>Bipenggou</span><small>Inspirasi di luar rute</small></button></div></details>",
-      "css": ".ds-gallery{padding-top:var(--space-lg,24px);border-top:1px solid var(--color-rule,#c9d4dc);color:var(--color-ink,#17252e);font-family:var(--font-body,'Geist',system-ui,sans-serif);line-height:1.55}.ds-gallery>summary{display:flex;justify-content:space-between;align-items:center;gap:var(--space-md,16px);min-height:64px;cursor:pointer;list-style:none}.ds-gallery>summary::-webkit-details-marker{display:none}.ds-gallery>summary>span:first-child{font-size:26px;font-weight:600;letter-spacing:-.03em}.ds-gallery>summary>span:last-child{display:flex;align-items:center;gap:var(--space-xs,8px);font-size:13px;color:var(--color-muted,#52656f)}.ds-gallery[open]>summary svg{transform:rotate(180deg)}.ds-gallery>summary:hover{color:var(--color-accent,#005bb8)}.ds-gallery-intro{margin:0;color:var(--color-muted,#52656f);font-size:14px;padding-bottom:var(--space-lg,24px)}.ds-gallery-track{display:flex;gap:var(--space-md,16px);overflow-x:auto;scroll-snap-type:x proximity;padding:var(--space-xs,8px) var(--space-xs,8px) var(--space-md,16px);max-width:100%;scrollbar-width:thin}.ds-gallery-photo{flex:0 0 280px;scroll-snap-align:start;min-width:0;text-align:left;background:transparent;color:inherit;font-family:inherit;padding:0;border:0;cursor:pointer}.ds-gallery-photo img{display:block;width:100%;height:350px;object-fit:cover;border-radius:var(--radius-card,16px)}.ds-gallery-photo>span{display:block;font-size:15px;font-weight:500;padding-top:var(--space-sm,12px)}.ds-gallery-photo small{display:block;color:var(--color-muted,#52656f);font-size:12px;padding-top:var(--space-2xs,4px)}.ds-gallery summary:focus-visible,.ds-gallery button:focus-visible{outline:3px solid var(--color-focus,#005bb8);outline-offset:4px}.ds-gallery button:active{transform:translateY(1px)}.ds-gallery svg{flex-shrink:0}"
+      "css": ".ds-gallery{padding-top:var(--space-lg,24px);border-top:1px solid var(--color-rule,#dfd3c1);color:var(--color-ink,#382d25);font-family:var(--font-body,'Geist',system-ui,sans-serif);line-height:1.55}.ds-gallery>summary{display:flex;justify-content:space-between;align-items:center;gap:var(--space-md,16px);min-height:64px;cursor:pointer;list-style:none}.ds-gallery>summary::-webkit-details-marker{display:none}.ds-gallery>summary>span:first-child{font-size:26px;font-weight:600;letter-spacing:-.03em}.ds-gallery>summary>span:last-child{display:flex;align-items:center;gap:var(--space-xs,8px);font-size:13px;color:var(--color-muted,#756250)}.ds-gallery[open]>summary svg{transform:rotate(180deg)}.ds-gallery>summary:hover{color:var(--color-accent,#884827)}.ds-gallery-intro{margin:0;color:var(--color-muted,#756250);font-size:14px;padding-bottom:var(--space-lg,24px)}.ds-gallery-track{display:flex;gap:var(--space-md,16px);overflow-x:auto;scroll-snap-type:x proximity;padding:var(--space-xs,8px) var(--space-xs,8px) var(--space-md,16px);max-width:100%;scrollbar-width:thin}.ds-gallery-photo{flex:0 0 280px;scroll-snap-align:start;min-width:0;text-align:left;background:transparent;color:inherit;font-family:inherit;padding:0;border:0;cursor:pointer}.ds-gallery-photo img{display:block;width:100%;height:350px;object-fit:cover;border-radius:var(--radius-card,16px)}.ds-gallery-photo>span{display:block;font-size:15px;font-weight:500;padding-top:var(--space-sm,12px)}.ds-gallery-photo small{display:block;color:var(--color-muted,#756250);font-size:12px;padding-top:var(--space-2xs,4px)}.ds-gallery summary:focus-visible,.ds-gallery button:focus-visible{outline:3px solid var(--color-focus,#884827);outline-offset:4px}.ds-gallery button:active{transform:translateY(1px)}.ds-gallery svg{flex-shrink:0}"
     },
     {
       "name": "Route Highlight",
@@ -264,34 +264,35 @@
       "refersTo": "route-highlight",
       "description": "A photographic route link with itinerary date, editorial title, and a clear direction marker.",
       "html": "<a class=\"ds-highlight\" href=\"#2026-11-09\" aria-label=\"Lihat jadwal Jiuzhaigou, 9 November\"><div class=\"ds-highlight-image\"><img src=\"photos/highlight-jiuzhaigou-480.webp\" width=\"480\" height=\"720\" loading=\"lazy\" alt=\"Danau di Jiuzhaigou memantulkan hutan musim gugur.\"><span class=\"ds-highlight-date\">9 November</span></div><div class=\"ds-highlight-copy\"><div><h3>Jiuzhaigou</h3><p>Danau jernih, hutan penuh warna.</p></div><span class=\"ds-highlight-go\" aria-hidden=\"true\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m9 5 7 7-7 7\"/></svg></span></div></a>",
-      "css": ".ds-highlight{display:block;min-width:0;text-decoration:none;border-radius:var(--radius-card,16px);color:var(--color-ink,#17252e);font-family:var(--font-body,'Geist',system-ui,sans-serif)}.ds-highlight-image{position:relative;overflow:clip;border-radius:var(--radius-card,16px);aspect-ratio:1.12;background:var(--color-paper-2,#e2e9ed)}.ds-highlight-image>img{display:block;width:100%;height:100%;object-fit:cover}.ds-highlight-date{position:absolute;top:14px;left:14px;display:flex;align-items:center;padding:var(--space-xs,8px) var(--space-sm,12px);border-radius:var(--radius-pill,12px);background:var(--color-paper,#eef2f3);font-size:12px}.ds-highlight-copy{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-sm,12px);padding:var(--space-md,16px) var(--space-3xs,2px) 0}.ds-highlight-copy h3{margin:0;font-family:var(--font-display,'Geist',Georgia,serif);font-size:clamp(26px,2.7vw,38px);font-weight:400;line-height:1.15;letter-spacing:-.025em}.ds-highlight-copy p{margin:var(--space-xs,8px) 0 0;font-size:13px;color:var(--color-muted,#52656f)}.ds-highlight-go{flex-shrink:0;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--color-paper-2,#e2e9ed)}.ds-highlight:hover .ds-highlight-go{background:var(--color-autumn,#203a48);color:var(--color-on-autumn,#f7fbff)}.ds-highlight:focus-visible{outline:3px solid var(--color-focus,#005bb8);outline-offset:4px}.ds-highlight:active{transform:translateY(1px)}@media(max-width:599px){.ds-highlight-image{aspect-ratio:1.04}.ds-highlight-copy h3{font-size:31px}.ds-highlight-copy p{font-size:12px}.ds-highlight-go{width:34px;height:34px}}"
+      "css": ".ds-highlight{display:block;min-width:0;text-decoration:none;border-radius:var(--radius-card,16px);color:var(--color-ink,#382d25);font-family:var(--font-body,'Geist',system-ui,sans-serif)}.ds-highlight-image{position:relative;overflow:clip;border-radius:var(--radius-card,16px);aspect-ratio:1.12;background:var(--color-paper-2,#f1e8d9)}.ds-highlight-image>img{display:block;width:100%;height:100%;object-fit:cover}.ds-highlight-date{position:absolute;top:14px;left:14px;display:flex;align-items:center;padding:var(--space-xs,8px) var(--space-sm,12px);border-radius:var(--radius-pill,12px);background:var(--color-paper,#fbf7ef);font-size:12px}.ds-highlight-copy{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-sm,12px);padding:var(--space-md,16px) var(--space-3xs,2px) 0}.ds-highlight-copy h3{margin:0;font-family:var(--font-display,'Geist',Georgia,serif);font-size:clamp(26px,2.7vw,38px);font-weight:400;line-height:1.15;letter-spacing:-.025em}.ds-highlight-copy p{margin:var(--space-xs,8px) 0 0;font-size:13px;color:var(--color-muted,#756250)}.ds-highlight-go{flex-shrink:0;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--color-paper-2,#f1e8d9)}.ds-highlight:hover .ds-highlight-go{background:var(--color-autumn,#744632);color:var(--color-on-autumn,#fffaf2)}.ds-highlight:focus-visible{outline:3px solid var(--color-focus,#884827);outline-offset:4px}.ds-highlight:active{transform:translateY(1px)}@media(max-width:599px){.ds-highlight-image{aspect-ratio:1.04}.ds-highlight-copy h3{font-size:31px}.ds-highlight-copy p{font-size:12px}.ds-highlight-go{width:34px;height:34px}}.ds-highlight-date,.ds-highlight-go{background-color:var(--color-glass,#fffaf2a8);background-image:var(--glass-reflection,linear-gradient(145deg,#ffffffad,#ffffff14 44%,#d7bd9524));border:1px solid var(--color-glass-edge,#ffffffd9);box-shadow:var(--glass-shadow,inset 0 1px 1px #fffffff2,inset 0 -1px 1px #9b774d2b,0 6px 20px #68462621);backdrop-filter:blur(22px) saturate(1.65);-webkit-backdrop-filter:blur(22px) saturate(1.65);}@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){.ds-highlight-date,.ds-highlight-go{background:var(--color-glass-solid,#fffcf6);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;}}"
     },
     {
       "name": "Route Photo Slider",
       "kind": "custom",
       "refersTo": "hero-slider",
       "description": "Native swipe specimen with two representative route photos; the app adds manual previous/next events, active-slide inert state, and a live counter.",
-      "html": "<section class=\"ds-hero\" aria-label=\"Foto destinasi\"><div class=\"ds-hero-track\" tabindex=\"0\" aria-label=\"Geser foto destinasi\"><figure class=\"ds-hero-slide\"><img src=\"photos/highlight-jiuzhaigou-480.webp\" width=\"480\" height=\"720\" alt=\"Danau di Jiuzhaigou memantulkan hutan musim gugur.\"><figcaption><a href=\"#2026-11-09\"><span>Jiuzhaigou</span><span>9 November</span></a></figcaption></figure><figure class=\"ds-hero-slide\"><img src=\"photos/highlight-siguniang-480.webp\" width=\"480\" height=\"640\" alt=\"Panorama pegunungan Siguniangshan.\"><figcaption><a href=\"#2026-11-10\"><span>Siguniangshan</span><span>10 November</span></a></figcaption></figure></div><div class=\"ds-hero-copy\"><h1>Musim Gugur<br>di China</h1><p>Sichuan &amp; Yunnan<br>8\u201321 November 2026</p></div></section>",
-      "css": ".ds-hero{position:relative;isolation:isolate;height:560px;overflow:hidden;border-radius:24px;background:var(--color-autumn,#203a48);color:var(--color-on-autumn,#f7fbff);font-family:var(--font-body,'Geist',system-ui,sans-serif)}.ds-hero-track{display:flex;width:100%;height:100%;overflow-x:auto;overflow-y:clip;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:inherit}.ds-hero-track::-webkit-scrollbar{display:none}.ds-hero-track:focus-visible{outline:3px solid var(--color-gold,#005bb8);outline-offset:-5px}.ds-hero-slide{position:relative;isolation:isolate;flex:0 0 100%;height:100%;min-width:0;margin:0;scroll-snap-align:start}.ds-hero-slide::after{content:\"\";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,var(--color-hero-mid,#0c192052),var(--color-hero-clear,#0c192000) 32%,var(--color-hero-mid,#0c192052) 60%,var(--color-hero-base,#0c1920ed))}.ds-hero-slide>img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 45%}.ds-hero-slide figcaption{position:absolute;top:24px;left:28px;z-index:1}.ds-hero-slide a{display:flex;flex-direction:column;justify-content:center;min-height:48px;padding:var(--space-xs,8px) var(--space-md,16px);border-radius:var(--radius-pill,12px);background:var(--color-photo-caption,#102c42c9);color:inherit;text-decoration:none}.ds-hero-slide a>span:first-child{font-size:18px;font-weight:500}.ds-hero-slide a>span:last-child{font-size:12px;color:var(--color-on-autumn-muted,#d0dfe8)}.ds-hero-slide a:focus-visible{outline:3px solid var(--color-on-autumn,#f7fbff);outline-offset:4px}.ds-hero-slide a:active{transform:translateY(1px)}.ds-hero-copy{position:absolute;inset:auto 0 0;z-index:1;padding:44px;pointer-events:none}.ds-hero-copy h1{margin:0;font-size:clamp(3.5rem,6.5vw,6rem);font-weight:600;line-height:.99;letter-spacing:-.04em;max-width:12ch}.ds-hero-copy p{margin:24px 0 0;line-height:1.6;font-size:16px}@media(max-width:959px){.ds-hero{height:520px}.ds-hero-copy{padding:32px}.ds-hero-copy h1{font-size:clamp(3rem,7.5vw,4.5rem)}}@media(max-width:599px){.ds-hero{height:440px;border-radius:20px}.ds-hero-copy{padding:24px}.ds-hero-copy h1{font-size:45px;line-height:1.02}.ds-hero-copy p{font-size:13px}.ds-hero-slide figcaption{top:12px;left:12px}.ds-hero-slide a{min-height:54px;padding:8px 12px}.ds-hero-slide a>span:first-child{font-size:14px}.ds-hero-slide a>span:last-child{font-size:10px}}"
+      "html": "<section class=\"ds-hero\" aria-label=\"Foto destinasi\"><div class=\"ds-hero-track\" tabindex=\"0\" aria-label=\"Geser foto destinasi\"><figure class=\"ds-hero-slide\"><img src=\"photos/highlight-jiuzhaigou-480.webp\" width=\"480\" height=\"720\" alt=\"Danau di Jiuzhaigou memantulkan hutan musim gugur.\"><figcaption><a href=\"#2026-11-09\"><span>Jiuzhaigou</span><span>9 November</span></a></figcaption></figure><figure class=\"ds-hero-slide\"><img src=\"photos/highlight-siguniang-480.webp\" width=\"480\" height=\"640\" alt=\"Panorama pegunungan Siguniangshan.\"><figcaption><a href=\"#2026-11-10\"><span>Siguniangshan</span><span>10 November</span></a></figcaption></figure></div><div class=\"ds-hero-copy\"><h1>Musim Gugur<br>di China</h1><p>Sichuan &amp; Yunnan<br>8–21 November 2026</p></div></section>",
+      "css": ".ds-hero{position:relative;isolation:isolate;height:560px;overflow:hidden;border-radius:24px;background:var(--color-autumn,#744632);color:var(--color-on-autumn,#fffaf2);font-family:var(--font-body,'Geist',system-ui,sans-serif)}.ds-hero-track{display:flex;width:100%;height:100%;overflow-x:auto;overflow-y:clip;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:inherit}.ds-hero-track::-webkit-scrollbar{display:none}.ds-hero-track:focus-visible{outline:3px solid var(--color-gold,#f2ce8d);outline-offset:-5px}.ds-hero-slide{position:relative;isolation:isolate;flex:0 0 100%;height:100%;min-width:0;margin:0;scroll-snap-align:start}.ds-hero-slide::after{content:\"\";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,var(--color-hero-mid,#241b143d),var(--color-hero-clear,#241b1400) 32%,var(--color-hero-mid,#241b143d) 60%,var(--color-hero-base,#241b14e6))}.ds-hero-slide>img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 45%}.ds-hero-slide figcaption{position:absolute;top:24px;left:28px;z-index:1}.ds-hero-slide a{display:flex;flex-direction:column;justify-content:center;min-height:48px;padding:var(--space-xs,8px) var(--space-md,16px);border-radius:var(--radius-pill,12px);background:var(--color-photo-caption,#fffaf2cf);color:inherit;text-decoration:none}.ds-hero-slide a>span:first-child{font-size:18px;font-weight:500}.ds-hero-slide a>span:last-child{font-size:12px;color:var(--color-on-autumn-muted,#f0dfc8)}.ds-hero-slide a:focus-visible{outline:3px solid var(--color-on-autumn,#fffaf2);outline-offset:4px}.ds-hero-slide a:active{transform:translateY(1px)}.ds-hero-copy{position:absolute;inset:auto 0 0;z-index:1;padding:44px;pointer-events:none}.ds-hero-copy h1{margin:0;font-size:clamp(3.5rem,6.5vw,6rem);font-weight:600;line-height:.99;letter-spacing:-.04em;max-width:12ch}.ds-hero-copy p{margin:24px 0 0;line-height:1.6;font-size:16px}@media(max-width:959px){.ds-hero{height:520px}.ds-hero-copy{padding:32px}.ds-hero-copy h1{font-size:clamp(3rem,7.5vw,4.5rem)}}@media(max-width:599px){.ds-hero{height:440px;border-radius:20px}.ds-hero-copy{padding:24px}.ds-hero-copy h1{font-size:45px;line-height:1.02}.ds-hero-copy p{font-size:13px}.ds-hero-slide figcaption{top:12px;left:12px}.ds-hero-slide a{min-height:54px;padding:8px 12px}.ds-hero-slide a>span:first-child{font-size:14px}.ds-hero-slide a>span:last-child{font-size:10px}}.ds-hero-slide a{background-color:var(--color-glass,#fffaf2a8);background-image:var(--glass-reflection,linear-gradient(145deg,#ffffffad,#ffffff14 44%,#d7bd9524));border:1px solid var(--color-glass-edge,#ffffffd9);box-shadow:var(--glass-shadow,inset 0 1px 1px #fffffff2,inset 0 -1px 1px #9b774d2b,0 6px 20px #68462621);backdrop-filter:blur(22px) saturate(1.65);-webkit-backdrop-filter:blur(22px) saturate(1.65);}@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){.ds-hero-slide a{background:var(--color-glass-solid,#fffcf6);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;}}.ds-hero-slide a,.ds-hero-slide a>span:last-child{color:var(--color-ink,#382d25)}"
     }
   ],
   "narrative": {
     "northStar": "A photographic guide with Liquid Glass navigation",
-    "overview": "Cool readable surfaces and natural autumn photographs connect every sightseeing stop to sourced transport, costs, tips, and its itinerary date.",
+    "overview": "Warm cream reading surfaces and natural autumn photographs connect every sightseeing stop to sourced transport, costs, tips, and its itinerary date.",
     "keyCharacteristics": [
-      "Translucent navigation with solid readable content panels",
-      "System light and dark themes with reduced-transparency fallbacks",
+      "Glossy translucent navigation, buttons, and badges with solid cream content panels",
+      "Fixed light appearance regardless of system theme, with reduced-transparency fallbacks",
       "One guide per sightseeing stop with shared park costs clearly identified",
       "Geist typography and locally hosted destination photographs"
     ],
     "rules": [
       "The CSS tokens in src/style.css are authoritative.",
       "Keep the original 14 dates and 13 overnight bases.",
-      "Never claim a photo is newer or more location-specific than its source proves."
+      "Never claim a photo is newer or more location-specific than its source proves.",
+      "Keep the page light when the device requests dark mode."
     ],
     "dos": [
       "Keep visible focus and native dialog behavior.",
-      "Link published prices to their sources."
+      "Display practical sources, publication dates, and the research check date without requiring a disclosure click."
     ],
     "donts": [
       "Do not use glass inside glass.",

@@ -2,6 +2,8 @@ export interface GuideSource {
   title: string;
   url: string;
   kind: 'official' | 'operator' | 'reference';
+  publishedAt?: string;
+  note?: string;
 }
 
 export interface GuideCost {

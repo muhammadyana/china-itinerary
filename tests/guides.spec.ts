@@ -30,8 +30,16 @@ test('destination coverage preserves every sightseeing stop and research provena
     expect(guide.checkedAt, guide.slug).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     for (const cost of guide.costs) {
       if (cost.status === 'published') expect(cost.source, `${guide.slug}: ${cost.label}`).toMatch(/^https:\/\//);
+      if (cost.source) expect(guide.sources.some(source => source.url === cost.source), `${guide.slug}: cost source missing from references`).toBe(true);
     }
-    for (const source of guide.sources) expect(new URL(source.url).protocol).toBe('https:');
+    for (const url of guide.gettingThere.sources) expect(guide.sources.some(source => source.url === url), `${guide.slug}: route source missing from references`).toBe(true);
+    for (const source of guide.sources) {
+      expect(new URL(source.url).protocol).toBe('https:');
+      if (source.publishedAt) {
+        expect(source.publishedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+        expect(source.publishedAt <= guide.checkedAt, `${guide.slug}: source cannot be published after its check date`).toBe(true);
+      }
+    }
   }
   for (const destination of placePages) {
     expect(galleryPhotos(destination).length, `${destination.slug}: empty gallery`).toBeGreaterThan(0);
@@ -57,6 +65,7 @@ test('every destination is a distinct server-rendered document with root-relativ
     expect(html, destination.slug).toContain('id="costs"');
     expect(html, destination.slug).toContain('id="gallery"');
     expect(html, destination.slug).toContain('id="tips"');
+    expect(html, destination.slug).toContain('id="sources"');
     expect(html, destination.slug).not.toContain('id="day-view"');
     for (const match of html.matchAll(/<(?:img|script)\b[^>]*\bsrc="([^"]+)"/g)) {
       expect(match[1], destination.slug).toMatch(/^\/(?:photos|assets)\//);
@@ -76,6 +85,9 @@ test('a nested destination works without JavaScript, reloads directly, and links
     await expect(page.locator('#place-title')).toHaveText(places.guishan.name);
     await expect(page.locator('.guide-last-leg')).toContainText('龟山公园');
     await expect(page.locator('#costs')).toContainText('Tarif kawasan');
+    await expect(page.locator('.guide-provenance time')).toBeVisible();
+    await expect(page.locator('.guide-references a').first()).toBeVisible();
+    await expect(page.locator('#sources li a').first()).toBeVisible();
     await expect(page.locator('.guide-date-link')).toHaveAttribute('href', '/#2026-11-17');
     await page.reload();
     await expect(page.locator('#place-title')).toHaveText(places.guishan.name);
@@ -122,7 +134,7 @@ test('destination gallery supports keyboard paging, close, source attribution, a
 
 for (const width of [360, 390, 1440]) {
   for (const colorScheme of ['light', 'dark'] as const) {
-    test(`${width}px ${colorScheme}: destination layout, usable controls, and accessible contrast`, async ({ page }) => {
+    test(`${width}px ${colorScheme} device: light destination layout, usable controls, and accessible contrast`, async ({ page }) => {
       await mkdir('artifacts', { recursive: true });
       await page.setViewportSize({ width, height: width < 600 ? 844 : 900 });
       await page.emulateMedia({ colorScheme, reducedMotion: 'reduce' });
@@ -130,9 +142,10 @@ for (const width of [360, 390, 1440]) {
       await page.evaluate(() => document.fonts.ready);
       await page.locator('.guide-hero img').evaluate(node => (node as HTMLImageElement).decode());
       await expect(page.locator('#place-title')).toContainText('Jiuzhaigou');
+      expect(await page.locator('html').evaluate(node => getComputedStyle(node).colorScheme.split(' '))).toContain('light');
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
-      await page.locator('.guide-references summary').click();
-      await page.locator('.guide-source-section summary').click();
+      await expect(page.locator('.guide-references a').first()).toBeVisible();
+      await expect(page.locator('.guide-source-section li a').first()).toBeVisible();
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
       const tooSmall = await page.locator('button,a,summary').evaluateAll(nodes => nodes.filter(node => {
         const rect = node.getBoundingClientRect();
@@ -148,6 +161,36 @@ for (const width of [360, 390, 1440]) {
     });
   }
 }
+
+test('dark device preference keeps homepage, directory, guide, and dialogs in the same light theme', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const path of ['/', '/places/', '/places/dali/']) {
+    await page.emulateMedia({ colorScheme: 'light' });
+    await page.goto(path);
+    const lightColors = await page.evaluate(() => ({
+      background: getComputedStyle(document.body).backgroundColor,
+      text: getComputedStyle(document.body).color,
+    }));
+    await page.emulateMedia({ colorScheme: 'dark' });
+    expect(await page.evaluate(() => ({
+      background: getComputedStyle(document.body).backgroundColor,
+      text: getComputedStyle(document.body).color,
+    }))).toEqual(lightColors);
+    expect(await page.locator('html').evaluate(node => getComputedStyle(node).colorScheme.split(' '))).toContain('light');
+    await expect(page.locator('meta[name="theme-color"]')).toHaveCount(1);
+    await expect(page.locator('meta[name="theme-color"]')).not.toHaveAttribute('media');
+  }
+  await page.locator('[data-gallery-index="0"]').click();
+  const darkDeviceDialog = await page.locator('#guide-photo-dialog').evaluate(node => ({
+    background: getComputedStyle(node).backgroundColor,
+    text: getComputedStyle(node).color,
+  }));
+  await page.emulateMedia({ colorScheme: 'light' });
+  expect(await page.locator('#guide-photo-dialog').evaluate(node => ({
+    background: getComputedStyle(node).backgroundColor,
+    text: getComputedStyle(node).color,
+  }))).toEqual(darkDeviceDialog);
+});
 
 test('reduced transparency removes backdrop effects from destination navigation', async ({ page, context }) => {
   const cdp = await context.newCDPSession(page);

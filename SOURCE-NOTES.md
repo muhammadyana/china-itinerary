@@ -168,3 +168,12 @@ The guide expansion covers 46 sightseeing stops through 29 park/town research gr
 Twenty-two additional destination images are recorded in `src/guide-photos-north.ts` and `src/guide-photos-west.ts`. Their provenance manifests are `source/guide-photos-north.json` and `source/guide-photos-west.json`. Eighteen are caption-matched images extracted from the user-provided PDF; four are attributed Commons photographs. Native PDF resolution is preserved; images are not upscaled. Additional Commons candidates could not be downloaded at sufficient resolution because of rate limits and are retained as research references only.
 
 Caicun's PDF image shows Erhai rather than a verified pier viewpoint; both its caption and alt text say so. The Kangding mosque photograph remains an explicitly unverified PDF reference, and its map pin still requires confirmation. The Daxueshan image illustrates the named mountain corridor rather than a surveyed pass location. These photos do not establish current access, current weather, or October 2026 capture dates.
+
+
+## Practical information refresh — 3 November 2026
+
+All 29 research groups were rechecked against accessible official, operator, and reference material. Guide pages now expose route references and their complete source lists without accordions. Research dates and verified publication dates are separate; source notes identify indexed-only retrieval, unreadable attachments, and historical location references. Editorial time allocations remain distinct from published operating rules.
+
+Recent references include the 31 October Jiuzhaigou notice, 25 October Yading visitor guidance, August G227 works update, October Jade Dragon maintenance notice, and 2 November Lijiang operator interview. Songzanlin's conflicting bus/hours pages and unreadable August shuttle-price attachment prevent a confirmed current package total, so CNY90 is only a reference. Yading's November tariff remains unconfirmed after the 2026 reforms. Undated booking listings do not prove selected-date availability; private transfers still require quotes.
+
+The interface uses a fixed warm-light palette under both device color preferences. Glass effects apply to controls and navigation; practical reading panels remain opaque, with reduced-transparency and increased-contrast fallbacks.

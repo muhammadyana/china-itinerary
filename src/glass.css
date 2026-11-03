@@ -1,31 +1,65 @@
 /* Hallmark · shape: app screen · genre: modern-minimal · theme: Liquid Glass travel guide · hero: Banner · nav: floating glass utility · footer: colophon · job: visit */
 /* Hallmark · answered F24 · Liquid Glass navigation uses a fine specular rim and a soft shadow as explicitly requested */
 /* Hallmark · pre-emit critique: P5 H4 E4 S5 R4 V4 · weakest: guide density; readable opaque content is separated from glass navigation */
+/* Hallmark · waive 29 · opaque reading panels and reduced-transparency fallbacks preserve legibility · the user explicitly requests Liquid Glass controls */
 
-.site-header { min-height: 80px; position: relative; z-index: var(--z-raised); }
-.site-header nav,.glass-surface,.mobile-daybar,.hero-controls,.hero-slide figcaption a {
- background: var(--color-glass-solid); color: var(--color-ink);
+/* Shared glass material belongs to controls; reading surfaces remain opaque. */
+:is(.site-header :where(nav),.site-header > :where(.nav-link),.glass-surface,.mobile-daybar,.hero-controls,.hero-slide :where(figcaption a),.primary-button,.quiet-button,.icon-button,.region-link,.highlight-date,.highlight-go,.state,.cost-status,.date-line > :where(span),.guide-date-link,.guide-hero-meta > :where(span,a),.copy-place,.stop-guide-link,.picker-days :where(.date-choice)) {
+ background-color: var(--color-glass-solid);
+ background-image: var(--glass-reflection);
  border: 1px solid var(--color-glass-edge);
- box-shadow: 0 8px 32px var(--color-glass-shadow), inset 0 1px 0 var(--color-glass-inset);
+ box-shadow: var(--glass-shadow);
+ color: var(--color-ink);
 }
+:is(.primary-button,.quiet-button,.icon-button,.region-link,.guide-date-link,.copy-place,.stop-guide-link,.picker-days :where(.date-choice),.site-header > :where(.nav-link)) {
+ transition: background-color 160ms ease, box-shadow 160ms ease;
+}
+:is(.primary-button,.quiet-button,.icon-button,.region-link,.guide-date-link,.copy-place,.stop-guide-link,.picker-days :where(.date-choice),.site-header > :where(.nav-link)):hover:not(:disabled) {
+ background-color: var(--color-glass-hover); box-shadow: var(--glass-shadow-hover);
+}
+:is(.primary-button,.quiet-button,.icon-button,.region-link,.guide-date-link,.copy-place,.stop-guide-link,.picker-days :where(.date-choice),.site-header > :where(.nav-link)):active:not(:disabled) {
+ background-color: var(--color-glass-pressed); box-shadow: inset 0 1px 3px var(--color-glass-rim), inset 0 -1px 0 var(--color-glass-inset);
+}
+.site-header { min-height: 80px; position: relative; z-index: var(--z-raised); }
 .site-header nav { border-radius: var(--radius-pill); padding: var(--space-2xs) var(--space-md); gap: var(--space-lg); }
-.hero-controls,.hero-slide figcaption a { background: var(--color-photo-caption); color: var(--color-on-autumn); border-color: var(--color-glass-edge); }
+.site-header > .nav-link { padding-inline: var(--space-md); border-radius: var(--radius-pill); }
+.site-header nav .nav-link { border-radius: var(--radius-pill); }
+.site-header nav .nav-link:hover { color: var(--color-accent); text-decoration: underline; text-underline-offset: 4px; }
+.hero-controls,.hero-slide figcaption a { background-color: var(--color-photo-caption); color: var(--color-ink); }
 .hero-controls { border-radius: var(--radius-pill); }
 .hero-slide figcaption a { border-radius: 24px; }
+.hero-slide figcaption a > span:last-child,.hero-region { color: var(--color-ink-2); }
+.hero-slide figcaption a:hover { background-color: var(--color-glass-hover); }
+.hero-controls .icon-button,.mobile-daybar > .icon-button { background: var(--color-transparent); color: var(--color-ink); border-color: var(--color-transparent); box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.hero-controls .icon-button:hover,.mobile-daybar > .icon-button:hover,.guide-section-nav a:hover { background: var(--color-glass-hover); box-shadow: inset 0 1px 1px var(--color-glass-inset); color: var(--color-accent); }
 .hero { border-radius: 32px; }
-.primary-button { color: var(--color-accent-ink); min-height: 52px; padding: var(--space-sm) var(--space-lg); }
+.primary-button { color: var(--color-accent-ink); background-color: var(--color-gold); min-height: 52px; padding: var(--space-sm) var(--space-lg); }
+.primary-button:hover:not(:disabled) { background-color: var(--color-gold-hover); }
+.primary-button:active:not(:disabled) { background-color: var(--color-gold); }
 .highlight-image { border-radius: var(--radius-card); }
-.highlight-date { background: var(--color-glass-solid); border: 1px solid var(--color-glass-edge); border-radius: var(--radius-pill); }
+.highlight-date { border-radius: var(--radius-pill); }
 .highlight-copy h4 { font-size: clamp(26px,2.5vw,36px); font-weight: 500; }
 .highlight-copy p { font-size: 14px; }
-.region-link { background: var(--color-paper-2); color: var(--color-ink); border: 1px solid var(--color-rule); }
-.region-link:hover { background: var(--color-paper-3); }
-.stop-guide-link { display: flex; align-items: center; gap: var(--space-sm); min-height: 48px; width: fit-content; margin-top: var(--space-md); color: var(--color-accent); font-weight: 500; text-decoration: none; }
-.day-essentials { border-radius: 24px; }
+.highlight-card:hover .highlight-go { background-color: var(--color-gold); background-image: var(--glass-reflection); color: var(--color-ink); }
+.region-link:hover { background-color: var(--color-glass-hover); }
+.stop-guide-link { display: flex; align-items: center; gap: var(--space-sm); min-height: 48px; width: fit-content; margin-top: var(--space-md); padding: var(--space-xs) var(--space-md); border-radius: var(--radius-pill); color: var(--color-accent); font-weight: 500; text-decoration: none; }
+.copy-place { border-radius: var(--radius-pill); padding: var(--space-xs) var(--space-sm); max-width: 100%; }
+.copy-place > span { min-width: 0; overflow-wrap: anywhere; }
+.state,.cost-status { display: inline-flex; align-items: center; padding: var(--space-2xs) var(--space-sm); border-radius: var(--radius-pill); line-height: 1.4; color: var(--color-accent); }
+.state.confirmed { background-color: var(--color-glass-solid); background-image: var(--glass-reflection); color: var(--color-ink-2); }
+.date-line > span { border-radius: var(--radius-pill); color: var(--color-accent); }
+.picker-days .date-choice[aria-current] { background-color: var(--color-gold); color: var(--color-ink); border-color: var(--color-glass-edge); }
+.picker-days .date-choice[aria-current] .choice-meta { color: var(--color-ink-2); }
+.day-essentials { border-radius: 24px; background: var(--color-paper-2); color: var(--color-ink); }
+.day-essentials .sleep-summary p,.day-essentials .transport-summary p { color: var(--color-ink-2); }
+.day-essentials .elevation,.day-essentials .transport-summary span { color: var(--color-muted); }
+.day-essentials .transport-summary { border-color: var(--color-rule); }
 .stop h3 { font-weight: 500; font-size: 30px; }
 .date-number,.arrival-date strong,.stop-sequence { font-weight: 500; }
 .mobile-daybar { color: var(--color-ink); border-radius: var(--radius-pill); }
-dialog { background: var(--color-glass-solid); border-color: var(--color-glass-edge); border-radius: 28px; }
+.mobile-picker { background: var(--color-transparent); color: var(--color-ink); border-radius: var(--radius-pill); }
+.mobile-picker:hover { background: var(--color-glass-hover); }
+dialog { background: var(--color-glass-solid); border: 1px solid var(--color-glass-edge); border-radius: 28px; box-shadow: var(--glass-shadow); }
 .guide-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); margin-bottom: var(--space-md); color: var(--color-muted); font-size: 14px; }
 .guide-breadcrumb a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
 .guide-breadcrumb svg { width: 14px; height: 14px; }
@@ -37,15 +71,18 @@ dialog { background: var(--color-glass-solid); border-color: var(--color-glass-e
 .guide-hero-text { min-height: 280px; }
 .guide-hero-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-md); margin-top: var(--space-lg); font-size: 14px; }
 .guide-hero-meta > span,.guide-hero-meta a { display: inline-flex; gap: var(--space-xs); align-items: center; min-height: 44px; }
-.guide-hero-meta a { text-decoration: none; border-bottom: 1px solid var(--color-on-autumn-muted); }
+.guide-hero-meta > span,.guide-hero-meta a { padding: var(--space-xs) var(--space-md); border-radius: var(--radius-pill); }
+.guide-hero-meta a { text-decoration: none; }
+.guide-hero-meta a:hover { background-color: var(--color-glass-hover); }
+.guide-hero :focus-visible { outline-color: var(--color-on-autumn); }
 .guide-intro { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,1fr); gap: var(--space-xl); align-items: center; padding-block: var(--space-lg); }
 .guide-intro > p { color: var(--color-ink-2); font-size: 18px; line-height: 1.6; max-width: 58ch; }
-.guide-date-link { display: flex; align-items: center; gap: var(--space-md); text-decoration: none; min-height: 76px; padding: var(--space-md) var(--space-lg); border-radius: 24px; background: var(--color-paper-2); }
+.guide-date-link { display: flex; align-items: center; gap: var(--space-md); text-decoration: none; min-height: 76px; padding: var(--space-md) var(--space-lg); border-radius: 24px; }
 .guide-date-link > span { flex: 1; font-weight: 500; }
 .guide-date-link small { display: block; color: var(--color-muted); font-size: 13px; font-weight: 400; margin-top: var(--space-2xs); }
 .guide-section-nav { display: flex; gap: var(--space-2xs); width: fit-content; max-width: 100%; margin-block: var(--space-md) var(--space-xl); padding: var(--space-2xs); border-radius: var(--radius-pill); position: sticky; top: var(--space-sm); z-index: var(--z-sticky-nav); }
 .guide-section-nav a { display: flex; align-items: center; gap: var(--space-xs); padding: var(--space-sm) var(--space-lg); min-height: 48px; text-decoration: none; border-radius: var(--radius-pill); font-size: 14px; font-weight: 500; white-space: nowrap; }
-.guide-section-nav a:hover { background: var(--color-paper-2); }
+.guide-section-nav a:hover { color: var(--color-accent); }
 .guide-body { display: grid; grid-template-columns: minmax(0,1.55fr) minmax(0,1fr); gap: var(--space-lg); align-items: start; }
 .guide-main-column,.guide-side-column { display: grid; gap: var(--space-lg); min-width: 0; }
 .guide-panel { padding: var(--space-xl); border-radius: var(--radius-card); background: var(--color-glass-solid); color: var(--color-ink); border: 1px solid var(--color-rule); scroll-margin-top: var(--space-3xl); }
@@ -61,7 +98,7 @@ dialog { background: var(--color-glass-solid); border-color: var(--color-glass-e
 .guide-duration { display: flex; align-items: flex-start; gap: var(--space-sm); font-size: 14px; margin-top: var(--space-lg); }
 .guide-duration svg { margin-top: var(--space-3xs); }
 .guide-references { margin-top: var(--space-md); color: var(--color-muted); font-size: 13px; }
-.guide-references summary { display: flex; align-items: center; justify-content: space-between; cursor: pointer; min-height: 44px; }
+.guide-references h3 { font-size: 14px; font-weight: 500; margin-bottom: var(--space-xs); color: var(--color-ink); }
 .guide-references > div { display: grid; }
 .guide-references a,.guide-costs a,.guide-photo-credit a,.guide-source-section a { display: inline-flex; align-items: center; gap: var(--space-xs); min-height: 44px; width: fit-content; overflow-wrap: anywhere; color: var(--color-accent); }
 .guide-references a svg,.guide-costs a svg,.guide-photo-credit a svg,.guide-source-section a svg { width: 14px; height: 14px; }
@@ -100,11 +137,13 @@ dialog { background: var(--color-glass-solid); border-color: var(--color-glass-e
 .guide-stop-links a { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); padding-block: var(--space-lg); border-bottom: 1px solid var(--color-rule); text-decoration: none; }
 .guide-stop-links strong { font-size: 18px; font-weight: 500; }
 .guide-stop-links small { display: block; font-size: 14px; color: var(--color-muted); }
-.guide-source-section { margin-top: var(--space-2xl); border-block: 1px solid var(--color-rule); padding-block: var(--space-md); color: var(--color-ink-2); }
-.guide-source-section summary { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); min-height: 48px; cursor: pointer; color: var(--color-ink); }
-.guide-source-section details > p { margin-top: var(--space-lg); }
+.guide-source-section { margin-top: var(--space-2xl); border-block: 1px solid var(--color-rule); padding-block: var(--space-xl); color: var(--color-ink-2); scroll-margin-top: var(--space-3xl); }
+.guide-source-section h2 { font-size: 28px; color: var(--color-ink); margin-bottom: var(--space-lg); }
+.guide-source-section > p { margin-top: var(--space-lg); max-width: 70ch; }
+.guide-source-section li { padding-block: var(--space-xs); }
 .guide-source-section ul { padding-left: var(--space-lg); }
 .guide-source-section small { display: block; color: var(--color-muted); font-size: 12px; }
+.guide-source-note { max-width: 70ch; margin-top: var(--space-xs); font-size: 14px; line-height: 1.6; color: var(--color-muted); }
 .guide-place-names { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--space-lg); padding-block: var(--space-lg); }
 .guide-place-names dt { font-weight: 500; }
 .guide-place-names dd { margin: var(--space-xs) 0 0; }
@@ -112,7 +151,7 @@ dialog { background: var(--color-glass-solid); border-color: var(--color-glass-e
 .guide-next h2 { font-size: 40px; }
 .guide-next p { margin-top: var(--space-lg); color: var(--color-muted); }
 .guide-visit-dates { display: grid; gap: var(--space-sm); }
-.guide-visit-dates .quiet-button { border-radius: 24px; min-height: 80px; padding: var(--space-md) var(--space-lg); text-decoration: none; justify-content: space-between; background: var(--color-paper-2); }
+.guide-visit-dates .quiet-button { border-radius: 24px; min-height: 80px; padding: var(--space-md) var(--space-lg); text-decoration: none; justify-content: space-between; }
 .guide-visit-dates span { flex: 1; }
 .guide-visit-dates small { display: block; font-size: 12px; font-weight: 400; color: var(--color-muted); margin-top: var(--space-2xs); }
 .guide-footer { display: flex; align-items: start; justify-content: space-between; gap: var(--space-xl); padding-block: var(--space-2xl) var(--space-3xl); }
@@ -144,8 +183,14 @@ dialog { background: var(--color-glass-solid); border-color: var(--color-glass-e
 .destination-index li a { display: inline-flex; align-items: center; min-height: 44px; }
 
 @supports ((backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px))) {
- .site-header nav,.glass-surface,.mobile-daybar { background: var(--color-glass); -webkit-backdrop-filter: blur(24px) saturate(1.5); backdrop-filter: blur(24px) saturate(1.5); }
- .hero-controls,.hero-slide figcaption a { -webkit-backdrop-filter: blur(20px) saturate(1.3); backdrop-filter: blur(20px) saturate(1.3); }
+ :is(.site-header :where(nav),.site-header > :where(.nav-link),.glass-surface,.mobile-daybar,.hero-controls,.hero-slide :where(figcaption a),.primary-button,.quiet-button,.icon-button,.region-link,.highlight-date,.highlight-go,.state,.cost-status,.date-line > :where(span),.guide-date-link,.guide-hero-meta > :where(span,a),.copy-place,.stop-guide-link,.picker-days :where(.date-choice)) {
+  background-color: var(--color-glass); -webkit-backdrop-filter: blur(22px) saturate(1.65); backdrop-filter: blur(22px) saturate(1.65);
+ }
+ .hero-controls,.hero-slide figcaption a,.highlight-date,.guide-hero-meta > span,.guide-hero-meta > a { background-color: var(--color-photo-caption); }
+ .primary-button,.picker-days .date-choice[aria-current] { background-color: var(--color-glass-tint); }
+ .primary-button:hover:not(:disabled) { background-color: var(--color-glass-tint-hover); }
+ .hero-controls .icon-button,.mobile-daybar > .icon-button { background: var(--color-transparent); -webkit-backdrop-filter: none; backdrop-filter: none; }
+ .hero-controls .icon-button:hover,.mobile-daybar > .icon-button:hover { background: var(--color-glass-hover); }
 }
 @media (max-width:959px) {
  .guide-body { grid-template-columns: minmax(0,1fr); }
@@ -208,8 +253,13 @@ dialog { background: var(--color-glass-solid); border-color: var(--color-glass-e
  .destination-index h3 { font-size: 21px; }
 }
 @media (prefers-reduced-transparency: reduce),(prefers-contrast: more) {
- .site-header nav,.glass-surface,.mobile-daybar,.hero-controls,.hero-slide figcaption a { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--color-glass-solid); color: var(--color-ink); box-shadow: none; }
- .hero-controls .icon-button,.hero-slide figcaption a > span,.hero-slide figcaption a > span:last-child { color: var(--color-ink); }
+ :root { --color-glass-hover: var(--color-glass-solid); --color-glass-pressed: var(--color-paper-2); --color-glass-tint-hover: var(--color-gold-hover); --glass-shadow-hover: none; }
+ :is(.site-header :where(nav),.site-header > :where(.nav-link),.glass-surface,.mobile-daybar,.hero-controls,.hero-slide :where(figcaption a),.primary-button,.quiet-button,.icon-button,.region-link,.highlight-date,.highlight-go,.state,.cost-status,.date-line > :where(span),.guide-date-link,.guide-hero-meta > :where(span,a),.copy-place,.stop-guide-link,.picker-days :where(.date-choice)) {
+  -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--color-glass-solid); color: var(--color-ink); border-color: var(--color-rule-2); box-shadow: none;
+ }
+ .primary-button,.picker-days .date-choice[aria-current] { background: var(--color-gold); }
+ .hero-controls .icon-button,.mobile-daybar > .icon-button { background: var(--color-transparent); border-color: var(--color-transparent); }
+ .hero-slide figcaption a > span,.hero-slide figcaption a > span:last-child { color: var(--color-ink); }
 }
 @media print {
  .guide-section-nav,.guide-photo-dialog,.site-header nav { display: none; }
@@ -221,4 +271,14 @@ dialog { background: var(--color-glass-solid); border-color: var(--color-glass-e
 .place-gallery-item > small { display: block; padding: 0 var(--space-lg) var(--space-lg); font-size: 12px; color: var(--color-muted); font-weight: 400; }
 @media (max-width:359px) {
  .site-header nav { gap: var(--space-2xs); padding-inline: var(--space-2xs); }
+}
+
+/* Source provenance remains in the reading flow, never behind a disclosure. */
+.guide-provenance { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-xs) var(--space-lg); padding-bottom: var(--space-sm); color: var(--color-muted); font-size: 13px; }
+.guide-provenance a,.guide-editorial-note a { display: inline-flex; align-items: center; gap: var(--space-xs); min-height: 44px; min-width: 44px; color: var(--color-accent); overflow-wrap: anywhere; }
+.guide-provenance a > svg,.guide-editorial-note a > svg { width: 16px; height: 16px; }
+.guide-editorial-note { margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--color-rule); font-size: 13px; line-height: 1.6; color: var(--color-muted); }
+.guide-editorial-note a { margin-top: var(--space-2xs); }
+@media (prefers-reduced-motion: reduce) {
+ :is(.primary-button,.quiet-button,.icon-button,.region-link,.guide-date-link,.copy-place,.stop-guide-link,.picker-days :where(.date-choice),.site-header > :where(.nav-link)) { transition: none; }
 }

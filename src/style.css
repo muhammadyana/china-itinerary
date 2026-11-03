@@ -6,43 +6,38 @@
 /* Hallmark · waive 39b · destination photographs are large gallery controls · Destination photographs stay large because their gallery is the requested content */
 /* Hallmark · waive 71 · date and title form one compact group · the overnight summary must remain visible on a phone */
 /* Hallmark · dismissed 25 · the 35ch homepage introduction is a short two-sentence lede, not running prose */
-/* Hallmark · dismissed 40 · static variables combine light and dark media scopes; rendered contrast and aXe checks cover the actual paired themes */
+/* Hallmark · dismissed 40 · warm-light surfaces are fixed across system preferences; rendered contrast checks cover the paired text and surface tokens */
 /* Hallmark · answered F25 · all desktop dates remain available in the mobile date picker */
-/* Hallmark · answered F4 · photo controls use a contrast-preserving glass surface; the blue date action remains primary */
+/* Hallmark · answered F4 · photo controls use a contrast-preserving glass surface; the amber date action remains primary */
 @import url('../tokens.css');
 @import url('../base.css');
+
 :root {
- --color-paper: #eef2f3; --color-paper-2: #e2e9ed; --color-paper-3: #d1dce3;
- --color-ink: #17252e; --color-ink-2: #3b4e59; --color-muted: #52656f;
- --color-rule: #c9d4dc; --color-rule-2: #8b9eab;
- --color-accent: #005bb8; --color-accent-ink: #f7fbff; --color-focus: #005bb8;
- --color-autumn: #203a48; --color-autumn-hover: #2a4c5e; --color-on-autumn: #f7fbff;
- --color-on-autumn-muted: #d0dfe8; --color-rust-wash: #dceaf7;
- --color-gold: #005bb8; --color-gold-hover: #004a96;
- --color-hero-clear: #0c192000; --color-hero-mid: #0c192052; --color-hero-base: #0c1920ed; --color-dock-shadow: #15334d1f;
- --color-photo-caption: #102c42c9; --color-backdrop: #091822bd; --color-transparent: transparent;
- --color-glass: #f7fbffbf; --color-glass-solid: #f7fbff; --color-glass-edge: #fbfdffcc;
- --color-glass-shadow: #15334d1c; --color-glass-inset: #fbfdffb3;
- --color-warning: #795500; --color-warning-surface: #f9f1dc;
+ color-scheme: only light;
+ --color-paper: #fbf7ef; --color-paper-2: #f1e8d9; --color-paper-3: #e8d9c4;
+ --color-ink: #382d25; --color-ink-2: #5a493c; --color-muted: #756250;
+ --color-rule: #dfd3c1; --color-rule-2: #ad977c;
+ --color-accent: #884827; --color-accent-ink: #382d25; --color-focus: #884827;
+ --color-autumn: #744632; --color-autumn-hover: #8a543b; --color-on-autumn: #fffaf2;
+ --color-on-autumn-muted: #f0dfc8; --color-rust-wash: #f3e1ca;
+ --color-gold: #f2ce8d; --color-gold-hover: #f7dca9;
+ --color-hero-clear: #241b1400; --color-hero-mid: #241b143d; --color-hero-base: #241b14e6; --color-dock-shadow: #60442a1f;
+ --color-photo-caption: #fffaf2cf; --color-backdrop: #241b148a; --color-transparent: transparent;
+ --color-glass: #fffaf2a8; --color-glass-solid: #fffcf6; --color-glass-edge: #ffffffd9;
+ --color-glass-shadow: #68462621; --color-glass-inset: #fffffff2;
+ --color-glass-glint: #ffffffad; --color-glass-reflection: #ffffff14; --color-glass-base: #d7bd9524;
+ --color-glass-rim: #9b774d2b; --color-glass-hover: #fffdf5db; --color-glass-pressed: #ecddc8d9;
+ --color-glass-tint: #f2ce8dcf; --color-glass-tint-hover: #f7dca9eb;
+ --color-warning: #77531d; --color-warning-surface: #faf0d9;
  --font-display: 'Geist', system-ui, sans-serif; --font-body: 'Geist', system-ui, sans-serif;
  --font-outlier: var(--font-body); --display-weight: 600;
  --container: 1280px; --gutter: 40px; --gap-columns: 40px;
  --radius-card: 28px; --radius-pill: 100px; --tracking-display: -.035em;
  --text-display: clamp(3rem,5.7vw,5.3rem); --text-section: clamp(2.2rem,3.2vw,3rem);
  --text-title: 1.65rem; --text-lead: 1.0625rem; --text-md: 1rem; --text-sm: .875rem;
-}
-@media (prefers-color-scheme: dark) {
- :root {
-  color-scheme: dark;
-  --color-paper: #10191e; --color-paper-2: #1c2a32; --color-paper-3: #30414d;
-  --color-ink: #eaf3f8; --color-ink-2: #c2d2dd; --color-muted: #a5b6c2;
-  --color-rule: #344752; --color-rule-2: #738d9c;
-  --color-accent: #7cbeff; --color-focus: #a0d0ff; --color-accent-ink: #f7fbff;
-  --color-rust-wash: #203b51; --color-gold: #125db3; --color-gold-hover: #1c6dc6;
-  --color-glass: #21303dcc; --color-glass-solid: #233440; --color-glass-edge: #d7e9f529;
-  --color-glass-inset: #d7e9f51f; --color-glass-shadow: #020d1659; --color-dock-shadow: #020d1666;
-  --color-warning: #efcf85; --color-warning-surface: #302e23;
- }
+ --glass-reflection: linear-gradient(145deg,var(--color-glass-glint),var(--color-glass-reflection) 44%,var(--color-glass-base));
+ --glass-shadow: inset 0 1px 1px var(--color-glass-inset), inset 0 -1px 1px var(--color-glass-rim), 0 6px 20px var(--color-glass-shadow), 0 1px 3px var(--color-glass-rim);
+ --glass-shadow-hover: inset 0 1px 1px var(--color-glass-inset), inset 0 -1px 1px var(--color-glass-rim), 0 8px 24px var(--color-glass-shadow), 0 2px 4px var(--color-glass-rim);
 }
 
 html { scroll-padding-top: 24px; }

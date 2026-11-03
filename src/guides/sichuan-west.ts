@@ -1,16 +1,18 @@
 import type { DestinationGuide, GuideSource } from '../guide-types.ts';
 
 const xinduqiaoSource: GuideSource = { title: 'China Discovery: akses Xinduqiao', url: 'https://www.chinadiscovery.com/sichuan/kangding/xinduqiao.html', kind: 'operator' };
-const kangdingSource: GuideSource = { title: 'Pemerintah Kangding: jaringan jalan', url: 'https://www.kangding.gov.cn/kdkdjt1/article/107029', kind: 'official' };
-const localTourSource: GuideSource = { title: 'Chengdu CYTS: rute dan biaya tambahan lokal', url: 'https://www.cdscyts.com/line.aspx?uin=2466', kind: 'operator' };
-const jiagenbaSource: GuideSource = { title: 'Ganzi TV: rute Jiagenba', url: 'https://www.ganzitv.com/cms/a/166446392/content', kind: 'reference' };
-const roadSource: GuideSource = { title: 'Sichuan Online: lokasi Tianlu 18 Bends', url: 'https://sichuan.scol.com.cn/ggxw/202408/82593925.html', kind: 'reference' };
+const kangdingSource: GuideSource = { title: 'Pemerintah Kangding: referensi jaringan jalan, 2022', url: 'https://www.kangding.gov.cn/kdkdjt1/article/107029', kind: 'official', publishedAt: '2022-09-14', note: 'Referensi jaringan jalan; bukan pembaruan kondisi atau penutupan jalan hari ini.' };
+const localTourSource: GuideSource = { title: 'Chengdu China Travel Service: rute dan biaya tambahan lokal', url: 'https://m.gosctour.com/line/show.html?id=240', kind: 'operator' };
+const jiagenbaSource: GuideSource = { title: 'Ganzi TV: rute Jiagenba', url: 'https://www.ganzitv.com/cms/a/166446392/content', kind: 'reference', publishedAt: '2025-05-11' };
+const roadSource: GuideSource = { title: 'Sichuan Online: lokasi Tianlu 18 Bends', url: 'https://sichuan.scol.com.cn/ggxw/202408/82593925.html', kind: 'reference', publishedAt: '2024-08-25' };
 const litangSource: GuideSource = { title: 'Sichuan Travel Guide: Litang dan biaranya', url: 'https://www.sichuantravelguide.com/litang.html', kind: 'operator' };
-const haiziSource: GuideSource = { title: 'Pemerintah Daocheng: Haizi Shan dan rute dari Litang', url: 'https://www.daocheng.gov.cn/dcxrmzf/c102548/201806/e8e36c09ba604547afd38433afe461a4.shtml', kind: 'official' };
+const haiziSource: GuideSource = { title: 'Pemerintah Daocheng: Haizi Shan dan rute dari Litang', url: 'https://www.daocheng.gov.cn/dcxrmzf/c102548/201806/e8e36c09ba604547afd38433afe461a4.shtml', kind: 'official', publishedAt: '2018-06-08', note: 'Referensi lokasi dan rute lama; harga di artikel tidak digunakan sebagai tarif saat ini.' };
+const liyaRoadSource: GuideSource = { title: 'Pemerintah Daocheng: pembaruan ruas Litang–Yading, Agustus 2026', url: 'https://www.daocheng.gov.cn/ttxw/article/727344', kind: 'official', publishedAt: '2026-08-17' };
 const pagodaSource: GuideSource = { title: 'Trip.com: Zunsheng Tower Forest', url: 'https://www.trip.com/travel-guide/attraction/daocheng/namgyal-tallinn-131896601', kind: 'reference' };
-const yadingNotice: GuideSource = { title: 'Salinan pengumuman operator Yading, 14 April 2026', url: 'https://www.513337.com/tourism/news/25715.html', kind: 'reference' };
-const yadingPromotion: GuideSource = { title: 'Pemerintah Daocheng: kebijakan gratis mulai Agustus 2026', url: 'https://www.daocheng.gov.cn/fmxw/article/726022', kind: 'official' };
-const yadingReform: GuideSource = { title: 'Laporan Xinhua: perubahan tarif dan promo hingga 31 Oktober', url: 'https://finance.sina.com.cn/wm/2026-07-10/doc-inihkimn3633439.shtml', kind: 'reference' };
+const yadingNotice: GuideSource = { title: 'Salinan pengumuman operator Yading, 14 April 2026', url: 'https://www.513337.com/tourism/news/25715.html', kind: 'reference', publishedAt: '2026-04-14' };
+const yadingPromotion: GuideSource = { title: 'Pemerintah Daocheng: kebijakan gratis mulai Agustus 2026', url: 'https://www.daocheng.gov.cn/fmxw/article/726022', kind: 'official', publishedAt: '2026-08-04', note: 'Isi ditemukan dalam indeks pencarian; halaman langsung gagal dimuat saat pemeriksaan. Tidak membuktikan tarif November.' };
+const yadingReform: GuideSource = { title: 'Laporan Xinhua: perubahan tarif dan promo hingga 31 Oktober', url: 'https://finance.sina.com.cn/wm/2026-07-10/doc-inihkimn3633439.shtml', kind: 'reference', publishedAt: '2026-07-10' };
+const yadingVisitorNotice: GuideSource = { title: 'Salinan panduan pengelola Yading, 25 Oktober 2026', url: 'https://www.513337.com/tourism/news/25960.html', kind: 'reference', publishedAt: '2026-10-25', note: 'Salinan yang menyebut pengelola sebagai sumber; tautan asli WeChat tidak dapat dimuat saat pemeriksaan.' };
 const xiangchengSource: GuideSource = { title: 'Sichuan Travel Guide: koridor Xiangcheng', url: 'https://www.sichuantravelguide.com/garze/xiangcheng.html', kind: 'operator' };
 
 export const westernGuides: DestinationGuide[] = [
@@ -47,7 +49,7 @@ export const westernGuides: DestinationGuide[] = [
     gettingThere: { origin: 'Yuzixi atau Xinduqiao', steps: ['Gunakan mobil yang sama menuju koridor S434 dan kawasan jalan Bandara Kangding.', 'Minta sopir memasukkan pin 红海子, lalu turun hanya di area yang dibuka untuk pengunjung.'], duration: 'Bagian dari loop sekitar 250 km pada PDF; waktu ruas perlu dihitung sopir berdasarkan kondisi jalan.', sources: [localTourSource.url, kangdingSource.url] },
     stopAccess: { honghaizi: 'Turun dari mobil di tempat parkir dekat danau pada koridor S434; lanjut berjalan di area yang dibuka.' },
     costs: [
-      { label: 'Biaya kebersihan lokal', amount: 'Acuan CNY 30 / orang', detail: 'Dicantumkan operator sebagai biaya referensi yang dibayar di lokasi; cek nilai terbaru.', status: 'estimate', source: localTourSource.url },
+      { label: 'Biaya kebersihan lokal', amount: 'Acuan CNY 30 / orang', detail: 'Dicantumkan pada paket operator yang tidak bertanggal; ini acuan anggaran, bukan harga terkonfirmasi 13 November. Cek nilai dan area yang tercakup sebelum membayar.', status: 'estimate', source: localTourSource.url },
       { label: 'Mobil dan parkir', amount: 'Perlu konfirmasi', detail: 'Masukkan singgah Honghaizi ke kesepakatan loop Xinduqiao dan Kangding.', status: 'unconfirmed' },
     ],
     visitDuration: 'Saran 20 hingga 30 menit.', bestTime: 'Pagi ketika tiba dari Yuzixi; pantulan bergantung pada angin.',
@@ -86,7 +88,7 @@ export const westernGuides: DestinationGuide[] = [
     gettingThere: { origin: 'Xinduqiao setelah kembali dari Kangding', steps: ['Ikuti mobil ke Jiagenba; Ganzi TV menempatkannya sekitar 27 hingga 30 km dari Xinduqiao.', 'Berjalan di area desa dan tepi sungai yang diizinkan.', 'Untuk Zimei Pass, minta sopir menghitung perjalanan tambahan secara terpisah dan memastikan jalan dibuka. Jangan menambahkannya hanya karena masih ada waktu satu jam.'], duration: 'Waktu ke Jiagenba mengikuti kondisi jalan; Zimei dapat memerlukan etape tambahan panjang.', sources: [jiagenbaSource.url] },
     stopAccess: { jiagenba: 'Mobil dari Xinduqiao ke kawasan desa Jiagenba, kemudian jalan kaki di jalur yang diizinkan.', zimei: 'Akses lanjutan dengan sopir lokal menuju 子梅垭口 hanya setelah rute, kendaraan dan jam kembali disetujui. Tetap opsional.' },
     costs: [
-      { label: 'Kawasan umum Jiagenba', amount: 'CNY 0', detail: 'Ganzi TV mencantumkan tanpa tiket untuk Jiagenba. Parkir, lahan pribadi dan titik pandang tambahan tidak otomatis termasuk.', status: 'published', source: jiagenbaSource.url },
+      { label: 'Kawasan umum Jiagenba', amount: 'Referensi: gratis', detail: 'Ganzi TV pada 11 Mei 2025 mencantumkan tanpa tiket. Ini referensi, bukan tarif resmi November 2026; parkir, lahan pribadi, dan titik pandang tambahan tidak termasuk.', status: 'estimate', source: jiagenbaSource.url },
       { label: 'Detur Zimei dan kendaraan lokal', amount: 'Perlu penawaran terpisah', detail: 'Konfirmasikan biaya akses, kebutuhan kendaraan dan tambahan waktu sebelum menyetujui detur.', status: 'unconfirmed' },
     ],
     visitDuration: 'Saran 1 hingga 2 jam di Jiagenba; Zimei tidak termasuk durasi ini.', bestTime: 'Sore untuk lembah Jiagenba; kembali sebelum kondisi jalan memburuk.',
@@ -117,12 +119,12 @@ export const westernGuides: DestinationGuide[] = [
     ],
     visitDuration: 'Saran 1 hingga 2 jam jalan santai dan kunjungan biara.', bestTime: 'Sore 14 November selama area kunjungan masih dibuka.',
     tips: ['Minta izin sebelum memotret di dalam aula atau memotret orang beribadah.', 'Siapkan bekal untuk keberangkatan ke Daocheng keesokan pagi.'],
-    cautions: ['Litang sekitar 4.014 m menurut PDF dan merupakan malam menginap tertinggi dalam rute; hindari memaksakan aktivitas.'], sources: [litangSource], checkedAt: '2026-11-03',
+    cautions: ['Litang sekitar 4.014 m menurut PDF dan merupakan malam menginap tertinggi dalam rute; hindari memaksakan aktivitas.'], sources: [litangSource, roadSource], checkedAt: '2026-11-03',
   },
   {
     slug: 'haizi-shan', name: 'Haizi Shan & Sister Lakes', region: 'Sichuan', placeIds: ['haizi', 'sister-lakes'],
     summary: 'Batu glasial dan danau di lintasan menuju Daocheng. Sister Lakes berada pada cabang arah Batang dan perlu detur tersendiri.',
-    gettingThere: { origin: 'Litang menuju Daocheng', steps: ['Ikuti mobil ke arah Daocheng dan minta singgah di titik Haizi Shan yang aman pada rute langsung.', 'Jika ingin Sister Lakes, tunjukkan pin 姊妹湖 kepada sopir dan minta perhitungan detur arah Batang sebelum meninggalkan Litang.', 'Tetap utamakan tiba di Riwa untuk beristirahat sebelum Yading.'], duration: 'PDF mengalokasikan sekitar 5 jam untuk Litang ke Riwa; detur Sister Lakes belum termasuk.', sources: [haiziSource.url] },
+    gettingThere: { origin: 'Litang menuju Daocheng', steps: ['Ikuti mobil ke arah Daocheng dan minta singgah di titik Haizi Shan yang aman pada rute langsung.', 'Jika ingin Sister Lakes, tunjukkan pin 姊妹湖 kepada sopir dan minta perhitungan detur arah Batang sebelum meninggalkan Litang.', 'Tetap utamakan tiba di Riwa untuk beristirahat sebelum Yading.'], duration: 'PDF mengalokasikan sekitar 5 jam untuk Litang ke Riwa; detur Sister Lakes belum termasuk.', sources: [liyaRoadSource.url, haiziSource.url] },
     stopAccess: { haizi: 'Singgah dengan mobil pada rute Litang ke Daocheng; tetap dekat titik berhenti dan jalur yang aman.', 'sister-lakes': 'Dari Litang, cabang G318 arah Batang berbeda dari arah Daocheng. Kunjungan hanya jika tambahan jarak dan waktu disepakati dengan sopir.' },
     costs: [
       { label: 'Mobil dan detur Sister Lakes', amount: 'Perlu penawaran', detail: 'Jangan menganggap detur termasuk tarif Litang ke Riwa. Sepakati biaya dan batas waktu.', status: 'unconfirmed' },
@@ -130,12 +132,12 @@ export const westernGuides: DestinationGuide[] = [
     ],
     visitDuration: 'Saran 20 hingga 30 menit per pemberhentian; tanpa trek ke pedalaman.', bestTime: 'Pagi 15 November ketika melintas dan jalan dibuka.',
     tips: ['Bawa makanan dan air dari Litang untuk etape panjang.', 'Foto danau dari titik yang disepakati sopir; jangan keluar jalur mencari danau lain.'],
-    cautions: ['Sister Lakes bukan pemberhentian otomatis pada rute langsung ke Daocheng.', 'Kawasan sekitar 4.500 m menurut PDF; batasi aktivitas bila kondisi tubuh atau cuaca tidak mendukung.'], sources: [haiziSource], checkedAt: '2026-11-03',
+    cautions: ['Sister Lakes bukan pemberhentian otomatis pada rute langsung ke Daocheng.', 'Pembaruan pemerintah 17 Agustus 2026 menargetkan penyelesaian G227 pada November; konfirmasikan pekerjaan jalan dan pengaturan lalu lintas sebelum berangkat.', 'Kawasan sekitar 4.500 m menurut PDF; batasi aktivitas bila kondisi tubuh atau cuaca tidak mendukung.'], sources: [liyaRoadSource, haiziSource], checkedAt: '2026-11-03',
   },
   {
     slug: 'daocheng', name: 'Daocheng & White Pagoda', region: 'Sichuan', placeIds: ['daocheng'],
     summary: 'Singgah di kompleks stupa putih dan isi bekal sebelum melanjutkan perjalanan ke Riwa.',
-    gettingThere: { origin: 'Haizi Shan, pada perjalanan dari Litang', steps: ['Lanjutkan mobil ke Daocheng dan minta berhenti di 尊胜塔林, kompleks White Pagoda dekat jembatan Daocheng.', 'Setelah kunjungan, beli bekal lalu teruskan mobil ke hotel di Riwa.'], duration: 'Bagian dari etape Litang ke Riwa sekitar 5 jam menurut PDF, belum termasuk berhenti.', sources: [pagodaSource.url, haiziSource.url] },
+    gettingThere: { origin: 'Haizi Shan, pada perjalanan dari Litang', steps: ['Lanjutkan mobil ke Daocheng dan minta berhenti di 尊胜塔林, kompleks White Pagoda dekat jembatan Daocheng.', 'Setelah kunjungan, beli bekal lalu teruskan mobil ke hotel di Riwa.'], duration: 'Bagian dari etape Litang ke Riwa sekitar 5 jam menurut PDF, belum termasuk berhenti.', sources: [pagodaSource.url, liyaRoadSource.url, haiziSource.url] },
     stopAccess: { daocheng: 'Turun di area White Pagoda / 尊胜塔林 dekat jembatan Daocheng dan berjalan mengitari bagian yang terbuka.' },
     costs: [
       { label: 'White Pagoda', amount: 'CNY 0', detail: 'Trip.com mencantumkan masuk gratis. Cek papan setempat untuk perubahan atau layanan tambahan.', status: 'published', source: pagodaSource.url },
@@ -143,21 +145,21 @@ export const westernGuides: DestinationGuide[] = [
     ],
     visitDuration: 'Sekitar 30 menit di kompleks stupa, ditambah belanja bekal.', bestTime: 'Siang ketika melewati kota pada 15 November.',
     tips: ['Ikuti arah kunjungan dan petunjuk setempat di area stupa.', 'Konfirmasikan hotel tujuan di Riwa, bukan menginap di kota Daocheng.'],
-    cautions: ['Riwa / Shangri-La Town di Sichuan berbeda dari Kota Shangri-La di Yunnan.'], sources: [pagodaSource, haiziSource], checkedAt: '2026-11-03',
+    cautions: ['Riwa / Shangri-La Town di Sichuan berbeda dari Kota Shangri-La di Yunnan.'], sources: [pagodaSource, liyaRoadSource, haiziSource], checkedAt: '2026-11-03',
   },
   {
     slug: 'yading', name: 'Yading', region: 'Sichuan', placeIds: ['zhaguanbeng', 'chonggu', 'luorong', 'milk-lake', 'five-colour', 'pearl-lake'],
     summary: 'Bus pegunungan, padang Luorong dan jalur danau. Pilih panjang perjalanan setelah mengetahui pembukaan jalur hari itu.',
-    gettingThere: { origin: 'Hotel di Riwa / Shangri-La Town, Sichuan', steps: ['Minta hotel mengatur antar ke pusat pengunjung Yading, lalu gunakan layanan bus yang berlaku menuju Zhaguanbeng.', 'Berjalan menuju Chonggu. Ke Luorong, pilih kendaraan listrik yang tersedia atau jalur jalan kaki.', 'Milk Lake dan Five-Colour Lake memerlukan trek lanjutan dari Luorong; pilih Pearl Lake dari cabang Chonggu bila jalur pendek dibuka.'], duration: 'Seharian. PDF mengalokasikan 5 hingga 6 jam pulang-pergi dari Luorong untuk trek danau atas, di luar bus dan antrean.', sources: [yadingNotice.url, yadingReform.url] },
+    gettingThere: { origin: 'Hotel di Riwa / Shangri-La Town, Sichuan', steps: ['Minta hotel mengatur antar ke pusat pengunjung Yading, lalu gunakan layanan bus yang berlaku menuju Zhaguanbeng.', 'Berjalan menuju Chonggu. Ke Luorong, pilih kendaraan listrik yang tersedia atau jalur jalan kaki.', 'Milk Lake dan Five-Colour Lake memerlukan trek lanjutan dari Luorong; pilih Pearl Lake dari cabang Chonggu bila jalur pendek dibuka.'], duration: 'Panduan pengelola yang disalin 25 Oktober menyebut trek danau atas dari Luorong sekitar 10 km pulang-pergi, 5 hingga 6 jam. Bus dan antrean di luar durasi ini.', sources: [yadingVisitorNotice.url, yadingReform.url] },
     stopAccess: { zhaguanbeng: 'Naik bus taman dari pusat pengunjung Riwa menuju titik turun Zhaguanbeng.', chonggu: 'Dari Zhaguanbeng, berjalan mengikuti jalur bertanda menuju Chonggu.', luorong: 'Dari kawasan Chonggu, gunakan kendaraan listrik menuju Luorong jika beroperasi atau ikuti jalur jalan kaki resmi.', 'milk-lake': 'Trek lanjutan dari Luorong hanya jika jalur atas dibuka; kendaraan listrik tidak mengantar sampai danau.', 'five-colour': 'Lanjutkan trek danau atas dari kawasan Milk Lake sesuai jalur yang diizinkan petugas; tidak ada jaminan akses pada 16 November.', 'pearl-lake': 'Ikuti percabangan jalur pendek dari Chonggu menuju Pearl Lake bila dibuka; ini alternatif terpisah dari trek Luorong ke danau atas.' },
     costs: [
       { label: 'Tiket kawasan', amount: 'Acuan awal CNY 146 / orang', detail: 'Pengumuman 14 April menyebut tarif ini sampai 25 November 2026. Promo gratis Agustus sampai Oktober menyusul; tarif final 16 November harus dicek saat reservasi.', status: 'estimate', source: yadingNotice.url },
       { label: 'Bus dan kendaraan listrik', amount: 'Perlu konfirmasi', detail: 'Kebijakan biaya berubah pada 2026. Jangan memakai total lama CNY 120 + CNY 80 atau menganggap promo gratis masih berlaku pada November.', status: 'unconfirmed', source: yadingPromotion.url },
       { label: 'Antar hotel ke pusat pengunjung', amount: 'Sesuai penawaran hotel', detail: 'Pastikan harga dan titik jemput pulang sebelum berangkat.', status: 'unconfirmed' },
     ],
-    visitDuration: 'Satu hari; panjang trek dipilih sesuai kondisi dan pembukaan jalur.', bestTime: 'Berangkat pagi 16 November; tanyakan jam bus terakhir saat masuk.',
+    visitDuration: 'Satu hari; panjang trek dipilih sesuai kondisi dan pembukaan jalur.', bestTime: 'Berangkat pagi 16 November. Panduan 25 Oktober menyebut pemeriksaan menuju jalur atas berhenti menerima pengunjung pada 14.30; tanyakan pula jam bus terakhir.',
     tips: ['Hubungi taman di +86 836 6966022 untuk harga dan jalur yang berlaku pada tanggal kunjungan.', 'Bawa bekal halal, air, jaket dan lampu kecil; simpan informasi bus terakhir.', 'Tentukan jam putar balik sebelum mulai trek dan sisakan waktu kembali ke bus.'],
-    cautions: ['Pengumuman April merencanakan jalur atas sampai 25 November, tetapi cuaca atau keputusan petugas dapat menutupnya lebih awal.', 'Milk Lake dan Five-Colour Lake sekitar 4.600 hingga 4.700 m menurut PDF. Pilih jalur pendek bila tubuh atau kondisi jalur tidak mendukung.'], sources: [yadingNotice, yadingPromotion, yadingReform], checkedAt: '2026-11-03',
+    cautions: ['Panduan pengelola yang disalin 25 Oktober menyebut jalur Milk Lake dan Five-Colour Lake tutup mulai 25 November hingga 15 April. Akses 16 November tetap bergantung cuaca dan keputusan petugas.', 'Milk Lake dan Five-Colour Lake sekitar 4.600 hingga 4.700 m menurut PDF. Pilih jalur pendek bila tubuh atau kondisi jalur tidak mendukung.'], sources: [yadingVisitorNotice, yadingNotice, yadingPromotion, yadingReform], checkedAt: '2026-11-03',
   },
   {
     slug: 'xiangcheng', name: 'Xiangcheng & Daxueshan', region: 'Sichuan', placeIds: ['xiangcheng', 'daxueshan'],

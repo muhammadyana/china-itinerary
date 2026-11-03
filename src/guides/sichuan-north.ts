@@ -6,16 +6,17 @@ const jiuzhaiNotice = 'https://www.jiuzhai.com/news/notice/11492-2026-10-31-09-0
 const jiuzhaiBus = 'https://en.jiuzhai.com/plan-your-trip/getting-around-the-park';
 const shuangqiaoGuide = 'https://www.sgns.cn/understand/sqg';
 const siguniangTickets = 'https://www.sgns.cn/info/notice/5748-2024-03-15-01-49-40';
-const siguniangTransport = 'https://www.sgnsgeopark.cn/guideline/traffic';
 const maobiliangGuide = 'https://you.ctrip.com/sight/xiaojin3110/145018.html';
 const maobiliangFees = 'https://travelnews.qunar.com/qa_strategy/aba-siguniangshan-travel-guide';
 const jiajuFees = 'https://www.danba.gov.cn/lyzx/article/234361';
+const jiajuTickets = 'https://touch.piao.qunar.com/touch/detail.htm?id=190399';
 const jiajuTransport = 'https://www.etripchina.com/china-guide/danba-jiaju-tibetan-village.htm';
 const zhongluTransport = 'https://place.fliggy.com/poi/14963276';
 const zhongluGuide = 'https://www.danba.gov.cn/lyzx/article/234330';
 const moshiGuide = 'https://www.etripchina.com/china-guide/ganzi-moshi-park.htm';
+const moshiTickets = 'https://touch.piao.qunar.com/touch/detail.htm?id=2120079683';
 const tagongTransport = 'https://www.etripchina.com/china-guide/kangding-tagong-grassland.htm';
-const tagongFees = 'https://www.westchinago.com/tagong-grassland';
+const tagongFees = 'https://m.gosctour.com/line/show.html?id=240';
 const muyaMap = 'https://www.amap.com/place/B0FFI9ZHW0';
 const muyaListing = 'https://piao.qunar.com/ticket/detail_517256.html';
 
@@ -49,8 +50,8 @@ export const northernGuides: DestinationGuide[] = [
     sources: [
       { title: 'Jiuzhaigou: tarif dan reservasi resmi', url: jiuzhaiTickets, kind: 'official' },
       { title: 'Jiuzhaigou: kereta dan akses darat', url: jiuzhaiArrival, kind: 'official' },
-      { title: 'Pengumuman pengelola, 31 Oktober 2026', url: jiuzhaiNotice, kind: 'official' },
-      { title: 'Jiuzhaigou: bus dan jalur jalan kaki', url: jiuzhaiBus, kind: 'official' },
+      { title: 'Pengumuman pengelola, 31 Oktober 2026', url: jiuzhaiNotice, kind: 'official', publishedAt: '2026-10-31' },
+      { title: 'Jiuzhaigou: bus dan jalur jalan kaki', url: jiuzhaiBus, kind: 'official', publishedAt: '2015-07-27' },
     ], checkedAt: '2026-11-03',
   },
   {
@@ -60,7 +61,7 @@ export const northernGuides: DestinationGuide[] = [
       origin: 'Hotel Jiuzhaigou, 10 November',
       steps: ['Berangkat pagi dengan mobil dan sopir menuju kota Siguniangshan / Rilong, sesuai etape darat dalam itinerary.', 'Minta sopir menambahkan Maobiliang / 猫鼻梁 sebagai titik berhenti jika jalan, cuaca, dan sisa waktu memungkinkan.', 'Turun di area berhenti yang diizinkan, berjalan ke gardu pandang, lalu lanjut ke penginapan Rilong.'],
       duration: 'Alokasi itinerary: 7 sampai 9 jam untuk Jiuzhaigou ke Rilong termasuk istirahat; waktu singgah bergantung rute sopir.',
-      sources: [siguniangTransport, maobiliangGuide],
+      sources: [maobiliangGuide],
     },
     stopAccess: { maobiliang: 'Akses dengan mobil sampai area gardu pandang Maobiliang di tepi jalan, lalu berjalan singkat. Ini titik pandang luar lembah, terpisah dari pintu masuk Shuangqiao.' },
     costs: [
@@ -72,9 +73,8 @@ export const northernGuides: DestinationGuide[] = [
     tips: ['Simpan nama 猫鼻梁 untuk ditunjukkan kepada sopir.', 'Gunakan lensa lebar untuk empat puncak, lalu coba pembesaran untuk detail salju.', 'Siapkan jaket di kabin agar tidak perlu membuka koper saat singgah.'],
     cautions: ['Titik ini berada di tepi jalan pegunungan. Foto dari area pandang, bukan badan jalan.', 'Jika perjalanan terlambat atau berkabut, prioritaskan tiba dan beristirahat di Rilong.'],
     sources: [
-      { title: 'Geopark Siguniangshan: akses transportasi', url: siguniangTransport, kind: 'official' },
       { title: 'Trip.com: lokasi dan akses Maobiliang', url: maobiliangGuide, kind: 'operator' },
-      { title: 'Qunar: referensi biaya Maobiliang', url: maobiliangFees, kind: 'reference' },
+      { title: 'Qunar: referensi biaya Maobiliang', url: maobiliangFees, kind: 'reference', publishedAt: '2026-04-15' },
     ], checkedAt: '2026-11-03',
   },
   {
@@ -91,7 +91,7 @@ export const northernGuides: DestinationGuide[] = [
       hongshan: 'Naik shuttle taman sampai pemberhentian terakhir Hongshan / 红杉林. Ikuti jalur pengunjung di kawasan hutan, lalu naik shuttle kembali turun; tidak perlu membeli tiket taman kedua.',
     },
     costs: [
-      { label: 'Tiket masuk Shuangqiao', amount: 'CNY 80 / orang', detail: 'Tarif dewasa yang ditampilkan pengelola. Berlaku untuk kunjungan lembah, termasuk kawasan Hongshan; periksa harga tanggal 11 November saat reservasi.', status: 'published', source: siguniangTickets },
+      { label: 'Tiket masuk Shuangqiao', amount: 'CNY 80 / orang', detail: 'Tarif dewasa pada panduan pengelola dan pengumuman 5 Maret 2024, termasuk kawasan Hongshan. Halaman masih mencantumkan CNY 80; cocokkan tanggal 11 November 2026 saat reservasi.', status: 'published', source: siguniangTickets },
       { label: 'Shuttle taman', amount: 'CNY 70 / orang', detail: 'Jumlah tiket masuk dan shuttle: CNY 150 per dewasa. Transportasi dari hotel dan kegiatan tambahan tidak termasuk.', status: 'published', source: siguniangTickets },
       { label: 'Transfer hotel dan perjalanan Danba', amount: 'Perlu konfirmasi', detail: 'Bagian dari perjalanan dengan sopir. Sepakati jam jemput di pintu keluar sebelum masuk taman.', status: 'unconfirmed' },
     ],
@@ -100,8 +100,8 @@ export const northernGuides: DestinationGuide[] = [
     tips: ['Naik sampai ujung lembah dahulu, lalu nikmati pemberhentian dalam perjalanan turun.', 'Bawa kacamata hitam, jaket, dan sepatu dengan sol yang tidak licin.', 'Simpan waktu penjemputan sopir; jangan memaksakan seluruh pemberhentian sebelum perjalanan ke Danba.'],
     cautions: ['Hongshan berada sekitar 3.840 m menurut pengelola. Bergerak perlahan dan hentikan aktivitas bila merasa tidak sehat.', 'Hongshan pada panduan ini adalah kawasan hutan. Lokasi “Hongshan Waterfall” dalam PDF belum terkonfirmasi.'],
     sources: [
-      { title: 'Pengelola Siguniangshan: panduan Shuangqiao', url: shuangqiaoGuide, kind: 'official' },
-      { title: 'Pengelola Siguniangshan: tiket dan pengingat kunjungan', url: siguniangTickets, kind: 'official' },
+      { title: 'Pengelola Siguniangshan: panduan Shuangqiao', url: shuangqiaoGuide, kind: 'official', note: 'Isi panduan ditemukan dalam indeks pencarian; halaman langsung gagal dimuat saat pemeriksaan. Tarif dicocokkan dengan pengumuman resmi di bawah.' },
+      { title: 'Pengelola Siguniangshan: tiket dan pengingat kunjungan', url: siguniangTickets, kind: 'official', publishedAt: '2024-03-05' },
     ], checkedAt: '2026-11-03',
   },
   {
@@ -115,7 +115,7 @@ export const northernGuides: DestinationGuide[] = [
     },
     stopAccess: { jiaju: 'Dari Danba, naik mobil ke pintu masuk Jiaju. Gunakan shuttle jika diwajibkan pada hari kunjungan; antar titik pandang dan rumah dilanjutkan berjalan kaki.' },
     costs: [
-      { label: 'Tiket masuk desa', amount: 'Referensi CNY 50 / orang', detail: 'Angka dari publikasi pemerintah Danba tahun 2022, masih sebagai referensi anggaran. Konfirmasikan tarif November 2026 di loket atau penyedia resmi.', status: 'estimate', source: jiajuFees },
+      { label: 'Tiket masuk desa', amount: 'CNY 50 / orang', detail: 'Harga dewasa pada daftar tiket Qunar saat diperiksa. Belum merupakan penawaran tanggal 11 November; cocokkan tanggal, penerimaan paspor, dan layanan yang termasuk sebelum membayar.', status: 'published', source: jiajuTickets },
       { label: 'Shuttle desa pulang-pergi', amount: 'Referensi CNY 35 / orang', detail: 'Publikasi pemerintah tahun 2022. Tanyakan apakah shuttle wajib dan apakah mobil sopir boleh masuk; jangan menghitung transportasi dua kali.', status: 'estimate', source: jiajuFees },
       { label: 'Mobil, parkir, dan waktu tunggu', amount: 'Perlu konfirmasi', detail: 'Minta dimasukkan dalam penawaran sopir hari Shuangqiao ke Danba.', status: 'unconfirmed' },
     ],
@@ -124,8 +124,9 @@ export const northernGuides: DestinationGuide[] = [
     tips: ['Pilih titik pandang sebelum berjalan agar waktu sore tidak habis berpindah kendaraan.', 'Minta izin sebelum memotret warga atau masuk halaman rumah.', 'Siapkan alas kaki yang nyaman untuk jalur menanjak dan bertangga.'],
     cautions: ['Desa masih dihuni; rumah dan ladang bukan area bebas masuk.', 'Tarif shuttle yang ditemukan berasal dari publikasi lama, bukan penawaran yang sudah dipesan.'],
     sources: [
-      { title: 'Pemerintah Danba: referensi tarif Jiaju, 2022', url: jiajuFees, kind: 'official' },
-      { title: 'ETripChina: akses dan kunjungan Jiaju', url: jiajuTransport, kind: 'operator' },
+      { title: 'Qunar: daftar tiket Jiaju', url: jiajuTickets, kind: 'operator' },
+      { title: 'Pemerintah Danba: referensi tarif Jiaju, 2022', url: jiajuFees, kind: 'official', publishedAt: '2022-05-18' },
+      { title: 'ETripChina: akses dan kunjungan Jiaju', url: jiajuTransport, kind: 'operator', publishedAt: '2023-05-17' },
     ], checkedAt: '2026-11-03',
   },
   {
@@ -148,7 +149,7 @@ export const northernGuides: DestinationGuide[] = [
     cautions: ['Jalur desa menanjak dan sebagian tangga tidak rata; pilih lintasan sesuai kondisi fisik.', 'Foto Jikayi dalam galeri menunjukkan kawasan Zhonglu, bukan jaminan sudut yang sama dari setiap gardu pandang.'],
     sources: [
       { title: 'Fliggy: akses mobil dan jalan kaki ke Zhonglu', url: zhongluTransport, kind: 'operator' },
-      { title: 'Pemerintah Danba: lokasi dan karakter Zhonglu', url: zhongluGuide, kind: 'official' },
+      { title: 'Pemerintah Danba: lokasi dan karakter Zhonglu', url: zhongluGuide, kind: 'official', publishedAt: '2022-06-15' },
     ], checkedAt: '2026-11-03',
   },
   {
@@ -162,15 +163,18 @@ export const northernGuides: DestinationGuide[] = [
     },
     stopAccess: { moshi: 'Turun di pusat pengunjung Moshi Park, lanjut dengan shuttle sesuai tiket, lalu berjalan di lintasan taman. Jangan memanjat formasi batu untuk mencari sudut foto.' },
     costs: [
-      { label: 'Tiket masuk taman', amount: 'Referensi CNY 60 / orang', detail: 'Tarif referensi operator ETripChina, artikel 2023; belum menjadi konfirmasi harga tanggal 12 November 2026.', status: 'estimate', source: moshiGuide },
-      { label: 'Shuttle taman', amount: 'Referensi CNY 20 / orang', detail: 'Dengan referensi tiket masuk, anggaran dasar CNY 80 per dewasa. Cek harga dan layanan yang termasuk saat membeli.', status: 'estimate', source: moshiGuide },
+      { label: 'Tiket masuk taman', amount: 'CNY 60 / orang', detail: 'Harga dewasa pada daftar tiket Qunar saat diperiksa. Pilih tanggal 12 November dan pastikan penerimaan paspor sebelum membayar; slot kunjungan belum dipesan.', status: 'published', source: moshiTickets },
+      { label: 'Shuttle taman pulang-pergi', amount: 'CNY 20 / orang', detail: 'Qunar mencantumkan shuttle pulang-pergi CNY 20 serta paket masuk dan shuttle CNY 80. Periksa paket agar tiket tidak terbeli dua kali.', status: 'published', source: moshiTickets },
       { label: 'Mobil dan parkir', amount: 'Perlu konfirmasi', detail: 'Bagian dari penawaran sopir untuk etape Danba ke Xinduqiao; biaya parkir perlu disebutkan secara terpisah jika belum termasuk.', status: 'unconfirmed' },
     ],
     visitDuration: 'Saran alokasi: sekitar 2 jam, termasuk berjalan dan berhenti untuk foto.',
-    bestTime: 'Siang sesuai itinerary. Referensi operator menyebut jam musim dingin 09.00 sampai 17.00 mulai 21 Oktober; cek jam hari kunjungan.',
+    bestTime: 'Siang sesuai itinerary. Artikel operator Mei 2023 mencantumkan jam musim dingin 09.00 sampai 17.00 mulai 21 Oktober; jam 12 November 2026 tetap perlu dikonfirmasi.',
     tips: ['Pakai sepatu dengan sol yang mencengkeram dan bawa lapisan penahan angin.', 'Gunakan jalur taman; batu yang terlihat mudah dicapai belum tentu boleh dipanjat.', 'Sepakati batas waktu kunjungan agar Tagong dan Muya masih mendapat cahaya sore.'],
-    cautions: ['Taman berada di dataran tinggi. Berjalan perlahan dan sediakan jeda istirahat.', 'Daftar biaya yang tersedia berasal dari operator, bukan konfirmasi tarif resmi terbaru.'],
-    sources: [{ title: 'ETripChina: referensi biaya, akses, dan musim kunjungan Moshi', url: moshiGuide, kind: 'operator' }],
+    cautions: ['Taman berada di dataran tinggi. Berjalan perlahan dan sediakan jeda istirahat.', 'Harga yang ditampilkan adalah daftar Qunar; harga untuk tanggal kunjungan dan aturan tiket paspor perlu dicocokkan saat reservasi.'],
+    sources: [
+      { title: 'Qunar: daftar tiket dan shuttle Moshi Park', url: moshiTickets, kind: 'operator' },
+      { title: 'ETripChina: akses dan jam kunjungan Moshi, 2023', url: moshiGuide, kind: 'operator', publishedAt: '2023-05-18' },
+    ],
     checkedAt: '2026-11-03',
   },
   {
@@ -184,7 +188,7 @@ export const northernGuides: DestinationGuide[] = [
     },
     stopAccess: { tagong: 'Datang dengan mobil dari arah Bamei, turun di akses padang yang diizinkan, lalu berjalan di area pengunjung. Minta harga titik pandang atau area berpagar sebelum masuk.' },
     costs: [
-      { label: 'Akses padang / biaya kebersihan', amount: 'Referensi CNY 15 / orang', detail: 'Angka dari operator WestChinaGo, bukan tarif resmi terverifikasi untuk 12 November. Biaya dapat berbeda menurut area yang dimasuki; cek papan harga.', status: 'estimate', source: tagongFees },
+      { label: 'Akses padang / biaya kebersihan', amount: 'Acuan CNY 35 / orang', detail: 'Biaya kebersihan pada paket Chengdu China Travel Service yang masih dapat dibuka. Halaman tidak bertanggal; ini acuan anggaran, bukan tarif terkonfirmasi untuk 12 November. Tanyakan area yang tercakup.', status: 'estimate', source: tagongFees },
       { label: 'Mobil, parkir, dan aktivitas tambahan', amount: 'Perlu konfirmasi', detail: 'Sepakati harga parkir atau berkuda sebelum menggunakan layanan. Tarif padang tidak mencakup tiket biara atau titik pandang lain.', status: 'unconfirmed' },
     ],
     visitDuration: 'Saran alokasi: 45 sampai 90 menit untuk berjalan singkat dan foto.',
@@ -192,8 +196,8 @@ export const northernGuides: DestinationGuide[] = [
     tips: ['Pilih satu titik pandang agar waktu tidak habis berpindah area berbayar.', 'Kenakan lapisan penahan angin; tempat terbuka terasa lebih dingin daripada di dalam mobil.', 'Biarkan hewan melintas dan jaga jarak; jangan mendekat hanya untuk foto.'],
     cautions: ['Padang terbuka, Muya Golden Pagoda, Biara Tagong, dan Biara Muya merupakan lokasi berbeda; sebutkan tujuan secara spesifik.', 'Jangan memasuki padang berpagar atau jalur kendaraan tanpa izin.'],
     sources: [
-      { title: 'ETripChina: lokasi dan akses Tagong', url: tagongTransport, kind: 'operator' },
-      { title: 'WestChinaGo: referensi biaya Tagong', url: tagongFees, kind: 'operator' },
+      { title: 'ETripChina: lokasi dan akses Tagong', url: tagongTransport, kind: 'operator', publishedAt: '2023-05-18' },
+      { title: 'Chengdu China Travel Service: acuan biaya kebersihan Tagong', url: tagongFees, kind: 'operator' },
     ], checkedAt: '2026-11-03',
   },
   {
