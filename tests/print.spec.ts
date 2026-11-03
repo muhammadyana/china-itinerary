@@ -3,10 +3,10 @@ import { days, pdfPath, places } from '../src/itinerary';
 import { guides, pageForPlace, placePath } from '../src/guides';
 import { chengduEveningMalls } from '../src/chengdu-evening';
 
-test('the build publishes a newly generated PDF separately from the archived source', async ({ page, request }) => {
+test('the build publishes a newly generated PDF separately from the archived source', async ({ page, request, baseURL }) => {
   await page.goto('/');
   const download = await page.locator('footer a[download]').getAttribute('href');
-  const downloadUrl = new URL(download!, 'http://127.0.0.1:4173');
+  const downloadUrl = new URL(download!, baseURL);
   expect(downloadUrl.pathname).toBe(`/${pdfPath}`);
   expect(downloadUrl.searchParams.get('v')).toMatch(/^\d+$/);
   await expect(page.locator('.site-navigation a[href*=".pdf"]')).toHaveCount(0);
@@ -23,10 +23,10 @@ test('the build publishes a newly generated PDF separately from the archived sou
   expect(document.equals(await archive.body())).toBe(false);
 });
 
-test('the printable document preserves all days, current stops, guide costs, sources, and Chengdu evening choices without application scripts', async ({ page }) => {
+test('the printable document preserves all days, current stops, guide costs, sources, and Chengdu evening choices without application scripts', async ({ page, baseURL }) => {
   const externalRequests: string[] = [];
   page.on('request', request => {
-    if (new URL(request.url()).origin !== 'http://127.0.0.1:4173') externalRequests.push(request.url());
+    if (new URL(request.url()).origin !== new URL(baseURL!).origin) externalRequests.push(request.url());
   });
   await page.goto('/print/');
   await expect(page.locator('script')).toHaveCount(0);

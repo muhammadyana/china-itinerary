@@ -310,16 +310,16 @@ test('arrival revision connects Chengdu sightseeing, its overnight stay, and the
  await expect(page.locator('.day-source-note')).toContainText('dipindahkan ke pagi 9 November');
 });
 
-test('server-rendered first day and PDF survive disabled JavaScript',async({browser})=>{
+test('server-rendered first day and PDF survive disabled JavaScript',async({browser,baseURL})=>{
  const context=await browser.newContext({javaScriptEnabled:false});const page=await context.newPage();
- await page.goto('http://127.0.0.1:4173/');
+ await page.goto(`${baseURL}/`);
  await expect(page.locator('#day-heading')).toHaveText(days[0].title);
  await expect(page.locator('.sleep-summary')).toContainText('Chengdu');
  await expect(page.locator('.hero + #user-gallery')).toHaveAttribute('open','');
  await expect(page.locator('.gallery-photo').first()).toBeVisible();
  await expect(page.locator('.no-script')).toContainText('itinerary terbaru 14 hari');
  await expect(page.locator('.day-source-note')).toContainText('9 November');
- const pdf=await page.request.get(`http://127.0.0.1:4173/${pdfPath}`);
+ const pdf=await page.request.get(`${baseURL}/${pdfPath}`);
  expect(pdf.ok()).toBe(true);expect(pdf.headers()['content-type']).toContain('pdf');await context.close();
 });
 test('every photo source exists with explicit responsive dimensions and attribution',async({request})=>{

@@ -1,13 +1,13 @@
 import { expect, test } from '@playwright/test';
 
-test('sharing crawlers receive the Jiuzhaigou image and route-specific metadata without JavaScript', async ({ browser, request }) => {
+test('sharing crawlers receive the Jiuzhaigou image and route-specific metadata without JavaScript', async ({ browser, request, baseURL }) => {
   const origin = 'https://china.muhammadyana.me';
   const imagePath = '/social/jiuzhaigou.jpg';
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
   try {
     for (const path of ['/', '/places/', '/places/jiuzhaigou/', '/places/dali/']) {
-      await page.goto(`http://127.0.0.1:4173${path}`);
+      await page.goto(`${baseURL}${path}`);
       const title = await page.title();
       const description = await page.locator('meta[name="description"]').getAttribute('content');
       await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', title);
@@ -28,7 +28,7 @@ test('sharing crawlers receive the Jiuzhaigou image and route-specific metadata 
     expect(response.status()).toBe(200);
     expect(response.headers()['content-type']).toContain('image/jpeg');
     expect((await response.body()).subarray(0, 3).toString('hex')).toBe('ffd8ff');
-    await page.goto(`http://127.0.0.1:4173${imagePath}`);
+    await page.goto(`${baseURL}${imagePath}`);
     await expect(page.locator('img')).toHaveJSProperty('naturalWidth', 1200);
     await expect(page.locator('img')).toHaveJSProperty('naturalHeight', 630);
   } finally {

@@ -145,11 +145,11 @@ test('native keyboard traversal, Escape focus restoration, and outside click wor
   await expect(menu).toHaveJSProperty('open', false);
 });
 
-test('the native places disclosure and destination links work without JavaScript', async ({ browser }) => {
+test('the native places disclosure and destination links work without JavaScript', async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 320, height: 844 } });
   try {
     const page = await context.newPage();
-    await page.goto('http://127.0.0.1:4173/places/');
+    await page.goto(`${baseURL}/places/`);
     await page.locator('.place-menu > summary').click();
     await expect(page.locator('.place-menu-panel')).toBeVisible();
     await page.locator('.place-menu').getByRole('link', { name: 'Impression Lijiang', exact: true }).click();
