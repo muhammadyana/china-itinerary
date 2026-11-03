@@ -63,7 +63,7 @@ for(const width of [360,390,1440]) {
   const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
   const requests:string[]=[];page.on('request',r=>{if(r.resourceType()==='image')requests.push(r.url());});
   await page.goto('/');await page.evaluate(()=>document.fonts.ready);
-  await expect(page.locator('h1')).toHaveText('Musim Gugur di China');
+  await expect(page.locator('h1')).toHaveText('Autumn and Winter in China');
   await expect(page.locator('.home-arrival .arrival-stay')).toContainText('Menginap di Chengdu');
   await expect(page.locator('.hero + #user-gallery')).toHaveAttribute('open','');
   await page.screenshot({path:`artifacts/home-${width}.png`,fullPage:false});
