@@ -30,6 +30,8 @@ Upload the contents of `dist/` to a static host. Assets use root-relative paths;
 
 The initial page is prerendered so the first day and PDF link remain available without JavaScript. Selecting a day requires JavaScript. Each date uses a `#YYYY-MM-DD` fragment; Back/Forward restores the corresponding date.
 
+The generated application module uses `data-cfasync="false"` to exclude it from Cloudflare Rocket Loader. Image-loading skeletons and navigation must initialize while photographs are still downloading, rather than waiting for the window load event. See [Cloudflare's script exclusion documentation](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/ignore-javascripts/).
+
 ## Testing
 
 ```sh

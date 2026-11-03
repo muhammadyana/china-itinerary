@@ -68,6 +68,7 @@ test('every destination is a distinct server-rendered document with root-relativ
     expect(html, destination.slug).toContain('id="gallery"');
     expect(html, destination.slug).toContain('id="tips"');
     expect(html, destination.slug).toContain('id="sources"');
+    expect(html, destination.slug).toContain('<script data-cfasync="false" type="module"');
     expect(html, destination.slug).not.toContain('id="day-view"');
     for (const match of html.matchAll(/<(?:img|script)\b[^>]*\bsrc="([^"]+)"/g)) {
       expect(match[1], destination.slug).toMatch(/^\/(?:photos|assets)\//);
@@ -76,7 +77,10 @@ test('every destination is a distinct server-rendered document with root-relativ
   const index = await request.get('/places/');
   expect(index.status()).toBe(200);
   const indexHtml = await index.text();
+  expect(indexHtml).toContain('<script data-cfasync="false" type="module"');
   for (const guide of guides) expect(indexHtml).toContain(`href="${placePath(guide.slug)}"`);
+  const home = await request.get('/');
+  expect(await home.text()).toContain('<script data-cfasync="false" type="module"');
 });
 
 test('a nested destination works without JavaScript, reloads directly, and links to its itinerary', async ({ browser }) => {

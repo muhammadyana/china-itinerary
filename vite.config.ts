@@ -27,7 +27,9 @@ export default defineConfig({
    handler(_options, bundle) {
     const index = bundle['index.html'];
     if (!index || index.type !== 'asset') throw new Error('Missing prerendered homepage');
-    const template = String(index.source);
+    // Rocket Loader must not postpone image-loading UI until the images finish.
+    const template = String(index.source).replace(/<script type="module"/g, '<script data-cfasync="false" type="module"');
+    index.source = template;
     this.emitFile({ type: 'asset', fileName: 'places/index.html', source: destinationHtml(template) });
     for (const page of placePages) {
      this.emitFile({ type: 'asset', fileName: `places/${page.slug}/index.html`, source: destinationHtml(template, page) });
