@@ -69,7 +69,7 @@ export const places: Record<string, Place> = {
   songzanlin: { name: 'Biara Songzanlin', chinese: '松赞林寺', description: 'Bangunan utama beratap emas berdiri bertingkat di bukit, tujuan pagi sebelum naik kereta ke Lijiang.', page: 21, photo: 'songzanlin', alt: 'Kompleks Biara Songzanlin dengan bangunan beratap emas bertingkat di bukit.' },
   'shangrila-station': { name: 'Stasiun Shangri-La', description: 'Fasad putih dan merah menandai stasiun di kota Shangri-La, Yunnan, untuk keberangkatan ke Lijiang.', page: 21, photo: 'shangrila-station', alt: 'Bangunan merah dan putih Stasiun Shangri-La di Yunnan.' },
   'lijiang-station': { name: 'Stasiun Lijiang', description: 'Stasiun beratap segitiga menjadi pintu masuk Lijiang; perjalanan ke kota tua dilanjutkan lewat darat.', page: 21, photo: 'lijiang-station', alt: 'Fasad dan atap segitiga Stasiun Lijiang.' },
-  dayan: { name: 'Kota Tua Lijiang (Dayan)', chinese: '大研古城', description: 'Kanal kecil, jembatan, dan rumah beratap genting membentuk kota tua yang dijelajahi menjelang sore.', page: 22, photo: 'dayan', alt: 'Kanal dan rumah beratap genting di Kota Tua Lijiang.' },
+  dayan: { name: 'Kota Tua Lijiang (Dayan)', chinese: '大研古城', description: 'Kanal kecil, jembatan, dan rumah beratap genting membentuk kota tua yang dijelajahi menjelang sore.', page: 22, photo: 'highlight-lijiang', alt: 'Panorama atap Kota Tua Lijiang dengan pegunungan bersalju di kejauhan.' },
   sifangjie: { name: 'Sifangjie', chinese: '四方街', description: 'Gang-gang kota tua bertemu di lapangan berbatu yang menjadi tujuan jalan malam di Lijiang.', page: 22 },
   'cable-car': { name: 'Big Cable Car', description: 'Gondola membawa pengunjung dari hutan di lereng bawah menuju tebing dan salju Glacier Park.', page: 24 },
   'jade-dragon': { name: 'Glacier Park, Jade Dragon', chinese: '玉龙雪山', description: 'Jalur kayu dan gardu pandang di stasiun atas menghadap punggung gunung bersalju.', page: 24, photo: 'jade-dragon', alt: 'Gunung bersalju dan kawasan gletser Jade Dragon.' },
@@ -77,7 +77,7 @@ export const places: Record<string, Place> = {
   'dali-station': { name: 'Stasiun Dali (Xiaguan)', chinese: '大理站', description: 'Stasiun di Xiaguan dihubungkan dengan hotel dekat kota tua menggunakan taksi.', page: 23 },
   erhai: { name: 'Danau Erhai', chinese: '洱海', description: 'Jalan pagi di tepi barat danau dimulai dari Dermaga Caicun, sekitar 3–4 km dari gerbang timur kota tua.', page: 25, photo: 'highlight-erhai', alt: 'Pemandangan Danau Erhai dengan garis pegunungan di seberang.', photoNote: 'Foto memperlihatkan Danau Erhai, bukan verifikasi pin Dermaga Caicun.' },
   caicun: { name: 'Dermaga Caicun', chinese: '才村码头', description: 'Titik mulai menyusuri tepi barat Erhai sebelum kembali ke Kota Tua Dali.', page: 23 },
-  'dali-old-town': { name: 'Kota Tua Dali', chinese: '大理古城', description: 'Dari Menara Wuhua terlihat deretan atap kota tua; telusuri gangnya lalu cari makan di Bo’ai Road.', page: 25, photo: 'dali-old-town', alt: 'Deretan atap dan jalan Kota Tua Dali dilihat dari Menara Wuhua.' },
+  'dali-old-town': { name: 'Kota Tua Dali', chinese: '大理古城', description: 'Dari Menara Wuhua terlihat deretan atap kota tua; telusuri gangnya lalu cari makan di Bo’ai Road.', page: 25, photo: 'highlight-dali', alt: 'Gerbang selatan Kota Tua Dali diterangi cahaya keemasan di bawah langit biru malam.', photoNote: 'Foto menampilkan gerbang selatan Kota Tua Dali, bukan Menara Wuhua. Suasana malam sebagai gambaran tempat; kunjungan dijadwalkan siang.' },
   wuhua: { name: 'Menara Wuhua', chinese: '五华楼', description: 'Menara di kota tua menjadi patokan jalan siang sebelum makan halal dan salat Jumat.', page: 23 },
   'kunming-station': { name: 'Stasiun Kunming', description: 'Salah satu tujuan kereta dari Dali berada di pusat kota; sebagian tiket berakhir di Kunming South.', page: 26, photo: 'kunming-station', alt: 'Lapangan dan bangunan Stasiun Kunming.' },
   nancheng: { name: 'Masjid Nancheng', chinese: '南城清真寺', description: 'Gerbang masjid menjadi salah satu patokan di pusat Kunming, dekat kawasan makan malam terakhir.', page: 26, photo: 'nancheng', alt: 'Bangunan Masjid Nancheng di pusat Kunming.' },
@@ -113,11 +113,12 @@ export const highlights: Highlight[] = [
  {place:'five-flower',date:'2026-11-09',region:'Sichuan',title:'Jiuzhaigou',caption:'Danau jernih, hutan penuh warna.',photo:"highlight-jiuzhaigou",alt:"Danau di Jiuzhaigou memantulkan hutan musim gugur dan pegunungan."},
  {place:'songzanlin',date:'2026-11-18',region:'Yunnan',title:'Shangri-La',caption:'Atap emas Biara Songzanlin di atas bukit.'},
  {place:'maobiliang',date:'2026-11-10',region:'Sichuan',title:'Siguniangshan',caption:'Empat puncak, satu panorama.',photo:"highlight-siguniang",alt:"Jajaran pegunungan Siguniangshan, dipotret pada 14 Oktober 2026."},
- {place:'dayan',date:'2026-11-18',region:'Yunnan',title:'Kota Tua Lijiang',caption:'Jalan sore menyusuri kanal dan gang Dayan.'},
+ {place:'dayan',date:'2026-11-18',region:'Yunnan',title:'Kota Tua Lijiang',caption:'Atap kota tua, kanal, dan pegunungan di kejauhan.',photo:'highlight-lijiang',alt:'Panorama atap Kota Tua Lijiang dengan pegunungan bersalju di kejauhan.'},
  {place:'tagong',date:'2026-11-12',region:'Sichuan',title:'Tagong',caption:'Padang terbuka di kaki Gunung Yala.'},
  {place:'blue-moon',date:'2026-11-19',region:'Yunnan',title:'Blue Moon Valley',caption:'Berhenti sejenak di tepi air toska.',photo:"highlight-blue-moon",alt:"Danau toska Blue Moon Valley di bawah pegunungan Jade Dragon."},
  {place:'luorong',date:'2026-11-16',region:'Sichuan',title:'Yading',caption:'Menyusuri padang di antara puncak salju.'},
  {place:'erhai',date:'2026-11-20',region:'Yunnan',title:'Danau Erhai',caption:'Pagi yang pelan di tepi danau.',photo:"highlight-erhai",alt:"Danau Erhai dan siluet pegunungan di seberangnya."},
+ {place:'dali-old-town',date:'2026-11-20',region:'Yunnan',title:'Kota Tua Dali',caption:'Gerbang megah, atap kota tua, dan gang untuk dijelajahi.',photo:'highlight-dali',alt:'Gerbang selatan Kota Tua Dali diterangi cahaya keemasan di bawah langit biru malam.'},
 ];
 export const bookingOptions = [
  {title:'Mobil privat satu arah',description:'Sesuai rute utama: 10–17 November, hotel Jiuzhaigou ke Dukezong. Minta harga total delapan hari, lintas provinsi, biaya satu arah, dan biaya sopir secara tertulis.',url:'https://www.klook.com/en-US/activity/127159-chengdu-jiuzhaigou-daocheng-yading-zuoergai-grassland-western-sichuan-multi-day-chartered-tour/'},
@@ -127,6 +128,38 @@ export const bookingOptions = [
 
 // PHOTO_DATA_START
 export const photos: Record<string, Photo> = {
+  "highlight-lijiang": {
+    "id": "highlight-lijiang",
+    "width": 5464,
+    "height": 3640,
+    "sizes": [
+      480,
+      960,
+      1440
+    ],
+    "author": "Franklin David",
+    "source": "https://www.pexels.com/photo/town-in-china-10670163/",
+    "license": "Pexels License",
+    "licenseUrl": "https://www.pexels.com/license/",
+    "origin": "Pexels",
+    "photoNote": "Panorama Kota Tua Lijiang dengan pegunungan di kejauhan. Foto arsip, diambil 28 Februari 2017 dan diterbitkan 28 Desember 2021."
+  },
+  "highlight-dali": {
+    "id": "highlight-dali",
+    "width": 5380,
+    "height": 3587,
+    "sizes": [
+      480,
+      960,
+      1440
+    ],
+    "author": "fei wang",
+    "source": "https://www.pexels.com/photo/facade-of-an-illuminated-temple-14321312/",
+    "license": "Pexels License",
+    "licenseUrl": "https://www.pexels.com/license/",
+    "origin": "Pexels",
+    "photoNote": "Gerbang selatan Kota Tua Dali pada malam hari, bukan Menara Wuhua. Tanggal pengambilan tidak tersedia; foto tidak menyatakan waktu kunjungan."
+  },
   "highlight-jiuzhaigou": {
   "id": "highlight-jiuzhaigou",
   "width": 1600,

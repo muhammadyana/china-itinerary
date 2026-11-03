@@ -152,3 +152,10 @@ Pencarian sosial Oktober 2026 tidak menghasilkan foto Instagram/Threads/X dengan
 ## Status rilis publik
 
 Alamat publik: [china.muhammadyana.me](https://china.muhammadyana.me). Dokumentasi ini mengikuti revisi lokal dengan enam foto pembuka, ringkasan kedatangan, sorotan rute, dan jurnal harian. Penerapan serta pemeriksaan publik untuk revisi ini belum dibuktikan dalam catatan sumber ini.
+
+
+## Lijiang and Dali homepage photographs
+
+- Lijiang now uses Franklin David’s [old-town panorama](https://www.pexels.com/photo/town-in-china-10670163/), captured 28 February 2017 and published 28 December 2021, under the Pexels License. The panorama replaces the close canal view in the hero, highlights, and Dayan stop. It is an archive photograph, not an October 2026 capture.
+- Dali Old Town is a separate highlight linked to 20 November. Its [illuminated South Gate photograph](https://www.pexels.com/photo/facade-of-an-illuminated-temple-14321312/) is by fei wang under the Pexels License. Capture/publication dates are unavailable. It does not depict Wuhua Tower and does not change the planned daytime visit.
+- Both images preserve original colors and proportions in locally hosted WebP variants; display cropping is CSS-only. Source records are included in `source/highlight-photos/manifest.json`.

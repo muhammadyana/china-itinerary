@@ -28,7 +28,10 @@ test('source invariants: 14 dates, 13 nights and conditional routes',async()=>{
   ['maobiliang','2026-11-10','Sichuan'],['dayan','2026-11-18','Yunnan'],
   ['tagong','2026-11-12','Sichuan'],['blue-moon','2026-11-19','Yunnan'],
   ['luorong','2026-11-16','Sichuan'],['erhai','2026-11-20','Yunnan'],
+  ['dali-old-town','2026-11-20','Yunnan'],
  ]);
+ expect(highlights.find(highlight=>highlight.place==='dayan')).toMatchObject({photo:'highlight-lijiang'});
+ expect(highlights.find(highlight=>highlight.place==='dali-old-town')).toMatchObject({title:'Kota Tua Dali',photo:'highlight-dali'});
  for(const highlight of highlights) {
   const day=days.find(day=>day.date===highlight.date);
   expect(day?.events.some(event=>event.kind==='stop'&&event.place===highlight.place),highlight.place).toBe(true);
@@ -52,11 +55,11 @@ for(const width of [360,390,1440]) {
   if(width<600) {const sleep=await page.locator('.home-arrival .arrival-stay').boundingBox();const dock=await page.locator('.mobile-daybar').boundingBox();expect(sleep!.y+sleep!.height).toBeLessThan(dock!.y);}
   await page.screenshot({path:`artifacts/home-${width}.png`,fullPage:false});
   expect(requests.filter(url=>url.includes('/photos/')).every(isInitialPhoto)).toBe(true);
-  await expect(page.locator('.highlight-card[data-highlight]')).toHaveCount(8);
-  for(const region of ['Sichuan','Yunnan']) {
+  await expect(page.locator('.highlight-card[data-highlight]')).toHaveCount(9);
+  for(const [region,count] of [['Sichuan',4],['Yunnan',5]] as const) {
    const group=page.locator(`.region-highlights[data-region="${region}"]`);
    await expect(group.locator('h3')).toContainText(region);
-   await expect(group.locator('.highlight-card')).toHaveCount(4);
+   await expect(group.locator('.highlight-card')).toHaveCount(count);
   }
   expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
   if(width===1440) {
@@ -112,26 +115,26 @@ test('homepage highlights: slider controls, native swipe scroll, matching days a
  await page.goto('/');
  const slides=page.locator('.hero-slide');
  const activeSlide=page.locator('.hero-slide.is-active');
- await expect(slides).toHaveCount(8);
+ await expect(slides).toHaveCount(9);
  for(const [index,highlight] of highlights.entries()) {
   await expect(slides.nth(index).locator('figcaption')).toContainText(highlight.title);
   await expect(slides.nth(index).locator('figcaption')).toContainText(highlight.region);
  }
- await expect(page.locator('#hero-counter')).toHaveText('1 / 8');
+ await expect(page.locator('#hero-counter')).toHaveText('1 / 9');
  await expect(activeSlide.locator('figcaption')).toContainText(highlights[0].title);
  await page.locator('[data-action="hero-next"]').click();
- await expect(page.locator('#hero-counter')).toHaveText('2 / 8');
+ await expect(page.locator('#hero-counter')).toHaveText('2 / 9');
  await expect(activeSlide.locator('figcaption')).toContainText(highlights[1].title);
  await page.locator('[data-action="hero-previous"]').click();
- await expect(page.locator('#hero-counter')).toHaveText('1 / 8');
+ await expect(page.locator('#hero-counter')).toHaveText('1 / 9');
  await page.locator('.hero-track').evaluate(el=>el.scrollTo({left:2*el.clientWidth,behavior:'instant'}));
- await expect(page.locator('#hero-counter')).toHaveText('3 / 8');
+ await expect(page.locator('#hero-counter')).toHaveText('3 / 9');
  await expect(activeSlide.locator('figcaption')).toContainText(highlights[2].title);
  await expect(activeSlide).not.toHaveAttribute('inert','');
  await expect(slides.first()).toHaveAttribute('inert','');
  await activeSlide.locator('img').evaluate(el=>(el as HTMLImageElement).decode());
  const cards=page.locator('.highlight-card[data-highlight]');
- await expect(cards).toHaveCount(8);
+ await expect(cards).toHaveCount(9);
  const arrival=await page.locator('.home-arrival').boundingBox();
  const firstCard=await cards.first().boundingBox();
  const lastCard=await cards.last().boundingBox();
@@ -165,14 +168,14 @@ test('homepage highlights: slider controls, native swipe scroll, matching days a
   await expect(page.locator('#day-heading')).toHaveText(days[0].title);
  }
 });
-test('homepage regions: province groups and keyboard navigation to a Yunnan day',async({page})=>{
+test('homepage regions: province groups and keyboard navigation to Lijiang and Dali',async({page})=>{
  await page.setViewportSize({width:390,height:844});
  await page.goto('/');
- const expectedPlaces={Sichuan:['five-flower','maobiliang','tagong','luorong'],Yunnan:['songzanlin','dayan','blue-moon','erhai']};
+ const expectedPlaces={Sichuan:['five-flower','maobiliang','tagong','luorong'],Yunnan:['songzanlin','dayan','blue-moon','erhai','dali-old-town']};
  for(const [region,placeIds] of Object.entries(expectedPlaces)) {
   const group=page.locator(`.region-highlights[data-region="${region}"]`);
   await expect(group.locator('h3')).toContainText(region);
-  await expect(group.locator('.highlight-card')).toHaveCount(4);
+  await expect(group.locator('.highlight-card')).toHaveCount(placeIds.length);
   expect(await group.locator('.highlight-card').evaluateAll(cards=>cards.map(card=>card.getAttribute('data-highlight')))).toEqual(placeIds);
  }
  const regionButton=page.locator('[data-action="region"][data-region="Yunnan"]');
@@ -186,6 +189,15 @@ test('homepage regions: province groups and keyboard navigation to a Yunnan day'
  await expect(page.locator('#day-heading')).toHaveText(days[10].title);
  await expect(page.locator('#day-heading')).toBeFocused();
  await expect(page.locator('.sleep-summary')).toContainText('Menginap di Lijiang');
+ await expect(page.locator('.sleep-summary')).toBeInViewport();
+ await page.goBack();
+ const dali=page.locator('.region-highlights[data-region="Yunnan"] [data-highlight="dali-old-town"]');
+ await expect(dali).toContainText('Kota Tua Dali');
+ await dali.focus();await page.keyboard.press('Enter');
+ await expect(page).toHaveURL(/#2026-11-20$/);
+ await expect(page.locator('#day-heading')).toHaveText(days[12].title);
+ await expect(page.locator('#day-heading')).toBeFocused();
+ await expect(page.locator('.sleep-summary')).toContainText('Menginap di Kunming');
  await expect(page.locator('.sleep-summary')).toBeInViewport();
 });
 test('production on mobile network: does not fetch unopened galleries',async({page,context})=>{
@@ -201,7 +213,7 @@ test('production on mobile network: does not fetch unopened galleries',async({pa
  responseBytes.push(...loaded);
  expect(imageUrls.every(isInitialPhoto)).toBe(true);
  const uniquePhotoIds=new Set(imageUrls.map(url=>new URL(url).pathname.match(/^\/photos\/(.+)-\d+\.webp$/)?.[1]));
- expect(uniquePhotoIds.size).toBeLessThanOrEqual(11);
+ expect(uniquePhotoIds.size).toBeLessThanOrEqual(12);
  expect(imageUrls.filter(url=>url.includes('user-autumn-'))).toEqual([]);
  await writeFile('artifacts/network.json',JSON.stringify({profile:'1.6 Mbps down, 750 Kbps up, 150 ms latency; cold cache',elapsedMs:Date.now()-start,images:imageUrls,resources:responseBytes},null,2));
  await page.getByRole('button',{name:'Pilih hari',exact:true}).click();

@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-11-03",
-  "summary": "Four optimized photo assets ready, including one verified October 2026 capture. Two existing photo fallbacks complete six on-route destinations. Publication date is never presented as capture date.",
+  "summary": "Six optimized highlight assets plus existing location photos cover nine route highlights. Lijiang uses a panoramic archive photo; Dali has a dedicated South Gate photograph. Capture and publication dates remain separate.",
   "newPhotos": [
     {
       "id": "highlight-jiuzhaigou",
@@ -308,5 +308,85 @@
     "Yading autumn photo 2026 creative commons",
     "site.pexels.com/photo \"Lijiang\" \"Oct\" \"2026\"",
     "site.pexels.com/photo \"Erhai\" \"2026\""
+  ],
+  "additionalCityPhotos": [
+    {
+      "id": "highlight-lijiang",
+      "place": "dayan",
+      "width": 5464,
+      "height": 3640,
+      "sizes": [
+        480,
+        960,
+        1440
+      ],
+      "author": "Franklin David",
+      "source": "https://www.pexels.com/photo/town-in-china-10670163/",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "origin": "Pexels",
+      "capturedAt": "2017-02-28",
+      "publishedAt": "2021-12-28",
+      "retrievedAt": "2026-11-03",
+      "photoNote": "Panorama Kota Tua Lijiang dengan pegunungan di kejauhan. Foto arsip, diambil 28 Februari 2017 dan diterbitkan 28 Desember 2021.",
+      "originalSha256": "4659a2fd091dcb97590fd607827ac815a7cbda7ba857080cc32492b87cc18964"
+    },
+    {
+      "id": "highlight-dali",
+      "place": "dali-old-town",
+      "title": "Dali Old Town South Gate at blue hour",
+      "width": 5380,
+      "height": 3587,
+      "source": "https://www.pexels.com/photo/facade-of-an-illuminated-temple-14321312/",
+      "originalUrl": "https://images.pexels.com/photos/14321312/pexels-photo-14321312.jpeg",
+      "author": "fei wang",
+      "authorUrl": "https://www.pexels.com/@feiwang/",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "captureDate": null,
+      "publicationDate": null,
+      "retrievedAt": "2026-11-03",
+      "locationEvidence": "Source labels Dali, China and Dali Ancient City. The gate plaque displays Wenxian Mingbang and Dali, matching the South Gate; do not caption this as Wuhua Tower.",
+      "processing": "Resized to WebP, original colors preserved; no upscale, crop, or AI processing. Display crop remains CSS-only.",
+      "originalSha256": "6a77d46fb3c337c1eb15b0def5d05ce69897cc13b685e7cee4ed41e5b6e586f5",
+      "variants": [
+        {
+          "src": "photos/highlight-dali-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 47548
+        },
+        {
+          "src": "photos/highlight-dali-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 171704
+        },
+        {
+          "src": "photos/highlight-dali-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 362180
+        }
+      ],
+      "visualReview": "Golden illuminated gate against cobalt-blue evening sky; strong architectural focal point, no obstructing crowd. Chosen over existing hazy rooftop image and February 2026 Wuhua image with crowds and a parked truck.",
+      "alternatives": [
+        {
+          "source": "https://commons.wikimedia.org/wiki/File:Dali_Ancient_Town_20260220-2.jpg",
+          "reason": "Recent February 2026, but existing view has haze, glare and foreground parapet."
+        },
+        {
+          "source": "https://commons.wikimedia.org/wiki/File:20260223_Dali_Old_Town_28.jpg",
+          "reason": "Recent February 2026 and licensed, but parked truck and crowds obscure architectural base."
+        }
+      ],
+      "sizes": [
+        480,
+        960,
+        1440
+      ],
+      "origin": "Pexels",
+      "photoNote": "Gerbang selatan Kota Tua Dali pada malam hari, bukan Menara Wuhua. Tanggal pengambilan tidak tersedia; foto tidak menyatakan waktu kunjungan."
+    }
   ]
 }
