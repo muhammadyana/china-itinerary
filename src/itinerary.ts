@@ -108,14 +108,16 @@ export const days: Day[] = [
 ];
 export const daysByDate = new Map(days.map((day) => [day.date, day]));
 // Highlights point to real stops in the PDF route; each image may show the wider destination.
-export interface Highlight { place: string; date: string; title: string; caption: string; photo?: string; alt?: string }
+export interface Highlight { place: string; date: string; region: 'Sichuan' | 'Yunnan'; title: string; caption: string; photo?: string; alt?: string }
 export const highlights: Highlight[] = [
- {place:'five-flower',date:'2026-11-09',title:'Jiuzhaigou',caption:'Danau jernih, hutan penuh warna.',photo:"highlight-jiuzhaigou",alt:"Danau di Jiuzhaigou memantulkan hutan musim gugur dan pegunungan."},
- {place:'maobiliang',date:'2026-11-10',title:'Siguniangshan',caption:'Empat puncak, satu panorama.',photo:"highlight-siguniang",alt:"Jajaran pegunungan Siguniangshan, dipotret pada 14 Oktober 2026."},
- {place:'tagong',date:'2026-11-12',title:'Tagong',caption:'Padang terbuka di kaki Gunung Yala.'},
- {place:'luorong',date:'2026-11-16',title:'Yading',caption:'Menyusuri padang di antara puncak salju.'},
- {place:'blue-moon',date:'2026-11-19',title:'Blue Moon Valley',caption:'Berhenti sejenak di tepi air toska.',photo:"highlight-blue-moon",alt:"Danau toska Blue Moon Valley di bawah pegunungan Jade Dragon."},
- {place:'erhai',date:'2026-11-20',title:'Danau Erhai',caption:'Pagi yang pelan di tepi danau.',photo:"highlight-erhai",alt:"Danau Erhai dan siluet pegunungan di seberangnya."},
+ {place:'five-flower',date:'2026-11-09',region:'Sichuan',title:'Jiuzhaigou',caption:'Danau jernih, hutan penuh warna.',photo:"highlight-jiuzhaigou",alt:"Danau di Jiuzhaigou memantulkan hutan musim gugur dan pegunungan."},
+ {place:'songzanlin',date:'2026-11-18',region:'Yunnan',title:'Shangri-La',caption:'Atap emas Biara Songzanlin di atas bukit.'},
+ {place:'maobiliang',date:'2026-11-10',region:'Sichuan',title:'Siguniangshan',caption:'Empat puncak, satu panorama.',photo:"highlight-siguniang",alt:"Jajaran pegunungan Siguniangshan, dipotret pada 14 Oktober 2026."},
+ {place:'dayan',date:'2026-11-18',region:'Yunnan',title:'Kota Tua Lijiang',caption:'Jalan sore menyusuri kanal dan gang Dayan.'},
+ {place:'tagong',date:'2026-11-12',region:'Sichuan',title:'Tagong',caption:'Padang terbuka di kaki Gunung Yala.'},
+ {place:'blue-moon',date:'2026-11-19',region:'Yunnan',title:'Blue Moon Valley',caption:'Berhenti sejenak di tepi air toska.',photo:"highlight-blue-moon",alt:"Danau toska Blue Moon Valley di bawah pegunungan Jade Dragon."},
+ {place:'luorong',date:'2026-11-16',region:'Sichuan',title:'Yading',caption:'Menyusuri padang di antara puncak salju.'},
+ {place:'erhai',date:'2026-11-20',region:'Yunnan',title:'Danau Erhai',caption:'Pagi yang pelan di tepi danau.',photo:"highlight-erhai",alt:"Danau Erhai dan siluet pegunungan di seberangnya."},
 ];
 export const bookingOptions = [
  {title:'Mobil privat satu arah',description:'Sesuai rute utama: 10–17 November, hotel Jiuzhaigou ke Dukezong. Minta harga total delapan hari, lintas provinsi, biaya satu arah, dan biaya sopir secara tertulis.',url:'https://www.klook.com/en-US/activity/127159-chengdu-jiuzhaigou-daocheng-yading-zuoergai-grassland-western-sichuan-multi-day-chartered-tour/'},

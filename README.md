@@ -26,7 +26,7 @@ Unggah isi `dist/` ke hosting statis. Aset memakai path relatif; tidak ada backe
 
 ## Ubah itinerary
 
-`src/itinerary.ts` adalah satu sumber data untuk tanggal, tempat ber-ID stabil, caption, foto, kredit, perpindahan, catatan praktis, dan tempat menginap. Pemilih hari, ringkasan rute, enam sorotan destinasi, foto pembuka, serta tampilan harian memakai data ini. `src/render.ts` merender HTML yang sama saat build dan saat tanggal dipilih. `src/main.ts` menangani interaksi DOM, dialog, clipboard, dan riwayat URL.
+`src/itinerary.ts` adalah satu sumber data untuk tanggal, tempat ber-ID stabil, caption, foto, kredit, perpindahan, catatan praktis, dan tempat menginap. The date picker, route overview, eight regional highlights, hero, and daily view share this data. `src/render.ts` merender HTML yang sama saat build dan saat tanggal dipilih. `src/main.ts` menangani interaksi DOM, dialog, clipboard, dan riwayat URL.
 
 Halaman awal diprarender sehingga hari pertama dan tautan PDF tetap terbaca saat JavaScript tidak tersedia. Pemilihan hari memerlukan JavaScript. Setiap tanggal memakai fragment `#YYYY-MM-DD`; Back/Forward mengembalikan tanggal sebelumnya.
 
@@ -52,19 +52,21 @@ Pemeriksaan tautan: 12306 dan dua halaman Jiuzhaigou merespons HTTP 200. Tiga ta
 
 ## Beranda dan jurnal perjalanan
 
-Beranda dibuka dengan enam foto destinasi di rute: Jiuzhaigou, Siguniangshan, Tagong, Yading, Blue Moon Valley, dan Danau Erhai. Geser foto atau gunakan tombol sebelumnya/berikutnya; foto tidak berganti otomatis. Nama destinasi pada foto dan enam kartu di bawahnya membuka tanggal perjalanan yang sesuai.
+The homepage has eight hero slides and two explicitly named destination groups. Sichuan includes Jiuzhaigou, Siguniangshan, Tagong, and Yading. Yunnan includes Shangri-La, Lijiang Old Town, Blue Moon Valley, and Lake Erhai. Region buttons scroll to and focus the matching heading. Each card opens its itinerary date; Shangri-La and Lijiang both link to 18 November. Hero slides alternate provinces, display the region in their captions, and support swipe and previous/next controls without autoplay.
+
+Use English for code identifiers, comments, test descriptions, and developer-facing messages. User-facing interface copy remains Bahasa Indonesia.
 
 Ringkasan kedatangan muncul tepat setelah foto pembuka, sebelum pilihan destinasi: mulai dari Chengdu dan menginap di Jiuzhaigou. Itinerary lengkap berada setelah bagian pilihan destinasi. Tautan seperti `#2026-11-20` tetap langsung memilih dan menampilkan hari tersebut. Catatan harian memakai foto yang bergantian sisi pada desktop; pada ponsel, foto muncul sebelum uraian tempat. Ringkasan menginap dan transportasi ditampilkan dekat judul hari.
 
 Galeri terpisah menyimpan 12 foto kiriman pengguna. Tombol **Galeri** membuka bagian yang semula tertutup. Tiga foto Bipenggou tetap diberi kredit kapongbeer berdasarkan tangkapan layar pengguna dan ditandai sebagai inspirasi di luar rute PDF. Tanggal pengambilan foto pengguna belum diketahui. Manifest asalnya ada di `source/user-photos/manifest.json`.
 
-Enam foto destinasi pada beranda terdiri atas empat aset baru dan dua foto arsip. Hanya foto Siguniangshan yang memiliki tanggal pengambilan terverifikasi pada Oktober 2026, yaitu 14 Oktober. Foto Jiuzhaigou diambil 6 November 2025, Erhai 20 Februari 2026, Tagong pada Juni 2018, dan Luorong pada Oktober 2012. Tanggal pengambilan Blue Moon Valley tidak tersedia. Rincian sumber, lisensi, dan tanggal terbit ada di `source/highlight-photos/manifest.json` serta `SOURCE-NOTES.md`.
+The eight homepage photos reuse four sourced highlight assets and four existing destination assets; no additional photo download is required for the regional groups. Hanya foto Siguniangshan yang memiliki tanggal pengambilan terverifikasi pada Oktober 2026, yaitu 14 Oktober. Foto Jiuzhaigou diambil 6 November 2025, Erhai 20 Februari 2026, Tagong pada Juni 2018, dan Luorong pada Oktober 2012. Tanggal pengambilan Blue Moon Valley tidak tersedia. Rincian sumber, lisensi, dan tanggal terbit ada di `source/highlight-photos/manifest.json` serta `SOURCE-NOTES.md`.
 
 Tampilan mempertahankan Geist, Bodoni Moda, palet kastanye/krem/terakota/emas, dan navigasi tanggal mengambang. Bukti revisi terbaru ada di `artifacts/highlights-verification.md`; bukti deployment publik ada di `artifacts/deployment/receipt.json`.
 
 ## Deployment terverifikasi
 
-Versi highlight dan slider sudah live di [china.muhammadyana.me](https://china.muhammadyana.me). Build dan 10 tes lulus; pemeriksaan publik 360/390 px juga lulus. Rincian HTTPS, aset, bukti, dan rollback: [panduan deployment](ops/README.md).
+Versi highlight dan slider sudah live di [china.muhammadyana.me](https://china.muhammadyana.me). Build and 11 browser tests pass; pemeriksaan publik 360/390 px juga lulus. Rincian HTTPS, aset, bukti, dan rollback: [panduan deployment](ops/README.md).
 
 ## GitHub Actions dan Nginx
 

@@ -1,5 +1,5 @@
 /* Hallmark · shape: app screen · genre: editorial · theme: Autumn field guide (user-requested seasonal edition of Specimen) · job: visit · draw: 5f3c4c
- * hero: Banner · nav: edge-aligned utility · footer: colophon · imagery: licensed place photographs in natural colour · signature: six route photographs open dated travel chapters
+ * hero: Banner · nav: edge-aligned utility · footer: colophon · imagery: licensed place photographs in natural colour · signature: eight route photographs open dated travel chapters
  * axes: warm-paper/high-contrast-serif/chestnut · posture: restrained · contrast: rendered and aXe checked · fold: mobile arrival overnight visible above dock · finish: ship · v2.0.0 */
 /* Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V5 · weakest: photo gaps, preserve text and source gaps rather than wrong locations */
 /* Hallmark · waive 83 · the brief requires real photographs per destination · photos are the guide content */
@@ -479,3 +479,29 @@ dialog::backdrop { background: var(--color-backdrop); }
 }
 
 .credit-note { display: block; padding-bottom: var(--space-sm); }
+
+/* Region names remain visible before travelers browse the destination photos. */
+.region-navigation { display: flex; gap: var(--space-md); margin-bottom: var(--space-xl); }
+.region-link { display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); min-height: 56px; min-width: 160px; padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-pill); background: var(--color-autumn); color: var(--color-on-autumn); font-size: 18px; text-align: left; }
+.region-link:hover { background: var(--color-autumn-hover); }
+.region-highlights { scroll-margin-top: var(--space-lg); }
+.region-highlights + .region-highlights { margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 1px solid var(--color-rule-2); }
+.region-heading { display: flex; align-items: center; justify-content: space-between; gap: var(--space-xl); margin-bottom: var(--space-lg); }
+.region-heading h3 { font-size: clamp(36px,4vw,52px); line-height: 1.1; color: var(--color-ink); }
+.region-heading p { max-width: 45ch; color: var(--color-ink-2); font-size: 14px; line-height: 1.65; }
+.region-highlights .highlight-card,.region-highlights .highlight-card:last-child { grid-column: span 3; display: block; }
+.region-highlights .highlight-card:nth-child(2) { padding-top: 0; }
+.region-highlights .highlight-card .highlight-image { aspect-ratio: 1.5; }
+.highlight-copy h4 { margin: 0; font-family: var(--font-display); font-weight: var(--display-weight); font-synthesis: none; letter-spacing: var(--tracking-display); font-size: clamp(26px,2.7vw,38px); line-height: 1.15; overflow-wrap: break-word; min-width: 0; text-wrap: balance; }
+.hero-region { font-size: 12px; color: var(--color-on-autumn-muted); margin-top: var(--space-2xs); }
+@media (max-width:599px) {
+ .region-navigation { gap: var(--space-sm); margin-bottom: var(--space-lg); }
+ .region-link { min-width: 0; flex: 1; padding: var(--space-sm) var(--space-md); font-size: 16px; }
+ .region-heading { display: block; margin-bottom: var(--space-lg); }
+ .region-heading h3 { font-size: 38px; }
+ .region-heading p { font-size: 14px; margin-top: var(--space-sm); }
+ .region-highlights + .region-highlights { margin-top: var(--space-xl); padding-top: var(--space-xl); }
+ .region-highlights .highlight-card .highlight-image { aspect-ratio: 1.04; }
+ .highlight-copy h4 { font-size: 31px; }
+ .hero-region { font-size: 11px; }
+}

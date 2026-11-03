@@ -114,6 +114,11 @@ document.addEventListener('click', event => {
   if (action === 'skip') { event.preventDefault(); $('#day-heading').focus(); }
   else if (action === 'hero-next') moveHero(1);
   else if (action === 'hero-previous') moveHero(-1);
+  else if (action === 'region') {
+    const section = document.getElementById(`region-${button.dataset.region?.toLowerCase()}`);
+    section?.scrollIntoView({block:'start',behavior:'instant'});
+    section?.querySelector<HTMLElement>('h3')?.focus({preventScroll:true});
+  }
   else if (action === 'pick-day') {
     $('#picker-days').innerHTML = pickerItems(current,'modal'); openDialog(picker,button);
   } else if (action === 'close') button.closest('dialog')?.close();

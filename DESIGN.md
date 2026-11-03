@@ -222,11 +222,11 @@ Both variable fonts use `font-display: swap`. Main headings use Geist semibold. 
 
 ## Layout
 
-The centered container remains at most 1280 pixels wide, including 40-pixel gutters. Home order is the hero slider, first-day arrival summary, six clickable highlights, full-itinerary introduction, selected-day journal, and optional user gallery. Direct date fragments scroll to the selected journal rather than requiring a pass through the home sections.
+The centered container remains at most 1280 pixels wide, including 40-pixel gutters. Home order is the hero slider, first-day arrival summary, eight clickable highlights grouped by Sichuan and Yunnan, full-itinerary introduction, selected-day journal, and optional user gallery. Direct date fragments scroll to the selected journal rather than requiring a pass through the home sections.
 
 The hero is 560 pixels high on desktop, 520 below 960 pixels, and 440 below 600. Each slide fills the frame; the trip title and action stay anchored at the bottom. A linked destination/date caption sits at the upper left; the counter and previous/next buttons sit at the upper right.
 
-Highlights use a six-column desktop grid with varied spans and image proportions: two broad opening features, three smaller photographs, and a full-width final feature. The second feature is offset vertically. Below 960 pixels they become regular two-column features; below 600 they form a native horizontal track with 86%-width cards and proximity scroll snapping.
+Highlights are grouped under explicit Sichuan and Yunnan headings, with four destinations per region. Two prominent region buttons scroll to and focus the matching heading. Each group uses two equal desktop columns with landscape photographs; below 600 pixels it becomes a native horizontal track with 86%-width cards and proximity scroll snapping.
 
 The full itinerary retains its sticky desktop date sidebar. On smaller screens the floating date dock replaces the sidebar. Desktop stops alternate image and text sides; the image column is wider. Phones always put the image before the stop description. Stop numbers and dashed transfer connectors provide chronology without a border around every stop.
 
@@ -246,7 +246,7 @@ Each hero slide has its own graduated dark overlay: translucent brown at the top
 
 The hero uses 24-pixel corners on desktop and 20 on phones. Photo frames, date rows, the essentials panel, and practical notes use `card`; controls and overlaid date labels use `control`. The date dock uses 22-pixel corners and a 14-pixel central picker. The small direction marker below a highlight is circular.
 
-Standard dialogs retain `dialog`; compact status labels use `small`. Expanded images use `contain`. Hero crops use `cover` with a vertical focal position of 45%; journal images use aspect ratios of 1.12 on larger screens and 1.3 on phones. Highlight proportions deliberately vary on desktop and unify to 1.04 on phones. Fine rules appear where they clarify a boundary; transfer connectors are dashed. Icons are inline rounded-stroke SVGs.
+Standard dialogs retain `dialog`; compact status labels use `small`. Expanded images use `contain`. Hero crops use `cover` with a vertical focal position of 45%; journal images use aspect ratios of 1.12 on larger screens and 1.3 on phones. Highlight proportions are 1.5 on desktop and 1.04 on phones. Fine rules appear where they clarify a boundary; transfer connectors are dashed. Icons are inline rounded-stroke SVGs.
 
 ## Components
 
@@ -276,7 +276,7 @@ The floating dock stays inset 16 pixels from the sides and 12 from the bottom, w
 
 ### Hero Slider and Route Highlights
 
-The hero and highlights share six destinations from the route: Jiuzhaigou, Siguniangshan, Tagong, Yading, Blue Moon Valley, and Erhai. The hero supports native swipe/scroll and previous/next buttons; its counter updates with the active slide. Inactive slide content is inert, and only the first image is eager. Highlight cards open the matching date. They are destination navigation, not booking or live-availability controls.
+The hero and highlights share eight destinations from the route. Sichuan contains Jiuzhaigou, Siguniangshan, Tagong, and Yading. Yunnan contains Shangri-La, Lijiang Old Town, Blue Moon Valley, and Erhai. Hero slides alternate regions, identify their region in the caption, and show Shangri-La immediately after Jiuzhaigou. The hero supports native swipe/scroll and previous/next buttons; its counter updates with the active slide. Inactive slide content is inert, and only the first image is eager. Highlight cards open the matching date. They are destination navigation, not booking or live-availability controls.
 
 Photographs are tied to source metadata. A park-level Jiuzhaigou photograph does not prove a named lake; a Siguniangshan panorama does not prove Maobiliang or Shuangqiao. Photo source and capture-date details belong in the image/source information, separate from the itinerary date.
 
