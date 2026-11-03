@@ -1,6 +1,7 @@
 import './style.css';
 import './glass.css';
 import { initializeGuide } from './guide-main.ts';
+import { initializePhotoLoading } from './photo-loading.ts';
 import { days, daysByDate, places } from './itinerary.ts';
 import { dayView, pickerItems, photoDetail, userPhotoDetail, overviewContent, icon, fullDate } from './render.ts';
 
@@ -155,6 +156,7 @@ showDay(current,{scroll:daysByDate.has(location.hash.slice(1)),announceChange:fa
 
 }
 
+initializePhotoLoading();
 if (document.getElementById('day-view')) initializeItinerary();
 else initializeGuide();
 document.documentElement.classList.add('js');

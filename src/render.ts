@@ -29,7 +29,7 @@ const external = (label: string, url: string) => `<a class="text-link" href="${e
 export function photoImage(id: string, alt: string, eager = false, sizes = '(min-width: 960px) 340px, calc(100vw - 48px)') {
  const p = photos[id] || userPhotos[id]; if(!p) return '';
  const max = p.sizes[p.sizes.length-1];
- return `<img src="/photos/${id}-${max}.webp" srcset="${p.sizes.map(w=>`/photos/${id}-${w}.webp ${w}w`).join(', ')}" sizes="${sizes}" width="${p.width}" height="${p.height}" alt="${e(alt)}" ${eager?'fetchpriority="high" loading="eager"':'loading="lazy"'} decoding="async">`;
+ return `<img data-photo-state="loading" src="/photos/${id}-${max}.webp" srcset="${p.sizes.map(w=>`/photos/${id}-${w}.webp ${w}w`).join(', ')}" sizes="${sizes}" width="${p.width}" height="${p.height}" alt="${e(alt)}" ${eager?'fetchpriority="high" loading="eager"':'loading="lazy"'} decoding="async">`;
 }
 function copyPlace(id: string) {const p=places[id];return p.chinese ? `<button type="button" class="copy-place" data-action="copy-place" data-place="${id}" aria-label="Salin nama Mandarin ${e(p.name)}">${icon('copy')}<span lang="zh-Hans">${e(p.chinese)}</span><span class="copy-label">Salin</span></button>`:'';}
 function status(value?: string) {return value ? `<span class="state ${value==='Terkonfirmasi'?'confirmed':''}">${e(value)}</span>`:'';}

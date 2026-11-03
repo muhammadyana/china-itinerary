@@ -53,6 +53,14 @@ button[aria-busy="true"] { cursor: progress; }
 button:active:not(:disabled),a:active { transform: translateY(1px); }
 :focus-visible,button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 4px; }
 svg { flex-shrink: 0; }
+.js img[data-photo-state="loading"] {
+ background: linear-gradient(110deg,var(--color-paper-3) 25%,var(--color-paper) 40%,var(--color-paper-3) 55%) 100% 0 / 250% 100%;
+ animation: photo-skeleton 1.8s ease-in-out infinite;
+}
+@keyframes photo-skeleton { to { background-position: -100% 0; } }
+@media (prefers-reduced-motion: reduce) {
+ .js img[data-photo-state="loading"] { animation: none; }
+}
 .site-header { display: flex; align-items: center; justify-content: space-between; min-height: 88px; gap: var(--space-md); }
 .wordmark { display: inline-flex; align-items: center; gap: var(--space-sm); min-height: 44px; font-size: 20px; font-weight: 600; text-decoration: none; white-space: nowrap; }
 .wordmark svg { width: 28px; height: 28px; }

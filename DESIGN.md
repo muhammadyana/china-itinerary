@@ -33,6 +33,8 @@ Glass is reserved for navigation, buttons, badges, the floating date dock, and c
 
 Links have no underline in either their resting or hover state. Color and material feedback identify interactions, and focus rings appear immediately. Interactive targets are at least 44px. The hero is manually controlled, never autoplaying. Reduced motion removes animated scrolling. Native dialogs contain focus and restore the opening control after Escape or close.
 
+Photos reserve their layout dimensions and show a warm skeleton while loading. Native load/error events settle the state, including cached images and photos inserted by date navigation or gallery dialogs. Reduced motion keeps the placeholder still; failed images stop animating and retain their alternative text. No artificial page delay is introduced.
+
 ## Homepage
 
 Nine photographs rotate through Sichuan and Yunnan in the hero. The first-night arrival summary remains directly below it and identifies Chengdu as the overnight base. Region sections lead to destination guides; hero captions and the date picker still select itinerary days. The 14-day journal and all overnight summaries remain available with approved traveler revisions applied.
