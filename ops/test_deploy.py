@@ -97,6 +97,7 @@ class DeploymentTests(unittest.TestCase):
                      'places/../index.html', 'places/a/b/index.html', 'places/a/script.js',
                      'places/.hidden/index.html', 'places/a--b/index.html',
                      'social/script.js', 'social/../index.html', 'social/.hidden.jpg',
+                     'social/a/b.jpg', 'social/Upper.jpg', 'social/a--b.jpg', 'social/card.jpeg',
                      'alternate.pdf', 'China-Itinerary-8-22-November-2026.pdf',
                      'print/extra.html', 'print/index.js', 'print/page/index.html',
                      'print/../index.html', 'print/index.html/child.html']:
@@ -151,12 +152,13 @@ class DeploymentTests(unittest.TestCase):
         self.assertEqual((self.base / 'current/public/places/jiuzhaigou/index.html').read_text(), '<html>Destination guide</html>')
 
     def test_social_image_round_trip(self):
-        target = self.dist / 'social/jiuzhaigou.jpg'
-        target.parent.mkdir()
-        target.write_bytes(b'\xff\xd8\xff\xd9')
+        (self.dist / 'social').mkdir()
+        for name in ['social/jiuzhaigou.jpg', 'social/user-impression-lijiang-2.jpg']:
+            (self.dist / name).write_bytes(b'\xff\xd8\xff\xd9')
         payload, _ = package(self.dist, REVISION)
         deploy.deploy(payload, REVISION, self.base, lambda *_: None)
-        self.assertEqual((self.base / 'current/public/social/jiuzhaigou.jpg').read_bytes(), target.read_bytes())
+        for name in ['social/jiuzhaigou.jpg', 'social/user-impression-lijiang-2.jpg']:
+            self.assertEqual((self.base / 'current/public' / name).read_bytes(), (self.dist / name).read_bytes())
 
     def test_links_directories_and_executables(self):
         for member_type in [tarfile.SYMTYPE, tarfile.LNKTYPE, tarfile.DIRTYPE, tarfile.FIFOTYPE]:

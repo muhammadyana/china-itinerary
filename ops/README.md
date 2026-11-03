@@ -11,7 +11,7 @@ ssh deploy@119.28.110.221 "deploy $GITHUB_SHA" < site.tar.gz
 
 `package.py` includes the static `dist/` files, a generated `release.json` containing the full Git revision, and a checksum manifest. It refuses source files, secrets, executables and symlinks. The server independently validates the command, bounded gzip/tar sizes, paths, file types, manifest, revision and every checksum before activation.
 
-The sharing image is allowed only at `social/jiuzhaigou.jpg`; other files in that directory are rejected. The installed receiver must include this exact path before deploying a release that contains the JPEG.
+Sharing images are allowed only as lowercase `social/<photo-id>.jpg` files directly in that directory; nested paths, other extensions and other directories are rejected. `social/jiuzhaigou.jpg` remains the homepage card, and each place page uses the card generated from its cover photo by `node ops/prepare-social-images.mjs` (requires ImageMagick). Update the installed receiver before deploying a release that contains a card other than `social/jiuzhaigou.jpg`.
 
 The generated itinerary is allowed only at `China-Itinerary-8-21-November-2026.pdf`, with its static print page at `print/index.html`. The original `China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf` remains allowed for archived source and photo attribution. New builds include both PDFs and the print page. Other PDF filenames and files under `print/` are rejected; no general PDF or print-directory allowance is introduced.
 

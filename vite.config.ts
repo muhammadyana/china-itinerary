@@ -2,15 +2,26 @@ import { defineConfig } from 'vite';
 import { readFileSync } from 'node:fs';
 import { shell } from './src/render.ts';
 import { guideView, placesIndex } from './src/guide-render.ts';
-import { pageBySlug, placePages, placePath, type PlacePage } from './src/guides.ts';
+import { coverPhoto, pageBySlug, placePages, placePath, type GalleryPhoto, type PlacePage } from './src/guides.ts';
 import { staysView } from './src/stays-render.ts';
 import { staysPath } from './src/stays.ts';
 import { escapeHtml } from './src/render.ts';
 import { renderPrintDocument } from './src/print-render.ts';
 import { pdfPath } from './src/itinerary.ts';
+import { socialImage } from './src/social-image.ts';
 import { generatePdfFromUrl } from './ops/generate-pdf.mjs';
 
 const printStyles = readFileSync(new URL('./src/print.css', import.meta.url), 'utf8');
+
+// Link previews show the same photograph as the page hero instead of the site-wide Jiuzhaigou card.
+function socialMeta(html: string, cover?: GalleryPhoto) {
+ if (!cover) return html;
+ const image = socialImage(cover.id);
+ return html.replace(/<meta (property="og:image"|name="twitter:image") content="[^"]*">/g, (_match, attribute) => `<meta ${attribute} content="https://china.muhammadyana.me${image.path}">`)
+  .replace(/<meta (property="og:image:alt"|name="twitter:image:alt") content="[^"]*">/g, (_match, attribute) => `<meta ${attribute} content="${escapeHtml(cover.alt)}">`)
+  .replace(/<meta property="og:image:width" content="[^"]*">/, `<meta property="og:image:width" content="${image.width}">`)
+  .replace(/<meta property="og:image:height" content="[^"]*">/, `<meta property="og:image:height" content="${image.height}">`);
+}
 
 function pageHtml(html: string, title: string, description: string, path: string, body: string) {
  const url = `https://china.muhammadyana.me${path}`;
@@ -25,7 +36,7 @@ function pageHtml(html: string, title: string, description: string, path: string
 function destinationHtml(html: string, page?: PlacePage) {
  const title = page ? `${page.name}: rute, biaya & galeri | China 2026` : 'Panduan tempat di Sichuan & Yunnan | China 2026';
  const description = page ? (page.placeId ? `Cara menuju ${page.name}, biaya kawasan, galeri, dan tips perjalanan November 2026.` : page.guide.summary) : 'Panduan setiap tempat wisata dalam itinerary Sichuan dan Yunnan, 8 sampai 21 November 2026.';
- return pageHtml(html, title, description, page ? placePath(page.slug) : '/places/', page ? guideView(page) : placesIndex());
+ return socialMeta(pageHtml(html, title, description, page ? placePath(page.slug) : '/places/', page ? guideView(page) : placesIndex()), page && coverPhoto(page));
 }
 
 const staysHtml = (html: string) => pageHtml(html, 'Hotel & hostel per malam | China 2026', 'Satu hotel dan satu hostel untuk setiap kota menginap di Sichuan dan Yunnan, 8 sampai 20 November 2026, dengan harga perkiraan dan bukti menerima paspor asing.', staysPath, staysView());

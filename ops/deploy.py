@@ -18,9 +18,9 @@ from uuid import uuid4
 
 BASE = Path('/home/deploy/apps/china.muhammadyana.me')
 DOMAIN = 'china.muhammadyana.me'
-MAX_COMPRESSED = 64 * 1024 * 1024
-MAX_EXPANDED = 100 * 1024 * 1024
-MAX_FILES = 512
+MAX_COMPRESSED = 96 * 1024 * 1024
+MAX_EXPANDED = 160 * 1024 * 1024
+MAX_FILES = 768
 MANIFEST = 'manifest.json'
 PDF = 'China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf'
 GENERATED_PDF = 'China-Itinerary-8-21-November-2026.pdf'
@@ -41,10 +41,11 @@ def valid_revision(revision):
 def allowed_path(name):
     """Only the deployed site's static file locations, never host configuration."""
     if name in {'index.html', 'release.json', 'icons.svg', 'favicon.svg',
-                'social/jiuzhaigou.jpg', PDF, GENERATED_PDF, PRINT_INDEX}:
+                PDF, GENERATED_PDF, PRINT_INDEX}:
         return True
     return bool(re.fullmatch(r'assets/[A-Za-z0-9_-]+\.(?:js|css|woff2)', name)
                 or re.fullmatch(r'photos/[A-Za-z0-9_-]+\.(?:webp|avif)', name)
+                or re.fullmatch(r'social/[a-z0-9]+(?:-[a-z0-9]+)*\.jpg', name)
                 or re.fullmatch(r'places/(?:[a-z0-9]+(?:-[a-z0-9]+)*/)?index\.html', name))
 
 
