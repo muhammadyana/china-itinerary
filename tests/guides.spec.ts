@@ -162,3 +162,20 @@ test('reduced transparency removes backdrop effects from destination navigation'
   expect(effects.background).toMatch(/^rgb\(/);
   await expect(page.locator('.guide-section-nav a')).toHaveCount(4);
 });
+
+test('320px: all header controls remain inside the viewport with full touch targets', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 844 });
+  for (const path of ['/', '/places/jiuzhaigou/', '/places/kunming-old-town/']) {
+    await page.goto(path);
+    const controls = await page.locator('.site-header a,.site-header button').evaluateAll(nodes => nodes.map(node => {
+      const rect = node.getBoundingClientRect();
+      return { text: node.textContent, left: rect.left, right: rect.right, width: rect.width, height: rect.height };
+    }));
+    for (const control of controls) {
+      expect(control.left, `${path}: ${control.text}`).toBeGreaterThanOrEqual(0);
+      expect(control.right, `${path}: ${control.text}`).toBeLessThanOrEqual(320);
+      expect(control.width, `${path}: ${control.text}`).toBeGreaterThanOrEqual(44);
+      expect(control.height, `${path}: ${control.text}`).toBeGreaterThanOrEqual(44);
+    }
+  }
+});

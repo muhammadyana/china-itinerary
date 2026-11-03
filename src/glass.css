@@ -219,3 +219,6 @@ dialog { background: var(--color-glass-solid); border-color: var(--color-glass-e
 
 .guide-location-note { font-size: 12px; color: var(--color-muted); margin-top: var(--space-sm); max-width: 75ch; }
 .place-gallery-item > small { display: block; padding: 0 var(--space-lg) var(--space-lg); font-size: 12px; color: var(--color-muted); font-weight: 400; }
+@media (max-width:359px) {
+ .site-header nav { gap: var(--space-2xs); padding-inline: var(--space-2xs); }
+}
