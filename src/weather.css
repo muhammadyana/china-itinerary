@@ -1,0 +1,191 @@
+/* Hallmark · component: current weather · genre: modern-minimal · theme: locked warm cream Liquid Glass · states: loading ready stale error · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R5 V3 · weakest: density; model context and source remain secondary to the current reading */
+
+.weather-panel {
+  min-width: 0;
+  margin-block: var(--space-lg);
+  padding: var(--space-lg);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-card);
+  background: var(--color-glass-solid);
+  color: var(--color-ink);
+}
+
+.weather-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.weather-header h3 {
+  min-width: 0;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  font-weight: 600;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+.weather-refresh {
+  flex: 0 0 auto;
+  min-height: 44px;
+  min-width: 6rem;
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--color-glass-edge);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-glass);
+  background-image: var(--glass-reflection);
+  box-shadow: var(--glass-shadow);
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--dur-micro) var(--ease-out);
+}
+
+.weather-refresh:hover:not(:disabled) {
+  background-color: var(--color-glass-hover);
+}
+
+.weather-refresh:active:not(:disabled) {
+  background-color: var(--color-glass-pressed);
+}
+
+.weather-refresh:focus-visible,
+.weather-panel a:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.weather-refresh:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.weather-refresh[aria-busy="true"] {
+  cursor: progress;
+}
+
+.weather-reading,
+.weather-placeholder {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-xs) var(--space-lg);
+  min-height: 3.5rem;
+  margin-top: var(--space-md);
+}
+
+.weather-reading[hidden],
+.weather-placeholder[hidden],
+.weather-time[hidden] {
+  display: none;
+}
+
+.weather-temperature {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+  letter-spacing: var(--tracking-display);
+}
+
+.weather-feels-like {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+
+.weather-status,
+.weather-time,
+.weather-disclaimer,
+.weather-location-note,
+.weather-source,
+.weather-no-script {
+  display: block;
+  margin: var(--space-xs) 0 0;
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  overflow-wrap: break-word;
+}
+
+.weather-status,
+.weather-time,
+.weather-source {
+  color: var(--color-muted);
+}
+
+.weather-disclaimer,
+.weather-location-note {
+  color: var(--color-ink-2);
+}
+
+.weather-source a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.weather-source > span {
+  display: block;
+}
+
+.weather-panel a:hover {
+  color: var(--color-ink);
+}
+
+.weather-placeholder {
+  align-items: center;
+}
+
+.weather-placeholder > span {
+  display: block;
+  height: 2.5rem;
+  width: 7rem;
+  border-radius: var(--space-xs);
+  background: var(--color-paper-2);
+}
+
+.weather-placeholder > span:last-child {
+  height: 1rem;
+  width: 8rem;
+}
+
+.weather-panel[data-weather-state="stale"] .weather-status,
+.weather-panel[data-weather-state="error"] .weather-status {
+  color: var(--color-warning);
+  font-weight: 500;
+}
+
+@media (max-width: 399px) {
+  .weather-panel {
+    padding: var(--space-md);
+  }
+
+  .weather-header {
+    gap: var(--space-sm);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .weather-refresh {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .weather-refresh {
+    background: var(--color-glass-solid);
+    border-color: var(--color-rule-2);
+    box-shadow: none;
+  }
+}

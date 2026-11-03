@@ -1,0 +1,424 @@
+{
+  "checkedAt": "2026-11-03",
+  "purpose": "Verified reference coordinates for current modeled weather. These are named town or area references, not station observations or forecasts for the trip date.",
+  "coordinateSystem": "WGS84",
+  "geocodingDocumentation": "https://open-meteo.com/en/docs/geocoding-api",
+  "attribution": [
+    {
+      "name": "GeoNames",
+      "url": "https://www.geonames.org/"
+    },
+    {
+      "name": "OpenStreetMap contributors",
+      "url": "https://www.openstreetmap.org/copyright"
+    }
+  ],
+  "selectionNotes": [
+    "Selected records by province and prefecture, not merely the first same-name search result.",
+    "Zhangzha near Jiuzhaigou park is used instead of the unrelated Jiuzhaigou settlement in Hunan.",
+    "Rilongzhen in Aba is used instead of the unrelated Rilong settlement in Liangshan.",
+    "Daocheng uses Jinzhu in Garze; a separate Daocheng geocoding record had an inconsistent Jiangsu administrative label.",
+    "Daily mappings follow the overnight town, with Kunming for the final departure day.",
+    "Mountain guide mappings explicitly disclose the named reference area and altitude or location limitations."
+  ],
+  "locations": {
+    "chengdu": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=1815286&language=en",
+      "record": {
+        "id": 1815286,
+        "name": "Chengdu",
+        "latitude": 30.66667,
+        "longitude": 104.06667,
+        "elevation": 499.0,
+        "feature_code": "PPLA",
+        "country_code": "CN",
+        "admin1_id": 1794299,
+        "admin2_id": 1815285,
+        "timezone": "Asia/Shanghai",
+        "population": 20937757,
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Sichuan",
+        "admin2": "Chengdu Shi"
+      }
+    },
+    "jiuzhaigou": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=1793060&language=en",
+      "record": {
+        "id": 1793060,
+        "name": "Zhangzha",
+        "latitude": 33.29597,
+        "longitude": 103.86495,
+        "elevation": 2089.0,
+        "feature_code": "PPL",
+        "country_code": "CN",
+        "admin1_id": 1794299,
+        "admin2_id": 1818175,
+        "timezone": "Asia/Shanghai",
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Sichuan",
+        "admin2": "Aba Zangzu Qiangzu Zizhizhou"
+      }
+    },
+    "rilong": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=6999083&language=en",
+      "record": {
+        "id": 6999083,
+        "name": "Rilongzhen",
+        "latitude": 30.99537,
+        "longitude": 102.82925,
+        "elevation": 3166.0,
+        "feature_code": "PPL",
+        "country_code": "CN",
+        "admin1_id": 1794299,
+        "admin2_id": 1818175,
+        "timezone": "Asia/Shanghai",
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Sichuan",
+        "admin2": "Aba Zangzu Qiangzu Zizhizhou"
+      }
+    },
+    "danba": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=1785258&language=en",
+      "record": {
+        "id": 1785258,
+        "name": "Zhanggu",
+        "latitude": 30.86875,
+        "longitude": 101.88848,
+        "elevation": 2425.0,
+        "feature_code": "PPLA3",
+        "country_code": "CN",
+        "admin1_id": 1794299,
+        "admin2_id": 1810269,
+        "timezone": "Asia/Shanghai",
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Sichuan",
+        "admin2": "Garzê"
+      }
+    },
+    "bamei": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=1798278&language=en",
+      "record": {
+        "id": 1798278,
+        "name": "Bamei",
+        "latitude": 30.48448,
+        "longitude": 101.48243,
+        "elevation": 3449.0,
+        "feature_code": "PPL",
+        "country_code": "CN",
+        "admin1_id": 1794299,
+        "admin2_id": 1810269,
+        "timezone": "Asia/Shanghai",
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Sichuan",
+        "admin2": "Garzê"
+      }
+    },
+    "tagong": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=1804125&language=en",
+      "record": {
+        "id": 1804125,
+        "name": "Tagong",
+        "latitude": 30.32389,
+        "longitude": 101.53058,
+        "elevation": 3741.0,
+        "feature_code": "PPL",
+        "country_code": "CN",
+        "admin1_id": 1794299,
+        "admin2_id": 1810269,
+        "timezone": "Asia/Shanghai",
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Sichuan",
+        "admin2": "Garzê"
+      }
+    },
+    "xinduqiao": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=1789093&language=en",
+      "record": {
+        "id": 1789093,
+        "name": "Xinduqiao",
+        "latitude": 30.04525,
+        "longitude": 101.48876,
+        "elevation": 3469.0,
+        "feature_code": "PPL",
+        "country_code": "CN",
+        "admin1_id": 1794299,
+        "admin2_id": 1810269,
+        "timezone": "Asia/Shanghai",
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Sichuan",
+        "admin2": "Garzê"
+      }
+    },
+    "kangding": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=1802171&language=en",
+      "record": {
+        "id": 1802171,
+        "name": "Kangding",
+        "latitude": 30.00222,
+        "longitude": 101.9569,
+        "elevation": 2826.0,
+        "feature_code": "PPLA2",
+        "country_code": "CN",
+        "admin1_id": 1794299,
+        "admin2_id": 1810269,
+        "admin3_id": 1804839,
+        "timezone": "Asia/Shanghai",
+        "population": 100000,
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Sichuan",
+        "admin2": "Garzê",
+        "admin3": "Kangding Xian"
+      }
+    },
+    "jiagenba": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=6976290&language=en",
+      "record": {
+        "id": 6976290,
+        "name": "Jiagenba",
+        "latitude": 29.84597,
+        "longitude": 101.58858,
+        "elevation": 3645.0,
+        "feature_code": "PPL",
+        "country_code": "CN",
+        "admin1_id": 1794299,
+        "admin2_id": 1810269,
+        "timezone": "Asia/Shanghai",
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Sichuan",
+        "admin2": "Garzê"
+      }
+    },
+    "yajiang": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=1808573&language=en",
+      "record": {
+        "id": 1808573,
+        "name": "Hekou",
+        "latitude": 30.03477,
+        "longitude": 101.01345,
+        "elevation": 2648.0,
+        "feature_code": "PPL",
+        "country_code": "CN",
+        "admin1_id": 1794299,
+        "admin2_id": 1810269,
+        "timezone": "Asia/Shanghai",
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Sichuan",
+        "admin2": "Garzê"
+      }
+    },
+    "litang": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=1810604&language=en",
+      "record": {
+        "id": 1810604,
+        "name": "Gaocheng",
+        "latitude": 29.98814,
+        "longitude": 100.2694,
+        "elevation": 3935.0,
+        "feature_code": "PPLA3",
+        "country_code": "CN",
+        "admin1_id": 1794299,
+        "admin2_id": 1810269,
+        "timezone": "Asia/Shanghai",
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Sichuan",
+        "admin2": "Garzê"
+      }
+    },
+    "daocheng": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=6547110&language=en",
+      "record": {
+        "id": 6547110,
+        "name": "Jinzhu",
+        "latitude": 29.03921,
+        "longitude": 100.29694,
+        "elevation": 3747.0,
+        "feature_code": "PPL",
+        "country_code": "CN",
+        "admin1_id": 1794299,
+        "admin2_id": 1810269,
+        "timezone": "Asia/Shanghai",
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Sichuan",
+        "admin2": "Garzê"
+      }
+    },
+    "yading-village": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=10211775&language=en",
+      "record": {
+        "id": 10211775,
+        "name": "Yading",
+        "latitude": 28.4556,
+        "longitude": 100.338,
+        "elevation": 3969.0,
+        "feature_code": "PPL",
+        "country_code": "CN",
+        "admin1_id": 1794299,
+        "admin2_id": 1810269,
+        "timezone": "Asia/Shanghai",
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Sichuan",
+        "admin2": "Garzê"
+      }
+    },
+    "xiangcheng": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=8608938&language=en",
+      "record": {
+        "id": 8608938,
+        "name": "Sangpi",
+        "latitude": 28.93391,
+        "longitude": 99.79991,
+        "elevation": 2888.0,
+        "feature_code": "PPLA3",
+        "country_code": "CN",
+        "admin1_id": 1794299,
+        "admin2_id": 1810269,
+        "timezone": "Asia/Shanghai",
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Sichuan",
+        "admin2": "Garzê"
+      }
+    },
+    "shangri-la": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=7910932&language=en",
+      "record": {
+        "id": 7910932,
+        "name": "Shangri-La",
+        "latitude": 27.82511,
+        "longitude": 99.70779,
+        "elevation": 3283.0,
+        "feature_code": "PPLA2",
+        "country_code": "CN",
+        "admin1_id": 1785694,
+        "admin2_id": 1281365,
+        "timezone": "Asia/Shanghai",
+        "population": 186400,
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Yunnan",
+        "admin2": "Diqing"
+      }
+    },
+    "lijiang": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=1813253&language=en",
+      "record": {
+        "id": 1813253,
+        "name": "Lijiang",
+        "latitude": 26.86879,
+        "longitude": 100.22072,
+        "elevation": 2397.0,
+        "feature_code": "PPLA2",
+        "country_code": "CN",
+        "admin1_id": 1785694,
+        "admin2_id": 1803666,
+        "timezone": "Asia/Shanghai",
+        "population": 211151,
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Yunnan",
+        "admin2": "Lijiang Shi"
+      }
+    },
+    "dali": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=12277235&language=en",
+      "record": {
+        "id": 12277235,
+        "name": "Dali Old Town",
+        "latitude": 25.68863,
+        "longitude": 100.15894,
+        "elevation": 2052.0,
+        "feature_code": "PPL",
+        "country_code": "CN",
+        "admin1_id": 1785694,
+        "admin2_id": 1814065,
+        "timezone": "Asia/Shanghai",
+        "population": 82566,
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Yunnan",
+        "admin2": "Dali Bai Autonomous Prefecture"
+      }
+    },
+    "kunming": {
+      "provider": "Open-Meteo geocoding / GeoNames",
+      "source": "https://geocoding-api.open-meteo.com/v1/get?id=1804651&language=en",
+      "record": {
+        "id": 1804651,
+        "name": "Kunming",
+        "latitude": 25.03889,
+        "longitude": 102.71833,
+        "elevation": 1895.0,
+        "feature_code": "PPLA",
+        "country_code": "CN",
+        "admin1_id": 1785694,
+        "admin2_id": 1804649,
+        "timezone": "Asia/Shanghai",
+        "population": 5950578,
+        "country_id": 1814991,
+        "country": "China",
+        "admin1": "Yunnan",
+        "admin2": "Kunming Shi"
+      }
+    },
+    "riwa": {
+      "provider": "OpenStreetMap / Nominatim",
+      "source": "https://www.openstreetmap.org/node/1808141658",
+      "lookup": "https://nominatim.openstreetmap.org/search?q=%E9%A6%99%E6%A0%BC%E9%87%8C%E6%8B%89%E9%95%87+%E7%A8%BB%E5%9F%8E%E5%8E%BF&format=jsonv2&limit=5",
+      "record": {
+        "osm_type": "node",
+        "osm_id": 1808141658,
+        "latitude": 28.5618353,
+        "longitude": 100.3481193,
+        "name": "香格里拉镇",
+        "type": "town",
+        "display_name": "香格里拉镇, 稻城县, 甘孜藏族自治州, 四川省, 中国"
+      },
+      "selectionReason": "Riwa / Shangri-La Town in Daocheng, Sichuan. This is distinct from Shangri-La City in Yunnan."
+    },
+    "ganhaizi": {
+      "provider": "OpenStreetMap / Nominatim",
+      "source": "https://www.openstreetmap.org/way/1000080741",
+      "lookup": "https://nominatim.openstreetmap.org/search?q=%E5%8D%B0%E8%B1%A1%E4%B8%BD%E6%B1%9F&format=jsonv2&limit=5",
+      "record": {
+        "osm_type": "way",
+        "osm_id": 1000080741,
+        "latitude": 27.1006879,
+        "longitude": 100.2564517,
+        "name": "印象丽江",
+        "type": "theatre",
+        "display_name": "印象丽江, G674;S223, 大具乡, 玉龙纳西族自治县, 丽江市, 云南省, 中国"
+      },
+      "selectionReason": "The Nominatim representative point of the Impression Lijiang theater footprint provides a named Ganhaizi-area reference, not a Glacier Park summit point."
+    }
+  }
+}

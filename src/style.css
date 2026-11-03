@@ -28,6 +28,7 @@
  --color-glass-glint: #ffffffad; --color-glass-reflection: #ffffff14; --color-glass-base: #d7bd9524;
  --color-glass-rim: #9b774d2b; --color-glass-hover: #fffdf5db; --color-glass-pressed: #ecddc8d9;
  --color-glass-tint: #f2ce8dcf; --color-glass-tint-hover: #f7dca9eb;
+ --color-menu-glass: #fffaf22e; --color-menu-shine: #ffffff42; --color-menu-hover: #fffaf24d;
  --color-photo-badge: #fffaf20a; --color-photo-badge-shine: #ffffff1f; --color-photo-badge-clear: #ffffff05;
  --color-photo-badge-edge: #ffffff70; --color-photo-badge-hover: #fffaf22e;
  --color-warning: #77531d; --color-warning-surface: #faf0d9;
@@ -316,7 +317,7 @@ dialog::backdrop { background: var(--color-backdrop); }
  .footer-top { flex-direction: column; align-items: flex-start; gap: 20px; }
  .footer-top p { font-size: 28px; }
  .footer-bottom { font-size: 11px; gap: var(--space-xs); }
- .footer-bottom span { width: 100%; }
+ .footer-bottom > span { width: 100%; }
  .day-picker { width: 100%; max-height: calc(100dvh - 16px); margin: auto 0 0; padding: 20px var(--space-md) calc(20px + env(safe-area-inset-bottom)); border-radius: 12px 12px 0 0; }
  .dialog-header { margin-bottom: var(--space-md); gap: var(--space-xs); }
  .dialog-header h2 { font-size: 27px; }

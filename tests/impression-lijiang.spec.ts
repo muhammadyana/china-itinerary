@@ -102,7 +102,12 @@ test('phone visitors choose 19 November, open the sourced show guide and gallery
   expect(sourcedCosts.length).toBeGreaterThan(0);
   for (const cost of sourcedCosts) {
     const row = page.locator('.guide-costs > div').filter({ has: page.locator('dt', { hasText: cost.label }) });
-    await expect(row).toContainText(cost.amount);
+    const originalAmount = await row.locator('dd > strong').evaluate(element => {
+      const original = element.cloneNode(true) as HTMLElement;
+      original.querySelectorAll('.currency-estimate').forEach(estimate => estimate.remove());
+      return original.textContent?.replace(/\s+/g, ' ').trim();
+    });
+    expect(originalAmount).toBe(cost.amount);
     await expect(row.locator('a')).toHaveAttribute('href', cost.source!);
     await expect(page.locator(`#sources a[href="${cost.source}"]`)).toBeVisible();
   }

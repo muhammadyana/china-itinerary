@@ -32,6 +32,20 @@ Homepage cards and hero slides use shared image resolution and dedicated render 
 
 The initial page is prerendered so the first day and PDF link remain available without JavaScript. Selecting a day requires JavaScript. Each date uses a `#YYYY-MM-DD` fragment; Back/Forward restores the corresponding date.
 
+## Current temperature
+
+Daily views and every destination guide show current temperature and apparent temperature from [Open-Meteo](https://open-meteo.com/en/docs). These are model estimates for the named reference area, not local station observations or forecasts for the November itinerary dates. The provider's timestamp is displayed in China time (UTC+8). Daily views use the overnight town; mountain guides identify their reference village or base area and explain where conditions can differ.
+
+`src/weather-locations.ts` owns the verified coordinates and the mappings for all 14 dates and 31 guide groups. Coordinate sources and verification notes are recorded in `source/weather-locations.json`. `src/weather.ts` renders the shared panel and loads the public API directly in the browser without an API key or user geolocation. Readings are cached in memory for 15 minutes, simultaneous requests for one location are shared, and the refresh button requests new data. Loading skeletons, a 10-second timeout, retry controls, and a visible warning for data older than 45 minutes handle unavailable or stale responses. Invalid values are never replaced with zero. Without JavaScript, the reference location, attribution, and a loading explanation remain visible.
+
+This personal, noncommercial site uses the [Open-Meteo free API terms](https://open-meteo.com/en/terms), with attribution on every weather panel. API availability is not guaranteed. Reassess the service terms before commercial use. Weather tests mock provider responses so CI does not depend on the live API.
+
+## Rupiah estimates
+
+Chinese-yuan prices retain their original amount and display an approximate rupiah equivalent, including ticket components, alternatives, explanatory text, historical-price cautions, and daily practical notes. Existing IDR prices and free or unconfirmed prices are preserved. The shared formatter in `src/currency.ts` escapes plain text before adding conversion markup; it never rewrites completed HTML or link attributes.
+
+The initial static documents use a verified, dated ECB reference-rate snapshot recorded in `source/currency-rate.json`. The browser checks the [ECB-specific Frankfurter feed](https://api.frankfurter.dev/v2/providers/ecb/rate/CNY/IDR) once per page and updates every conversion when a valid newer rate is available, including content shown after switching dates. If the request fails, times out, or returns invalid data, the dated reference remains visible with an explanation. Prices remain available without JavaScript. The source and rate date appear beside the relevant costs; estimates are rounded to whole rupiah and payment-provider rates or fees may differ. These are daily reference rates, not live trading quotes.
+
 The generated application module uses `data-cfasync="false"` to exclude it from Cloudflare Rocket Loader. Image-loading skeletons and navigation must initialize while photographs are still downloading, rather than waiting for the window load event. See [Cloudflare's script exclusion documentation](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/ignore-javascripts/).
 
 Sharing metadata is rendered into the HTML for crawlers that do not run JavaScript. Open Graph and large-image cards use the Jiuzhaigou autumn photograph at `/social/jiuzhaigou.jpg` (1200 × 630 JPEG); destination documents keep their own titles, descriptions, and canonical URLs. Photo provenance is recorded in `source/social-image.json`.
@@ -73,6 +87,8 @@ A gallery directly below the hero contains 14 user-supplied photos and is open b
 The homepage uses six sourced highlight assets and existing destination photos. Lijiang uses an archival rooftop panorama by Franklin David; Dali uses fei wang’s illuminated South Gate image. Both retain source and license credits; neither is presented as an October 2026 capture. Only the Siguniangshan photo has a verified October 2026 capture date: 14 October. The Jiuzhaigou photo was taken on 6 November 2025, Erhai on 20 February 2026, Tagong in June 2018, and Luorong in October 2012. The Blue Moon Valley capture date is unavailable. Sources, licenses, and publication dates are documented in `source/highlight-photos/manifest.json` and `SOURCE-NOTES.md`.
 
 The current visual system uses locally hosted Geist, warm cream reading surfaces, rounded photograph frames, and Liquid Glass-inspired controls. CSS backdrop blur, reflected highlights, bright edges, and soft shadows provide the web material on buttons, navigation, and badges. Hero metadata badges use transparent glass so the photograph remains visible beneath them. The site stays light under either device color preference; reduced transparency and unsupported browsers receive solid surfaces. There are no native SwiftUI APIs or animated distortion effects.
+
+The destination section menu is fixed above the bottom safe area and uses a more transparent glass tint. Footer clearance keeps links reachable above it. A shared credit renderer adds “© 2026 by muhammadyana.me” to the homepage, destination directory, and individual guides.
 
 ## Destination guides
 

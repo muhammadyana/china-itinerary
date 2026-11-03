@@ -1,0 +1,29 @@
+{
+  "base": "CNY",
+  "quote": "IDR",
+  "rate": 2727.94,
+  "date": "2026-11-02",
+  "verifiedAt": "2026-11-03T09:25:48Z",
+  "provider": "European Central Bank",
+  "distributor": "Frankfurter",
+  "apiUrl": "https://api.frankfurter.dev/v2/providers/ecb/rate/CNY/IDR",
+  "apiResponse": {
+    "date": "2026-11-02",
+    "base": "CNY",
+    "quote": "IDR",
+    "rate": 2727.94
+  },
+  "sourceUrl": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+  "documentationUrl": "https://frankfurter.dev/",
+  "termsUrl": "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html",
+  "distributorTermsUrl": "https://frankfurter.dev/license/",
+  "crossCheck": {
+    "date": "2026-11-02",
+    "eurToCny": 7.4567,
+    "eurToIdr": 20341.45,
+    "calculation": "20341.45 / 7.4567 = 2727.9426555983 IDR per CNY; API rounds to 2727.94"
+  },
+  "usage": "Daily reference-rate estimate, not a payment quote. Original CNY prices remain visible. Converted amounts are calculated locally and rounded to whole IDR.",
+  "reuse": "ECB permits accurate reuse with attribution; calculations must be identified. Frankfurter permits API use without a key and encourages caching; abuse rate limits apply.",
+  "fallback": "The verified dated snapshot remains visible if the single browser refresh fails or returns invalid, future, or older data."
+}

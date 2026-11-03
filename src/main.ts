@@ -1,6 +1,10 @@
 import './style.css';
 import './glass.css';
 import './date-picker.css';
+import './weather.css';
+import { initializeWeather } from './weather.ts';
+import './currency.css';
+import { initializeCurrency } from './currency.ts';
 import { initializeGuide } from './guide-main.ts';
 import { initializePhotoLoading } from './photo-loading.ts';
 import { days, daysByDate, places, userPhotos } from './itinerary.ts';
@@ -62,6 +66,8 @@ function showDay(date: string, { push = false, scroll = false, announceChange = 
   current = date;
   if (push && location.hash !== `#${date}`) history.pushState({date}, '', `#${date}`);
   dayRoot.innerHTML = dayView(daysByDate.get(date)!);
+  initializeWeather(dayRoot);
+  initializeCurrency(dayRoot);
   updateNavigation();
   if (scroll) dayRoot.scrollIntoView({block:'start', behavior:'instant'});
   if (announceChange) announce(`${fullDate(date)}. ${daysByDate.get(date)!.overnight ? `Menginap di ${daysByDate.get(date)!.overnight!.name}.` : 'Penerbangan pulang ke Jakarta.'}`);
@@ -191,4 +197,6 @@ showDay(current,{scroll:daysByDate.has(location.hash.slice(1)),announceChange:fa
 initializePhotoLoading();
 if (document.getElementById('day-view')) initializeItinerary();
 else initializeGuide();
+initializeWeather();
+initializeCurrency();
 document.documentElement.classList.add('js');

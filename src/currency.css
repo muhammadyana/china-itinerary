@@ -1,0 +1,62 @@
+/* Currency estimates remain secondary to the original, payable CNY amounts. */
+.currency-estimate {
+  color: var(--color-ink-2);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.exchange-rate {
+  min-width: 0;
+  margin-block: var(--space-md);
+  padding-block-start: var(--space-sm);
+  border-top: 1px solid var(--color-rule);
+  color: var(--color-ink-2);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  overflow-wrap: break-word;
+}
+
+.exchange-rate p {
+  margin: 0;
+}
+
+.exchange-rate .exchange-summary {
+  color: var(--color-ink);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.exchange-rate .exchange-source,
+.exchange-rate .exchange-status {
+  margin-top: var(--space-xs);
+}
+
+.exchange-source a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.exchange-source a:hover {
+  color: var(--color-ink);
+}
+
+.exchange-source a:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.exchange-status {
+  color: var(--color-muted);
+}
+
+.exchange-rate[data-exchange-state="fallback"] .exchange-status {
+  color: var(--color-warning);
+}
