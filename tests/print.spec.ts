@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { days, pdfPath, places } from '../src/itinerary';
+import { days, pdfPath, photos, places } from '../src/itinerary';
 import { guides, pageForPlace, placePath } from '../src/guides';
 import { chengduEveningMalls } from '../src/chengdu-evening';
 
@@ -69,4 +69,55 @@ test('the printable document preserves all days, current stops, guide costs, sou
   expect(prices.sourceAmounts).toBeGreaterThan(0);
   expect(prices.estimates).toBe(prices.sourceAmounts);
   expect(externalRequests).toEqual([]);
+});
+
+test('the printable journal embeds same-origin photographs and credits each one exactly once', async ({ page, baseURL }) => {
+  await page.goto('/print/');
+  const cover = page.locator('.print-cover img');
+  await expect(cover).toHaveCount(1);
+  await expect(cover).toHaveAttribute('src', /^\/photos\/highlight-jiuzhaigou-\d+\.webp$/);
+  await expect(cover).toHaveAttribute('alt', /\S/);
+
+  for (const day of days) {
+    const section = page.locator(`[data-print-date="${day.date}"]`);
+    const stopPhotos = day.events.flatMap(event => {
+      if (event.kind !== 'stop') return [];
+      const place = places[event.place];
+      return place.photo && photos[place.photo] ? [place.alt || place.name] : [];
+    });
+    await expect(section.locator('.print-band img')).toHaveCount(stopPhotos.length ? 1 : 0);
+    const alts = await section.locator('img').evaluateAll(images => images.map(image => image.getAttribute('alt')));
+    for (const alt of stopPhotos) expect(alts, `${day.date} shows a photo for "${alt}"`).toContain(alt);
+  }
+
+  const sources = await page.locator('main img').evaluateAll(images => images.map(image => ({
+    src: image.getAttribute('src') ?? '', resolved: (image as HTMLImageElement).src, loading: image.getAttribute('loading'),
+  })));
+  expect(sources.length).toBeGreaterThan(days.length);
+  const ids = new Set<string>();
+  for (const source of sources) {
+    expect(new URL(source.resolved).origin).toBe(new URL(baseURL!).origin);
+    const match = source.src.match(/^\/photos\/([a-z0-9-]+)-(\d+)\.webp$/);
+    expect(match, source.src).not.toBeNull();
+    expect(source.loading).toBeNull();
+    ids.add(match![1]);
+  }
+  const credits = page.locator('#print-photo-credits [data-credit-photo]');
+  await expect(credits).toHaveCount(ids.size);
+  await expect(page.locator('#print-photo-credits img')).toHaveCount(0);
+  for (const id of ids) {
+    const credit = page.locator(`#print-photo-credits [data-credit-photo="${id}"]`);
+    await expect(credit).toHaveCount(1);
+    const photo = photos[id];
+    if (!photo) {
+      await expect(credit).toContainText('Foto yang dikirim pengguna');
+      continue;
+    }
+    await expect(credit).toContainText(photo.author);
+    // PDF document material links its license and source to the same archive page; the license link comes first.
+    await expect(credit.locator(`a[href="${photo.licenseUrl}"]`).first()).toHaveText(photo.license);
+    await expect(credit.locator(`a[href="${photo.source}"]`).last()).toHaveText('Sumber foto');
+    if (photo.origin === 'PDF') await expect(credit).toContainText('materi dokumen pengguna dari PDF sumber arsip');
+    else await expect(credit).toContainText(photo.origin);
+  }
 });

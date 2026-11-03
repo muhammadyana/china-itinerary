@@ -1,67 +1,185 @@
-/* Printable website snapshot; all content comes from shared itinerary and guide data. */
-@page { size: A4; margin: 16mm 14mm 20mm; }
-:root { --print-paper: #fffdf8; --print-ink: #382d25; --print-muted: #5a493c; --print-rule: #dfd3c1; --print-font: 'Geist', Arial, sans-serif; }
-html { scroll-padding: 0; }
-body.print-document { margin: 0; padding: 0; background: var(--print-paper); color: var(--print-ink); font-family: var(--print-font); font-size: 10pt; line-height: 1.45; }
-.print-document main { width: auto; max-width: 190mm; margin: 0 auto; }
-.print-document h1 { font-family: var(--print-font); font-size: 30pt; line-height: 1.1; margin: 10mm 0 6mm; }
-.print-document h2 { font-family: var(--print-font); font-size: 20pt; line-height: 1.15; margin: 0 0 4mm; }
-.print-document h3 { font-family: var(--print-font); font-size: 12pt; line-height: 1.3; margin: 0 0 2mm; }
-.print-document h4 { font-family: var(--print-font); font-size: 10pt; margin: 4mm 0 1.5mm; }
-.print-document p { margin: 2mm 0; }
-.print-document h2,.print-document h3,.print-document h4 { break-after: avoid; overflow-wrap: break-word; }
-.print-document a { color: var(--print-ink); text-decoration: none; overflow-wrap: anywhere; }
-.print-document a[href^="https://"]::after,.print-document a[href^="http://"]::after { content: 'URL: ' attr(href); display: block; color: var(--print-muted); font-size: 8pt; font-weight: 400; line-height: 1.35; overflow-wrap: anywhere; }
-.print-document ul,.print-document ol { margin: 2mm 0; padding-left: 5mm; }
-.print-document li { margin-block: 1.5mm; }
-.print-document svg { width: 12pt; height: 12pt; }
-.print-document table { border-collapse: collapse; width: 100%; font-size: 9pt; }
-.print-document th,.print-document td { border-bottom: 1px solid var(--print-rule); padding: 2mm; text-align: left; vertical-align: top; }
-.print-document thead { display: table-header-group; }
-.print-document tr { break-inside: avoid; }
-.print-cover { margin-bottom: 4mm; font-size: 9pt; line-height: 1.3; }
-.print-document .print-cover h1 { font-size: 26pt; margin: 3mm 0; }
-.print-document .print-cover p { margin-block: 1mm; }
-.print-document .print-overview h2 { font-size: 17pt; margin-bottom: 3mm; }
-.print-document .print-overview table { font-size: 8.5pt; line-height: 1.3; }
-.print-document .print-overview th,.print-document .print-overview td { padding: 1.3mm 1.5mm; }
-.print-overview th:first-child,.print-overview td:first-child { white-space: nowrap; }
-.print-credit { font-size: 9pt; color: var(--print-muted); }
-.print-day,.print-appendix,.print-booking { break-before: page; }
-.print-day > header { border-bottom: 1px solid var(--print-rule); padding-bottom: 3mm; margin-bottom: 4mm; }
-.print-essentials { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 5mm; margin: 4mm 0; padding: 3mm; border: 1px solid var(--print-rule); }
-.print-essentials dt { font-weight: 600; }
-.print-essentials dd { margin: 1mm 0 0; }
-.print-route,.print-status,.print-revision { color: var(--print-muted); }
-.print-document .print-events { padding-left: 0; list-style: none; }
-.print-events > li { padding-block: 3mm; border-bottom: 1px solid var(--print-rule); break-inside: avoid; }
-.print-event-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
-.print-event-heading > span { flex-shrink: 0; color: var(--print-muted); font-size: 9pt; }
-.print-transfer { padding-left: 4mm; }
-.print-practical > div,.print-costs > div,.print-sources > li { break-inside: avoid; }
-.print-costs { margin: 2mm 0; }
-.print-costs > div { padding-block: 2mm; border-bottom: 1px solid var(--print-rule); }
-.print-costs dt { font-weight: 600; }
-.print-costs dt span { font-weight: 400; color: var(--print-muted); }
-.print-costs dd { margin: 1mm 0 0; }
-.print-guide { margin-top: 8mm; padding-top: 4mm; border-top: 1px solid var(--print-rule); }
-.print-guide > h3 { font-size: 16pt; }
-.print-document .exchange-rate { margin-block: 4mm; padding-block: 3mm; font-size: 9pt; }
-.print-document .exchange-source a { display: block; min-width: 0; min-height: 0; margin-block: 1mm; }
-.print-document .print-cover .exchange-rate { margin-block: 2mm; padding-block: 2mm; font-size: 8pt; line-height: 1.3; }
+/* Printable photographic travel journal; all content comes from shared itinerary and guide data. */
+/* @page values mirror src/style.css tokens: page margin boxes do not inherit custom properties. */
+@page {
+  size: A4;
+  margin: 16mm 14mm 20mm;
+  background: #fffcf6;
+  @bottom-left { content: '© @muhammad_yana'; font-family: 'Geist', sans-serif; font-size: 7.5pt; color: #756250; }
+  @bottom-right { content: counter(page) ' / ' counter(pages); font-family: 'Geist', sans-serif; font-size: 7.5pt; font-variant-numeric: tabular-nums; color: #756250; }
+}
+@page :first {
+  margin: 0;
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
+}
+html { scroll-padding: 0; background: var(--color-glass-solid); }
+body.print-document { margin: 0; padding: 0; background: var(--color-glass-solid); color: var(--color-ink); font-family: var(--font-body); font-size: 9.5pt; line-height: 1.42; }
+.print-document * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+.print-document main { width: auto; max-width: none; margin: 0; }
+.print-document h1,.print-document h2,.print-document h3,.print-document h4 { font-family: var(--font-body); font-weight: 600; max-width: none; color: var(--color-ink); text-wrap: balance; break-after: avoid; overflow-wrap: break-word; }
+.print-document h2 { font-size: 26pt; line-height: 1.05; letter-spacing: -.035em; margin: 0 0 4mm; }
+.print-document h3 { font-size: 13pt; line-height: 1.2; letter-spacing: -.02em; margin: 0; }
+.print-document h4 { font-size: 9.5pt; line-height: 1.3; letter-spacing: 0; margin: 3.5mm 0 1mm; }
+.print-document p { margin: 1.5mm 0; }
+.print-document ul,.print-document ol { margin: 1.5mm 0; padding-left: 4.5mm; }
+.print-document li { margin-block: 1mm; }
+.print-document svg { width: 10pt; height: 10pt; }
+.print-document a { color: var(--color-accent); text-decoration: none; overflow-wrap: anywhere; }
+.print-document a[data-print-url]::after { content: attr(data-print-url); display: inline-block; max-width: 100%; margin-left: 1.4mm; color: var(--color-muted); font-size: 6.5pt; font-weight: 400; letter-spacing: 0; overflow-wrap: anywhere; }
+.print-document time,.print-time,.print-sequence,.print-index-number { font-variant-numeric: tabular-nums; }
+.print-section-intro { max-width: 150mm; color: var(--color-ink-2); }
+.print-photo-note { color: var(--color-muted); font-size: 6.8pt; line-height: 1.35; }
+
+/* Cover: full-bleed photograph on a margin-free first page. */
+.print-cover { position: relative; width: 210mm; height: 297mm; overflow: hidden; margin: 0; break-after: page; background: var(--color-ink); color: var(--color-on-autumn); }
+.print-cover img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.print-cover::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, var(--color-hero-mid), var(--color-hero-clear) 28%, var(--color-hero-clear) 46%, var(--color-hero-base) 86%); }
+.print-cover-copy { position: absolute; z-index: 1; inset: auto 16mm 18mm; }
+.print-document .print-cover h1 { margin: 0; color: var(--color-on-autumn); font-size: 70pt; line-height: .94; letter-spacing: -.04em; max-width: 9ch; }
+.print-document .print-cover-meta { margin: 7mm 0 0; font-size: 12.5pt; font-weight: 500; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.print-document .print-cover .print-credit { margin: 2.5mm 0 0; color: var(--color-on-autumn-muted); font-size: 9pt; }
+
+/* Colophon and journey index. */
+.print-colophon { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 8mm; padding: 0 0 4mm; margin: 0 0 9mm; border-bottom: 1px solid var(--color-rule); color: var(--color-ink-2); font-size: 7.8pt; line-height: 1.4; }
+.print-colophon p { margin: 0 0 1.5mm; }
+.print-document .print-colophon .exchange-rate { margin: 0 0 1.5mm; padding: 0; border: 0; font-size: 7.8pt; line-height: 1.4; }
+.print-document .print-colophon .exchange-rate p { margin: 0 0 1mm; }
+.print-document .exchange-source a { display: inline; min-width: 0; min-height: 0; }
 .print-document .currency-estimate { font-size: inherit; }
+.print-overview h2 { font-size: 30pt; }
+.print-document .print-index { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--color-rule); }
+.print-document .print-index li { margin: 0; border-bottom: 1px solid var(--color-rule); break-inside: avoid; }
+.print-index a { display: grid; grid-template-columns: 21mm minmax(0, 1fr) 42mm; gap: 5mm; align-items: center; padding: 2.4mm 0; color: var(--color-ink); }
+.print-index-number { color: var(--color-accent); font-size: 30pt; font-weight: 600; line-height: 1; letter-spacing: -.04em; }
+.print-index-copy { display: grid; gap: .6mm; min-width: 0; }
+.print-index-copy time { color: var(--color-accent); font-size: 8pt; }
+.print-index-copy strong { font-size: 13.5pt; font-weight: 600; line-height: 1.15; letter-spacing: -.02em; text-wrap: balance; }
+.print-index-copy > span { color: var(--color-ink-2); font-size: 8.5pt; }
+.print-index img { width: 42mm; height: 26mm; max-width: none; object-fit: cover; border-radius: 2.5mm; }
+
+/* Day opener: photo band, title, then the chestnut stay-and-transport panel. */
+.print-day,.print-appendix,.print-booking { break-before: page; }
+.print-day-header { break-inside: avoid; break-after: avoid; }
+.print-band { position: relative; height: 84mm; margin: 0; overflow: hidden; border-radius: 3.5mm; background: var(--color-paper-3); }
+.print-band img { width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.print-band::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, var(--color-hero-clear) 52%, var(--color-hero-base)); }
+.print-band figcaption { position: absolute; z-index: 1; inset: auto 6mm 4.5mm; display: flex; justify-content: space-between; align-items: flex-end; gap: 6mm; color: var(--color-on-autumn); }
+.print-band-meta { display: grid; gap: .4mm; }
+.print-day-count { font-size: 11pt; font-weight: 600; letter-spacing: -.01em; }
+.print-band-meta time,.print-band-place { color: var(--color-on-autumn-muted); font-size: 8.5pt; }
+.print-band-place { text-align: right; max-width: 70mm; }
+.print-day-header > .print-photo-note { margin: 1.5mm 0 0; }
+.print-day-header h2 { margin: 5mm 0 0; font-size: 28pt; }
+.print-day-meta { display: flex; gap: 3mm; color: var(--color-accent); font-size: 9pt; }
+.print-day-meta .print-day-count { font-size: 9pt; }
+.print-essentials { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); margin: 4.5mm 0 0; padding: 0; border-radius: 3.5mm; background: var(--color-autumn); color: var(--color-on-autumn); break-inside: avoid; break-before: avoid; }
+.print-essentials > div { padding: 4mm 5mm; min-width: 0; }
+.print-essentials > div + div { border-left: 1px solid var(--color-autumn-hover); }
+.print-essentials dt { display: flex; align-items: center; gap: 2mm; color: var(--color-on-autumn-muted); font-size: 7.8pt; }
+.print-essentials dt svg { width: 11pt; height: 11pt; color: var(--color-gold); }
+.print-essentials dd { display: grid; gap: .5mm; margin: 1.5mm 0 0; font-size: 9pt; }
+.print-essentials dd strong { font-size: 13pt; font-weight: 600; letter-spacing: -.02em; }
+.print-essentials dd > span { color: var(--color-on-autumn-muted); }
+.print-document .print-intro { max-width: 150mm; margin: 5mm 0 0; color: var(--color-ink-2); font-size: 11pt; line-height: 1.5; }
+.print-document .print-route { display: flex; flex-wrap: wrap; align-items: center; gap: 1.6mm; margin: 3.5mm 0 0; padding: 0; list-style: none; }
+.print-document .print-route li { display: flex; align-items: center; gap: 1.6mm; margin: 0; }
+.print-route span { padding: .7mm 2.6mm; border-radius: 10mm; background: var(--color-paper-2); color: var(--color-ink-2); font-size: 7.8pt; }
+.print-route svg { width: 7pt; height: 7pt; color: var(--color-accent); }
+
+/* Stops and the dashed journey line through transfers. */
+.print-document .print-events { list-style: none; margin: 5mm 0 0; padding: 0; }
+.print-document .print-events > li { margin: 0; break-inside: avoid; }
+.print-stop { padding: 2.6mm 0; }
+.print-stop.print-with-photo { display: grid; grid-template-columns: minmax(0, 1fr) 55mm; gap: 6mm; align-items: start; }
+.print-stop.print-photo-left { grid-template-columns: 55mm minmax(0, 1fr); }
+.print-stop.print-photo-left .print-stop-photo { grid-column: 1; grid-row: 1; }
+.print-stop.print-photo-left .print-stop-text { grid-column: 2; grid-row: 1; }
+.print-stop.print-text-stop { margin-left: 3.6mm; padding-left: 5mm; border-left: 1px solid var(--color-rule); }
+.print-stop.print-text-stop .print-stop-text { max-width: 145mm; }
+.print-stop.print-text-stop .print-sequence { font-size: 15pt; }
+.print-stop-text { min-width: 0; }
+.print-document .print-stop-meta { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2.4mm; margin: 0 0 1.2mm; }
+.print-sequence { color: var(--color-accent); font-size: 19pt; font-weight: 600; line-height: 1; letter-spacing: -.03em; }
+.print-time { color: var(--color-accent); font-size: 8.5pt; }
+.print-status { display: inline-block; padding: .4mm 1.8mm; border-radius: .6mm; background: var(--color-rust-wash); color: var(--color-accent); font-size: 7pt; line-height: 1.4; }
+.print-document .print-chinese { margin: .6mm 0 0; color: var(--color-muted); font-size: 8.5pt; }
+.print-document .print-description { margin: 1.6mm 0 0; color: var(--color-ink-2); }
+.print-document .print-note { margin: 2mm 0 0; padding-top: 1.6mm; border-top: 1px solid var(--color-rule); color: var(--color-muted); font-size: 8.3pt; }
+.print-document .print-guide-link { margin: 1.6mm 0 0; font-size: 8.3pt; }
+.print-stop-photo { margin: 0; }
+.print-stop-photo img { width: 100%; height: auto; max-width: none; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 3mm; }
+.print-stop-photo figcaption { margin-top: 1.4mm; color: var(--color-muted); font-size: 6.8pt; line-height: 1.35; }
+.print-transfer { margin-left: 3.6mm; padding: 1.4mm 0 1.4mm 5mm; border-left: 1px dashed var(--color-rule-2); }
+.print-document .print-transfer-line { display: flex; flex-wrap: wrap; align-items: center; gap: 2mm; margin: 0; color: var(--color-ink-2); font-size: 8.5pt; }
+.print-transfer-line strong { font-weight: 500; }
+.print-mode { display: inline-flex; align-items: center; gap: 1.2mm; padding: .4mm 2.2mm .4mm 1.6mm; border: 1px solid var(--color-rule); border-radius: 10mm; background: var(--color-glass-solid); color: var(--color-accent); font-size: 7pt; }
+.print-mode svg { width: 8pt; height: 8pt; }
+.print-document .print-transfer-detail { margin: .8mm 0 0; color: var(--color-muted); font-size: 8pt; }
+
+/* Practical notes, overnight detail, and the Chengdu evening choices. */
+/* Practical notes move as one block so a single card never strands on its own page. */
+.print-practical { margin-top: 5mm; break-inside: avoid; }
+.print-practical-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3mm; margin-top: 2.5mm; }
+.print-practical-grid > div { padding: 2.6mm 3.6mm; border-radius: 3mm; background: var(--color-paper-2); break-inside: avoid; }
+.print-practical-grid > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.print-practical-grid h4 { margin-top: 0; }
+.print-practical-grid p { font-size: 8.5pt; }
+.print-document .print-night { display: flex; align-items: flex-start; gap: 2.4mm; margin: 4mm 0 0; color: var(--color-ink-2); break-inside: avoid; }
+.print-night svg { margin-top: .4mm; color: var(--color-accent); }
+.print-revision,.print-day-link { color: var(--color-muted); font-size: 8.3pt; }
 .print-document details { display: block; }
 .print-document details > summary { display: block; }
 .print-document button { display: none; }
 .print-document [class*="chengdu-evening"] { box-shadow: none; backdrop-filter: none; }
-.print-document .chengdu-evening { margin-block: 6mm; }
-.print-document .chengdu-evening-grid { display: block; }
-.print-document .chengdu-evening-card { margin-block: 4mm; border-radius: 0; break-inside: avoid; }
-.print-document .chengdu-evening-card > summary { padding: 3mm; min-height: 0; }
-.print-document .chengdu-evening-content { padding: 0 3mm 3mm; }
-.print-document .chengdu-evening-source,.print-document .chengdu-evening-map { display: block; min-height: 0; padding: 0; margin-block: 2mm; border: 0; border-radius: 0; background: none; }
+.print-document .chengdu-evening { margin-block: 7mm 0; }
+.print-document .chengdu-evening-header { break-after: avoid; }
+.print-document .chengdu-evening-header { margin-bottom: 3mm; }
+.print-document .chengdu-evening-header h3 { margin: 0 0 1.5mm; font-size: 17pt; }
+.print-document .chengdu-evening-date,.print-document .chengdu-evening-header > p:last-child { margin: 0 0 1mm; font-size: 8.5pt; }
+.print-document .chengdu-evening-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3mm; }
+.print-document .chengdu-evening-card { border-radius: 3mm; break-inside: avoid; }
+.print-document .chengdu-evening-card > summary { padding: 3mm 3.5mm 0; min-height: 0; }
+.print-document .chengdu-evening-name strong { font-size: 11pt; }
+.print-document .chengdu-evening-name > [lang],.print-document .chengdu-evening-label { font-size: 7.5pt; }
+.print-document .chengdu-evening-content { padding: 0 3.5mm 3mm; }
+.print-document .chengdu-evening-appeal,.print-document .chengdu-evening-fact p,.print-document .chengdu-evening-budget p,.print-document .chengdu-evening-checked { font-size: 7.8pt; line-height: 1.4; }
+.print-document .chengdu-evening-fact { margin-top: 2mm; padding-top: 2mm; }
+.print-document .chengdu-evening-fact h4,.print-document .chengdu-evening-budget h4 { margin: 0 0 1mm; font-size: 8.3pt; }
+.print-document .chengdu-evening-fact h4 svg,.print-document .chengdu-evening-budget h4 svg { width: 9pt; height: 9pt; color: var(--color-accent); }
+.print-document .chengdu-evening-sources { margin-top: 1mm; }
+.print-document .chengdu-evening-source,.print-document .chengdu-evening-map { display: block; width: auto; min-height: 0; margin-block: 1mm 0; padding: 0; border: 0; border-radius: 0; background: none; font-size: 7.8pt; }
 .print-document .chengdu-evening-map > svg,.print-document .chengdu-evening-source > svg { display: none; }
-.print-document .chengdu-evening-fact { margin-top: 3mm; padding-top: 3mm; }
-.print-document .chengdu-evening-budget { padding: 3mm; border-radius: 0; }
-@media screen { .print-document { padding: 8mm; } }
-@media print { html,body.print-document { background: var(--print-paper); } }
+.print-document .chengdu-evening-budget { margin-top: 3mm; padding: 3mm 4mm; border-radius: 3mm; break-inside: avoid; }
+.print-document .chengdu-evening-checked { margin-top: 2mm; color: var(--color-muted); }
+
+/* Guides appendix: short cover-photo band, then two balanced columns. */
+.print-guide { margin-top: 9mm; }
+.print-guide-header { break-inside: avoid; break-after: avoid; }
+.print-guide-header.print-with-photo { position: relative; height: 45mm; overflow: hidden; border-radius: 3.5mm; background: var(--color-paper-3); }
+.print-guide-header img { width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.print-guide-header.print-with-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, var(--color-hero-clear) 35%, var(--color-hero-base)); }
+.print-document .print-guide-header h3 { font-size: 19pt; letter-spacing: -.03em; }
+.print-document .print-guide-header.print-with-photo h3 { position: absolute; z-index: 1; inset: auto 5mm 4mm; color: var(--color-on-autumn); }
+.print-guide-lead { max-width: 160mm; margin-top: 2.5mm; break-before: avoid; color: var(--color-ink-2); }
+.print-guide-body { columns: 2; column-gap: 7mm; margin-top: 1mm; font-size: 8.5pt; }
+.print-guide-body > h4:first-child { margin-top: 1.5mm; }
+.print-costs { margin: 1.5mm 0; }
+.print-costs > div,.print-sources > li { break-inside: avoid; }
+.print-costs > div { padding-block: 1.5mm; border-bottom: 1px solid var(--color-rule); }
+.print-costs dt { font-weight: 600; }
+.print-costs dt span { font-weight: 400; color: var(--color-muted); }
+.print-costs dd { margin: .6mm 0 0; }
+.print-costs dd p { margin: .6mm 0; }
+.print-sources p { margin: .4mm 0; color: var(--color-muted); }
+
+/* Booking references and photo credits. */
+.print-booking > article { padding-block: 3mm; border-bottom: 1px solid var(--color-rule); break-inside: avoid; }
+.print-booking h3 { font-size: 12pt; }
+.print-photo-credits { margin-top: 12mm; }
+.print-photo-credits > ol { columns: 2; column-gap: 7mm; margin: 4mm 0 0; padding: 0; list-style: none; font-size: 7.2pt; line-height: 1.35; }
+.print-document .print-photo-credits li { margin: 0 0 2.6mm; break-inside: avoid; }
+.print-document .print-photo-credits li p { margin: 0; color: var(--color-ink-2); }
+.print-document .print-photo-credits .print-photo-credit-title { color: var(--color-ink); font-weight: 600; }
+.print-document .print-photo-credits .print-photo-note { color: var(--color-muted); font-size: 6.6pt; }
+.print-document main > footer.print-credit { margin-top: 6mm; color: var(--color-muted); font-size: 8pt; }
+@media screen { .print-document main { max-width: 182mm; margin: 0 auto; padding: 8mm 0; } }

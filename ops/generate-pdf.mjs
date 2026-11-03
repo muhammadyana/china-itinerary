@@ -6,12 +6,18 @@ import { fileURLToPath } from 'node:url';
 import { chromium } from '@playwright/test';
 
 const contentTypes = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript', '.woff2': 'font/woff2', '.webp': 'image/webp', '.svg': 'image/svg+xml' };
+// 182 mm A4 content width at 96 CSS px per inch, so measured image boxes match their printed size.
+const PRINT_VIEWPORT = { width: 688, height: 1123 };
+const PRINT_PIXEL_RATIO = 2; // about 192 dpi at the printed size
+const JPEG_QUALITY = 0.76;
+// The deploy archive is capped; the photographic journal targets 8 MB and must never exceed 10 MB.
+const MAX_PDF_BYTES = 10_000_000;
 
 export async function generatePdfFromUrl(url) {
  const origin = new URL(url).origin;
  const browser = await chromium.launch({ headless: true, channel: process.env.CI ? undefined : 'chrome' });
  try {
-  const page = await browser.newPage();
+  const page = await browser.newPage({ viewport: PRINT_VIEWPORT });
   const failures = [];
   await page.route('**/*', route => {
     if (new URL(route.request().url()).origin === origin) return route.continue();
@@ -21,25 +27,40 @@ export async function generatePdfFromUrl(url) {
   page.on('response', response => { if (!response.ok()) failures.push(`Resource returned ${response.status()}: ${response.url()}`); });
   await page.goto(url, { waitUntil: 'networkidle' });
   await page.emulateMedia({ media: 'print' });
-  await page.evaluate(async () => {
+  await page.evaluate(async ({ pixelRatio, quality }) => {
     document.querySelectorAll('details').forEach(details => { details.open = true; });
     document.querySelectorAll('img').forEach(image => { image.loading = 'eager'; });
     await document.fonts.ready;
     await Promise.all(Array.from(document.images, image => image.decode()));
-  });
+    // Chrome embeds WebP losslessly, so re-encode each photo as a JPEG cropped and sized to its printed box.
+    await Promise.all(Array.from(document.images, async image => {
+      const box = image.getBoundingClientRect();
+      if (!box.width || !box.height) throw new Error(`Printable image has no size: ${image.currentSrc}`);
+      const { naturalWidth, naturalHeight } = image;
+      const aspect = getComputedStyle(image).objectFit === 'cover' ? box.width / box.height : naturalWidth / naturalHeight;
+      // shortcut: crops around the centre, matching the default object-position every print image uses.
+      const sourceWidth = Math.min(naturalWidth, naturalHeight * aspect);
+      const sourceHeight = sourceWidth / aspect;
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(Math.min(sourceWidth, box.width * pixelRatio));
+      canvas.height = Math.round(canvas.width / aspect);
+      const context = canvas.getContext('2d');
+      context.imageSmoothingQuality = 'high';
+      context.drawImage(image, (naturalWidth - sourceWidth) / 2, (naturalHeight - sourceHeight) / 2, sourceWidth, sourceHeight, 0, 0, canvas.width, canvas.height);
+      image.src = canvas.toDataURL('image/jpeg', quality);
+      await image.decode();
+    }));
+  }, { pixelRatio: PRINT_PIXEL_RATIO, quality: JPEG_QUALITY });
   const dayCount = Number(await page.locator('meta[name="itinerary-day-count"]').getAttribute('content'));
   if (dayCount !== 14 || await page.locator('[data-print-date]').count() !== dayCount) throw new Error('Printable itinerary must contain all 14 days');
   if (!(await page.locator('.print-credit').first().textContent())?.includes('© @muhammad_yana')) throw new Error('Printable itinerary is missing its author credit');
   if (failures.length) throw new Error(failures.join('\n'));
   const filename = await page.locator('meta[name="itinerary-pdf-path"]').getAttribute('content');
   if (!filename || !/^[A-Za-z0-9][A-Za-z0-9._-]*\.pdf$/.test(filename)) throw new Error('Invalid generated PDF filename');
-  const buffer = await page.pdf({
-    preferCSSPageSize: true, printBackground: true, tagged: true, outline: true,
-    displayHeaderFooter: true, headerTemplate: '<span></span>',
-    footerTemplate: '<div style="font-size:9px;width:100%;padding:0 14mm;display:flex;justify-content:space-between"><span>© @muhammad_yana</span><span><span class="pageNumber"></span> / <span class="totalPages"></span></span></div>',
-    margin: { top: '16mm', right: '14mm', bottom: '20mm', left: '14mm' },
-  });
+  // Page size, margins, and the footer come from @page rules in src/print.css so the cover can print edge to edge.
+  const buffer = await page.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
   if (!buffer.subarray(0, 5).equals(Buffer.from('%PDF-')) || buffer.length < 10_000) throw new Error('Browser did not generate a complete PDF');
+  if (buffer.length > MAX_PDF_BYTES) throw new Error(`Generated PDF is ${buffer.length} bytes, above the ${MAX_PDF_BYTES}-byte limit`);
   return { buffer, filename, dayCount };
  } finally {
   await browser.close();
