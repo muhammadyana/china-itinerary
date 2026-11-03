@@ -91,9 +91,20 @@ class DeploymentTests(unittest.TestCase):
     def test_forbidden_paths(self):
         for name in ['../index.html', '/index.html', 'assets/../index.js', './index.html',
                      '.env', 'src/main.ts', 'assets/source.js.map', 'nginx.conf',
-                     'photos/.hidden.webp', 'assets/a/b.js', 'release.json/child.js']:
+                     'photos/.hidden.webp', 'assets/a/b.js', 'release.json/child.js',
+                     'places/../index.html', 'places/a/b/index.html', 'places/a/script.js',
+                     'places/.hidden/index.html', 'places/a--b/index.html']:
             with self.subTest(name=name), self.assertRaises(ValueError):
                 deploy.validate_archive(raw_archive(self.entries() + [file_entry(name)]), REVISION)
+
+    def test_destination_pages_round_trip(self):
+        for name in ['places/index.html', 'places/jiuzhaigou/index.html', 'places/blue-moon-valley/index.html']:
+            target = self.dist / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text('<html>Destination guide</html>')
+        payload, _ = package(self.dist, REVISION)
+        deploy.deploy(payload, REVISION, self.base, lambda *_: None)
+        self.assertEqual((self.base / 'current/public/places/jiuzhaigou/index.html').read_text(), '<html>Destination guide</html>')
 
     def test_links_directories_and_executables(self):
         for member_type in [tarfile.SYMTYPE, tarfile.LNKTYPE, tarfile.DIRTYPE, tarfile.FIFOTYPE]:

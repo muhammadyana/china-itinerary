@@ -1,7 +1,10 @@
 import './style.css';
-import { days, daysByDate, places } from './itinerary';
-import { dayView, pickerItems, photoDetail, userPhotoDetail, overviewContent, icon, fullDate } from './render';
+import './glass.css';
+import { initializeGuide } from './guide-main.ts';
+import { days, daysByDate, places } from './itinerary.ts';
+import { dayView, pickerItems, photoDetail, userPhotoDetail, overviewContent, icon, fullDate } from './render.ts';
 
+function initializeItinerary() {
 const $ = <T extends HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
 let current = dateFromHash();
 const dayRoot = $('#day-view');
@@ -149,3 +152,9 @@ window.addEventListener('popstate',historyChanged);
 window.addEventListener('hashchange',historyChanged);
 document.documentElement.classList.add('js');
 showDay(current,{scroll:daysByDate.has(location.hash.slice(1)),announceChange:false});
+
+}
+
+if (document.getElementById('day-view')) initializeItinerary();
+else initializeGuide();
+document.documentElement.classList.add('js');

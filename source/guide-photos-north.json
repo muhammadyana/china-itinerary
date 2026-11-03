@@ -1,0 +1,883 @@
+{
+  "checkedAt": "2026-11-03",
+  "photos": [
+    {
+      "id": "guide-n-hongshan",
+      "width": 740,
+      "height": 491,
+      "sizes": [
+        480,
+        740
+      ],
+      "author": "PDF perjalanan pengguna",
+      "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=9",
+      "license": "Dokumen pengguna",
+      "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=9",
+      "origin": "PDF",
+      "photoNote": "Hutan di area Hongshan, Shuangqiao, sesuai foto berlabel dalam PDF perjalanan. Tanggal pengambilan mengikuti sumber PDF; bukan konfirmasi kondisi saat kunjungan.",
+      "placeId": "hongshan",
+      "downloadUrl": null,
+      "captureDate": null,
+      "verifiedAt": "2026-11-03",
+      "alt": "Hutan di area Hongshan, Shuangqiao, sesuai foto berlabel dalam PDF perjalanan.",
+      "originalFile": "page-09-xref-185.jpeg",
+      "pdfPage": 9,
+      "embeddedSourceUrls": [
+        "https://www.sohu.com/a/345676_100713"
+      ],
+      "exactStopPhoto": true,
+      "rightsNote": "Extracted from the user-provided itinerary PDF. No Creative Commons license or capture date is claimed."
+    },
+    {
+      "id": "guide-n-moshi",
+      "width": 740,
+      "height": 493,
+      "sizes": [
+        480,
+        740
+      ],
+      "author": "PDF perjalanan pengguna",
+      "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=10",
+      "license": "Dokumen pengguna",
+      "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=10",
+      "origin": "PDF",
+      "photoNote": "Formasi batu abu-abu di Moshi Park, sesuai PDF perjalanan. Tanggal pengambilan mengikuti sumber PDF; bukan konfirmasi kondisi saat kunjungan.",
+      "placeId": "moshi",
+      "downloadUrl": null,
+      "captureDate": null,
+      "verifiedAt": "2026-11-03",
+      "alt": "Formasi batu abu-abu di Moshi Park, sesuai PDF perjalanan.",
+      "originalFile": "page-10-xref-198.jpeg",
+      "pdfPage": 10,
+      "embeddedSourceUrls": [
+        "https://bbs.zol.com.cn/dcbbs/d268_206727.html"
+      ],
+      "exactStopPhoto": true,
+      "rightsNote": "Extracted from the user-provided itinerary PDF. No Creative Commons license or capture date is claimed."
+    },
+    {
+      "id": "guide-n-muya",
+      "width": 640,
+      "height": 480,
+      "sizes": [
+        480,
+        640
+      ],
+      "author": "PDF perjalanan pengguna",
+      "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=11",
+      "license": "Dokumen pengguna",
+      "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=11",
+      "origin": "PDF",
+      "photoNote": "Kompleks Muya Monastery dengan latar pegunungan, sesuai PDF perjalanan. Tanggal pengambilan mengikuti sumber PDF; bukan konfirmasi kondisi saat kunjungan.",
+      "placeId": "muya",
+      "downloadUrl": null,
+      "captureDate": null,
+      "verifiedAt": "2026-11-03",
+      "alt": "Kompleks Muya Monastery dengan latar pegunungan, sesuai PDF perjalanan.",
+      "originalFile": "page-11-xref-209.jpeg",
+      "pdfPage": 11,
+      "embeddedSourceUrls": [
+        "https://th.trip.com/moments/detail/chengdu-104-140799850/"
+      ],
+      "exactStopPhoto": true,
+      "rightsNote": "Extracted from the user-provided itinerary PDF. No Creative Commons license or capture date is claimed."
+    },
+    {
+      "id": "guide-n-guishan",
+      "width": 650,
+      "height": 418,
+      "sizes": [
+        480,
+        650
+      ],
+      "author": "PDF perjalanan pengguna",
+      "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=20",
+      "license": "Dokumen pengguna",
+      "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=20",
+      "origin": "PDF",
+      "photoNote": "Roda doa emas di Bukit Guishan, Dukezong. Tanggal pengambilan mengikuti sumber PDF; bukan konfirmasi kondisi saat kunjungan.",
+      "placeId": "guishan",
+      "downloadUrl": null,
+      "captureDate": null,
+      "verifiedAt": "2026-11-03",
+      "alt": "Roda doa emas di Bukit Guishan, Dukezong.",
+      "originalFile": "page-20-xref-338.jpeg",
+      "pdfPage": 20,
+      "embeddedSourceUrls": [
+        "https://www.chinaxiantour.com/yunnan-tours/3-days-shangri-la-tour.html"
+      ],
+      "exactStopPhoto": true,
+      "rightsNote": "Extracted from the user-provided itinerary PDF. No Creative Commons license or capture date is claimed."
+    },
+    {
+      "id": "guide-n-sifangjie",
+      "width": 700,
+      "height": 400,
+      "sizes": [
+        480,
+        700
+      ],
+      "author": "PDF perjalanan pengguna",
+      "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=22",
+      "license": "Dokumen pengguna",
+      "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=22",
+      "origin": "PDF",
+      "photoNote": "Bangunan di alun-alun Sifangjie, Kota Tua Lijiang. Tanggal pengambilan mengikuti sumber PDF; bukan konfirmasi kondisi saat kunjungan.",
+      "placeId": "sifangjie",
+      "downloadUrl": null,
+      "captureDate": null,
+      "verifiedAt": "2026-11-03",
+      "alt": "Bangunan di alun-alun Sifangjie, Kota Tua Lijiang.",
+      "originalFile": "page-22-xref-362.jpeg",
+      "pdfPage": 22,
+      "embeddedSourceUrls": [
+        "https://www.tripadvisor.com/Attraction_Review-g303783-d552374-Reviews-Square_Street_Sifangjie-Lijiang_Yunnan.html"
+      ],
+      "exactStopPhoto": true,
+      "rightsNote": "Extracted from the user-provided itinerary PDF. No Creative Commons license or capture date is claimed."
+    },
+    {
+      "id": "guide-n-wuhua",
+      "width": 740,
+      "height": 555,
+      "sizes": [
+        480,
+        740
+      ],
+      "author": "PDF perjalanan pengguna",
+      "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=25",
+      "license": "Dokumen pengguna",
+      "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=25",
+      "origin": "PDF",
+      "photoNote": "Pemandangan Kota Tua Dali dari Menara Wuhua, sesuai keterangan PDF. Tanggal pengambilan mengikuti sumber PDF; bukan konfirmasi kondisi saat kunjungan.",
+      "placeId": "wuhua",
+      "downloadUrl": null,
+      "captureDate": null,
+      "verifiedAt": "2026-11-03",
+      "alt": "Pemandangan Kota Tua Dali dari Menara Wuhua, sesuai keterangan PDF.",
+      "originalFile": "page-25-xref-393.jpeg",
+      "pdfPage": 25,
+      "embeddedSourceUrls": [
+        "https://commons.wikimedia.org/wiki/File:Dali_Ancient_Town_20260220-2.jpg"
+      ],
+      "exactStopPhoto": true,
+      "rightsNote": "Extracted from the user-provided itinerary PDF. No Creative Commons license or capture date is claimed."
+    },
+    {
+      "id": "guide-n-caicun",
+      "width": 740,
+      "height": 555,
+      "sizes": [
+        480,
+        740
+      ],
+      "author": "PDF perjalanan pengguna",
+      "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=25",
+      "license": "Dokumen pengguna",
+      "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=25",
+      "origin": "PDF",
+      "photoNote": "Referensi pemandangan Danau Erhai dari PDF; foto ini tidak memastikan tampilan Dermaga Caicun. Tanggal pengambilan mengikuti sumber PDF; bukan konfirmasi kondisi saat kunjungan.",
+      "placeId": "caicun",
+      "downloadUrl": null,
+      "captureDate": null,
+      "verifiedAt": "2026-11-03",
+      "alt": "Referensi pemandangan Danau Erhai dari PDF; foto ini tidak memastikan tampilan Dermaga Caicun.",
+      "originalFile": "page-25-xref-66.jpeg",
+      "pdfPage": 25,
+      "embeddedSourceUrls": [
+        "https://commons.wikimedia.org/wiki/File:Erhai_20260220-1.jpg"
+      ],
+      "exactStopPhoto": false,
+      "rightsNote": "Extracted from the user-provided itinerary PDF. No Creative Commons license or capture date is claimed."
+    },
+    {
+      "id": "guide-n-nancheng",
+      "width": 740,
+      "height": 380,
+      "sizes": [
+        480,
+        740
+      ],
+      "author": "PDF perjalanan pengguna",
+      "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=26",
+      "license": "Dokumen pengguna",
+      "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=26",
+      "origin": "PDF",
+      "photoNote": "Gerbang Masjid Nancheng di Kunming. Tanggal pengambilan mengikuti sumber PDF; bukan konfirmasi kondisi saat kunjungan.",
+      "placeId": "nancheng",
+      "downloadUrl": null,
+      "captureDate": null,
+      "verifiedAt": "2026-11-03",
+      "alt": "Gerbang Masjid Nancheng di Kunming.",
+      "originalFile": "page-26-xref-400.jpeg",
+      "pdfPage": 26,
+      "embeddedSourceUrls": [
+        "https://www.islamichinatravel.com/destination-guide/kunming/kunming-masjid/kunming-nancheng-mosque/",
+        "https://www.dasiatravels.com/tour-package/5-days-4-nights-kunming-china-muslim-friendly-tour-package"
+      ],
+      "exactStopPhoto": true,
+      "rightsNote": "Extracted from the user-provided itinerary PDF. No Creative Commons license or capture date is claimed."
+    },
+    {
+      "id": "guide-n-shuncheng",
+      "width": 740,
+      "height": 493,
+      "sizes": [
+        480,
+        740
+      ],
+      "author": "PDF perjalanan pengguna",
+      "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=26",
+      "license": "Dokumen pengguna",
+      "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=26",
+      "origin": "PDF",
+      "photoNote": "Gerbang Masjid Shuncheng di kawasan Hui, Kunming. Tanggal pengambilan mengikuti sumber PDF; bukan konfirmasi kondisi saat kunjungan.",
+      "placeId": "shuncheng",
+      "downloadUrl": null,
+      "captureDate": null,
+      "verifiedAt": "2026-11-03",
+      "alt": "Gerbang Masjid Shuncheng di kawasan Hui, Kunming.",
+      "originalFile": "page-26-xref-402.jpeg",
+      "pdfPage": 26,
+      "embeddedSourceUrls": [
+        "https://www.dasiatravels.com/tour-package/5-days-4-nights-kunming-china-muslim-friendly-tour-package"
+      ],
+      "exactStopPhoto": true,
+      "rightsNote": "Extracted from the user-provided itinerary PDF. No Creative Commons license or capture date is claimed."
+    }
+  ],
+  "commonsUpgradeCandidates": [
+    {
+      "id": "guide-n-guishan",
+      "width": 2048,
+      "height": 1536,
+      "sizes": [
+        280
+      ],
+      "author": "BrokenSphere",
+      "source": "https://commons.wikimedia.org/wiki/File:Guishan_Temple_giant_prayer_wheel_2.JPG",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "origin": "Wikimedia Commons",
+      "photoNote": "Roda doa emas di Guishan, Shangri-La. Foto 2008-05-17. Pratinjau resolusi kecil; buka sumber untuk foto asli.",
+      "placeId": "guishan",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/1/17/Guishan_Temple_giant_prayer_wheel_2.JPG",
+      "captureDate": "2008-05-17",
+      "verifiedAt": "2026-11-03",
+      "alt": "Roda doa emas di Guishan, Shangri-La.",
+      "originalTitle": "File:Guishan Temple giant prayer wheel 2.JPG",
+      "sourceMetadata": {
+        "DateTime": {
+          "value": "2008-06-16 22:25:44",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Guishan Temple giant prayer wheel 2",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "GFDL|Taken with Olympus FE-280 / X-820 / C-520|CC-BY-SA-3.0,2.5,2.0,1.0|License migration redundant|Self-published work|Photos by User:BrokenSphere|Prayer Wheel at Grand Buddha Temple",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "The giant prayer wheel of Guishan Temple in Shangri-La, Yunnan.",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2008-05-17",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/User:BrokenSphere\" title=\"User:BrokenSphere\">BrokenSphere</a>",
+          "source": "commons-desc-page"
+        },
+        "Permission": {
+          "value": "You may select the license of your choice.",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseShortName": {
+          "value": "CC BY-SA 3.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution-Share Alike 3.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/3.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-sa-3.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "assetDimensions": {
+        "width": 280,
+        "height": 210
+      },
+      "assetNote": "Only a source-sized preview could be retrieved; original and 960px downloads returned HTTP 429/403. Do not upscale."
+    },
+    {
+      "id": "guide-n-sifangjie",
+      "width": 3264,
+      "height": 2448,
+      "sizes": [
+        280
+      ],
+      "author": "Lai.jack",
+      "source": "https://commons.wikimedia.org/wiki/File:Lijiang_Sifangjie.JPG",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "origin": "Wikimedia Commons",
+      "photoNote": "Alun-alun Sifangjie di Kota Tua Lijiang. Foto 2013-11-08. Pratinjau resolusi kecil; buka sumber untuk foto asli.",
+      "placeId": "sifangjie",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Lijiang_Sifangjie.JPG",
+      "captureDate": "2013-11-08 09:58:39",
+      "verifiedAt": "2026-11-03",
+      "alt": "Alun-alun Sifangjie di Kota Tua Lijiang.",
+      "originalTitle": "File:Lijiang Sifangjie.JPG",
+      "sourceMetadata": {
+        "DateTime": {
+          "value": "2013-11-17 10:26:14",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Lijiang Sifangjie",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "Taken with iPhone 5|Self-published work|People of Lijiang",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Lijiang Sifangjie",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2013-11-08 09:58:39",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Lai.jack&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Lai.jack (page does not exist)\">Lai.jack</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY-SA 3.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution-Share Alike 3.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/3.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-sa-3.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "assetDimensions": {
+        "width": 280,
+        "height": 210
+      },
+      "assetNote": "Only a source-sized preview could be retrieved; original and 960px downloads returned HTTP 429/403. Do not upscale."
+    },
+    {
+      "id": "guide-n-caicun",
+      "width": 6000,
+      "height": 4000,
+      "sizes": [
+        300
+      ],
+      "author": "Liuxingy",
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E7%90%86%E6%89%8D%E6%9D%91%E7%9A%84%E6%B4%B1%E6%B5%B7_03.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "origin": "Wikimedia Commons",
+      "photoNote": "Tepi Danau Erhai dari Caicun, Dali. Foto 2023-07-23. Pratinjau resolusi kecil; buka sumber untuk foto asli.",
+      "placeId": "caicun",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4c/%E5%A4%A7%E7%90%86%E6%89%8D%E6%9D%91%E7%9A%84%E6%B4%B1%E6%B5%B7_03.jpg",
+      "captureDate": "2023-07-23 19:40:23",
+      "verifiedAt": "2026-11-03",
+      "alt": "Tepi Danau Erhai dari Caicun, Dali.",
+      "originalTitle": "File:大理才村的洱海 03.jpg",
+      "sourceMetadata": {
+        "DateTime": {
+          "value": "2023-09-20 11:27:23",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "大理才村的洱海 03",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "Erhai Lake|Dali Town|China photographs taken on 2023-07-23|Self-published work",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "​大理才村的洱海",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2023-07-23 19:40:23",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/User:Liuxingy\" title=\"User:Liuxingy\">Liuxingy</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY-SA 4.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution-Share Alike 4.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/4.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-sa-4.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "assetDimensions": {
+        "width": 300,
+        "height": 200
+      },
+      "assetNote": "Only a source-sized preview could be retrieved; original and 960px downloads returned HTTP 429/403. Do not upscale."
+    },
+    {
+      "id": "guide-n-wuhua",
+      "width": 7360,
+      "height": 4912,
+      "sizes": [
+        300
+      ],
+      "author": "4537668",
+      "source": "https://commons.wikimedia.org/wiki/File:%E4%BA%94%E5%8D%8E%E6%A5%BC-2064564.jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "origin": "Wikimedia Commons",
+      "photoNote": "Menara Wuhua di Kota Tua Dali. Foto 2016-10-18. Pratinjau resolusi kecil; buka sumber untuk foto asli.",
+      "placeId": "wuhua",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0f/%E4%BA%94%E5%8D%8E%E6%A5%BC-2064564.jpg",
+      "captureDate": "2016-10-18",
+      "verifiedAt": "2026-11-03",
+      "alt": "Menara Wuhua di Kota Tua Dali.",
+      "originalTitle": "File:五华楼-2064564.jpg",
+      "sourceMetadata": {
+        "DateTime": {
+          "value": "2023-02-09 19:55:57",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "五华楼-2064564",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "CC-Zero|Wuhua Tower|Images from Pixabay",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "​五华楼-2064564",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2016-10-18",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<a rel=\"nofollow\" class=\"external free\" href=\"https://pixabay.com/photos/dali-yunnan-dali-ancient-building-2064564/\">https://pixabay.com/photos/dali-yunnan-dali-ancient-building-2064564/</a>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://pixabay.com/users/4537668-4537668/\">4537668</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Zero, Public Domain Dedication",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "false",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "assetDimensions": {
+        "width": 300,
+        "height": 200
+      },
+      "assetNote": "Only a source-sized preview could be retrieved; original and 960px downloads returned HTTP 429/403. Do not upscale."
+    },
+    {
+      "id": "guide-n-nancheng",
+      "width": 3072,
+      "height": 4096,
+      "sizes": [
+        157
+      ],
+      "author": "源義信",
+      "source": "https://commons.wikimedia.org/wiki/File:2025-07-24_Kunming_Nancheng_Mosque_%E6%98%86%E6%98%8E%E5%8D%97%E5%9F%8E%E6%B8%85%E7%9C%9F%E5%AF%BA_02.jpg",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "origin": "Wikimedia Commons",
+      "photoNote": "Pintu masuk Masjid Nancheng, Kunming. Foto 2025-07-24. Pratinjau resolusi kecil; buka sumber untuk foto asli.",
+      "placeId": "nancheng",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/8/85/2025-07-24_Kunming_Nancheng_Mosque_%E6%98%86%E6%98%8E%E5%8D%97%E5%9F%8E%E6%B8%85%E7%9C%9F%E5%AF%BA_02.jpg",
+      "captureDate": "2025-07-24 22:21:20",
+      "verifiedAt": "2026-11-03",
+      "alt": "Pintu masuk Masjid Nancheng, Kunming.",
+      "originalTitle": "File:2025-07-24 Kunming Nancheng Mosque 昆明南城清真寺 02.jpg",
+      "sourceMetadata": {
+        "DateTime": {
+          "value": "2026-10-14 16:48:15",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "2025-07-24 Kunming Nancheng Mosque 昆明南城清真寺 02",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "Self-published work|Uploaded via Campaign:wlm-cn|Files with coordinates missing SDC location of creation|Images from Wiki Loves Monuments missing SDC participant in|Images from Wiki Loves Monuments missing SDC inception|Images from Wiki Loves Monuments missing SDC creator|Images from Wiki Loves Monuments missing SDC depicts|Images from Wiki Loves Monuments missing SDC location of creation|Images from Wiki Loves Monuments missing SDC source of file|Mosque gates in China|China photographs taken on 2025-07-24|Mosques in China photographed in 2025|Images from Wiki Loves Monuments 2026|Photographs by 源義信|Images from Wiki Loves Monuments 2026 in China|WLM 2026 China unreviewed|Nancheng Mosque, Kunming",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "GPSLatitude": {
+          "value": "25.040628",
+          "source": "commons-desc-page"
+        },
+        "GPSLongitude": {
+          "value": "102.708435",
+          "source": "commons-desc-page"
+        },
+        "GPSMapDatum": {
+          "value": "WGS-84",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "​昆明南城清真寺",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2025-07-24 22:21:20",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/User:%E6%BA%90%E7%BE%A9%E4%BF%A1\" title=\"User:源義信\">源義信</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY 4.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution 4.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by/4.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-4.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "assetDimensions": {
+        "width": 157,
+        "height": 210
+      },
+      "assetNote": "Only a source-sized preview could be retrieved; original and 960px downloads returned HTTP 429/403. Do not upscale."
+    },
+    {
+      "id": "guide-n-shuncheng",
+      "width": 3072,
+      "height": 4096,
+      "sizes": [
+        157
+      ],
+      "author": "源義信",
+      "source": "https://commons.wikimedia.org/wiki/File:2026-05-05_Kunming_Shuncheng_Street_Mosque_%E6%98%86%E6%98%8E%E9%A1%BA%E5%9F%8E%E8%A1%97%E6%B8%85%E7%9C%9F%E5%AF%BA_01.jpg",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "origin": "Wikimedia Commons",
+      "photoNote": "Halaman Masjid Shuncheng, Kunming. Foto 2026-05-05. Pratinjau resolusi kecil; buka sumber untuk foto asli.",
+      "placeId": "shuncheng",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a4/2026-05-05_Kunming_Shuncheng_Street_Mosque_%E6%98%86%E6%98%8E%E9%A1%BA%E5%9F%8E%E8%A1%97%E6%B8%85%E7%9C%9F%E5%AF%BA_01.jpg",
+      "captureDate": "2026-05-05 13:40:04",
+      "verifiedAt": "2026-11-03",
+      "alt": "Halaman Masjid Shuncheng, Kunming.",
+      "originalTitle": "File:2026-05-05 Kunming Shuncheng Street Mosque 昆明顺城街清真寺 01.jpg",
+      "sourceMetadata": {
+        "DateTime": {
+          "value": "2026-10-06 15:01:03",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "2026-05-05 Kunming Shuncheng Street Mosque 昆明顺城街清真寺 01",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "Self-published work|Uploaded via Campaign:wlm-cn|Files with coordinates missing SDC location of creation|Images from Wiki Loves Monuments missing SDC participant in|Images from Wiki Loves Monuments missing SDC inception|Images from Wiki Loves Monuments missing SDC creator|Images from Wiki Loves Monuments missing SDC depicts|Images from Wiki Loves Monuments missing SDC location of creation|Images from Wiki Loves Monuments 2026|Photographs by 源義信|China photographs taken on 2026-05-05|Images from Wiki Loves Monuments 2026 in China|WLM 2026 China unreviewed|Shuncheng Street Mosque",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "GPSLatitude": {
+          "value": "25.039230",
+          "source": "commons-desc-page"
+        },
+        "GPSLongitude": {
+          "value": "102.704279",
+          "source": "commons-desc-page"
+        },
+        "GPSMapDatum": {
+          "value": "WGS-84",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "​昆明顺城街清真寺",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2026-05-05 13:40:04",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/User:%E6%BA%90%E7%BE%A9%E4%BF%A1\" title=\"User:源義信\">源義信</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY 4.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution 4.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by/4.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-4.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "assetDimensions": {
+        "width": 157,
+        "height": 210
+      },
+      "assetNote": "Only a source-sized preview could be retrieved; original and 960px downloads returned HTTP 429/403. Do not upscale."
+    }
+  ],
+  "downloadLimitation": "Original and high-resolution Wikimedia downloads returned HTTP 429/403. Small preview files are not shipped."
+}

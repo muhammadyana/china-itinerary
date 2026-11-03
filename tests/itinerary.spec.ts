@@ -1,6 +1,7 @@
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {days,highlights,places,photos,userPhotos} from '../src/itinerary';
+import {guideForPlace,placePath} from '../src/guides';
 import {mkdir,writeFile} from 'node:fs/promises';
 
 const overnight=['Jiuzhaigou','Jiuzhaigou','Rilong','Danba','Xinduqiao','Xinduqiao','Litang','Riwa','Riwa','Shangri-La','Lijiang','Dali','Kunming',null];
@@ -110,7 +111,7 @@ for(const width of [360,390,1440]) {
   expect(axe.violations).toEqual([]);expect(errors).toEqual([]);
  });
 }
-test('homepage highlights: slider controls, native swipe scroll, matching days and history',async({page})=>{
+test('homepage highlights: slider controls, destination guides, matching days and history',async({page})=>{
  await page.setViewportSize({width:390,height:844});
  await page.goto('/');
  const slides=page.locator('.hero-slide');
@@ -146,7 +147,8 @@ test('homepage highlights: slider controls, native swipe scroll, matching days a
  for(const highlight of highlights) {
   const place=places[highlight.place];const photo=photos[highlight.photo||place.photo!];
   const card=page.locator(`a.highlight-card[data-highlight="${highlight.place}"]`);
-  await expect(card).toHaveAttribute('href',`#${highlight.date}`);
+  const guide=guideForPlace.get(highlight.place)!;
+  await expect(card).toHaveAttribute('href',placePath(guide.slug));
   await expect(card).toContainText(highlight.title);
   await expect(card).toContainText(highlight.caption);
   const img=card.locator('img');
@@ -156,13 +158,17 @@ test('homepage highlights: slider controls, native swipe scroll, matching days a
   await img.scrollIntoViewIfNeeded();
   expect(await img.evaluate(async el=>{const image=el as HTMLImageElement;await image.decode();return image.naturalWidth;})).toBeGreaterThan(0);
   await card.click();
+  await expect(page).toHaveURL(new RegExp(`${placePath(guide.slug)}$`));
+  await expect(page.locator('#place-title')).toHaveText(guide.name);
+  await page.locator(`.guide-date-link[href="/#${highlight.date}"]`).click();
   await expect(page).toHaveURL(new RegExp(`#${highlight.date}$`));
   const day=days.find(day=>day.date===highlight.date)!;
   await expect(page.locator('#day-heading')).toHaveText(day.title);
-  await expect(page.locator('#day-heading')).toBeFocused();
   await expect(page.locator('#day-view')).toContainText(place.name);
   await expect(page.locator('#day-view .sleep-summary')).toContainText(`Menginap di ${day.overnight!.name}`);
   await expect(page.locator('#day-view .sleep-summary')).toBeInViewport();
+  await page.goBack();
+  await expect(page).toHaveURL(new RegExp(`${placePath(guide.slug)}$`));
   await page.goBack();
   await expect(page).not.toHaveURL(/#2026-/);
   await expect(page.locator('#day-heading')).toHaveText(days[0].title);
@@ -185,18 +191,24 @@ test('homepage regions: province groups and keyboard navigation to Lijiang and D
  const lijiang=page.locator('.region-highlights[data-region="Yunnan"] [data-highlight="dayan"]');
  await expect(lijiang).toContainText('Kota Tua Lijiang');
  await lijiang.focus();await page.keyboard.press('Enter');
+ await expect(page).toHaveURL(/\/places\/lijiang\/$/);
+ const lijiangDate=page.locator('.guide-date-link[href="/#2026-11-18"]');
+ await lijiangDate.focus();await page.keyboard.press('Enter');
  await expect(page).toHaveURL(/#2026-11-18$/);
  await expect(page.locator('#day-heading')).toHaveText(days[10].title);
- await expect(page.locator('#day-heading')).toBeFocused();
  await expect(page.locator('.sleep-summary')).toContainText('Menginap di Lijiang');
  await expect(page.locator('.sleep-summary')).toBeInViewport();
+ await page.goBack();
+ await expect(page).toHaveURL(/\/places\/lijiang\/$/);
  await page.goBack();
  const dali=page.locator('.region-highlights[data-region="Yunnan"] [data-highlight="dali-old-town"]');
  await expect(dali).toContainText('Kota Tua Dali');
  await dali.focus();await page.keyboard.press('Enter');
+ await expect(page).toHaveURL(/\/places\/dali\/$/);
+ const daliDate=page.locator('.guide-date-link[href="/#2026-11-20"]');
+ await daliDate.focus();await page.keyboard.press('Enter');
  await expect(page).toHaveURL(/#2026-11-20$/);
  await expect(page.locator('#day-heading')).toHaveText(days[12].title);
- await expect(page.locator('#day-heading')).toBeFocused();
  await expect(page.locator('.sleep-summary')).toContainText('Menginap di Kunming');
  await expect(page.locator('.sleep-summary')).toBeInViewport();
 });

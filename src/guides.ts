@@ -1,0 +1,65 @@
+import { days, highlights, photos, places } from './itinerary.ts';
+import { northernGuides } from './guides/sichuan-north.ts';
+import { westernGuides } from './guides/sichuan-west.ts';
+import { yunnanGuides } from './guides/yunnan.ts';
+import type { DestinationGuide } from './guide-types.ts';
+
+const transitStops = new Set(['zhaguanbeng', 'cable-car']);
+export const guides = [...northernGuides, ...westernGuides, ...yunnanGuides].map(guide => ({
+  ...guide, placeIds: guide.placeIds.filter(id => !transitStops.has(id)),
+}));
+
+export interface PlacePage {
+  slug: string;
+  name: string;
+  guide: DestinationGuide;
+  placeId?: string;
+}
+
+export const placePages: PlacePage[] = guides.flatMap(guide => {
+  const pages: PlacePage[] = [{ slug: guide.slug, name: guide.name, guide }];
+  for (const id of guide.placeIds) {
+    if (id !== guide.slug && (guide.placeIds.length > 1 || places[id].name !== guide.name)) {
+      pages.push({ slug: id, name: places[id].name, guide, placeId: id });
+    }
+  }
+  return pages;
+});
+
+export const pageBySlug = new Map(placePages.map(page => [page.slug, page]));
+export const pageForPlace = new Map(guides.flatMap(guide => guide.placeIds.map(id => [id, pageBySlug.get(id) ?? pageBySlug.get(guide.slug)!] as const)));
+export const guideForPlace = new Map(guides.flatMap(guide => guide.placeIds.map(id => [id, guide] as const)));
+export const placePath = (slug: string) => `/places/${slug}/`;
+export const guideDates = (page: PlacePage) => days.filter(day => day.events.some(event => event.kind === 'stop' && (page.placeId ? event.place === page.placeId : page.guide.placeIds.includes(event.place))));
+
+export interface GalleryPhoto { id: string; title: string; alt: string; note?: string }
+const extraPhotos: Record<string, GalleryPhoto[]> = {
+  jiuzhaigou: [{ id: 'highlight-jiuzhaigou', title: 'Musim gugur di Jiuzhaigou', alt: 'Hutan musim gugur memantul di danau Jiuzhaigou.' }],
+  siguniangshan: [{ id: 'highlight-siguniang', title: 'Panorama Siguniangshan', alt: 'Puncak bersalju di kawasan Siguniangshan.' }],
+  lijiang: [{ id: 'dayan', title: 'Kanal Kota Tua Lijiang', alt: 'Kanal dan jalan batu di Kota Tua Lijiang.' }],
+  'blue-moon-valley': [{ id: 'blue-moon', title: 'Danau Blue Moon Valley', alt: 'Danau di kaki Jade Dragon Snow Mountain.' }],
+  erhai: [{ id: 'erhai', title: 'Danau Erhai', alt: 'Bentang Danau Erhai di Dali.' }],
+  dali: [{ id: 'dali-old-town', title: 'Kota Tua Dali', alt: 'Bangunan tradisional di Kota Tua Dali.' }],
+};
+
+export function galleryPhotos(page: PlacePage): GalleryPhoto[] {
+  const ids = page.placeId ? [page.placeId] : page.guide.placeIds;
+  const titles: Record<string, string> = { caicun: 'Danau Erhai (foto referensi)', 'kangding-mosque': 'Foto masjid pada PDF', wuhua: 'Panorama dari Menara Wuhua' };
+  const items: GalleryPhoto[] = ids.flatMap(id => {
+    const place = places[id];
+    return place.photo && photos[place.photo] ? [{ id: place.photo, title: titles[id] ?? place.name, alt: place.alt || place.name, note: place.photoNote }] : [];
+  });
+  if (!page.placeId) items.push(...(extraPhotos[page.guide.slug] ?? []));
+  return items.filter((item, index) => items.findIndex(other => other.id === item.id) === index);
+}
+
+export function coverPhoto(page: PlacePage): GalleryPhoto | undefined {
+  if (!page.placeId) {
+    const highlight = highlights.find(item => page.guide.placeIds.includes(item.place));
+    if (highlight) {
+      const place = places[highlight.place];
+      return { id: highlight.photo || place.photo!, title: highlight.title, alt: highlight.alt || place.alt || place.name, note: place.photoNote };
+    }
+  }
+  return galleryPhotos(page)[0];
+}

@@ -1,31 +1,50 @@
-/* Hallmark · shape: app screen · genre: editorial · theme: Autumn field guide (user-requested seasonal edition of Specimen) · job: visit · draw: 5f3c4c
- * hero: Banner · nav: edge-aligned utility · footer: colophon · imagery: licensed place photographs in natural colour · signature: nine route photographs open dated travel chapters
- * axes: warm-paper/high-contrast-serif/chestnut · posture: restrained · contrast: rendered and aXe checked · fold: mobile arrival overnight visible above dock · finish: ship · v2.0.0 */
-/* Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V5 · weakest: photo gaps, preserve text and source gaps rather than wrong locations */
-/* Hallmark · waive 83 · the brief requires real photographs per destination · photos are the guide content */
-/* Hallmark · waive 39b · full photograph buttons are intentional gallery controls · large tap surfaces reveal source details */
-/* Hallmark · answered F25 · all 14 desktop destinations are present in the two-tap mobile picker */
-/* Hallmark · waive 71 · date and title are a single compact heading group · inset essentials prioritize overnight information above the mobile dock */
-/* Hallmark · answered F4 · the dark photo control preserves contrast over changing imagery; gold remains the sole primary action */
+/* Hallmark · shape: app screen · genre: modern-minimal · theme: Liquid Glass travel guide, user-requested web adaptation · job: visit
+ * hero: Banner · nav: floating glass utility · footer: colophon · imagery: real destination photographs in natural colour
+ * signature: destination guides connect researched costs and transport to the original travel dates · posture: restrained · finish: ship */
+/* Hallmark · pre-emit critique: P5 H4 E4 S5 R4 V4 · weakest: dense practical information; split route and price reading from concise timing and tips */
+/* Hallmark · waive 83 · photographs are the requested destination galleries · real location imagery is the guide content */
+/* Hallmark · waive 39b · destination photographs are large gallery controls · Destination photographs stay large because their gallery is the requested content */
+/* Hallmark · waive 71 · date and title form one compact group · the overnight summary must remain visible on a phone */
+/* Hallmark · dismissed 25 · the 35ch homepage introduction is a short two-sentence lede, not running prose */
+/* Hallmark · dismissed 40 · static variables combine light and dark media scopes; rendered contrast and aXe checks cover the actual paired themes */
+/* Hallmark · answered F25 · all desktop dates remain available in the mobile date picker */
+/* Hallmark · answered F4 · photo controls use a contrast-preserving glass surface; the blue date action remains primary */
 @import url('../tokens.css');
 @import url('../base.css');
 :root {
- --color-paper: #fbf6ed; --color-paper-2: #f1e6d5; --color-paper-3: #e7d8bf;
- --color-ink: #39291f; --color-ink-2: #604a38; --color-muted: #766453;
- --color-rule: #e1d3be; --color-rule-2: #a18b70;
- --color-accent: #9c4826; --color-accent-ink: #fff8ec; --color-focus: #a34824;
- --color-autumn: #713f2d; --color-autumn-hover: #8b5136; --color-on-autumn: #fff5e4;
- --color-on-autumn-muted: #ebd4b5; --color-rust-wash: #f3dfcb;
- --color-gold: #f2cd8a; --color-gold-hover: #f9dfad;
- --color-hero-clear: #251b1200; --color-hero-mid: #251b128f; --color-hero-base: #251b12f5; --color-dock-shadow: #39291f29;
- --color-photo-caption: #3d281ee6; --color-backdrop: #302218c4; --color-transparent: transparent;
- --font-display: 'Bodoni Moda', Georgia, serif; --font-body: 'Geist', system-ui, sans-serif;
- --font-outlier: var(--font-body); --display-weight: 400;
+ --color-paper: #eef2f3; --color-paper-2: #e2e9ed; --color-paper-3: #d1dce3;
+ --color-ink: #17252e; --color-ink-2: #3b4e59; --color-muted: #52656f;
+ --color-rule: #c9d4dc; --color-rule-2: #8b9eab;
+ --color-accent: #005bb8; --color-accent-ink: #f7fbff; --color-focus: #005bb8;
+ --color-autumn: #203a48; --color-autumn-hover: #2a4c5e; --color-on-autumn: #f7fbff;
+ --color-on-autumn-muted: #d0dfe8; --color-rust-wash: #dceaf7;
+ --color-gold: #005bb8; --color-gold-hover: #004a96;
+ --color-hero-clear: #0c192000; --color-hero-mid: #0c192052; --color-hero-base: #0c1920ed; --color-dock-shadow: #15334d1f;
+ --color-photo-caption: #102c42c9; --color-backdrop: #091822bd; --color-transparent: transparent;
+ --color-glass: #f7fbffbf; --color-glass-solid: #f7fbff; --color-glass-edge: #fbfdffcc;
+ --color-glass-shadow: #15334d1c; --color-glass-inset: #fbfdffb3;
+ --color-warning: #795500; --color-warning-surface: #f9f1dc;
+ --font-display: 'Geist', system-ui, sans-serif; --font-body: 'Geist', system-ui, sans-serif;
+ --font-outlier: var(--font-body); --display-weight: 600;
  --container: 1280px; --gutter: 40px; --gap-columns: 40px;
- --radius-card: 16px; --radius-pill: 12px; --tracking-display: -.025em;
+ --radius-card: 28px; --radius-pill: 100px; --tracking-display: -.035em;
  --text-display: clamp(3rem,5.7vw,5.3rem); --text-section: clamp(2.2rem,3.2vw,3rem);
  --text-title: 1.65rem; --text-lead: 1.0625rem; --text-md: 1rem; --text-sm: .875rem;
 }
+@media (prefers-color-scheme: dark) {
+ :root {
+  color-scheme: dark;
+  --color-paper: #10191e; --color-paper-2: #1c2a32; --color-paper-3: #30414d;
+  --color-ink: #eaf3f8; --color-ink-2: #c2d2dd; --color-muted: #a5b6c2;
+  --color-rule: #344752; --color-rule-2: #738d9c;
+  --color-accent: #7cbeff; --color-focus: #a0d0ff; --color-accent-ink: #f7fbff;
+  --color-rust-wash: #203b51; --color-gold: #125db3; --color-gold-hover: #1c6dc6;
+  --color-glass: #21303dcc; --color-glass-solid: #233440; --color-glass-edge: #d7e9f529;
+  --color-glass-inset: #d7e9f51f; --color-glass-shadow: #020d1659; --color-dock-shadow: #020d1666;
+  --color-warning: #efcf85; --color-warning-surface: #302e23;
+ }
+}
+
 html { scroll-padding-top: 24px; }
 body { font-synthesis: none; }
 button,a,summary { -webkit-tap-highlight-color: var(--color-transparent); }
@@ -49,7 +68,7 @@ svg { flex-shrink: 0; }
 .hero h1 { grid-column: 1 / -1; font-family: var(--font-body); font-size: clamp(3.5rem,6.5vw,6rem); font-weight: 600; line-height: .99; letter-spacing: -.04em; max-width: 12ch; }
 .hero-subtitle { color: var(--color-on-autumn); line-height: 1.6; font-size: 16px; }
 .hero-subtitle span { display: block; color: var(--color-on-autumn-muted); font-size: 14px; }
-.primary-button { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-sm); min-height: 54px; padding: var(--space-md) var(--space-lg); border-radius: var(--radius-pill); background: var(--color-gold); color: var(--color-ink); font-weight: 600; font-size: 16px; white-space: nowrap; }
+.primary-button { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-sm); min-height: 54px; padding: var(--space-md) var(--space-lg); border-radius: var(--radius-pill); background: var(--color-gold); color: var(--color-accent-ink); font-weight: 600; font-size: 16px; white-space: nowrap; }
 .primary-button:hover { background: var(--color-gold-hover); }
 .hero-photo { position: absolute; inset: 0; margin: 0; min-width: 0; }
 .hero-photo > img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; object-position: center 48%; }
@@ -106,7 +125,7 @@ svg { flex-shrink: 0; }
 .stop-meta { display: flex; align-items: center; gap: var(--space-xs); flex-wrap: wrap; margin-bottom: var(--space-sm); }
 .stop-time { font-size: 13px; color: var(--color-accent); font-variant-numeric: tabular-nums; }
 .state { display: inline-block; font-size: 11px; padding: var(--space-3xs) var(--space-xs); border-radius: 2px; background: var(--color-rust-wash); color: var(--color-accent); }
-.state.confirmed { background: var(--color-paper-3); color: var(--color-autumn); }
+.state.confirmed { background: var(--color-paper-3); color: var(--color-ink); }
 .stop h3 { font-size: 27px; line-height: 1.15; }
 .stop-description { margin-top: var(--space-sm); font-size: 16px; line-height: 1.65; color: var(--color-ink-2); }
 .stop-note { margin-top: var(--space-sm); font-size: 13px; line-height: 1.6; color: var(--color-muted); }
@@ -321,7 +340,7 @@ dialog::backdrop { background: var(--color-backdrop); }
 .hero::after { display: none; }
 .hero-track { display: flex; width: 100%; height: 100%; overflow-x: auto; overflow-y: clip; scroll-snap-type: x mandatory; scrollbar-width: none; border-radius: inherit; }
 .hero-track::-webkit-scrollbar { display: none; }
-.hero-track:focus-visible { outline-offset: -5px; outline-color: var(--color-gold); }
+.hero-track:focus-visible { outline-offset: -5px; outline-color: var(--color-on-autumn); }
 .hero-slide { position: relative; isolation: isolate; flex: 0 0 100%; height: 100%; min-width: 0; margin: 0; scroll-snap-align: start; }
 .hero-slide::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg,var(--color-hero-mid),var(--color-hero-clear) 32%,var(--color-hero-mid) 60%,var(--color-hero-base)); }
 .hero-slide > img { width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }

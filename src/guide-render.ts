@@ -1,0 +1,61 @@
+import { days, photos, places, pdfPath } from './itinerary.ts';
+import { coverPhoto, galleryPhotos, guideDates, guides, pageBySlug, pageForPlace, placePath, type PlacePage } from './guides.ts';
+import { escapeHtml as e, icon, photoImage } from './render.ts';
+
+const external = (label: string, url: string) => `<a href="${e(url)}" target="_blank" rel="noopener noreferrer">${e(label)}<span class="visually-hidden"> (buka tab baru)</span>${icon('share')}</a>`;
+const shortDate = (date: string) => `${Number(date.slice(-2))} November`;
+
+export function guidePhotoDetail(page: PlacePage, index: number) {
+  const gallery = galleryPhotos(page);
+  const item = gallery[index];
+  if (!item) return '';
+  const photo = photos[item.id];
+  return `<figure class="guide-photo-detail">${photoImage(item.id, item.alt, true, '(min-width: 960px) 1080px, calc(100vw - 32px)')}<figcaption><h2 id="guide-photo-title">${e(item.title)}</h2>${item.note ? `<p>${e(item.note)}</p>` : ''}${photo.photoNote && photo.photoNote !== item.note ? `<p>${e(photo.photoNote)}</p>` : ''}<p>Foto referensi. Warna daun, cuaca, dan akses dapat berbeda saat kunjungan.</p><div class="guide-photo-credit">${external(`Foto: ${photo.author}`, photo.source)}${external(photo.license, photo.licenseUrl)}<p>Ukuran disesuaikan ke WebP. Pemotongan hanya pada bingkai galeri.</p></div></figcaption></figure>`;
+}
+
+export function guideView(page: PlacePage) {
+  const { guide } = page;
+  const dates = guideDates(page);
+  const date = dates[0] ?? guideDates(pageBySlug.get(guide.slug)!)[0] ?? days[0];
+  const photo = coverPhoto(page);
+  const gallery = galleryPhotos(page);
+  const description = page.placeId ? places[page.placeId].description : guide.summary;
+  const names = page.placeId ? [page.placeId] : guide.placeIds;
+  const publishedCost = guide.costs.find(cost => cost.status !== 'unconfirmed');
+  const checked = new Intl.DateTimeFormat('id-ID', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${guide.checkedAt}T12:00:00Z`));
+  const sourceLinks = guide.gettingThere.sources.map((url, index) => external(`Rujukan perjalanan ${index + 1}`, url)).join('');
+  const nearby = guides.filter(item => item.region === guide.region && item !== guide).slice(0, 4);
+  return `<a class="skip-link" href="#guide-info">Langsung ke info praktis</a>
+  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a><nav aria-label="Navigasi utama"><a class="nav-link" href="/#${date.date}">${icon('calendar')}<span>Itinerary</span></a><a class="nav-link" href="/places/">Tempat</a></nav></header>
+  <main class="container guide-page" data-guide="${e(page.slug)}">
+    <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="/places/#${guide.region.toLowerCase()}">${guide.region}</a>${page.placeId ? `${icon('right')}<a href="${placePath(guide.slug)}">${e(guide.name)}</a>` : ''}</nav>
+    <section class="guide-hero ${photo ? '' : 'guide-hero-text'}" aria-labelledby="place-title">
+      ${photo ? photoImage(photo.id, photo.alt, true, '(min-width: 1280px) 1200px, calc(100vw - 32px)') : ''}
+      <div class="guide-hero-content"><h1 id="place-title">${e(page.name)}</h1><div class="guide-hero-meta"><span>${guide.region}</span><a href="/#${date.date}">${icon('calendar')}${shortDate(date.date)}${icon('right')}</a>${gallery.length ? `<a href="#gallery">${icon('expand')}${gallery.length} foto</a>` : ''}</div></div>
+    </section>
+    ${photo?.note ? `<p class="guide-location-note">${e(photo.note)}</p>` : ''}
+    <div class="guide-intro"><p>${e(description)}</p><a class="guide-date-link" href="/#${date.date}">${icon('bed')}<span>${date.overnight ? `Malamnya di ${e(date.overnight.name)}` : 'Hari kepulangan'}<small>Buka jadwal ${shortDate(date.date)}</small></span>${icon('right')}</a></div>
+    <nav class="guide-section-nav glass-surface" aria-label="Bagian panduan"><a href="#getting-there">${icon('car')}Cara ke sana</a><a href="#costs">${icon('wallet')}Biaya</a><a href="#gallery">${icon('image')}Galeri</a><a href="#tips">${icon('bulb')}Tips</a></nav>
+    <div class="guide-body" id="guide-info">
+      <div class="guide-main-column">
+        <section class="guide-panel" id="getting-there" aria-labelledby="transport-heading"><h2 id="transport-heading">${icon('pin')}Cara ke sana</h2><p class="guide-origin">Dari ${e(guide.gettingThere.origin)}</p><ol class="guide-steps">${guide.gettingThere.steps.map(step => `<li>${e(step)}</li>`).join('')}</ol>${page.placeId && guide.stopAccess?.[page.placeId] ? `<div class="guide-last-leg"><h3>Menuju ${e(page.name)}</h3><p>${e(guide.stopAccess[page.placeId])}</p></div>` : ''}<p class="guide-duration">${icon('clock')}<span>${e(guide.gettingThere.duration)}</span></p><details class="guide-references"><summary>Rujukan rute${icon('down')}</summary><div>${sourceLinks}</div></details></section>
+        <section class="guide-panel" id="costs" aria-labelledby="cost-heading"><h2 id="cost-heading">${icon('wallet')}Biaya kunjungan</h2>${page.placeId ? `<p class="guide-cost-context">Tarif kawasan ${e(guide.name)}. Tiket bersama tidak perlu dihitung ulang untuk tiap pemberhentian.</p>` : ''}<p class="guide-cost-note">Dalam yuan China (CNY). ${publishedCost ? 'Perhatikan komponen, musim, dan status harga.' : 'Tarif yang belum memiliki rujukan pasti ditandai untuk konfirmasi.'}</p><dl class="guide-costs">${guide.costs.map(cost => `<div><dt>${e(cost.label)}<span class="cost-status ${cost.status}">${cost.status === 'published' ? 'Tarif terpublikasi' : cost.status === 'estimate' ? 'Anggaran acuan' : 'Perlu konfirmasi'}</span></dt><dd><strong>${e(cost.amount)}</strong><p>${e(cost.detail)}</p>${cost.source ? external('Sumber tarif', cost.source) : ''}</dd></div>`).join('')}</dl><p class="guide-checked">Diperiksa ${checked}. Harga dan operasional dapat berubah; cocokkan dengan tanggal kunjungan sebelum membayar.</p></section>
+      </div>
+      <aside class="guide-side-column" aria-label="Rencana kunjungan">
+        <section class="guide-panel guide-timing" aria-labelledby="timing-heading"><h2 id="timing-heading">Rencanakan waktumu</h2><dl><div><dt>${icon('clock')}${page.placeId ? 'Waktu untuk kawasan' : 'Waktu di lokasi'}</dt><dd>${e(guide.visitDuration)}</dd></div><div><dt>${icon('sun')}Waktu terbaik</dt><dd>${e(guide.bestTime)}</dd></div></dl></section>
+        <section class="guide-panel" id="tips" aria-labelledby="tips-heading"><h2 id="tips-heading">${icon('bulb')}Tips di lapangan</h2><ul class="guide-tips">${guide.tips.map(tip => `<li>${e(tip)}</li>`).join('')}</ul></section>
+        ${guide.cautions.length ? `<section class="guide-panel guide-caution" aria-labelledby="caution-heading"><h2 id="caution-heading">${icon('info')}Sebelum berangkat</h2><ul class="guide-tips">${guide.cautions.map(caution => `<li>${e(caution)}</li>`).join('')}</ul></section>` : ''}
+      </aside>
+    </div>
+    <section class="place-gallery" id="gallery" aria-labelledby="place-gallery-heading"><div class="guide-section-heading"><h2 id="place-gallery-heading">Lihat lebih dekat.</h2><p>${gallery.length ? `${gallery.length} foto ${e(page.name)}. Ketuk untuk melihat foto utuh dan sumbernya.` : `Foto khusus ${e(page.name)} belum terverifikasi. Lihat deskripsi dan panduan kawasan di bawah.`}</p></div>${gallery.length ? `<div class="place-gallery-track">${gallery.map((item, index) => `<button class="place-gallery-item" type="button" data-gallery-index="${index}" aria-label="Perbesar foto ${index + 1}: ${e(item.title)}">${photoImage(item.id, item.alt, false, '(min-width: 960px) 580px, 85vw')}<span>${e(item.title)}${icon('expand')}</span>${item.note ? `<small>${e(item.note)}</small>` : ''}</button>`).join('')}</div><noscript><p class="no-script">Galeri tetap dapat dilihat. Pembesaran foto memerlukan JavaScript.</p></noscript>` : ''}</section>
+    ${!page.placeId && guide.placeIds.length > 1 ? `<section class="guide-stop-index" aria-labelledby="guide-stops-heading"><h2 id="guide-stops-heading">Tempat dalam kawasan ini</h2><div class="guide-stop-links">${guide.placeIds.map(id => { const stop = places[id]; const target = pageForPlace.get(id); return target ? `<a href="${placePath(target.slug)}"><span><strong>${e(stop.name)}</strong>${stop.chinese ? `<small lang="zh-Hans">${e(stop.chinese)}</small>` : ''}</span>${icon('right')}</a>` : ''; }).join('')}</div></section>` : ''}
+    <section class="guide-source-section"><details><summary>Sumber & nama tempat${icon('down')}</summary><p>Rute kunjungan dan tempat menginap mengikuti PDF. Info praktis dirangkum dari rujukan berikut, diperiksa ${checked}.</p><ul>${guide.sources.map(source => `<li>${external(source.title, source.url)}<small>${source.kind === 'official' ? 'Pengelola / pemerintah' : source.kind === 'operator' ? 'Operator perjalanan' : 'Referensi tambahan'}</small></li>`).join('')}</ul><dl class="guide-place-names">${names.map(id => `<div><dt>${e(places[id].name)}</dt><dd${places[id].chinese ? ' lang="zh-Hans"' : ''}>${e(places[id].chinese ?? 'Cocokkan pin dengan sopir setempat.')}</dd></div>`).join('')}</dl><p>${external('Itinerary PDF', `/${pdfPath}`)}</p></details></section>
+    <section class="guide-next"><div><h2>Lanjutkan perjalanan.</h2><p>Kembali ke tanggal kunjungan untuk melihat transportasi dan lokasi menginap.</p></div><div class="guide-visit-dates">${dates.map(day => `<a class="quiet-button" href="/#${day.date}">${icon('calendar')}<span>${shortDate(day.date)}<small>${e(day.title)}</small></span>${icon('right')}</a>`).join('')}</div></section>
+  </main>
+  <footer class="container guide-footer"><a class="wordmark" href="/">${icon('mountain')}China 2026</a><nav aria-label="Destinasi lainnya">${nearby.map(item => `<a href="${placePath(item.slug)}">${e(item.name)}</a>`).join('')}</nav></footer>
+  <dialog class="photo-dialog guide-photo-dialog" id="guide-photo-dialog" aria-labelledby="guide-photo-title"><header class="guide-photo-toolbar"><span id="guide-photo-count" aria-live="polite"></span><div><button type="button" class="icon-button" data-guide-action="previous-photo" aria-label="Foto sebelumnya">${icon('left')}</button><button type="button" class="icon-button" data-guide-action="next-photo" aria-label="Foto berikutnya">${icon('right')}</button><button type="button" class="icon-button" data-guide-action="close-photo" aria-label="Tutup foto" autofocus>${icon('close')}</button></div></header><div id="guide-photo-content"></div></dialog>`;
+}
+
+export function placesIndex() {
+  return `<a class="skip-link" href="#places-title">Langsung ke daftar tempat</a><header class="site-header container"><a class="wordmark" href="/">${icon('mountain')}China 2026</a><a class="nav-link" href="/">${icon('left')}Kembali ke perjalanan</a></header><main class="container places-index"><h1 id="places-title">Tempat yang akan kita jelajahi.</h1><p class="lead">Cara ke sana, biaya, foto, dan bekal praktis untuk setiap pemberhentian wisata.</p>${(['Sichuan', 'Yunnan'] as const).map(region => `<section id="${region.toLowerCase()}"><h2>${region}</h2><div class="destination-index">${guides.filter(guide => guide.region === region).map(guide => { const page = pageBySlug.get(guide.slug)!; const photo = coverPhoto(page); return `<article><a href="${placePath(guide.slug)}">${photo ? photoImage(photo.id, photo.alt) : ''}<span><h3>${e(guide.name)}</h3><small>${guideDates(page).map(day => shortDate(day.date)).join(', ')}</small></span>${icon('right')}</a>${guide.placeIds.length > 1 ? `<ul>${guide.placeIds.map(id => {const target = pageForPlace.get(id); return target ? `<li><a href="${placePath(target.slug)}">${e(places[id].name)}</a></li>` : '';}).join('')}</ul>` : ''}</article>`; }).join('')}</div></section>`).join('')}</main><footer class="container guide-footer"><a href="/">Kembali ke itinerary 14 hari</a></footer>`;
+}

@@ -159,3 +159,12 @@ Alamat publik: [china.muhammadyana.me](https://china.muhammadyana.me). Dokumenta
 - Lijiang now uses Franklin David’s [old-town panorama](https://www.pexels.com/photo/town-in-china-10670163/), captured 28 February 2017 and published 28 December 2021, under the Pexels License. The panorama replaces the close canal view in the hero, highlights, and Dayan stop. It is an archive photograph, not an October 2026 capture.
 - Dali Old Town is a separate highlight linked to 20 November. Its [illuminated South Gate photograph](https://www.pexels.com/photo/facade-of-an-illuminated-temple-14321312/) is by fei wang under the Pexels License. Capture/publication dates are unavailable. It does not depict Wuhua Tower and does not change the planned daytime visit.
 - Both images preserve original colors and proportions in locally hosted WebP variants; display cropping is CSS-only. Source records are included in `source/highlight-photos/manifest.json`.
+
+
+## Destination guides and photo additions (3 November 2026)
+
+The guide expansion covers 46 sightseeing stops through 29 park/town research groups and 54 static destination pages. Airports, stations, transfer-only stops, and hotel bases are excluded. Transport, costs, tips, sources, and source-check dates are recorded in `src/guides/`. Published prices are distinct from operator estimates and unconfirmed costs; earlier rates and temporary Yading offers are not treated as guaranteed November bookings.
+
+Twenty-two additional destination images are recorded in `src/guide-photos-north.ts` and `src/guide-photos-west.ts`. Their provenance manifests are `source/guide-photos-north.json` and `source/guide-photos-west.json`. Eighteen are caption-matched images extracted from the user-provided PDF; four are attributed Commons photographs. Native PDF resolution is preserved; images are not upscaled. Additional Commons candidates could not be downloaded at sufficient resolution because of rate limits and are retained as research references only.
+
+Caicun's PDF image shows Erhai rather than a verified pier viewpoint; both its caption and alt text say so. The Kangding mosque photograph remains an explicitly unverified PDF reference, and its map pin still requires confirmation. The Daxueshan image illustrates the named mountain corridor rather than a surveyed pass location. These photos do not establish current access, current weather, or October 2026 capture dates.

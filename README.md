@@ -2,7 +2,7 @@
 
 A static travel guide with a Bahasa Indonesia interface for 8–21 November 2026. Built with Vite, TypeScript, semantic HTML, and plain CSS.
 
-Public website: [china.muhammadyana.me](https://china.muhammadyana.me). The release with the destination slider and highlights has been verified at this public URL, including mobile layouts at 360 and 390 px.
+Public website: [china.muhammadyana.me](https://china.muhammadyana.me). Browse the [destination directory](https://china.muhammadyana.me/places/) or open a guide such as [/places/jiuzhaigou/](https://china.muhammadyana.me/places/jiuzhaigou/).
 
 ## Run locally
 
@@ -22,7 +22,7 @@ npm run preview -- --host 127.0.0.1 --port 4173
 
 Open <http://127.0.0.1:4173/>. To jump directly to 20 November, open <http://127.0.0.1:4173/#2026-11-20>.
 
-Upload the contents of `dist/` to a static host. Assets use relative paths; the site requires no backend, API keys, third-party font loading, or runtime image service. The PDF is downloaded only when its link is opened.
+Upload the contents of `dist/` to a static host. Assets use root-relative paths; deploy at the domain root. Nginx serves each destination directory through its generated `index.html`; the site requires no backend, API keys, third-party font loading, or runtime image service. The PDF is downloaded only when its link is opened.
 
 ## Update the itinerary
 
@@ -44,15 +44,15 @@ The local `artifacts/` directory is excluded from Git. GitHub Actions uploads te
 
 ## Information limits
 
-Times and prices follow the PDF rather than live schedules. The source confirms arrival at TFU on 8 November at 12:20. Trains, transfers, park access, local mosques, and the return flight time require confirmation as described on the page. Booked accommodation names were not provided, so the guide displays overnight areas.
+Itinerary dates and overnight bases follow the PDF. Destination guides add researched transport, costs, and tips with visible sources and a check date. Published prices, estimates, and unconfirmed costs are labeled separately. These are planning references, not live bookings or guarantees for the travel date. The source confirms arrival at TFU on 8 November at 12:20. Trains, transfers, park access, local mosques, and the return flight time require confirmation as described on the page. Booked accommodation names were not provided, so the guide displays overnight areas.
 
-Photos without sufficient evidence of permission to reuse them are not published as web assets. Their destinations remain available as text; missing photos and replacement sources are documented in `SOURCE-NOTES.md` and the page’s source section. CC BY / CC BY-SA photos retain attribution, license links, and resize/crop notices. No AI-generated images are used.
+Destination photographs retain their original source and attribution. User-supplied PDF photographs fill location-specific gaps and are identified as document references, without an invented photographer, capture date, or Creative Commons license. Photo-location uncertainty from the PDF stays visible. CC BY / CC BY-SA photos retain attribution, license links, and resize/crop notices. No AI-generated images are used.
 
 Previous link checks: 12306 and two Jiuzhaigou pages returned HTTP 200. Three original Klook links rejected automated access with HTTP 403; package availability remains unverified. Details are stored in `artifacts/external-links.json`.
 
 ## Homepage and travel journal
 
-The homepage has nine hero slides and two explicitly named destination groups. Sichuan includes Jiuzhaigou, Siguniangshan, Tagong, and Yading. Yunnan includes Shangri-La, Lijiang Old Town, Blue Moon Valley, Lake Erhai, and Dali Old Town. Region buttons scroll to and focus the matching heading. Each card opens its itinerary date; Shangri-La and Lijiang both link to 18 November. Hero slides alternate provinces before ending in Dali, display the region in their captions, and support swipe and previous/next controls without autoplay.
+The homepage has nine hero slides and two explicitly named destination groups. Sichuan includes Jiuzhaigou, Siguniangshan, Tagong, and Yading. Yunnan includes Shangri-La, Lijiang Old Town, Blue Moon Valley, Lake Erhai, and Dali Old Town. Region buttons scroll to and focus the matching heading. Each highlight card opens its destination guide. Hero captions still open travel dates; guides link back to the matching itinerary date and overnight base. Hero slides alternate provinces before ending in Dali, display the region in their captions, and support swipe and previous/next controls without autoplay.
 
 Use English for code identifiers, comments, test descriptions, and developer-facing messages. User-facing interface copy remains Bahasa Indonesia.
 
@@ -62,11 +62,17 @@ A separate gallery contains 12 user-supplied photos. The **Gallery** button, lab
 
 The homepage uses six sourced highlight assets and existing destination photos. Lijiang uses an archival rooftop panorama by Franklin David; Dali uses fei wang’s illuminated South Gate image. Both retain source and license credits; neither is presented as an October 2026 capture. Only the Siguniangshan photo has a verified October 2026 capture date: 14 October. The Jiuzhaigou photo was taken on 6 November 2025, Erhai on 20 February 2026, Tagong in June 2018, and Luorong in October 2012. The Blue Moon Valley capture date is unavailable. Sources, licenses, and publication dates are documented in `source/highlight-photos/manifest.json` and `SOURCE-NOTES.md`.
 
-The design retains Geist, Bodoni Moda, the chestnut/cream/terracotta/gold palette, and floating date navigation. Highlight revision evidence is in `artifacts/highlights-verification.md`; public deployment evidence is in `artifacts/deployment/receipt.json`.
+The current visual system uses locally hosted Geist, cool neutral reading surfaces, rounded photograph frames, and Liquid Glass-inspired navigation. CSS backdrop blur, a fine highlight, and restrained shadows provide the web material. Dark mode follows the system; reduced transparency and unsupported browsers receive solid surfaces. There are no native SwiftUI APIs or animated distortion effects.
 
-## Verified deployment
+## Destination guides
 
-The highlights and slider are live at [china.muhammadyana.me](https://china.muhammadyana.me). The build and 11 browser tests pass; public checks at 360/390 px also pass. HTTPS, assets, evidence, and rollback details are in the [deployment guide](ops/README.md).
+`src/guides/*.ts` contains researched regional data typed by `src/guide-types.ts`. Each sightseeing stop maps to a page; airports, stations, transfer-only stops, and hotel bases are excluded. Related stops share park or town transport and ticket data, with stop-specific final-leg directions. Shared tickets are explicitly identified on individual stop pages so their price is not counted twice.
+
+`src/guides.ts` owns the route registry, itinerary-date lookup, and gallery selection. `src/guide-render.ts` renders the guide and directory; `src/guide-main.ts` enhances galleries with native dialogs, keyboard navigation, and focus restoration. `vite.config.ts` emits real static HTML for `/places/` and every `/places/<slug>/` route. Direct navigation and reload work without a client-side router. The guide content, sources, photos, and links remain available without JavaScript.
+
+New research should include source URLs, the applicable season, and the actual check date. Never promote an old quote or a temporary offer to a confirmed future price. Yading's 2026 pricing changes and weather-dependent upper-lake access require a final operator check. Private-car quotes remain unconfirmed where no reliable fare is available.
+
+The browser suite covers all generated documents, complete sightseeing-stop coverage, source-linked costs, direct reloads, no-JavaScript content, gallery keyboard handling, mobile layout, dark/light contrast, and reduced transparency. The deployment tests also exercise nested destination pages and reject traversal or arbitrary files.
 
 ## GitHub Actions and Nginx
 

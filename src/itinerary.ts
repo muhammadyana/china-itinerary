@@ -1,3 +1,5 @@
+import { northernGuidePhotos, northernPlacePhotoIds, northernPhotoDescriptions } from './guide-photos-north.ts';
+import { westernGuidePhotos, westernPlacePhotoIds } from './guide-photos-west.ts';
 // All itinerary facts and captions are transcribed or condensed from the supplied PDF.
 // Dates, overnight bases and navigation are rendered from this one source of truth.
 export interface Photo {
@@ -85,6 +87,13 @@ export const places: Record<string, Place> = {
   'green-lake': { name: 'Green Lake (Cuihu)', chinese: '翠湖', description: 'Danau kota dengan jalur jalan kaki di tepi air dapat dikunjungi jika jam penerbangan memungkinkan.', page: 27, photo: 'green-lake', alt: 'Taman dan perairan Green Lake atau Cuihu di Kunming.' },
   kmg: { name: 'Bandara Changshui (KMG)', chinese: '昆明长水国际机场', description: 'Terminal beratap keemasan menjadi titik keberangkatan pulang dari Kunming ke Jakarta.', page: 27, photo: 'kmg', alt: 'Terminal Bandara Internasional Kunming Changshui.' },
 };
+for (const [placeId, photoId] of Object.entries({ ...northernPlacePhotoIds, ...westernPlacePhotoIds })) {
+  const photo = northernGuidePhotos[photoId] ?? westernGuidePhotos[photoId];
+  places[placeId].photo = photoId;
+  places[placeId].alt = northernPhotoDescriptions[photoId] ?? photo.photoNote ?? places[placeId].name;
+  places[placeId].photoNote = photo.photoNote;
+}
+
 const s = (place: string, time: string, note?: string, status?: VisitStatus): Event => ({kind:'stop',place,time,note,status});
 const t = (mode: Extract<Event,{kind:'transfer'}>['mode'], title: string, detail?: string, status?: VisitStatus): Event => ({kind:'transfer',mode,title,detail,status});
 const rail = {label:'Cek jadwal di 12306',url:railUrl};
@@ -128,6 +137,8 @@ export const bookingOptions = [
 
 // PHOTO_DATA_START
 export const photos: Record<string, Photo> = {
+  ...northernGuidePhotos,
+  ...westernGuidePhotos,
   "highlight-lijiang": {
     "id": "highlight-lijiang",
     "width": 5464,

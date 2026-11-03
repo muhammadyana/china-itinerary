@@ -41,7 +41,8 @@ def allowed_path(name):
     if name in {'index.html', 'release.json', 'icons.svg', 'favicon.svg', PDF}:
         return True
     return bool(re.fullmatch(r'assets/[A-Za-z0-9_-]+\.(?:js|css|woff2)', name)
-                or re.fullmatch(r'photos/[A-Za-z0-9_-]+\.(?:webp|avif)', name))
+                or re.fullmatch(r'photos/[A-Za-z0-9_-]+\.(?:webp|avif)', name)
+                or re.fullmatch(r'places/(?:[a-z0-9]+(?:-[a-z0-9]+)*/)?index\.html', name))
 
 
 def read_bounded(stream, limit):
