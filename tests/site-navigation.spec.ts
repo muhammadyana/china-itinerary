@@ -17,6 +17,42 @@ test.beforeEach(async ({ page }) => {
   await page.route('https://api.frankfurter.dev/**', route => route.abort());
 });
 
+test('the daily navigation stays compact when the mobile safe area changes during scrolling', async ({ page, context }) => {
+  const session = await context.newCDPSession(page);
+  await session.send('Emulation.setSafeAreaInsetsOverride', { insets: { top: 0, right: 0, bottom: 0, left: 0 } });
+  await page.goto('/#2026-11-08');
+  await page.evaluate(() => document.fonts.ready);
+  const bar = page.locator('.mobile-daybar');
+  const initial = (await bar.boundingBox())!;
+
+  for (const [width, height, bottom, scroll] of [[390, 844, 34, 300], [390, 700, 0, 1800], [320, 844, 34, 2500], [844, 390, 21, 1800]]) {
+    await page.setViewportSize({ width, height });
+    await session.send('Emulation.setSafeAreaInsetsOverride', { insets: { top: 0, right: 0, bottom, left: 0 } });
+    await page.evaluate(y => scrollTo(0, y), scroll);
+    await expect.poll(async () => (await bar.boundingBox())!.height).toBeCloseTo(initial.height, 1);
+    const bounds = (await bar.boundingBox())!;
+    expect(bounds.y + bounds.height).toBeLessThanOrEqual(height - bottom - 8);
+    expect(bounds.x).toBeGreaterThanOrEqual(0);
+    expect(bounds.x + bounds.width).toBeLessThanOrEqual(width);
+    for (const button of await bar.locator('button').all()) {
+      const control = (await button.boundingBox())!;
+      expect(control.width).toBeGreaterThanOrEqual(44);
+      expect(control.height).toBeGreaterThanOrEqual(44);
+      expect(Math.abs(control.y + control.height / 2 - bounds.y - bounds.height / 2)).toBeLessThan(1);
+    }
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.locator('#mobile-picker').click();
+  await expect(page.locator('#day-picker')).toBeVisible();
+  await page.locator('#day-picker [data-date="2026-11-19"]').click();
+  await expect(page.locator('#current-date')).toHaveText('19 November');
+  await bar.getByRole('button', { name: 'Hari berikutnya', exact: true }).click();
+  await expect(page.locator('#current-date')).toHaveText('20 November');
+  await bar.getByRole('button', { name: 'Hari sebelumnya', exact: true }).click();
+  await expect(page.locator('#current-date')).toHaveText('19 November');
+});
+
 test('all three page types expose every sightseeing stop once in regional itinerary order', async ({ page }) => {
   expect(sightseeingStops).toHaveLength(48);
   for (const id of sightseeingStops) expect(pageForPlace.has(id), id).toBe(true);
