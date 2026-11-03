@@ -224,7 +224,7 @@ test('320px: all header controls remain inside the viewport with full touch targ
   await page.setViewportSize({ width: 320, height: 844 });
   for (const path of ['/', '/places/jiuzhaigou/', '/places/kunming-old-town/']) {
     await page.goto(path);
-    const controls = await page.locator('.site-header a,.site-header button').evaluateAll(nodes => nodes.map(node => {
+    const controls = await page.locator('.site-header a,.site-header button').evaluateAll(nodes => nodes.filter(node => node.getClientRects().length).map(node => {
       const rect = node.getBoundingClientRect();
       return { text: node.textContent, left: rect.left, right: rect.right, width: rect.width, height: rect.height };
     }));

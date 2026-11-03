@@ -3,6 +3,7 @@ import { coverPhoto, guides, pageBySlug, pageForPlace, placePath } from './guide
 import { currencyText, renderExchangeRate } from './currency.ts';
 import { escapeHtml as e, fullDate, icon } from './render.ts';
 import { CHENGDU_EVENING_DATE, renderChengduEvening } from './chengdu-evening.ts';
+import { stayBaseForDate, stayBases, stayNights, type Stay } from './stays.ts';
 
 const siteOrigin = 'https://china.muhammadyana.me';
 const COVER_PHOTO_ID = 'highlight-jiuzhaigou';
@@ -103,8 +104,10 @@ function printDayHeader(day: Day, index: number, lead: string | undefined, ledge
 }
 
 function printEssentials(day: Day): string {
+  const base = day.overnight ? stayBaseForDate(day.date) : undefined;
+  const picks = base ? `<span class="print-stay-picks">Pilihan: <a href="#print-stays-${e(base.id)}">${e(base.hotel.name)}</a> · <a href="#print-stays-${e(base.id)}">${e(base.hostel.name)}</a></span>` : '';
   const stay = day.overnight
-    ? `<dt>${icon('bed')}Menginap</dt><dd><strong>${e(day.overnight.name)}</strong><span>${e(day.overnight.area)}</span>${day.overnight.elevation ? `<span class="print-elevation">${e(day.overnight.elevation)}</span>` : ''}</dd>`
+    ? `<dt>${icon('bed')}Menginap</dt><dd><strong>${e(day.overnight.name)}</strong><span>${e(day.overnight.area)}</span>${day.overnight.elevation ? `<span class="print-elevation">${e(day.overnight.elevation)}</span>` : ''}${picks}</dd>`
     : `<dt>${icon('plane')}Kepulangan</dt><dd><strong>Pulang ke Jakarta</strong></dd>`;
   return `<dl class="print-essentials"><div>${stay}</div><div><dt>${icon('train')}Transportasi</dt><dd><strong>${e(day.transport)}</strong></dd></div></dl>`;
 }
@@ -211,6 +214,16 @@ function printedUrl(href: string): string {
   return `${url.hostname.replace(/^www\./, '')}${rest === '/' ? '' : readable(rest)}`;
 }
 
+function printStay(stay: Stay): string {
+  const listing = stay.links.find(link => link.gallery) ?? stay.links[0];
+  return `<div class="print-stay"><p class="print-stay-kind">${e(stay.kind)} · <strong>${currencyText(stay.price)}</strong></p><h4>${e(stay.name)}</h4>${stay.chinese ? `<p lang="zh-Hans">${e(stay.chinese)}</p>` : ''}${stay.chineseAddress ? `<p lang="zh-Hans">${e(stay.chineseAddress)}</p>` : ''}${paragraph(stay.location)}${paragraph(stay.foreignGuests)}${stay.rooms ? paragraph(stay.rooms) : ''}${stay.halal ? paragraph(stay.halal) : ''}<p>${sourceLink(`Foto & kamar di ${listing.label}`, listing.url)}</p></div>`;
+}
+
+function printStays(): string {
+  return `<section class="print-stays" id="print-stays"><h2>Penginapan per malam</h2><p>Satu hotel dan satu hostel atau guesthouse untuk setiap kota menginap, dicek 3 November 2026. Semua menerima paspor asing menurut sumbernya. Harga adalah perkiraan kamar per malam dan belum dipesan; cek ulang tanggal 2026 di penyedia.</p>
+  ${stayBases.map(base => `<article id="print-stays-${e(base.id)}"><h3>${e(base.name)} <span>${stayNights(base).map(day => `${Number(day.date.slice(-2))} November`).join(' & ')}</span></h3><p class="print-stays-area">${e(base.area)}</p>${base.notes.map(paragraph).join('')}<div class="print-stays-pair">${printStay(base.hotel)}${printStay(base.hostel)}</div></article>`).join('')}</section>`;
+}
+
 export function renderPrintDocument(styles: string, stylesheetLinks: string, generatedAt: string): string {
   const generatedLabel = new Intl.DateTimeFormat('id-ID', { dateStyle: 'long', timeStyle: 'short', timeZone: 'Asia/Jakarta' }).format(new Date(generatedAt));
   const ledger = createPhotoLedger();
@@ -219,6 +232,7 @@ export function renderPrintDocument(styles: string, stylesheetLinks: string, gen
     ${printIndex(ledger)}
     ${days.map((day, index) => printDay(day, index, ledger)).join('')}
     ${printGuides(ledger)}
+    ${printStays()}
     <section class="print-booking"><h2>Rujukan transportasi</h2>${bookingOptions.map(option => `<article><h3>${e(option.title)}</h3>${paragraph(option.description)}<p>${sourceLink('Buka penyedia', option.url)}</p></article>`).join('')}</section>`;
   // Credits render last so the ledger already holds every photograph above.
   // The author credit prints on the cover and in every later page footer (see @page in src/print.css).

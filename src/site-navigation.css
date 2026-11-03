@@ -218,6 +218,13 @@ html {
   }
 }
 
+/* Six 44px targets do not fit below 360px; the places panel keeps the stays link there. */
+@media (max-width: 359px) {
+  .site-navigation .site-navigation-stays {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
   .site-header .site-navigation,
   .site-navigation .place-menu-panel {

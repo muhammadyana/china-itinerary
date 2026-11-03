@@ -1,0 +1,91 @@
+/* Hotel and hostel recommendations: one open section per overnight base, two solid reading cards per base. */
+.stays-page { padding-top: var(--space-xl); }
+.stays-intro { display: grid; gap: var(--space-md); max-width: 62ch; }
+.stays-intro h1 { max-width: 18ch; text-wrap: balance; }
+.stays-intro p { color: var(--color-ink-2); }
+.stays-intro .lead { color: var(--color-ink); }
+
+.stays-index { margin-top: var(--space-xl); }
+.stays-index ol { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin: 0; padding: 0; list-style: none; }
+.stays-index a { display: inline-flex; align-items: center; gap: var(--space-xs); min-height: 44px; padding: var(--space-xs) var(--space-md) var(--space-xs) var(--space-xs); border: 1px solid var(--color-rule-2); border-radius: var(--radius-pill); color: var(--color-ink); font-size: 14px; font-weight: 500; text-decoration: none; }
+.stays-index a span { display: inline-grid; place-items: center; min-width: 32px; height: 28px; padding-inline: var(--space-xs); border-radius: var(--radius-pill); background: var(--color-autumn); color: var(--color-on-autumn); font-size: 12px; font-variant-numeric: tabular-nums; }
+.stays-index a:hover { background: var(--color-paper-2); }
+
+.stay-base { margin-top: var(--space-3xl); scroll-margin-top: var(--space-3xl); }
+.stay-base-header { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-xl); align-items: end; }
+.stay-area { margin: 0; }
+.stay-area img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-card); background: var(--color-paper-3); }
+.stay-area figcaption,.stay-photo figcaption { margin-top: var(--space-xs); color: var(--color-muted); font-size: 12px; line-height: 1.45; }
+.stay-base-copy { display: grid; gap: var(--space-sm); color: var(--color-ink-2); }
+.stay-base-copy h2 { color: var(--color-ink); font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: 1.04; letter-spacing: -.04em; }
+.stay-nights { display: inline-flex; align-items: center; gap: var(--space-xs); width: fit-content; color: var(--color-accent); font-weight: 500; font-variant-numeric: tabular-nums; }
+.stay-base-note { padding: var(--space-sm) var(--space-md); border-radius: 16px; background: var(--color-warning-surface); color: var(--color-warning); font-size: 14px; }
+.stay-base-dates { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-xs); }
+.stay-base-dates .quiet-button { justify-content: space-between; min-height: 56px; border-radius: 20px; text-align: left; white-space: normal; }
+.stay-base-dates small { display: block; color: var(--color-muted); font-size: 12px; }
+
+.stay-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-lg); margin-top: var(--space-xl); align-items: start; }
+.stay-card { display: grid; min-width: 0; overflow: clip; border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-glass-solid); color: var(--color-ink); scroll-margin-top: var(--space-3xl); }
+.stay-photo { margin: 0; }
+.stay-photo img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; background: var(--color-paper-3); }
+.stay-photo figcaption { padding-inline: var(--space-lg); }
+.stay-photo figcaption a,.stay-links a { color: var(--color-accent); overflow-wrap: anywhere; }
+.stay-photo figcaption a svg,.stay-links a svg { width: 14px; height: 14px; }
+.stay-card-body { display: grid; gap: var(--space-sm); padding: var(--space-lg); }
+.stay-card h3 { font-size: 24px; line-height: 1.2; letter-spacing: -.025em; text-wrap: balance; }
+.stay-chinese { margin-top: calc(var(--space-xs) * -1); color: var(--color-ink-2); font-size: 15px; }
+.stay-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-xs) var(--space-sm); }
+.stay-meta .state { font-size: 12px; font-weight: 500; }
+.stay-meta strong { font-size: 17px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.stay-reason { color: var(--color-ink-2); }
+.stay-facts { display: grid; gap: 0; margin: var(--space-xs) 0 0; }
+.stay-facts > div { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: var(--space-sm); padding-block: var(--space-sm); border-top: 1px solid var(--color-rule); }
+.stay-facts dt { display: flex; align-items: flex-start; gap: var(--space-xs); color: var(--color-ink); font-size: 14px; font-weight: 500; }
+.stay-facts dt svg { width: 16px; height: 16px; margin-top: 2px; color: var(--color-accent); }
+.stay-facts dd { margin: 0; color: var(--color-ink-2); font-size: 14px; }
+.stay-facts dd span { display: block; margin-top: var(--space-2xs); }
+.stay-links { display: flex; flex-wrap: wrap; gap: 0 var(--space-lg); }
+.stay-links a { display: inline-flex; align-items: center; gap: var(--space-xs); min-height: 44px; font-size: 14px; font-weight: 500; text-decoration: none; }
+.stay-sources { border-top: 1px solid var(--color-rule); font-size: 13px; }
+.stay-sources summary { display: flex; align-items: center; justify-content: space-between; min-height: 44px; color: var(--color-ink-2); cursor: pointer; list-style: none; }
+.stay-sources summary::-webkit-details-marker { display: none; }
+.stay-sources summary svg { width: 16px; height: 16px; transition: transform var(--dur-micro) var(--ease-out); }
+.stay-sources[open] summary svg { transform: rotate(180deg); }
+.stay-sources ul { display: grid; gap: var(--space-2xs); margin: 0; padding: 0 0 var(--space-sm); list-style: none; }
+.stay-sources a { display: inline-flex; align-items: center; gap: var(--space-xs); min-height: 44px; color: var(--color-accent); overflow-wrap: anywhere; }
+.stay-sources a svg { width: 14px; height: 14px; }
+
+.guide-stays { margin-top: var(--space-3xl); }
+.guide-stays .stay-pair { margin-top: 0; }
+.stay-card-compact .stay-card-body { padding: var(--space-lg); }
+.stay-card-compact h3 { font-size: 21px; }
+.stays-all-link { display: inline-flex; align-items: center; gap: var(--space-xs); min-height: 44px; margin-top: var(--space-md); color: var(--color-accent); font-weight: 500; }
+
+.stays-page > .guide-source-section { margin-top: var(--space-3xl); }
+
+.day-essentials .sleep-stays-link { display: flex; width: fit-content; align-items: center; gap: var(--space-2xs); min-height: 44px; margin-top: var(--space-2xs); color: var(--color-accent); font-size: 14px; font-weight: 500; text-decoration: none; }
+.day-essentials .sleep-stays-link svg { width: 16px; height: 16px; }
+.day-essentials .sleep-stays-link:hover { color: var(--color-autumn-hover); }
+
+@media (max-width: 959px) {
+  .stay-base-header { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
+  .stay-area img { aspect-ratio: 16 / 9; }
+  .stay-pair { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 599px) {
+  .stays-page { padding-top: var(--space-lg); }
+  .stays-intro h1 { font-size: 40px; }
+  .stays-index ol { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); scrollbar-width: none; }
+  .stays-index li { flex: 0 0 auto; }
+  .stay-base { margin-top: var(--space-2xl); }
+  .stay-card-body { padding: var(--space-md); }
+  .stay-photo figcaption { padding-inline: var(--space-md); }
+  .stay-card h3 { font-size: 21px; }
+  .stay-facts > div { grid-template-columns: minmax(0, 1fr); gap: var(--space-2xs); }
+  .guide-stays { margin-top: var(--space-2xl); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stay-sources summary svg { transition: none; }
+}

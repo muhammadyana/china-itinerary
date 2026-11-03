@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { days, pdfPath, photos, places } from '../src/itinerary';
+import { stayBaseForDate, stayBases, stayNights } from '../src/stays';
 import { guides, pageForPlace, placePath } from '../src/guides';
 import { chengduEveningMalls } from '../src/chengdu-evening';
 
@@ -139,5 +140,22 @@ test('the printable journal embeds same-origin photographs and credits each one 
     else if (photo.origin === 'PDF') await expect(credit).toContainText('gambar dari PDF sumber arsip; berkas asli dan lisensinya di');
     else await expect(credit).toContainText(photo.origin);
     if (photo.license !== 'Dokumen pengguna') await expect(credit).not.toContainText('materi dokumen pengguna');
+  }
+});
+
+test('the printable document lists both stay options in every overnight panel and in the stays appendix', async ({ page }) => {
+  await page.goto('/print/');
+  for (const day of days.filter(item => item.overnight)) {
+    const base = stayBaseForDate(day.date)!;
+    const picks = page.locator(`[data-print-date="${day.date}"] .print-stay-picks`);
+    await expect(picks).toContainText(base.hotel.name);
+    await expect(picks).toContainText(base.hostel.name);
+    await expect(picks.locator('a').first()).toHaveAttribute('href', `#print-stays-${base.id}`);
+  }
+  await expect(page.locator(`[data-print-date="${days.at(-1)!.date}"] .print-stay-picks`)).toHaveCount(0);
+  for (const base of stayBases) {
+    const entry = page.locator(`#print-stays-${base.id}`);
+    await expect(entry.locator('.print-stay h4')).toHaveText([base.hotel.name, base.hostel.name]);
+    for (const day of stayNights(base)) await expect(entry.locator('h3')).toContainText(`${Number(day.date.slice(-2))} November`);
   }
 });

@@ -7,6 +7,7 @@ import './currency.css';
 import './site-navigation.css';
 import './destination-cards.css';
 import './chengdu-evening.css';
+import './stays.css';
 import { initializeCurrency } from './currency.ts';
 import { initializeSiteNavigation } from './site-navigation.ts';
 import { initializeGuide } from './guide-main.ts';

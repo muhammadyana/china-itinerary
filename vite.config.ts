@@ -2,7 +2,9 @@ import { defineConfig } from 'vite';
 import { readFileSync } from 'node:fs';
 import { shell } from './src/render.ts';
 import { guideView, placesIndex } from './src/guide-render.ts';
-import { pageBySlug, placePages, type PlacePage } from './src/guides.ts';
+import { pageBySlug, placePages, placePath, type PlacePage } from './src/guides.ts';
+import { staysView } from './src/stays-render.ts';
+import { staysPath } from './src/stays.ts';
 import { escapeHtml } from './src/render.ts';
 import { renderPrintDocument } from './src/print-render.ts';
 import { pdfPath } from './src/itinerary.ts';
@@ -10,17 +12,23 @@ import { generatePdfFromUrl } from './ops/generate-pdf.mjs';
 
 const printStyles = readFileSync(new URL('./src/print.css', import.meta.url), 'utf8');
 
-function destinationHtml(html: string, page?: PlacePage) {
- const title = page ? `${page.name}: rute, biaya & galeri | China 2026` : 'Panduan tempat di Sichuan & Yunnan | China 2026';
- const description = page ? (page.placeId ? `Cara menuju ${page.name}, biaya kawasan, galeri, dan tips perjalanan November 2026.` : page.guide.summary) : 'Panduan setiap tempat wisata dalam itinerary Sichuan dan Yunnan, 8 sampai 21 November 2026.';
- const url = `https://china.muhammadyana.me/places/${page ? `${page.slug}/` : ''}`;
+function pageHtml(html: string, title: string, description: string, path: string, body: string) {
+ const url = `https://china.muhammadyana.me${path}`;
  return html.replace(/<title>.*?<\/title>/s, `<title>${escapeHtml(title)}</title>`)
   .replace(/<meta (property="og:title"|name="twitter:title") content="[^"]*">/g, (_match, attribute) => `<meta ${attribute} content="${escapeHtml(title)}">`)
   .replace(/<meta (name="description"|property="og:description"|name="twitter:description") content="[^"]*">/g, (_match, attribute) => `<meta ${attribute} content="${escapeHtml(description)}">`)
   .replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${url}">`)
   .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${url}">`)
-  .replace(/<!--page-start-->[\s\S]*?<!--page-end-->/, `<!--page-start--><div id="app">${page ? guideView(page) : placesIndex()}</div><!--page-end-->`);
+  .replace(/<!--page-start-->[\s\S]*?<!--page-end-->/, `<!--page-start--><div id="app">${body}</div><!--page-end-->`);
 }
+
+function destinationHtml(html: string, page?: PlacePage) {
+ const title = page ? `${page.name}: rute, biaya & galeri | China 2026` : 'Panduan tempat di Sichuan & Yunnan | China 2026';
+ const description = page ? (page.placeId ? `Cara menuju ${page.name}, biaya kawasan, galeri, dan tips perjalanan November 2026.` : page.guide.summary) : 'Panduan setiap tempat wisata dalam itinerary Sichuan dan Yunnan, 8 sampai 21 November 2026.';
+ return pageHtml(html, title, description, page ? placePath(page.slug) : '/places/', page ? guideView(page) : placesIndex());
+}
+
+const staysHtml = (html: string) => pageHtml(html, 'Hotel & hostel per malam | China 2026', 'Satu hotel dan satu hostel untuk setiap kota menginap di Sichuan dan Yunnan, 8 sampai 20 November 2026, dengan harga perkiraan dan bukti menerima paspor asing.', staysPath, staysView());
 export default defineConfig({
  base: '/',
  plugins: [{
@@ -70,6 +78,7 @@ export default defineConfig({
   transformIndexHtml(html, context) {
    const path = (context.originalUrl || context.path).split('?')[0];
    if (/^\/places\/?$/.test(path)) return destinationHtml(html);
+   if (path === staysPath || `${path}/` === staysPath) return staysHtml(html);
    const slug = path.match(/^\/places\/([a-z0-9-]+)\/?$/)?.[1];
    const page = slug ? pageBySlug.get(slug) : undefined;
    return page ? destinationHtml(html, page) : html.replace('<!--app-->', shell());
@@ -85,6 +94,8 @@ export default defineConfig({
     const stylesheetLinks = Array.from(template.matchAll(/<link\b(?=[^>]*\brel="stylesheet")[^>]*>/g), match => match[0]).join('');
     this.emitFile({ type: 'asset', fileName: 'print/index.html', source: renderPrintDocument(printStyles, stylesheetLinks, new Date().toISOString()) });
     this.emitFile({ type: 'asset', fileName: 'places/index.html', source: destinationHtml(template) });
+    if (pageBySlug.has('stays')) throw new Error('A place guide cannot use the reserved stays slug');
+    this.emitFile({ type: 'asset', fileName: 'places/stays/index.html', source: staysHtml(template) });
     for (const page of placePages) {
      this.emitFile({ type: 'asset', fileName: `places/${page.slug}/index.html`, source: destinationHtml(template, page) });
     }

@@ -107,7 +107,7 @@ for (const width of [320, 390]) {
         expect(bounds.height).toBeLessThanOrEqual(844 * 0.6 + 1);
         expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
 
-        const targets = await page.locator('.site-navigation a, .site-navigation summary').evaluateAll(nodes => nodes.map(node => {
+        const targets = await page.locator('.site-navigation a, .site-navigation summary').evaluateAll(nodes => nodes.filter(node => node.getClientRects().length).map(node => {
           const rect = node.getBoundingClientRect();
           return { label: node.textContent, width: rect.width, height: rect.height };
         }));
@@ -134,6 +134,8 @@ test('native keyboard traversal, Escape focus restoration, and outside click wor
   await expect(menu).toHaveJSProperty('open', true);
   await page.keyboard.press('Tab');
   await expect(menu.getByRole('link', { name: 'Lihat semua tempat' })).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(menu.getByRole('link', { name: 'Hotel & hostel per malam' })).toBeFocused();
   await page.keyboard.press('Tab');
   await expect(menu.getByRole('link', { name: 'Jalan sore di Chengdu', exact: true })).toBeFocused();
   await page.keyboard.press('Escape');
