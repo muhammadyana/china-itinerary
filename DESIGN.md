@@ -9,7 +9,7 @@ description: "A photographic Sichuan and Yunnan field guide with Liquid Glass-in
 
 The photographs supply the autumn colors. Warm cream reading surfaces keep route details legible, while translucent navigation floats over the content. This is a CSS interpretation of Apple's Liquid Glass material, not a native Apple component or an Apple-branded product.
 
-The interface stays in Bahasa Indonesia. Code identifiers, comments, tests, and developer documentation use English. Dates, destinations, overnight bases, and conditional itinerary branches remain sourced from the supplied PDF.
+The interface stays in Bahasa Indonesia. Code identifiers, comments, tests, and developer documentation use English. The supplied PDF remains the archived base for dates, destinations, captions, and conditional branches. Explicit traveler revisions take precedence: 8 November is a Chengdu city walk with an overnight stay in Chengdu; 9 November combines a morning transfer, a shorter Jiuzhaigou visit with entry before the published 14:00 admission cutoff, and one overnight in Jiuzhaigou. All later dates remain unchanged.
 
 ## Tokens and typography
 
@@ -29,13 +29,13 @@ Geist is the active display and body face, at weights 400, 500, and 600. Heading
 
 ## Material and interaction
 
-Glass is reserved for navigation, buttons, badges, the floating date dock, and controls over photographs. A shared material combines backdrop blur, saturation, a diagonal light reflection, a bright upper rim, and a soft lower shadow. Amber glass marks the primary date action. Toolbar children stay clear to avoid stacking blur layers. Information panels use solid cream reading surfaces. Unsupported browsers receive the solid fallback first. Reduced-transparency and increased-contrast preferences remove blur and reflection. The site remains light regardless of the device color-scheme setting; the document and browser theme metadata declare only light.
+Glass is reserved for navigation, buttons, badges, the floating date dock, and controls over photographs. A shared material combines backdrop blur, saturation, a diagonal light reflection, a bright upper rim, and a soft lower shadow. Amber glass marks the primary date action. Toolbar children stay clear to avoid stacking blur layers. Hero metadata badges use transparent glass over the photograph, with readable text and solid accessibility fallbacks. Information panels use solid cream reading surfaces. Unsupported browsers receive the solid fallback first. Reduced-transparency and increased-contrast preferences remove blur and reflection. The site remains light regardless of the device color-scheme setting; the document and browser theme metadata declare only light.
 
-Focus rings appear immediately. Interactive targets are at least 44px. The hero is manually controlled, never autoplaying. Reduced motion removes animated scrolling. Native dialogs contain focus and restore the opening control after Escape or close.
+Links have no underline in either their resting or hover state. Color and material feedback identify interactions, and focus rings appear immediately. Interactive targets are at least 44px. The hero is manually controlled, never autoplaying. Reduced motion removes animated scrolling. Native dialogs contain focus and restore the opening control after Escape or close.
 
 ## Homepage
 
-Nine photographs rotate through Sichuan and Yunnan in the hero. The first-night arrival summary remains directly below it. Region sections lead to destination guides; hero captions and the date picker still select itinerary days. The original 14-day journal and all overnight summaries remain available.
+Nine photographs rotate through Sichuan and Yunnan in the hero. The first-night arrival summary remains directly below it and identifies Chengdu as the overnight base. Region sections lead to destination guides; hero captions and the date picker still select itinerary days. The 14-day journal and all overnight summaries remain available with approved traveler revisions applied.
 
 Desktop highlights use two columns. Phone highlights retain native horizontal scrolling. The desktop date sidebar collapses into the existing mobile picker and floating dock.
 
@@ -51,6 +51,6 @@ The gallery shows locally hosted responsive photographs and opens the full frame
 
 ## Preservation and verification
 
-The redesign preserves the manual hero, every date, all 13 overnight stays, route overview, clipboard fallback, PDF download, optional user gallery, native dialog focus, and history behavior. Destination-card navigation intentionally changes from a date jump to a guide page; guide links return to the matching travel day.
+The redesign preserves the manual hero, all 14 dates, the 13-night total, route overview, clipboard fallback, the archived PDF download, optional user gallery, native dialog focus, and history behavior. The revised overnight sequence begins with Chengdu on 8 November and Jiuzhaigou on 9 November. Destination-card navigation intentionally changes from a date jump to a guide page; guide links return to the matching travel day.
 
 Verification includes mobile widths 320, 360, and 390px, desktop 1440px, fixed light appearance under both system color preferences, reduced transparency, no-JavaScript documents, direct nested-route reloads, source/asset coverage, and aXe checks. Local evidence belongs in ignored `artifacts/`; Hallmark comparisons belong in `.hallmark/`.

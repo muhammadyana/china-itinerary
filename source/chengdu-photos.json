@@ -1,0 +1,249 @@
+{
+  "checkedAt": "2026-11-03",
+  "photos": [
+    {
+      "id": "chengdu-chunxi",
+      "selectedAs": "primary",
+      "title": "File:Chunxi Road gold building Chengdu 2026 dllu.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Chunxi_Road_gold_building_Chengdu_2026_dllu.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/34/Chunxi_Road_gold_building_Chengdu_2026_dllu.jpg",
+      "author": "Daniel Lu (Dllu)",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "capturedAt": "2026-01-23",
+      "originalWidth": 8313,
+      "originalHeight": 8316,
+      "originalSha256": "8e41d8ce0af213209605284948c9ed1207af9697634bdc467e1e4afa59608a08",
+      "caption": "Jalan pejalan kaki Chunxi Road dengan bangunan berfasad emas dan pengunjung.",
+      "photoNote": "Chunxi Road, dipotret pada 23 Januari 2026. Foto referensi, bukan kondisi saat perjalanan November.",
+      "transform": "EXIF orientation, proportional downsize, WebP encoding. No upscaling, color editing, or content alteration. CSS cropping may apply in display frames.",
+      "derivatives": [
+        {
+          "path": "public/photos/chengdu-chunxi-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 50878,
+          "sha256": "220e25e36e9669c5adee3ca77c6a57508dc45241758583928331a60edb119d68"
+        },
+        {
+          "path": "public/photos/chengdu-chunxi-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 143952,
+          "sha256": "37a9e3e015bba6d104e2d73871d49fa7d61a46516c7f77309bfb9c251f4eeb88"
+        },
+        {
+          "path": "public/photos/chengdu-chunxi-1440.webp",
+          "width": 1440,
+          "height": 1441,
+          "bytes": 277372,
+          "sha256": "492ba7390fe0fd006a17ec58d98b8ec85aaffe9e5f135ded7137ade29b7f1129"
+        }
+      ],
+      "commonsMetadata": {
+        "DateTime": {
+          "value": "2026-07-03 22:56:43",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Chunxi Road gold building Chengdu 2026 dllu",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "Chunxi Road|Taken with Fujifilm GFX100S|Self-published work|F-number f/5.6|Exposure time 1/50 sec|Lens focal length 20 mm|Commerce buildings in Chengdu",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "The gold-clad, multi‑eaved “Huangjin Lou” (Gold Building) jewelry mall on Chunxi Road Pedestrian Street, Jinjiang District, Chengdu, Sichuan, China, photographed on 23 January 2026.",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2026-01-23",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "Daniel Lu (<a href=\"//commons.wikimedia.org/wiki/User:Dllu\" title=\"User:Dllu\">User:dllu</a>)",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY-SA 4.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution-Share Alike 4.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/4.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-sa-4.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      }
+    },
+    {
+      "id": "chengdu-taikoo",
+      "selectedAs": "gallery",
+      "title": "File:Taikoo Li Chengdu & Daci Temple at Night.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Taikoo_Li_Chengdu_%26_Daci_Temple_at_Night.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Taikoo_Li_Chengdu_%26_Daci_Temple_at_Night.jpg",
+      "author": "Eftetf",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "capturedAt": "2024-07-20",
+      "originalWidth": 3024,
+      "originalHeight": 4032,
+      "originalSha256": "1255549d35ae0c5017ad41609c273c89019d3f9c5c9dfa5d61bc1aacfa0e342c",
+      "caption": "Jalur pejalan kaki dan bangunan Taikoo Li diterangi cahaya malam, dengan gedung tinggi di belakangnya.",
+      "photoNote": "Taikoo Li pada malam hari, dipotret pada 20 Juli 2024. Foto arsip sebagai gambaran kawasan.",
+      "transform": "EXIF orientation, proportional downsize, WebP encoding. No upscaling, color editing, or content alteration. CSS cropping may apply in display frames.",
+      "derivatives": [
+        {
+          "path": "public/photos/chengdu-taikoo-480.webp",
+          "width": 480,
+          "height": 640,
+          "bytes": 60472,
+          "sha256": "dac92631f4ac51768c1e18d2f1a95ee672abb4f5873b393bbe64f57ea884ea9a"
+        },
+        {
+          "path": "public/photos/chengdu-taikoo-960.webp",
+          "width": 960,
+          "height": 1280,
+          "bytes": 193528,
+          "sha256": "20140ad56a8953458e2c38d85c06adcca960fd7868b04c0d6c66a6324b0af0c6"
+        },
+        {
+          "path": "public/photos/chengdu-taikoo-1440.webp",
+          "width": 1440,
+          "height": 1920,
+          "bytes": 360092,
+          "sha256": "3e0519bc95a30fa819f1793198e178a9936f9137353d0d135690fd00201cab47"
+        }
+      ],
+      "commonsMetadata": {
+        "DateTime": {
+          "value": "2024-09-08 09:03:19",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Taikoo Li Chengdu & Daci Temple at Night",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "Daci Temple|Self-published work|Files with coordinates missing SDC location of creation",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "GPSLatitude": {
+          "value": "30.655481",
+          "source": "commons-desc-page"
+        },
+        "GPSLongitude": {
+          "value": "104.081519",
+          "source": "commons-desc-page"
+        },
+        "GPSMapDatum": {
+          "value": "WGS-84",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Taikoo Li Chengdu at Night",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2024-07-20",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Eftetf&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Eftetf (page does not exist)\">Eftetf</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY-SA 4.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution-Share Alike 4.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/4.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-sa-4.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      }
+    }
+  ],
+  "selectionNote": "Two visually inspected photographs cover the suggested Chunxi Road and Taikoo Li walk. The newer January 2026 Chunxi photograph is primary. Taikoo Li is explicitly a July 2024 archive; neither is claimed as October 2026."
+}

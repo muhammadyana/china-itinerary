@@ -1,6 +1,7 @@
 import { northernGuidePhotos, northernPlacePhotoIds, northernPhotoDescriptions } from './guide-photos-north.ts';
 import { westernGuidePhotos, westernPlacePhotoIds } from './guide-photos-west.ts';
-// All itinerary facts and captions are transcribed or condensed from the supplied PDF.
+import { chengduGuidePhotos } from './guide-photos-chengdu.ts';
+// The PDF supplies the base route; explicit traveler revisions take precedence.
 // Dates, overnight bases and navigation are rendered from this one source of truth.
 export interface Photo {
   id: string; width: number; height: number; sizes: number[];
@@ -9,7 +10,7 @@ export interface Photo {
   photoNote?: string;
 }
 export interface Place {
-  name: string; chinese?: string; description: string; page: number;
+  name: string; chinese?: string; description: string; page?: number;
   photo?: string; alt?: string; photoNote?: string;
 }
 export type VisitStatus = 'Opsional' | 'Perlu konfirmasi' | 'Jika jalur dibuka' | 'Alternatif' | 'Terkonfirmasi';
@@ -21,14 +22,16 @@ export interface Day {
   date: string; title: string; shortTitle: string; region: string; route: string[];
   overnight: { name: string; area: string; elevation?: string; detail: string } | null;
   transport: string; intro: string; events: Event[]; practical: Practical[]; pages: number[];
+  sourceNote?: string;
 }
 export const pdfPath = 'China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf';
 export const railUrl = 'https://www.12306.cn/en/index.html';
 export const places: Record<string, Place> = {
-  tfu: { name: 'Chengdu Tianfu (TFU)', chinese: '成都天府国际机场', description: 'Terminal 1 menjadi pintu masuk perjalanan; setelah imigrasi dan bagasi, lanjut langsung ke Chengdu East.', page: 5, photo: 'tfu', alt: 'Area dalam Terminal 1 Bandara Chengdu Tianfu dengan papan petunjuk dan pengunjung.' },
+  tfu: { name: 'Chengdu Tianfu (TFU)', chinese: '成都天府国际机场', description: 'Terminal 1 menjadi pintu masuk perjalanan. Setelah imigrasi dan bagasi, menuju hotel di Chengdu sebelum jalan sore di kota.', page: 5, photo: 'tfu', alt: 'Area dalam Terminal 1 Bandara Chengdu Tianfu dengan papan petunjuk dan pengunjung.' },
+  chengdu: { name: 'Jalan sore di Chengdu', chinese: '春熙路 / 成都太古里', description: 'Mulai santai di pusat kota: telusuri Chunxi Road dan gang terbuka Taikoo Li, lalu makan malam sebelum kembali ke hotel.', photo: 'chengdu-chunxi', alt: 'Jalan pejalan kaki Chunxi Road dengan bangunan berfasad emas dan pengunjung.', photoNote: chengduGuidePhotos['chengdu-chunxi'].photoNote },
   'chengdu-east': { name: 'Stasiun Chengdu East', chinese: '成都东站', description: 'Di Chengdu Dong, siapkan paspor untuk pemeriksaan sebelum naik kereta menuju Huanglongjiuzhai.', page: 5, photo: 'chengdu-east', alt: 'Area pintu masuk Stasiun Chengdu East dengan papan nama stasiun.' },
   huanglongjiuzhai: { name: 'Stasiun Huanglongjiuzhai', chinese: '黄龙九寨站', description: 'Stasiun di wilayah Songpan ini menjadi titik berganti kendaraan menuju gerbang Jiuzhaigou.', page: 5, photo: 'huanglongjiuzhai', alt: 'Fasad Stasiun Huanglongjiuzhai di antara pegunungan.' },
-  'jiuzhaigou-hotel': { name: 'Goukou / Pengfeng', description: 'Menginap dekat pintu masuk taman untuk dua malam, sebelum dijemput sopir pada 10 November.', page: 3 },
+  'jiuzhaigou-hotel': { name: 'Goukou / Pengfeng', description: 'Menginap satu malam pada 9 November dekat pintu masuk taman, sebelum dijemput sopir pada 10 November.', page: 3 },
   'five-flower': { name: 'Five Flower Lake', chinese: '五花海', description: 'Dari jalur kayu di lembah Rize, lihat air biru-hijau dan batang pohon yang terendam di dasar danau.', page: 6, photo: 'five-flower', alt: 'Air toska bening dan batang terendam di Five Flower Lake, dikelilingi pohon kuning dan jingga.' },
   shuzheng: { name: 'Danau Shuzheng', chinese: '树正群海', description: 'Danau-danau kecil tersusun bertingkat di antara hutan, diikuti jalur kayu sepanjang lembah.', page: 6, photo: 'shuzheng', alt: 'Danau biru Shuzheng di antara pulau-pulau kecil dan dedaunan kuning, jingga, serta hijau.' },
   maobiliang: { name: 'Maobiliang & Siguniangshan', chinese: '猫鼻梁', description: 'Saat cuaca cerah, puncak-puncak Siguniangshan berderet membentuk siluet “Empat Saudari”.', page: 8, photo: 'siguniang', alt: 'Puncak bersalju Siguniangshan menjulang di atas pegunungan.', photoNote: 'Foto pengganti memperlihatkan Siguniangshan; sudut Maobiliang tidak diklaim.' },
@@ -100,8 +103,218 @@ const rail = {label:'Cek jadwal di 12306',url:railUrl};
 const halal: Practical = {title:'Cari makan halal',text:'Cari papan 清真 atau kedai 兰州拉面 di Amap. Konfirmasikan sebelum memesan; siapkan bekal untuk pegunungan.',copy:'清真'};
 const snow: Practical = {title:'Kondisi jalan',text:'Lintasan tinggi rawan salju dan es. Konfirmasikan rute dengan sopir, kendaraan dengan rantai ban, serta rencana jika jalan ditutup.'};
 export const days: Day[] = [
- {date:'2026-11-08',title:'Dari TFU ke Jiuzhaigou',shortTitle:'Tiba & menuju Jiuzhaigou',region:'Sichuan',route:['Chengdu Tianfu','Chengdu East','Huanglongjiuzhai','Jiuzhaigou'],overnight:{name:'Jiuzhaigou',area:'Goukou atau Pengfeng, dekat gerbang taman',elevation:'±2.000 m',detail:'Malam pertama dari dua malam. Konfirmasi check-in malam dan penjemputan.'},transport:'Taksi / DiDi, kereta, lalu jemputan',intro:'Hari perjalanan. Langsung dari bandara ke gerbang Jiuzhaigou lewat Chengdu East.',events:[s('tfu','12.20','12.20–14.00 untuk imigrasi, bagasi, dan makan singkat.','Terkonfirmasi'),t('car','TFU ke Chengdu East','14.00–15.45 dengan taksi resmi atau DiDi. Target tiba 45 menit sebelum kereta.'),s('chengdu-east','Sore','Target kereta mulai 16.30, dengan jeda sedikitnya 4 jam sejak mendarat.','Perlu konfirmasi'),t('train','Chengdu East ke Huanglongjiuzhai','Sekitar 1½–2½ jam. Jadwal dan kursi belum dikonfirmasi.','Perlu konfirmasi'),s('huanglongjiuzhai','Malam','Cocokkan jam jemput dengan kereta yang akhirnya dipesan.'),t('car','Stasiun ke Goukou / Pengfeng','Sekitar 2 jam. Jemputan malam atau shuttle hanya jika sambungannya terkonfirmasi.','Perlu konfirmasi'),s('jiuzhaigou-hotel','Malam')],practical:[{title:'Kereta sore',text:'Jam 16.30 adalah target pencarian, bukan tiket terkonfirmasi. Sisakan waktu untuk pemeriksaan paspor.',link:rail},{title:'Jika pesawat terlambat',text:'Coba kereta berikutnya bila jemputan masih tersedia. Jika sambungan habis, bermalam dekat Chengdu East dan naik kereta pertama 9 November; kunjungan taman menjadi lebih singkat.'},{title:'Bekal halal',text:'Bawa makanan kemasan halal untuk transit dan makan malam di hotel.'}],pages:[3,4,5,28,30]},
- {date:'2026-11-09',title:'Sehari di Jiuzhaigou',shortTitle:'Danau-danau Jiuzhaigou',region:'Sichuan',route:['Gerbang Jiuzhaigou','Lembah Rize','Lembah Shuzheng'],overnight:{name:'Jiuzhaigou',area:'Hotel yang sama di Goukou / Pengfeng',elevation:'±2.000 m',detail:'Malam kedua dekat gerbang taman. Sopir menjemput dari hotel besok pagi.'},transport:'Bus taman dan jalan kaki',intro:'Seharian menyusuri danau biru-hijau di lembah Rize dan Shuzheng.',events:[t('bus','Masuk taman dan naik bus','Target masuk 08.00; arah bus mengikuti pembukaan jalur hari itu.'),s('five-flower','Pagi'),t('bus','Lembah Rize ke Shuzheng','Urutan pemberhentian menyesuaikan bus taman dan cuaca.'),s('shuzheng','Siang–sore'),t('bus','Kembali ke gerbang dan hotel','Target keluar 16.30–17.00.')],practical:[{title:'Tiket dan paspor',text:'Menurut PDF: tiket dewasa CNY 190 + bus CNY 90 = CNY 280. Bawa paspor asli dan reservasi sesuai nama.',link:{label:'Reservasi resmi taman',url:'https://www.jiuzhai.com/intelligent-service/tickets'}},{title:'Jam masuk',text:'Pengumuman yang dirujuk PDF: masuk 08.00–14.00, tutup 18.00. Cek kembali akses dan cuaca menjelang kunjungan.',link:{label:'Pengumuman pengelola',url:'https://www.jiuzhai.com/news/notice/11492-2026-10-31-09-08-46'}},{title:'Bekal seharian',text:'Bawa bekal halal dan air untuk kunjungan taman.'}],pages:[3,4,6,28]},
+ {
+  "date": "2026-11-08",
+  "title": "Sore pertama di Chengdu",
+  "shortTitle": "Jalan-jalan di Chengdu",
+  "region": "Sichuan",
+  "route": [
+    "Chengdu Tianfu",
+    "Pusat kota Chengdu",
+    "Chunxi Road",
+    "Taikoo Li"
+  ],
+  "overnight": {
+    "name": "Chengdu",
+    "area": "Pusat kota, sekitar Chunxi Road / Taikoo Li",
+    "detail": "Malam pertama di Chengdu. Pilih hotel yang mudah dijangkau taksi untuk keberangkatan ke Chengdu East besok pagi; nama hotel belum ditentukan."
+  },
+  "transport": "Taksi / DiDi ke hotel, lalu jalan kaki",
+  "intro": "Minggu untuk menikmati kota dulu. Setelah tiba dan menyimpan koper, jalan santai di pusat Chengdu lalu bermalam di sini.",
+  "events": [
+    {
+      "kind": "stop",
+      "place": "tfu",
+      "time": "12.20",
+      "note": "Sisihkan waktu untuk imigrasi, bagasi, dan makan sebelum menuju hotel. Jam kedatangan mengikuti PDF.",
+      "status": "Terkonfirmasi"
+    },
+    {
+      "kind": "transfer",
+      "mode": "car",
+      "title": "TFU ke hotel di pusat Chengdu",
+      "detail": "Gunakan taksi resmi atau DiDi. Tunjukkan alamat hotel; waktu tiba mengikuti proses bandara dan lalu lintas."
+    },
+    {
+      "kind": "transfer",
+      "mode": "walk",
+      "title": "Simpan koper, lalu mulai jalan sore",
+      "detail": "Check-in atau titip koper di hotel terlebih dahulu. Tidak ada kereta antarkota hari ini."
+    },
+    {
+      "kind": "stop",
+      "place": "chengdu",
+      "time": "Sore–malam",
+      "note": "Usulan rute santai: Chunxi Road–Taikoo Li. Berhenti untuk foto dan makan; pendekkan jalan kaki jika lelah setelah penerbangan."
+    },
+    {
+      "kind": "transfer",
+      "mode": "walk",
+      "title": "Kembali ke hotel di Chengdu",
+      "detail": "Istirahat dan siapkan keberangkatan pagi ke stasiun. Gunakan taksi lokal jika hotel tidak dekat rute jalan kaki."
+    }
+  ],
+  "practical": [
+    {
+      "title": "Malam pertama di Chengdu",
+      "text": "Jalan-jalan dan bermalam di kota. Reservasi hotel masih perlu ditentukan; tidak ada penjemputan Jiuzhaigou malam ini."
+    },
+    {
+      "title": "Siapkan kereta Senin pagi",
+      "text": "Cari kereta pagi 9 November dari Chengdu East ke Huanglongjiuzhai. Konfirmasikan jemputan stasiun dan perkiraan tiba di gerbang taman sebelum membeli tiket.",
+      "link": {
+        "label": "Cek jadwal di 12306",
+        "url": "https://www.12306.cn/en/index.html"
+      }
+    },
+    {
+      "title": "Cari makan halal",
+      "text": "Cari tanda 清真 dan konfirmasikan bahan langsung kepada penjual. Siapkan juga bekal untuk perjalanan Senin."
+    }
+  ],
+  "pages": [
+    3,
+    4,
+    5,
+    28,
+    30
+  ],
+  "sourceNote": "Revisi perjalanan: 8 November jalan-jalan dan menginap di Chengdu. Perjalanan ke Jiuzhaigou dipindahkan ke pagi 9 November; jadwal ini menggantikan bagian awal PDF."
+},
+ {
+  "date": "2026-11-09",
+  "title": "Dari Chengdu ke danau Jiuzhaigou",
+  "shortTitle": "Kereta pagi & Jiuzhaigou",
+  "region": "Sichuan",
+  "route": [
+    "Chengdu East",
+    "Huanglongjiuzhai",
+    "Gerbang Jiuzhaigou",
+    "Danau-danau taman"
+  ],
+  "overnight": {
+    "name": "Jiuzhaigou",
+    "area": "Goukou atau Pengfeng, dekat gerbang taman",
+    "elevation": "±2.000 m",
+    "detail": "Satu malam di Jiuzhaigou setelah perjalanan dari Chengdu. Sopir menjemput dari hotel pada 10 November."
+  },
+  "transport": "Taksi, kereta pagi, jemputan, lalu bus taman",
+  "intro": "Berangkat dari Chengdu pagi hari. Kunjungi danau setelah tiba; panjang rute menyesuaikan sisa waktu dan batas masuk taman.",
+  "events": [
+    {
+      "kind": "transfer",
+      "mode": "car",
+      "title": "Hotel Chengdu ke Chengdu East",
+      "detail": "Atur jemputan sesuai kereta yang dipesan; sisakan waktu untuk pemeriksaan paspor dan naik kereta."
+    },
+    {
+      "kind": "stop",
+      "place": "chengdu-east",
+      "time": "Pagi",
+      "note": "Pilih kereta pagi paling awal yang tersedia. Nomor kereta, jam berangkat, dan kursi belum dikonfirmasi.",
+      "status": "Perlu konfirmasi"
+    },
+    {
+      "kind": "transfer",
+      "mode": "train",
+      "title": "Chengdu East ke Huanglongjiuzhai",
+      "detail": "Pengelola mencantumkan perjalanan tercepat 1 jam 39 menit. Durasi sebenarnya mengikuti layanan pada tiket.",
+      "status": "Perlu konfirmasi"
+    },
+    {
+      "kind": "stop",
+      "place": "huanglongjiuzhai",
+      "time": "Setelah kereta tiba",
+      "note": "Sopir atau shuttle menuju Jiuzhaigou harus sesuai waktu kedatangan kereta."
+    },
+    {
+      "kind": "transfer",
+      "mode": "car",
+      "title": "Stasiun ke gerbang Jiuzhaigou",
+      "detail": "Sekitar 93 km / 2 jam menurut pengelola, di luar menunggu dan urusan bagasi. Sepakati penitipan koper dengan hotel atau sopir.",
+      "status": "Perlu konfirmasi"
+    },
+    {
+      "kind": "transfer",
+      "mode": "bus",
+      "title": "Masuk taman sebelum 14.00",
+      "detail": "Pengumuman terbaru yang diperiksa menyebut batas masuk 14.00 dan tutup 18.00. Masuk hanya jika tiket, waktu tiba, dan akses sudah sesuai.",
+      "status": "Perlu konfirmasi"
+    },
+    {
+      "kind": "stop",
+      "place": "five-flower",
+      "time": "Siang",
+      "note": "Prioritaskan danau di lembah Rize jika waktu tiba dan pengaturan bus memungkinkan; kunjungan ini bukan lagi sehari penuh.",
+      "status": "Perlu konfirmasi"
+    },
+    {
+      "kind": "transfer",
+      "mode": "bus",
+      "title": "Pilih rute kembali melalui Shuzheng",
+      "detail": "Ikuti pengaturan petugas dan waktu bus terakhir; tidak perlu mengejar semua pemberhentian."
+    },
+    {
+      "kind": "stop",
+      "place": "shuzheng",
+      "time": "Sore",
+      "note": "Singgah hanya jika waktu cukup sebelum keluar taman.",
+      "status": "Opsional"
+    },
+    {
+      "kind": "transfer",
+      "mode": "bus",
+      "title": "Kembali ke gerbang dan hotel",
+      "detail": "Ikuti waktu keluar dan bus terakhir yang dikonfirmasi petugas; jangan menunggu sampai batas tutup."
+    },
+    {
+      "kind": "stop",
+      "place": "jiuzhaigou-hotel",
+      "time": "Malam"
+    }
+  ],
+  "practical": [
+    {
+      "title": "Kereta dan sambungan pagi",
+      "text": "Pastikan jadwal kereta, jemputan, dan penitipan koper memungkinkan tiba sebelum batas masuk. Belum ada tiket atau layanan transfer yang dikonfirmasi.",
+      "link": {
+        "label": "Cek jadwal di 12306",
+        "url": "https://www.12306.cn/en/index.html"
+      }
+    },
+    {
+      "title": "Batas masuk 14.00",
+      "text": "Pengumuman 31 Oktober 2026: masuk 08.00–14.00, tutup 18.00. Jika sambungan membuat tiba setelah batas masuk, jangan menganggap masih bisa berkunjung; jadwal taman perlu ditinjau ulang.",
+      "link": {
+        "label": "Pengumuman resmi taman",
+        "url": "https://www.jiuzhai.com/news/notice/11492-2026-10-31-09-08-46"
+      }
+    },
+    {
+      "title": "Waktu transfer stasiun",
+      "text": "Pengelola memperkirakan sekitar 2 jam dari Huanglongjiuzhai ke Jiuzhaigou. Tambahkan waktu menunggu dan urusan koper.",
+      "link": {
+        "label": "Akses resmi Jiuzhaigou",
+        "url": "https://www.jiuzhai.com/intelligent-service/arrival-mode"
+      }
+    },
+    {
+      "title": "Tiket dan paspor",
+      "text": "Tarif dewasa yang dipublikasikan: masuk CNY 190 + bus CNY 90 = CNY 280. Reservasi sesuai paspor; harga tidak otomatis lebih rendah untuk kunjungan siang.",
+      "link": {
+        "label": "Tarif dan reservasi resmi",
+        "url": "https://www.jiuzhai.com/intelligent-service/tickets"
+      }
+    }
+  ],
+  "pages": [
+    3,
+    4,
+    6,
+    28
+  ],
+  "sourceNote": "Revisi perjalanan: 8 November jalan-jalan dan menginap di Chengdu. Perjalanan ke Jiuzhaigou dipindahkan ke pagi 9 November; jadwal ini menggantikan bagian awal PDF."
+},
  {date:'2026-11-10',title:'Menuju Siguniangshan',shortTitle:'Perjalanan ke Rilong',region:'Sichuan',route:['Jiuzhaigou','Siguniangshan','Rilong'],overnight:{name:'Rilong',area:'Kaki Siguniangshan',elevation:'3.200 m',detail:'Satu malam sebelum menjelajahi Shuangqiao Valley besok pagi.'},transport:'Mobil dengan sopir, 7–9 jam / ±456 km',intro:'Etape darat panjang menuju kaki gunung; sisakan waktu makan dan istirahat.',events:[t('car','Hotel Jiuzhaigou ke Siguniangshan','Berangkat pagi. Alokasikan 7–9 jam termasuk makan dan istirahat; sepakati jalur dengan sopir.'),s('maobiliang','Sore','Singgah hanya jika cuaca cerah dan waktunya cukup.','Opsional'),t('car','Lanjut ke penginapan di Rilong'),s('rilong','Sore–malam')],practical:[{title:'Mulai sewa mobil',text:'Rute privat 10–17 November dimulai dari hotel Jiuzhaigou dan berakhir di Dukezong, Yunnan. Konfirmasikan biaya satu arah dan lintas provinsi.'},halal,snow],pages:[3,7,8,28,30]},
  {date:'2026-11-11',title:'Shuangqiao & rumah Tibet Danba',shortTitle:'Shuangqiao & Jiaju',region:'Sichuan',route:['Rilong','Shuangqiao','Jiaju','Danba'],overnight:{name:'Danba',area:'Kota di dasar lembah',elevation:'2.000 m',detail:'Turun dari Rilong untuk bermalam; lanjut ke Zhonglu besok pagi.'},transport:'Shuttle taman, lalu mobil ±3 jam',intro:'Pagi di lembah pegunungan, sore di antara rumah-rumah Tibet di lereng.',events:[t('bus','Shuttle menuju ujung Shuangqiao','Turun bertahap di pemberhentian yang dibuka.'),s('hongshan','Pagi','Foto pada PDF menunjukkan hutan; lokasi “Hongshan Waterfall” belum terkonfirmasi.','Perlu konfirmasi'),s('shuangqiao','Pagi'),t('car','Shuangqiao ke Danba','Sekitar 3 jam; lanjut singgah di Jiaju.'),s('jiaju','Sore'),s('danba','Malam')],practical:[{title:'Di lembah',text:'Gunakan shuttle dan jalur kayu sesuai pengaturan taman. Warna gugur pada pertengahan November belum tentu sama dengan foto.'},halal],pages:[3,7,9,28]},
  {date:'2026-11-12',title:'Dari Danba ke padang Tagong',shortTitle:'Zhonglu, Moshi & Tagong',region:'Sichuan',route:['Danba','Zhonglu','Moshi Park','Tagong','Xinduqiao'],overnight:{name:'Xinduqiao',area:'Basis untuk perjalanan sekitar Kangding',elevation:'3.300 m',detail:'Malam pertama dari dua malam. Siapkan keberangkatan sangat pagi besok.'},transport:'Mobil ±5 jam / ±180 km',intro:'Rumah batu, hutan batu kelabu, lalu padang rumput yang menghadap Yala.',events:[s('zhonglu','Pagi'),t('car','Danba ke Bamei','Perjalanan dilanjutkan ke Moshi Park.'),s('moshi','Siang','Taman berada sekitar 3.500 m.'),t('car','Moshi Park ke Tagong'),s('tagong','Sore','Lihat Gunung Yala dari padang; PDF menyebut kawasan Yala sendiri tutup musim dingin.'),s('muya','Sore'),t('car','Lanjut ke Xinduqiao'),s('xinduqiao','Malam')],practical:[{title:'Bekal siang',text:'Pilihan halal di Tagong dan Xinduqiao terbatas. Siapkan bekal dan cari 兰州拉面 di jalan utama.',copy:'兰州拉面'},{title:'Ketinggian',text:'Naik lagi dari Danba sekitar 2.000 m ke basis Xinduqiao sekitar 3.300 m. Sisakan waktu istirahat.'},snow],pages:[3,7,10,11,28,30]},
@@ -137,6 +350,7 @@ export const bookingOptions = [
 
 // PHOTO_DATA_START
 export const photos: Record<string, Photo> = {
+  ...chengduGuidePhotos,
   ...northernGuidePhotos,
   ...westernGuidePhotos,
   "highlight-lijiang": {

@@ -23,16 +23,16 @@ const muyaListing = 'https://piao.qunar.com/ticket/detail_517256.html';
 export const northernGuides: DestinationGuide[] = [
   {
     slug: 'jiuzhaigou', name: 'Jiuzhaigou', region: 'Sichuan', placeIds: ['five-flower', 'shuzheng'],
-    summary: 'Satu hari untuk danau bening Rize dan susunan danau Shuzheng. Naik bus taman untuk jarak jauh, lalu nikmati tepi air lewat jalur kayu.',
+    summary: 'Danau bening Rize dan Shuzheng setelah perjalanan pagi dari Chengdu. Pilih pemberhentian sesuai waktu tiba dan pengaturan bus taman.',
     gettingThere: {
-      origin: 'Chengdu pada 8 November; hotel Goukou / Pengfeng pada 9 November',
+      origin: 'Hotel di pusat Chengdu pada Senin, 9 November',
       steps: [
-        'Dari TFU, menuju Chengdu East dengan taksi atau DiDi sesuai rencana hari pertama. Pesan kereta ke Huanglongjiuzhai lewat 12306; cocokkan namanya dengan paspor.',
-        'Dari Huanglongjiuzhai, lanjut sekitar 93 km dengan shuttle resmi atau jemputan hotel. Untuk kedatangan malam, pastikan jam jemput sebelum memesan kereta.',
-        'Besok paginya, berangkat dari hotel ke gerbang Jiuzhaigou. Setelah pemeriksaan paspor, bus taman menghubungkan lembah; urutan perjalanan mengikuti pengaturan petugas.',
+        'Setelah bermalam di Chengdu, berangkat ke Chengdu East untuk kereta pagi 9 November menuju Huanglongjiuzhai. Pilih layanan yang tiba cukup awal; nomor kereta dan kursi belum dikonfirmasi.',
+        'Dari Huanglongjiuzhai, lanjut sekitar 93 km dengan shuttle atau jemputan yang sudah disepakati. Pastikan waktu jemput dan penitipan koper agar masih tiba di gerbang sebelum batas masuk 14.00.',
+        'Masuk taman pada hari yang sama setelah tiba. Bus taman menghubungkan lembah; prioritaskan danau yang dapat dijangkau dalam sisa siang dan sore, lalu menginap satu malam di Goukou / Pengfeng.',
       ],
-      duration: 'Kereta tercepat 1 jam 39 menit dari Chengdu East; lanjut sekitar 2 jam dari stasiun ke taman. Tambahkan waktu transfer TFU, pemeriksaan, dan menunggu.',
-      sources: [jiuzhaiArrival, jiuzhaiBus],
+      duration: 'Kereta tercepat 1 jam 39 menit dari Chengdu East; lanjut sekitar 2 jam dari stasiun ke taman. Tambahkan perjalanan hotel ke stasiun, pemeriksaan, menunggu, dan urusan koper.',
+      sources: [jiuzhaiArrival, jiuzhaiNotice, jiuzhaiBus],
     },
     stopAccess: {
       'five-flower': 'Di dalam taman, gunakan bus menuju lembah Rize dan turun pada pemberhentian Five Flower Lake / 五花海 yang dibuka. Lanjut berjalan di jalur kayu; kendaraan privat tidak menjadi transportasi antardanau.',
@@ -41,12 +41,12 @@ export const northernGuides: DestinationGuide[] = [
     costs: [
       { label: 'Tiket masuk taman dewasa', amount: 'CNY 190 / orang', detail: 'Tarif musim ramai berlaku 1 April sampai 15 November, termasuk kunjungan 9 November. Satu tiket taman mencakup Five Flower Lake dan Shuzheng.', status: 'published', source: jiuzhaiTickets },
       { label: 'Bus di dalam taman', amount: 'CNY 90 / orang', detail: 'Terpisah dari tiket masuk. Jumlah tiket masuk dan bus: CNY 280 per dewasa; tidak termasuk kereta atau jemputan stasiun.', status: 'published', source: jiuzhaiTickets },
-      { label: 'Kereta dan jemputan', amount: 'Perlu konfirmasi', detail: 'Harga kereta bergantung pada layanan dan kelas. Minta penawaran jemputan malam per kendaraan, termasuk tol dan titik turun hotel.', status: 'unconfirmed', source: jiuzhaiArrival },
+      { label: 'Kereta dan jemputan', amount: 'Perlu konfirmasi', detail: 'Harga kereta bergantung pada layanan dan kelas. Minta penawaran jemputan pagi / siang per kendaraan, termasuk tol, penitipan koper, dan titik turun dekat gerbang.', status: 'unconfirmed', source: jiuzhaiArrival },
     ],
-    visitDuration: 'Sehari penuh; rencana perjalanan sekitar 08.00 sampai 17.00.',
-    bestTime: 'Masuk pagi. Pengumuman 31 Oktober 2026 menetapkan masuk 08.00 sampai 14.00 dan tutup 18.00; cek pengumuman baru sebelum berangkat.',
+    visitDuration: 'Sisa siang dan sore setelah kereta dan transfer; bukan kunjungan sehari penuh. Shuzheng disesuaikan dengan sisa waktu.',
+    bestTime: 'Pilih sambungan pagi yang memungkinkan tiba sebelum 14.00. Pengumuman 31 Oktober 2026 menetapkan masuk 08.00–14.00 dan tutup 18.00; itu jam operasional, bukan janji waktu tiba.',
     tips: ['Pesan tanggal kunjungan terlebih dahulu dan bawa paspor asli yang sesuai reservasi.', 'Simpan peta taman di ponsel; kombinasikan bus dan jalan kaki agar tidak menghabiskan hari untuk berpindah lembah.', 'Siapkan bekal halal, air, dan baterai cadangan sebelum meninggalkan hotel.'],
-    cautions: ['Jalur yang dibuka dapat berubah karena cuaca. Ikuti pembatas taman dan jangan turun ke tepi air di luar jalur.', 'Tiket taman berbeda dari shuttle stasiun. Jangan menganggap bus CNY 90 sudah mencakup Huanglongjiuzhai ke hotel.'],
+    cautions: ['Jika sambungan tiba setelah batas masuk, kunjungan taman 9 November perlu ditinjau ulang. Jangan mengandalkan akses setelah 14.00.', 'Jalur yang dibuka dapat berubah karena cuaca. Ikuti pembatas taman dan jangan turun ke tepi air di luar jalur.', 'Tiket taman berbeda dari shuttle stasiun. Jangan menganggap bus CNY 90 sudah mencakup Huanglongjiuzhai ke hotel.'],
     sources: [
       { title: 'Jiuzhaigou: tarif dan reservasi resmi', url: jiuzhaiTickets, kind: 'official' },
       { title: 'Jiuzhaigou: kereta dan akses darat', url: jiuzhaiArrival, kind: 'official' },

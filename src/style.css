@@ -28,6 +28,8 @@
  --color-glass-glint: #ffffffad; --color-glass-reflection: #ffffff14; --color-glass-base: #d7bd9524;
  --color-glass-rim: #9b774d2b; --color-glass-hover: #fffdf5db; --color-glass-pressed: #ecddc8d9;
  --color-glass-tint: #f2ce8dcf; --color-glass-tint-hover: #f7dca9eb;
+ --color-photo-badge: #fffaf20a; --color-photo-badge-shine: #ffffff1f; --color-photo-badge-clear: #ffffff05;
+ --color-photo-badge-edge: #ffffff70; --color-photo-badge-hover: #fffaf22e;
  --color-warning: #77531d; --color-warning-surface: #faf0d9;
  --font-display: 'Geist', system-ui, sans-serif; --font-body: 'Geist', system-ui, sans-serif;
  --font-outlier: var(--font-body); --display-weight: 600;
@@ -45,6 +47,7 @@ body { font-synthesis: none; }
 button,a,summary { -webkit-tap-highlight-color: var(--color-transparent); }
 button { color: inherit; cursor: pointer; border: 0; }
 button,a { touch-action: manipulation; }
+a { text-decoration: none; }
 button:disabled { opacity: .4; cursor: not-allowed; }
 button[aria-busy="true"] { cursor: progress; }
 button:active:not(:disabled),a:active { transform: translateY(1px); }

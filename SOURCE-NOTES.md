@@ -1,12 +1,12 @@
 # Catatan sumber dan batas bukti
 
-Sumber utama: PDF pengguna, 31 halaman. Data jadwal, nama tempat, caption, dan nama Mandarin ada di `src/itinerary.ts`.
+The user-provided 31-page PDF is retained as the archived base itinerary. Explicit traveler revisions take precedence over that document; current dates, places, captions, Chinese names, and overnight bases are maintained in `src/itinerary.ts`. The route table below reflects the revised plan, while its PDF references identify the original source.
 
 ## Rute dan malam
 
 | Tanggal | Menginap | Halaman PDF |
 |---|---|---|
-| 2026-11-08 | Jiuzhaigou | 3, 4, 5, 28, 30 |
+| 2026-11-08 | Chengdu | Traveler revision; base PDF: 3, 4, 5, 28, 30 |
 | 2026-11-09 | Jiuzhaigou | 3, 4, 6, 28 |
 | 2026-11-10 | Rilong | 3, 7, 8, 28, 30 |
 | 2026-11-11 | Danba | 3, 7, 9, 28 |
@@ -24,7 +24,7 @@ Sumber utama: PDF pengguna, 31 halaman. Data jadwal, nama tempat, caption, dan n
 ## Status yang dipertahankan
 
 - Tiba TFU 8 November pukul 12.20: dikonfirmasi oleh PDF.
-- Target kereta sore mulai 16.30, jemputan malam, dan check-in: perlu konfirmasi.
+- The former 8 November evening train plan is superseded by a Chengdu city walk and overnight stay. The 9 November morning train/road transfer must reach Jiuzhaigou before the published 14:00 admission cutoff for a shorter park visit; transport availability and timings still require confirmation.
 - Sister Lakes: detur ke arah Batang, terpisah dari jalur langsung Daocheng.
 - Danau atas Yading: hanya jika jalur dibuka; Pearl Lake adalah alternatif jika terbuka.
 - Masjid Kangding: pin dan foto belum terverifikasi; Jumat 20 November di Dali, bukan Kunming.
@@ -163,7 +163,7 @@ Alamat publik: [china.muhammadyana.me](https://china.muhammadyana.me). Dokumenta
 
 ## Destination guides and photo additions (3 November 2026)
 
-The guide expansion covers 46 sightseeing stops through 29 park/town research groups and 54 static destination pages. Airports, stations, transfer-only stops, and hotel bases are excluded. Transport, costs, tips, sources, and source-check dates are recorded in `src/guides/`. Published prices are distinct from operator estimates and unconfirmed costs; earlier rates and temporary Yading offers are not treated as guaranteed November bookings.
+The guide expansion, including the revised Chengdu first day, covers 47 sightseeing stops through 30 park/town research groups and 55 static destination routes. Airports, stations, transfer-only stops, and hotel bases are excluded. Transport, costs, tips, sources, and source-check dates are recorded in `src/guides/`. Published prices are distinct from operator estimates and unconfirmed costs; earlier rates and temporary Yading offers are not treated as guaranteed November bookings.
 
 Twenty-two additional destination images are recorded in `src/guide-photos-north.ts` and `src/guide-photos-west.ts`. Their provenance manifests are `source/guide-photos-north.json` and `source/guide-photos-west.json`. Eighteen are caption-matched images extracted from the user-provided PDF; four are attributed Commons photographs. Native PDF resolution is preserved; images are not upscaled. Additional Commons candidates could not be downloaded at sufficient resolution because of rate limits and are retained as research references only.
 
@@ -172,8 +172,14 @@ Caicun's PDF image shows Erhai rather than a verified pier viewpoint; both its c
 
 ## Practical information refresh — 3 November 2026
 
-All 29 research groups were rechecked against accessible official, operator, and reference material. Guide pages now expose route references and their complete source lists without accordions. Research dates and verified publication dates are separate; source notes identify indexed-only retrieval, unreadable attachments, and historical location references. Editorial time allocations remain distinct from published operating rules.
+The 29 preexisting research groups were rechecked against accessible official, operator, and reference material; the new Chengdu guide brings the total to 30 groups. Guide pages now expose route references and their complete source lists without accordions. Research dates and verified publication dates are separate; source notes identify indexed-only retrieval, unreadable attachments, and historical location references. Editorial time allocations remain distinct from published operating rules.
 
 Recent references include the 31 October Jiuzhaigou notice, 25 October Yading visitor guidance, August G227 works update, October Jade Dragon maintenance notice, and 2 November Lijiang operator interview. Songzanlin's conflicting bus/hours pages and unreadable August shuttle-price attachment prevent a confirmed current package total, so CNY90 is only a reference. Yading's November tariff remains unconfirmed after the 2026 reforms. Undated booking listings do not prove selected-date availability; private transfers still require quotes.
 
 The interface uses a fixed warm-light palette under both device color preferences. Glass effects apply to controls and navigation; practical reading panels remain opaque, with reduced-transparency and increased-contrast fallbacks.
+
+## Traveler revision — Chengdu first night
+
+The traveler confirmed a city walk and overnight stay in Chengdu on Sunday, 8 November 2026. Monday, 9 November now starts with a morning train/road transfer, followed by a shorter Jiuzhaigou park visit and one night near Jiuzhaigou. Entry must be reached before the published 14:00 admission cutoff; this remains a conditional plan until transport timings and park admission are confirmed. All dates from 10 November onward remain unchanged. The original PDF is archived without rewriting it to imply that these revisions appeared in the source.
+
+A dedicated Chengdu city-walk guide and two credited destination photographs support the revised first day. Image credits and source links accompany the photographs; no capture-date claim is added without evidence. Hero metadata badges use transparent glass while practical reading panels retain their warm, solid surfaces.

@@ -4,7 +4,7 @@ import {days,highlights,places,photos,userPhotos} from '../src/itinerary';
 import {guideForPlace,placePath} from '../src/guides';
 import {mkdir,writeFile} from 'node:fs/promises';
 
-const overnight=['Jiuzhaigou','Jiuzhaigou','Rilong','Danba','Xinduqiao','Xinduqiao','Litang','Riwa','Riwa','Shangri-La','Lijiang','Dali','Kunming',null];
+const overnight=['Chengdu','Jiuzhaigou','Rilong','Danba','Xinduqiao','Xinduqiao','Litang','Riwa','Riwa','Shangri-La','Lijiang','Dali','Kunming',null];
 const initialPhotoIds=new Set([
  ...highlights.map(highlight=>photos[highlight.photo||places[highlight.place].photo!].id),
  ...days[0].events.flatMap(event=>event.kind==='stop'&&places[event.place].photo?[photos[places[event.place].photo!].id]:[]),
@@ -17,6 +17,12 @@ test('source invariants: 14 dates, 13 nights and conditional routes',async()=>{
  expect(days).toHaveLength(14);
  expect(days.map(d=>d.overnight?.name??null)).toEqual(overnight);
  expect(days.filter(d=>d.overnight)).toHaveLength(13);
+ expect(days[0].events.some(event=>event.kind==='transfer'&&event.mode==='train')).toBe(false);
+ expect(days[0].events.some(event=>event.kind==='stop'&&event.place==='chengdu')).toBe(true);
+ expect(days[1].events.some(event=>event.kind==='transfer'&&event.mode==='train')).toBe(true);
+ expect(days[1].events.some(event=>event.kind==='stop'&&event.place==='chengdu-east')).toBe(true);
+ expect(days[0].sourceNote).toContain('menginap di Chengdu');
+ expect(days[1].intro).not.toContain('Seharian');
  expect(days.map(d=>d.date)).toEqual(Array.from({length:14},(_,i)=>`2026-11-${String(i+8).padStart(2,'0')}`));
  const ids=days.flatMap(d=>d.events.filter(e=>e.kind==='stop').map(e=>e.place));
  expect(ids.every(id=>Boolean(places[id]))).toBe(true);
@@ -52,7 +58,7 @@ for(const width of [360,390,1440]) {
   const requests:string[]=[];page.on('request',r=>{if(r.resourceType()==='image')requests.push(r.url());});
   await page.goto('/');await page.evaluate(()=>document.fonts.ready);
   await expect(page.locator('h1')).toHaveText('Musim Gugur di China');
-  await expect(page.locator('.home-arrival .arrival-stay')).toContainText('Menginap di Jiuzhaigou');
+  await expect(page.locator('.home-arrival .arrival-stay')).toContainText('Menginap di Chengdu');
   if(width<600) {const sleep=await page.locator('.home-arrival .arrival-stay').boundingBox();const dock=await page.locator('.mobile-daybar').boundingBox();expect(sleep!.y+sleep!.height).toBeLessThan(dock!.y);}
   await page.screenshot({path:`artifacts/home-${width}.png`,fullPage:false});
   expect(requests.filter(url=>url.includes('/photos/')).every(isInitialPhoto)).toBe(true);
@@ -257,12 +263,34 @@ test('copy succeeds and clipboard-denied fallback remains usable',async({page,co
  await expect(photo).toBeFocused();
  await expect(page.locator('html')).not.toHaveClass(/dialog-open/);
 });
+test('arrival revision connects Chengdu sightseeing, its overnight stay, and the next morning transfer',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/#2026-11-08');
+ await expect(page.locator('.home-arrival')).toHaveAccessibleName(/menginap di Chengdu/);
+ await expect(page.locator('.sleep-summary')).toContainText('Menginap di Chengdu');
+ await page.locator('#day-view a[href="/places/chengdu/"]').click();
+ await expect(page.locator('#place-title')).toContainText('Chunxi Road');
+ await expect(page.locator('[data-gallery-index]')).toHaveCount(2);
+ await expect(page.locator('.guide-date-link')).toHaveAttribute('href','/#2026-11-08');
+ await expect(page.locator('.guide-date-link')).toContainText('Chengdu');
+ await page.locator('.guide-date-link').click();
+ await expect(page.locator('.sleep-summary')).toContainText('Menginap di Chengdu');
+ await page.getByRole('button',{name:'Pilih hari',exact:true}).click();
+ await page.locator('#picker-days [data-date="2026-11-09"]').click();
+ await expect(page.locator('#day-heading')).toHaveText(days[1].title);
+ await expect(page.locator('#day-view')).toContainText('Chengdu East');
+ await expect(page.locator('#day-view')).toContainText('14.00');
+ await expect(page.locator('.sleep-summary')).toContainText('Menginap di Jiuzhaigou');
+ await expect(page.locator('.day-source-note')).toContainText('dipindahkan ke pagi 9 November');
+});
+
 test('server-rendered first day and PDF survive disabled JavaScript',async({browser})=>{
  const context=await browser.newContext({javaScriptEnabled:false});const page=await context.newPage();
  await page.goto('http://127.0.0.1:4173/');
  await expect(page.locator('#day-heading')).toHaveText(days[0].title);
- await expect(page.locator('.sleep-summary')).toContainText('Jiuzhaigou');
- await expect(page.locator('.no-script')).toContainText('seluruh 14 hari');
+ await expect(page.locator('.sleep-summary')).toContainText('Chengdu');
+ await expect(page.locator('.no-script')).toContainText('rencana awal 14 hari');
+ await expect(page.locator('.day-source-note')).toContainText('9 November');
  const pdf=await page.request.get('http://127.0.0.1:4173/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf');
  expect(pdf.ok()).toBe(true);expect(pdf.headers()['content-type']).toContain('pdf');await context.close();
 });

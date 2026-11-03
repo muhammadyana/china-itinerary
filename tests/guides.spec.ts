@@ -50,6 +50,8 @@ test('destination coverage preserves every sightseeing stop and research provena
   }
   expect(guideDates(pageForPlace.get('dali-old-town')!).map(day => day.date)).toEqual(['2026-11-20']);
   expect(guideDates(pageForPlace.get('dayan')!).map(day => day.date)).toEqual(['2026-11-18']);
+  expect(guideDates(pageForPlace.get('chengdu')!).map(day => day.date)).toEqual(['2026-11-08']);
+  expect(guideDates(pageForPlace.get('five-flower')!).map(day => day.date)).toEqual(['2026-11-09']);
   expect(pageForPlace.get('songzanlin')!.guide.region).toBe('Yunnan');
   expect(pageForPlace.get('five-flower')!.guide.region).toBe('Sichuan');
 });

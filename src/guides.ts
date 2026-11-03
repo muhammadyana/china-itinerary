@@ -2,10 +2,11 @@ import { days, highlights, photos, places } from './itinerary.ts';
 import { northernGuides } from './guides/sichuan-north.ts';
 import { westernGuides } from './guides/sichuan-west.ts';
 import { yunnanGuides } from './guides/yunnan.ts';
+import { chengduGuides } from './guides/chengdu.ts';
 import type { DestinationGuide } from './guide-types.ts';
 
 const transitStops = new Set(['zhaguanbeng', 'cable-car']);
-export const guides = [...northernGuides, ...westernGuides, ...yunnanGuides].map(guide => ({
+export const guides = [...chengduGuides, ...northernGuides, ...westernGuides, ...yunnanGuides].map(guide => ({
   ...guide, placeIds: guide.placeIds.filter(id => !transitStops.has(id)),
 }));
 
@@ -34,6 +35,7 @@ export const guideDates = (page: PlacePage) => days.filter(day => day.events.som
 
 export interface GalleryPhoto { id: string; title: string; alt: string; note?: string }
 const extraPhotos: Record<string, GalleryPhoto[]> = {
+  chengdu: [{ id: 'chengdu-taikoo', title: 'Malam di Taikoo Li', alt: 'Jalur pejalan kaki dan bangunan Taikoo Li diterangi cahaya malam, dengan gedung tinggi di belakangnya.', note: photos['chengdu-taikoo'].photoNote }],
   jiuzhaigou: [{ id: 'highlight-jiuzhaigou', title: 'Musim gugur di Jiuzhaigou', alt: 'Hutan musim gugur memantul di danau Jiuzhaigou.' }],
   siguniangshan: [{ id: 'highlight-siguniang', title: 'Panorama Siguniangshan', alt: 'Puncak bersalju di kawasan Siguniangshan.' }],
   lijiang: [{ id: 'dayan', title: 'Kanal Kota Tua Lijiang', alt: 'Kanal dan jalan batu di Kota Tua Lijiang.' }],

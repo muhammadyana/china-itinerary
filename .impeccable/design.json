@@ -238,8 +238,8 @@
       "name": "Overnight and Transport",
       "kind": "card",
       "refersTo": "essentials-panel",
-      "description": "Warm cream sleep and transport essentials immediately after the selected-day heading.",
-      "html": "<div class=\"ds-essentials\"><div class=\"ds-sleep\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2 4v16m20-8v8M2 16h20M2 8h6v8m0-6h10a4 4 0 0 1 4 4v2\"/></svg><div><strong>Menginap di Jiuzhaigou</strong><p>Area hotel dekat taman</p></div></div><div class=\"ds-transport\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"5\" y=\"3\" width=\"14\" height=\"15\" rx=\"3\"/><path d=\"M5 10h14m-7-7v7m-4 8-2 3m10-3 2 3M8 14h.01M16 14h.01\"/></svg><div><span>Perjalanan hari ini</span><p>Chengdu → Huanglongjiuzhai → Jiuzhaigou</p></div></div></div>",
+      "description": "Warm cream sleep and transport essentials immediately after the selected-day heading; the revised first night is in Chengdu.",
+      "html": "<div class=\"ds-essentials\"><div class=\"ds-sleep\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2 4v16m20-8v8M2 16h20M2 8h6v8m0-6h10a4 4 0 0 1 4 4v2\"/></svg><div><strong>Menginap di Chengdu</strong><p>Area hotel di pusat kota</p></div></div><div class=\"ds-transport\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"5\" y=\"3\" width=\"14\" height=\"15\" rx=\"3\"/><path d=\"M5 10h14m-7-7v7m-4 8-2 3m10-3 2 3M8 14h.01M16 14h.01\"/></svg><div><span>Perjalanan hari ini</span><p>TFU → Chengdu → jalan sore</p></div></div></div>",
       "css": ".ds-essentials{border-radius:var(--radius-card,16px);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;padding:var(--space-lg,24px);background:var(--color-autumn,#744632);color:var(--color-on-autumn,#fffaf2);font-family:var(--font-body,'Geist',system-ui,sans-serif);line-height:1.55}.ds-sleep,.ds-transport{display:flex;align-items:flex-start;gap:var(--space-sm,12px);min-width:0}.ds-sleep>svg,.ds-transport>svg{flex-shrink:0;margin-top:var(--space-2xs,4px)}.ds-sleep strong{font-size:16px;font-weight:600}.ds-sleep p{margin:var(--space-2xs,4px) 0 0;font-size:13px;color:var(--color-on-autumn,#fffaf2)}.ds-transport{border-left:1px solid var(--color-autumn-hover,#8a543b);padding-left:var(--space-lg,24px)}.ds-transport span{font-size:12px;color:var(--color-on-autumn-muted,#f0dfc8)}.ds-transport p{margin:var(--space-2xs,4px) 0 0;font-size:14px}@media(max-width:599px){.ds-essentials{display:flex;flex-direction:column;padding:20px;gap:var(--space-md,16px)}.ds-transport{border-left:0;border-top:1px solid var(--color-autumn-hover,#8a543b);padding:var(--space-md,16px) 0 0}.ds-transport span{font-size:11px}.ds-transport p{font-size:13px;margin-top:1px}}.ds-essentials{background:var(--color-paper-2,#f1e8d9);color:var(--color-ink,#382d25)}.ds-sleep p,.ds-transport p{color:var(--color-ink-2,#5a493c)}.ds-transport span{color:var(--color-muted,#756250)}.ds-transport{border-color:var(--color-rule,#dfd3c1)}"
     },
     {
@@ -286,7 +286,8 @@
     ],
     "rules": [
       "The CSS tokens in src/style.css are authoritative.",
-      "Keep the original 14 dates and 13 overnight bases.",
+      "Preserve all 14 dates and the 13-night total; explicit traveler revisions take precedence over the archived PDF.",
+      "The first overnight is Chengdu on 8 November; Jiuzhaigou has one night on 9 November after a morning transfer and shorter visit with entry before the published 14:00 admission cutoff.",
       "Never claim a photo is newer or more location-specific than its source proves.",
       "Keep the page light when the device requests dark mode."
     ],
