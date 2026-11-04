@@ -263,6 +263,7 @@ dialog::backdrop { background: var(--color-backdrop); }
 .journey-gallery > summary::-webkit-details-marker { display: none; }
 .journey-gallery > summary > span:first-child { font-size: 26px; font-weight: 600; letter-spacing: -.03em; }
 .journey-gallery > summary > span:last-child { display: flex; align-items: center; gap: var(--space-xs); font-size: 13px; color: var(--color-muted); }
+.journey-gallery > summary svg { transition: transform 200ms ease; }
 .journey-gallery[open] > summary svg { transform: rotate(180deg); }
 .gallery-intro { color: var(--color-muted); font-size: 14px; padding-bottom: var(--space-lg); }
 .gallery-track { display: flex; gap: var(--space-md); overflow-x: auto; scroll-snap-type: x proximity; padding: var(--space-xs) var(--space-xs) var(--space-md); max-width: 100%; scrollbar-width: thin; }

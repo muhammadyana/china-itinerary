@@ -47,9 +47,11 @@ heroTrack.addEventListener('scroll', () => {
   heroSlides.forEach((slide,i)=>{slide.classList.toggle('is-active',i===index);slide.inert=i!==index;});
   $('#hero-counter').textContent=`${index+1} / ${heroSlides.length}`;
 }, {passive:true});
+// In-page jumps glide unless the reader asked for reduced motion.
+const glide = (): ScrollBehavior => matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
 function moveHero(direction: number) {
   const next=(heroIndex+direction+heroSlides.length)%heroSlides.length;
-  heroTrack.scrollTo({left:next*heroTrack.clientWidth,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+  heroTrack.scrollTo({left:next*heroTrack.clientWidth,behavior:glide()});
 }
 
 function dateFromHash() {
@@ -165,7 +167,7 @@ document.addEventListener('click', event => {
   else if (action === 'transport' && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
     event.preventDefault();
     const section = $('#day-transport');
-    section.scrollIntoView({block:'start'});
+    section.scrollIntoView({block:'start', behavior:glide()});
     section.focus({preventScroll:true});
   }
   else if ((action === 'itinerary' || action === 'gallery') && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
@@ -173,14 +175,14 @@ document.addEventListener('click', event => {
     const target = action === 'gallery' ? $('#user-gallery') : $('#itinerary');
     if (target instanceof HTMLDetailsElement) target.open = true;
     if (location.hash !== `#${target.id}`) history.pushState({date:current}, '', `#${target.id}`);
-    target.scrollIntoView({block:'start', behavior:'instant'});
+    target.scrollIntoView({block:'start', behavior:glide()});
     target.querySelector<HTMLElement>('summary, h2')?.focus({preventScroll:true});
   }
   else if (action === 'hero-next') moveHero(1);
   else if (action === 'hero-previous') moveHero(-1);
   else if (action === 'region') {
     const section = document.getElementById(`region-${button.dataset.region?.toLowerCase()}`);
-    section?.scrollIntoView({block:'start',behavior:'instant'});
+    section?.scrollIntoView({block:'start',behavior:glide()});
     section?.querySelector<HTMLElement>('h3')?.focus({preventScroll:true});
   }
   else if (action === 'pick-day') {
