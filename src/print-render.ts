@@ -1,7 +1,8 @@
 import { bookingOptions, days, highlights, pdfPath, photos, places, userPhotos, type Day, type Event, type Photo, type UserPhoto } from './itinerary.ts';
+import { dayTimelines } from './day-timelines.ts';
 import { coverPhoto, guides, pageBySlug, pageForPlace, placePath } from './guides.ts';
 import { currencyText, renderExchangeRate } from './currency.ts';
-import { escapeHtml as e, fullDate, icon } from './render.ts';
+import { escapeHtml as e, fullDate, icon, timelineList } from './render.ts';
 import { CHENGDU_EVENING_DATE, renderChengduEvening } from './chengdu-evening.ts';
 import { stayBaseForDate, stayBases, stayBudget, stayNights, type Stay } from './stays.ts';
 
@@ -118,6 +119,7 @@ function printDay(day: Day, index: number, ledger: PhotoLedger): string {
     <div class="print-day-opening">${printDayHeader(day, index, lead, ledger)}
     ${printEssentials(day)}
     <p class="print-intro">${currencyText(day.intro)}</p><ol class="print-route" aria-label="Rute hari ini">${day.route.map((stop, i) => `<li>${i ? icon('right') : ''}<span>${e(stop)}</span></li>`).join('')}</ol></div>
+    ${dayTimelines[day.date]?.length ? `<section class="print-timeline"><h3>Timeline</h3>${timelineList(dayTimelines[day.date])}</section>` : ''}
     <ol class="print-events">${printEvents(day, lead, ledger)}</ol>
     <section class="print-practical"><h3>Info praktis</h3><div class="print-practical-grid">${day.practical.map(item => `<div><h4>${e(item.title)}</h4>${paragraph(item.text)}${item.copy ? `<p lang="zh-Hans">${e(item.copy)}</p>` : ''}${item.link ? `<p>${sourceLink(item.link.label, item.link.url)}</p>` : ''}</div>`).join('')}</div></section>
     ${day.overnight ? `<p class="print-night">${icon('bed')}<span>${e(day.overnight.detail)}</span></p>` : ''}

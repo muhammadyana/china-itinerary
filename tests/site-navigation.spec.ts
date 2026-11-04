@@ -62,8 +62,9 @@ test('all three page types expose every sightseeing stop once in regional itiner
     await page.goto(path);
     const navigation = page.getByRole('navigation', { name: 'Navigasi utama', exact: true });
     await expect(navigation.getByRole('link', { name: 'Beranda', exact: true })).toHaveAttribute('href', '/');
-    await expect(navigation.getByRole('link', { name: 'Itinerary', exact: true })).toHaveAttribute('href', '/#itinerary');
-    await navigation.locator('summary').click();
+    await navigation.locator('.itinerary-menu > summary').click();
+    await expect(navigation.getByRole('link', { name: 'Jadwal 14 hari' })).toHaveAttribute('href', '/#itinerary');
+    await navigation.locator('.place-menu > summary').click();
     await expect(navigation.getByRole('link', { name: 'Lihat semua tempat' })).toHaveAttribute('href', '/places/');
     const links = await navigation.locator('.place-menu-group a').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')));
     expect(links).toHaveLength(46);
@@ -135,14 +136,6 @@ test('native keyboard traversal, Escape focus restoration, and outside click wor
   await page.keyboard.press('Tab');
   await expect(menu.getByRole('link', { name: 'Lihat semua tempat' })).toBeFocused();
   await page.keyboard.press('Tab');
-  await expect(menu.getByRole('link', { name: 'Hotel & hostel per malam' })).toBeFocused();
-  await page.keyboard.press('Tab');
-  await expect(menu.getByRole('link', { name: 'Peta rute 14 hari' })).toBeFocused();
-  await page.keyboard.press('Tab');
-  await expect(menu.getByRole('link', { name: 'Persiapan & pemesanan' })).toBeFocused();
-  await page.keyboard.press('Tab');
-  await expect(menu.getByRole('link', { name: 'Kereta & timeline' })).toBeFocused();
-  await page.keyboard.press('Tab');
   await expect(menu.getByRole('link', { name: 'Jalan sore di Chengdu', exact: true })).toBeFocused();
   await page.keyboard.press('Escape');
   await expect(menu).toHaveJSProperty('open', false);
@@ -172,7 +165,8 @@ test('the Itinerary anchor restores its selected day through Back and reload', a
   await page.goto('/#2026-11-19');
   const dayDate = page.locator('#day-view .date-line time');
   await expect(dayDate).toHaveAttribute('datetime', '2026-11-19');
-  await page.locator('.site-navigation').getByRole('link', { name: 'Itinerary', exact: true }).click();
+  await page.locator('.itinerary-menu > summary').click();
+  await page.locator('.site-navigation').getByRole('link', { name: 'Jadwal 14 hari' }).click();
   await expect(page).toHaveURL(/\/#itinerary$/);
   await expect(dayDate).toHaveAttribute('datetime', '2026-11-19');
   await expect(page.locator('#itinerary')).toBeInViewport();

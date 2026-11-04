@@ -330,7 +330,7 @@ for (const width of [320, 390]) {
       const stop = page.locator(`#day-view li[id^="stop-${id}-"]`);
       const badge = stop.locator('[data-weather-location]');
       await expectReading(badge, 'ganhaizi', '1', '-3');
-      await expectCompactOverlay(badge, stop.locator('img').first());
+      await expectCompactOverlay(badge, stop.locator('.stop-photo img'));
     }
     await expect(page.locator('#day-view [data-weather-location="dali"]')).toHaveCount(0);
     expect(requestedLocations.filter(location => location[0] === ganhaiziCoordinates[0])).toHaveLength(1);

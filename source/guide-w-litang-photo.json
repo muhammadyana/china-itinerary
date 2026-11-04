@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-11-04",
+  "placeId": "litang",
+  "photo": {
+    "id": "guide-w-litang",
+    "width": 640,
+    "height": 444,
+    "sizes": [480, 640],
+    "author": "PDF perjalanan pengguna",
+    "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=15",
+    "license": "Dokumen pengguna",
+    "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=15",
+    "origin": "PDF",
+    "photoNote": "Jalan kota Litang berlabel pada PDF perjalanan. Tanggal pengambilan foto tidak tersedia."
+  },
+  "alt": "Jalan kota Litang yang dilapisi batu, diapit bangunan bergaya Tibet berdinding oranye dan toko barang antik, dengan warga berpakaian tradisional dan bukit di kejauhan.",
+  "pdfPage": 15,
+  "pdfXref": 276,
+  "pdfCaption": "MENGINAP — Litang: Kota dataran tinggi dengan gang-gang beratap khas Tibet. Di jadwal, sore di Litang dipakai untuk jalan santai setelah berkendara.",
+  "originalCreditInPdf": "gs.ctrip.com",
+  "originalLinkInPdf": "https://gs.ctrip.com/html5/you/sight/litang3150/134017757.html",
+  "takenAt": null,
+  "captureDateEvidence": "Tidak tersedia: the embedded JPEG carries no capture date and the PDF gives none.",
+  "sourceBasis": "Individually extracted embedded image (xref 276, 640x444), byte-identical (sha256 4f6255eea4747901...) to the copy in public/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf, visually matched to the PDF caption 'Litang' (town stay), not the monastery card on the same page. User supplied and authorized the document; no Creative Commons license is claimed.",
+  "verificationLimits": [
+    "Shows a Tibetan-style pedestrian street in Litang town; the exact street is not identified.",
+    "Season and capture date are unknown; green hillside suggests a non-winter visit but is not evidence of a date."
+  ],
+  "processing": "Proportional Lanczos downscale to 480px; native 640px kept; WebP quality 84, method 6 (same settings that reproduce guide-w-gaoersi byte-for-byte). No crop, upscaling or content edits.",
+  "assets": [
+    { "path": "public/photos/guide-w-litang-480.webp", "width": 480, "height": 333, "bytes": 40464 },
+    { "path": "public/photos/guide-w-litang-640.webp", "width": 640, "height": 444, "bytes": 58678 }
+  ]
+}

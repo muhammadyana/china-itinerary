@@ -120,6 +120,10 @@ body.print-document { margin: 0; padding: 0; background: var(--color-glass-solid
 
 /* Practical notes, overnight detail, and the Chengdu evening choices. */
 /* Practical cards break only between rows; three cards share one row so none is left alone. */
+.print-timeline { margin-top: 5mm; }
+.print-document .day-timeline { display: grid; margin: 2.5mm 0 0; padding: 0; list-style: none; border-bottom: 1px solid var(--color-rule); }
+.print-document .day-timeline li { display: grid; grid-template-columns: 28mm minmax(0, 1fr); gap: 4mm; margin: 0; padding: 1.6mm 0; border-top: 1px solid var(--color-rule); color: var(--color-ink-2); break-inside: avoid; }
+.day-timeline-time { color: var(--color-accent); font-weight: 600; font-variant-numeric: tabular-nums; }
 .print-practical { margin-top: 5mm; }
 .print-practical-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3mm; margin-top: 2.5mm; }
 .print-practical-grid:has(> :last-child:nth-child(3)) { grid-template-columns: repeat(3, minmax(0, 1fr)); }

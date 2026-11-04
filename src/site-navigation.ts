@@ -16,18 +16,15 @@ type Region = 'Sichuan' | 'Yunnan';
 interface Destination { slug: string; name: string; region: Region }
 
 const topLinks: { before: NavLink[]; after: NavLink[] } = {
-  before: [
-    { href: '/', label: 'Beranda' },
-    { href: '/#itinerary', label: 'Itinerary', action: 'itinerary' },
-  ],
+  before: [{ href: '/', label: 'Beranda' }],
   after: [
     { href: '/#user-gallery', label: 'Galeri', action: 'gallery' },
     { href: '/#route', label: 'Rute', action: 'overview' },
   ],
 };
 
-const panelLinks: NavLink[] = [
-  { href: '/places/', label: 'Lihat semua tempat' },
+const itineraryLinks: NavLink[] = [
+  { href: '/#itinerary', label: 'Jadwal 14 hari', action: 'itinerary' },
   { href: staysPath, label: 'Hotel & hostel per malam' },
   { href: routeMapPath, label: 'Peta rute 14 hari' },
   { href: preparePath, label: 'Persiapan & pemesanan' },
@@ -46,11 +43,13 @@ function destinations(): Destination[] {
   }));
 }
 
-const topLink = ({ href, label, action }: NavLink) =>
-  `<a class="site-navigation-link" href="${escapeHtml(href)}"${action ? ` data-action="${action}"` : ''}>${escapeHtml(label)}</a>`;
+const actionAttribute = (action?: string) => action ? ` data-action="${escapeHtml(action)}"` : '';
 
-const panelLink = ({ href, label }: NavLink) =>
-  `<a class="place-menu-all" href="${escapeHtml(href)}">${escapeHtml(label)}<span aria-hidden="true">↗</span></a>`;
+const topLink = ({ href, label, action }: NavLink) =>
+  `<a class="site-navigation-link" href="${escapeHtml(href)}"${actionAttribute(action)}>${escapeHtml(label)}</a>`;
+
+const panelLink = ({ href, label, action }: NavLink) =>
+  `<a class="nav-menu-link" href="${escapeHtml(href)}"${actionAttribute(action)}>${escapeHtml(label)}<span aria-hidden="true">↗</span></a>`;
 
 const destinationItem = (place: Destination) =>
   `<li><a href="${escapeHtml(placePath(place.slug))}">${escapeHtml(place.name)}</a></li>`;
@@ -58,15 +57,19 @@ const destinationItem = (place: Destination) =>
 const regionGroup = (region: Region, places: Destination[]) =>
   `<section class="place-menu-group"><h2>${region}</h2><ol role="list">${places.filter(place => place.region === region).map(destinationItem).join('')}</ol></section>`;
 
+// A native disclosure, so both menus open without JavaScript.
+const navMenu = (name: string, label: string, panel: string) =>
+  `<details class="nav-menu ${name}-menu"><summary>${label}<span class="nav-menu-chevron" aria-hidden="true"></span></summary><div class="nav-menu-panel ${name}-menu-panel">${panel}</div></details>`;
+
+const itineraryMenu = () => navMenu('itinerary', 'Itinerary', itineraryLinks.map(panelLink).join(''));
+
 function placeMenu() {
   const places = destinations();
-  const summary = '<summary>Tempat<span class="place-menu-chevron" aria-hidden="true"></span></summary>';
-  const panel = [...panelLinks.map(panelLink), regionGroup('Sichuan', places), regionGroup('Yunnan', places)].join('');
-  return `<details class="place-menu">${summary}<div class="place-menu-panel">${panel}</div></details>`;
+  return navMenu('place', 'Tempat', [panelLink({ href: '/places/', label: 'Lihat semua tempat' }), regionGroup('Sichuan', places), regionGroup('Yunnan', places)].join(''));
 }
 
 export function renderSiteNavigation(): string {
-  const items = [...topLinks.before.map(topLink), placeMenu(), ...topLinks.after.map(topLink)].join('');
+  const items = [...topLinks.before.map(topLink), itineraryMenu(), placeMenu(), ...topLinks.after.map(topLink)].join('');
   return `<nav class="site-navigation" aria-label="Navigasi utama">${items}</nav>`;
 }
 
@@ -78,7 +81,7 @@ export function initializeSiteNavigation(root: ParentNode = document): void {
   if (initializedDocuments.has(ownerDocument)) return;
   initializedDocuments.add(ownerDocument);
 
-  const openMenus = () => Array.from(ownerDocument.querySelectorAll<HTMLDetailsElement>('.site-navigation .place-menu[open]'));
+  const openMenus = () => Array.from(ownerDocument.querySelectorAll<HTMLDetailsElement>('.site-navigation .nav-menu[open]'));
 
   ownerDocument.addEventListener('click', event => {
     const target = event.target;

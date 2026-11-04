@@ -19,13 +19,13 @@ test('the trains page shows tickets, the Jiuzhaigou slots and the 8-10 November 
   await plain.goto(trainsPath);
   await expect(plain.locator('#trains .prepare-booking')).toHaveCount(trainBookings.length);
   await expect(plain.locator('#jiuzhaigou tbody tr')).toHaveCount(2);
-  await expect(plain.locator('.trains-timeline')).toHaveCount(timeline.length);
+  await expect(plain.locator('.day-timeline')).toHaveCount(timeline.length);
   await expect(plain.locator('#back-to-chengdu')).toContainText('Ya. Rute Sichuan sekarang memakai transportasi umum');
   await context.close();
 
   await page.goto('/');
-  await page.locator('.place-menu > summary').click();
-  await expect(page.locator('.place-menu-panel').getByRole('link', { name: 'Kereta & timeline' })).toHaveAttribute('href', trainsPath);
+  await page.locator('.itinerary-menu > summary').click();
+  await expect(page.locator('.itinerary-menu-panel').getByRole('link', { name: 'Kereta & timeline' })).toHaveAttribute('href', trainsPath);
 });
 
 for (const width of [320, 390, 1440]) {

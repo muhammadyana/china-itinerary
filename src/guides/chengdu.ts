@@ -16,12 +16,12 @@ export const chengduGuides: DestinationGuide[] = [
     gettingThere: {
       origin: 'Bandara Chengdu Tianfu (TFU), Minggu 8 November',
       steps: [
-        'Setelah rencana kedatangan pukul 12.20, selesaikan imigrasi dan ambil bagasi. Pilihan praktis adalah taksi resmi bandara menuju hotel di Chengdu; simpan alamat hotel dalam bahasa Mandarin dan titipkan koper sebelum berjalan-jalan.',
+        'Setelah mendarat pukul 12.20 dengan penerbangan domestik dari Shanghai (imigrasi sudah di Pudong), ambil bagasi. Pilihan praktis adalah taksi resmi bandara menuju hotel di Chengdu; simpan alamat hotel dalam bahasa Mandarin dan titipkan koper sebelum berjalan-jalan.',
         'Alternatif hemat: bus bandara jalur 1 menuju Chunxi Road. Ctrip mencantumkan arah dari TFU T2; tanyakan petugas titik naik yang sesuai terminal kedatangan. Lanjutkan ke hotel sebelum memulai jalan santai.',
         'Mulai dari 春熙路, lalu berjalan ke 成都太古里 di No. 8 Middle Shamao Street. Dari lokasi lain di kota, Metro jalur 2 atau 3 berhenti di Chunxi Road, yang terhubung dengan Taikoo Li.',
         'Malamnya lanjutkan ke IFS atau Taikoo Li yang masih di kawasan Chunxi Road. Lihat pilihan mal beserta jam acuan dan sumbernya di bagian malam pertama. Pilih satu kawasan, makan malam, lalu kembali ke hotel di Chengdu; perjalanan antarkota dilanjutkan esok hari.',
       ],
-      duration: 'Operator memberi acuan sekitar 80 menit untuk bus jalur 1. Waktu dari pesawat sampai hotel lebih panjang karena imigrasi, bagasi, menunggu kendaraan, lalu lintas, dan perjalanan terakhir ke hotel.',
+      duration: 'Operator memberi acuan sekitar 80 menit untuk bus jalur 1. Waktu dari pesawat sampai hotel lebih panjang karena bagasi, menunggu kendaraan, lalu lintas, dan perjalanan terakhir ke hotel.',
       sources: [airportBusNotice, airportTransport, taikooLiAccess, taikooLiOverview],
     },
     stopAccess: {
@@ -58,7 +58,7 @@ export const chengduGuides: DestinationGuide[] = [
       'Jika memerlukan makanan halal, cari tanda 清真 lalu konfirmasikan bahan dan cara pengolahannya kepada restoran.',
     ],
     cautions: [
-      'Kedatangan pukul 12.20 adalah rencana dari itinerary, bukan waktu pasti keluar bandara. Persingkat jalan-jalan jika penerbangan atau imigrasi terlambat.',
+      'Kedatangan pukul 12.20 adalah jadwal HO1119 dari Shanghai, bukan waktu pasti keluar bandara. Persingkat jalan-jalan jika penerbangan terlambat.',
       'Malam 8 November menginap di Chengdu. Sebelum tidur, pastikan tiket, stasiun keberangkatan, dan waktu berangkat untuk perjalanan 9 November.',
     ],
     sources: [

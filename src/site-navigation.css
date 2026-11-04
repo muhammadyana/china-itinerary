@@ -33,7 +33,7 @@ html {
 }
 
 .site-navigation .site-navigation-link,
-.site-navigation .place-menu > summary {
+.site-navigation .nav-menu > summary {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,7 +58,7 @@ html {
   flex: 1;
 }
 
-.site-navigation .place-menu {
+.site-navigation .nav-menu {
   flex: 1;
   min-width: 0;
   position: static;
@@ -67,15 +67,20 @@ html {
   border: 0;
 }
 
-.site-navigation .place-menu > summary {
+.site-navigation .nav-menu > summary {
   list-style: none;
 }
 
-.site-navigation .place-menu > summary::-webkit-details-marker {
+/* Chrome still lays out a closed panel; hiding it keeps its links out of hit-testing and geometry. */
+.site-navigation .nav-menu:not([open]) > .nav-menu-panel {
   display: none;
 }
 
-.place-menu-chevron {
+.site-navigation .nav-menu > summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-menu-chevron {
   width: 7px;
   height: 7px;
   margin-top: -3px;
@@ -84,12 +89,12 @@ html {
   transform: rotate(45deg);
 }
 
-.place-menu[open] .place-menu-chevron {
+.nav-menu[open] .nav-menu-chevron {
   margin-top: 3px;
   transform: rotate(225deg);
 }
 
-.site-navigation .place-menu-panel {
+.site-navigation .nav-menu-panel {
   position: absolute;
   top: calc(100% + var(--space-sm));
   left: 50%;
@@ -112,7 +117,7 @@ html {
   scroll-padding-block: var(--space-sm);
 }
 
-.site-navigation .place-menu-panel a {
+.site-navigation .nav-menu-panel a {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -128,7 +133,7 @@ html {
   overflow-wrap: anywhere;
 }
 
-.site-navigation .place-menu-panel .place-menu-all {
+.site-navigation .nav-menu-panel .nav-menu-link {
   color: var(--color-accent);
   font-weight: 500;
 }
@@ -156,8 +161,8 @@ html {
 }
 
 .site-navigation a:hover,
-.site-navigation .place-menu > summary:hover,
-.site-navigation .place-menu[open] > summary {
+.site-navigation .nav-menu > summary:hover,
+.site-navigation .nav-menu[open] > summary {
   background-color: var(--color-glass-hover);
   color: var(--color-accent);
 }
@@ -190,7 +195,7 @@ html {
     pointer-events: none;
   }
 
-  .site-navigation .place-menu-panel {
+  .site-navigation .nav-menu-panel {
     background-color: var(--color-glass);
     -webkit-backdrop-filter: blur(24px) saturate(150%);
     backdrop-filter: blur(24px) saturate(150%);
@@ -211,16 +216,23 @@ html {
   }
 
   .site-navigation .site-navigation-link,
-  .site-navigation .place-menu > summary {
+  .site-navigation .nav-menu > summary {
     gap: 6px;
     padding-inline: 6px;
     font-size: 12px;
   }
 }
 
+/* Two dropdowns leave no room for their chevrons on the narrowest phones. */
+@media (max-width: 360px) {
+  .nav-menu-chevron {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
   .site-header .site-navigation,
-  .site-navigation .place-menu-panel {
+  .site-navigation .nav-menu-panel {
     background: var(--color-glass-solid);
     border-color: var(--color-rule-2);
     -webkit-backdrop-filter: none;
@@ -234,7 +246,7 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   .site-navigation .site-navigation-link,
-  .site-navigation .place-menu > summary {
+  .site-navigation .nav-menu > summary {
     transition: none;
   }
 }

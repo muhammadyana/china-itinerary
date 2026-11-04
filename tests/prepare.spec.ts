@@ -35,13 +35,13 @@ test('the preparation page works without JavaScript and is reachable from the pl
   await expect(plain.locator('.prepare-done li')).toHaveCount(doneItems.length);
   await expect(plain.locator('.prepare-group h3')).toHaveCount(3);
   await expect(plain.locator('.prepare-booking')).toHaveCount(bookings.length);
-  await expect(plain.locator('.prepare-costs tfoot')).toContainText('Total jika berangkat sendiri');
+  await expect(plain.locator('.prepare-costs tfoot')).toContainText('Total bagianmu');
   await expect(plain.locator('.prepare-contacts a[href="tel:+8618610455488"]')).toBeVisible();
   await context.close();
 
   await page.goto('/');
-  await page.locator('.place-menu > summary').click();
-  await expect(page.locator('.place-menu-panel').getByRole('link', { name: 'Persiapan & pemesanan' })).toHaveAttribute('href', preparePath);
+  await page.locator('.itinerary-menu > summary').click();
+  await expect(page.locator('.itinerary-menu-panel').getByRole('link', { name: 'Persiapan & pemesanan' })).toHaveAttribute('href', preparePath);
 });
 
 for (const width of [320, 390, 1440]) {

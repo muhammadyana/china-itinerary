@@ -105,7 +105,7 @@ function routeMapSvg() {
   ].join('');
   const [chengduX, chengduY] = placed('chengdu'), [kunmingX, kunmingY] = placed('kunming');
   const flights = [
-    { date: '2026-11-08', d: `M${width - 6} ${round(chengduY - 70)}L${round(chengduX + 7)} ${round(chengduY - 5)}`, label: 'tiba di TFU', x: width - 10, y: round(chengduY - 78), anchor: 'end', mid: [round((width - 6 + chengduX) / 2), round(chengduY - 37)] as const },
+    { date: '2026-11-08', d: `M${width - 6} ${round(chengduY - 70)}L${round(chengduX + 7)} ${round(chengduY - 5)}`, label: 'dari Shanghai', x: width - 10, y: round(chengduY - 78), anchor: 'end', mid: [round((width - 6 + chengduX) / 2), round(chengduY - 37)] as const },
     { date: '2026-11-21', d: `M${round(kunmingX + 7)} ${round(kunmingY + 3)}L${width - 6} ${round(kunmingY + 26)}`, label: 'ke Jakarta', x: width - 10, y: round(kunmingY + 12), mid: [round((kunmingX + width) / 2), round(kunmingY + 14)] as const, anchor: 'end' },
   ];
   const routeDays = days.map((day, index) => {

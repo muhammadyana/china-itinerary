@@ -28,7 +28,7 @@ export const pdfPath = 'China-Itinerary-8-21-November-2026.pdf';
 // Refresh the download cache key for every build and browser session.
 export const pdfDownloadUrl = `/${pdfPath}?v=${Date.now()}`;
 export const places: Record<string, Place> = {
-  tfu: { name: 'Chengdu Tianfu (TFU)', chinese: '成都天府国际机场', description: 'Terminal 1 menjadi pintu masuk perjalanan. Setelah imigrasi dan bagasi, menuju hotel di Chengdu sebelum jalan sore di kota.', page: 5, photo: 'tfu', alt: 'Area dalam Terminal 1 Bandara Chengdu Tianfu dengan papan petunjuk dan pengunjung.' },
+  tfu: { name: 'Chengdu Tianfu (TFU)', chinese: '成都天府国际机场', description: 'Tiba dengan penerbangan domestik dari Shanghai Pudong. Ambil bagasi, lalu menuju hotel di Chengdu sebelum jalan sore di kota.', page: 5, photo: 'tfu', alt: 'Area dalam Terminal 1 Bandara Chengdu Tianfu dengan papan petunjuk dan pengunjung.' },
   chengdu: { name: 'Jalan sore di Chengdu', chinese: '春熙路 / 成都太古里', description: 'Mulai santai di pusat kota: telusuri Chunxi Road dan gang terbuka Taikoo Li, lalu makan malam sebelum kembali ke hotel.', photo: 'chengdu-chunxi', alt: 'Jalan pejalan kaki Chunxi Road dengan bangunan berfasad emas dan pengunjung.', photoNote: chengduGuidePhotos['chengdu-chunxi'].photoNote },
   'chengdu-east': { name: 'Stasiun Chengdu East', chinese: '成都东站', description: 'Di Chengdu Dong, siapkan paspor untuk pemeriksaan sebelum naik kereta menuju Huanglongjiuzhai.', page: 5, photo: 'chengdu-east', alt: 'Area pintu masuk Stasiun Chengdu East dengan papan nama stasiun.' },
   huanglongjiuzhai: { name: 'Stasiun Huanglongjiuzhai', chinese: '黄龙九寨站', description: 'Stasiun di wilayah Songpan ini menjadi titik berganti kendaraan menuju gerbang Jiuzhaigou.', page: 5, photo: 'huanglongjiuzhai', alt: 'Fasad Stasiun Huanglongjiuzhai di antara pegunungan.' },
@@ -109,6 +109,7 @@ export const days: Day[] = [
   "shortTitle": "Jalan-jalan di Chengdu",
   "region": "Sichuan",
   "route": [
+    "Shanghai Pudong",
     "Chengdu Tianfu",
     "Pusat kota Chengdu",
     "Chunxi Road",
@@ -119,14 +120,21 @@ export const days: Day[] = [
     "area": "Pusat kota, sekitar Chunxi Road / Taikoo Li",
     "detail": "Malam pertama di Chengdu. Pilih hotel yang mudah dijangkau taksi untuk keberangkatan ke Chengdu East besok pagi; nama hotel belum ditentukan."
   },
-  "transport": "Taksi / DiDi ke hotel, lalu jalan kaki",
-  "intro": "Minggu untuk menikmati kota dulu. Setelah tiba dan menyimpan koper, jalan santai di pusat Chengdu lalu bermalam di sini.",
+  "transport": "Pesawat dari Shanghai, taksi / DiDi ke hotel, lalu jalan kaki",
+  "intro": "Tiba dari Shanghai setelah transit semalam di Pudong. Setelah menyimpan koper, jalan santai di pusat Chengdu lalu bermalam di sini.",
   "events": [
+    {
+      "kind": "transfer",
+      "mode": "plane",
+      "title": "HO1119 Shanghai Pudong ke Chengdu Tianfu, 08.50–12.20",
+      "detail": "Penerbangan domestik setelah transit semalam di Pudong. Imigrasi dan bea cukai sudah selesai di Shanghai pada 7 November malam.",
+      "status": "Terkonfirmasi"
+    },
     {
       "kind": "stop",
       "place": "tfu",
       "time": "12.20",
-      "note": "Sisihkan waktu untuk imigrasi, bagasi, dan makan sebelum menuju hotel. Jam kedatangan mengikuti PDF.",
+      "note": "Kedatangan domestik, jadi tinggal ambil bagasi. Sisihkan waktu untuk makan sebelum menuju hotel. Jam sesuai tiket HO1119.",
       "status": "Terkonfirmasi"
     },
     {
@@ -155,6 +163,10 @@ export const days: Day[] = [
     }
   ],
   "practical": [
+    {
+      "title": "Penerbangan 7–8 November",
+      "text": "Juneyao HO1568 dari Jakarta (CGK) Sabtu 7 November 15.45 WIB, tiba Shanghai Pudong 23.20 waktu China. Imigrasi dan bea cukai di Pudong, lalu transit semalam sekitar 9,5 jam. HO1119 berangkat 08.50 dan tiba di Tianfu 12.20."
+    },
     {
       "title": "Malam pertama di Chengdu",
       "text": "Jalan-jalan dan bermalam di kota. Reservasi hotel masih perlu ditentukan; tidak ada penjemputan Jiuzhaigou malam ini."

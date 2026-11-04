@@ -194,6 +194,21 @@ export const westernGuidePhotos: Record<string, Photo> = {
     "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
     "origin": "Wikimedia Commons",
     "photoNote": "Pearl Lake (Zhuoma La Cuo) di Yading, 24 Oktober 2012. Foto arsip; warna dan kondisi dapat berbeda saat kunjungan."
+  },
+  "guide-w-litang": {
+    "id": "guide-w-litang",
+    "width": 640,
+    "height": 444,
+    "sizes": [
+      480,
+      640
+    ],
+    "author": "PDF perjalanan pengguna",
+    "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=15",
+    "license": "Dokumen pengguna",
+    "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=15",
+    "origin": "PDF",
+    "photoNote": "Jalan kota Litang berlabel pada PDF perjalanan. Tanggal pengambilan foto tidak tersedia."
   }
 };
 
@@ -205,6 +220,7 @@ export const westernPlacePhotoIds: Record<string, string> = {
   "zimei": "guide-w-zimei",
   "gaoersi": "guide-w-gaoersi",
   "tianlu": "guide-w-tianlu",
+  "litang": "guide-w-litang",
   "haizi": "guide-w-haizi",
   "daxueshan": "guide-w-daxueshan",
   "xiangcheng": "guide-w-xiangcheng",

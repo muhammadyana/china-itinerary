@@ -54,8 +54,8 @@ test('the map page is a no-JavaScript document with the map, every day and links
 
 test('the places menu and the route overview open the map, and a timeline day spotlights its legs', async ({ page }) => {
   await page.goto('/');
-  await page.locator('.place-menu > summary').click();
-  await expect(page.locator('.place-menu-panel').getByRole('link', { name: 'Peta rute 14 hari' })).toHaveAttribute('href', routeMapPath);
+  await page.locator('.itinerary-menu > summary').click();
+  await expect(page.locator('.itinerary-menu-panel').getByRole('link', { name: 'Peta rute 14 hari' })).toHaveAttribute('href', routeMapPath);
   await page.keyboard.press('Escape');
   await page.locator('.site-navigation [data-action="overview"]').click();
   await page.locator('#overview-dialog').getByRole('link', { name: 'Lihat di peta' }).click();
