@@ -1,10 +1,11 @@
-import { stayBases, stayNights, type Stay } from './stays.ts';
 import { escapeHtml as e, icon, siteCredit } from './render.ts';
 import { currencyText, renderExchangeRate } from './currency.ts';
 import { renderSiteNavigation } from './site-navigation.ts';
 import { bookings, type Booking, type Link, type Urgency } from './bookings.ts';
+import { cnyRange as range, costLines, costsPath, friendShare, stayTotal, sumLines } from './costs.ts';
 
 export { bookings, preparePath, type Booking } from './bookings.ts';
+export { stayTotal } from './costs.ts';
 
 // Researched and adversarially re-checked on 4 November 2026; booking windows are counted from that day.
 export const preparedAt = '2026-11-04';
@@ -23,56 +24,17 @@ const urgencyGroups: { id: Urgency; title: string; lead: string }[] = [
   { id: 'onsite', title: 'Beli di lokasi', lead: 'Tidak perlu reservasi; bawa paspor.' },
 ];
 
-const priceRange = (text: string) => {
-  const amounts = [...text.matchAll(/\d+/g)].map(match => Number(match[0]));
-  return { min: Math.min(...amounts), max: Math.max(...amounts) };
-};
-// The friend joins in Shangri-La on 17 November; private rooms from that night on are split two ways.
-export const sharedFrom = '2026-11-17';
-const nightShare = (stay: Stay, date: string) => {
-  const price = priceRange(stay.price);
-  const people = date >= sharedFrom && stay.room === 'Kamar privat' ? 2 : 1;
-  return { min: price.min / people, max: price.max / people };
-};
-// Your share per night runs from the cheaper pick's lowest rate to the dearer pick's highest rate; `from` limits it to later nights.
-export function stayTotal(from = '') {
-  const total = stayBases.reduce((sum, base) => stayNights(base).filter(day => day.date >= from).reduce((acc, day) => {
-    const [hotel, hostel] = [nightShare(base.hotel, day.date), nightShare(base.hostel, day.date)];
-    return { min: acc.min + Math.min(hotel.min, hostel.min), max: acc.max + Math.max(hotel.max, hostel.max) };
-  }, sum), { min: 0, max: 0 });
-  return { min: Math.round(total.min), max: Math.round(total.max) };
-}
-
-// What the friend pays from Shangri-La on: Yunnan tickets plus the other half of each room.
-type Range = { min: number; max: number };
-const addRange = (a: Range, b: Range) => ({ min: a.min + b.min, max: a.max + b.max });
-const sumCosts = (items: Booking[], share: (item: Booking) => number = () => 1) => {
-  const total = items.reduce((acc, item) => addRange(acc, { min: item.cost!.min / share(item), max: item.cost!.max / share(item) }), { min: 0, max: 0 });
-  return { min: Math.round(total.min), max: Math.round(total.max) };
-};
-const perPerson = bookings.filter(item => item.cost?.per === 'orang');
-const perCar = bookings.filter(item => item.cost?.per === 'mobil');
-// Cars and taxis from 18 November carry both travellers, so each pays half.
-const carShare = (item: Booking) => item.tripDate > sharedFrom ? 2 : 1;
-
-// What the friend pays from Shangri-La on: Yunnan tickets, the other half of each room and of each car or taxi.
-export function friendShare() {
-  const tickets = sumCosts(perPerson.filter(item => item.tripDate > sharedFrom));
-  const cars = sumCosts(perCar.filter(item => item.tripDate > sharedFrom), () => 2);
-  return addRange(addRange(stayTotal(sharedFrom), tickets), cars);
-}
-
+// The table groups the same rounded lines as the cost breakdown page, so both show one total.
+const linesPer = (per: 'orang' | 'mobil') => sumLines(costLines.filter(line => line.booking?.cost?.per === per));
 export function costRows() {
   const rows = [
-    { label: 'Tiket, kereta, bus, dan shuttle', basis: 'per orang', ...sumCosts(perPerson) },
-    { label: 'Mobil sewa, taksi, dan transfer', basis: 'bagianmu; dari 18 November dibagi dua', ...sumCosts(perCar, carShare) },
+    { label: 'Tiket, kereta, bus, dan shuttle', basis: 'per orang', ...linesPer('orang') },
+    { label: 'Mobil sewa, taksi, dan transfer', basis: 'bagianmu; dari 18 November dibagi dua', ...linesPer('mobil') },
     { label: 'Penginapan 13 malam', basis: 'bagianmu; kamar 17–20 November dibagi dua', ...stayTotal() },
   ];
-  return { rows, total: rows.reduce((total, row) => addRange(total, row), { min: 0, max: 0 }) };
+  return { rows, total: { min: rows.reduce((sum, row) => sum + row.min, 0), max: rows.reduce((sum, row) => sum + row.max, 0) } };
 }
 
-// currencyText() reads plain digits, so CNY amounts carry no thousands separator.
-const range = (value: { min: number; max: number }) => value.min === value.max ? `CNY ${value.min}` : `CNY ${value.min}–${value.max}`;
 const shortDate = (date: string) => `${Number(date.slice(-2))} Nov`;
 const link = (target: Link) => target.url.startsWith('/') ? `<a href="${e(target.url)}">${e(target.label)}${icon('right')}</a>` : `<a href="${e(target.url)}" target="_blank" rel="noopener noreferrer">${e(target.label)}<span class="visually-hidden"> (buka tab baru)</span>${icon('share')}</a>`;
 
@@ -134,9 +96,10 @@ export function prepareView() {
     </div>
     ${section('bookings', 'Pesan dan kapan', `<p class="prepare-section-lead">Jam dalam WIB kecuali disebut lain. Penjualan tiket kereta di 12306 dibuka 15 hari sebelumnya, termasuk hari itu. Jika paspormu belum terverifikasi di 12306, verifikasi manual bisa makan 3–5 hari kerja; pakai Trip.com atau loket stasiun di Chengdu pada 8 November. Semua link kereta dan timeline 8–10 November ada di <a href="/places/trains/">Kereta & timeline</a>.</p>
       ${urgencyGroups.map(group => `<div class="prepare-group"><h3>${group.title}<span>${group.lead}</span></h3><div class="prepare-bookings">${bookings.filter(item => item.urgency === group.id).map(bookingCard).join('')}</div></div>`).join('')}`)}
-    ${section('costs', 'Perkiraan biaya', `<p class="prepare-section-lead">Dijumlahkan dari harga di halaman ini dan pilihan penginapan termurah sampai termahal per malam. Dihitung untuk bagianmu: Sichuan sendiri, lalu kamar 17–20 November dibagi dua dengan temanmu. Belum termasuk makan, oleh-oleh, makan dan menginap sopir, serta biaya satu arah mobil.</p>
+    ${section('costs', 'Perkiraan biaya', `<p class="prepare-section-lead">Dijumlahkan dari harga di halaman ini dan pilihan penginapan termurah sampai termahal per malam. Dihitung untuk bagianmu: Sichuan sendiri, lalu kamar 17–20 November dibagi dua dengan temanmu. Belum termasuk makan, oleh-oleh, makan dan menginap sopir, biaya satu arah mobil, serta biaya pemesanan Trip.com.</p>
       <table class="prepare-costs"><thead><tr><th scope="col">Pos</th><th scope="col">Dasar</th><th scope="col">Perkiraan</th></tr></thead><tbody>${costs.rows.map(row => `<tr><th scope="row">${e(row.label)}</th><td>${e(row.basis)}</td><td>${currencyText(range(row))}</td></tr>`).join('')}</tbody><tfoot><tr><th scope="row">Total bagianmu</th><td></td><td>${currencyText(range(costs.total))}</td></tr></tfoot></table>
-      <p class="prepare-section-lead">${currencyText(`Bagian temanmu mulai 17 November: tiket Yunnan dan separuh kamar, ${range(friendShare())}.`)}</p>
+      <p class="prepare-section-lead">${currencyText(`Bagian temanmu mulai 17 November: tiket Yunnan, separuh kamar, dan separuh mobil atau taksi, ${range(friendShare())}.`)}</p>
+      <p class="prepare-link"><a href="${costsPath}">Rincian biaya per hari${icon('right')}</a></p>
       ${renderExchangeRate()}`)}
     ${section('payments', 'Membayar', list([
       'Alipay dan WeChat Pay dengan kartu asing gratis untuk transaksi sampai CNY 200; di atas itu kena biaya 3%. Penginapan di bawah CNY 183 per malam berarti satu kali bayar per malam tetap gratis biaya aplikasi; bank penerbit kartu bisa tetap mengenakan biaya kurs.',

@@ -9,6 +9,7 @@ import { routeMapView } from './src/route-map.ts';
 import { routeMapPath } from './src/route-map-main.ts';
 import { prepareView, preparePath } from './src/prepare.ts';
 import { trainsView, trainsPath } from './src/trains.ts';
+import { costsView, costsPath } from './src/costs-render.ts';
 import { escapeHtml } from './src/render.ts';
 import { renderPrintDocument } from './src/print-render.ts';
 import { pdfPath } from './src/itinerary.ts';
@@ -46,6 +47,7 @@ function destinationHtml(html: string, page?: PlacePage) {
 const routeMapHtml = (html: string) => pageHtml(html, 'Peta rute 14 hari | China 2026', 'Peta titik ke titik perjalanan Sichuan dan Yunnan, 8 sampai 21 November 2026: urutan hari, moda, dan tempat menginap.', routeMapPath, routeMapView());
 const prepareHtml = (html: string) => pageHtml(html, 'Persiapan & pemesanan | China 2026', 'Yang sudah beres, yang harus dipesan dan kapan, perkiraan biaya, internet, serta nomor darurat untuk perjalanan Sichuan dan Yunnan 8–21 November 2026.', preparePath, prepareView());
 const trainsHtml = (html: string) => pageHtml(html, 'Kereta & timeline | China 2026', 'Link Trip.com untuk semua kereta, slot tiket Jiuzhaigou, dan timeline jam demi jam 8–10 November 2026 dari Chengdu ke Bipenggou.', trainsPath, trainsView());
+const costsHtml = (html: string) => pageHtml(html, 'Rincian biaya | China 2026', 'Rincian biaya perjalanan Sichuan dan Yunnan 8–21 November 2026 per hari: kereta, bus, tiket masuk, mobil, dan penginapan, dalam yuan dan rupiah.', costsPath, costsView());
 const staysHtml = (html: string) => pageHtml(html, 'Hotel & hostel per malam | China 2026', 'Satu hotel dan satu hostel untuk setiap kota menginap di Sichuan dan Yunnan, 8 sampai 20 November 2026, dengan harga perkiraan dan bukti menerima paspor asing.', staysPath, staysView());
 export default defineConfig({
  base: '/',
@@ -100,6 +102,7 @@ export default defineConfig({
    if (path === routeMapPath || `${path}/` === routeMapPath) return routeMapHtml(html);
    if (path === preparePath || `${path}/` === preparePath) return prepareHtml(html);
    if (path === trainsPath || `${path}/` === trainsPath) return trainsHtml(html);
+   if (path === costsPath || `${path}/` === costsPath) return costsHtml(html);
    const slug = path.match(/^\/places\/([a-z0-9-]+)\/?$/)?.[1];
    const page = slug ? pageBySlug.get(slug) : undefined;
    return page ? destinationHtml(html, page) : html.replace('<!--app-->', shell());
@@ -123,6 +126,8 @@ export default defineConfig({
     this.emitFile({ type: 'asset', fileName: 'places/prepare/index.html', source: prepareHtml(template) });
     if (pageBySlug.has('trains')) throw new Error('A place guide cannot use the reserved trains slug');
     this.emitFile({ type: 'asset', fileName: 'places/trains/index.html', source: trainsHtml(template) });
+    if (pageBySlug.has('costs')) throw new Error('A place guide cannot use the reserved costs slug');
+    this.emitFile({ type: 'asset', fileName: 'places/costs/index.html', source: costsHtml(template) });
     for (const page of placePages) {
      this.emitFile({ type: 'asset', fileName: `places/${page.slug}/index.html`, source: destinationHtml(template, page) });
     }

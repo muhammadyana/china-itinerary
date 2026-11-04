@@ -10,6 +10,7 @@ import './chengdu-evening.css';
 import './stays.css';
 import './route-map.css';
 import './prepare.css';
+import './costs.css';
 import './site-search.css';
 import { initializeCurrency } from './currency.ts';
 import { initializeSiteNavigation } from './site-navigation.ts';

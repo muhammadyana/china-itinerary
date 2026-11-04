@@ -1,0 +1,80 @@
+/* Cost breakdown page: a total with categories, a date jump list, then one card per day of clickable lines. */
+.costs-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); margin-top: var(--space-xl); }
+.costs-layout .costs-days { margin-top: 0; }
+
+.costs-summary { display: grid; align-content: start; gap: var(--space-sm); max-width: 760px; padding: var(--space-lg); border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-glass-solid); }
+.costs-summary h2 { color: var(--color-muted); font-size: 15px; font-weight: 500; letter-spacing: 0; }
+.costs-total { color: var(--color-ink); font-size: clamp(2rem, 7vw, 2.6rem); font-weight: 600; line-height: 1.1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.costs-total .currency-estimate { display: block; margin-top: var(--space-2xs); font-size: 15px; letter-spacing: 0; }
+.costs-summary-note,.costs-friend { color: var(--color-ink-2); font-size: 14px; }
+.costs-friend { display: grid; gap: var(--space-3xs); padding-top: var(--space-sm); border-top: 1px solid var(--color-rule); }
+.costs-friend strong { color: var(--color-ink); font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.costs-friend .currency-estimate { display: block; }
+.costs-categories { display: grid; margin: var(--space-xs) 0 0; }
+.costs-categories > div { display: grid; gap: var(--space-3xs); padding-block: var(--space-sm); border-top: 1px solid var(--color-rule); }
+.costs-categories dt { color: var(--color-ink); font-weight: 500; }
+.costs-categories dd { margin: 0; color: var(--color-ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.costs-categories .currency-estimate { display: block; }
+.costs-summary .text-link { width: fit-content; }
+.costs-summary .text-link svg { width: 14px; height: 14px; }
+
+.costs-jump ol { display: grid; grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)); gap: 6px; max-width: 560px; margin: var(--space-md) 0 0; padding: 0; list-style: none; }
+.costs-jump a { display: grid; place-items: center; align-content: center; min-height: 52px; padding: var(--space-2xs); border: 1px solid var(--color-rule-2); border-radius: 14px; color: var(--color-muted); font-size: 12px; line-height: 1.15; }
+.costs-jump a span { color: var(--color-ink); font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.costs-jump a:hover { background: var(--color-paper-2); }
+
+.costs-day { margin-top: var(--space-lg); padding: var(--space-lg); border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-glass-solid); scroll-margin-top: var(--site-navigation-clearance); }
+.costs-day-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; gap: var(--space-xs) var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 1px solid var(--color-rule); }
+.costs-day h3 { font-size: 22px; line-height: 1.25; letter-spacing: -.015em; }
+.costs-day-date { display: block; color: var(--color-accent); font-size: 14px; font-weight: 500; letter-spacing: 0; }
+.costs-day-total { display: grid; justify-items: end; text-align: right; color: var(--color-muted); font-size: 13px; }
+.costs-day-total strong { color: var(--color-ink); font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.costs-day-total .currency-estimate { display: block; }
+.costs-day-total small { color: var(--color-warning); font-size: 13px; }
+
+.costs-lines { display: grid; margin: 0; padding: 0; list-style: none; }
+.costs-lines li + li { border-top: 1px solid var(--color-rule); }
+.cost-line { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name amount" "meta amount" "note note" "action action"; gap: var(--space-3xs) var(--space-md); margin-inline: calc(var(--space-sm) * -1); padding: var(--space-sm); border-radius: 16px; color: var(--color-ink); }
+.cost-line:hover { background: var(--color-paper-2); }
+.cost-line:focus-visible { outline-offset: 0; }
+.cost-line-name { grid-area: name; font-weight: 600; line-height: 1.35; }
+.cost-line-meta { grid-area: meta; color: var(--color-muted); font-size: 13px; }
+.cost-line-amount { grid-area: amount; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+.cost-line-amount.is-missing { color: var(--color-warning); font-weight: 500; }
+.cost-line-amount .currency-estimate { display: block; }
+.cost-line-note { grid-area: note; margin-top: var(--space-3xs); color: var(--color-ink-2); font-size: 14px; }
+.cost-line-action { grid-area: action; display: inline-flex; align-items: center; gap: var(--space-2xs); min-height: 32px; color: var(--color-accent); font-size: 13px; font-weight: 600; }
+.cost-line-action svg { flex: none; width: 14px; height: 14px; }
+.cost-line:hover .cost-line-action { color: var(--color-autumn-hover); }
+.costs-day .prepare-link { margin-top: var(--space-xs); }
+
+.costs-method-links { display: flex; flex-wrap: wrap; gap: 0 var(--space-lg); }
+.costs-method-links .text-link { font-size: 14px; }
+.costs-method-links svg { width: 14px; height: 14px; }
+/* Undo the source list's own item padding and indent so both lists on this page match. */
+.costs-method .prepare-list { padding-left: 1.2em; }
+.costs-method .prepare-list li { padding-block: 0; }
+
+@media (min-width: 380px) {
+  .costs-jump ol { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+}
+
+@media (max-width: 599px) {
+  .costs-summary,.costs-day { padding: var(--space-md); border-radius: 22px; }
+  .costs-day h3 { font-size: 20px; }
+  .costs-day-total { justify-items: start; text-align: left; }
+  .cost-line { grid-template-columns: minmax(0, 1fr); grid-template-areas: "name" "meta" "amount" "note" "action"; margin-inline: calc(var(--space-xs) * -1); padding: var(--space-sm) var(--space-xs); }
+  .cost-line-amount { margin-top: var(--space-2xs); text-align: left; }
+}
+
+@media (min-width: 1024px) {
+  .costs-layout { grid-template-columns: minmax(0, 1fr) minmax(320px, 380px); align-items: start; }
+  .costs-summary { grid-column: 2; grid-row: 1; }
+  .costs-total { font-size: 2.1rem; }
+  .costs-days { grid-column: 1; grid-row: 1; }
+}
+
+/* Sticky only where the whole card fits under the navigation, so no part of it, focus ring included, stays off screen. */
+@media (min-width: 1024px) and (min-height: 900px) {
+  .costs-summary { position: sticky; top: var(--site-navigation-clearance); max-height: calc(100dvh - var(--site-navigation-clearance)); overflow-y: auto; }
+}

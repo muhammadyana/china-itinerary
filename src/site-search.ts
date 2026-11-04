@@ -19,11 +19,12 @@ const resultLimit = 20;
 const tripTimeZone = 'Asia/Shanghai';
 const searchLabel = 'Cari tempat dan itinerary';
 
-// Also the planning links of the Itinerary menu. trains.ts imports the navigation, so its path stays a literal here.
+// Also the planning links of the Itinerary menu. trains.ts imports the navigation and costs.ts computes every line on load, so their paths stay literals here.
 export const planningPages: PlanningPage[] = [
   { href: staysPath, label: 'Hotel & hostel per malam', keywords: 'penginapan menginap akomodasi' },
   { href: routeMapPath, label: 'Peta rute 14 hari', keywords: 'map perjalanan' },
   { href: preparePath, label: 'Persiapan & pemesanan', keywords: 'booking tiket biaya pembayaran internet darurat KBRI asuransi' },
+  { href: '/places/costs/', label: 'Rincian biaya', keywords: 'biaya harga budget anggaran rupiah yuan total per hari' },
   { href: '/places/trains/', label: 'Kereta & timeline', keywords: 'tiket kereta train stasiun jadwal jam' },
 ];
 
