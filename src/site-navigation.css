@@ -226,17 +226,15 @@ html {
   }
 }
 
-@media (max-width: 1000px) {
-  .site-header {
-    padding-top: var(--site-navigation-clearance);
-    padding-bottom: 0;
-    justify-content: center;
-  }
+.site-header {
+  padding-top: var(--site-navigation-clearance);
+  padding-bottom: 0;
+  justify-content: center;
+}
 
-  /* On phones the floating menu is the header; the wordmark only took a row of space. */
-  .site-header .wordmark {
-    display: none;
-  }
+/* The floating menu is the header at every width; its logo link is the home link, so the wordmark would repeat it. */
+.site-header .wordmark {
+  display: none;
 }
 
 /* Six controls on phones: small minimum padding, and flex shares the spare room back out. */
