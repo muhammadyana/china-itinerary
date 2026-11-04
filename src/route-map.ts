@@ -24,7 +24,6 @@ export const mapPoints: Record<string, MapPoint> = {
   tagong: at('tagong', 'Tagong', 'e'),
   xinduqiao: at('xinduqiao', 'Xinduqiao', 'sw'),
   kangding: at('kangding', 'Kangding', 'e'),
-  jiagenba: at('jiagenba', 'Jiagenba'),
   yajiang: at('yajiang', 'Yajiang'),
   litang: at('litang', 'Litang', 'n'),
   daocheng: at('daocheng', 'Daocheng', 'e'),

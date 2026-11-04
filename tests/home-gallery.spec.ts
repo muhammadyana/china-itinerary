@@ -82,10 +82,10 @@ test('arrow keys wrap user photos but never reuse gallery state for an itinerary
   await expect(page.locator('#photo-dialog')).not.toBeVisible();
   await page.getByRole('button', { name: 'Pilih hari', exact: true }).click();
   await page.locator('#picker-days [data-date="2026-11-12"]').click();
-  const stopOpener = page.locator('#day-view [data-action="photo"][data-place="jiaju"]');
+  const stopOpener = page.locator('#day-view [data-action="photo"][data-place="moshi"]');
   await stopOpener.click();
   const dialog = page.locator('#photo-dialog');
-  const stop = places.jiaju;
+  const stop = places.moshi;
   const photo = photos[stop.photo!];
   await expect(dialog.locator('#photo-title')).toHaveText(stop.name);
   await expect(dialog.locator('[data-action="photo-previous"]')).toBeHidden();

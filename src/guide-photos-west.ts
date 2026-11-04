@@ -1,36 +1,6 @@
 import type { Photo } from './itinerary.ts';
 
 export const westernGuidePhotos: Record<string, Photo> = {
-  "guide-w-yuzixi": {
-    "id": "guide-w-yuzixi",
-    "width": 740,
-    "height": 555,
-    "sizes": [
-      480,
-      740
-    ],
-    "author": "PDF perjalanan pengguna",
-    "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=13",
-    "license": "Dokumen pengguna",
-    "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=13",
-    "origin": "PDF",
-    "photoNote": "Pemandangan Yuzixi berlabel pada PDF perjalanan. Tanggal pengambilan foto tidak tersedia."
-  },
-  "guide-w-honghaizi": {
-    "id": "guide-w-honghaizi",
-    "width": 740,
-    "height": 494,
-    "sizes": [
-      480,
-      740
-    ],
-    "author": "PDF perjalanan pengguna",
-    "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=13",
-    "license": "Dokumen pengguna",
-    "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=13",
-    "origin": "PDF",
-    "photoNote": "Danau Honghaizi berlabel pada PDF perjalanan. Tanggal pengambilan foto tidak tersedia."
-  },
   "guide-w-kangding-mosque": {
     "id": "guide-w-kangding-mosque",
     "width": 416,
@@ -44,21 +14,6 @@ export const westernGuidePhotos: Record<string, Photo> = {
     "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=14",
     "origin": "PDF",
     "photoNote": "Foto berlabel Masjid Kangding pada PDF; identitas lokasi belum terverifikasi. Konfirmasi pin dengan sopir."
-  },
-  "guide-w-jiagenba": {
-    "id": "guide-w-jiagenba",
-    "width": 740,
-    "height": 415,
-    "sizes": [
-      480,
-      740
-    ],
-    "author": "PDF perjalanan pengguna",
-    "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=14",
-    "license": "Dokumen pengguna",
-    "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=14",
-    "origin": "PDF",
-    "photoNote": "Lembah Jiagenba (Gamba) berlabel pada PDF perjalanan. Tanggal pengambilan foto tidak tersedia."
   },
   "guide-w-zimei": {
     "id": "guide-w-zimei",
@@ -213,10 +168,7 @@ export const westernGuidePhotos: Record<string, Photo> = {
 };
 
 export const westernPlacePhotoIds: Record<string, string> = {
-  "yuzixi": "guide-w-yuzixi",
-  "honghaizi": "guide-w-honghaizi",
   "kangding-mosque": "guide-w-kangding-mosque",
-  "jiagenba": "guide-w-jiagenba",
   "zimei": "guide-w-zimei",
   "gaoersi": "guide-w-gaoersi",
   "tianlu": "guide-w-tianlu",

@@ -69,13 +69,13 @@ test('guide hero shows a loading skeleton until its real image arrives without m
 });
 
 test('date-switched photos settle after loading and remain ready when opened in a fresh dialog', async ({ page }) => {
-  const gate = await holdPhotoRequests(page, places.jiaju.photo!);
+  const gate = await holdPhotoRequests(page, places.moshi.photo!);
   try {
     await page.goto('/');
     await page.evaluate(() => document.fonts.ready);
     await page.getByRole('button', { name: 'Pilih hari', exact: true }).click();
     await page.locator('#picker-days [data-date="2026-11-12"]').click();
-    const opener = page.locator('#day-view [data-action="photo"][data-place="jiaju"]');
+    const opener = page.locator('#day-view [data-action="photo"][data-place="moshi"]');
     const image = opener.locator('img');
     await image.scrollIntoViewIfNeeded();
     await gate.requested;

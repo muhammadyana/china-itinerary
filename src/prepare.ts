@@ -87,7 +87,6 @@ const sources: Link[] = [
   { label: 'Jiuzhaigou: pengumuman tiket habis', url: 'https://www.jiuzhai.com/news/notice/11492-2026-10-31-09-08-46' },
   { label: 'Xinhua Yunnan: tarif Jade Dragon dan Impression Lijiang 2026', url: 'https://www.yn.xinhuanet.com/20260702/e8f8d1a27e2845b4bf54cfc5ef8f5d36/c.html' },
   { label: 'Songzanlin: tarif shuttle internal', url: 'https://www.xgllszljq.cn/news_1/39.html' },
-  { label: 'Sina Travel: pendaftaran Yuzixi', url: 'https://travel.sina.cn/2026-07-10/detail-inihhzsc8395848.d.html?vt=4' },
   { label: 'WeChat: kartu internasional di Weixin Pay', url: 'https://help.wechat.com/cgi-bin/micromsg-bin/oshelpcenter?opcode=2&id=2307252mur7f2307257zfyfe&lang=en&plat=ios&Channel=helpcenter&t=help_center/w_topic_detail' },
   { label: 'Cailian: keringanan biaya WeChat Pay 2026', url: 'https://www.cls.cn/detail/2383167' },
   { label: 'Pemerintah China: kartu asing untuk pembayaran seluler', url: 'https://www.chinaservicesinfo.com/s/202502/25/WS67bd6c5a498eec7e1f730389/using-foreign-bank-cards-for-mobile-payments-in-china.html' },

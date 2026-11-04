@@ -39,13 +39,12 @@ export const dayTimelines: Record<string, TimelineStep[]> = {
   ],
   '2026-11-12': [
     ['08.00', 'Berangkat dari Rilong dengan mobil sewa hari terakhir. Bawa bekal dan air; hari ini sekitar 260 km di jalan pegunungan.'],
-    ['±11.00–11.30', 'Tiba di Danba setelah 3–3,5 jam, termasuk antrean buka-tutup G350 di Banshanmen. Jiaju (±1 jam) hanya jika tiba sebelum 12.00; jam berikutnya ikut mundur.'],
+    ['±11.00–11.30', 'Tiba di Danba setelah 3–3,5 jam, termasuk antrean buka-tutup G350 di Banshanmen.'],
     ['±11.30–12.30', 'Makan siang di Danba; cari papan 清真 atau 兰州拉面. Isi bekal, karena pilihan halal di Tagong dan Xinduqiao terbatas.'],
     ['±12.30–14.15', 'Lanjut naik ke Bamei dan Moshi Park, sekitar 1,5–2 jam.'],
-    ['±14.15–15.45', 'Moshi Park (±3.500 m), sekitar 1,5 jam. Tiket CNY 60 dan shuttle CNY 20; jam musim dingin 09.00–17.00 (sumber 2023). Keluar paling lambat 15.45.'],
-    ['±16.30–17.15', 'Padang Tagong menghadap Gunung Yala, sekitar 45 menit. Pilih satu titik pandang saja.'],
-    ['±17.15–18.00', 'Biara Muya (木雅大寺), kunjungan singkat. Pastikan sopir menuju biara, bukan Muya Golden Pagoda; lewati bila hari sudah mulai gelap.'],
-    ['±18.30–18.45', 'Tiba di Xinduqiao tak lama setelah matahari terbenam (±18.20). Check-in; sewa mobil berakhir di sini. Pastikan kamar berpemanas atau ada selimut listrik.'],
+    ['±14.15–16.00', 'Moshi Park (±3.500 m), sekitar 1,5–2 jam untuk foto. Tiket CNY 60 dan shuttle CNY 20; jam musim dingin 09.00–17.00 (sumber 2023). Keluar paling lambat 16.00.'],
+    ['±16.45–18.15', 'Padang Tagong menghadap Gunung Yala dalam cahaya sore, sekitar 1,5 jam sampai matahari terbenam (±18.20).'],
+    ['±18.45–19.00', 'Tiba di Xinduqiao. Check-in; sewa mobil berakhir di sini. Pastikan kamar berpemanas atau ada selimut listrik.'],
     ['Malam', 'Makan malam dengan bekal atau di kedai 兰州拉面 di jalan utama. Besok ke Kangding, berangkat paling lambat 09.00.'],
   ],
   '2026-11-13': [
@@ -63,7 +62,7 @@ export const dayTimelines: Record<string, TimelineStep[]> = {
     ['±11.00–13.00', 'Naik bus yang lewat: dari Danba (berangkat 08.00) kira-kira 11.00–11.30, dari Chengdu (06.30) kira-kira 12.30–13.00. Tiket dibeli hari itu, di bawah CNY 171.'],
     ['Siang', 'Lewat terowongan Gao’ersi dan Tianlu 18 Bends dari jendela bus; bus tidak berhenti di titik pandang. Zuhur sekitar 13.03 masih di jalan.'],
     ['±15.00–16.30', 'Tiba di Litang (4.014 m), sekitar 700 m lebih tinggi dari semalam. Bus dari Chengdu bisa baru tiba ±16.30–17.30. Check-in dan istirahat.'],
-    ['±16.00–17.45', 'Biara Litang (长青春科尔寺), mobil lokal 2,3–3,5 km dari penginapan, hanya jika tiba sebelum 16.30. Jam aula belum terverifikasi; kembali sebelum gelap (±18.24).'],
+    ['±16.30–18.00', 'Jalan santai dan foto di gang kota Litang bila badan sehat; kembali ke penginapan sebelum gelap (±18.24).'],
     ['Malam', 'Makan malam dengan bekal atau di kedai berpapan 清真; malam bisa −15 °C. Besok bus 09.30 dari 理塘县汽车站 ke Daocheng.'],
   ],
   '2026-11-15': [

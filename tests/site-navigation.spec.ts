@@ -55,7 +55,7 @@ test('the daily navigation stays compact when the mobile safe area changes durin
 });
 
 test('all three page types expose every sightseeing stop once in regional itinerary order', async ({ page }) => {
-  expect(sightseeingStops).toHaveLength(45);
+  expect(sightseeingStops).toHaveLength(39);
   for (const id of sightseeingStops) expect(pageForPlace.has(id), id).toBe(true);
 
   for (const path of ['/', '/places/', '/places/impression-lijiang/']) {
@@ -67,8 +67,8 @@ test('all three page types expose every sightseeing stop once in regional itiner
     await navigation.locator('.place-menu > summary').click();
     await expect(navigation.getByRole('link', { name: 'Lihat semua tempat' })).toHaveAttribute('href', '/places/');
     const links = await navigation.locator('.place-menu-group a').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')));
-    expect(links).toHaveLength(45);
-    expect(new Set(links).size).toBe(45);
+    expect(links).toHaveLength(39);
+    expect(new Set(links).size).toBe(39);
     expect(links).toEqual(sightseeingStops.map(id => placePath(pageForPlace.get(id)!.slug)));
     await expect(navigation.locator('.place-menu-group h2')).toHaveText(['Sichuan', 'Yunnan']);
 

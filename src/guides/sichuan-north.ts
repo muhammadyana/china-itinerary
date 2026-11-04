@@ -13,15 +13,10 @@ const lixiaoWinter = 'https://cbgc.scol.com.cn/news/6998156';
 const maobiliangGuide = 'https://you.ctrip.com/sight/xiaojin3110/145018.html';
 const maobiliangFees = 'https://travelnews.qunar.com/qa_strategy/aba-siguniangshan-travel-guide';
 const danbaRoadworks = 'https://news.qq.com/rain/a/20251015A06A3C00';
-const jiajuFees = 'https://www.danba.gov.cn/lyzx/article/234361';
-const jiajuTickets = 'https://touch.piao.qunar.com/touch/detail.htm?id=190399';
-const jiajuTransport = 'https://www.etripchina.com/china-guide/danba-jiaju-tibetan-village.htm';
 const moshiGuide = 'https://www.etripchina.com/china-guide/ganzi-moshi-park.htm';
 const moshiTickets = 'https://touch.piao.qunar.com/touch/detail.htm?id=2120079683';
 const tagongTransport = 'https://www.etripchina.com/china-guide/kangding-tagong-grassland.htm';
 const tagongFees = 'https://m.gosctour.com/line/show.html?id=240';
-const muyaMap = 'https://www.amap.com/place/B0FFI9ZHW0';
-const muyaListing = 'https://piao.qunar.com/ticket/detail_517256.html';
 
 export const northernGuides: DestinationGuide[] = [
   {
@@ -110,32 +105,6 @@ export const northernGuides: DestinationGuide[] = [
     ], checkedAt: '2026-11-04',
   },
   {
-    slug: 'jiaju', name: 'Jiaju Tibetan Village', region: 'Sichuan', placeIds: ['jiaju'],
-    summary: 'Rumah Tibet merah-putih mengikuti lereng Danba. Pilih satu atau dua titik pandang, lalu berjalan pelan di antara rumah yang masih dihuni.',
-    gettingThere: {
-      origin: 'Rilong, 12 November',
-      steps: ['Dari Rilong, lanjut dengan mobil melalui Xiaojin menuju Danba sesuai itinerary.', 'Dari area Danba, arahkan sopir ke pusat pengunjung Jiaju / 甲居藏寨, sekitar 8 km dari kota menurut operator.', 'Konfirmasikan penggunaan shuttle atau izin kendaraan saat tiba. Kembali ke mobil di titik yang disepakati untuk melanjutkan ke Bamei.'],
-      duration: 'Rilong ke Danba sekitar 3–3,5 jam termasuk antrean perbaikan jalan G350 di Banshanmen, belum termasuk kunjungan Jiaju.',
-      sources: [jiajuTransport, danbaRoadworks],
-    },
-    stopAccess: { jiaju: 'Dari Danba, naik mobil ke pintu masuk Jiaju. Gunakan shuttle jika diwajibkan pada hari kunjungan; antar titik pandang dan rumah dilanjutkan berjalan kaki.' },
-    costs: [
-      { label: 'Tiket masuk desa', amount: 'CNY 50 / orang', detail: 'Harga dewasa pada daftar tiket Qunar saat diperiksa. Belum merupakan penawaran tanggal 12 November; cocokkan tanggal, penerimaan paspor, dan layanan yang termasuk sebelum membayar.', status: 'published', source: jiajuTickets },
-      { label: 'Shuttle desa pulang-pergi', amount: 'Referensi CNY 35 / orang', detail: 'Publikasi pemerintah tahun 2022. Tanyakan apakah shuttle wajib dan apakah mobil sopir boleh masuk; jangan menghitung transportasi dua kali.', status: 'estimate', source: jiajuFees },
-      { label: 'Mobil, parkir, dan waktu tunggu', amount: 'Perlu konfirmasi', detail: 'Minta dimasukkan dalam penawaran sopir hari Rilong ke Xinduqiao.', status: 'unconfirmed' },
-    ],
-    visitDuration: 'Saran alokasi: sekitar 1 jam untuk satu titik pandang. Lewati jika tiba di Danba setelah 12.00.',
-    bestTime: 'Siang, hanya jika perjalanan dari Rilong lancar. Moshi Park dan Tagong masih menunggu setelahnya.',
-    tips: ['Pilih satu titik pandang sebelum berangkat agar waktu tidak habis berpindah kendaraan.', 'Minta izin sebelum memotret warga atau masuk halaman rumah.', 'Siapkan alas kaki yang nyaman untuk jalur menanjak dan bertangga.'],
-    cautions: ['Desa masih dihuni; rumah dan ladang bukan area bebas masuk.', 'Tarif shuttle yang ditemukan berasal dari publikasi lama, bukan penawaran yang sudah dipesan.'],
-    sources: [
-      { title: 'Qunar: daftar tiket Jiaju', url: jiajuTickets, kind: 'operator' },
-      { title: 'Pemerintah Danba: referensi tarif Jiaju, 2022', url: jiajuFees, kind: 'official', publishedAt: '2022-05-18' },
-      { title: 'ETripChina: akses dan kunjungan Jiaju', url: jiajuTransport, kind: 'operator', publishedAt: '2023-05-17' },
-      { title: 'Ganzi: pengaturan lalu lintas perbaikan G350 Banshanmen', url: danbaRoadworks, kind: 'official', publishedAt: '2025-10-15' },
-    ], checkedAt: '2026-11-04',
-  },
-  {
     slug: 'moshi-park', name: 'Moshi Park', region: 'Sichuan', placeIds: ['moshi'],
     summary: 'Jalur di antara formasi batu kelabu menjadi jeda yang berbeda dalam perjalanan dari lembah Danba ke padang Tagong.',
     gettingThere: {
@@ -150,13 +119,14 @@ export const northernGuides: DestinationGuide[] = [
       { label: 'Shuttle taman pulang-pergi', amount: 'CNY 20 / orang', detail: 'Qunar mencantumkan shuttle pulang-pergi CNY 20 serta paket masuk dan shuttle CNY 80. Periksa paket agar tiket tidak terbeli dua kali.', status: 'published', source: moshiTickets },
       { label: 'Mobil dan parkir', amount: 'Perlu konfirmasi', detail: 'Bagian dari penawaran sopir untuk etape Rilong ke Xinduqiao; biaya parkir perlu disebutkan secara terpisah jika belum termasuk.', status: 'unconfirmed' },
     ],
-    visitDuration: 'Saran alokasi: sekitar 1,5 jam, termasuk berjalan dan berhenti untuk foto. Keluar paling lambat 15.45.',
+    visitDuration: 'Saran alokasi: sekitar 1,5–2 jam, termasuk berjalan dan berhenti untuk foto. Keluar paling lambat 16.00.',
     bestTime: 'Siang sesuai itinerary. Artikel operator Mei 2023 mencantumkan jam musim dingin 09.00 sampai 17.00 mulai 21 Oktober; jam 12 November 2026 tetap perlu dikonfirmasi.',
     tips: ['Pakai sepatu dengan sol yang mencengkeram dan bawa lapisan penahan angin.', 'Gunakan jalur taman; batu yang terlihat mudah dicapai belum tentu boleh dipanjat.', 'Sepakati batas waktu kunjungan agar Tagong dan Muya masih mendapat cahaya sore.'],
-    cautions: ['Taman berada di dataran tinggi. Berjalan perlahan dan sediakan jeda istirahat.', 'Harga yang ditampilkan adalah daftar Qunar; harga untuk tanggal kunjungan dan aturan tiket paspor perlu dicocokkan saat reservasi.'],
+    cautions: ['Taman berada di dataran tinggi. Berjalan perlahan dan sediakan jeda istirahat.', 'Perbaikan G350 di Banshanmen dekat Danba: buka-tutup setiap 30 menit dan 4–6 penutupan penuh sekitar 1 jam per hari; sisakan cadangan waktu sebelum Moshi.', 'Harga yang ditampilkan adalah daftar Qunar; harga untuk tanggal kunjungan dan aturan tiket paspor perlu dicocokkan saat reservasi.'],
     sources: [
       { title: 'Qunar: daftar tiket dan shuttle Moshi Park', url: moshiTickets, kind: 'operator' },
       { title: 'ETripChina: akses dan jam kunjungan Moshi, 2023', url: moshiGuide, kind: 'operator', publishedAt: '2023-05-18' },
+      { title: 'QQ News: perbaikan G350 di Banshanmen, Danba', url: danbaRoadworks, kind: 'reference' },
     ],
     checkedAt: '2026-11-04',
   },
@@ -174,36 +144,13 @@ export const northernGuides: DestinationGuide[] = [
       { label: 'Akses padang / biaya kebersihan', amount: 'Acuan CNY 35 / orang', detail: 'Biaya kebersihan pada paket Chengdu China Travel Service yang masih dapat dibuka. Halaman tidak bertanggal; ini acuan anggaran, bukan tarif terkonfirmasi untuk 12 November. Tanyakan area yang tercakup.', status: 'estimate', source: tagongFees },
       { label: 'Mobil, parkir, dan aktivitas tambahan', amount: 'Perlu konfirmasi', detail: 'Sepakati harga parkir atau berkuda sebelum menggunakan layanan. Tarif padang tidak mencakup tiket biara atau titik pandang lain.', status: 'unconfirmed' },
     ],
-    visitDuration: 'Saran alokasi: sekitar 45 menit untuk berjalan singkat dan foto.',
+    visitDuration: 'Saran alokasi: sekitar 1,5 jam di cahaya sore sampai matahari terbenam (±18.20).',
     bestTime: 'Sore sesuai itinerary saat gunung tidak tertutup awan. Warna hijau dalam foto referensi tidak mewakili seluruh musim.',
     tips: ['Pilih satu titik pandang agar waktu tidak habis berpindah area berbayar.', 'Kenakan lapisan penahan angin; tempat terbuka terasa lebih dingin daripada di dalam mobil.', 'Biarkan hewan melintas dan jaga jarak; jangan mendekat hanya untuk foto.'],
     cautions: ['Padang terbuka, Muya Golden Pagoda, Biara Tagong, dan Biara Muya merupakan lokasi berbeda; sebutkan tujuan secara spesifik.', 'Jangan memasuki padang berpagar atau jalur kendaraan tanpa izin.'],
     sources: [
       { title: 'ETripChina: lokasi dan akses Tagong', url: tagongTransport, kind: 'operator', publishedAt: '2023-05-18' },
       { title: 'Chengdu China Travel Service: acuan biaya kebersihan Tagong', url: tagongFees, kind: 'operator' },
-    ], checkedAt: '2026-11-03',
-  },
-  {
-    slug: 'muya-monastery', name: 'Biara Muya', region: 'Sichuan', placeIds: ['muya'],
-    summary: 'Kunjungan singkat ke kompleks biara di kawasan Tagong. Sisakan ruang untuk kegiatan ibadah dan ikuti petunjuk petugas sebelum masuk bangunan.',
-    gettingThere: {
-      origin: 'Padang Tagong, 12 November',
-      steps: ['Tunjukkan pin 木雅大寺 di Amap kepada sopir. Pastikan tujuannya biara ini, bukan Muya Golden Pagoda atau kawasan wisata Muya Shengdi.', 'Sopir mengantar dari kawasan Tagong ke akses biara. Konfirmasikan kondisi jalan terakhir dan tempat parkir pada hari kunjungan.', 'Lanjut berjalan hanya di area pengunjung yang dibuka, lalu kembali ke mobil untuk menuju Xinduqiao.'],
-      duration: 'Waktu transfer lokal perlu dikonfirmasi berdasarkan titik awal di Tagong; sisakan kunjungan singkat sebelum perjalanan ke Xinduqiao.',
-      sources: [muyaMap],
-    },
-    stopAccess: { muya: 'Gunakan pin Amap 木雅大寺, lalu datang dengan sopir dari Tagong. Setelah parkir, tanyakan bangunan dan jalur mana yang terbuka untuk pengunjung.' },
-    costs: [
-      { label: 'Akses biara / biaya kebersihan', amount: 'Perlu konfirmasi', detail: 'Halaman tiket Qunar tidak menampilkan penawaran harga. Konfirmasikan biaya di pintu masuk; jangan menganggap gratis atau memakai harga biara lain.', status: 'unconfirmed', source: muyaListing },
-      { label: 'Mobil dan parkir', amount: 'Perlu konfirmasi', detail: 'Masukkan kunjungan Muya ke rute sopir Rilong ke Xinduqiao. Tanyakan biaya parkir dan waktu tunggu sebelum turun.', status: 'unconfirmed' },
-    ],
-    visitDuration: 'Saran alokasi: sekitar 45 menit untuk area yang dibuka. Lewati bila hari sudah mulai gelap.',
-    bestTime: 'Sore sesuai itinerary, sebelum terlalu gelap untuk perjalanan ke hotel. Jam akses bangunan perlu dikonfirmasi langsung.',
-    tips: ['Simpan nama 木雅大寺 dan pin lokasi sebelum meninggalkan Tagong.', 'Minta izin sebelum memotret orang, upacara, atau bagian dalam bangunan.', 'Berbicara pelan dan ikuti arah berjalan yang ditunjukkan pengelola.'],
-    cautions: ['Biara adalah tempat ibadah aktif; sebagian area dapat dibatasi meski halaman luar terbuka.', 'Jangan menyamakan Biara Muya dengan Muya Golden Pagoda yang berada di kawasan Tagong.'],
-    sources: [
-      { title: 'Amap: pin Biara Muya / 木雅大寺', url: muyaMap, kind: 'operator' },
-      { title: 'Qunar: daftar Biara Muya, harga belum tersedia', url: muyaListing, kind: 'operator' },
     ], checkedAt: '2026-11-03',
   },
 ];

@@ -2,7 +2,6 @@ import type { DestinationGuide, GuideSource } from '../guide-types.ts';
 
 const xinduqiaoSource: GuideSource = { title: 'China Discovery: akses Xinduqiao', url: 'https://www.chinadiscovery.com/sichuan/kangding/xinduqiao.html', kind: 'operator' };
 const kangdingSource: GuideSource = { title: 'Pemerintah Kangding: referensi jaringan jalan, 2022', url: 'https://www.kangding.gov.cn/kdkdjt1/article/107029', kind: 'official', publishedAt: '2022-09-14', note: 'Referensi jaringan jalan; bukan pembaruan kondisi atau penutupan jalan hari ini.' };
-const localTourSource: GuideSource = { title: 'Chengdu China Travel Service: rute dan biaya tambahan lokal', url: 'https://m.gosctour.com/line/show.html?id=240', kind: 'operator' };
 const jiagenbaSource: GuideSource = { title: 'Ganzi TV: rute Jiagenba', url: 'https://www.ganzitv.com/cms/a/166446392/content', kind: 'reference', publishedAt: '2025-05-11' };
 const roadSource: GuideSource = { title: 'Sichuan Online: lokasi Tianlu 18 Bends', url: 'https://sichuan.scol.com.cn/ggxw/202408/82593925.html', kind: 'reference', publishedAt: '2024-08-25' };
 const litangSource: GuideSource = { title: 'Sichuan Travel Guide: Litang dan biaranya', url: 'https://www.sichuantravelguide.com/litang.html', kind: 'operator' };
@@ -31,33 +30,6 @@ export const westernGuides: DestinationGuide[] = [
     cautions: ['Jangan berhenti di badan jalan demi foto; gunakan area parkir yang disetujui sopir.'], sources: [xinduqiaoSource, jiagenbaSource], checkedAt: '2026-11-03',
   },
   {
-    slug: 'yuzixi', name: 'Yuzixi', region: 'Sichuan', placeIds: ['yuzixi'],
-    summary: 'Punggung bukit terbuka untuk melihat jajaran Gongga dan Yala. Tidak termasuk rencana transportasi umum.',
-    gettingThere: { origin: 'Hotel di Xinduqiao', steps: ['Tidak ada dalam rencana transportasi umum. Ke 鱼子西 perlu mobil carteran tambahan dari Xinduqiao, pulang-pergi.', 'Jika menambah mobil, konfirmasikan apakah mobil yang sama boleh naik sampai titik pandang atau perlu kendaraan penghubung lokal.'], duration: 'Sekitar 37 km atau 40–60 menit dari Xinduqiao dengan mobil. Itinerary tidak memberi jam karena Yuzixi tidak termasuk rencana.', sources: [localTourSource.url] },
-    stopAccess: { yuzixi: 'Hanya dengan mobil carteran tambahan dari Xinduqiao, lalu kendaraan penghubung lokal bila diwajibkan di akses terakhir.' },
-    costs: [
-      { label: 'Biaya kebersihan', amount: 'Acuan CNY 30 / orang', detail: 'Angka dari paket operator lokal, bukan tarif resmi tetap untuk November. Tanyakan nilai yang berlaku sebelum naik.', status: 'estimate', source: localTourSource.url },
-      { label: 'Kendaraan penghubung', amount: 'Acuan CNY 60 / orang', detail: 'Operator mencantumkan biaya tambahan ini. Konfirmasikan apakah diperlukan dan apakah pulang-pergi sudah termasuk.', status: 'estimate', source: localTourSource.url },
-      { label: 'Mobil carteran tambahan', amount: 'Sesuai penawaran', detail: 'Tidak termasuk anggaran rencana. Sepakati harga pulang-pergi dari Xinduqiao dan waktu menunggu.', status: 'unconfirmed' },
-    ],
-    visitDuration: 'Saran 30 hingga 60 menit di titik pandang.', bestTime: 'Saat langit cerah. Tidak masuk jadwal 13 November, yang dipakai untuk salat Jumat di Kangding.',
-    tips: ['Konfirmasikan pembukaan akses sebelum meninggalkan hotel.', 'Bawa sarung tangan dan simpan baterai kamera di bagian dalam jaket.'],
-    cautions: ['Jika menambah mobil, lewati Yuzixi bila akses terlambat atau jalan tertutup es.'], sources: [localTourSource], checkedAt: '2026-11-03',
-  },
-  {
-    slug: 'honghaizi', name: 'Honghaizi', region: 'Sichuan', placeIds: ['honghaizi'],
-    summary: 'Danau pegunungan di koridor S434 dekat jalan Bandara Kangding. Tidak termasuk rencana transportasi umum.',
-    gettingThere: { origin: 'Xinduqiao', steps: ['Tidak ada dalam rencana transportasi umum. Ke sini perlu mobil carteran tambahan dari Xinduqiao menuju koridor S434 dan kawasan jalan Bandara Kangding.', 'Jika menambah mobil, minta sopir memasukkan pin 红海子, lalu turun hanya di area yang dibuka untuk pengunjung.'], duration: 'PDF menempatkannya di loop mobil sekitar 250 km; waktu ruas perlu dihitung sopir. Itinerary tidak memberi jam karena Honghaizi tidak termasuk rencana.', sources: [localTourSource.url, kangdingSource.url] },
-    stopAccess: { honghaizi: 'Dengan mobil carteran tambahan, turun di tempat parkir dekat danau pada koridor S434; lanjut berjalan di area yang dibuka.' },
-    costs: [
-      { label: 'Biaya kebersihan lokal', amount: 'Acuan CNY 30 / orang', detail: 'Dicantumkan pada paket operator yang tidak bertanggal; ini acuan anggaran, bukan harga terkonfirmasi November. Cek nilai dan area yang tercakup sebelum membayar.', status: 'estimate', source: localTourSource.url },
-      { label: 'Mobil carteran dan parkir', amount: 'Perlu konfirmasi', detail: 'Butuh mobil carteran tambahan dari Xinduqiao; tidak termasuk anggaran rencana.', status: 'unconfirmed' },
-    ],
-    visitDuration: 'Saran 20 hingga 30 menit.', bestTime: 'Saat angin tenang, agar pantulan di danau terlihat.',
-    tips: ['Simpan pin danau agar tidak tertukar dengan lokasi lain bernama sama.', 'Foto dari tepi yang aman tanpa berjalan di atas es.'],
-    cautions: ['Tanpa mobil carteran tambahan, Honghaizi tidak bisa dicapai dalam rencana ini.'], sources: [localTourSource, kangdingSource], checkedAt: '2026-11-03',
-  },
-  {
     slug: 'kangding', name: 'Kangding', region: 'Sichuan', placeIds: ['kangding', 'kangding-mosque'],
     summary: 'Singgah kota untuk makan dan salat Jumat, sebelum kembali ke pegunungan lewat Zheduo.',
     gettingThere: { origin: 'Xinduqiao, lewat Zheduo', steps: ['Minta hotel di Xinduqiao mencarikan mobil tumpangan (拼车) ke Kangding, CNY 40–50 per orang, berangkat saat penuh 4 orang. Jika lama, naik bus yang lewat. Berangkat paling lambat 09.00.', 'Tiba sekitar 11.00. Tunjukkan 康定清真寺 saat bertanya arah, karena pin masjid belum terverifikasi.', 'Pulang dengan mobil tumpangan dari 东关 atau 步行街 di Kangding; berangkat sebelum 15.30.'], duration: 'Sekitar 2 jam sekali jalan lewat Zheduo, dengan mobil tumpangan atau bus.', sources: [kangdingSource.url] },
@@ -83,17 +55,16 @@ export const westernGuides: DestinationGuide[] = [
     cautions: ['Lintasan sekitar 4.298 m menurut PDF; es atau pembatasan jalan dapat memperlambat perjalanan.'], sources: [xinduqiaoSource], checkedAt: '2026-11-03',
   },
   {
-    slug: 'jiagenba', name: 'Jiagenba & Zimei Pass', region: 'Sichuan', placeIds: ['jiagenba', 'zimei'],
-    summary: 'Lembah desa dekat Xinduqiao untuk sore yang lebih tenang, dan Zimei sebagai perjalanan tambahan yang jauh. Keduanya tidak termasuk rencana transportasi umum.',
-    gettingThere: { origin: 'Xinduqiao', steps: ['Tidak ada dalam rencana transportasi umum; perlu mobil carteran tambahan dari Xinduqiao. Ganzi TV menempatkan Jiagenba sekitar 27 hingga 30 km dari Xinduqiao.', 'Berjalan di area desa dan tepi sungai yang diizinkan.', 'Zimei Pass lebih dari 100 km sekali jalan dari Jiagenba dan tidak disarankan. Jika tetap ingin, minta sopir menghitung perjalanan tambahan secara terpisah dan memastikan jalan dibuka.'], duration: 'Waktu ke Jiagenba mengikuti kondisi jalan; Zimei dapat memerlukan etape tambahan panjang. Itinerary tidak memberi jam karena keduanya tidak termasuk rencana.', sources: [jiagenbaSource.url] },
-    stopAccess: { jiagenba: 'Dengan mobil carteran tambahan dari Xinduqiao ke kawasan desa Jiagenba, kemudian jalan kaki di jalur yang diizinkan.', zimei: 'Akses lanjutan dengan sopir lokal menuju 子梅垭口 hanya setelah rute, kendaraan dan jam kembali disetujui. Tetap opsional.' },
+    slug: 'zimei', name: 'Zimei Pass', region: 'Sichuan', placeIds: ['zimei'],
+    summary: 'Lintasan tinggi dengan panorama Gunung Gongga, jauh dari rute utama. Tidak termasuk rencana transportasi umum.',
+    gettingThere: { origin: 'Xinduqiao', steps: ['Tidak ada dalam rencana transportasi umum; perlu mobil carteran seharian dari Xinduqiao.', 'Rute melewati kawasan Jiagenba lalu jalan tanah menuju 子梅垭口. Minta sopir memastikan jalan dibuka dan menghitung waktu kembali sebelum berangkat.'], duration: 'Lebih dari 100 km sekali jalan dari Jiagenba, ditambah sekitar 27–30 km dari Xinduqiao ke Jiagenba menurut Ganzi TV. Itinerary tidak memberi jam karena tidak termasuk rencana.', sources: [jiagenbaSource.url] },
+    stopAccess: { zimei: 'Hanya dengan sopir lokal menuju 子梅垭口, setelah rute, kendaraan, dan jam kembali disetujui. Tetap opsional.' },
     costs: [
-      { label: 'Kawasan umum Jiagenba', amount: 'Referensi: gratis', detail: 'Ganzi TV pada 11 Mei 2025 mencantumkan tanpa tiket. Ini referensi, bukan tarif resmi November 2026; parkir, lahan pribadi, dan titik pandang tambahan tidak termasuk.', status: 'estimate', source: jiagenbaSource.url },
-      { label: 'Mobil carteran dan detur Zimei', amount: 'Perlu penawaran terpisah', detail: 'Butuh mobil carteran tambahan dari Xinduqiao. Konfirmasikan biaya akses, kendaraan dan tambahan waktu sebelum menyetujui detur Zimei.', status: 'unconfirmed' },
+      { label: 'Mobil carteran seharian', amount: 'Perlu penawaran terpisah', detail: 'Butuh mobil carteran tambahan dari Xinduqiao. Konfirmasikan biaya akses, kendaraan, dan tambahan waktu sebelum menyetujui perjalanan.', status: 'unconfirmed' },
     ],
-    visitDuration: 'Saran 1 hingga 2 jam di Jiagenba; Zimei tidak termasuk durasi ini.', bestTime: 'Sore untuk lembah Jiagenba; kembali sebelum kondisi jalan memburuk.',
-    tips: ['Minta izin sebelum masuk lahan pertanian atau halaman rumah.', 'Jika menambah mobil, pilih Jiagenba daripada Zimei karena jauh lebih dekat.'],
-    cautions: ['Zimei tidak disarankan dalam itinerary; akses tanah, es dan jarak tambahan dapat membuatnya tidak layak.'], sources: [jiagenbaSource], checkedAt: '2026-11-03',
+    visitDuration: 'Perjalanan seharian penuh; tidak muat dalam rencana 13 November yang dipakai untuk salat Jumat di Kangding.', bestTime: 'Pagi yang cerah; kembali sebelum gelap dan sebelum jalan tanah membeku.',
+    tips: ['Bawa jaket tebal, air, dan bekal; tidak ada fasilitas di lintasan.'],
+    cautions: ['Zimei tidak disarankan dalam itinerary; akses tanah, es, dan jarak tambahan dapat membuatnya tidak layak.'], sources: [jiagenbaSource], checkedAt: '2026-11-04',
   },
   {
     slug: 'g318', name: 'G318 & Tianlu 18 Bends', region: 'Sichuan', placeIds: ['gaoersi', 'tianlu'],
@@ -108,16 +79,15 @@ export const westernGuides: DestinationGuide[] = [
     cautions: ['Rute melewati lintasan tinggi; penutupan atau es dapat menambah waktu berkendara.'], sources: [roadSource], checkedAt: '2026-11-03',
   },
   {
-    slug: 'litang', name: 'Litang & biaranya', region: 'Sichuan', placeIds: ['litang', 'litang-monastery'],
-    summary: 'Sore berjalan ringan di kota dataran tinggi dan kompleks Biara Litang.',
-    gettingThere: { origin: 'Xinduqiao melalui G318', steps: ['Tiba dengan bus yang lewat dari Xinduqiao, lalu check-in dan istirahat.', 'Ke 长青春科尔寺 naik taksi lokal, 2,3–3,5 km dari penginapan, hanya jika tiba sebelum 16.30. Kembali sebelum gelap, sekitar 18.24.'], duration: 'Sekitar 195 km dan 4–5 jam dengan bus dari Xinduqiao. Tiba sekitar 15.00–16.30, atau 16.30–17.30 bila naik bus dari Chengdu.', sources: [litangSource.url, roadSource.url] },
-    stopAccess: { litang: 'Gunakan hotel di kota sebagai titik mulai jalan santai; mobil lokal untuk jarak yang lebih jauh.', 'litang-monastery': 'Taksi lokal ke 长青春科尔寺 di sisi bukit kota, 2,3–3,5 km dari penginapan; cek akses aula dan kendaraan internal di pintu masuk.' },
+    slug: 'litang', name: 'Litang', region: 'Sichuan', placeIds: ['litang'],
+    summary: 'Sore berjalan ringan di gang-gang kota dataran tinggi setelah perjalanan bus panjang.',
+    gettingThere: { origin: 'Xinduqiao melalui G318', steps: ['Tiba dengan bus yang lewat dari Xinduqiao, lalu check-in dan istirahat.', 'Sisa sore untuk jalan santai di kota; kembali ke penginapan sebelum gelap, sekitar 18.24.'], duration: 'Sekitar 195 km dan 4–5 jam dengan bus dari Xinduqiao. Tiba sekitar 15.00–16.30, atau 16.30–17.30 bila naik bus dari Chengdu.', sources: [litangSource.url, roadSource.url] },
+    stopAccess: { litang: 'Gunakan hotel di kota sebagai titik mulai jalan santai; mobil lokal untuk jarak yang lebih jauh.' },
     costs: [
-      { label: 'Akses biara dan kendaraan internal', amount: 'Perlu konfirmasi', detail: 'Tarif terkini dan cakupan aula belum terverifikasi. Tanyakan sebelum menggunakan kendaraan atau pemandu internal.', status: 'unconfirmed' },
-      { label: 'Taksi dan penginapan', amount: 'Sesuai pemakaian', detail: 'Minta harga kamar berpemanas; sepakati tarif taksi ke biara sebelum naik.', status: 'unconfirmed' },
+      { label: 'Taksi dan penginapan', amount: 'Sesuai pemakaian', detail: 'Minta harga kamar berpemanas; sepakati tarif taksi lokal sebelum naik.', status: 'unconfirmed' },
     ],
-    visitDuration: 'Saran 1 hingga 2 jam jalan santai dan kunjungan biara.', bestTime: 'Sore 14 November, hanya jika tiba sebelum 16.30 dan area kunjungan masih dibuka.',
-    tips: ['Minta izin sebelum memotret di dalam aula atau memotret orang beribadah.', 'Siapkan bekal untuk bus 09.30 ke Daocheng keesokan pagi.'],
+    visitDuration: 'Saran 1 hingga 2 jam jalan santai di kota.', bestTime: 'Sore 14 November setelah check-in, sebelum gelap.',
+    tips: ['Minta izin sebelum memotret orang di jalan.', 'Siapkan bekal untuk bus 09.30 ke Daocheng keesokan pagi.'],
     cautions: ['Litang sekitar 4.014 m menurut PDF dan merupakan malam menginap tertinggi dalam rute; hindari memaksakan aktivitas.'], sources: [litangSource, roadSource], checkedAt: '2026-11-03',
   },
   {

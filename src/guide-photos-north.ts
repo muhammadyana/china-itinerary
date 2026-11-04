@@ -18,21 +18,6 @@ export const northernGuidePhotos: Record<string, Photo> = {
     "origin": "PDF",
     "photoNote": "Formasi batu abu-abu di Moshi Park, sesuai PDF perjalanan. Tanggal pengambilan mengikuti sumber PDF; bukan konfirmasi kondisi saat kunjungan."
   },
-  "guide-n-muya": {
-    "id": "guide-n-muya",
-    "width": 640,
-    "height": 480,
-    "sizes": [
-      480,
-      640
-    ],
-    "author": "PDF perjalanan pengguna",
-    "source": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=11",
-    "license": "Dokumen pengguna",
-    "licenseUrl": "https://china.muhammadyana.me/China-Ganzi-Yunnan-8-21Nov-2026-Itinerary.pdf#page=11",
-    "origin": "PDF",
-    "photoNote": "Kompleks Muya Monastery dengan latar pegunungan, sesuai PDF perjalanan. Tanggal pengambilan mengikuti sumber PDF; bukan konfirmasi kondisi saat kunjungan."
-  },
   "guide-n-sifangjie": {
     "id": "guide-n-sifangjie",
     "width": 700,
@@ -112,7 +97,6 @@ export const northernGuidePhotos: Record<string, Photo> = {
 
 export const northernPlacePhotoIds: Record<string, string> = {
   "moshi": "guide-n-moshi",
-  "muya": "guide-n-muya",
   "sifangjie": "guide-n-sifangjie",
   "wuhua": "guide-n-wuhua",
   "caicun": "guide-n-caicun",
@@ -122,7 +106,6 @@ export const northernPlacePhotoIds: Record<string, string> = {
 
 export const northernPhotoDescriptions: Record<string, string> = {
   "guide-n-moshi": "Formasi batu abu-abu di Moshi Park, sesuai PDF perjalanan.",
-  "guide-n-muya": "Kompleks Muya Monastery dengan latar pegunungan, sesuai PDF perjalanan.",
   "guide-n-sifangjie": "Bangunan di alun-alun Sifangjie, Kota Tua Lijiang.",
   "guide-n-wuhua": "Pemandangan Kota Tua Dali dari Menara Wuhua, sesuai keterangan PDF.",
   "guide-n-caicun": "Referensi pemandangan Danau Erhai dari PDF; foto ini tidak memastikan tampilan Dermaga Caicun.",
