@@ -1,0 +1,199 @@
+import { days } from './itinerary.ts';
+import { weatherLocations } from './weather-locations.ts';
+import { provinceShapes, riverLines } from './route-map-geo.ts';
+import { escapeHtml as e, icon, siteCredit } from './render.ts';
+import { renderSiteNavigation } from './site-navigation.ts';
+
+type Mode = 'car' | 'train' | 'bus' | 'plane';
+type LabelSide = 'n' | 's' | 'e' | 'w' | 'sw';
+export interface MapPoint { name: string; latitude: number; longitude: number; label?: LabelSide }
+export interface MapLeg { from: string; to: string; mode: Mode }
+
+const at = (id: string, name: string, label?: LabelSide): MapPoint => ({ name, latitude: weatherLocations[id].latitude, longitude: weatherLocations[id].longitude, label });
+
+// Towns reuse the verified weather coordinates; points without a label are drawn as pass-through dots.
+export const mapPoints: Record<string, MapPoint> = {
+  chengdu: at('chengdu', 'Chengdu', 's'),
+  jiuzhaigou: at('jiuzhaigou', 'Jiuzhaigou', 'w'),
+  // Approximate references: Huanglongjiuzhai station near Chuanzhusi, and Pingwu on the Jiumian expressway that keeps the 10 November line off the closed G213.
+  huanglongjiuzhai: { name: 'Stasiun Huanglongjiuzhai', latitude: 32.78, longitude: 103.63 },
+  jiumian: { name: 'Pingwu, tol Jiumian', latitude: 32.41, longitude: 104.53 },
+  dujiangyan: { name: 'Dujiangyan', latitude: 31.0, longitude: 103.62 },
+  bipenggou: at('bipenggou', 'Bipenggou', 'w'),
+  rilong: at('rilong', 'Rilong', 'e'),
+  danba: at('danba', 'Danba', 'n'),
+  bamei: at('bamei', 'Bamei'),
+  tagong: at('tagong', 'Tagong', 'e'),
+  xinduqiao: at('xinduqiao', 'Xinduqiao', 'sw'),
+  kangding: at('kangding', 'Kangding', 'e'),
+  jiagenba: at('jiagenba', 'Jiagenba'),
+  yajiang: at('yajiang', 'Yajiang'),
+  litang: at('litang', 'Litang', 'n'),
+  daocheng: at('daocheng', 'Daocheng', 'e'),
+  riwa: at('riwa', 'Riwa', 'e'),
+  yading: at('yading-village', 'Yading', 's'),
+  xiangcheng: at('xiangcheng', 'Xiangcheng', 'n'),
+  'shangri-la': at('shangri-la', 'Shangri-La', 'w'),
+  lijiang: at('lijiang', 'Lijiang', 'e'),
+  ganhaizi: at('ganhaizi', 'Jade Dragon'),
+  dali: at('dali', 'Dali', 'w'),
+  kunming: at('kunming', 'Kunming', 'n'),
+};
+
+export const overnightPoint: Record<string, string> = {
+  Chengdu: 'chengdu', Jiuzhaigou: 'jiuzhaigou', Bipenggou: 'bipenggou', Rilong: 'rilong', Xinduqiao: 'xinduqiao',
+  Litang: 'litang', Riwa: 'riwa', 'Shangri-La': 'shangri-la', Lijiang: 'lijiang', Dali: 'dali', Kunming: 'kunming',
+};
+
+const go = (mode: Mode, ...ids: string[]): MapLeg[] => ids.slice(1).map((to, index) => ({ from: ids[index], to, mode }));
+// Legs follow the visiting order of each day; the flights on 8 and 21 November are arrows toward the frame edge.
+export const mapLegs: Record<string, MapLeg[]> = {
+  '2026-11-08': [],
+  '2026-11-09': [...go('train', 'chengdu', 'huanglongjiuzhai'), ...go('car', 'huanglongjiuzhai', 'jiuzhaigou')],
+  '2026-11-10': go('car', 'jiuzhaigou', 'jiumian', 'dujiangyan', 'bipenggou'),
+  '2026-11-11': go('car', 'bipenggou', 'rilong'),
+  '2026-11-12': go('car', 'rilong', 'danba', 'bamei', 'tagong', 'xinduqiao'),
+  '2026-11-13': go('car', 'xinduqiao', 'kangding', 'jiagenba', 'xinduqiao'),
+  '2026-11-14': go('car', 'xinduqiao', 'yajiang', 'litang'),
+  '2026-11-15': go('car', 'litang', 'daocheng', 'riwa'),
+  '2026-11-16': go('bus', 'riwa', 'yading', 'riwa'),
+  '2026-11-17': go('car', 'riwa', 'xiangcheng', 'shangri-la'),
+  '2026-11-18': go('train', 'shangri-la', 'lijiang'),
+  '2026-11-19': [...go('car', 'lijiang', 'ganhaizi', 'lijiang'), ...go('train', 'lijiang', 'dali')],
+  '2026-11-20': go('train', 'dali', 'kunming'),
+  '2026-11-21': [],
+};
+
+const provinceLabels = [
+  { name: 'SICHUAN', longitude: 103.45, latitude: 29.15 }, { name: 'YUNNAN', longitude: 101.45, latitude: 26.25 },
+  { name: 'XIZANG', longitude: 99.4, latitude: 32.3 }, { name: 'QINGHAI', longitude: 100.6, latitude: 33.5 }, { name: 'GANSU', longitude: 104.55, latitude: 33.55 },
+];
+const riverLabels = [
+  { name: 'S. Jinsha', longitude: 99.5, latitude: 29.6 }, { name: 'S. Yalong', longitude: 101.25, latitude: 28.15 }, { name: 'S. Dadu', longitude: 102.32, latitude: 29.55 },
+];
+const modeNames: Record<Mode, string> = { car: 'Mobil', train: 'Kereta', bus: 'Bus taman', plane: 'Pesawat' };
+
+const points = Object.values(mapPoints);
+const bounds = {
+  west: Math.min(...points.map(p => p.longitude)) - 1.35, east: Math.max(...points.map(p => p.longitude)) + 0.5,
+  south: Math.min(...points.map(p => p.latitude)) - 0.4, north: Math.max(...points.map(p => p.latitude)) + 0.4,
+};
+const xScale = Math.cos((bounds.north + bounds.south) / 2 * Math.PI / 180);
+const width = 600;
+const unit = width / ((bounds.east - bounds.west) * xScale);
+const height = Math.round((bounds.north - bounds.south) * unit);
+const round = (value: number) => Math.round(value * 10) / 10;
+const project = (longitude: number, latitude: number) => [round((longitude - bounds.west) * xScale * unit), round((bounds.north - latitude) * unit)] as const;
+const placed = (id: string) => project(mapPoints[id].longitude, mapPoints[id].latitude);
+
+function curve(leg: MapLeg) {
+  const [x1, y1] = placed(leg.from), [x2, y2] = placed(leg.to);
+  const length = Math.hypot(x2 - x1, y2 - y1) || 1;
+  // Bow each leg to the left of travel so out-and-back days read as two strokes.
+  const bow = Math.min(length * 0.12, 14);
+  const cx = round((x1 + x2) / 2 + (y2 - y1) / length * bow), cy = round((y1 + y2) / 2 - (x2 - x1) / length * bow);
+  return { d: `M${x1} ${y1}Q${cx} ${cy} ${x2} ${y2}`, mid: [round(x1 / 4 + cx / 2 + x2 / 4), round(y1 / 4 + cy / 2 + y2 / 4)] as const, length };
+}
+
+const shortDate = (date: string) => new Intl.DateTimeFormat('id-ID', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Asia/Shanghai' }).format(new Date(`${date}T12:00:00+08:00`));
+const dayModes = (date: string) => [...new Set(mapLegs[date].map(leg => leg.mode))];
+
+function routeMapSvg() {
+  const provinces = provinceShapes.map(shape => `<path class="map-province${['Sichuan', 'Yunnan'].includes(shape.name) ? ' is-route' : ''}" d="${shape.rings.map(ring => `M${ring.map(([lon, lat]) => project(lon, lat).join(' ')).join('L')}Z`).join('')}"/>`).join('');
+  const rivers = riverLines.map(river => `<path class="map-river" d="${river.lines.map(line => `M${line.map(([lon, lat]) => project(lon, lat).join(' ')).join('L')}`).join('')}"/>`).join('');
+  const labels = [
+    ...provinceLabels.map(label => `<text class="map-province-label" x="${project(label.longitude, label.latitude)[0]}" y="${project(label.longitude, label.latitude)[1]}">${label.name}</text>`),
+    ...riverLabels.map(label => `<text class="map-river-label" x="${project(label.longitude, label.latitude)[0]}" y="${project(label.longitude, label.latitude)[1]}">${label.name}</text>`),
+  ].join('');
+  const [chengduX, chengduY] = placed('chengdu'), [kunmingX, kunmingY] = placed('kunming');
+  const flights = [
+    { date: '2026-11-08', d: `M${width - 6} ${round(chengduY - 70)}L${round(chengduX + 7)} ${round(chengduY - 5)}`, label: 'tiba di TFU', x: width - 10, y: round(chengduY - 78), anchor: 'end', mid: [round((width - 6 + chengduX) / 2), round(chengduY - 37)] as const },
+    { date: '2026-11-21', d: `M${round(kunmingX + 7)} ${round(kunmingY + 3)}L${width - 6} ${round(kunmingY + 26)}`, label: 'ke Jakarta', x: width - 10, y: round(kunmingY + 12), mid: [round((kunmingX + width) / 2), round(kunmingY + 14)] as const, anchor: 'end' },
+  ];
+  const routeDays = days.map((day, index) => {
+    const legs = mapLegs[day.date].map(curve);
+    const flight = flights.find(item => item.date === day.date);
+    const paths = flight ? `<path class="route-leg route-leg-plane" d="${flight.d}" marker-end="url(#route-arrow)"/><text class="map-flight-label" x="${flight.x}" y="${flight.y}" text-anchor="${flight.anchor}">${flight.label}</text>`
+      : mapLegs[day.date].map((leg, legIndex) => `<path class="route-leg route-leg-${leg.mode}" d="${legs[legIndex].d}"/>`).join('');
+    return `<g class="route-day" data-day="${day.date}"><a href="#day-${day.date}" tabindex="-1"><title>${e(`Hari ${index + 1}, ${shortDate(day.date)}: ${day.shortTitle}`)}</title>${paths}</a></g>`;
+  }).join('');
+  const badges = days.map((day, index) => {
+    const flight = flights.find(item => item.date === day.date);
+    const longest = mapLegs[day.date].map(curve).reduce<ReturnType<typeof curve> | undefined>((best, leg) => !best || leg.length > best.length ? leg : best, undefined);
+    // Very short out-and-back days would hide their number under the town ring, so it moves beside the town.
+    const anchor = flight?.mid ?? (longest!.length < 30 ? [round(longest!.mid[0] - 24), round(longest!.mid[1] + 6)] as const : longest!.mid);
+    return `<a href="#day-${day.date}" tabindex="-1"><g class="route-badge" data-day="${day.date}" transform="translate(${anchor[0]} ${anchor[1]})"><title>${e(`Hari ${index + 1}, ${shortDate(day.date)}: ${day.shortTitle}`)}</title><circle r="11"/><text dy="4.5">${index + 1}</text></g></a>`;
+  }).join('');
+  const overnightIds = new Set(Object.values(overnightPoint));
+  const dots = Object.entries(mapPoints).map(([id, point]) => {
+    const [x, y] = placed(id);
+    const overnight = overnightIds.has(id);
+    const offset = overnight ? 11 : 8;
+    const label = point.label ? {
+      n: [x, round(y - offset), 'middle'], s: [x, round(y + offset + 12), 'middle'], e: [round(x + offset), round(y + 5), 'start'], w: [round(x - offset), round(y + 5), 'end'], sw: [round(x - 6), round(y + offset + 12), 'end'],
+    }[point.label] : undefined;
+    return `<g class="route-point${overnight ? ' is-overnight' : ''}"><title>${e(point.name)}</title><circle cx="${x}" cy="${y}" r="${overnight ? 5.5 : 3.5}"/>${label ? `<text x="${label[0]}" y="${label[1]}" text-anchor="${label[2]}">${e(point.name)}</text>` : ''}</g>`;
+  }).join('');
+  const scaleKm = 100;
+  const scaleLength = round(scaleKm / 111.32 * unit);
+  const scale = `<g class="map-scale" transform="translate(16 ${height - 22})"><path d="M0 0H${scaleLength}M0 -5V5M${scaleLength} -5V5"/><text x="${round(scaleLength / 2)}" y="-9">${scaleKm} km</text></g>`;
+  const north = `<g class="map-north" transform="translate(${width - 24} 30)"><path d="M0 -14L6 4L0 0L-6 4Z"/><text y="18">U</text></g>`;
+  return `<svg class="route-map" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" style="--map-aspect: ${round(width / height * 1000) / 1000}" aria-hidden="true" focusable="false">
+    <defs><clipPath id="route-map-frame"><rect width="${width}" height="${height}"/></clipPath><marker id="route-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="route-arrow-head" d="M0 0L10 5L0 10Z"/></marker></defs>
+    <rect class="map-ground" width="${width}" height="${height}"/>
+    <g clip-path="url(#route-map-frame)">${provinces}${rivers}${labels}${routeDays}${dots}${badges}</g>${scale}${north}
+  </svg>`;
+}
+
+function timelineEntry(index: number) {
+  const day = days[index];
+  const modes = day.date === '2026-11-08' || day.date === '2026-11-21' ? ['plane' as Mode, ...dayModes(day.date)] : dayModes(day.date);
+  return `<li class="route-entry" id="day-${day.date}" data-day="${day.date}">
+    <span class="route-entry-number" aria-hidden="true">${index + 1}</span>
+    <div class="route-entry-body">
+      <p class="route-entry-date"><time datetime="${day.date}">${shortDate(day.date)}</time><span>Hari ${index + 1}</span><span>${modes.map(mode => modeNames[mode]).join(' + ')}</span></p>
+      <h3>${e(day.shortTitle)}</h3>
+      <p class="route-entry-path">${day.route.map(e).join(' <span aria-hidden="true">→</span><span class="visually-hidden">, lalu </span> ')}</p>
+      <p class="route-entry-meta">${e(day.transport)}</p>
+      <p class="route-entry-sleep">${icon('bed')}${day.overnight ? `Menginap di ${e(day.overnight.name)}${day.overnight.elevation ? ` · ${e(day.overnight.elevation)}` : ''}` : 'Terbang pulang ke Jakarta'}</p>
+      <a class="text-link" href="/#${day.date}">Buka jadwal hari ${index + 1}${icon('right')}</a>
+    </div>
+  </li>`;
+}
+
+export function routeMapView() {
+  const bases = new Set(days.flatMap(day => day.overnight ? [day.overnight.name] : []));
+  const nights = days.filter(day => day.overnight).length;
+  return `<a class="skip-link" href="#route-timeline-title">Langsung ke urutan hari</a>
+  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation()}</header>
+  <main class="container route-map-page" data-route-map>
+    <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="/places/">Tempat</a>${icon('right')}<span>Peta rute</span></nav>
+    <div class="route-map-intro">
+      <h1 id="route-map-heading">Rute ${days.length} hari, titik demi titik.</h1>
+      <p class="lead">Dari Chengdu ke Kunming: ${nights} malam di ${bases.size} tempat menginap, sebagian besar lewat darat. Garis di peta menghubungkan titik menurut urutan kunjungan, bukan jalur jalan sebenarnya.</p>
+      <p>Nomor pada garis sama dengan nomor hari di daftar. Setiap hari terhubung ke jadwal lengkap.</p>
+    </div>
+    <div class="route-map-layout">
+      <figure class="route-map-figure">
+        ${routeMapSvg()}
+        <figcaption>
+          <ul class="route-legend" role="list">
+            <li><span class="route-legend-line is-car" aria-hidden="true"></span>Mobil</li>
+            <li><span class="route-legend-line is-train" aria-hidden="true"></span>Kereta</li>
+            <li><span class="route-legend-line is-bus" aria-hidden="true"></span>Bus taman</li>
+            <li><span class="route-legend-line is-plane" aria-hidden="true"></span>Pesawat</li>
+            <li><span class="route-legend-dot is-overnight" aria-hidden="true"></span>Tempat menginap</li>
+            <li><span class="route-legend-dot" aria-hidden="true"></span>Singgah atau dilewati</li>
+          </ul>
+          <p>Peta Sichuan dan Yunnan, 8–21 November 2026. Skala perkiraan; U menunjuk utara.</p>
+        </figcaption>
+      </figure>
+      <section class="route-timeline" aria-labelledby="route-timeline-title">
+        <h2 id="route-timeline-title">Urutan hari</h2>
+        <ol role="list">${days.map((_, index) => timelineEntry(index)).join('')}</ol>
+      </section>
+    </div>
+    <section class="guide-source-section" aria-labelledby="route-map-sources"><h2 id="route-map-sources">Sumber peta</h2><p>Batas provinsi dan sungai dari Natural Earth 10m (domain publik), disederhanakan sekitar 2,5 km. Titik kota memakai koordinat acuan yang sama dengan prakiraan cuaca di halaman tempat. Pingwu dan Stasiun Huanglongjiuzhai adalah titik perkiraan; Pingwu hanya penanda jalur memutar 10 November, bukan tempat singgah.</p><p>Jarak dan waktu tempuh ada di setiap hari dan masih perlu dicek bersama sopir di Amap.</p></section>
+  </main>
+  <footer class="container guide-footer"><a href="/">Kembali ke itinerary ${days.length} hari</a>${siteCredit()}</footer>`;
+}

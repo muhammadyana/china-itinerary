@@ -1,0 +1,83 @@
+/* Route map: a prerendered SVG beside a day-by-day timeline; hover or focus spotlights a day's legs. */
+.route-map-page { padding-top: var(--space-xl); }
+.route-map-intro { display: grid; gap: var(--space-md); max-width: 62ch; }
+.route-map-intro h1 { max-width: 16ch; text-wrap: balance; }
+.route-map-intro p { color: var(--color-ink-2); }
+.route-map-intro .lead { color: var(--color-ink); }
+
+.route-map-layout { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: var(--space-2xl); margin-top: var(--space-xl); align-items: start; }
+.route-map-figure { position: sticky; top: var(--site-navigation-clearance); margin: 0; }
+.route-map { display: block; width: min(100%, calc((100svh - var(--site-navigation-clearance) - 6rem) * var(--map-aspect))); min-width: min(100%, 320px); height: auto; margin-inline: auto; border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-paper-3); }
+.route-map-figure figcaption { display: grid; gap: var(--space-xs); margin-top: var(--space-sm); color: var(--color-muted); font-size: 13px; }
+
+.map-ground { fill: var(--color-paper-3); }
+.map-province { fill: var(--color-paper-2); stroke: var(--color-rule-2); stroke-width: .8; stroke-linejoin: round; }
+.map-province.is-route { fill: var(--color-glass-solid); }
+.map-river { fill: none; stroke: var(--color-map-water); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.map-province-label { fill: var(--color-muted); font-size: 12px; font-weight: 600; letter-spacing: .24em; text-anchor: middle; }
+.map-river-label { fill: var(--color-map-water-ink); font-size: 12px; font-style: italic; text-anchor: middle; }
+.map-flight-label { fill: var(--color-muted); font-size: 12px; }
+
+.route-leg { fill: none; stroke-linecap: round; transition: stroke-width var(--dur-short) var(--ease-out); }
+.route-leg-car { stroke: var(--color-accent); stroke-width: 3; }
+.route-leg-train { stroke: var(--color-ink-2); stroke-width: 3; stroke-dasharray: 7 5; stroke-linecap: butt; }
+.route-leg-bus { stroke: var(--color-accent); stroke-width: 2.4; stroke-dasharray: 2 4; }
+.route-leg-plane { stroke: var(--color-muted); stroke-width: 2.4; stroke-dasharray: .5 6; }
+.route-arrow-head { fill: var(--color-muted); }
+.route-day,.route-badge { transition: opacity var(--dur-short) var(--ease-out); }
+.route-day a { cursor: pointer; }
+.route-day:hover .route-leg,.route-day.is-active .route-leg { stroke-width: 5.5; }
+.route-map.has-active :is(.route-day,.route-badge):not(.is-active) { opacity: .28; }
+.route-badge circle { fill: var(--color-autumn); stroke: var(--color-glass-solid); stroke-width: 2; }
+.route-badge text { fill: var(--color-on-autumn); font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; text-anchor: middle; }
+
+.route-point circle { fill: var(--color-ink-2); stroke: var(--color-glass-solid); stroke-width: 1.5; }
+.route-point.is-overnight circle { fill: var(--color-glass-solid); stroke: var(--color-ink); stroke-width: 2.2; }
+.route-point text { fill: var(--color-ink); font-size: 14px; paint-order: stroke; stroke: var(--color-glass-solid); stroke-width: 3.5px; stroke-linejoin: round; }
+.route-point.is-overnight text { font-size: 16px; font-weight: 600; }
+.map-scale path { fill: none; stroke: var(--color-ink-2); stroke-width: 1.5; }
+.map-scale text,.map-north text { fill: var(--color-ink-2); font-size: 11px; text-anchor: middle; }
+.map-north path { fill: var(--color-ink-2); }
+
+.route-legend { display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-md); margin: 0; padding: 0; list-style: none; color: var(--color-ink-2); }
+.route-legend li { display: inline-flex; align-items: center; gap: var(--space-xs); }
+.route-legend-line { width: 28px; border-top: 3px solid var(--color-accent); }
+.route-legend-line.is-train { border-top-color: var(--color-ink-2); border-top-style: dashed; }
+.route-legend-line.is-bus { border-top-style: dotted; }
+.route-legend-line.is-plane { border-top-color: var(--color-muted); border-top-style: dotted; }
+.route-legend-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--color-ink-2); }
+.route-legend-dot.is-overnight { width: 12px; height: 12px; border: 2px solid var(--color-ink); background: var(--color-glass-solid); }
+
+.route-timeline h2 { font-size: var(--text-title); line-height: 1.2; }
+.route-timeline ol { display: grid; margin: var(--space-md) 0 0; padding: 0; list-style: none; }
+.route-entry { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: var(--space-md); padding: var(--space-md) var(--space-sm); border-top: 1px solid var(--color-rule); scroll-margin-top: var(--space-xl); transition: background-color var(--dur-micro) var(--ease-out); }
+.route-entry:hover,.route-entry:focus-within,.route-entry:target { background: var(--color-rust-wash); }
+.route-entry-number { display: grid; place-items: center; width: 32px; height: 32px; border-radius: var(--radius-pill); background: var(--color-autumn); color: var(--color-on-autumn); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.route-entry-body { display: grid; gap: var(--space-2xs); min-width: 0; }
+.route-entry-date { display: flex; flex-wrap: wrap; gap: 0 var(--space-sm); color: var(--color-muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.route-entry h3 { font-size: 19px; line-height: 1.25; letter-spacing: -.015em; }
+.route-entry-path { color: var(--color-ink-2); overflow-wrap: anywhere; }
+.route-entry-meta { color: var(--color-muted); font-size: 14px; }
+.route-entry-sleep { display: flex; align-items: center; gap: var(--space-xs); color: var(--color-ink); font-size: 14px; }
+.route-entry-sleep svg { width: 16px; height: 16px; color: var(--color-accent); }
+.route-entry .text-link { width: fit-content; gap: var(--space-2xs); color: var(--color-accent); font-size: 14px; font-weight: 500; }
+.route-entry .text-link svg { width: 16px; height: 16px; }
+
+.route-map-page > .guide-source-section { margin-top: var(--space-3xl); }
+
+@media (max-width: 959px) {
+  .route-map-layout { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+  .route-map-figure { position: static; }
+  .route-map { width: 100%; }
+}
+
+@media (max-width: 599px) {
+  .route-map-page { padding-top: var(--space-lg); }
+  .route-map-intro h1 { font-size: 40px; }
+  .route-map { border-radius: 20px; }
+  .route-entry { padding-inline: var(--space-2xs); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-leg,.route-day,.route-badge,.route-entry { transition: none; }
+}

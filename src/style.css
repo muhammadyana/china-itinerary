@@ -32,6 +32,7 @@
  --color-photo-badge: #fffaf20a; --color-photo-badge-shine: #ffffff1f; --color-photo-badge-clear: #ffffff05;
  --color-photo-badge-edge: #ffffff70; --color-photo-badge-hover: #fffaf22e;
  --color-warning: #77531d; --color-warning-surface: #faf0d9;
+ --color-map-water: #7da1a6; --color-map-water-ink: #4c6f74;
  --font-display: 'Geist', system-ui, sans-serif; --font-body: 'Geist', system-ui, sans-serif;
  --font-outlier: var(--font-body); --display-weight: 600;
  --container: 1280px; --gutter: 40px; --gap-columns: 40px;
@@ -194,6 +195,7 @@ dialog::backdrop { background: var(--color-backdrop); }
 .picker-days .choice-meta { font-size: 11px; }
 .picker-days .date-choice > svg { display: none; }
 .dialog-intro { margin-bottom: var(--space-lg); font-size: 15px; }
+.dialog-intro a { color: var(--color-accent); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
 .overview-list li { border-top: 1px solid var(--color-rule); }
 .overview-list a { display: flex; align-items: center; gap: var(--space-md); padding: var(--space-md) 0; text-decoration: none; }
 .overview-list a:hover { color: var(--color-accent); }

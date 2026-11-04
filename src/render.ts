@@ -1,4 +1,5 @@
 import { guideForPlace, pageForPlace, placePath } from './guides.ts';
+import { routeMapPath } from './route-map-main.ts';
 import { renderWeather } from './weather.ts';
 import { weatherLocationForGuide } from './weather-locations.ts';
 import { currencyText, hasCnyAmount, renderExchangeRate } from './currency.ts';
@@ -74,7 +75,7 @@ export function dayView(day: Day) {
  <nav class="day-pagination" aria-label="Pindah hari"><button type="button" class="quiet-button" data-action="previous" ${index===0?'disabled':''}>${icon('left')}<span>Hari sebelumnya</span></button><button type="button" class="quiet-button" data-action="next" ${index===days.length-1?'disabled':''}><span>Hari berikutnya</span>${icon('right')}</button></nav>`;
 }
 export function overviewContent(current: string) {
- return `<p class="dialog-intro">14 hari, 13 malam. Sembilan malam di Sichuan, empat di Yunnan.</p><ol class="overview-list">${days.map(day=>`<li><a href="#${day.date}" data-date="${day.date}" ${current===day.date?'aria-current="date"':''}><time datetime="${day.date}">${day.date.slice(-2)} Nov</time><span><strong>${e(day.title)}</strong><span>${day.overnight?`Menginap di ${e(day.overnight.name)}`:'Penerbangan pulang'}</span></span>${icon('right')}</a></li>`).join('')}</ol><details class="booking-options"><summary>Mobil & alternatif paket${icon('down')}</summary>${bookingOptions.map((o,i)=>`<div class="booking-option"><h3>${e(o.title)}</h3><p>${e(o.description)}</p>${external(i===0?'Lihat penyedia mobil':'Lihat paket alternatif',o.url)}</div>`).join('')}</details>`;
+ return `<p class="dialog-intro">14 hari, 13 malam. Sembilan malam di Sichuan, empat di Yunnan. <a href="${routeMapPath}">Lihat di peta</a></p><ol class="overview-list">${days.map(day=>`<li><a href="#${day.date}" data-date="${day.date}" ${current===day.date?'aria-current="date"':''}><time datetime="${day.date}">${day.date.slice(-2)} Nov</time><span><strong>${e(day.title)}</strong><span>${day.overnight?`Menginap di ${e(day.overnight.name)}`:'Penerbangan pulang'}</span></span>${icon('right')}</a></li>`).join('')}</ol><details class="booking-options"><summary>Mobil & alternatif paket${icon('down')}</summary>${bookingOptions.map((o,i)=>`<div class="booking-option"><h3>${e(o.title)}</h3><p>${e(o.description)}</p>${external(i===0?'Lihat penyedia mobil':'Lihat paket alternatif',o.url)}</div>`).join('')}</details>`;
 }
 export function photoDetail(placeId: string): PhotoContent {
  const p=places[placeId];const photo=p.photo?photos[p.photo]:undefined;

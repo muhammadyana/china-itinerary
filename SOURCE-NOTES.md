@@ -178,6 +178,10 @@ Recent references include the 31 October Jiuzhaigou notice, 25 October Yading vi
 
 The interface uses a fixed warm-light palette under both device color preferences. Glass effects apply to controls and navigation; practical reading panels remain opaque, with reduced-transparency and increased-contrast fallbacks.
 
+## Route map (4 November 2026)
+
+Province outlines and river centerlines on `/places/map/` come from Natural Earth 10m admin-1 states/provinces and rivers + lake centerlines (public domain, GeoJSON from the `nvkelso/natural-earth-vector` repository, downloaded 4 November 2026), clipped to the trip area and simplified to about 2.5 km by `ops/prepare-route-map.mjs`. Natural Earth admin-1 boundaries are not authoritative borders. Town points reuse the verified weather coordinates. Approximate references: Huanglongjiuzhai station (32.78 N, 103.63 E), Pingwu (32.41 N, 104.53 E, not a stop; it keeps the 10 November line on the expressway detour) and the Dujiangyan lunch stop (31.00 N, 103.62 E). Lines join points in visiting order and are not road geometry.
+
 ## Traveler revision — Bipenggou (4 November 2026)
 
 G213 Songpan–Maoxian has been closed by the Dingziba landslide since 16 September 2026 and was still not cleared on 22 October ([Jimu via Sohu](https://www.sohu.com/a/1091125891_121443915)), so the 10 November drive from Jiuzhaigou can no longer use it. At the traveler's request Bipenggou replaces Shuangqiao Valley: 10 November drives the Jiumian expressway, Dujiangyan and G4217 to a night near the Bipenggou gate; 11 November visits the valley in the morning and crosses 理小路 (G662, daytime only) to Rilong; 12 November drives Rilong, Danba, Moshi Park and Tagong to Xinduqiao. The Danba night and Zhonglu drop out; 13–21 November are unchanged.
