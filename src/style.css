@@ -179,7 +179,9 @@ summary:hover { color: var(--color-accent); }
 .practical-list details + details { border-top: 1px solid var(--color-rule); }
 .practical-content { padding: 0 0 20px; font-size: 14px; line-height: 1.7; color: var(--color-ink-2); }
 .practical-content .text-link { margin-top: var(--space-xs); }
-.text-link { min-width: 44px; display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; }
+/* Links must stand apart from body text: accent colour, weight and an underline, not colour alone. */
+.text-link { min-width: 44px; display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; color: var(--color-accent); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.text-link:hover { color: var(--color-autumn-hover); text-decoration-thickness: 2px; }
 .night-detail { display: flex; gap: var(--space-sm); align-items: flex-start; margin-top: var(--space-lg); font-size: 14px; color: var(--color-ink-2); }
 .night-detail svg { margin-top: var(--space-2xs); }
 .day-end { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); margin-top: var(--space-lg); color: var(--color-muted); font-size: 12px; }
