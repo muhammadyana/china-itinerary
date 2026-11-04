@@ -53,7 +53,7 @@ for (const width of [320, 390, 1440]) {
     await page.evaluate(() => document.fonts.ready);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
     // In-sentence links are exempt from the target-size rule, as in WCAG 2.5.8.
-    const tooSmall = await page.locator('main a:not(.prepare-list a),main button,main summary').evaluateAll(nodes => nodes.filter(node => {
+    const tooSmall = await page.locator('main a:not(.prepare-list a, .prepare-section-lead a),main button,main summary').evaluateAll(nodes => nodes.filter(node => {
       const rect = node.getBoundingClientRect();
       return rect.width > 0 && rect.height > 0 && (rect.width < 44 || rect.height < 44);
     }).map(node => node.textContent?.trim()));

@@ -141,6 +141,8 @@ test('native keyboard traversal, Escape focus restoration, and outside click wor
   await page.keyboard.press('Tab');
   await expect(menu.getByRole('link', { name: 'Persiapan & pemesanan' })).toBeFocused();
   await page.keyboard.press('Tab');
+  await expect(menu.getByRole('link', { name: 'Kereta & timeline' })).toBeFocused();
+  await page.keyboard.press('Tab');
   await expect(menu.getByRole('link', { name: 'Jalan sore di Chengdu', exact: true })).toBeFocused();
   await page.keyboard.press('Escape');
   await expect(menu).toHaveJSProperty('open', false);

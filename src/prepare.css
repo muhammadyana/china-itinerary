@@ -18,7 +18,7 @@
 .prepare-booking { display: grid; align-content: start; gap: var(--space-xs); padding: var(--space-lg); border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-glass-solid); }
 .prepare-booking-date { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2xs) var(--space-sm); color: var(--color-accent); font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums; }
 .prepare-booking-date strong { color: var(--color-ink); font-weight: 500; }
-.prepare-booking h4 { font-size: 20px; line-height: 1.25; letter-spacing: -.015em; }
+.prepare-booking :is(h3,h4) { font-size: 20px; line-height: 1.25; letter-spacing: -.015em; }
 .prepare-booking dl { display: grid; margin: 0; }
 .prepare-booking dl > div { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: var(--space-sm); padding-block: var(--space-xs); border-top: 1px solid var(--color-rule); }
 .prepare-booking dt { color: var(--color-ink); font-size: 14px; font-weight: 500; }
@@ -40,6 +40,11 @@
 .prepare-contacts dd { margin: var(--space-2xs) 0 0; color: var(--color-ink-2); font-size: 14px; }
 .prepare-contacts dd a { display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; color: var(--color-ink); font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
 .prepare-contacts dd span { display: block; }
+.trains-timeline { display: grid; gap: 0; max-width: 760px; margin: var(--space-md) 0 0; padding: 0; list-style: none; }
+.trains-timeline li { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: var(--space-md); padding-block: var(--space-sm); border-top: 1px solid var(--color-rule); color: var(--color-ink-2); }
+.trains-time { color: var(--color-accent); font-weight: 600; font-variant-numeric: tabular-nums; }
+.prepare-section-lead strong { color: var(--color-ink); font-weight: 600; }
+.prepare-section-lead a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
 .prepare-sources { display: grid; gap: 0; margin: var(--space-sm) 0 0; padding: 0; list-style: none; }
 
 @media (max-width: 599px) {
@@ -48,4 +53,5 @@
   .prepare-section { margin-top: var(--space-2xl); }
   .prepare-booking { padding: var(--space-md); }
   .prepare-booking dl > div { grid-template-columns: minmax(0, 1fr); gap: var(--space-2xs); }
+  .trains-timeline li { grid-template-columns: minmax(0, 1fr); gap: var(--space-2xs); }
 }

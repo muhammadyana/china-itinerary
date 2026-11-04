@@ -2,8 +2,9 @@ import { days, places } from './itinerary.ts';
 import { pageForPlace, placePath } from './guides.ts';
 import { staysPath } from './stays.ts';
 import { routeMapPath } from './route-map-main.ts';
-// Kept as a literal so the navigation does not pull the preparation page data into every page.
+// Kept as literals so the navigation does not pull page data into every page.
 const preparePath = '/places/prepare/';
+const trainsPath = '/places/trains/';
 
 const initializedDocuments = new WeakSet<Document>();
 const escapeHtml = (value: string) => value.replace(/[&<>"']/g, character => ({
@@ -22,7 +23,7 @@ export function renderSiteNavigation(): string {
 
   const groups = (['Sichuan', 'Yunnan'] as const).map(region => `<section class="place-menu-group"><h2>${region}</h2><ol role="list">${destinations.filter(place => place.region === region).map(place => `<li><a href="${escapeHtml(placePath(place.slug))}">${escapeHtml(place.name)}</a></li>`).join('')}</ol></section>`).join('');
 
-  return `<nav class="site-navigation" aria-label="Navigasi utama"><a class="site-navigation-link" href="/">Beranda</a><a class="site-navigation-link" href="/#itinerary" data-action="itinerary">Itinerary</a><details class="place-menu"><summary>Tempat<span class="place-menu-chevron" aria-hidden="true"></span></summary><div class="place-menu-panel"><a class="place-menu-all" href="/places/">Lihat semua tempat<span aria-hidden="true">↗</span></a><a class="place-menu-all" href="${staysPath}">Hotel & hostel per malam<span aria-hidden="true">↗</span></a><a class="place-menu-all" href="${routeMapPath}">Peta rute 14 hari<span aria-hidden="true">↗</span></a><a class="place-menu-all" href="${preparePath}">Persiapan & pemesanan<span aria-hidden="true">↗</span></a>${groups}</div></details><a class="site-navigation-link site-navigation-stays" href="${staysPath}">Hotel</a><a class="site-navigation-link" href="/#user-gallery" data-action="gallery">Galeri</a><a class="site-navigation-link" href="/#route" data-action="overview">Rute</a></nav>`;
+  return `<nav class="site-navigation" aria-label="Navigasi utama"><a class="site-navigation-link" href="/">Beranda</a><a class="site-navigation-link" href="/#itinerary" data-action="itinerary">Itinerary</a><details class="place-menu"><summary>Tempat<span class="place-menu-chevron" aria-hidden="true"></span></summary><div class="place-menu-panel"><a class="place-menu-all" href="/places/">Lihat semua tempat<span aria-hidden="true">↗</span></a><a class="place-menu-all" href="${staysPath}">Hotel & hostel per malam<span aria-hidden="true">↗</span></a><a class="place-menu-all" href="${routeMapPath}">Peta rute 14 hari<span aria-hidden="true">↗</span></a><a class="place-menu-all" href="${preparePath}">Persiapan & pemesanan<span aria-hidden="true">↗</span></a><a class="place-menu-all" href="${trainsPath}">Kereta & timeline<span aria-hidden="true">↗</span></a>${groups}</div></details><a class="site-navigation-link" href="/#user-gallery" data-action="gallery">Galeri</a><a class="site-navigation-link" href="/#route" data-action="overview">Rute</a></nav>`;
 }
 
 export function initializeSiteNavigation(root: ParentNode = document): void {
