@@ -16,8 +16,8 @@ export const chengduGuides: DestinationGuide[] = [
     gettingThere: {
       origin: 'Bandara Chengdu Tianfu (TFU), Minggu 8 November',
       steps: [
-        'Setelah mendarat pukul 12.20 dengan penerbangan domestik dari Shanghai (imigrasi sudah di Pudong), ambil bagasi. Pilihan praktis adalah taksi resmi bandara menuju hotel di Chengdu; simpan alamat hotel dalam bahasa Mandarin dan titipkan koper sebelum berjalan-jalan.',
-        'Alternatif hemat: bus bandara jalur 1 menuju Chunxi Road. Ctrip mencantumkan arah dari TFU T2; tanyakan petugas titik naik yang sesuai terminal kedatangan. Lanjutkan ke hotel sebelum memulai jalan santai.',
+        'Setelah mendarat pukul 12.20 dengan penerbangan domestik dari Shanghai (imigrasi sudah di Pudong), ambil bagasi. Pilihan praktis adalah taksi resmi dari antrean di lantai dasar Terminal 2, pintu G04, menuju hotel di Chengdu; simpan alamat hotel dalam bahasa Mandarin dan titipkan koper sebelum berjalan-jalan.',
+        'Alternatif hemat: bus bandara jalur 1 (机场巴士1号线) dari pintu G03 di lantai dasar Terminal 2 menuju Chunxi Road. Lanjutkan ke hotel sebelum memulai jalan santai.',
         'Mulai dari 春熙路, lalu berjalan ke 成都太古里 di No. 8 Middle Shamao Street. Dari lokasi lain di kota, Metro jalur 2 atau 3 berhenti di Chunxi Road, yang terhubung dengan Taikoo Li.',
         'Malamnya lanjutkan ke IFS atau Taikoo Li yang masih di kawasan Chunxi Road. Lihat pilihan mal beserta jam acuan dan sumbernya di bagian malam pertama. Pilih satu kawasan, makan malam, lalu kembali ke hotel di Chengdu; perjalanan antarkota dilanjutkan esok hari.',
       ],

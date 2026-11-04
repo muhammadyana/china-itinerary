@@ -18,8 +18,8 @@ export const jiuzhaigouSlots = [
 // The 7 November flight has no day panel, so it lives here; the other days come from the day timelines.
 const departure = { date: '2026-11-07', title: 'Sabtu, 7 November · Jakarta ke Shanghai', steps: [
     ['15.45 WIB', 'Juneyao HO1568 dari Jakarta (CGK).'],
-    ['23.20', 'Mendarat di Shanghai Pudong (PVG). Imigrasi dan bea cukai di sini; tes roaming dan WhatsApp.'],
-    ['Malam', 'Transit sekitar 9,5 jam sampai penerbangan pagi.'],
+    ['23.20', 'Mendarat di Terminal 2 Shanghai Pudong (PVG). Imigrasi di sini; bila bagasi tidak langsung ke Chengdu, ambil dan lewati bea cukai. Tes roaming dan WhatsApp.'],
+    ['±00.30–06.00', 'Istirahat di Aerotel (Terminal 2 lantai 6) atau area istirahat gratis lantai 3 dekat island M. Bawa bekal halal.'],
 ] as TimelineStep[] };
 const timelineTitles: Record<string, string> = { '2026-11-08': 'Minggu, 8 November · Tiba di Chengdu', '2026-11-09': 'Senin, 9 November · Jiuzhaigou', '2026-11-10': 'Selasa, 10 November · Kereta dan bus ke Lixian' };
 export const timeline = [departure, ...Object.entries(timelineTitles).map(([date, title]) => ({ date, title, steps: dayTimelines[date] }))];

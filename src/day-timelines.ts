@@ -4,9 +4,10 @@ export type TimelineStep = [time: string, text: string];
 
 export const dayTimelines: Record<string, TimelineStep[]> = {
   '2026-11-08': [
+    ['±06.30–07.00', 'Check-in Juneyao di lantai 3 Terminal 2 Pudong, island J atau L. Batas check-in 08.10.'],
     ['08.50', 'Juneyao HO1119 dari Pudong ke Chengdu Tianfu.'],
-    ['12.20', 'Mendarat di Tianfu (TFU). Penerbangan domestik, jadi tinggal ambil bagasi, lalu makan siang sebelum ke hotel.'],
-    ['±14.00–15.30', 'DiDi atau taksi ke hotel di Chunxi Road, sekitar satu jam lebih.'],
+    ['12.20', 'Mendarat di Terminal 2 Tianfu (TFU). Penerbangan domestik, jadi tinggal ambil bagasi, lalu makan siang sebelum ke hotel.'],
+    ['±14.00–15.30', 'Taksi resmi dari pintu G04 atau DiDi ke hotel di Chunxi Road, sekitar 60–90 menit.'],
     ['Sore–malam', 'Jalan santai di Chunxi Road dan Taikoo Li, makan malam halal. Beli bekal berlabel 清真 untuk 9–12 November, lalu tidur cepat.'],
   ],
   '2026-11-09': [

@@ -28,7 +28,7 @@ export const pdfPath = 'China-Itinerary-8-21-November-2026.pdf';
 // Refresh the download cache key for every build and browser session.
 export const pdfDownloadUrl = `/${pdfPath}?v=${Date.now()}`;
 export const places: Record<string, Place> = {
-  tfu: { name: 'Chengdu Tianfu (TFU)', chinese: '成都天府国际机场', description: 'Tiba dengan penerbangan domestik dari Shanghai Pudong. Ambil bagasi, lalu menuju hotel di Chengdu sebelum jalan sore di kota.', page: 5, photo: 'tfu', alt: 'Area dalam Terminal 1 Bandara Chengdu Tianfu dengan papan petunjuk dan pengunjung.' },
+  tfu: { name: 'Chengdu Tianfu (TFU)', chinese: '成都天府国际机场', description: 'Tiba di Terminal 2 dengan penerbangan domestik dari Shanghai Pudong. Ambil bagasi, lalu menuju hotel di Chengdu sebelum jalan sore di kota.', page: 5, photo: 'tfu', alt: 'Area dalam Terminal 1 Bandara Chengdu Tianfu dengan papan petunjuk dan pengunjung.' },
   chengdu: { name: 'Jalan sore di Chengdu', chinese: '春熙路 / 成都太古里', description: 'Mulai santai di pusat kota: telusuri Chunxi Road dan gang terbuka Taikoo Li, lalu makan malam sebelum kembali ke hotel.', photo: 'chengdu-chunxi', alt: 'Jalan pejalan kaki Chunxi Road dengan bangunan berfasad emas dan pengunjung.', photoNote: chengduGuidePhotos['chengdu-chunxi'].photoNote },
   'chengdu-east': { name: 'Stasiun Chengdu East', chinese: '成都东站', description: 'Di Chengdu Dong, siapkan paspor untuk pemeriksaan sebelum naik kereta menuju Huanglongjiuzhai.', page: 5, photo: 'chengdu-east', alt: 'Area pintu masuk Stasiun Chengdu East dengan papan nama stasiun.' },
   huanglongjiuzhai: { name: 'Stasiun Huanglongjiuzhai', chinese: '黄龙九寨站', description: 'Stasiun di wilayah Songpan ini menjadi titik berganti kendaraan menuju gerbang Jiuzhaigou.', page: 5, photo: 'huanglongjiuzhai', alt: 'Fasad Stasiun Huanglongjiuzhai di antara pegunungan.' },
@@ -165,7 +165,23 @@ export const days: Day[] = [
   "practical": [
     {
       "title": "Penerbangan 7–8 November",
-      "text": "Juneyao HO1568 dari Jakarta (CGK) Sabtu 7 November 15.45 WIB, tiba Shanghai Pudong 23.20 waktu China. Imigrasi dan bea cukai di Pudong, lalu transit semalam sekitar 9,5 jam. HO1119 berangkat 08.50 dan tiba di Tianfu 12.20."
+      "text": "Juneyao HO1568 dari Jakarta (CGK) Sabtu 7 November 15.45 WIB, tiba di Terminal 2 Shanghai Pudong pukul 23.20 waktu China. HO1119 berangkat 08.50 dari terminal yang sama dan tiba di Terminal 2 Tianfu pukul 12.20. HO1568 tanggal 5 November sempat dibatalkan; cek status di aplikasi Juneyao atau Trip.com pada 6–7 November."
+    },
+    {
+      "title": "Imigrasi dan bagasi di Pudong",
+      "text": "Isi kartu kedatangan online sebelum berangkat, lewat aplikasi 移民局12367 atau mini program di WeChat/Alipay. Di konter CGK, tanyakan apakah bagasi langsung ke TFU dan minta boarding pass HO1119. Jika tidak, ambil bagasi di Pudong, lewati bea cukai, lalu check-in ulang di konter Juneyao lantai 3 Terminal 2 (island J atau L). Check-in tutup 08.10; check-in online tutup 08.00."
+    },
+    {
+      "title": "Malam di Pudong",
+      "text": "Paling praktis: Aerotel di lantai 6 Terminal 2, masih di area umum dan 3 menit dari pemeriksaan keamanan. Pesan di Trip.com dengan tanggal check-in 7 November dan kabari tiba sekitar 00.30. Gratis: area istirahat di lantai 3 Terminal 2 dekat island M. Kapsul tidur hanya ada di ruang tunggu internasional, jadi tidak bisa dipakai."
+    },
+    {
+      "title": "Makan dan salat di Pudong",
+      "text": "Belum ada makanan halal yang terverifikasi di Pudong pada malam hari. Makan di CGK, bawa camilan halal, dan minta makanan Muslim (MOML) untuk HO1568 lewat aplikasi Juneyao atau 95520. Tidak ada ruang salat resmi; salat di kamar hotel atau sudut yang tenang. Wudu bisa di kamar mandi gratis di jembatan kedatangan D69 atau D83, sebelum imigrasi."
+    },
+    {
+      "title": "Dari Tianfu ke hotel",
+      "text": "Taksi resmi di lantai dasar Terminal 2, pintu G04, sekitar CNY 170–200 termasuk tol. DiDi dijemput di lantai 1 Gedung Parkir 1, sekitar 500 m dari pintu kedatangan B1/B2. Hemat: bus bandara jalur 1 dari pintu G03 ke Chunxi Road, CNY 15, tiap 20–30 menit, sekitar 80 menit."
     },
     {
       "title": "Malam pertama di Chengdu",
@@ -361,7 +377,8 @@ export const days: Day[] = [
   ],
   practical: [
     { title: 'Tiket Impression Lijiang', text: 'Pilihan 19 November pada tangkapan layar Trip.com: 13.20 atau 14.50, mulai Rp462.162. Utamakan 13.20. Harga kalender adalah acuan terendah, bukan harga final kursi biasa/VIP; cek total dan ketersediaan sebelum memesan.', link: { label: 'Cek sesi & tiket di Trip.com', url: 'https://id.trip.com/travel-guide/attraction/yulong/impressions-lijiang-performance-10758688/' } },
-    { title: 'Jika antrean gondola panjang', text: 'Persingkat atau lewati Glacier Park agar pertunjukan tetap terkejar. Blue Moon Valley menyesuaikan sisa waktu; jangan menghabiskan jeda masuk teater untuk antrean tambahan.' },
+    { title: 'Paket Trip.com', text: 'Trip.com menjual paket resmi CNY 488 per orang: tiket kawasan, kereta gantung Glacier Park, Impression Lijiang, dan antar-jemput dari kota tua. Cukup tunjukkan ID, tanpa mini program. Kumpul 07.50–08.00; pesan paling lambat 16.00 sehari sebelumnya. Ketersediaan 19 November belum terlihat per 4 November.' },
+    { title: 'Jika antrean gondola panjang', text: 'Sejak 13 Juli 2026, yang terlambat dari slot kereta gantung dipindah ke slot 16.30–17.00. Persingkat atau lewati Glacier Park agar pertunjukan tetap terkejar. Blue Moon Valley menyesuaikan sisa waktu; jangan menghabiskan jeda masuk teater untuk antrean tambahan.' },
     { title: 'Kereta dan bagasi', text: 'Koper dititipkan di hotel Lijiang. Sisakan waktu mengambilnya dan menuju stasiun; pilih kedatangan Dali tetap 19 November.', link: {label:'Pesan di Trip.com',url:'https://id.trip.com/trains/china/route/lijiang-to-dali/'} },
     { title: 'Bekal halal', text: 'Bawa bekal untuk satu hari di Jade Dragon. Makan malam halal di Lijiang sebelum kereta, karena tiba di Dali sudah larut.' },
   ],
