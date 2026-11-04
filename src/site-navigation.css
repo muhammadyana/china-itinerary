@@ -208,8 +208,13 @@ html {
 @media (max-width: 1000px) {
   .site-header {
     padding-top: var(--site-navigation-clearance);
-    padding-bottom: var(--space-md);
+    padding-bottom: 0;
     justify-content: center;
+  }
+
+  /* On phones the floating menu is the header; the wordmark only took a row of space. */
+  .site-header .wordmark {
+    display: none;
   }
 }
 
