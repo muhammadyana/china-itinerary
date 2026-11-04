@@ -213,6 +213,7 @@ html {
   }
 }
 
+/* Six controls on phones: small minimum padding, and flex shares the spare room back out. */
 @media (max-width: 600px) {
   .site-header .site-navigation {
     gap: 0;
@@ -221,15 +222,23 @@ html {
   .site-navigation .site-navigation-link,
   .site-navigation .nav-menu > summary {
     gap: 6px;
-    padding-inline: 6px;
+    padding-inline: 4px;
     font-size: 12px;
   }
 }
 
-/* Two dropdowns leave no room for their chevrons on the narrowest phones. */
-@media (max-width: 360px) {
+/* With chevrons the bar needs about 330px, so the narrowest phones drop them. */
+@media (max-width: 365px) {
   .nav-menu-chevron {
     display: none;
+  }
+}
+
+/* Below that the bar takes half the usual side gutter. */
+@media (max-width: 340px) {
+  .site-header .site-navigation {
+    width: calc(100% - var(--space-md));
+    max-width: none;
   }
 }
 

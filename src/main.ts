@@ -10,8 +10,10 @@ import './chengdu-evening.css';
 import './stays.css';
 import './route-map.css';
 import './prepare.css';
+import './site-search.css';
 import { initializeCurrency } from './currency.ts';
 import { initializeSiteNavigation } from './site-navigation.ts';
+import { initializeSiteSearch } from './site-search.ts';
 import { initializeGuide } from './guide-main.ts';
 import { initializeRouteMap } from './route-map-main.ts';
 import { initializePhotoLoading } from './photo-loading.ts';
@@ -150,7 +152,8 @@ document.addEventListener('click', event => {
     if (picker.open) { returnFocus.set(picker,restoreTarget); picker.close(); }
     if (overview.open) { returnFocus.set(overview,restoreTarget); overview.close(); }
     showDay(date,{push:true,scroll:true});
-    if (!dateLink.closest('dialog') || matchMedia('(min-width: 960px)').matches) $('#day-heading').focus({preventScroll:true});
+    // The picker and overview return focus to the mobile picker on close; other links (the search dialog's) hand it to the day.
+    if (!(picker.contains(dateLink) || overview.contains(dateLink)) || matchMedia('(min-width: 960px)').matches) $('#day-heading').focus({preventScroll:true});
     return;
   }
   const button = event.target.closest<HTMLElement>('[data-action]');
@@ -241,4 +244,5 @@ initializeRouteMap();
 initializeWeather();
 initializeCurrency();
 initializeSiteNavigation();
+initializeSiteSearch();
 document.documentElement.classList.add('js');

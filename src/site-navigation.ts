@@ -1,10 +1,6 @@
 import { days, places } from './itinerary.ts';
 import { pageForPlace, placePath } from './guides.ts';
-import { staysPath } from './stays.ts';
-import { routeMapPath } from './route-map-main.ts';
-// Kept as literals so the navigation does not pull page data into every page.
-const preparePath = '/places/prepare/';
-const trainsPath = '/places/trains/';
+import { planningPages, renderSiteSearch, searchTrigger } from './site-search.ts';
 
 const initializedDocuments = new WeakSet<Document>();
 const escapeHtml = (value: string) => value.replace(/[&<>"']/g, character => ({
@@ -25,10 +21,7 @@ const topLinks: { before: NavLink[]; after: NavLink[] } = {
 
 const itineraryLinks: NavLink[] = [
   { href: '/#itinerary', label: 'Lihat itinerary 14 hari', action: 'itinerary' },
-  { href: staysPath, label: 'Hotel & hostel per malam' },
-  { href: routeMapPath, label: 'Peta rute 14 hari' },
-  { href: preparePath, label: 'Persiapan & pemesanan' },
-  { href: trainsPath, label: 'Kereta & timeline' },
+  ...planningPages,
 ];
 
 // One menu entry per guide page, in the order the itinerary first visits it.
@@ -69,8 +62,8 @@ function placeMenu() {
 }
 
 export function renderSiteNavigation(): string {
-  const items = [...topLinks.before.map(topLink), itineraryMenu(), placeMenu(), ...topLinks.after.map(topLink)].join('');
-  return `<nav class="site-navigation" aria-label="Navigasi utama">${items}</nav>`;
+  const items = [...topLinks.before.map(topLink), itineraryMenu(), placeMenu(), ...topLinks.after.map(topLink), searchTrigger()].join('');
+  return `<nav class="site-navigation" aria-label="Navigasi utama">${items}</nav>${renderSiteSearch()}`;
 }
 
 export function initializeSiteNavigation(root: ParentNode = document): void {

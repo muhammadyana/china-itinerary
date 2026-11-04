@@ -1,0 +1,168 @@
+/* Icon-only trigger at the end of the navigation bar. */
+.site-navigation .site-search-trigger {
+  flex: 0 0 44px;
+  padding: 0;
+}
+
+/* Pinned near the top so the field stays put while results change and an on-screen keyboard opens. */
+.site-search-dialog {
+  --site-search-top: min(12dvh, 120px);
+  width: min(40rem, calc(100% - var(--space-md)));
+  max-width: none;
+  max-height: calc(100dvh - var(--site-search-top) - var(--space-lg));
+  margin-block: var(--site-search-top) auto;
+  padding: var(--space-lg);
+  overflow: hidden;
+  background-image: var(--glass-reflection);
+}
+
+.site-search-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.site-search-dialog .dialog-header {
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.site-search-dialog .dialog-header h2 {
+  font-size: var(--text-xl);
+}
+
+.site-search-dialog .dialog-header .icon-button {
+  margin: 0 calc(-1 * var(--space-xs)) 0 0;
+}
+
+.site-search-form {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.site-search-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.site-search-field > svg {
+  position: absolute;
+  left: var(--space-md);
+  color: var(--color-muted);
+  pointer-events: none;
+}
+
+/* 16px text keeps iOS from zooming into the field. */
+.site-search-field input {
+  width: 100%;
+  min-height: 52px;
+  padding: var(--space-sm) var(--space-md) var(--space-sm) calc(var(--space-md) + 20px + var(--space-sm));
+  border: 1px solid var(--color-muted);
+  border-radius: var(--radius-pill);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-size: var(--text-md);
+}
+
+/* Escape and the close button already clear and close; Chrome's blue clear icon is off-palette and under 44px. */
+.site-search-field input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.site-search-field input::placeholder {
+  color: var(--color-muted);
+  opacity: 1;
+}
+
+.site-search-field input:focus-visible {
+  outline-offset: 2px;
+}
+
+.site-search-status {
+  margin: var(--space-sm) var(--space-md) var(--space-xs);
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}
+
+.site-search-results {
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-rule-2) var(--color-transparent);
+}
+
+.site-search-result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-3xs);
+  min-height: 56px;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 16px;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.site-search-result:hover,
+.site-search-result:focus-visible {
+  background-color: var(--color-paper-2);
+}
+
+.site-search-result:focus-visible {
+  outline-offset: -3px;
+}
+
+.site-search-result-title {
+  font-size: var(--text-md);
+  font-weight: 500;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.site-search-result:hover .site-search-result-title {
+  color: var(--color-accent);
+}
+
+.site-search-result-detail {
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+}
+
+@supports ((backdrop-filter: blur(6px)) or (-webkit-backdrop-filter: blur(6px))) {
+  .site-search-dialog::backdrop {
+    -webkit-backdrop-filter: blur(6px) saturate(120%);
+    backdrop-filter: blur(6px) saturate(120%);
+  }
+}
+
+@media (max-width: 600px) {
+  .site-search-dialog {
+    --site-search-top: calc(var(--space-xs) + env(safe-area-inset-top, 0px));
+    padding: var(--space-md);
+    border-radius: 24px;
+  }
+
+  .site-search-dialog .dialog-header h2 {
+    font-size: var(--text-lg);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .site-search-dialog {
+    background: var(--color-glass-solid);
+    border-color: var(--color-rule-2);
+  }
+
+  .site-search-dialog::backdrop {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
