@@ -20,15 +20,20 @@ export const weatherLocations: Record<string, WeatherLocation> = {
     source: 'https://geocoding-api.open-meteo.com/v1/get?id=1793060&language=en',
     note: 'Acuan area menginap Zhangzha dekat pintu taman; suhu danau dan lembah di dalam taman dapat berbeda.',
   },
+  bipenggou: {
+    id: 'bipenggou', name: 'Bipenggou · gerbang', latitude: 31.4155, longitude: 102.9849,
+    source: 'https://www.openstreetmap.org/way/1351805644',
+    note: 'Acuan pusat pengunjung di mulut lembah sekitar 2.250 m; Danau Panyang sekitar 3.680 m jauh lebih dingin.',
+  },
   rilong: {
     id: 'rilong', name: 'Rilong · Siguniangshan', latitude: 30.99537, longitude: 102.82925,
     source: 'https://geocoding-api.open-meteo.com/v1/get?id=6999083&language=en',
-    note: 'Acuan kota Rilong, area menginap Siguniangshan; suhu Shuangqiao dan puncak gunung dapat berbeda.',
+    note: 'Acuan kota Rilong, area menginap Siguniangshan; suhu Maobiliang dan puncak gunung dapat berbeda.',
   },
   danba: {
     id: 'danba', name: 'Danba · Zhanggu', latitude: 30.86875, longitude: 101.88848,
     source: 'https://geocoding-api.open-meteo.com/v1/get?id=1785258&language=en',
-    note: 'Acuan kota Danba di lembah; desa Jiaju dan Zhonglu di lereng dapat memiliki kondisi berbeda.',
+    note: 'Acuan kota Danba di lembah; Desa Jiaju di lereng dapat memiliki kondisi berbeda.',
   },
   bamei: {
     id: 'bamei', name: 'Bamei', latitude: 30.48448, longitude: 101.48243,
@@ -115,10 +120,9 @@ export const weatherLocations: Record<string, WeatherLocation> = {
 export const weatherLocationForGuide: Record<string, string> = {
   chengdu: 'chengdu',
   jiuzhaigou: 'jiuzhaigou',
+  bipenggou: 'bipenggou',
   siguniangshan: 'rilong',
-  shuangqiao: 'rilong',
   jiaju: 'danba',
-  zhonglu: 'danba',
   'moshi-park': 'bamei',
   tagong: 'tagong',
   'muya-monastery': 'tagong',

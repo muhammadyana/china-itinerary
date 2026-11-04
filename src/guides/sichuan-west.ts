@@ -19,10 +19,10 @@ export const westernGuides: DestinationGuide[] = [
   {
     slug: 'xinduqiao', name: 'Xinduqiao', region: 'Sichuan', placeIds: ['xinduqiao'],
     summary: 'Dua malam di lembah pohon dan rumah Tibet, sebagai basis perjalanan sekitar Kangding.',
-    gettingThere: { origin: 'Tagong, setelah perjalanan dari Danba', steps: ['Lanjutkan mobil sewaan dari Tagong ke hotel Xinduqiao sesuai rute 12 November.', 'Untuk berfoto, minta sopir berhenti di area aman sepanjang koridor sungai dan desa; pemandangan tersebar di luar pusat kota.'], duration: 'Rencana PDF: sekitar 5 jam berkendara untuk seluruh etape Danba ke Xinduqiao, belum termasuk kunjungan.', sources: [xinduqiaoSource.url, jiagenbaSource.url] },
+    gettingThere: { origin: 'Tagong, setelah perjalanan dari Rilong', steps: ['Lanjutkan mobil sewaan dari Tagong ke hotel Xinduqiao sesuai rute 12 November.', 'Untuk berfoto, minta sopir berhenti di area aman sepanjang koridor sungai dan desa; pemandangan tersebar di luar pusat kota.'], duration: 'Itinerary: sekitar 7,5–8,5 jam untuk seluruh hari Rilong ke Xinduqiao, termasuk singgah.', sources: [xinduqiaoSource.url, jiagenbaSource.url] },
     stopAccess: { xinduqiao: 'Gunakan hotel sebagai titik jemput mobil; pilih lokasi foto di koridor desa bersama sopir.' },
     costs: [
-      { label: 'Mobil dan sopir', amount: 'Sesuai penawaran', detail: 'Minta harga untuk rangkaian Danba, Tagong, Xinduqiao dan loop Kangding; pastikan biaya menginap sopir termasuk.', status: 'unconfirmed' },
+      { label: 'Mobil dan sopir', amount: 'Sesuai penawaran', detail: 'Minta harga untuk rangkaian Rilong, Danba, Tagong, Xinduqiao dan loop Kangding; pastikan biaya menginap sopir termasuk.', status: 'unconfirmed' },
       { label: 'Lokasi foto dan parkir', amount: 'Perlu konfirmasi', detail: 'Biaya lahan pribadi atau titik pandang dapat berbeda; tanyakan sebelum masuk.', status: 'unconfirmed' },
     ],
     visitDuration: 'Dua malam; singgah foto menyesuaikan waktu tiba.', bestTime: 'Cahaya pagi atau sore; rute ini tiba pada malam 12 November.',

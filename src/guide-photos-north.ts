@@ -3,22 +3,6 @@ import type { Photo } from './itinerary.ts';
 // Sourced photographs and PDF derivatives preserve their original attribution.
 // The Caicun image is explicitly labeled as an Erhai reference, not a verified pier photograph.
 export const northernGuidePhotos: Record<string, Photo> = {
-  "hongshan-refreshed": {
-    "id": "hongshan-refreshed",
-    "width": 4032,
-    "height": 3024,
-    "sizes": [
-      480,
-      960,
-      1440
-    ],
-    "author": "Yushan Wang",
-    "source": "https://unsplash.com/@dalkeith",
-    "license": "Unsplash License",
-    "licenseUrl": "https://unsplash.com/license",
-    "origin": "Unsplash",
-    "photoNote": "Referensi pegunungan dan hutan Shuangqiao; bukan verifikasi titik Hutan Hongshan atau air terjun. Tanggal pengambilan tidak tersedia; bukan konfirmasi kondisi November 2026."
-  },
   "guide-n-moshi": {
     "id": "guide-n-moshi",
     "width": 740,
@@ -143,7 +127,6 @@ export const northernGuidePhotos: Record<string, Photo> = {
 };
 
 export const northernPlacePhotoIds: Record<string, string> = {
-  "hongshan": "hongshan-refreshed",
   "moshi": "guide-n-moshi",
   "muya": "guide-n-muya",
   "guishan": "guishan-refreshed",
@@ -155,7 +138,6 @@ export const northernPlacePhotoIds: Record<string, string> = {
 };
 
 export const northernPhotoDescriptions: Record<string, string> = {
-  "hongshan-refreshed": "Puncak berbatu berselimut salju di atas deretan pohon konifer Shuangqiao, dengan langit biru dan awan tipis.",
   "guide-n-moshi": "Formasi batu abu-abu di Moshi Park, sesuai PDF perjalanan.",
   "guide-n-muya": "Kompleks Muya Monastery dengan latar pegunungan, sesuai PDF perjalanan.",
   "guishan-refreshed": "Roda doa emas raksasa di Bukit Guishan berdiri di antara pepohonan dengan langit biru dan pengunjung di bagian bawahnya.",

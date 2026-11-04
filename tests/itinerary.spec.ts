@@ -4,7 +4,7 @@ import {days,highlights,places,photos,userPhotos,pdfPath} from '../src/itinerary
 import {guideForPlace,placePath} from '../src/guides';
 import {mkdir,writeFile} from 'node:fs/promises';
 
-const overnight=['Chengdu','Jiuzhaigou','Rilong','Danba','Xinduqiao','Xinduqiao','Litang','Riwa','Riwa','Shangri-La','Lijiang','Dali','Kunming',null];
+const overnight=['Chengdu','Jiuzhaigou','Bipenggou','Rilong','Xinduqiao','Xinduqiao','Litang','Riwa','Riwa','Shangri-La','Lijiang','Dali','Kunming',null];
 const photoRegistry={...photos,...userPhotos};
 const initialPhotoIds=new Set([
  ...highlights.map(highlight=>photoRegistry[highlight.photo||places[highlight.place].photo!].id),
@@ -34,7 +34,8 @@ test('source invariants: 14 dates, 13 nights and conditional routes',async()=>{
  expect(days[13].events.find(e=>e.kind==='stop'&&e.place==='kmg')).toMatchObject({status:'Perlu konfirmasi'});
  expect(highlights.map(highlight=>[highlight.place,highlight.date,highlight.region])).toEqual(expect.arrayContaining([
   ['five-flower','2026-11-09','Sichuan'],['songzanlin','2026-11-18','Yunnan'],
-  ['maobiliang','2026-11-10','Sichuan'],['dayan','2026-11-18','Yunnan'],
+  ['maobiliang','2026-11-11','Sichuan'],['dayan','2026-11-18','Yunnan'],
+  ['bipenggou','2026-11-11','Sichuan'],
   ['tagong','2026-11-12','Sichuan'],['blue-moon','2026-11-19','Yunnan'],
   ['luorong','2026-11-16','Sichuan'],['erhai','2026-11-20','Yunnan'],
   ['dali-old-town','2026-11-20','Yunnan'],
@@ -350,7 +351,7 @@ test('user gallery: open below the hero, summary reopens it, photo source and co
  const bipeng=page.locator('.gallery-photo[data-photo="user-autumn-08"]');
  await bipeng.click();
  await expect(page.locator('#photo-title')).toHaveText('Bipenggou');
- await expect(page.locator('#photo-content')).toContainText('di luar rute 14 hari');
+ await expect(page.locator('#photo-content')).toContainText('Dikunjungi pagi 11 November');
  await expect(page.locator('#photo-content')).toContainText('kapongbeer');
  await expect(page.locator('#photo-content')).toContainText('Tanggal pengambilan tidak dicantumkan');
  await page.keyboard.press('Escape');await expect(bipeng).toBeFocused();

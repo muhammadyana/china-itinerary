@@ -63,6 +63,17 @@
         "admin2": "Aba Zangzu Qiangzu Zizhizhou"
       }
     },
+    "bipenggou": {
+      "provider": "OpenStreetMap",
+      "source": "https://www.openstreetmap.org/way/1351805644",
+      "record": {
+        "name": "毕棚沟风景区游客中心",
+        "latitude": 31.4155,
+        "longitude": 102.9849,
+        "elevation": 2257,
+        "note": "Visitor-centre building (OSM way edited 2025-01-16); elevation from SRTM30 at this point, queried 2026-11-04. Added for the 4 November 2026 Bipenggou revision."
+      }
+    },
     "rilong": {
       "provider": "Open-Meteo geocoding / GeoNames",
       "source": "https://geocoding-api.open-meteo.com/v1/get?id=6999083&language=en",

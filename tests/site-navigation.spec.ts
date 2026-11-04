@@ -3,7 +3,7 @@ import { days } from '../src/itinerary';
 import { pageForPlace, placePath } from '../src/guides';
 
 const excludedStops = new Set([
-  'tfu', 'chengdu-east', 'huanglongjiuzhai', 'jiuzhaigou-hotel', 'rilong', 'danba',
+  'tfu', 'chengdu-east', 'huanglongjiuzhai', 'jiuzhaigou-hotel', 'bipenggou-gate', 'rilong', 'danba',
   'kangding-road', 'riwa', 'zhaguanbeng', 'shangrila-station', 'lijiang-station',
   'cable-car', 'dali-station', 'kunming-station', 'kmg',
 ]);
@@ -55,7 +55,7 @@ test('the daily navigation stays compact when the mobile safe area changes durin
 });
 
 test('all three page types expose every sightseeing stop once in regional itinerary order', async ({ page }) => {
-  expect(sightseeingStops).toHaveLength(48);
+  expect(sightseeingStops).toHaveLength(46);
   for (const id of sightseeingStops) expect(pageForPlace.has(id), id).toBe(true);
 
   for (const path of ['/', '/places/', '/places/impression-lijiang/']) {
@@ -66,8 +66,8 @@ test('all three page types expose every sightseeing stop once in regional itiner
     await navigation.locator('summary').click();
     await expect(navigation.getByRole('link', { name: 'Lihat semua tempat' })).toHaveAttribute('href', '/places/');
     const links = await navigation.locator('.place-menu-group a').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')));
-    expect(links).toHaveLength(48);
-    expect(new Set(links).size).toBe(48);
+    expect(links).toHaveLength(46);
+    expect(new Set(links).size).toBe(46);
     expect(links).toEqual(sightseeingStops.map(id => placePath(pageForPlace.get(id)!.slug)));
     await expect(navigation.locator('.place-menu-group h2')).toHaveText(['Sichuan', 'Yunnan']);
 

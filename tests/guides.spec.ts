@@ -5,7 +5,7 @@ import { guides, placePages, pageForPlace, galleryPhotos, guideDates, placePath 
 import { days, places, photos, userPhotos } from '../src/itinerary';
 
 const nonSightseeingStops = new Set([
-  'tfu', 'chengdu-east', 'huanglongjiuzhai', 'jiuzhaigou-hotel', 'rilong', 'danba',
+  'tfu', 'chengdu-east', 'huanglongjiuzhai', 'jiuzhaigou-hotel', 'bipenggou-gate', 'rilong', 'danba',
   'kangding-road', 'riwa', 'zhaguanbeng', 'shangrila-station', 'lijiang-station',
   'cable-car', 'dali-station', 'kunming-station', 'kmg',
 ]);

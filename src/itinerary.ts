@@ -38,11 +38,10 @@ export const places: Record<string, Place> = {
   shuzheng: { name: 'Danau Shuzheng', chinese: '树正群海', description: 'Danau-danau kecil tersusun bertingkat di antara hutan, diikuti jalur kayu sepanjang lembah.', page: 6, photo: 'shuzheng', alt: 'Danau biru Shuzheng di antara pulau-pulau kecil dan dedaunan kuning, jingga, serta hijau.' },
   maobiliang: { name: 'Maobiliang & Siguniangshan', chinese: '猫鼻梁', description: 'Saat cuaca cerah, puncak-puncak Siguniangshan berderet membentuk siluet “Empat Saudari”.', page: 8, photo: 'siguniang', alt: 'Puncak bersalju Siguniangshan menjulang di atas pegunungan.', photoNote: 'Foto pengganti memperlihatkan Siguniangshan; sudut Maobiliang tidak diklaim.' },
   rilong: { name: 'Rilong', chinese: '日隆镇', description: 'Kota kecil di kaki Siguniangshan dengan penginapan dan toko di sepanjang jalan utama.', page: 8 },
-  shuangqiao: { name: 'Shuangqiao Valley', chinese: '双桥沟', description: 'Turun dari shuttle untuk mengikuti jalur kayu dan sungai di antara tebing serta hutan.', page: 9, photo: 'shuangqiao-refreshed', alt: 'Panorama Shuangqiao dekat Longzhucuo: sungai berkelok di antara pepohonan menguning dan puncak bersalju.' },
-  hongshan: { name: 'Hutan Hongshan', description: 'Bagian atas Shuangqiao menjadi patokan turun bus; lokasi air terjun pada jadwal belum terkonfirmasi.', page: 9 },
+  bipenggou: { name: 'Bipenggou', chinese: '毕棚沟', description: 'Lembah berhutan larch dengan Danau Panyang dan puncak granit bersalju. Pengunjung wajib naik bus taman sekitar 26 km dari gerbang ke Shanghaizi.', photo: 'bipenggou', alt: 'Danau tenang dengan batang pohon mati di Bipenggou, memantulkan larch keemasan dan puncak granit di bawah langit biru.' },
+  'bipenggou-gate': { name: 'Gerbang Bipenggou', chinese: '毕棚沟游客中心', description: 'Pusat pengunjung di mulut lembah, Desa Zhuangfang, Putou. Satu pilihan penginapan berada di dekatnya; pilihan lain di kota Lixian, sekitar 30 menit berkendara.', photo: 'bipenggou', alt: 'Danau tenang dengan batang pohon mati di Bipenggou, memantulkan larch keemasan dan puncak granit di bawah langit biru.', photoNote: 'Foto pengganti memperlihatkan lembah Bipenggou di atas gerbang; bukan foto pusat pengunjung atau penginapan.' },
   jiaju: { name: 'Jiaju Tibetan Village', chinese: '甲居藏寨', description: 'Rumah-rumah Tibet bertingkat tersebar di lereng, mengikuti kontur bukit Danba.', page: 9, photo: 'jiaju-refreshed', alt: 'Panorama Desa Jiaju dengan rumah Tibet berbingkai putih-merah, ladang hijau, dan jalan berkelok di lereng bukit.' },
-  danba: { name: 'Danba', chinese: '丹巴', description: 'Pusat kota mengikuti sungai di dasar lembah dan menjadi basis menuju desa-desa Tibet di lereng.', page: 9 },
-  zhonglu: { name: 'Zhonglu Tibetan Village', chinese: '中路藏寨', description: 'Desa pertanian di atas lembah Danba memperlihatkan rumah batu, ladang, dan menara pengawas.', page: 10, photo: 'zhonglu', alt: 'Rumah putih, menara batu, dan ladang setelah panen di Jikayi, kawasan Zhonglu.', photoNote: 'Foto memperlihatkan Jikayi di kawasan Zhonglu, diambil pada Oktober 2025.' },
+  danba: { name: 'Danba', chinese: '丹巴', description: 'Pusat kota mengikuti sungai di dasar lembah, dikelilingi desa-desa Tibet di lereng.', page: 9 },
   moshi: { name: 'Moshi Park', chinese: '墨石公园', description: 'Jalur taman membawa kamu mendekati punggung batu bergerigi dan hutan batu kelabu di Bamei.', page: 10, photo: 'moshi', alt: 'Formasi batu kelabu bergerigi di Moshi Park.' },
   tagong: { name: 'Padang rumput Tagong', chinese: '塔公草原', description: 'Padang rumput terbuka membingkai Gunung Yala di kejauhan, lebih lapang daripada lembah Danba.', page: 10, photo: 'tagong', alt: 'Padang rumput luas di Tagong, Sichuan.' },
   muya: { name: 'Biara Muya', chinese: '木雅大寺', description: 'Atap dan dinding biara Tibet memberi penanda skala di tengah dataran Tagong.', page: 11 },
@@ -172,7 +171,7 @@ export const days: Day[] = [
     },
     {
       "title": "Cari makan halal",
-      "text": "Cari tanda 清真 dan konfirmasikan bahan langsung kepada penjual. Siapkan juga bekal untuk perjalanan Senin."
+      "text": "Cari tanda 清真 dan konfirmasikan bahan langsung kepada penjual. Siapkan juga bekal berlabel 清真 untuk 9–12 November; belum ditemukan restoran halal di Lixian dan dekat Bipenggou."
     }
   ],
   "pages": [
@@ -318,9 +317,9 @@ export const days: Day[] = [
   ],
   "sourceNote": "Revisi perjalanan: 8 November jalan-jalan dan menginap di Chengdu. Perjalanan ke Jiuzhaigou dipindahkan ke pagi 9 November; jadwal ini menggantikan bagian awal PDF."
 },
- {date:'2026-11-10',title:'Menuju Siguniangshan',shortTitle:'Perjalanan ke Rilong',region:'Sichuan',route:['Jiuzhaigou','Siguniangshan','Rilong'],overnight:{name:'Rilong',area:'Kaki Siguniangshan',elevation:'3.200 m',detail:'Satu malam sebelum menjelajahi Shuangqiao Valley besok pagi.'},transport:'Mobil dengan sopir, 7–9 jam / ±456 km',intro:'Etape darat panjang menuju kaki gunung; sisakan waktu makan dan istirahat.',events:[t('car','Hotel Jiuzhaigou ke Siguniangshan','Berangkat pagi. Alokasikan 7–9 jam termasuk makan dan istirahat; sepakati jalur dengan sopir.'),s('maobiliang','Sore','Singgah hanya jika cuaca cerah dan waktunya cukup.','Opsional'),t('car','Lanjut ke penginapan di Rilong'),s('rilong','Sore–malam')],practical:[{title:'Mulai sewa mobil',text:'Rute privat 10–17 November dimulai dari hotel Jiuzhaigou dan berakhir di Dukezong, Yunnan. Konfirmasikan biaya satu arah dan lintas provinsi.'},halal,snow],pages:[3,7,8,28,30]},
- {date:'2026-11-11',title:'Shuangqiao & rumah Tibet Danba',shortTitle:'Shuangqiao & Jiaju',region:'Sichuan',route:['Rilong','Shuangqiao','Jiaju','Danba'],overnight:{name:'Danba',area:'Kota di dasar lembah',elevation:'2.000 m',detail:'Turun dari Rilong untuk bermalam; lanjut ke Zhonglu besok pagi.'},transport:'Shuttle taman, lalu mobil ±3 jam',intro:'Pagi di lembah pegunungan, sore di antara rumah-rumah Tibet di lereng.',events:[t('bus','Shuttle menuju ujung Shuangqiao','Turun bertahap di pemberhentian yang dibuka.'),s('hongshan','Pagi','Foto referensi kawasan Shuangqiao; bukan verifikasi titik Hutan Hongshan atau “Hongshan Waterfall”.','Perlu konfirmasi'),s('shuangqiao','Pagi'),t('car','Shuangqiao ke Danba','Sekitar 3 jam; lanjut singgah di Jiaju.'),s('jiaju','Sore'),s('danba','Malam')],practical:[{title:'Di lembah',text:'Gunakan shuttle dan jalur kayu sesuai pengaturan taman. Warna gugur pada pertengahan November belum tentu sama dengan foto.'},halal],pages:[3,7,9,28]},
- {date:'2026-11-12',title:'Dari Danba ke padang Tagong',shortTitle:'Zhonglu, Moshi & Tagong',region:'Sichuan',route:['Danba','Zhonglu','Moshi Park','Tagong','Xinduqiao'],overnight:{name:'Xinduqiao',area:'Basis untuk perjalanan sekitar Kangding',elevation:'3.300 m',detail:'Malam pertama dari dua malam. Siapkan keberangkatan sangat pagi besok.'},transport:'Mobil ±5 jam / ±180 km',intro:'Rumah batu, hutan batu kelabu, lalu padang rumput yang menghadap Yala.',events:[s('zhonglu','Pagi'),t('car','Danba ke Bamei','Perjalanan dilanjutkan ke Moshi Park.'),s('moshi','Siang','Taman berada sekitar 3.500 m.'),t('car','Moshi Park ke Tagong'),s('tagong','Sore','Lihat Gunung Yala dari padang; PDF menyebut kawasan Yala sendiri tutup musim dingin.'),s('muya','Sore'),t('car','Lanjut ke Xinduqiao'),s('xinduqiao','Malam')],practical:[{title:'Bekal siang',text:'Pilihan halal di Tagong dan Xinduqiao terbatas. Siapkan bekal dan cari 兰州拉面 di jalan utama.',copy:'兰州拉面'},{title:'Ketinggian',text:'Naik lagi dari Danba sekitar 2.000 m ke basis Xinduqiao sekitar 3.300 m. Sisakan waktu istirahat.'},snow],pages:[3,7,10,11,28,30]},
+ {date:'2026-11-10',title:'Memutar ke Bipenggou',shortTitle:'Perjalanan ke Bipenggou',region:'Sichuan',route:['Jiuzhaigou','Tol Jiumian','Dujiangyan','Lixian','Bipenggou'],overnight:{name:'Bipenggou',area:'Dekat gerbang di Putou, atau kota Lixian',elevation:'2.250 m',detail:'Satu malam dekat lembah agar bisa masuk saat loket buka besok pagi. Dari kota Lixian, sisihkan sekitar 30 menit ke gerbang.'},transport:'Mobil dengan sopir, ±8,5–9,5 jam / ±580 km',intro:'Jalan Songpan–Maoxian tertutup longsor, jadi perjalanan hari ini memutar lewat tol ke Dujiangyan, lalu naik ke Lixian. Taman Bipenggou dikunjungi besok pagi.',events:[t('car','Hotel Jiuzhaigou ke tol Jiumian','Berangkat sekitar 07.30, sebelum antrean dari Zhangzha ke Terowongan Jiuzhai (九寨隧道) pukul 09.00–11.00. Jangan lewat Songpan–Maoxian: G213 tertutup di Dingziba sejak 16 September 2026.'),t('car','Dujiangyan, lalu tol G4217 ke Lixian','Makan siang di Dujiangyan. Isi bensin di Lixian karena tidak ada SPBU di 理小路 besok.'),s('bipenggou-gate','Sore','Tiba sekitar 16.00–17.00. Loket tiket tutup sekitar 15.00, jadi taman dikunjungi besok pagi.')],practical:[{title:'Mulai sewa mobil',text:'Rute privat 10–17 November dimulai dari hotel Jiuzhaigou dan berakhir di Dukezong, Yunnan. Konfirmasikan biaya satu arah, lintas provinsi, dan rute memutar hari ini.'},{title:'G213 tertutup',text:'Longsor di Dingziba, Maoxian, sejak 16 September 2026; per 22 Oktober belum dibuka dan belum ada tanggal buka. Minta sopir mengecek Amap pagi ini dan memakai tol Jiumian ke Dujiangyan.'},{title:'Makan halal',text:'Tidak ditemukan restoran halal di kota Lixian maupun dekat gerbang Bipenggou. Pakai bekal berlabel 清真 yang dibeli di Chengdu, dan cari 清真 di Amap untuk makan siang di Dujiangyan.',copy:'清真'},snow],pages:[3,7,28,30],sourceNote:'Revisi 4 November 2026: G213 Songpan–Maoxian tertutup longsor, jadi rute 10–12 November disusun ulang. Atas permintaanmu, Bipenggou menggantikan Shuangqiao. Danba kini hanya tempat singgah makan siang, bukan tempat menginap, dan Zhonglu dihapus dari rute.'},
+ {date:'2026-11-11',title:'Bipenggou, lalu ke kaki Siguniang',shortTitle:'Bipenggou & Rilong',region:'Sichuan',route:['Bipenggou','Danau Panyang','Jalan Lixiao','Rilong'],overnight:{name:'Rilong',area:'Kaki Siguniangshan',elevation:'3.200 m',detail:'Satu malam di kaki Siguniangshan sebelum turun ke Danba lalu naik ke Tagong besok.'},transport:'Bus dan mobil listrik taman, lalu mobil ±2–3 jam',intro:'Pagi di danau dan hutan larch Bipenggou, siang melintasi terowongan Qionglai menuju kaki Siguniangshan.',events:[t('bus','Gerbang ke Shanghaizi','Tukar voucher kategori non-mainland (paspor luar daratan Tiongkok) di loket saat buka pukul 08.00–08.30, lalu naik bus taman sekitar 40–45 menit. Minum obat antimabuk sebelum naik.'),s('bipenggou','09.00–12.00','Mobil listrik ke Danau Panyang (±3.680 m) dan Teluk Bulan. Ambil foto dalam perjalanan naik; kendaraan turun dilaporkan tidak berhenti. Mulai turun dari Shanghaizi paling lambat 12.15.'),t('car','Bipenggou ke Rilong lewat 理小路','Tinggalkan gerbang paling lambat 13.00. Jalan ini hanya dibuka siang hari dan rawan es. Jika ditutup, ikuti keputusan pukul 07.00: lewati taman dan langsung ke Rilong lewat Wolong.'),s('maobiliang','Sore','Pulang-pergi sebentar dari Rilong jika langit cerah, sebelum matahari terbenam sekitar 18.14.','Opsional'),s('rilong','Sore–malam')],practical:[{title:'Keputusan pukul 07.00',text:'Cek status 理小路 bersama sopir. Jika ditutup karena salju atau es, lewati taman dan langsung ke Rilong lewat Wolong agar tidak berkendara di pegunungan setelah gelap.',copy:'理小路'},{title:'Tiket Bipenggou',text:'Pesan sekarang di Qunar atau Ctrip sesuai nama di paspor. Qunar mencantumkan kategori non-mainland CNY 140 termasuk bus, ditambah mobil listrik CNY 60 pulang-pergi. Tanggal 11 November bertepatan dengan libur sekolah Aba dan Chengdu; tahun lalu tiket habis pada 13–14 November.'},{title:'Ketinggian',text:'Bus naik dari sekitar 2.250 m ke 3.560 m dalam satu pagi, lalu malam di Rilong 3.200 m. Bergerak pelan dan minum cukup air.'},halal],pages:[3,8,28],sourceNote:'Revisi 4 November 2026: G213 Songpan–Maoxian tertutup longsor, jadi rute 10–12 November disusun ulang. Atas permintaanmu, Bipenggou menggantikan Shuangqiao. Danba kini hanya tempat singgah makan siang, bukan tempat menginap, dan Zhonglu dihapus dari rute.'},
+ {date:'2026-11-12',title:'Dari Siguniang ke padang Tagong',shortTitle:'Danba, Moshi & Tagong',region:'Sichuan',route:['Rilong','Danba','Moshi Park','Tagong','Xinduqiao'],overnight:{name:'Xinduqiao',area:'Basis untuk perjalanan sekitar Kangding',elevation:'3.300 m',detail:'Malam pertama dari dua malam. Siapkan keberangkatan sangat pagi besok.'},transport:'Mobil ±7,5–8,5 jam / ±260 km',intro:'Hari berkendara panjang: turun ke lembah Danba, hutan batu Moshi, lalu padang rumput yang menghadap Yala.',events:[t('car','Rilong ke Danba','Berangkat 08.00. Ada perbaikan G350 di Banshanmen dekat Danba: buka-tutup setiap 30 menit dan beberapa penutupan penuh sekitar 1 jam per hari.'),s('jiaju','Siang','Singgah di titik pandang hanya jika tiba di Danba sebelum 12.00.','Opsional'),s('danba','Siang','Makan siang dan isi bekal sebelum naik ke Bamei.'),t('car','Danba ke Bamei','Perjalanan dilanjutkan ke Moshi Park.'),s('moshi','Siang','Taman berada sekitar 3.500 m.'),t('car','Moshi Park ke Tagong'),s('tagong','Sore','Lihat Gunung Yala dari padang; PDF menyebut kawasan Yala sendiri tutup musim dingin.'),s('muya','Sore'),t('car','Lanjut ke Xinduqiao'),s('xinduqiao','Malam')],practical:[{title:'Bekal siang',text:'Pilihan halal di Tagong dan Xinduqiao terbatas. Siapkan bekal dan cari 兰州拉面 di jalan utama.',copy:'兰州拉面'},{title:'Ketinggian',text:'Turun dari Rilong sekitar 3.200 m ke Danba sekitar 2.000 m, lalu tidur di Xinduqiao sekitar 3.300 m. Sisakan waktu istirahat.'},snow],pages:[3,9,10,11,28,30],sourceNote:'Revisi 4 November 2026: G213 Songpan–Maoxian tertutup longsor, jadi rute 10–12 November disusun ulang. Atas permintaanmu, Bipenggou menggantikan Shuangqiao. Danba kini hanya tempat singgah makan siang, bukan tempat menginap, dan Zhonglu dihapus dari rute.'},
  {date:'2026-11-13',title:'Kangding & cahaya pegunungan',shortTitle:'Kangding & salat Jumat',region:'Sichuan',route:['Xinduqiao','Yuzixi','Kangding','Jiagenba','Xinduqiao'],overnight:{name:'Xinduqiao',area:'Kembali ke hotel yang sama',elevation:'3.300 m',detail:'Malam kedua di Xinduqiao sebelum melanjutkan G318 ke Litang.'},transport:'Mobil, loop ±250 km',intro:'Prioritas hari ini: tiba di Kangding sebelum 12.30 untuk salat Jumat.',events:[s('yuzixi','06.30','Target dalam PDF untuk cahaya pertama; konfirmasikan jam berangkat dan kondisi akses dengan sopir.'),t('car','Melalui S434 menuju Kangding'),s('honghaizi','Pagi'),s('kangding-road','Pagi'),s('kangding','Sebelum 12.30'),s('kangding-mosque','Siang','Salat Jumat dan makan di kluster Hui sekitar masjid. Pin serta jam salat perlu dicek.','Perlu konfirmasi'),t('car','Kembali lewat Zheduo Pass'),s('zheduo','Siang–sore','Lintasan sekitar 4.298 m, rawan es.'),s('jiagenba','Sore'),s('zimei','Jika sempat','Jalan tanah dan lintasan tinggi; jangan mengorbankan waktu salat atau keselamatan jalan.','Opsional'),t('car','Kembali ke Xinduqiao')],practical:[{title:'Salat Jumat',text:'Sepakati Kangding sebelum 12.30 sebagai titik wajib. Konfirmasikan masjid dan jam setempat; foto masjid pada PDF belum terverifikasi.',copy:'康定清真寺'},{title:'Makan halal',text:'Cari kluster Hui di sekitar masjid untuk makan siang dan mengisi bekal.'},snow],pages:[3,12,13,14,28,30]},
  {date:'2026-11-14',title:'Menelusuri G318 ke Litang',shortTitle:'G318 & Biara Litang',region:'Sichuan',route:['Xinduqiao','Gao’ersi Shan','Tianlu 18 Bends','Litang'],overnight:{name:'Litang',area:'Kota dataran tinggi',elevation:'4.014 m',detail:'Malam menginap tertinggi dalam perjalanan. Pilih aktivitas sore yang ringan.'},transport:'Mobil ±4 jam / ±150 km',intro:'Jalan pegunungan berkelok dan padang tinggi, ditutup kunjungan ringan ke biara.',events:[t('car','Xinduqiao ke Litang melalui G318','Sekitar 4 jam, mengikuti kondisi jalan.'),s('gaoersi','Pagi','Lintasan pada jadwal sekitar 4.412 m.'),s('tianlu','Siang'),s('litang','Sore','Jalan santai; tidak ada trek hari ini.'),s('litang-monastery','Sore')],practical:[{title:'Malam dingin',text:'Perkiraan dalam PDF untuk Litang: siang 1–8 °C, malam −15 hingga −8 °C. Ini perkiraan musiman, bukan prakiraan langsung.'},halal,snow],pages:[3,12,15,28,30]},
  {date:'2026-11-15',title:'Dari Litang ke gerbang Yading',shortTitle:'Haizi Shan & Riwa',region:'Sichuan',route:['Litang','Haizi Shan','Daocheng','Riwa'],overnight:{name:'Riwa',area:'Shangri-La Town, Sichuan',elevation:'2.900 m',detail:'Malam pertama dari dua malam. Konfirmasikan kamar berpemanas untuk 15 dan 16 November.'},transport:'Mobil ±5 jam / ±220 km',intro:'Melintasi dataran bekas gletser, lalu turun ke basis kunjungan Yading.',events:[t('car','Litang ke Haizi Shan'),s('haizi','Pagi','Dataran sekitar 4.500 m.'),s('sister-lakes','Jika mengambil detur','Letaknya di G318 arah Batang. Bukan pemberhentian pada jalur langsung ke Daocheng.','Perlu konfirmasi'),t('car','Lanjut ke Daocheng'),s('daocheng','Siang','Isi ulang bekal halal untuk dua malam dan hari trek.'),t('car','Daocheng ke Riwa'),s('riwa','Sore–malam')],practical:[{title:'Riwa bukan kota Shangri-La',text:'Riwa / Shangri-La Town (香格里拉镇) berada di Sichuan. Kota Shangri-La di Yunnan baru dituju pada 17 November.',copy:'香格里拉镇'},{title:'Sister Lakes',text:'Konfirmasikan tambahan jarak dan waktu detur ke arah Batang dengan sopir. Utamakan rute Haizi Shan–Daocheng–Riwa.'},{title:'Bekal dan penginapan',text:'Beli bekal halal sebelum Riwa; pastikan kamar memiliki pemanas.'},snow],pages:[3,12,16,28,30]},
@@ -368,10 +367,11 @@ export interface Highlight { place: string; date: string; region: 'Sichuan' | 'Y
 export const highlights: Highlight[] = [
  {place:'five-flower',date:'2026-11-09',region:'Sichuan',title:'Jiuzhaigou',caption:'Danau jernih, hutan penuh warna.',photo:"highlight-jiuzhaigou",alt:"Danau di Jiuzhaigou memantulkan hutan musim gugur dan pegunungan."},
  {place:'songzanlin',date:'2026-11-18',region:'Yunnan',title:'Shangri-La',caption:'Atap emas Biara Songzanlin di atas bukit.'},
- {place:'maobiliang',date:'2026-11-10',region:'Sichuan',title:'Siguniangshan',caption:'Empat puncak, satu panorama.',photo:"highlight-siguniang",alt:"Jajaran pegunungan Siguniangshan, dipotret pada 14 Oktober 2026."},
+ {place:'bipenggou',date:'2026-11-11',region:'Sichuan',title:'Bipenggou',caption:'Larch keemasan dan danau tenang di bawah puncak granit.'},
  {place:'dayan',date:'2026-11-18',region:'Yunnan',title:'Kota Tua Lijiang',caption:'Atap kota tua, kanal, dan pegunungan di kejauhan.',photo:'highlight-lijiang',alt:'Panorama atap Kota Tua Lijiang dengan pegunungan bersalju di kejauhan.'},
- {place:'tagong',date:'2026-11-12',region:'Sichuan',title:'Tagong',caption:'Padang terbuka di kaki Gunung Yala.'},
+ {place:'maobiliang',date:'2026-11-11',region:'Sichuan',title:'Siguniangshan',caption:'Empat puncak, satu panorama.',photo:"highlight-siguniang",alt:"Jajaran pegunungan Siguniangshan, dipotret pada 14 Oktober 2026."},
  {place:'impression-lijiang',date:'2026-11-19',region:'Yunnan',title:'Impression Lijiang',caption:'Panggung merah, nyanyian, dan latar pegunungan salju.',photo:'user-impression-lijiang-2',alt:'Barisan penampil di panggung merah Impression Lijiang dengan puncak Jade Dragon Snow Mountain dan langit biru.'},
+ {place:'tagong',date:'2026-11-12',region:'Sichuan',title:'Tagong',caption:'Padang terbuka di kaki Gunung Yala.'},
  {place:'blue-moon',date:'2026-11-19',region:'Yunnan',title:'Blue Moon Valley',caption:'Berhenti sejenak di tepi air toska.',photo:"highlight-blue-moon",alt:"Danau toska Blue Moon Valley di bawah pegunungan Jade Dragon."},
  {place:'luorong',date:'2026-11-16',region:'Sichuan',title:'Yading',caption:'Menyusuri padang di antara puncak salju.'},
  {place:'erhai',date:'2026-11-20',region:'Yunnan',title:'Danau Erhai',caption:'Pagi yang pelan di tepi danau.',photo:"highlight-erhai",alt:"Danau Erhai dan siluet pegunungan di seberangnya."},
@@ -631,22 +631,6 @@ export const photos: Record<string, Photo> = {
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "origin": "Wikimedia Commons"
   },
-  "shuangqiao-refreshed": {
-    "id": "shuangqiao-refreshed",
-    "width": 5267,
-    "height": 3944,
-    "sizes": [
-      480,
-      960,
-      1440
-    ],
-    "author": "Yang Yu's Album (yuyang226)",
-    "source": "https://www.flickr.com/photos/yuyang226/54080128670/",
-    "license": "CC BY-NC-SA 2.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
-    "origin": "Flickr",
-    "photoNote": "四姑娘山秋日 — Shuangqiao dekat Longzhucuo, 19 Oktober 2024. Foto arsip; lokasi dicocokkan dari koordinat foto dan peta OpenStreetMap. Bukan kondisi Oktober 2026."
-  },
   "jiaju-refreshed": {
     "id": "jiaju-refreshed",
     "width": 3600,
@@ -905,20 +889,21 @@ export const photos: Record<string, Photo> = {
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "origin": "Wikimedia Commons"
   },
-  "zhonglu": {
-    "id": "zhonglu",
-    "width": 4096,
-    "height": 3072,
+  "bipenggou": {
+    "id": "bipenggou",
+    "width": 3648,
+    "height": 2736,
     "sizes": [
       480,
       960,
       1600
     ],
-    "author": "Marym1718",
-    "source": "https://commons.wikimedia.org/wiki/File:Jikayi,_Zhonglu,_Danba_county.jpg",
-    "license": "CC BY 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-    "origin": "Wikimedia Commons"
+    "author": "geoff leng",
+    "source": "https://commons.wikimedia.org/wiki/File:%E6%AF%95%E6%A3%9A%E6%B2%9F.jpg",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "origin": "Wikimedia Commons",
+    "photoNote": "Danau di kawasan Danau Panyang dan Teluk Bulan, Bipenggou, 6 Oktober 2019. Foto arsip, bukan kondisi November 2026."
   }
 };
 // PHOTO_DATA_END
@@ -1104,7 +1089,7 @@ export const userPhotos: Record<string, UserPhoto> = {
     "location": "Bipenggou",
     "provenanceFilename": "becac626-86cb-437f-a03d-689af209a72f-e231f65b-b48c-4290-8a2c-db7efaa316f5.png",
     "title": "Bipenggou",
-    "caption": "Bipenggou, lokasi dikonfirmasi pengguna. Inspirasi tambahan di luar rute 14 hari."
+    "caption": "Bipenggou, lokasi dikonfirmasi pengguna. Dikunjungi pagi 11 November."
   },
   "user-autumn-09": {
     "id": "user-autumn-09",
@@ -1123,7 +1108,7 @@ export const userPhotos: Record<string, UserPhoto> = {
     "location": "Bipenggou",
     "provenanceFilename": "becac626-86cb-437f-a03d-689af209a72f-e231f65b-b48c-4290-8a2c-db7efaa316f5.png",
     "title": "Bipenggou",
-    "caption": "Bipenggou, lokasi dikonfirmasi pengguna. Inspirasi tambahan di luar rute 14 hari."
+    "caption": "Bipenggou, lokasi dikonfirmasi pengguna. Dikunjungi pagi 11 November."
   },
   "user-autumn-10": {
     "id": "user-autumn-10",
@@ -1142,7 +1127,7 @@ export const userPhotos: Record<string, UserPhoto> = {
     "location": "Bipenggou",
     "provenanceFilename": "becac626-86cb-437f-a03d-689af209a72f-e231f65b-b48c-4290-8a2c-db7efaa316f5.png",
     "title": "Bipenggou",
-    "caption": "Bipenggou, lokasi dikonfirmasi pengguna. Inspirasi tambahan di luar rute 14 hari."
+    "caption": "Bipenggou, lokasi dikonfirmasi pengguna. Dikunjungi pagi 11 November."
   },
   "user-autumn-11": {
     "id": "user-autumn-11",
@@ -1179,5 +1164,131 @@ export const userPhotos: Record<string, UserPhoto> = {
     "location": null,
     "title": "Pohon emas & air toska",
     "caption": "Pohon berdaun kuning berdiri di antara kolam-kolam jernih bertingkat dengan tepian berwarna keemasan."
+  },
+  "user-autumn-13": {
+    "id": "user-autumn-13",
+    "width": 1248,
+    "height": 1664,
+    "sizes": [
+      480,
+      960,
+      1248
+    ],
+    "sourceFilename": "becac626-86cb-437f-a03d-689af209a72f-f07d44e2-252c-4fcd-893c-d19cb8f901a5.png",
+    "alt": "Ranting daun merah membingkai danau tenang yang memantulkan lereng berhutan dan puncak bersalju.",
+    "credit": "Kiriman pengguna; fotografer tidak diketahui",
+    "origin": "Unggahan pengguna",
+    "takenAt": null,
+    "location": "Bipenggou",
+    "title": "Bingkai daun merah",
+    "caption": "Bipenggou, lokasi menurut pengguna. Dikunjungi pagi 11 November."
+  },
+  "user-autumn-14": {
+    "id": "user-autumn-14",
+    "width": 1240,
+    "height": 1794,
+    "sizes": [
+      480,
+      960,
+      1240
+    ],
+    "sourceFilename": "becac626-86cb-437f-a03d-689af209a72f-be0bc18c-846a-4cff-99d8-4291dba6b3ef.png",
+    "alt": "Jalur papan kayu menyusuri padang rumput hijau dan kolam kecil yang memantulkan puncak granit runcing.",
+    "credit": "Kiriman pengguna; fotografer tidak diketahui",
+    "origin": "Unggahan pengguna",
+    "takenAt": null,
+    "location": "Bipenggou",
+    "title": "Jalur kayu di bawah puncak granit",
+    "caption": "Bipenggou, lokasi menurut pengguna. Dikunjungi pagi 11 November."
+  },
+  "user-autumn-15": {
+    "id": "user-autumn-15",
+    "width": 1320,
+    "height": 1724,
+    "sizes": [
+      480,
+      960,
+      1320
+    ],
+    "sourceFilename": "becac626-86cb-437f-a03d-689af209a72f-d12cfd70-3af8-410a-bbc4-90c46878ce49.png",
+    "alt": "Daun maple merah terang menggantung di atas danau toska yang memantulkan lereng hutan dan awan.",
+    "credit": "Kiriman pengguna; fotografer tidak diketahui",
+    "origin": "Unggahan pengguna",
+    "takenAt": null,
+    "location": "Bipenggou",
+    "title": "Maple merah di tepi danau",
+    "caption": "Bipenggou, lokasi menurut pengguna. Dikunjungi pagi 11 November."
+  },
+  "user-autumn-16": {
+    "id": "user-autumn-16",
+    "width": 1320,
+    "height": 1725,
+    "sizes": [
+      480,
+      960,
+      1320
+    ],
+    "sourceFilename": "becac626-86cb-437f-a03d-689af209a72f-7ad3f8c9-22d2-44af-914a-5d12ffdf53fd.png",
+    "alt": "Puncak bersalju berbentuk piramida menjulang di atas hutan cemara dan barisan larch kuning di tepi danau hijau yang berkilau.",
+    "credit": "Kiriman pengguna; fotografer tidak diketahui",
+    "origin": "Unggahan pengguna",
+    "takenAt": null,
+    "location": "Bipenggou",
+    "title": "Piramida salju di atas danau",
+    "caption": "Bipenggou, lokasi menurut pengguna. Dikunjungi pagi 11 November."
+  },
+  "user-autumn-17": {
+    "id": "user-autumn-17",
+    "width": 1080,
+    "height": 1616,
+    "sizes": [
+      480,
+      960,
+      1080
+    ],
+    "sourceFilename": "becac626-86cb-437f-a03d-689af209a72f-ff1ca178-1032-4c38-8a85-4fe6d11b9fc6.png",
+    "alt": "Gunung batu berselimut salju tipis di atas barisan larch jingga dan danau berpagar kayu yang ramai pengunjung.",
+    "credit": "Kiriman pengguna; fotografer tidak diketahui",
+    "origin": "Unggahan pengguna",
+    "takenAt": null,
+    "location": "Bipenggou",
+    "title": "Larch jingga di kaki gunung",
+    "caption": "Bipenggou, lokasi menurut pengguna. Dikunjungi pagi 11 November."
+  },
+  "user-autumn-18": {
+    "id": "user-autumn-18",
+    "width": 1080,
+    "height": 1616,
+    "sizes": [
+      480,
+      960,
+      1080
+    ],
+    "sourceFilename": "becac626-86cb-437f-a03d-689af209a72f-6cdf12b0-60fa-4e6d-bd67-afa9c9405027.png",
+    "alt": "Puncak runcing bersalju dan hutan larch keemasan terpantul di danau hijau tua.",
+    "credit": "Kiriman pengguna; fotografer tidak diketahui",
+    "origin": "Unggahan pengguna",
+    "takenAt": null,
+    "location": "Bipenggou",
+    "title": "Emas di danau hijau",
+    "caption": "Bipenggou, lokasi menurut pengguna. Dikunjungi pagi 11 November."
+  },
+  "user-autumn-19": {
+    "id": "user-autumn-19",
+    "width": 1080,
+    "height": 1616,
+    "sizes": [
+      480,
+      960,
+      1080
+    ],
+    "sourceFilename": "becac626-86cb-437f-a03d-689af209a72f-79bc8d5f-71f5-4137-a400-add8edbfbfe4.png",
+    "alt": "Puncak piramida bersalju dengan awan kecil di lerengnya, di atas pucuk-pucuk larch keemasan.",
+    "credit": "Kiriman pengguna; fotografer tidak diketahui",
+    "origin": "Unggahan pengguna",
+    "takenAt": null,
+    "location": "Bipenggou",
+    "title": "Puncak piramida",
+    "caption": "Bipenggou, lokasi menurut pengguna. Dikunjungi pagi 11 November."
   }
 };

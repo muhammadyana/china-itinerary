@@ -8,9 +8,9 @@ The user-provided 31-page PDF is retained as the archived base itinerary. Explic
 |---|---|---|
 | 2026-11-08 | Chengdu | Traveler revision; base PDF: 3, 4, 5, 28, 30 |
 | 2026-11-09 | Jiuzhaigou | 3, 4, 6, 28 |
-| 2026-11-10 | Rilong | 3, 7, 8, 28, 30 |
-| 2026-11-11 | Danba | 3, 7, 9, 28 |
-| 2026-11-12 | Xinduqiao | 3, 7, 10, 11, 28, 30 |
+| 2026-11-10 | Bipenggou | Traveler revision; base PDF: 3, 7, 28, 30 |
+| 2026-11-11 | Rilong | Traveler revision; base PDF: 3, 8, 28 |
+| 2026-11-12 | Xinduqiao | Traveler revision; base PDF: 3, 9, 10, 11, 28, 30 |
 | 2026-11-13 | Xinduqiao | 3, 12, 13, 14, 28, 30 |
 | 2026-11-14 | Litang | 3, 12, 15, 28, 30 |
 | 2026-11-15 | Riwa | 3, 12, 16, 28, 30 |
@@ -34,7 +34,7 @@ The user-provided 31-page PDF is retained as the archived base itinerary. Explic
 
 ## Foto yang diterbitkan
 
-Data `photos` memuat 33 entri aset berlisensi; 29 tempat memiliki foto dan 32 tempat tetap berupa teks. Empat entri baru melayani beranda pilihan destinasi, termasuk Erhai yang diekspor ulang dari sumber resolusi penuh. Galeri 12 foto pengguna disimpan terpisah. Pada revisi autumn sebelumnya, enam foto diganti untuk Five Flower Lake, Shuzheng, Shuangqiao, Xinduqiao, Luorong, dan Milk Lake; dua gap diisi untuk Zhonglu (Jikayi) dan Sister Lakes pada jalur Batang.
+Data `photos` memuat 33 entri aset berlisensi; 29 tempat memiliki foto dan 32 tempat tetap berupa teks. Empat entri baru melayani beranda pilihan destinasi, termasuk Erhai yang diekspor ulang dari sumber resolusi penuh. Galeri 19 foto musim gugur pengguna disimpan terpisah. Pada revisi autumn sebelumnya, enam foto diganti untuk Five Flower Lake, Shuzheng, Shuangqiao, Xinduqiao, Luorong, dan Milk Lake; dua gap diisi untuk Zhonglu (Jikayi) dan Sister Lakes pada jalur Batang.
 
 Aset diekspor ke WebP 480 px dan hingga 960/1600 px sesuai ukuran sumber, tanpa memperbesar foto. Sumber baru Shuangqiao hanya 980 px; sumber Shuzheng dan Milk Lake memakai rendition resmi Wikimedia 1920 px. Foto Five Flower Lake pada jadwal harian memakai karya Chensiyuan dengan hutan kuning/jingga dan air toska. Empat aset beranda baru tersedia pada lebar 480, 960, dan 1440 px; keenam foto pembuka dijelaskan pada bagian berikutnya. Foto diperkecil dan dikonversi ke WebP; tampilan dapat terpotong sesuai bingkai. Tidak ada pewarnaan ulang atau gambar AI. Lisensi asli setiap foto tetap berlaku, termasuk ShareAlike untuk turunannya.
 
@@ -49,6 +49,7 @@ Aset diekspor ke WebP 480 px dan hingga 960/1600 px sesuai ukuran sumber, tanpa 
 | Danau Erhai | PDF, caption PDF hlm. 25 | [ShuQizhe](https://commons.wikimedia.org/wiki/File:Erhai_20260220-1.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
 | Kota Tua Dali | PDF, caption PDF hlm. 25 | [ShuQizhe](https://commons.wikimedia.org/wiki/File:Dali_Ancient_Town_20260220-2.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
 | Stasiun Kunming | PDF, caption PDF hlm. 26 | [CEphoto, Uwe Aranas](https://commons.wikimedia.org/wiki/File:Kunming_Yunnan_Square-in-front-of_the-railway-station-01.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) |
+| Bipenggou | Wikimedia Commons, revisi 4 November 2026 | [geoff leng](https://commons.wikimedia.org/wiki/File:%E6%AF%95%E6%A3%9A%E6%B2%9F.jpg), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0) |
 | Maobiliang & Siguniangshan | Wikimedia Commons, caption PDF hlm. 8 | [Ben Kaethner](https://commons.wikimedia.org/wiki/File:Mount_Siguniang.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
 | Shuangqiao Valley | Wikimedia Commons, caption PDF hlm. 9 | [landagent](https://commons.wikimedia.org/wiki/File:%E5%9B%9B%E5%A7%91%E5%A8%98%E5%B1%B1%E5%8F%8C%E6%A1%A5%E6%B2%9F_-_panoramio.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) |
 | Jiaju Tibetan Village | Wikimedia Commons, caption PDF hlm. 9 | [Nyx Ning](https://commons.wikimedia.org/wiki/File:%E5%9B%9B%E5%B7%9D_%E4%B8%B9%E5%B7%B4-%E7%94%B2%E5%B1%85%E6%98%A5%E8%89%B2_-_panoramio.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) |
@@ -78,7 +79,7 @@ Beranda memakai enam foto dari destinasi dalam itinerary. Empat aset baru bersum
 | Destinasi dan hari perjalanan | Tanggal pengambilan | Tanggal terbit | Sumber dan lisensi | Batas identitas lokasi |
 |---|---|---|---|---|
 | Jiuzhaigou, 9 November | 6 November 2025 | 28 April 2026 | [Kent Chin](https://www.pexels.com/photo/scenic-autumn-reflection-in-jiuzhaigou-valley-37302353/), [Pexels License](https://www.pexels.com/license/) | Kawasan Jiuzhaigou; sumber tidak menamai danau tertentu. |
-| Siguniangshan, 10 November | 14 Oktober 2026 | 14 Oktober 2026 | [Oli Liao](https://www.pexels.com/photo/majestic-view-of-siguniang-mountain-range-40267914/), [Pexels License](https://www.pexels.com/license/) | Panorama pegunungan; tidak memverifikasi titik Maobiliang atau Shuangqiao. |
+| Siguniangshan, 11 November | 14 Oktober 2026 | 14 Oktober 2026 | [Oli Liao](https://www.pexels.com/photo/majestic-view-of-siguniang-mountain-range-40267914/), [Pexels License](https://www.pexels.com/license/) | Panorama pegunungan; tidak memverifikasi titik Maobiliang atau Shuangqiao. |
 | Tagong, 12 November | 17 Juni 2018 | Tidak dicatat dalam manifest baru | [Valerian Guillot](https://commons.wikimedia.org/wiki/File:Grasslands_in_Tagong_county,_Sichuan,_China_(41077322430).jpg), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | Foto lokasi sebenarnya dari arsip. |
 | Yading / Luorong, 16 November | Oktober 2012 | Tidak dicatat dalam manifest baru | [rheins](https://commons.wikimedia.org/wiki/File:%E6%B4%9B%E7%BB%92%E7%89%9B%E5%9C%BA_-_Luorong_Pasture_-_2012.10_-_panoramio_(1).jpg), [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) | Luorong; foto tidak membuktikan akses jalur saat perjalanan. |
 | Blue Moon Valley, 19 November | Tidak tersedia | 25 Juli 2026 | [Richard L](https://www.pexels.com/photo/stunning-view-of-jade-dragon-snow-mountain-and-blue-moon-valley-38718349/), [Pexels License](https://www.pexels.com/license/) | Tanggal terbit tidak dipakai sebagai tanggal pengambilan. |
@@ -88,11 +89,10 @@ Hanya foto Siguniangshan dalam set ini yang terverifikasi diambil pada Oktober 2
 
 ## Gap foto
 
-Sebanyak 32 titik tidak memakai foto web karena izin pakai atau kecocokan sumber belum dapat diverifikasi. Teks asli tetap tersedia. Tidak ada gambar pengganti dari lokasi berbeda.
+Sebanyak 31 titik tidak memakai foto web karena izin pakai atau kecocokan sumber belum dapat diverifikasi. Teks asli tetap tersedia. Tidak ada gambar pengganti dari lokasi berbeda.
 
 - Goukou / Pengfeng (PDF hlm. 3)
 - Rilong (PDF hlm. 8)
-- Hutan Hongshan (PDF hlm. 9)
 - Danba (PDF hlm. 9)
 - Moshi Park (PDF hlm. 10)
 - Biara Muya (PDF hlm. 11)
@@ -143,7 +143,7 @@ Folder kerja `source/` menyimpan bahan audit dan tidak diterbitkan oleh build. P
 
 ## Foto kiriman pengguna dan pembaruan visual
 
-Galeri mempertahankan 12 foto kiriman pengguna. Foto pengguna 08–10 adalah Bipenggou, dikonfirmasi pengguna dan tangkapan layar unggahan kapongbeer. Foto tersebut ditampilkan sebagai inspirasi di luar rute 14 hari. Penanda relatif `14h` pada tangkapan layar tidak membuktikan tanggal pengambilan Oktober 2026. Foto lain tetap memakai deskripsi visual tanpa menebak nama tempat. Beranda kini memakai enam foto destinasi yang bersumber terpisah; foto pengguna 02 tidak lagi menjadi foto pembuka.
+Galeri memuat 19 foto musim gugur kiriman pengguna. Foto pengguna 08–10 adalah Bipenggou, dikonfirmasi pengguna dan tangkapan layar unggahan kapongbeer. Foto 13–19 dikirim pengguna pada 4 November 2026 sebagai foto Bipenggou; fotografer aslinya tidak diketahui. Sejak revisi 4 November 2026, Bipenggou masuk rute pada 11 November. Penanda relatif `14h` pada tangkapan layar tidak membuktikan tanggal pengambilan Oktober 2026. Foto lain tetap memakai deskripsi visual tanpa menebak nama tempat. Beranda kini memakai enam foto destinasi yang bersumber terpisah; foto pengguna 02 tidak lagi menjadi foto pembuka.
 
 Metadata asal: `source/user-photos/manifest.json`, `source/user-photos/provenance.json`; data tampilan berada di `src/itinerary.ts`. Foto pengguna tidak dilabeli lisensi Creative Commons. Berkas asli tetap tersimpan; hanya resize, koreksi orientasi EXIF, konversi WebP dan crop bingkai yang diterapkan.
 
@@ -177,6 +177,12 @@ The 29 preexisting research groups were rechecked against accessible official, o
 Recent references include the 31 October Jiuzhaigou notice, 25 October Yading visitor guidance, August G227 works update, October Jade Dragon maintenance notice, and 2 November Lijiang operator interview. Songzanlin's conflicting bus/hours pages and unreadable August shuttle-price attachment prevent a confirmed current package total, so CNY90 is only a reference. Yading's November tariff remains unconfirmed after the 2026 reforms. Undated booking listings do not prove selected-date availability; private transfers still require quotes.
 
 The interface uses a fixed warm-light palette under both device color preferences. Glass effects apply to controls and navigation; practical reading panels remain opaque, with reduced-transparency and increased-contrast fallbacks.
+
+## Traveler revision — Bipenggou (4 November 2026)
+
+G213 Songpan–Maoxian has been closed by the Dingziba landslide since 16 September 2026 and was still not cleared on 22 October ([Jimu via Sohu](https://www.sohu.com/a/1091125891_121443915)), so the 10 November drive from Jiuzhaigou can no longer use it. At the traveler's request Bipenggou replaces Shuangqiao Valley: 10 November drives the Jiumian expressway, Dujiangyan and G4217 to a night near the Bipenggou gate; 11 November visits the valley in the morning and crosses 理小路 (G662, daytime only) to Rilong; 12 November drives Rilong, Danba, Moshi Park and Tagong to Xinduqiao. The Danba night and Zhonglu drop out; 13–21 November are unchanged.
+
+Facts were researched and adversarially re-checked on 4 November 2026 from official Bipenggou notices, Qunar and Tongcheng listings, Chuanguan reports and Trip.com. Unresolved: November opening hours differ between sources, the 2026–27 理小路 winter-control date is unpublished, no halal restaurant was found in Lixian, and road times are estimates rather than Amap or Baidu figures. The official site bipenggou.net serves only plain HTTP without a valid certificate, so its notices were read but are not linked from the guide. The licensed route photo is geoff leng's 6 October 2019 Commons image (CC BY-SA 2.0); the ten gallery photos come from the user and carry no Creative Commons licence.
 
 ## Traveler revision — Chengdu first night
 

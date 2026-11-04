@@ -4,15 +4,18 @@ const jiuzhaiTickets = 'https://www.jiuzhai.com/intelligent-service/tickets';
 const jiuzhaiArrival = 'https://www.jiuzhai.com/intelligent-service/arrival-mode';
 const jiuzhaiNotice = 'https://www.jiuzhai.com/news/notice/11492-2026-10-31-09-08-46';
 const jiuzhaiBus = 'https://en.jiuzhai.com/plan-your-trip/getting-around-the-park';
-const shuangqiaoGuide = 'https://www.sgns.cn/understand/sqg';
-const siguniangTickets = 'https://www.sgns.cn/info/notice/5748-2024-03-15-01-49-40';
+const bipenggouTickets = 'https://touch.piao.qunar.com/touch/detail.htm?id=13696';
+const bipenggouHours = 'https://m.ly.com/trip/detail/5951976';
+const bipenggouColour = 'https://cbgc.scol.com.cn/news/8072738';
+const g213Closure = 'https://www.sohu.com/a/1091125891_121443915';
+const lixiaoRoad = 'https://cbgc.scol.com.cn/news/8080079';
+const lixiaoWinter = 'https://cbgc.scol.com.cn/news/6998156';
 const maobiliangGuide = 'https://you.ctrip.com/sight/xiaojin3110/145018.html';
 const maobiliangFees = 'https://travelnews.qunar.com/qa_strategy/aba-siguniangshan-travel-guide';
+const danbaRoadworks = 'https://news.qq.com/rain/a/20251015A06A3C00';
 const jiajuFees = 'https://www.danba.gov.cn/lyzx/article/234361';
 const jiajuTickets = 'https://touch.piao.qunar.com/touch/detail.htm?id=190399';
 const jiajuTransport = 'https://www.etripchina.com/china-guide/danba-jiaju-tibetan-village.htm';
-const zhongluTransport = 'https://place.fliggy.com/poi/14963276';
-const zhongluGuide = 'https://www.danba.gov.cn/lyzx/article/234330';
 const moshiGuide = 'https://www.etripchina.com/china-guide/ganzi-moshi-park.htm';
 const moshiTickets = 'https://touch.piao.qunar.com/touch/detail.htm?id=2120079683';
 const tagongTransport = 'https://www.etripchina.com/china-guide/kangding-tagong-grassland.htm';
@@ -55,117 +58,97 @@ export const northernGuides: DestinationGuide[] = [
     ], checkedAt: '2026-11-03',
   },
   {
-    slug: 'siguniangshan', name: 'Siguniangshan', region: 'Sichuan', placeIds: ['maobiliang'],
-    summary: 'Empat puncak bersalju dilihat dari Maobiliang, sebuah titik pandang di tepi jalan menuju kota Siguniangshan. Singgahnya singkat dan bergantung cuaca.',
+    slug: 'bipenggou', name: 'Bipenggou', region: 'Sichuan', placeIds: ['bipenggou'],
+    summary: 'Lembah panjang di Lixian dengan hutan larch, Danau Panyang, dan puncak granit bersalju. Bus taman membawa kamu ke bagian atas lembah; satu pagi cukup untuk Shanghaizi dan danau sebelum melintas ke Siguniang.',
     gettingThere: {
-      origin: 'Hotel Jiuzhaigou, 10 November',
-      steps: ['Berangkat pagi dengan mobil dan sopir menuju kota Siguniangshan / Rilong, sesuai etape darat dalam itinerary.', 'Minta sopir menambahkan Maobiliang / 猫鼻梁 sebagai titik berhenti jika jalan, cuaca, dan sisa waktu memungkinkan.', 'Turun di area berhenti yang diizinkan, berjalan ke gardu pandang, lalu lanjut ke penginapan Rilong.'],
-      duration: 'Alokasi itinerary: 7 sampai 9 jam untuk Jiuzhaigou ke Rilong termasuk istirahat; waktu singgah bergantung rute sopir.',
-      sources: [maobiliangGuide],
+      origin: 'Penginapan di Putou atau kota Lixian, 11 November',
+      steps: ['Malam sebelumnya, sopir memutar dari Jiuzhaigou lewat tol Jiumian, Dujiangyan, dan tol G4217, lalu keluar di Putou menuju 毕棚沟游客中心. G213 Songpan–Maoxian tertutup longsor sejak 16 September 2026.', 'Pagi hari, tukar voucher kategori non-mainland (paspor luar daratan Tiongkok) di loket dengan paspor. Mobil pribadi diparkir di pusat pengunjung; bus taman wajib.', 'Naik bus ke Shanghaizi / 上海子 (sekitar 3.560 m), lalu mobil listrik ke Danau Panyang / 磐羊湖 dan Teluk Bulan / 月亮湾. Mulai turun dari Shanghaizi paling lambat 12.15 agar bisa meninggalkan gerbang pukul 13.00 menuju 理小路.'],
+      duration: 'Jiuzhaigou ke gerbang sekitar 8,5–9,5 jam pada 10 November. Di dalam taman, bus gerbang ke Shanghaizi sekitar 40–45 menit sekali jalan.',
+      sources: [g213Closure, bipenggouHours],
     },
-    stopAccess: { maobiliang: 'Akses dengan mobil sampai area gardu pandang Maobiliang di tepi jalan, lalu berjalan singkat. Ini titik pandang luar lembah, terpisah dari pintu masuk Shuangqiao.' },
+    stopAccess: { bipenggou: 'Masuk lewat pusat pengunjung di mulut lembah. Bus taman wajib sampai Shanghaizi, lalu mobil listrik dan jalur kayu ke Danau Panyang dan Teluk Bulan.' },
+    costs: [
+      { label: 'Tiket masuk dan bus taman', amount: 'CNY 140 / orang', detail: 'Kategori non-mainland di Qunar dan Ctrip, termasuk bus wajib; voucher ditukar di loket (需换票). Sumber lain memberi angka berbeda: CNY 70 + 70 (China for Travelers), CNY 70 + 60 (Tongcheng), dan CNY 80 + 60 (Xinxin, 2025).', status: 'published', source: bipenggouTickets },
+      { label: 'Mobil listrik', amount: 'CNY 60 / orang pulang-pergi', detail: 'Harga CNY 60 mencakup dua segmen pulang-pergi: Shanghaizi–Danau Panyang dan Teluk Bulan–Yanziyan, CNY 20–30 per segmen. Untuk rute sampai Teluk Bulan, tanyakan segmen yang perlu dibeli. Paket tiket, bus, dan mobil listrik tercantum CNY 190.', status: 'published', source: bipenggouTickets },
+      { label: 'Parkir mobil sopir', amount: 'Referensi CNY 20 / hari', detail: 'Tarif parkir pusat pengunjung menurut panduan Tongcheng Oktober 2026.', status: 'estimate', source: bipenggouHours },
+    ],
+    visitDuration: 'Saran alokasi: sekitar 3 jam di Shanghaizi, Danau Panyang, dan Teluk Bulan, ditambah sekitar 1,5 jam bus pulang-pergi. Rute lengkap sampai Yanziyan / 燕子岩窝 (3.837 m) butuh setengah sampai satu hari.',
+    bestTime: 'Datang saat loket buka pukul 08.00–08.30. Penjualan tiket berhenti sekitar 15.00–15.30 dan sumber berbeda soal jam musim dingin. Warna gugur 10–11 November sudah di ujung musim; salju pertama bisa turun.',
+    tips: ['Pesan tiket sebelum berangkat. Tanggal 11 November bertepatan dengan libur sekolah Aba dan Chengdu, dan tahun lalu tiket habis pada 13–14 November.', 'Minum obat antimabuk sebelum naik bus; jalannya berkelok lebih dari 20 km.', 'Ambil foto dalam perjalanan naik. Bus dan mobil listrik dilaporkan tidak berhenti dalam perjalanan turun.', 'Bawa bekal halal. Makanan di dalam taman terbatas, dan tidak ditemukan restoran halal di kota Lixian maupun dekat gerbang.'],
+    cautions: ['Bus naik sekitar 1.300 m dalam satu pagi. Bergerak pelan di Danau Panyang (sekitar 3.680 m) dan turun bila pusing atau sesak napas.', 'Pada pagi hari di bulan November, jalur kayu dan jalan rawan lapisan es tipis.', '理小路 ke Rilong hanya dibuka siang hari dan bisa ditutup karena salju. Cek pukul 07.00; jika ditutup, lewati taman dan putar lewat Wolong.'],
+    sources: [
+      { title: 'Qunar: tiket non-mainland, bus, dan kereta listrik', url: bipenggouTickets, kind: 'operator' },
+      { title: 'Tongcheng: jam buka, bus, dan parkir', url: bipenggouHours, kind: 'operator', publishedAt: '2026-10-27' },
+      { title: 'Chuanguan: musim warna gugur Bipenggou dan 理小路', url: bipenggouColour, kind: 'reference', publishedAt: '2026-10-20' },
+      { title: 'Jimu via Sohu: G213 Maoxian belum dibuka', url: g213Closure, kind: 'reference', publishedAt: '2026-10-22' },
+      { title: 'Chuanguan: 理小路 hanya siang hari', url: lixiaoRoad, kind: 'reference', publishedAt: '2026-10-23' },
+      { title: 'Chuanguan: kontrol musim dingin 理小路 2025', url: lixiaoWinter, kind: 'reference', publishedAt: '2025-11-24' },
+    ], checkedAt: '2026-11-04',
+  },
+  {
+    slug: 'siguniangshan', name: 'Siguniangshan', region: 'Sichuan', placeIds: ['maobiliang'],
+    summary: 'Empat puncak bersalju dilihat dari Maobiliang, sebuah titik pandang di tepi jalan dekat kota Siguniangshan. Singgahnya singkat dan bergantung cuaca.',
+    gettingThere: {
+      origin: 'Bipenggou, 11 November',
+      steps: ['Setelah Bipenggou, sopir melintasi 理小路 dan terowongan Qionglai menuju kota Siguniangshan / Rilong.', 'Jika langit cerah dan masih sebelum matahari terbenam, minta sopir mengantar pulang-pergi sebentar dari Rilong ke Maobiliang / 猫鼻梁.', 'Turun di area berhenti yang diizinkan, berjalan ke gardu pandang, lalu kembali ke penginapan Rilong.'],
+      duration: 'Bipenggou ke Rilong lewat 理小路 sekitar 2–3 jam; waktu singgah bergantung cuaca dan sisa cahaya.',
+      sources: [maobiliangGuide, lixiaoRoad],
+    },
+    stopAccess: { maobiliang: 'Akses dengan mobil sampai area gardu pandang Maobiliang di tepi jalan, lalu berjalan singkat. Ini titik pandang di luar lembah, tanpa tiket taman.' },
     costs: [
       { label: 'Titik pandang Maobiliang', amount: 'Referensi: gratis', detail: 'Panduan Qunar menyebut tanpa tiket masuk. Parkir atau layanan lokal, jika ada, tetap perlu dicek; ini bukan tiket masuk lembah Siguniangshan.', status: 'estimate', source: maobiliangFees },
-      { label: 'Mobil dan parkir', amount: 'Perlu konfirmasi', detail: 'Masukkan singgah Maobiliang ke penawaran sopir untuk etape Jiuzhaigou ke Rilong, termasuk waktu tunggu dan biaya parkir.', status: 'unconfirmed' },
+      { label: 'Mobil dan parkir', amount: 'Perlu konfirmasi', detail: 'Masukkan singgah Maobiliang ke penawaran sopir untuk etape Bipenggou ke Rilong, termasuk waktu tunggu dan biaya parkir.', status: 'unconfirmed' },
     ],
     visitDuration: 'Saran alokasi: 20 sampai 40 menit, tanpa menunggu langit cerah terlalu lama.',
-    bestTime: 'Sore sesuai itinerary, jika puncak terlihat. Cahaya pagi juga menarik, tetapi tidak perlu mengubah jadwal transfer panjang demi foto.',
+    bestTime: 'Sore sesuai itinerary, jika puncak terlihat dan sebelum matahari terbenam sekitar 18.14.',
     tips: ['Simpan nama 猫鼻梁 untuk ditunjukkan kepada sopir.', 'Gunakan lensa lebar untuk empat puncak, lalu coba pembesaran untuk detail salju.', 'Siapkan jaket di kabin agar tidak perlu membuka koper saat singgah.'],
     cautions: ['Titik ini berada di tepi jalan pegunungan. Foto dari area pandang, bukan badan jalan.', 'Jika perjalanan terlambat atau berkabut, prioritaskan tiba dan beristirahat di Rilong.'],
     sources: [
       { title: 'Trip.com: lokasi dan akses Maobiliang', url: maobiliangGuide, kind: 'operator' },
       { title: 'Qunar: referensi biaya Maobiliang', url: maobiliangFees, kind: 'reference', publishedAt: '2026-04-15' },
-    ], checkedAt: '2026-11-03',
-  },
-  {
-    slug: 'shuangqiao', name: 'Shuangqiao Valley', region: 'Sichuan', placeIds: ['shuangqiao', 'hongshan'],
-    summary: 'Shuttle membawa kamu ke bagian atas lembah. Perjalanan turun memberi ruang untuk berhenti di hutan Hongshan dan jalur kayu di bawah puncak bersalju.',
-    gettingThere: {
-      origin: 'Penginapan Rilong, 11 November',
-      steps: ['Minta sopir mengantar ke pusat pengunjung Shuangqiao / 双桥沟. Pengelola mencantumkan akses dari kota dengan jarak sekitar 8 km.', 'Setelah pemeriksaan tiket, naik shuttle taman ke Hongshan / 红杉林, pemberhentian di ujung lembah.', 'Kembali secara bertahap dengan shuttle, turun hanya pada pemberhentian yang dibuka. Sepakati jam bertemu sopir untuk melanjutkan perjalanan ke Jiaju dan Danba.'],
-      duration: 'Akses lokal sekitar 8 km dari kota; waktu perjalanan tergantung hotel dan antrean. Itinerary mengalokasikan pagi di taman, lalu sekitar 3 jam berkendara ke Danba.',
-      sources: [shuangqiaoGuide],
-    },
-    stopAccess: {
-      shuangqiao: 'Masuk melalui pusat pengunjung Shuangqiao, lalu gunakan shuttle taman untuk menghubungkan pemberhentian. Pilih jalur kayu yang dibuka untuk berjalan di antara titik pandang.',
-      hongshan: 'Naik shuttle taman sampai pemberhentian terakhir Hongshan / 红杉林. Ikuti jalur pengunjung di kawasan hutan, lalu naik shuttle kembali turun; tidak perlu membeli tiket taman kedua.',
-    },
-    costs: [
-      { label: 'Tiket masuk Shuangqiao', amount: 'CNY 80 / orang', detail: 'Tarif dewasa pada panduan pengelola dan pengumuman 5 Maret 2024, termasuk kawasan Hongshan. Halaman masih mencantumkan CNY 80; cocokkan tanggal 11 November 2026 saat reservasi.', status: 'published', source: siguniangTickets },
-      { label: 'Shuttle taman', amount: 'CNY 70 / orang', detail: 'Jumlah tiket masuk dan shuttle: CNY 150 per dewasa. Transportasi dari hotel dan kegiatan tambahan tidak termasuk.', status: 'published', source: siguniangTickets },
-      { label: 'Transfer hotel dan perjalanan Danba', amount: 'Perlu konfirmasi', detail: 'Bagian dari perjalanan dengan sopir. Sepakati jam jemput di pintu keluar sebelum masuk taman.', status: 'unconfirmed' },
-    ],
-    visitDuration: 'Saran alokasi: 3 sampai 4 jam untuk versi singkat itinerary. Pengelola merekomendasikan sehari untuk kunjungan lebih lengkap.',
-    bestTime: 'Mulai pagi agar masih cukup waktu menuju Danba. Halaman pengelola mencantumkan penerimaan musim ramai 08.00 sampai 15.00; periksa slot tiket terbaru.',
-    tips: ['Naik sampai ujung lembah dahulu, lalu nikmati pemberhentian dalam perjalanan turun.', 'Bawa kacamata hitam, jaket, dan sepatu dengan sol yang tidak licin.', 'Simpan waktu penjemputan sopir; jangan memaksakan seluruh pemberhentian sebelum perjalanan ke Danba.'],
-    cautions: ['Hongshan berada sekitar 3.840 m menurut pengelola. Bergerak perlahan dan hentikan aktivitas bila merasa tidak sehat.', 'Hongshan pada panduan ini adalah kawasan hutan. Lokasi “Hongshan Waterfall” dalam PDF belum terkonfirmasi.'],
-    sources: [
-      { title: 'Pengelola Siguniangshan: panduan Shuangqiao', url: shuangqiaoGuide, kind: 'official', note: 'Isi panduan ditemukan dalam indeks pencarian; halaman langsung gagal dimuat saat pemeriksaan. Tarif dicocokkan dengan pengumuman resmi di bawah.' },
-      { title: 'Pengelola Siguniangshan: tiket dan pengingat kunjungan', url: siguniangTickets, kind: 'official', publishedAt: '2024-03-05' },
-    ], checkedAt: '2026-11-03',
+      { title: 'Chuanguan: 理小路 hanya siang hari', url: lixiaoRoad, kind: 'reference', publishedAt: '2026-10-23' },
+    ], checkedAt: '2026-11-04',
   },
   {
     slug: 'jiaju', name: 'Jiaju Tibetan Village', region: 'Sichuan', placeIds: ['jiaju'],
     summary: 'Rumah Tibet merah-putih mengikuti lereng Danba. Pilih satu atau dua titik pandang, lalu berjalan pelan di antara rumah yang masih dihuni.',
     gettingThere: {
-      origin: 'Shuangqiao Valley, 11 November',
-      steps: ['Setelah keluar Shuangqiao, lanjut dengan mobil melalui kawasan Xiaojin menuju Danba sesuai itinerary.', 'Dari area Danba, arahkan sopir ke pusat pengunjung Jiaju / 甲居藏寨, sekitar 8 km dari kota menurut operator.', 'Konfirmasikan penggunaan shuttle atau izin kendaraan saat tiba. Akhiri kunjungan dengan jemputan yang sudah disepakati untuk kembali ke hotel Danba.'],
-      duration: 'Alokasi itinerary: sekitar 3 jam dari Shuangqiao ke Danba, belum termasuk kunjungan Jiaju.',
-      sources: [jiajuTransport],
+      origin: 'Rilong, 12 November',
+      steps: ['Dari Rilong, lanjut dengan mobil melalui Xiaojin menuju Danba sesuai itinerary.', 'Dari area Danba, arahkan sopir ke pusat pengunjung Jiaju / 甲居藏寨, sekitar 8 km dari kota menurut operator.', 'Konfirmasikan penggunaan shuttle atau izin kendaraan saat tiba. Kembali ke mobil di titik yang disepakati untuk melanjutkan ke Bamei.'],
+      duration: 'Rilong ke Danba sekitar 3–3,5 jam termasuk antrean perbaikan jalan G350 di Banshanmen, belum termasuk kunjungan Jiaju.',
+      sources: [jiajuTransport, danbaRoadworks],
     },
     stopAccess: { jiaju: 'Dari Danba, naik mobil ke pintu masuk Jiaju. Gunakan shuttle jika diwajibkan pada hari kunjungan; antar titik pandang dan rumah dilanjutkan berjalan kaki.' },
     costs: [
-      { label: 'Tiket masuk desa', amount: 'CNY 50 / orang', detail: 'Harga dewasa pada daftar tiket Qunar saat diperiksa. Belum merupakan penawaran tanggal 11 November; cocokkan tanggal, penerimaan paspor, dan layanan yang termasuk sebelum membayar.', status: 'published', source: jiajuTickets },
+      { label: 'Tiket masuk desa', amount: 'CNY 50 / orang', detail: 'Harga dewasa pada daftar tiket Qunar saat diperiksa. Belum merupakan penawaran tanggal 12 November; cocokkan tanggal, penerimaan paspor, dan layanan yang termasuk sebelum membayar.', status: 'published', source: jiajuTickets },
       { label: 'Shuttle desa pulang-pergi', amount: 'Referensi CNY 35 / orang', detail: 'Publikasi pemerintah tahun 2022. Tanyakan apakah shuttle wajib dan apakah mobil sopir boleh masuk; jangan menghitung transportasi dua kali.', status: 'estimate', source: jiajuFees },
-      { label: 'Mobil, parkir, dan waktu tunggu', amount: 'Perlu konfirmasi', detail: 'Minta dimasukkan dalam penawaran sopir hari Shuangqiao ke Danba.', status: 'unconfirmed' },
+      { label: 'Mobil, parkir, dan waktu tunggu', amount: 'Perlu konfirmasi', detail: 'Minta dimasukkan dalam penawaran sopir hari Rilong ke Xinduqiao.', status: 'unconfirmed' },
     ],
-    visitDuration: 'Saran alokasi: 1 sampai 2 jam untuk singgah sore; sekitar 3 jam bila ingin berjalan lebih lama.',
-    bestTime: 'Sore sesuai itinerary, dengan batas waktu kembali sebelum berkendara malam. Warna daun bergantung kondisi tahun kunjungan.',
-    tips: ['Pilih titik pandang sebelum berjalan agar waktu sore tidak habis berpindah kendaraan.', 'Minta izin sebelum memotret warga atau masuk halaman rumah.', 'Siapkan alas kaki yang nyaman untuk jalur menanjak dan bertangga.'],
+    visitDuration: 'Saran alokasi: sekitar 1 jam untuk satu titik pandang. Lewati jika tiba di Danba setelah 12.00.',
+    bestTime: 'Siang, hanya jika perjalanan dari Rilong lancar. Moshi Park dan Tagong masih menunggu setelahnya.',
+    tips: ['Pilih satu titik pandang sebelum berangkat agar waktu tidak habis berpindah kendaraan.', 'Minta izin sebelum memotret warga atau masuk halaman rumah.', 'Siapkan alas kaki yang nyaman untuk jalur menanjak dan bertangga.'],
     cautions: ['Desa masih dihuni; rumah dan ladang bukan area bebas masuk.', 'Tarif shuttle yang ditemukan berasal dari publikasi lama, bukan penawaran yang sudah dipesan.'],
     sources: [
       { title: 'Qunar: daftar tiket Jiaju', url: jiajuTickets, kind: 'operator' },
       { title: 'Pemerintah Danba: referensi tarif Jiaju, 2022', url: jiajuFees, kind: 'official', publishedAt: '2022-05-18' },
       { title: 'ETripChina: akses dan kunjungan Jiaju', url: jiajuTransport, kind: 'operator', publishedAt: '2023-05-17' },
-    ], checkedAt: '2026-11-03',
-  },
-  {
-    slug: 'zhonglu', name: 'Zhonglu Tibetan Village', region: 'Sichuan', placeIds: ['zhonglu'],
-    summary: 'Rumah batu, menara pengawas, dan ladang memberi alasan untuk berhenti lebih pelan sebelum melanjutkan perjalanan ke Bamei.',
-    gettingThere: {
-      origin: 'Hotel Danba, 12 November',
-      steps: ['Berangkat dengan sopir dari hotel menuju Zhonglu / 中路藏寨. Sepakati titik turun sesuai rumah atau gardu pandang yang ingin dikunjungi.', 'Fliggy menyarankan akses mobil dari Danba, kemudian berjalan mengunjungi desa dari area kantor pemerintahan Zhonglu.', 'Kembali ke mobil di titik yang disepakati sebelum melanjutkan ke Bamei dan Moshi Park.'],
-      duration: 'Waktu transfer lokal perlu dikonfirmasi dengan sopir; itinerary mengalokasikan sekitar 5 jam berkendara untuk seluruh hari Danba ke Xinduqiao.',
-      sources: [zhongluTransport],
-    },
-    stopAccess: { zhonglu: 'Gunakan mobil dari Danba ke Zhonglu, lalu berjalan di jalur desa. Sepakati titik pandang dengan sopir terlebih dahulu karena rumah dan menara tersebar di lereng.' },
-    costs: [
-      { label: 'Akses desa dan titik pandang', amount: 'Perlu konfirmasi', detail: 'Belum ditemukan daftar tarif resmi yang berlaku untuk November 2026. Jangan menganggap akses rumah, menara, atau parkir otomatis gratis.', status: 'unconfirmed' },
-      { label: 'Mobil dan parkir', amount: 'Perlu konfirmasi', detail: 'Gabungkan dengan perjalanan Danba ke Bamei. Tanyakan biaya tambahan jika mengunjungi gardu pandang di luar rute mobil.', status: 'unconfirmed' },
-    ],
-    visitDuration: 'Saran alokasi: 1 sampai 2 jam pada pagi hari.',
-    bestTime: 'Pagi sesuai itinerary, sebelum perjalanan panjang ke Moshi dan Tagong. Kabut atau cahaya yang berubah bisa menutupi menara dari kejauhan.',
-    tips: ['Simpan nama 中路藏寨 dan titik jemput agar mudah ditemukan setelah berjalan.', 'Minta izin sebelum masuk rumah, halaman, atau menara milik warga.', 'Siapkan bekal sejak Danba supaya tidak bergantung pada jam buka kedai desa.'],
-    cautions: ['Jalur desa menanjak dan sebagian tangga tidak rata; pilih lintasan sesuai kondisi fisik.', 'Foto Jikayi dalam galeri menunjukkan kawasan Zhonglu, bukan jaminan sudut yang sama dari setiap gardu pandang.'],
-    sources: [
-      { title: 'Fliggy: akses mobil dan jalan kaki ke Zhonglu', url: zhongluTransport, kind: 'operator' },
-      { title: 'Pemerintah Danba: lokasi dan karakter Zhonglu', url: zhongluGuide, kind: 'official', publishedAt: '2022-06-15' },
-    ], checkedAt: '2026-11-03',
+      { title: 'Ganzi: pengaturan lalu lintas perbaikan G350 Banshanmen', url: danbaRoadworks, kind: 'official', publishedAt: '2025-10-15' },
+    ], checkedAt: '2026-11-04',
   },
   {
     slug: 'moshi-park', name: 'Moshi Park', region: 'Sichuan', placeIds: ['moshi'],
-    summary: 'Jalur di antara formasi batu kelabu menjadi jeda yang berbeda dalam perjalanan dari desa Danba ke padang Tagong.',
+    summary: 'Jalur di antara formasi batu kelabu menjadi jeda yang berbeda dalam perjalanan dari lembah Danba ke padang Tagong.',
     gettingThere: {
-      origin: 'Zhonglu / Danba, 12 November',
+      origin: 'Danba, 12 November',
       steps: ['Lanjut dengan sopir ke arah Bamei dan pusat pengunjung Moshi Park / 墨石公园.', 'Gunakan shuttle taman menuju area kunjungan, lalu ikuti jalur pejalan kaki yang ditandai.', 'Bertemu sopir di pintu keluar untuk melanjutkan ke Tagong, Muya, dan penginapan Xinduqiao.'],
-      duration: 'Bagian dari alokasi itinerary sekitar 5 jam berkendara untuk seluruh hari Danba ke Xinduqiao; durasi per segmen perlu dikonfirmasi sopir.',
+      duration: 'Bagian dari hari Rilong ke Xinduqiao, sekitar 7,5–8,5 jam termasuk singgah; durasi per segmen perlu dikonfirmasi sopir.',
       sources: [moshiGuide],
     },
     stopAccess: { moshi: 'Turun di pusat pengunjung Moshi Park, lanjut dengan shuttle sesuai tiket, lalu berjalan di lintasan taman. Jangan memanjat formasi batu untuk mencari sudut foto.' },
     costs: [
       { label: 'Tiket masuk taman', amount: 'CNY 60 / orang', detail: 'Harga dewasa pada daftar tiket Qunar saat diperiksa. Pilih tanggal 12 November dan pastikan penerimaan paspor sebelum membayar; slot kunjungan belum dipesan.', status: 'published', source: moshiTickets },
       { label: 'Shuttle taman pulang-pergi', amount: 'CNY 20 / orang', detail: 'Qunar mencantumkan shuttle pulang-pergi CNY 20 serta paket masuk dan shuttle CNY 80. Periksa paket agar tiket tidak terbeli dua kali.', status: 'published', source: moshiTickets },
-      { label: 'Mobil dan parkir', amount: 'Perlu konfirmasi', detail: 'Bagian dari penawaran sopir untuk etape Danba ke Xinduqiao; biaya parkir perlu disebutkan secara terpisah jika belum termasuk.', status: 'unconfirmed' },
+      { label: 'Mobil dan parkir', amount: 'Perlu konfirmasi', detail: 'Bagian dari penawaran sopir untuk etape Rilong ke Xinduqiao; biaya parkir perlu disebutkan secara terpisah jika belum termasuk.', status: 'unconfirmed' },
     ],
     visitDuration: 'Saran alokasi: sekitar 2 jam, termasuk berjalan dan berhenti untuk foto.',
     bestTime: 'Siang sesuai itinerary. Artikel operator Mei 2023 mencantumkan jam musim dingin 09.00 sampai 17.00 mulai 21 Oktober; jam 12 November 2026 tetap perlu dikonfirmasi.',
@@ -175,7 +158,7 @@ export const northernGuides: DestinationGuide[] = [
       { title: 'Qunar: daftar tiket dan shuttle Moshi Park', url: moshiTickets, kind: 'operator' },
       { title: 'ETripChina: akses dan jam kunjungan Moshi, 2023', url: moshiGuide, kind: 'operator', publishedAt: '2023-05-18' },
     ],
-    checkedAt: '2026-11-03',
+    checkedAt: '2026-11-04',
   },
   {
     slug: 'tagong', name: 'Padang rumput Tagong', region: 'Sichuan', placeIds: ['tagong'],
@@ -183,7 +166,7 @@ export const northernGuides: DestinationGuide[] = [
     gettingThere: {
       origin: 'Moshi Park / Bamei, 12 November',
       steps: ['Lanjutkan perjalanan dengan sopir ke Tagong / 塔公草原 di koridor menuju Xinduqiao.', 'Sepakati titik turun di area padang atau gardu pandang yang dibuka, lalu berjalan singkat dari tempat parkir.', 'Setelah kunjungan, lanjut ke Biara Muya sebelum menuju hotel Xinduqiao. Hindari menambah pendakian panjang pada hari transfer ini.'],
-      duration: 'Durasi tiap segmen dikonfirmasi sopir; seluruh hari Danba ke Xinduqiao dialokasikan sekitar 5 jam berkendara dalam itinerary.',
+      duration: 'Bagian dari hari Rilong ke Xinduqiao, sekitar 7,5–8,5 jam termasuk singgah; durasi per segmen perlu dikonfirmasi sopir.',
       sources: [tagongTransport],
     },
     stopAccess: { tagong: 'Datang dengan mobil dari arah Bamei, turun di akses padang yang diizinkan, lalu berjalan di area pengunjung. Minta harga titik pandang atau area berpagar sebelum masuk.' },
@@ -212,7 +195,7 @@ export const northernGuides: DestinationGuide[] = [
     stopAccess: { muya: 'Gunakan pin Amap 木雅大寺, lalu datang dengan sopir dari Tagong. Setelah parkir, tanyakan bangunan dan jalur mana yang terbuka untuk pengunjung.' },
     costs: [
       { label: 'Akses biara / biaya kebersihan', amount: 'Perlu konfirmasi', detail: 'Halaman tiket Qunar tidak menampilkan penawaran harga. Konfirmasikan biaya di pintu masuk; jangan menganggap gratis atau memakai harga biara lain.', status: 'unconfirmed', source: muyaListing },
-      { label: 'Mobil dan parkir', amount: 'Perlu konfirmasi', detail: 'Masukkan kunjungan Muya ke rute sopir Danba ke Xinduqiao. Tanyakan biaya parkir dan waktu tunggu sebelum turun.', status: 'unconfirmed' },
+      { label: 'Mobil dan parkir', amount: 'Perlu konfirmasi', detail: 'Masukkan kunjungan Muya ke rute sopir Rilong ke Xinduqiao. Tanyakan biaya parkir dan waktu tunggu sebelum turun.', status: 'unconfirmed' },
     ],
     visitDuration: 'Saran alokasi: 45 sampai 60 menit untuk area yang dibuka.',
     bestTime: 'Sore sesuai itinerary, sebelum terlalu gelap untuk perjalanan ke hotel. Jam akses bangunan perlu dikonfirmasi langsung.',
