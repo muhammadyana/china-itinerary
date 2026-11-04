@@ -54,12 +54,13 @@ html {
   transition: background-color var(--dur-micro) var(--ease-out);
 }
 
+/* Share spare room by label length, so the two dropdowns are not squeezed next to short links. */
 .site-navigation .site-navigation-link {
-  flex: 1;
+  flex: 1 1 auto;
 }
 
 .site-navigation .nav-menu {
-  flex: 1;
+  flex: 1 1 auto;
   min-width: 0;
   position: static;
   margin: 0;
@@ -81,6 +82,8 @@ html {
 }
 
 .nav-menu-chevron {
+  /* A shrunk box turns the rotated borders into a tick; keep it square. */
+  flex: none;
   width: 7px;
   height: 7px;
   margin-top: -3px;
