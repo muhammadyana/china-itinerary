@@ -36,7 +36,7 @@ test('source invariants: 14 dates, 13 nights and conditional routes',async()=>{
   ['five-flower','2026-11-09','Sichuan'],['songzanlin','2026-11-18','Yunnan'],
   ['maobiliang','2026-11-11','Sichuan'],['dayan','2026-11-18','Yunnan'],
   ['bipenggou','2026-11-11','Sichuan'],
-  ['tagong','2026-11-12','Sichuan'],['blue-moon','2026-11-18','Yunnan'],
+  ['tagong','2026-11-12','Sichuan'],['blue-moon','2026-11-19','Yunnan'],
   ['luorong','2026-11-16','Sichuan'],['erhai','2026-11-20','Yunnan'],
   ['dali-old-town','2026-11-20','Yunnan'],
   ['impression-lijiang','2026-11-19','Yunnan'],

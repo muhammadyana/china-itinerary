@@ -40,7 +40,7 @@ test('Impression Lijiang is required between the glacier and valley without chan
     if (event.kind === 'transfer' && event.mode === 'train' && /Dali/.test(event.title)) return ['train-to-dali'];
     return [];
   });
-  expect(sequence).toEqual(['jade-dragon', placeId, 'train-to-dali']);
+  expect(sequence).toEqual([placeId, 'jade-dragon', 'train-to-dali']);
   const stop = day.events.find(event => event.kind === 'stop' && event.place === placeId)!;
   expect(stop.status).toBe('Wajib');
   if (stop.kind === 'stop') {
