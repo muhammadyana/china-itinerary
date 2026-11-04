@@ -24,7 +24,7 @@ const topLinks: { before: NavLink[]; after: NavLink[] } = {
 };
 
 const itineraryLinks: NavLink[] = [
-  { href: '/#itinerary', label: 'Jadwal 14 hari', action: 'itinerary' },
+  { href: '/#itinerary', label: 'Lihat itinerary 14 hari', action: 'itinerary' },
   { href: staysPath, label: 'Hotel & hostel per malam' },
   { href: routeMapPath, label: 'Peta rute 14 hari' },
   { href: preparePath, label: 'Persiapan & pemesanan' },
