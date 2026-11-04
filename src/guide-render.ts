@@ -22,7 +22,7 @@ export function guidePhotoDetail(page: PlacePage, index: number): PhotoContent {
   const photo = photos[item.id];
   return {
     image: photoImage(item.id, item.alt, true, '(min-width: 960px) 1000px, calc(100vw - 128px)'),
-    caption: `<h2 id="guide-photo-title">${e(item.title)}</h2>${item.note ? `<p>${e(item.note)}</p>` : ''}${photo.photoNote && photo.photoNote !== item.note ? `<p>${e(photo.photoNote)}</p>` : ''}<p>Foto referensi. Warna daun, cuaca, dan akses dapat berbeda saat kunjungan.</p><div class="guide-photo-credit">${external(`Foto: ${photo.author}`, photo.source)}${external(photo.license, photo.licenseUrl)}<p>Ukuran disesuaikan ke WebP. Pemotongan hanya pada bingkai galeri.</p></div>`,
+    caption: `<h2 id="guide-photo-title">${e(item.title)}</h2>${item.note ? `<p>${e(item.note)}</p>` : ''}${photo.photoNote && photo.photoNote !== item.note ? `<p>${e(photo.photoNote)}</p>` : ''}<p>Foto referensi. Warna daun, cuaca, dan akses dapat berbeda saat kunjungan.</p><div class="guide-photo-credit">${external(`Foto: ${photo.author}`, photo.source)}${photo.licenseUrl === photo.source ? `<p>${e(photo.license)}</p>` : external(photo.license, photo.licenseUrl)}<p>Ukuran disesuaikan ke WebP. Pemotongan hanya pada bingkai galeri.</p></div>`,
   };
 }
 

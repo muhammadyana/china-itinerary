@@ -19,7 +19,7 @@ function stayCard(stay: Stay, base: StayBase, compact = false) {
   const gallery = stay.links.find(link => link.gallery) ?? stay.links[0];
   const links = compact ? [] : stay.links.filter(link => photo || link !== gallery);
   return `<article class="stay-card${compact ? ' stay-card-compact' : ''}"${compact ? '' : ` id="${id}"`} aria-labelledby="${headingId}">
-    ${photo ? `<figure class="stay-photo">${photoImage(stay.photo!.id, stay.photo!.alt, false, compact ? '(min-width: 960px) 360px, 92vw' : '(min-width: 960px) 560px, 92vw')}<figcaption>Foto properti: ${external(photo.author, photo.source)} · ${external(photo.license, photo.licenseUrl)}</figcaption></figure>` : ''}
+    ${photo ? `<figure class="stay-photo">${photoImage(stay.photo!.id, stay.photo!.alt, false, compact ? '(min-width: 960px) 360px, 92vw' : '(min-width: 960px) 560px, 92vw')}<figcaption>Foto properti: ${external(photo.author, photo.source)} · ${photo.licenseUrl === photo.source ? e(photo.license) : external(photo.license, photo.licenseUrl)}</figcaption></figure>` : ''}
     <div class="stay-card-body">
       <h3 id="${headingId}">${e(stay.name)}</h3>
       ${stay.chinese ? `<p class="stay-chinese" lang="zh-Hans">${e(stay.chinese)}</p>` : ''}

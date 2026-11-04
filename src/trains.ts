@@ -11,7 +11,7 @@ export const trainsPath = '/places/trains/';
 export const trainBookings = bookings.filter(item => item.link?.url.includes('/trains/china/route/'));
 
 export const jiuzhaigouSlots = [
-  { trains: 'C5746 06.14 atau C5782 06.45', arrive: '07.53 / 08.30', gate: '±10.00–10.45', slot: '10:00–12:00' },
+  { trains: 'C5746 06.14 (C5782 06.45 tidak sempat shuttle 08.30)', arrive: '07.53', gate: '±10.00–10.45', slot: '10:00–12:00' },
   { trains: 'C5772 07.30 atau C6362 08.12', arrive: '09.31 / 10.01', gate: '±11.30–12.00', slot: '12:00–14:00' },
 ];
 

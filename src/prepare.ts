@@ -44,20 +44,31 @@ export function stayTotal(from = '') {
 }
 
 // What the friend pays from Shangri-La on: Yunnan tickets plus the other half of each room.
+type Range = { min: number; max: number };
+const addRange = (a: Range, b: Range) => ({ min: a.min + b.min, max: a.max + b.max });
+const sumCosts = (items: Booking[], share: (item: Booking) => number = () => 1) => {
+  const total = items.reduce((acc, item) => addRange(acc, { min: item.cost!.min / share(item), max: item.cost!.max / share(item) }), { min: 0, max: 0 });
+  return { min: Math.round(total.min), max: Math.round(total.max) };
+};
+const perPerson = bookings.filter(item => item.cost?.per === 'orang');
+const perCar = bookings.filter(item => item.cost?.per === 'mobil');
+// Cars and taxis from 18 November carry both travellers, so each pays half.
+const carShare = (item: Booking) => item.tripDate > sharedFrom ? 2 : 1;
+
+// What the friend pays from Shangri-La on: Yunnan tickets, the other half of each room and of each car or taxi.
 export function friendShare() {
-  const rooms = stayTotal(sharedFrom);
-  return bookings.filter(item => item.tripDate > sharedFrom && item.cost?.per === 'orang')
-    .reduce((total, item) => ({ min: total.min + item.cost!.min, max: total.max + item.cost!.max }), rooms);
+  const tickets = sumCosts(perPerson.filter(item => item.tripDate > sharedFrom));
+  const cars = sumCosts(perCar.filter(item => item.tripDate > sharedFrom), () => 2);
+  return addRange(addRange(stayTotal(sharedFrom), tickets), cars);
 }
 
 export function costRows() {
-  const sum = (per: 'orang' | 'mobil') => bookings.filter(item => item.cost?.per === per).reduce((total, item) => ({ min: total.min + item.cost!.min, max: total.max + item.cost!.max }), { min: 0, max: 0 });
   const rows = [
-    { label: 'Tiket kereta, taman, dan pertunjukan', basis: 'per orang', ...sum('orang') },
-    { label: 'Mobil + sopir 2 hari', basis: 'per mobil', ...sum('mobil') },
+    { label: 'Tiket, kereta, bus, dan shuttle', basis: 'per orang', ...sumCosts(perPerson) },
+    { label: 'Mobil sewa, taksi, dan transfer', basis: 'bagianmu; dari 18 November dibagi dua', ...sumCosts(perCar, carShare) },
     { label: 'Penginapan 13 malam', basis: 'bagianmu; kamar 17–20 November dibagi dua', ...stayTotal() },
   ];
-  return { rows, total: rows.reduce((total, row) => ({ min: total.min + row.min, max: total.max + row.max }), { min: 0, max: 0 }) };
+  return { rows, total: rows.reduce((total, row) => addRange(total, row), { min: 0, max: 0 }) };
 }
 
 // currencyText() reads plain digits, so CNY amounts carry no thousands separator.

@@ -1,0 +1,615 @@
+[
+ {
+  "placeId": "milk-lake",
+  "id": "tripcom-milk-lake",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/daocheng-county/milk-lake-82112/",
+  "imageUrl": "https://ak-d.tripcdn.com/images/10081c000001cu0o8A761.jpg",
+  "width": 1440,
+  "height": 960,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Danau toska bertepi putih di dasar lembah berbatu, diapit tebing kelabu dan puncak bersalju di bawah awan berarak.",
+  "note": "Verified. This is the first photo in the Trip.com POI header, from a sharp 1920x1280 original. It shows the milky-white rim, grey cliffs and snow peaks, with no people or watermark. Files exist at 480, 960 and 1440 and their dimensions match."
+ },
+ {
+  "placeId": "five-colour",
+  "id": "tripcom-five-colour",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/daocheng-county/five-color-lake-87227/",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0101y12000o69pz6rE01C.jpg",
+  "width": 1440,
+  "height": 959,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Pemandangan udara danau biru pekat di cekungan lereng kelabu, dengan kolam hijau di depannya, danau toska di kejauhan, dan padang rumput keemasan di bawah puncak bergerigi.",
+  "note": "Verified. This is the first photo in the Trip.com POI header, a sharp aerial taken when the grass was autumn gold. The alt text now also mentions the green pond in the foreground, which takes up much of the frame. Files exist at 480, 960 and 1440 and their dimensions match."
+ },
+ {
+  "placeId": "pearl-lake",
+  "id": "tripcom-pearl-lake",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/daocheng-county/pearl-lake-82111/",
+  "imageUrl": "https://ak-d.tripcdn.com/images/100m0i0000009n35rB2B5.jpg",
+  "width": 1000,
+  "height": 664,
+  "sizes": [
+   480,
+   960,
+   1000
+  ],
+  "alt": "Danau hijau zamrud di kaki gunung bersalju, dikelilingi pohon larch keemasan musim gugur.",
+  "note": "Verified. This is the classic autumn view of Pearl Lake under Chenrezig, with golden larches, and it is sharp. I confirmed that 1000px is the largest version: the plain URL, the dimg04 host and an _R_1920 suffix all return 1000x664. Files exist at 480, 960 and 1000 and their dimensions match."
+ },
+ {
+  "placeId": "xiangcheng",
+  "id": "tripcom-xiangcheng",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/moments/detail/xiangcheng-3107-138364038",
+  "imageUrl": "https://ak-d.tripcdn.com/images/1mi3i12000pxx46264283.jpg",
+  "width": 1200,
+  "height": 800,
+  "sizes": [
+   480,
+   960,
+   1200
+  ],
+  "alt": "Desa rumah Tibet bercat putih berbingkai merah dan sebuah stupa putih di dataran lembah, berlatar bukit keemasan diterpa cahaya sore dan langit biru berawan.",
+  "note": "Replaced, using the same Trip.com Moments post ('Ganzi White Tibetan Houses Village'). The earlier pick (1mi3u12000pxx3jvrDB3D) was a soft phone-zoom shot with a power pylon in the centre of the frame. The new photo is a wider, sharper view of the white-house village in warm late-afternoon light, with golden hills, blue sky and a white stupa. The pylons in it are distant and small. The 1200x1600 portrait original was cropped to 1200x800 (rows 200-1000). All three files were overwritten and checked."
+ },
+ {
+  "placeId": "daxueshan",
+  "id": "tripcom-daxueshan",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/shangri-la/daxue-mountain-yakou-24649312/",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0100h12000a4oydsdB3C6.jpg",
+  "width": 690,
+  "height": 465,
+  "sizes": [
+   480,
+   690
+  ],
+  "alt": "Puncak celah gunung dengan tugu tinggi, deretan bendera doa warna-warni, dan punggung pegunungan bersalju di bawah langit biru.",
+  "note": "Kept, but marginal. It is still the only photo on Trip.com's 'Daxue Mountain Yakou (大雪山垭口)' POI, which I re-fetched and found carries just this image. A search of Trip.com Moments found no other post showing the pass. The photo does show the pass (summit monument, prayer flags, snowy ridges), but it is a 690px, slightly soft phone shot. Use it at card size only, or treat it as none if quality matters more than coverage. Files exist at 480 and 690 and their dimensions match."
+ },
+ {
+  "placeId": "dukezong",
+  "id": "tripcom-dukezong",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/shangri-la/dukezong-ancient-town-89845",
+  "imageUrl": "https://ak-d.tripcdn.com/images/100r0p000000fyn8o4FDE.jpg",
+  "width": 1440,
+  "height": 957,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Stupa putih berhias bendera doa warna-warni di alun-alun berbatu, dikelilingi rumah kayu Tibet dan roda doa emas raksasa di kejauhan.",
+  "note": "Verified. This POI header photo of the old-town square shows a stupa above a row of prayer wheels, prayer flags, Tibetan wooden houses and the giant golden prayer wheel, all sharp and in bright light. Only a few small figures appear at the left edge. Files exist at 480, 960 and 1440 and their dimensions match."
+ },
+ {
+  "placeId": "songzanlin",
+  "id": "tripcom-songzanlin",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/shangri-la/songzanlin-scenic-spot-76335",
+  "imageUrl": "https://ak-d.tripcdn.com/images/100d10000000omz6gF119.jpg",
+  "width": 1440,
+  "height": 961,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Kompleks biara Tibet beratap emas di lereng bukit, terpantul di danau dengan pepohonan dan langit biru berawan.",
+  "note": "Verified. This is the first photo in the POI header: the classic view of the monastery across Lamuyangcuo lake, with its reflection. It is sharp, in good light and has no people. Files exist at 480, 960 and 1440 and their dimensions match."
+ },
+ {
+  "placeId": "blue-moon",
+  "id": "tripcom-blue-moon",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/yulong/blue-moon-valley-91410",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0102u1200087dl1bw91F0.jpg",
+  "width": 1440,
+  "height": 961,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Danau toska di kaki pegunungan bersalju, diapit lereng berhutan dengan pohon larch keemasan musim gugur.",
+  "note": "Verified. This is the first photo in the POI header: a turquoise lake below Jade Dragon Snow Mountain with an autumn-gold forested slope. It is sharp, with no watermark or people. Files exist at 480, 960 and 1440 and their dimensions match."
+ },
+ {
+  "placeId": "dayan",
+  "id": "tripcom-dayan",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/lijiang/old-town-of-lijiang-75924",
+  "imageUrl": "https://ak-d.tripcdn.com/images/100f12000000rz2qm851C.jpg",
+  "width": 1440,
+  "height": 960,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Atap-atap genteng kota tua Lijiang dengan pepohonan musim gugur, berlatar puncak bersalju yang bersemu jingga.",
+  "note": "Verified. This POI header photo shows Dayan's tiled rooftops and autumn trees, with alpenglow on Jade Dragon Snow Mountain. It is sharp and has no people. A small satellite dish sits on one foreground roof. Files exist at 480, 960 and 1440 and their dimensions match."
+ },
+ {
+  "placeId": "sifangjie",
+  "id": "tripcom-sifangjie",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/lijiang/sifang-street-86495",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0100312000qf7qn0f387A.jpg",
+  "width": 1440,
+  "height": 961,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Alun-alun berlantai batu yang lengang di kota tua, dengan rumah kayu merah dan pohon berdaun kuning diterpa cahaya pagi.",
+  "note": "Verified. This POI header photo shows the empty cobbled Sifang Square in low morning light, with a yellow-leaved tree and red Naxi wooden shopfronts. It is sharp and has no people. Files exist at 480, 960 and 1440 and their dimensions match."
+ },
+ {
+  "placeId": "chengdu",
+  "id": "tripcom-chengdu",
+  "status": "ok",
+  "imageUrl": "https://youimg1.tripcdn.com/target/100410000000owden3387.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/chengdu/chunxi-road-99590/",
+  "width": 1440,
+  "height": 960,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Jalan raya di kawasan Chunxi Road pada malam hari, dengan gedung IFS berpatung panda, butik mewah yang terang, dan jejak cahaya mobil.",
+  "note": "Verified: this is the hero photo on the Trip.com Chunxi Road page (1920x1280 original). It shows the night street at IFS/Chunxi Road with the panda sculpture, which fits an evening walk. Sharp, no watermark, only normal street signage. Taikoo Li is not in the frame. All three widths exist, the largest is 1440x960 and metadata is stripped."
+ },
+ {
+  "placeId": "five-flower",
+  "id": "tripcom-five-flower",
+  "status": "ok",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0105t1200087crzuu8AB9.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/jiuzhaigou/five-flower-lake-85292/",
+  "width": 1440,
+  "height": 961,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Danau biru toska dengan batang kayu berlumut di permukaannya, dikelilingi hutan pinus dan pohon musim gugur kuning dan merah.",
+  "note": "Verified: from the Trip.com Five Flower Lake gallery (1920x1281 original). Turquoise water with a mossy log and autumn forest. Sharp, no watermark, only tiny people on the boardwalk. The iconic snow-peak reflection shot on the same page is only 1000px wide, so it was not used. All three widths exist and the largest is 1440x961."
+ },
+ {
+  "placeId": "shuzheng",
+  "id": "tripcom-shuzheng",
+  "status": "ok",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0107012000ndsj4kzE94A.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/jiuzhaigou/shu-zheng-lakes-85315/",
+  "width": 1440,
+  "height": 960,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Pemandangan udara deretan danau biru bertingkat di lembah yang dipenuhi pohon musim gugur merah, oranye, dan kuning.",
+  "note": "Verified: hero image of the Trip.com Shu Zheng Lakes page (1920x1280 original). An aerial autumn view of the terraced lake chain, sharp, with no watermark. All three widths exist and the largest is 1440x960."
+ },
+ {
+  "placeId": "bipenggou",
+  "id": "tripcom-bipenggou",
+  "status": "ok",
+  "imageUrl": "https://youimg1.tripcdn.com/target/010731200085d3leiD694.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/li-county/bipeng-valley-89964/",
+  "width": 1440,
+  "height": 960,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Puncak bersalju terpantul di danau jernih, diapit pohon larch keemasan musim gugur di bawah langit biru.",
+  "note": "Verified: the only large photo on the Trip.com Bipeng Valley page (1920x1280 original). Golden larches and a reflected snow peak. Sharp, no watermark, a few tiny people far away. All three widths exist and the largest is 1440x960."
+ },
+ {
+  "placeId": "maobiliang",
+  "id": "tripcom-maobiliang",
+  "status": "ok",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0100y12000m92jglr54BB.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/xiaojin/cat-s-nose-ridge-10520949/",
+  "width": 1440,
+  "height": 809,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Gedung anjungan pandang Maobiliang yang terbuat dari batu berdiri di punggung bukit, dengan puncak bersalju Gunung Siguniang menjulang di belakangnya saat senja.",
+  "note": "Verified: hero photo of the Trip.com Cat's Nose Ridge (Maobiliang) page (1920x1079 original). It shows the stone viewpoint building, with Yaomei Peak behind it in blue-hour light. Sharp, no watermark. The photo was kept; only the alt text was reworded, because 'Gedung ... dari batu di punggung bukit' was ambiguous. All three widths exist and the largest is 1440x809."
+ },
+ {
+  "placeId": "moshi",
+  "id": "tripcom-moshi",
+  "status": "ok",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0105012000u80jdw45DA1.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/daofu/moshi-park-scenic-area-13644486/",
+  "width": 1440,
+  "height": 960,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Hamparan batu abu-abu runcing bergerigi di tengah lembah berumput keemasan, dengan perbukitan dan awan mendung di kejauhan.",
+  "note": "Verified: hero photo of the Trip.com Moshi Park Scenic Area page (1920x1280 original). Grey stone spires with golden autumn grass. Sharp, no watermark. The colour grading is strong, but the colours still look natural enough. All three widths exist and the largest is 1440x960."
+ },
+ {
+  "placeId": "tagong",
+  "id": "tripcom-tagong",
+  "status": "ok",
+  "imageUrl": "https://ak-d.tripcdn.com/images/010011200082kgvtqA6EF.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/kangding/tagong-grassland-10758200/",
+  "width": 1440,
+  "height": 961,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Biara Tagong beratap emas dan tenda Tibet berhias di padang rumput, dengan Gunung Yala bersalju di bawah langit biru berawan.",
+  "note": "Verified: hero photo of the Trip.com Tagong Grassland page (1920x1281 original). It shows the grassland, Tagong Monastery, white stupas and Yala snow mountain. The small people in the frame are not posing, and there is no watermark. All three widths exist and the largest is 1440x961."
+ },
+ {
+  "placeId": "xinduqiao",
+  "id": "tripcom-xinduqiao",
+  "status": "ok",
+  "imageUrl": "https://ak-d.tripcdn.com/images/10040y000000lrwbmB50C.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/kangding/xinduqiao-town-82108/",
+  "width": 1440,
+  "height": 952,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Deretan rumah Tibet di kaki gunung berselimut salju tipis, dengan lereng dan pepohonan musim gugur keemasan.",
+  "note": "Verified: from the Trip.com Xinduqiao Town gallery (1920x1269 original). Village houses under a snow-dusted, cloud-capped mountain in autumn light, sharp, with no watermark. All three widths exist and the largest is 1440x952. An alternative on the same page shows golden poplars with yaks (10040y000000m3yoqC2E0.jpg)."
+ },
+ {
+  "placeId": "kangding",
+  "id": "tripcom-kangding",
+  "status": "ok",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0102x12000mj8f9at72E9.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/kangding/liuliu-city-56809411/",
+  "width": 1440,
+  "height": 960,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Sungai Zheduo yang deras membelah pusat kota Kangding pada malam hari, diapit gedung bergaya Tibet yang terang dan jembatan berlampu.",
+  "note": "Verified and kept. Trip.com has no generic Kangding city POI; the search result 'Kangding City' redirects to Liuliu City (56809411), the old-town street on the river. This is its 1920x1280 photo of central Kangding at night. A blurred purple flower is in the foreground at the right edge, but there is no text overlay or logo and the subject is sharp. Re-checked alternatives: the Liuliu City daytime gate (0100912000o0d7hmhA644) has prominent signage and a phone number; the Love Song Square photo shows a crowd and an LED screen; the destination-page aerial carries a hotel logo; the other photos are hotels, food or landscapes outside the city. All three widths exist and the largest is 1440x960."
+ },
+ {
+  "placeId": "kangding-mosque",
+  "id": "tripcom-kangding-mosque",
+  "status": "none",
+  "note": "Second attempt, 2026-11-04: Trip.com global search returns '0 result' for both 'Kangding Mosque' and '康定清真寺'. Web searches limited to trip.com find no mosque POI or Moments post; Kangding results cover only Buddhist temples (Nanwu, Jingang, Muya). None of the 17 Trip.com Kangding attraction slugs found in the downloaded pages is a mosque. No other site's photo was used."
+ },
+ {
+  "placeId": "jade-dragon",
+  "id": "tripcom-jade-dragon",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/yulong/glacier-park-cableway-98276833/",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0100212000f1ra8rh992D.jpg",
+  "width": 1440,
+  "height": 959,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Kereta gantung biru melintas di atas jalur tangga yang menanjak di lereng batu bersalju tipis di Taman Gletser.",
+  "note": "Verified and kept. It shows the Glacier Park boardwalk and cableway on rocky upper slopes with light snow. It is sharp, has no watermark, and all three files exist at the expected dimensions. I compared the other POI photos (snowy gondola close-ups, a portrait of the peak, a forest cableway), and none shows the park better in landscape."
+ },
+ {
+  "placeId": "impression-lijiang",
+  "id": "tripcom-impression-lijiang",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/yulong/impressions-lijiang-performance-10758688/",
+  "imageUrl": "https://ak-d.tripcdn.com/images/010241200086x854vA643.jpg",
+  "width": 1440,
+  "height": 956,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Ratusan penari berbusana adat berbaris di panggung merah bertingkat dengan latar gunung bersalju di bawah langit biru.",
+  "note": "Verified and kept. The red tiered stage, the cast in rows and Jade Dragon Snow Mountain behind them are all clear. Only a tiny stage sign is visible, and there is no overlay. Files and dimensions match."
+ },
+ {
+  "placeId": "erhai",
+  "id": "tripcom-erhai",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/dali-city/erhai-lake-75916/",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0100t12000g3b5zsaA9A7.jpg",
+  "width": 1440,
+  "height": 810,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Deretan pohon berdaun jingga khas musim gugur tumbuh di air tenang Danau Erhai, dengan perbukitan di seberang danau.",
+  "note": "Verified and kept. An autumn scene of rust-coloured trees standing in the lake, sharp, with no text. The alt text matches. Files and dimensions match."
+ },
+ {
+  "placeId": "caicun",
+  "id": "tripcom-caicun",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/dali/caicun-wharf-10520883/",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0104r12000f0qvzcc8BDE.jpg",
+  "width": 1440,
+  "height": 1079,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Kapal-kapal wisata putih bersandar di dermaga kecil di tepi Danau Erhai yang biru, dengan pegunungan di seberang danau.",
+  "note": "Verified and kept. An elevated view of the wharf with docked white tour boats and Erhai behind, in clean light with no overlay. Files and dimensions match."
+ },
+ {
+  "placeId": "dali-old-town",
+  "id": "tripcom-dali-old-town",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/dali-city/dali-ancient-city-78629/",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0101t12000jco2p76D9FE.jpg",
+  "width": 1440,
+  "height": 960,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Gerbang Selatan Kota Kuno Dali dengan menara bertingkat berhias lentera merah di atas tembok bata dan taman bunga di depannya.",
+  "note": "Verified and kept. A frontal view of the South Gate (文献名邦 / 大理 plaques) with lanterns and flower beds, which matches the alt text. It is somewhat HDR-processed but the colours are sensible. Files and dimensions match."
+ },
+ {
+  "placeId": "wuhua",
+  "id": "tripcom-wuhua",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/dali/wuhua-building-84213/",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0102h12000tz04i0nF6B1.jpg",
+  "width": 1440,
+  "height": 961,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Menara Wuhua bertingkat tiga dengan atap melengkung dan papan nama emas berdiri di atas gerbang batu, di bawah langit biru.",
+  "note": "Verified and kept. The 五華樓 plaque is readable and the tower stands against a clear blue sky. A small direction signpost in the bottom-right corner is acceptable. Files and dimensions match."
+ },
+ {
+  "placeId": "shuncheng",
+  "id": "tripcom-shuncheng",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/moments/detail/kunming-29-147618361/",
+  "imageUrl": "https://ak-d.tripcdn.com/images/1mi0p224x99tmst4k7882.jpg",
+  "width": 1440,
+  "height": 809,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Gerbang Masjid Shuncheng berpilar merah dengan papan nama hijau, diapit deretan toko berpapan kuning di Jalan Shuncheng.",
+  "note": "Verified and kept. The photo shows the 顺城清真寺 gate on Shuncheng Street. Two small figures walk inside the gateway, and nobody is posing. The texture is somewhat smoothed (likely AI-upscaled) but acceptable. I changed the alt text: 'toko-toko halal' became 'deretan toko berpapan kuning', because the half-cropped shop signs do not show that they are halal. Files and dimensions match."
+ },
+ {
+  "placeId": "nancheng",
+  "id": "tripcom-nancheng",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/moments/detail/kunming-29-131233783/",
+  "imageUrl": "https://ak-d.tripcdn.com/images/1mi69224x90p9ntyp3B11.jpg",
+  "width": 1176,
+  "height": 725,
+  "sizes": [
+   480,
+   960,
+   1176
+  ],
+  "alt": "Masjid Nancheng dengan kubah hijau, kaligrafi emas, dan menara putih tinggi di bawah langit biru.",
+  "note": "Identity confirmed: the uncropped source shows the green 南城清真寺 sign at the bottom right, and it is the og:image of a Trip Moments post about Nancheng Mosque. I re-cropped and overwrote all three files. The previous 1176x784 crop cut the 朝真殿 characters in half at the bottom edge. The new top crop is 1176x725 (about 16:10) and keeps the full minaret, dome and calligraphy. Files: 480x296, 960x592 and 1176x725, all with metadata stripped. The source is a portrait user photo 1176 px wide, so it is still below 1200 px. Trip.com has no landscape alternative (the other two photos in the post are portrait, one taken at night)."
+ },
+ {
+  "placeId": "green-lake",
+  "id": "tripcom-green-lake",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/kunming/the-green-lake-park-78617/",
+  "imageUrl": "https://ak-d.tripcdn.com/images/100a1f000001grncg2491.jpg",
+  "width": 1440,
+  "height": 959,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Ratusan burung camar berenang di danau Taman Danau Hijau, dikelilingi pohon dedalu kekuningan dan perahu wisata.",
+  "note": "Verified and kept. Black-headed gulls on the lake, with yellowing willows, a pavilion and pedal boats, in bright light. Saturation is high but sensible, and there is no overlay. Files and dimensions match."
+ },
+ {
+  "placeId": "zheduo",
+  "status": "ok",
+  "id": "tripcom-zheduo",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0100t12000n5mtilq74DF.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/kangding/zheduoshan-snow-viewing-platform-69286051/",
+  "width": 1440,
+  "height": 960,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Stupa putih dan bendera doa warna-warni di puncak celah gunung bersalju, dengan jalan berkelok menuruni lereng di bawah langit biru.",
+  "note": "Verified and kept. It shows the pass itself: the white stupa, the prayer-flag cairn and the G318 switchbacks, sharp, with no watermark. The 480, 960 and 1440 files are 480x320, 960x640 and 1440x960. The source is 1920x1280. Heavy snow cover, so it may look snowier than the pass in mid-November."
+ },
+ {
+  "placeId": "zimei",
+  "status": "ok",
+  "id": "tripcom-zimei",
+  "imageUrl": "https://ak-d.tripcdn.com/images/010331200086ufh6aD7DB.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/kangding/zimei-pass-20952310/",
+  "width": 1440,
+  "height": 958,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Puncak Gongga bersalju berpendar jingga diterpa cahaya matahari, menjulang di atas lautan awan.",
+  "note": "Verified and kept. This is the classic Zimei Pass view: Gongga lit orange above a sea of clouds. It is sharp, has no watermark, and the files match the listed sizes (1440x958). I made the alt text neutral because the photo cannot show whether this is sunrise or sunset."
+ },
+ {
+  "placeId": "gaoersi",
+  "status": "ok",
+  "id": "tripcom-gaoersi",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0105812000fajazxi704F.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/yajiang/gao-ersi-mountain-56806267/",
+  "width": 1440,
+  "height": 810,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Jalan berkelok menuruni lembah di antara lereng hutan larch berwarna keemasan musim gugur, dengan kabut tipis di punggung gunung.",
+  "note": "Verified and kept. An autumn shot of golden larch slopes with the road winding down the valley. It is sharp with no watermark, and the files match the listed sizes (1440x810, 16:9). The alt text matches the photo."
+ },
+ {
+  "placeId": "tianlu",
+  "status": "ok",
+  "id": "tripcom-tianlu",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0106w12000f1r4bg2141E.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/yajiang/heavenly-road-eighteen-bends-viewing-platform-91951522/",
+  "width": 1440,
+  "height": 959,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Jalan aspal berkelok tajam membentuk tikungan bertumpuk di lereng berhutan cemara yang tertutup salju.",
+  "note": "Verified and kept. A sharp overhead view of the stacked hairpins of 天路十八弯, with light snow. There is no watermark, and the small roadside signs are incidental. The files match the listed sizes (1440x959)."
+ },
+ {
+  "placeId": "litang",
+  "status": "ok",
+  "id": "tripcom-litang",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0105x120008n8v9oe0BFB.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/litang/litang-chokhor-ling-144552640/",
+  "width": 1440,
+  "height": 961,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Kompleks biara Litang beratap emas dengan bangunan merah putih bertingkat dan tembok stupa putih, berlatar bukit cokelat keemasan di bawah langit biru.",
+  "note": "Replaced. The previous pick (Letong Ancient Town page) had heavy HDR processing, darkened corners and a teal-tinted sky. The new photo comes from Trip.com's Litang Chokhor Ling (Changqing Chunke'er Monastery) page. The monastery is Litang's main landmark and sits on the edge of the town. The photo is in warm low light below brown late-autumn hills, which matches November. It is sharp, with natural colours and no watermark (I checked the corners). The source is 1920x1281, and I rewrote all three files: 480x320, 960x641 and 1440x961."
+ },
+ {
+  "placeId": "haizi",
+  "status": "ok",
+  "id": "tripcom-haizi",
+  "imageUrl": "https://ak-d.tripcdn.com/images/100f1a0000019nmh1287E.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/daocheng-county/sichuan-haizishan-national-nature-reserve-80456/",
+  "width": 1440,
+  "height": 960,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Kolam beku di antara bongkahan batu granit dan rumput keemasan di dataran tinggi Haizi Shan, di bawah langit biru berawan.",
+  "note": "Verified and kept. It shows the granite boulder plateau with a frozen pool and golden grass in late-autumn light. It is sharp with no watermark, and the files match the listed sizes (1440x960). The alt text matches the photo."
+ },
+ {
+  "placeId": "sister-lakes",
+  "status": "ok",
+  "id": "tripcom-sister-lakes",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0104p12000u70s31k3E43.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/batang/sister-lake-20692869/",
+  "width": 1440,
+  "height": 960,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Dua danau toska di lembah padang rumput hijau dengan jalan berkelok di sampingnya dan pegunungan berbatu bersalju di belakang.",
+  "note": "Verified and kept. A clear drone view of both turquoise lakes beside the road, with no watermark. The files match the listed sizes (1440x960). It is a summer photo (green grass), and the late-season alternative on the page reads less clearly."
+ },
+ {
+  "placeId": "daocheng",
+  "status": "ok",
+  "id": "tripcom-daocheng",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0101312000n985hrx9F75.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/daocheng-county/white-pagoda-145612427/",
+  "width": 1440,
+  "height": 1080,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Stupa putih besar dikelilingi deretan stupa kecil di Daocheng, dengan jalan setapak batu membelah rumput keemasan.",
+  "note": "Verified and kept. Daocheng's White Pagoda, the town's main landmark, among golden autumn grass. It is sharp with no watermark, and the files match the listed sizes (1440x1080, 4:3)."
+ },
+ {
+  "placeId": "chonggu",
+  "status": "ok",
+  "id": "tripcom-chonggu",
+  "imageUrl": "https://ak-d.tripcdn.com/images/100i0p000000fhg3rD5E3.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/daocheng-county/daocheng-yading-scenic-area-chonggu-temple-80449/",
+  "width": 1440,
+  "height": 960,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Bangunan biara Tibet beratap emas di tepi hutan, dengan sungai kecil hijau toska dan semak merah serta kuning musim gugur di depannya.",
+  "note": "Verified and kept. The temple building is clearly visible above a turquoise stream, with autumn foliage in front. The colours are strongly saturated but still believable. There is no watermark, and the files match the listed sizes (1440x960)."
+ },
+ {
+  "placeId": "luorong",
+  "status": "ok",
+  "id": "tripcom-luorong",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0106y120008a75prfCB27.jpg",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/daocheng-county/luorong-pasture-80483/",
+  "width": 1440,
+  "height": 948,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Kuda merumput di padang rumput keemasan di kaki pegunungan bersalju, dengan jalan papan kayu berisi pengunjung di sisi kiri.",
+  "note": "Verified and kept. A golden autumn meadow with grazing horses below the Yading peaks, in strong light, with no watermark. The files match the listed sizes (1440x948). I corrected the alt text: the boardwalk with visitors is on the left side, not in the far distance."
+ }
+]

@@ -25,8 +25,8 @@ export const northernGuides: DestinationGuide[] = [
     gettingThere: {
       origin: 'Hotel di pusat Chengdu pada Senin, 9 November',
       steps: [
-        'Setelah bermalam di Chengdu, naik DiDi dari hotel sekitar 05.15 ke Chengdu East. Kereta C5746 06.14 atau C5782 06.45 ke Huanglongjiuzhai, tiba 07.53 atau 08.30. Pesan kursinya di Trip.com.',
-        'Dari Huanglongjiuzhai, naik shuttle kawasan (景区直通车) sekitar 93 km, kira-kira 2 jam, ke gerbang Jiuzhaigou. Sepakati penitipan koper dengan hotel agar bisa langsung masuk sebelum batas 14.00.',
+        'Setelah bermalam di Chengdu, naik DiDi dari hotel pukul 05.15 ke Chengdu East. Kereta C5746 06.14 ke Huanglongjiuzhai, tiba 07.53; C5782 06.45 tiba 08.30 dan tidak sempat mengejar shuttle 08.30. Pesan kursinya di Trip.com.',
+        'Dari Huanglongjiuzhai, naik bus shuttle Trip.com slot 08.30 (CNY 35) sekitar 93 km, kira-kira 2 jam, ke gerbang Jiuzhaigou. Titip koper di hotel, lalu masuk dengan slot 10:00–12:00.',
         'Masuk taman pada hari yang sama setelah tiba. Bus taman menghubungkan lembah; prioritaskan danau yang dapat dijangkau dalam sisa siang dan sore, lalu menginap satu malam di Goukou / Pengfeng.',
       ],
       duration: 'Kereta tercepat 1 jam 39 menit dari Chengdu East; lanjut sekitar 2 jam dari stasiun ke taman. Tambahkan perjalanan hotel ke stasiun, pemeriksaan, menunggu, dan urusan koper.',
@@ -39,7 +39,7 @@ export const northernGuides: DestinationGuide[] = [
     costs: [
       { label: 'Tiket masuk taman dewasa', amount: 'CNY 190 / orang', detail: 'Tarif musim ramai berlaku 1 April sampai 15 November, termasuk kunjungan 9 November. Satu tiket taman mencakup Five Flower Lake dan Shuzheng.', status: 'published', source: jiuzhaiTickets },
       { label: 'Bus di dalam taman', amount: 'CNY 90 / orang', detail: 'Terpisah dari tiket masuk. Jumlah tiket masuk dan bus: CNY 280 per dewasa; tidak termasuk kereta atau shuttle stasiun.', status: 'published', source: jiuzhaiTickets },
-      { label: 'Kereta dan shuttle stasiun', amount: 'Perlu konfirmasi', detail: 'Harga kereta bergantung pada layanan dan kelas. Shuttle kawasan (景区直通车) dari stasiun ke gerbang sekitar CNY 50 menurut sumber sekunder.', status: 'unconfirmed', source: jiuzhaiArrival },
+      { label: 'Kereta dan shuttle stasiun', amount: 'Acuan CNY 178 / orang', detail: 'Kereta C5746 kelas dua CNY 143 dan bus shuttle Trip.com slot 08.30 CNY 35, menurut Trip.com per 4 November; belum dipesan. Shuttle kawasan (景区直通车) lain sekitar CNY 50 menurut sumber sekunder.', status: 'estimate', source: jiuzhaiArrival },
     ],
     visitDuration: 'Sisa siang dan sore setelah kereta dan transfer; bukan kunjungan sehari penuh. Shuzheng disesuaikan dengan sisa waktu.',
     bestTime: 'Pilih sambungan pagi yang memungkinkan tiba sebelum 14.00. Pengumuman 31 Oktober 2026 menetapkan masuk 08.00–14.00 dan tutup 18.00; itu jam operasional, bukan janji waktu tiba.',
@@ -57,7 +57,7 @@ export const northernGuides: DestinationGuide[] = [
     summary: 'Lembah panjang di Lixian dengan hutan larch, Danau Panyang, dan puncak granit bersalju. Bus taman membawa kamu ke bagian atas lembah; satu pagi cukup untuk Shanghaizi dan danau sebelum melintas ke Siguniang.',
     gettingThere: {
       origin: 'Hotel di kota Lixian, 11 November',
-      steps: ['Pada 10 November tanpa mobil: shuttle 06.20 dari gerbang Jiuzhaigou ke Huanglongjiuzhai, kereta C5784 ke Chengdu East, lalu bus 13.30 dari Chadianzi ke kota Lixian. G213 Songpan–Maoxian tertutup longsor sejak 16 September 2026, jadi rutenya memutar lewat Chengdu.', 'Pagi 11 November sekitar 07.30, check-out dan bawa koper. Mobil tumpangan dari terminal Lixian ke 毕棚沟游客中心, CNY 20–40 per orang, sekitar 30 menit. Tanyakan tempat titip koper di pusat pengunjung.', 'Tukar voucher kategori non-mainland (paspor luar daratan Tiongkok) di loket dengan paspor. Bus taman wajib.', 'Naik bus ke Shanghaizi / 上海子 (sekitar 3.560 m), lalu mobil listrik ke Danau Panyang / 磐羊湖 dan Teluk Bulan / 月亮湾. Mulai turun dari Shanghaizi paling lambat 12.15. Sewa mobil dengan sopir dimulai di gerbang; berangkat paling lambat 13.00 lewat 理小路 ke Rilong.'],
+      steps: ['Pada 10 November tanpa mobil: shuttle 06.20 dari gerbang Jiuzhaigou ke Huanglongjiuzhai, kereta C5784 ke Chengdu East, lalu bus 13.30 dari Chadianzi ke kota Lixian. G213 Songpan–Maoxian tertutup longsor sejak 16 September 2026, jadi rutenya memutar lewat Chengdu.', 'Pagi 11 November, check-out dengan koper dan cek status 理小路 pukul 07.00. Sekitar 07.10, mobil tumpangan dari terminal Lixian ke 毕棚沟游客中心, CNY 20–40 per orang, sekitar 30 menit. Tanyakan tempat titip koper di pusat pengunjung.', 'Tukar voucher kategori non-mainland (paspor luar daratan Tiongkok) di loket dengan paspor. Bus taman wajib.', 'Naik bus ke Shanghaizi / 上海子 (sekitar 3.560 m), lalu mobil listrik ke Danau Panyang / 磐羊湖 dan Teluk Bulan / 月亮湾. Mulai turun dari Shanghaizi paling lambat 12.15. Sewa mobil dengan sopir dimulai di gerbang; berangkat paling lambat 13.00 lewat 理小路 ke Rilong.'],
       duration: 'Pada 10 November, gerbang Jiuzhaigou pukul 06.20 sampai kota Lixian sekitar 16.30–17.00. Kota Lixian ke gerbang Bipenggou sekitar 30 menit. Di dalam taman, bus gerbang ke Shanghaizi sekitar 40–45 menit sekali jalan.',
       sources: [g213Closure, bipenggouHours],
     },
@@ -85,7 +85,7 @@ export const northernGuides: DestinationGuide[] = [
     summary: 'Empat puncak bersalju dilihat dari Maobiliang, sebuah titik pandang di tepi jalan dekat kota Siguniangshan. Singgahnya singkat dan bergantung cuaca.',
     gettingThere: {
       origin: 'Bipenggou, 11 November',
-      steps: ['Setelah Bipenggou, sopir melintasi 理小路 dan terowongan Qionglai menuju kota Siguniangshan / Rilong.', 'Jika langit cerah dan masih sebelum matahari terbenam, minta sopir mengantar pulang-pergi sebentar dari Rilong ke Maobiliang / 猫鼻梁.', 'Turun di area berhenti yang diizinkan, berjalan ke gardu pandang, lalu kembali ke penginapan Rilong.'],
+      steps: ['Setelah Bipenggou, sopir melintasi 理小路 dan terowongan Qionglai menuju kota Siguniangshan / Rilong.', 'Jika langit cerah, minta sopir mengantar ke Maobiliang / 猫鼻梁 sekitar 17.00, sekitar 10 menit dari Rilong, lalu menjemput setelah langit biru (±18.40).', 'Turun di area berhenti yang diizinkan, berjalan ke gardu pandang, lalu kembali ke penginapan Rilong.'],
       duration: 'Bipenggou ke Rilong lewat 理小路 sekitar 2–3 jam; waktu singgah bergantung cuaca dan sisa cahaya.',
       sources: [maobiliangGuide, lixiaoRoad],
     },
@@ -94,8 +94,8 @@ export const northernGuides: DestinationGuide[] = [
       { label: 'Titik pandang Maobiliang', amount: 'Referensi: gratis', detail: 'Panduan Qunar menyebut tanpa tiket masuk. Parkir atau layanan lokal, jika ada, tetap perlu dicek; ini bukan tiket masuk lembah Siguniangshan.', status: 'estimate', source: maobiliangFees },
       { label: 'Mobil dan parkir', amount: 'Perlu konfirmasi', detail: 'Masukkan singgah Maobiliang ke penawaran sopir untuk etape Bipenggou ke Rilong, termasuk waktu tunggu dan biaya parkir.', status: 'unconfirmed' },
     ],
-    visitDuration: 'Saran alokasi: 20 sampai 40 menit, tanpa menunggu langit cerah terlalu lama.',
-    bestTime: 'Sore sesuai itinerary, jika puncak terlihat dan sebelum matahari terbenam sekitar 18.14.',
+    visitDuration: 'Saran alokasi: sekitar 1,5 jam, ±17.00–18.40, hanya bila puncak terlihat; jangan menunggu langit cerah terlalu lama.',
+    bestTime: 'Sore jika puncak terlihat: pasang tripod sebelum cahaya emas 17.39. Matahari terbenam sekitar 18.14; puncak bersalju masih kena cahaya sampai ±18.24, lalu langit biru sampai ±18.39.',
     tips: ['Simpan nama 猫鼻梁 untuk ditunjukkan kepada sopir.', 'Gunakan lensa lebar untuk empat puncak, lalu coba pembesaran untuk detail salju.', 'Siapkan jaket di kabin agar tidak perlu membuka koper saat singgah.'],
     cautions: ['Titik ini berada di tepi jalan pegunungan. Foto dari area pandang, bukan badan jalan.', 'Jika perjalanan terlambat atau berkabut, prioritaskan tiba dan beristirahat di Rilong.'],
     sources: [
@@ -109,8 +109,8 @@ export const northernGuides: DestinationGuide[] = [
     summary: 'Jalur di antara formasi batu kelabu menjadi jeda yang berbeda dalam perjalanan dari lembah Danba ke padang Tagong.',
     gettingThere: {
       origin: 'Danba, 12 November',
-      steps: ['Lanjut dengan sopir ke arah Bamei dan pusat pengunjung Moshi Park / 墨石公园.', 'Gunakan shuttle taman menuju area kunjungan, lalu ikuti jalur pejalan kaki yang ditandai.', 'Bertemu sopir di pintu keluar untuk melanjutkan ke Tagong, Muya, dan penginapan Xinduqiao.'],
-      duration: 'Bagian dari hari Rilong ke Xinduqiao, sekitar 10 jam termasuk singgah (berangkat 08.00, tiba sekitar 18.30); durasi per segmen perlu dikonfirmasi sopir.',
+      steps: ['Lanjut dengan sopir ke arah Bamei dan pusat pengunjung Moshi Park / 墨石公园.', 'Gunakan shuttle taman menuju area kunjungan, lalu ikuti jalur pejalan kaki yang ditandai.', 'Bertemu sopir di pintu keluar untuk melanjutkan ke Tagong dan penginapan Xinduqiao.'],
+      duration: 'Bagian dari hari Rilong ke Xinduqiao, sekitar 11,5 jam termasuk singgah (berangkat 07.45, tiba sekitar 19.15); durasi per segmen perlu dikonfirmasi sopir.',
       sources: [moshiGuide],
     },
     stopAccess: { moshi: 'Turun di pusat pengunjung Moshi Park, lanjut dengan shuttle sesuai tiket, lalu berjalan di lintasan taman. Jangan memanjat formasi batu untuk mencari sudut foto.' },
@@ -121,7 +121,7 @@ export const northernGuides: DestinationGuide[] = [
     ],
     visitDuration: 'Saran alokasi: sekitar 1,5–2 jam, termasuk berjalan dan berhenti untuk foto. Keluar paling lambat 16.00.',
     bestTime: 'Siang sesuai itinerary. Artikel operator Mei 2023 mencantumkan jam musim dingin 09.00 sampai 17.00 mulai 21 Oktober; jam 12 November 2026 tetap perlu dikonfirmasi.',
-    tips: ['Pakai sepatu dengan sol yang mencengkeram dan bawa lapisan penahan angin.', 'Gunakan jalur taman; batu yang terlihat mudah dicapai belum tentu boleh dipanjat.', 'Sepakati batas waktu kunjungan agar Tagong dan Muya masih mendapat cahaya sore.'],
+    tips: ['Pakai sepatu dengan sol yang mencengkeram dan bawa lapisan penahan angin.', 'Gunakan jalur taman; batu yang terlihat mudah dicapai belum tentu boleh dipanjat.', 'Sepakati batas waktu kunjungan agar Tagong masih mendapat cahaya sore.'],
     cautions: ['Taman berada di dataran tinggi. Berjalan perlahan dan sediakan jeda istirahat.', 'Perbaikan G350 di Banshanmen dekat Danba: buka-tutup setiap 30 menit dan 4–6 penutupan penuh sekitar 1 jam per hari; sisakan cadangan waktu sebelum Moshi.', 'Harga yang ditampilkan adalah daftar Qunar; harga untuk tanggal kunjungan dan aturan tiket paspor perlu dicocokkan saat reservasi.'],
     sources: [
       { title: 'Qunar: daftar tiket dan shuttle Moshi Park', url: moshiTickets, kind: 'operator' },
@@ -135,8 +135,8 @@ export const northernGuides: DestinationGuide[] = [
     summary: 'Padang terbuka dengan Gunung Yala di kejauhan. Pada November, bayangkan lanskap yang lebih kering dan keemasan daripada rumput hijau musim panas.',
     gettingThere: {
       origin: 'Moshi Park / Bamei, 12 November',
-      steps: ['Lanjutkan perjalanan dengan sopir ke Tagong / 塔公草原 di koridor menuju Xinduqiao.', 'Sepakati titik turun di area padang atau gardu pandang yang dibuka, lalu berjalan singkat dari tempat parkir.', 'Setelah kunjungan, lanjut ke Biara Muya sebelum menuju hotel Xinduqiao. Hindari menambah pendakian panjang pada hari transfer ini.'],
-      duration: 'Bagian dari hari Rilong ke Xinduqiao, sekitar 10 jam termasuk singgah (berangkat 08.00, tiba sekitar 18.30); durasi per segmen perlu dikonfirmasi sopir.',
+      steps: ['Lanjutkan perjalanan dengan sopir ke Tagong / 塔公草原 di koridor menuju Xinduqiao.', 'Sepakati titik turun di area padang atau gardu pandang yang dibuka, lalu berjalan singkat dari tempat parkir.', 'Setelah matahari terbenam, lanjut ke hotel Xinduqiao, sekitar 40–45 menit dalam gelap. Hindari menambah pendakian panjang pada hari transfer ini.'],
+      duration: 'Bagian dari hari Rilong ke Xinduqiao, sekitar 11,5 jam termasuk singgah (berangkat 07.45, tiba sekitar 19.15); durasi per segmen perlu dikonfirmasi sopir.',
       sources: [tagongTransport],
     },
     stopAccess: { tagong: 'Datang dengan mobil dari arah Bamei, turun di akses padang yang diizinkan, lalu berjalan di area pengunjung. Minta harga titik pandang atau area berpagar sebelum masuk.' },
@@ -144,7 +144,7 @@ export const northernGuides: DestinationGuide[] = [
       { label: 'Akses padang / biaya kebersihan', amount: 'Acuan CNY 35 / orang', detail: 'Biaya kebersihan pada paket Chengdu China Travel Service yang masih dapat dibuka. Halaman tidak bertanggal; ini acuan anggaran, bukan tarif terkonfirmasi untuk 12 November. Tanyakan area yang tercakup.', status: 'estimate', source: tagongFees },
       { label: 'Mobil, parkir, dan aktivitas tambahan', amount: 'Perlu konfirmasi', detail: 'Sepakati harga parkir atau berkuda sebelum menggunakan layanan. Tarif padang tidak mencakup tiket biara atau titik pandang lain.', status: 'unconfirmed' },
     ],
-    visitDuration: 'Saran alokasi: sekitar 1,5 jam di cahaya sore sampai matahari terbenam (±18.20).',
+    visitDuration: 'Saran alokasi: sekitar 2 jam, ±16.30–18.30, di cahaya sore sampai matahari terbenam (±18.19).',
     bestTime: 'Sore sesuai itinerary saat gunung tidak tertutup awan. Warna hijau dalam foto referensi tidak mewakili seluruh musim.',
     tips: ['Pilih satu titik pandang agar waktu tidak habis berpindah area berbayar.', 'Kenakan lapisan penahan angin; tempat terbuka terasa lebih dingin daripada di dalam mobil.', 'Biarkan hewan melintas dan jaga jarak; jangan mendekat hanya untuk foto.'],
     cautions: ['Padang terbuka, Muya Golden Pagoda, Biara Tagong, dan Biara Muya merupakan lokasi berbeda; sebutkan tujuan secara spesifik.', 'Jangan memasuki padang berpagar atau jalur kendaraan tanpa izin.'],
