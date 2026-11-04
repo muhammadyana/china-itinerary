@@ -11,7 +11,7 @@ const escapeHtml = (value: string) => value.replace(/[&<>"']/g, character => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[character]!);
 
-interface NavLink { href: string; label: string; action?: string; className?: string }
+interface NavLink { href: string; label: string; action?: string }
 type Region = 'Sichuan' | 'Yunnan';
 interface Destination { slug: string; name: string; region: Region }
 
@@ -21,8 +21,6 @@ const topLinks: { before: NavLink[]; after: NavLink[] } = {
     { href: '/#itinerary', label: 'Itinerary', action: 'itinerary' },
   ],
   after: [
-    // Hidden below 360px, where the Places panel carries the same link.
-    { href: staysPath, label: 'Hotel', className: 'site-navigation-stays' },
     { href: '/#user-gallery', label: 'Galeri', action: 'gallery' },
     { href: '/#route', label: 'Rute', action: 'overview' },
   ],
@@ -48,8 +46,8 @@ function destinations(): Destination[] {
   }));
 }
 
-const topLink = ({ href, label, action, className }: NavLink) =>
-  `<a class="site-navigation-link${className ? ` ${className}` : ''}" href="${escapeHtml(href)}"${action ? ` data-action="${action}"` : ''}>${escapeHtml(label)}</a>`;
+const topLink = ({ href, label, action }: NavLink) =>
+  `<a class="site-navigation-link" href="${escapeHtml(href)}"${action ? ` data-action="${action}"` : ''}>${escapeHtml(label)}</a>`;
 
 const panelLink = ({ href, label }: NavLink) =>
   `<a class="place-menu-all" href="${escapeHtml(href)}">${escapeHtml(label)}<span aria-hidden="true">↗</span></a>`;

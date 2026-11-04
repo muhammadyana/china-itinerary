@@ -93,14 +93,10 @@ test('the day panel and navigation reach the stays, including the 320px places p
   await expect(link).toHaveAttribute('href', `${staysPath}#${stayBaseForDate('2026-11-15')!.id}`);
   await page.goto('/#2026-11-21');
   await expect(page.locator('.day-essentials .sleep-stays-link')).toHaveCount(0);
-  await expect(page.locator('.site-navigation-stays')).toBeVisible();
-  await page.locator('.site-navigation-stays').click();
-  await expect(page).toHaveURL(new RegExp(`${staysPath}$`));
-
   await page.setViewportSize({ width: 320, height: 760 });
-  await expect(page.locator('.site-navigation-stays')).toBeHidden();
   await page.locator('.place-menu > summary').click();
-  await expect(page.locator('.place-menu-panel').getByRole('link', { name: 'Hotel & hostel per malam' })).toBeVisible();
+  await page.locator('.place-menu-panel').getByRole('link', { name: 'Hotel & hostel per malam' }).click();
+  await expect(page).toHaveURL(new RegExp(`${staysPath}$`));
 });
 
 for (const width of [320, 390, 1440]) {
