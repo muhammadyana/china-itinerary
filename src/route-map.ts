@@ -15,10 +15,8 @@ const at = (id: string, name: string, label?: LabelSide): MapPoint => ({ name, l
 export const mapPoints: Record<string, MapPoint> = {
   chengdu: at('chengdu', 'Chengdu', 's'),
   jiuzhaigou: at('jiuzhaigou', 'Jiuzhaigou', 'w'),
-  // Approximate references: Huanglongjiuzhai station near Chuanzhusi, and Pingwu on the Jiumian expressway that keeps the 10 November line off the closed G213.
+  // Approximate reference for Huanglongjiuzhai station near Chuanzhusi.
   huanglongjiuzhai: { name: 'Stasiun Huanglongjiuzhai', latitude: 32.78, longitude: 103.63 },
-  jiumian: { name: 'Pingwu, tol Jiumian', latitude: 32.41, longitude: 104.53 },
-  dujiangyan: { name: 'Dujiangyan', latitude: 31.0, longitude: 103.62 },
   bipenggou: at('bipenggou', 'Bipenggou', 'w'),
   rilong: at('rilong', 'Rilong', 'e'),
   danba: at('danba', 'Danba', 'n'),
@@ -50,14 +48,14 @@ const go = (mode: Mode, ...ids: string[]): MapLeg[] => ids.slice(1).map((to, ind
 export const mapLegs: Record<string, MapLeg[]> = {
   '2026-11-08': [],
   '2026-11-09': [...go('train', 'chengdu', 'huanglongjiuzhai'), ...go('car', 'huanglongjiuzhai', 'jiuzhaigou')],
-  '2026-11-10': go('car', 'jiuzhaigou', 'jiumian', 'dujiangyan', 'bipenggou'),
+  '2026-11-10': [...go('bus', 'jiuzhaigou', 'huanglongjiuzhai'), ...go('train', 'huanglongjiuzhai', 'chengdu'), ...go('bus', 'chengdu', 'bipenggou')],
   '2026-11-11': go('car', 'bipenggou', 'rilong'),
   '2026-11-12': go('car', 'rilong', 'danba', 'bamei', 'tagong', 'xinduqiao'),
-  '2026-11-13': go('car', 'xinduqiao', 'kangding', 'jiagenba', 'xinduqiao'),
-  '2026-11-14': go('car', 'xinduqiao', 'yajiang', 'litang'),
-  '2026-11-15': go('car', 'litang', 'daocheng', 'riwa'),
+  '2026-11-13': go('car', 'xinduqiao', 'kangding', 'xinduqiao'),
+  '2026-11-14': go('bus', 'xinduqiao', 'yajiang', 'litang'),
+  '2026-11-15': [...go('bus', 'litang', 'daocheng'), ...go('car', 'daocheng', 'riwa')],
   '2026-11-16': go('bus', 'riwa', 'yading', 'riwa'),
-  '2026-11-17': go('car', 'riwa', 'xiangcheng', 'shangri-la'),
+  '2026-11-17': [...go('car', 'riwa', 'xiangcheng'), ...go('bus', 'xiangcheng', 'shangri-la')],
   '2026-11-18': go('train', 'shangri-la', 'lijiang'),
   '2026-11-19': [...go('car', 'lijiang', 'ganhaizi', 'lijiang'), ...go('train', 'lijiang', 'dali')],
   '2026-11-20': go('train', 'dali', 'kunming'),
@@ -193,7 +191,7 @@ export function routeMapView() {
         <ol role="list">${days.map((_, index) => timelineEntry(index)).join('')}</ol>
       </section>
     </div>
-    <section class="guide-source-section" aria-labelledby="route-map-sources"><h2 id="route-map-sources">Sumber peta</h2><p>Batas provinsi dan sungai dari Natural Earth 10m (domain publik), disederhanakan sekitar 2,5 km. Titik kota memakai koordinat acuan yang sama dengan prakiraan cuaca di halaman tempat. Pingwu dan Stasiun Huanglongjiuzhai adalah titik perkiraan; Pingwu hanya penanda jalur memutar 10 November, bukan tempat singgah.</p><p>Jarak dan waktu tempuh ada di setiap hari dan masih perlu dicek bersama sopir di Amap.</p></section>
+    <section class="guide-source-section" aria-labelledby="route-map-sources"><h2 id="route-map-sources">Sumber peta</h2><p>Batas provinsi dan sungai dari Natural Earth 10m (domain publik), disederhanakan sekitar 2,5 km. Titik kota memakai koordinat acuan yang sama dengan prakiraan cuaca di halaman tempat. Stasiun Huanglongjiuzhai adalah titik perkiraan.</p><p>Jarak dan waktu tempuh ada di setiap hari dan masih perlu dicek bersama sopir di Amap.</p></section>
   </main>
   <footer class="container guide-footer"><a href="/">Kembali ke itinerary ${days.length} hari</a>${siteCredit()}</footer>`;
 }

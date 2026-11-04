@@ -9,7 +9,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('every train links to its Trip.com route page', () => {
-  expect(trainBookings.map(item => item.tripDate)).toEqual(['2026-11-09', '2026-11-18', '2026-11-19', '2026-11-20']);
+  expect(trainBookings.map(item => item.tripDate)).toEqual(['2026-11-09', '2026-11-10', '2026-11-18', '2026-11-19', '2026-11-20']);
   for (const item of trainBookings) expect(item.link?.url, item.item).toMatch(/^https:\/\/id\.trip\.com\/trains\/china\/route\/[a-z-]+\/$/);
 });
 
@@ -20,7 +20,7 @@ test('the trains page shows tickets, the Jiuzhaigou slots and the 8-10 November 
   await expect(plain.locator('#trains .prepare-booking')).toHaveCount(trainBookings.length);
   await expect(plain.locator('#jiuzhaigou tbody tr')).toHaveCount(2);
   await expect(plain.locator('.trains-timeline')).toHaveCount(timeline.length);
-  await expect(plain.locator('#back-to-chengdu')).toContainText('Tidak, dalam rencana sekarang');
+  await expect(plain.locator('#back-to-chengdu')).toContainText('Ya. Rute Sichuan sekarang memakai transportasi umum');
   await context.close();
 
   await page.goto('/');

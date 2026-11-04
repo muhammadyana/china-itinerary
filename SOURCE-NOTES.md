@@ -178,6 +178,10 @@ Recent references include the 31 October Jiuzhaigou notice, 25 October Yading vi
 
 The interface uses a fixed warm-light palette under both device color preferences. Glass effects apply to controls and navigation; practical reading panels remain opaque, with reduced-transparency and increased-contrast fallbacks.
 
+## Public-transport plan for the Sichuan section (4 November 2026)
+
+At the traveller's request the solo Sichuan section uses public transport where it exists and a hired car only on 11–12 November. Bus timetables and fares come from live 团子出行 (tz12306.com) queries for the travel dates and train times from 12306, both run on 4 November 2026 and re-checked by an independent verifier: the Jiuzhaigou–Huanglongjiuzhai shuttle (CNY 51), C5784 to Chengdu East (CNY 130), Chadianzi–Lixian buses (CNY 69–85), Danba and Litang buses, and Xiangcheng–Shangri-La buses. No bus runs over 理小路 from Bipenggou, and no Riwa–Xiangcheng bus was found. Shared-car prices (Lixian–Bipenggou, Xinduqiao–Kangding) are traveller reports, and DiDi coverage in small Ganzi towns is unverified.
+
 ## Preparation page and 13/14/17 November timings (4 November 2026)
 
 `/places/prepare/` and the revised 13, 14 and 17 November days rest on research re-checked by independent verifiers on 4 November 2026: 12306 sale-start hours and the 15-day presale window, Qunar train listings for each date, Jiuzhaigou sold-out notices, the Jade Dragon cable-car rules (22 Sep 2026), the 2026 Jade Dragon and Impression Lijiang tariffs, WeChat Pay and Alipay foreign-card rules, Telkomsel's 14 Sep 2026 RoaMAX catalogue, KBRI Beijing's hotline, CDC altitude guidance, and computed sunrise, sunset and Kemenag prayer times. Unresolved: whether Yading, Jiuzhaigou and the Jade Dragon cable car accept passports in their mini programs, the 2026 Yuzixi registration rule, whether Indonesian roaming reaches WhatsApp and Google, and Friday khutbah time at the Kangding mosque. Visa, flights and Alipay/WeChat Pay are marked done because the traveller said so.

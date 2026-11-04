@@ -27,11 +27,12 @@ export const timeline = [
     ['10.45–17.30', 'Bus taman ke Five Flower Lake, lalu turun lewat Shuzheng. Taman tutup 18.00.'],
     ['±18.00', 'Check-in hotel dekat gerbang, Pengfeng atau Goukou.'],
   ] },
-  { date: '2026-11-10', title: 'Selasa, 10 November · Ke Bipenggou', steps: [
-    ['07.30', 'Dijemput sopir; berangkat sebelum antrean terowongan Jiuzhai pukul 09.00–11.00.'],
-    ['Siang', 'Tol Jiumian, lalu makan siang di Dujiangyan (cari 清真 di Amap).'],
-    ['Sore', 'Isi bensin di Lixian.'],
-    ['±16.00–17.00', 'Tiba di penginapan dekat gerbang Bipenggou atau di kota Lixian.'],
+  { date: '2026-11-10', title: 'Selasa, 10 November · Kereta dan bus ke Lixian', steps: [
+    ['06.20', 'Shuttle dari 九寨沟口长途客运站 ke Stasiun Huanglongjiuzhai, CNY 51, sekitar 2 jam.'],
+    ['09.04', 'Kereta C5784 ke Chengdu East, tiba 10.45.'],
+    ['±11.00–13.00', 'MRT atau DiDi ke terminal Chadianzi; makan siang halal di Chengdu.'],
+    ['13.30', 'Bus ke 理县旅游客运中心, CNY 75, sekitar 3 jam. Cadangan 15.30 dan 16.30.'],
+    ['±16.30–17.00', 'Check-in hotel di kota Lixian; besok pagi mobil tumpangan ke gerbang Bipenggou.'],
   ] },
 ];
 
@@ -45,7 +46,7 @@ export function trainsView() {
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="/places/">Tempat</a>${icon('right')}<span>Kereta & timeline</span></nav>
     <div class="prepare-intro">
       <h1 id="trains-title">Kereta, lalu tiga hari pertama jam demi jam.</h1>
-      <p class="lead">Link Trip.com untuk keempat kereta, cara memilih slot Jiuzhaigou, dan timeline 8–10 November dari Tianfu sampai gerbang Bipenggou.</p>
+      <p class="lead">Link Trip.com untuk semua kereta, cara memilih slot Jiuzhaigou, dan timeline 8–10 November dari Tianfu sampai kota Lixian.</p>
     </div>
     <section class="prepare-section" id="trains" aria-labelledby="trains-list-title"><h2 id="trains-list-title">Tiket kereta</h2>
       <p class="prepare-section-lead">Jam dalam WIB. Di Sichuan kamu sendiri, jadi satu kursi; mulai Shangri-La temanmu ikut, jadi dua kursi atas nama paspor masing-masing.</p>
@@ -64,8 +65,7 @@ export function trainsView() {
       ${timeline.map(day => `<div class="prepare-group"><h3>${e(day.title)}</h3><ol class="trains-timeline" role="list">${day.steps.map(([time, text]) => `<li><span class="trains-time">${e(time)}</span><span>${e(text)}</span></li>`).join('')}</ol><p class="prepare-link"><a href="/#${day.date}">Buka jadwal ${e(shortDate(day.date))}${icon('right')}</a></p></div>`).join('')}
     </section>
     <section class="prepare-section" id="back-to-chengdu" aria-labelledby="back-title"><h2 id="back-title">Balik ke Chengdu?</h2>
-      <p class="prepare-section-lead">Tidak, dalam rencana sekarang. Pada 10 November sopir menjemput di Jiuzhaigou dan langsung ke Bipenggou lewat tol Jiumian, Dujiangyan dan Lixian. Rutenya melewati Dujiangyan, sekitar satu jam dari Chengdu, tetapi tidak masuk kota.</p>
-      <p class="prepare-section-lead">Tanpa mobil privat, jalannya memang kembali ke arah Chengdu: kereta ${external('Huanglongjiuzhai ke Chengdu', 'https://id.trip.com/trains/china/route/huanglongjiuzhai-to-chengdu/')}, bus dari terminal Chadianzi ke Lixian, lalu mobil tumpangan ke gerbang Bipenggou. Jadwal dan harga jalur ini sedang dicek; jangan dipesan dulu.</p>
+      <p class="prepare-section-lead">Ya. Rute Sichuan sekarang memakai transportasi umum: dari Jiuzhaigou kembali ke Chengdu naik kereta ${external('Huanglongjiuzhai ke Chengdu', 'https://id.trip.com/trains/china/route/huanglongjiuzhai-to-chengdu/')}, lalu bus dari terminal Chadianzi ke Lixian. Mobil sewa baru dipakai 11–12 November, karena tidak ada bus dari Bipenggou lewat 理小路 ke Rilong.</p>
     </section>
   </main>
   <footer class="container guide-footer"><a href="/">Kembali ke itinerary 14 hari</a>${siteCredit()}</footer>`;
