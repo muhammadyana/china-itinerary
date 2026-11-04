@@ -31,11 +31,22 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Test restricted deployment handler
         run: python3 -m unittest discover -s ops -p 'test_*.py' -v
-      - name: Build and test itinerary and destination guides
+      # Test failures are reported but do not block deployment (owner's decision, 4 November 2026).
+      - name: Test itinerary and destination guides
+        id: e2e
+        continue-on-error: true
         run: npm run test:e2e
         env:
           CI: 'true'
-      - name: Package verified static site
+      - name: Report failing tests
+        if: steps.e2e.outcome == 'failure'
+        run: |
+          echo "::warning::End-to-end tests failed; deploying anyway. See the test-evidence artifact."
+          printf '### End-to-end tests failed\n\nDeployment continued; see the test-evidence artifact.\n' >> "$GITHUB_STEP_SUMMARY"
+      # A clean build after the tests, so a build interrupted inside the test run is never packaged.
+      - name: Build site
+        run: npm run build
+      - name: Package static site
         run: python3 ops/package.py "$GITHUB_SHA" site.tar.gz
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:

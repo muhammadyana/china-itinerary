@@ -32,6 +32,8 @@ python3 -m unittest discover -s ops -p 'test_*.py' -v   # deploy handler/packagi
 
 **HTML is rendered from strings by the same modules at build time and in the browser.** `vite.config.ts` imports `src/render.ts`, `src/guide-render.ts`, `src/print-render.ts` and `src/guides.ts` in Node. These modules and everything they import must not touch `document`/`window` at module top level; DOM wiring lives in `initialize*` functions.
 
+**Components:** build UI from small named render functions, one per component, each returning one HTML string. `src/site-navigation.ts` is the reference: data arrays (`topLinks`, `panelLinks`) are mapped through components (`topLink`, `panelLink`, `destinationItem`, `regionGroup`) and composed by `placeMenu()` and `renderSiteNavigation()`. Join lists with `''` (whitespace between inline elements shows up as gaps). Do not write a whole menu, card or section as one long template literal; split it into named pieces. Escape every interpolated text and attribute with `escapeHtml`.
+
 **Prerender plugin (`vite.config.ts`, `prerender-itinerary`):**
 - Homepage: `transformIndexHtml` replaces `<!--app-->` in `index.html` with `shell()`.
 - `generateBundle` emits `places/index.html`, one `places/<slug>/index.html` per entry in `placePages`, and the script-free `print/index.html`. Per-page title, description, Open Graph, canonical and body are swapped into the `index.html` template by regex (`<!--page-start-->…<!--page-end-->`), so keep those markers and meta tag shapes intact.
@@ -55,12 +57,13 @@ python3 -m unittest discover -s ops -p 'test_*.py' -v   # deploy handler/packagi
 
 ## Deployment
 
-`.github/workflows/deploy.yml`: on PRs and pushes to `main`, run the ops unit tests, `npm run test:e2e`, then `ops/package.py`. Only `main` deploys, over a restricted SSH key to `ops/deploy.py` on the server.
+`.github/workflows/deploy.yml`: on PRs and pushes to `main`, run the ops unit tests (blocking), `npm run test:e2e` (non-blocking: failures only warn), a clean `npm run build` (blocking), then `ops/package.py`. Only `main` deploys, over a restricted SSH key to `ops/deploy.py` on the server.
 
 `allowed_path()` in `ops/deploy.py` (also used by `ops/package.py`) is a strict allowlist of output paths: root `index.html`/`release.json`/icons, `assets/*.{js,css,woff2}`, `photos/*.{webp,avif}`, `places/<slug>/index.html`, `social/<photo-id>.jpg` (one card per place page, made by `ops/prepare-social-images.mjs`), two exact PDF names and `print/index.html`. Any new output path fails packaging. Adding one means updating `allowed_path()` and its coverage in `ops/test_deploy.py`, and the root-owned installed copy on the server must be updated separately before deploying (see `ops/README.md`).
 
 ## Content and repo rules
 
+- Do not add new test files or test cases (owner's rule, 4 November 2026). Keep the existing suite and make it pass; adjust an existing test only when a change breaks it.
 - New research: include source URLs, applicable season and the real check date (`checkedAt`). Set `publishedAt` only for a verified publication date. Never present an old quote or temporary offer as a confirmed future price; use `estimate`/`unconfirmed`.
 - Photo capture dates stay distinct from itinerary dates; unknown dates/locations stay explicit.
 - Pages must work without JavaScript (prerendered content, native `<details>`, `<dialog>`, popover). Theme is light-only, with solid fallbacks for reduced transparency.
