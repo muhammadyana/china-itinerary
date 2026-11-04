@@ -4,7 +4,7 @@
 /* Hallmark · waive 29 · opaque reading panels and reduced-transparency fallbacks preserve legibility · the user explicitly requests Liquid Glass controls */
 
 /* Shared glass material belongs to controls; reading surfaces remain opaque. */
-:is(.site-header :where(nav),.site-header > :where(.nav-link),.glass-surface,.mobile-daybar,.hero-controls,.hero-slide :where(figcaption a),.primary-button,.quiet-button,.icon-button,.region-link,.highlight-date,.highlight-go,.state,.cost-status,.date-line > :where(span),.guide-date-link,.guide-hero-meta > :where(span,a),.weather-panel > :where(.weather-open),.copy-place,.stop-guide-link,.picker-days :where(.date-choice)) {
+:is(.site-header :where(nav),.site-header > :where(.nav-link),.glass-surface,.mobile-daybar,.hero-controls,.hero-slide :where(figcaption a),.primary-button,.quiet-button,.icon-button,.region-link,.highlight-date,.highlight-go,.state,.cost-status,.date-line > :where(span),.guide-date-link,.guide-hero-meta > :where(span,a,button),.weather-panel > :where(.weather-open),.copy-place,.stop-guide-link,.picker-days :where(.date-choice)) {
  background-color: var(--color-glass-solid);
  background-image: var(--glass-reflection);
  border: 1px solid var(--color-glass-edge);
@@ -70,10 +70,13 @@ dialog { background: var(--color-glass-solid); border: 1px solid var(--color-gla
 .guide-hero h1 { font-size: clamp(2.8rem,5.5vw,5.2rem); max-width: 22ch; font-weight: 600; line-height: 1.02; }
 .guide-hero-text { min-height: 280px; }
 .guide-hero-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-md); margin-top: var(--space-lg); font-size: 14px; }
-.guide-hero-meta > span,.guide-hero-meta a { display: inline-flex; gap: var(--space-xs); align-items: center; min-height: 44px; }
-.guide-hero-meta > span,.guide-hero-meta a { padding: var(--space-xs) var(--space-md); border-radius: var(--radius-pill); }
-.guide-hero-meta a { text-decoration: none; }
-.guide-hero-meta a:hover { background-color: var(--color-glass-hover); }
+.guide-hero-meta > span,.guide-hero-meta :is(a,button) { display: inline-flex; gap: var(--space-xs); align-items: center; min-height: 44px; }
+.guide-hero-meta > span,.guide-hero-meta :is(a,button) { padding: var(--space-xs) var(--space-md); border-radius: var(--radius-pill); }
+.guide-hero-meta :is(a,button) { text-decoration: none; }
+.guide-hero-meta :is(a,button):hover { background-color: var(--color-glass-hover); }
+.guide-hero-meta button { font: inherit; cursor: pointer; }
+/* Shown by script: without it the share chip has nothing to do. */
+.guide-hero-meta button[hidden] { display: none; }
 .guide-hero :focus-visible { outline-color: var(--color-on-autumn); }
 .guide-intro { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,1fr); gap: var(--space-xl); align-items: center; padding-block: var(--space-lg); }
 .guide-intro > p { color: var(--color-ink-2); font-size: 18px; line-height: 1.6; max-width: 58ch; }
@@ -187,21 +190,21 @@ dialog { background: var(--color-glass-solid); border: 1px solid var(--color-gla
 .destination-index li a { display: inline-flex; align-items: center; min-height: 44px; }
 
 @supports ((backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px))) {
- :is(.site-header :where(nav),.site-header > :where(.nav-link),.glass-surface,.mobile-daybar,.hero-controls,.hero-slide :where(figcaption a),.primary-button,.quiet-button,.icon-button,.region-link,.highlight-date,.highlight-go,.state,.cost-status,.date-line > :where(span),.guide-date-link,.guide-hero-meta > :where(span,a),.weather-panel > :where(.weather-open),.copy-place,.stop-guide-link,.picker-days :where(.date-choice)) {
+ :is(.site-header :where(nav),.site-header > :where(.nav-link),.glass-surface,.mobile-daybar,.hero-controls,.hero-slide :where(figcaption a),.primary-button,.quiet-button,.icon-button,.region-link,.highlight-date,.highlight-go,.state,.cost-status,.date-line > :where(span),.guide-date-link,.guide-hero-meta > :where(span,a,button),.weather-panel > :where(.weather-open),.copy-place,.stop-guide-link,.picker-days :where(.date-choice)) {
   background-color: var(--color-glass); -webkit-backdrop-filter: blur(22px) saturate(1.65); backdrop-filter: blur(22px) saturate(1.65);
  }
  .hero-controls,.hero-slide figcaption a,.highlight-date { background-color: var(--color-photo-caption); }
  /* Photo overlays share one transparent material, including the weather trigger. */
- :is(.guide-hero-meta > span,.guide-hero-meta > a,.weather-panel > .weather-open) {
+ :is(.guide-hero-meta > span,.guide-hero-meta > :is(a,button),.weather-panel > .weather-open) {
   background-color: var(--color-photo-badge);
   background-image: linear-gradient(145deg,var(--color-photo-badge-shine),var(--color-photo-badge-clear) 55%);
   color: var(--color-on-autumn); border-color: var(--color-photo-badge-edge);
   text-shadow: 0 1px 2px var(--color-hero-base), 0 0 4px var(--color-hero-base);
   -webkit-backdrop-filter: blur(12px) saturate(1.35); backdrop-filter: blur(12px) saturate(1.35);
  }
- :is(.guide-hero-meta > a,.weather-panel > .weather-open):hover { background-color: var(--color-photo-badge-hover); }
- :is(.guide-hero-meta > a,.weather-panel > .weather-open):active { background-color: var(--color-photo-badge-hover); box-shadow: inset 0 1px 3px var(--color-hero-mid); }
- :is(.guide-hero-meta > a,.weather-panel > .weather-open):focus-visible { outline: 3px solid var(--color-on-autumn); outline-offset: 3px; box-shadow: 0 0 0 6px var(--color-hero-base); }
+ :is(.guide-hero-meta > :is(a,button),.weather-panel > .weather-open):hover { background-color: var(--color-photo-badge-hover); }
+ :is(.guide-hero-meta > :is(a,button),.weather-panel > .weather-open):active { background-color: var(--color-photo-badge-hover); box-shadow: inset 0 1px 3px var(--color-hero-mid); }
+ :is(.guide-hero-meta > :is(a,button),.weather-panel > .weather-open):focus-visible { outline: 3px solid var(--color-on-autumn); outline-offset: 3px; box-shadow: 0 0 0 6px var(--color-hero-base); }
  .guide-section-nav.glass-surface { background-color: var(--color-menu-glass); background-image: linear-gradient(145deg,var(--color-menu-shine),var(--color-photo-badge-clear) 44%,var(--color-photo-badge-clear)); }
  .guide-section-nav a:hover { background: var(--color-menu-hover); }
  .primary-button,.picker-days .date-choice[aria-current] { background-color: var(--color-glass-tint); }
@@ -271,7 +274,7 @@ dialog { background: var(--color-glass-solid); border: 1px solid var(--color-gla
 }
 @media (prefers-reduced-transparency: reduce),(prefers-contrast: more) {
  :root { --color-glass-hover: var(--color-glass-solid); --color-glass-pressed: var(--color-paper-2); --color-glass-tint-hover: var(--color-gold-hover); --glass-shadow-hover: none; }
- :is(.site-header :where(nav),.site-header > :where(.nav-link),.glass-surface,.mobile-daybar,.hero-controls,.hero-slide :where(figcaption a),.primary-button,.quiet-button,.icon-button,.region-link,.highlight-date,.highlight-go,.state,.cost-status,.date-line > :where(span),.guide-date-link,.guide-hero-meta > :where(span,a),.weather-panel > :where(.weather-open),.copy-place,.stop-guide-link,.picker-days :where(.date-choice)) {
+ :is(.site-header :where(nav),.site-header > :where(.nav-link),.glass-surface,.mobile-daybar,.hero-controls,.hero-slide :where(figcaption a),.primary-button,.quiet-button,.icon-button,.region-link,.highlight-date,.highlight-go,.state,.cost-status,.date-line > :where(span),.guide-date-link,.guide-hero-meta > :where(span,a,button),.weather-panel > :where(.weather-open),.copy-place,.stop-guide-link,.picker-days :where(.date-choice)) {
   -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--color-glass-solid); color: var(--color-ink); border-color: var(--color-rule-2); box-shadow: none;
  }
  .guide-section-nav.glass-surface { background: var(--color-glass-solid); }
@@ -279,8 +282,8 @@ dialog { background: var(--color-glass-solid); border: 1px solid var(--color-gla
  .primary-button,.picker-days .date-choice[aria-current] { background: var(--color-gold); }
  .hero-controls .icon-button,.mobile-daybar > .icon-button { background: var(--color-transparent); border-color: var(--color-transparent); }
  .hero-slide figcaption a > span,.hero-slide figcaption a > span:last-child { color: var(--color-ink); }
- :is(.guide-hero-meta > span,.guide-hero-meta > a,.weather-panel > .weather-open),:is(.guide-hero-meta > a,.weather-panel > .weather-open):is(:hover,:active,:focus-visible) { background: var(--color-glass-solid); color: var(--color-ink); border-color: var(--color-rule-2); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; text-shadow: none; }
- :is(.guide-hero-meta > a,.weather-panel > .weather-open):focus-visible { outline-color: var(--color-focus); }
+ :is(.guide-hero-meta > span,.guide-hero-meta > :is(a,button),.weather-panel > .weather-open),:is(.guide-hero-meta > :is(a,button),.weather-panel > .weather-open):is(:hover,:active,:focus-visible) { background: var(--color-glass-solid); color: var(--color-ink); border-color: var(--color-rule-2); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; text-shadow: none; }
+ :is(.guide-hero-meta > :is(a,button),.weather-panel > .weather-open):focus-visible { outline-color: var(--color-focus); }
 }
 @media print {
  .guide-section-nav,.guide-photo-dialog,.site-header nav { display: none; }

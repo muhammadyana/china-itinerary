@@ -2,6 +2,30 @@ import { pageBySlug, galleryPhotos } from './guides.ts';
 import { guidePhotoDetail } from './guide-render.ts';
 import { updatePhotoContent } from './photo-viewer.ts';
 
+const SHARE_LABEL = 'Bagikan';
+const SHARE_FEEDBACK_MS = 2200;
+
+// Phones get the native share sheet; elsewhere the canonical link goes to the clipboard.
+async function sharePage(button: HTMLButtonElement) {
+  const url = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href ?? location.href;
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: document.title, url });
+      return;
+    } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') return;
+    }
+  }
+  const label = button.querySelector<HTMLElement>('[data-share-label]')!;
+  try {
+    await navigator.clipboard.writeText(url);
+    label.textContent = 'Tautan tersalin';
+  } catch {
+    label.textContent = 'Salin dari bilah alamat';
+  }
+  setTimeout(() => { label.textContent = SHARE_LABEL; }, SHARE_FEEDBACK_MS);
+}
+
 export function initializeGuide() {
   const slug = document.querySelector<HTMLElement>('[data-guide]')?.dataset.guide;
   const page = slug ? pageBySlug.get(slug) : undefined;
@@ -11,6 +35,8 @@ export function initializeGuide() {
   const gallery = galleryPhotos(page);
   let current = 0;
   let opener: HTMLElement | null = null;
+  const share = document.querySelector<HTMLButtonElement>('[data-guide-action="share"]');
+  if (share) share.hidden = false;
 
   const showPhoto = (index: number) => {
     current = (index + gallery.length) % gallery.length;
@@ -33,6 +59,7 @@ export function initializeGuide() {
     if (action === 'close-photo') dialog.close();
     if (action === 'next-photo') showPhoto(current + 1);
     if (action === 'previous-photo') showPhoto(current - 1);
+    if (action === 'share' && share) void sharePage(share);
   });
   dialog.addEventListener('keydown', event => {
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {

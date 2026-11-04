@@ -10,6 +10,7 @@ import { CHENGDU_EVENING_DATE, renderChengduEvening } from './chengdu-evening.ts
 import { renderDestinationCard } from './destination-card.ts';
 import { renderStaySummary } from './stays-render.ts';
 
+const shareButton = `<button type="button" class="guide-share" data-guide-action="share" hidden>${icon('share')}<span data-share-label aria-live="polite">Bagikan</span></button>`;
 const external = (label: string, url: string) => `<a href="${e(url)}" target="_blank" rel="noopener noreferrer">${e(label)}<span class="visually-hidden"> (buka tab baru)</span>${icon('share')}</a>`;
 const shortDate = (date: string) => `${Number(date.slice(-2))} November`;
 const fullDate = (date: string) => new Intl.DateTimeFormat('id-ID', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${date}T12:00:00Z`));
@@ -48,7 +49,7 @@ export function guideView(page: PlacePage) {
     <section class="guide-hero ${photo ? '' : 'guide-hero-text'}" aria-labelledby="place-title">
       ${photo ? photoImage(photo.id, photo.alt, true, '(min-width: 1280px) 1200px, calc(100vw - 32px)') : ''}
       ${renderWeather(weatherLocationForGuide[guide.slug], `guide-${page.slug}`)}
-      <div class="guide-hero-content"><h1 id="place-title">${e(page.name)}</h1><div class="guide-hero-meta"><span>${guide.region}</span><a href="/#${date.date}">${icon('calendar')}${shortDate(date.date)}${icon('right')}</a>${gallery.length ? `<a href="#gallery">${icon('expand')}${gallery.length} foto</a>` : ''}</div></div>
+      <div class="guide-hero-content"><h1 id="place-title">${e(page.name)}</h1><div class="guide-hero-meta"><span>${guide.region}</span><a href="/#${date.date}">${icon('calendar')}${shortDate(date.date)}${icon('right')}</a>${gallery.length ? `<a href="#gallery">${icon('expand')}${gallery.length} foto</a>` : ''}${shareButton}</div></div>
     </section>
     ${photo?.note ? `<p class="guide-location-note">${e(photo.note)}</p>` : ''}
     <div class="guide-intro"><p>${e(description)}</p><a class="guide-date-link" href="/#${date.date}">${icon('bed')}<span>${date.overnight ? `Malamnya di ${e(date.overnight.name)}` : 'Hari kepulangan'}<small>Buka jadwal ${shortDate(date.date)}</small></span>${icon('right')}</a></div>
