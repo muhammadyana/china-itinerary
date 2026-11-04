@@ -211,7 +211,7 @@ export const days: Day[] = [
       "kind": "stop",
       "place": "chengdu-east",
       "time": "Pagi",
-      "note": "Pilih C5746 06.14 atau C5782 06.45, kelas dua CNY 143 di Trip.com. Datang 30–45 menit lebih awal untuk pemeriksaan paspor.",
+      "note": "Pilih C5746 06.14 atau C5782 06.45 di Trip.com. Datang 30–45 menit lebih awal untuk pemeriksaan paspor.",
       "status": "Perlu konfirmasi"
     },
     {
