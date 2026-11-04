@@ -611,5 +611,21 @@
   ],
   "alt": "Kuda merumput di padang rumput keemasan di kaki pegunungan bersalju, dengan jalan papan kayu berisi pengunjung di sisi kiri.",
   "note": "Verified and kept. A golden autumn meadow with grazing horses below the Yading peaks, in strong light, with no watermark. The files match the listed sizes (1440x948). I corrected the alt text: the boardwalk with visitors is on the left side, not in the far distance."
+ },
+ {
+  "placeId": "chengdu-skp-tower",
+  "id": "tripcom-chengdu-skp-tower",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/travel-guide/attraction/chengdu/tower-of-life-142239549/",
+  "imageUrl": "https://ak-d.tripcdn.com/images/0103f12000o4vrz48C139.jpg",
+  "width": 1440,
+  "height": 1022,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Tiang-tiang air Menara Vitality di Chengdu SKP menyala biru pada malam hari, dengan kolam melengkung di depannya dan gedung tinggi di kejauhan.",
+  "note": "First photo in the Trip.com Tower of Life POI header, downloaded 2026-11-05 as a 1920x1363 JPEG. Night shot: four of the six columns lit cyan above the curved pool, towers on the right; the other two are out of frame, so the alt text does not give a count. Capture date unknown. Files exist at 480, 960 and 1440."
  }
 ]

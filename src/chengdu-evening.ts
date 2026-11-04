@@ -1,7 +1,8 @@
 import { escapeHtml, icon } from './render.ts';
+import { placePath } from './guides.ts';
 
 export const CHENGDU_EVENING_DATE = '2026-11-08';
-export const CHENGDU_EVENING_CHECKED_AT = '2026-11-03';
+export const CHENGDU_EVENING_CHECKED_AT = '2026-11-05';
 
 interface EveningSource {
   label: string;
@@ -13,6 +14,8 @@ interface EveningMall {
   name: string;
   chineseName: string;
   nearby: boolean;
+  /** The itinerary's fixed stop for this evening; the other malls are fallbacks. */
+  planned?: boolean;
   appeal: string;
   address: string;
   route: string;
@@ -20,9 +23,28 @@ interface EveningMall {
   hoursNote: string;
   hoursSources: EveningSource[];
   locationSource: EveningSource;
+  guide?: { label: string; href: string };
 }
 
 export const chengduEveningMalls: readonly EveningMall[] = [
+  {
+    id: 'chengdu-skp',
+    name: 'Chengdu SKP',
+    chineseName: '成都SKP',
+    nearby: false,
+    planned: true,
+    appeal: 'Lokasi Menara Vitality (生机之塔), pemberhentian wajib malam ini: enam tiang air di taman terbuka mal mewah ini, dengan lampu cincin yang menyala setelah gelap.',
+    address: 'North Section of Tianfu Avenue, Gaoxin',
+    route: 'DiDi sekitar 12,5 km dari hotel di Chunxi Road ke 成都SKP 生机之塔, ±15 menit tanpa macet. Metro: jalur 1 ke 锦城广场, atau jalur 18 ke 锦城广场东 pintu B yang paling dekat.',
+    hours: '10.00–22.00 setiap hari',
+    hoursNote: 'Jam Senin–Minggu dipublikasikan langsung oleh pengelola SKP. Taman dan menara buka sepanjang hari menurut Trip.com.',
+    hoursSources: [
+      { label: 'Jam & alamat: SKP resmi', url: 'https://skp-beijing.com/shop?c=chengdu' },
+      { label: 'Jam: Trip.com Chengdu SKP Grand Steps', url: 'https://www.trip.com/travel-guide/attraction/chengdu/chengdu-skp-grand-steps-150184535/' },
+    ],
+    locationSource: { label: 'Lokasi: SKP resmi', url: 'https://skp-beijing.com/shop?c=chengdu' },
+    guide: { label: 'Panduan Menara Vitality', href: placePath('chengdu-skp-tower') },
+  },
   {
     id: 'chengdu-ifs',
     name: 'Chengdu IFS',
@@ -51,19 +73,6 @@ export const chengduEveningMalls: readonly EveningMall[] = [
       { label: 'Jam tenant: Apple Taikoo Li', url: 'https://www.apple.com.cn/retail/taikoolichengdu/' },
     ],
     locationSource: { label: 'Akses: Taikoo Li resmi', url: 'https://www.taikooli-chengdu.com/en/AboutUs/ArrivalPattern' },
-  },
-  {
-    id: 'chengdu-skp',
-    name: 'Chengdu SKP',
-    chineseName: '成都SKP',
-    nearby: false,
-    appeal: 'Pilihan belanja mewah di selatan kota jika masih ingin menjelajah setelah perjalanan.',
-    address: 'North Section of Tianfu Avenue, Gaoxin',
-    route: 'Pesan DiDi atau taksi dari Chunxi Road dengan tujuan 成都SKP. Cek estimasi perjalanan dan ongkos di aplikasi sebelum memilih alternatif ini.',
-    hours: '10.00–22.00 setiap hari',
-    hoursNote: 'Jam Senin–Minggu dipublikasikan langsung oleh pengelola SKP.',
-    hoursSources: [{ label: 'Jam & alamat: SKP resmi', url: 'https://skp-beijing.com/shop?c=chengdu' }],
-    locationSource: { label: 'Lokasi: SKP resmi', url: 'https://skp-beijing.com/shop?c=chengdu' },
   },
   {
     id: 'chengdu-mixc',
@@ -101,15 +110,18 @@ function renderMall(mall: EveningMall): string {
   const mapUrl = `https://uri.amap.com/search?keyword=${encodeURIComponent(mall.chineseName)}&city=${encodeURIComponent('成都')}&view=map`;
   const separateLocationSource = !mall.hoursSources.some(source => source.url === mall.locationSource.url);
 
-  return `<details class="chengdu-evening-card" data-evening-mall="${mall.id}"${mall.nearby ? ' open' : ''}>
+  const label = mall.planned ? 'Wajib malam ini' : mall.nearby ? 'Dekat Chunxi Road' : 'Alternatif kawasan';
+  const guideLink = mall.guide ? `<a class="text-link chengdu-evening-guide" href="${escapeHtml(mall.guide.href)}">${escapeHtml(mall.guide.label)}${icon('right')}</a>` : '';
+
+  return `<details class="chengdu-evening-card" data-evening-mall="${mall.id}"${mall.nearby || mall.planned ? ' open' : ''}>
     <summary>
-      <span class="chengdu-evening-name"><span class="chengdu-evening-label">${mall.nearby ? 'Dekat Chunxi Road' : 'Alternatif kawasan'}</span><strong>${escapeHtml(mall.name)}</strong><span lang="zh-Hans">${escapeHtml(mall.chineseName)}</span></span>
+      <span class="chengdu-evening-name"><span class="chengdu-evening-label">${label}</span><strong>${escapeHtml(mall.name)}</strong><span lang="zh-Hans">${escapeHtml(mall.chineseName)}</span></span>
       <span class="chengdu-evening-chevron">${icon('down')}</span>
     </summary>
     <div class="chengdu-evening-content">
       <p class="chengdu-evening-appeal">${escapeHtml(mall.appeal)}</p>
       <div class="chengdu-evening-fact"><h4>${icon('clock')}${escapeHtml(mall.hours)}</h4><p>${escapeHtml(mall.hoursNote)}</p><div class="chengdu-evening-sources">${mall.hoursSources.map(sourceLink).join('')}</div></div>
-      <div class="chengdu-evening-fact"><h4>${icon('walk')}Dari Chunxi Road</h4><p>${escapeHtml(mall.route)}</p><p class="chengdu-evening-address">${escapeHtml(mall.address)}</p>${separateLocationSource ? sourceLink(mall.locationSource) : ''}</div>
+      <div class="chengdu-evening-fact"><h4>${icon('walk')}Dari Chunxi Road</h4><p>${escapeHtml(mall.route)}</p><p class="chengdu-evening-address">${escapeHtml(mall.address)}</p>${separateLocationSource ? sourceLink(mall.locationSource) : ''}${guideLink}</div>
       <a class="chengdu-evening-map" href="${escapeHtml(mapUrl)}" target="_blank" rel="noopener noreferrer">${icon('pin')}Cari di Amap${icon('right')}<span class="visually-hidden">: ${escapeHtml(mall.name)} (buka tab baru)</span></a>
     </div>
   </details>`;
@@ -119,9 +131,9 @@ export function renderChengduEvening(date?: string): string {
   if (date && date !== CHENGDU_EVENING_DATE) return '';
 
   return `<section class="chengdu-evening" id="chengdu-evening" aria-labelledby="chengdu-evening-heading">
-    <header class="chengdu-evening-header"><h3 id="chengdu-evening-heading">Pilih mal untuk malam pertama.</h3><p class="chengdu-evening-date">Minggu, 8 November 2026</p><p>Lanjutkan jalan sore dengan IFS atau Taikoo Li yang masih satu kawasan. Pilih satu area untuk malam ini; lima tempat di bawah adalah pilihan, bukan semuanya wajib dikunjungi.</p></header>
+    <header class="chengdu-evening-header"><h3 id="chengdu-evening-heading">Malam pertama di Chengdu SKP.</h3><p class="chengdu-evening-date">Minggu, 8 November 2026</p><p>Malam ini wajib ke Menara Vitality di Chengdu SKP. IFS, Taikoo Li, MixC, dan Global Center tetap tercatat sebagai cadangan bila rencana berubah.</p></header>
     <div class="chengdu-evening-grid">${chengduEveningMalls.map(renderMall).join('')}</div>
-    <div class="chengdu-evening-budget"><h4>${icon('wallet')}Anggaran malam</h4><p>Belanja dan makan dibayar sesuai pilihan. Bioskop, arena bermain, dan aktivitas lain dapat memerlukan tiket terpisah. Ongkos DiDi atau taksi mengikuti estimasi aplikasi.</p><p>Selesai jalan-jalan, kembali menginap di Chengdu. Besok berangkat pagi menuju Jiuzhaigou.</p></div>
-    <p class="chengdu-evening-checked">Diperiksa <time datetime="${CHENGDU_EVENING_CHECKED_AT}">3 November 2026</time>, Semua jam UTC+8. Jam tenant dan operasional 8 November dapat berubah; cek tempat pilihan sebelum berangkat.</p>
+    <div class="chengdu-evening-budget"><h4>${icon('wallet')}Anggaran malam</h4><p>Belanja dan makan dibayar sesuai pilihan. Bioskop, arena bermain, dan aktivitas lain dapat memerlukan tiket terpisah. Ongkos DiDi atau taksi mengikuti estimasi aplikasi.</p><p>Pulang ke hotel ±20.30 dan tidur sebelum 22.00. Besok DiDi 05.15 ke Chengdu East untuk kereta ke Jiuzhaigou.</p></div>
+    <p class="chengdu-evening-checked">Diperiksa <time datetime="${CHENGDU_EVENING_CHECKED_AT}">5 November 2026</time>, Semua jam UTC+8. Jam tenant dan operasional 8 November dapat berubah; cek tempat pilihan sebelum berangkat.</p>
   </section>`;
 }

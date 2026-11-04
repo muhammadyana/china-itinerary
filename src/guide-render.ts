@@ -1,11 +1,12 @@
 import { days, photos, places, pdfDownloadUrl, userPhotos } from './itinerary.ts';
 import { coverPhoto, galleryPhotos, guideDates, guides, pageBySlug, pageForPlace, placePath, type PlacePage } from './guides.ts';
-import { escapeHtml as e, icon, photoImage, userPhotoDetail, siteCredit, renderPhotoDialog } from './render.ts';
+import { escapeHtml as e, icon, photoImage, userPhotoDetail, siteCredit, renderPhotoDialog, amapLink } from './render.ts';
 import type { PhotoContent } from './photo-viewer.ts';
 import { renderWeather } from './weather.ts';
 import { weatherLocationForGuide } from './weather-locations.ts';
 import { currencyText, hasCnyAmount, renderExchangeRate } from './currency.ts';
 import { renderSiteNavigation } from './site-navigation.ts';
+import { amapIdsForPage } from './amap.ts';
 import { CHENGDU_EVENING_DATE, renderChengduEvening } from './chengdu-evening.ts';
 import { renderDestinationCard } from './destination-card.ts';
 import { renderStaySummary } from './stays-render.ts';
@@ -58,7 +59,7 @@ export function guideView(page: PlacePage) {
     ${guide.slug === 'chengdu' ? renderChengduEvening(CHENGDU_EVENING_DATE) : ''}
     <div class="guide-body" id="guide-info">
       <div class="guide-main-column">
-        <section class="guide-panel" id="getting-there" aria-labelledby="transport-heading"><h2 id="transport-heading">${icon('pin')}Cara ke sana</h2><p class="guide-origin">Dari ${e(guide.gettingThere.origin)}</p><ol class="guide-steps">${guide.gettingThere.steps.map(step => `<li>${e(step)}</li>`).join('')}</ol>${page.placeId && guide.stopAccess?.[page.placeId] ? `<div class="guide-last-leg"><h3>Menuju ${e(page.name)}</h3><p>${e(guide.stopAccess[page.placeId])}</p></div>` : ''}<p class="guide-duration">${icon('clock')}<span>${e(guide.gettingThere.duration)}</span></p><div class="guide-references"><h3>Sumber rute</h3><div>${sourceLinks}</div></div></section>
+        <section class="guide-panel" id="getting-there" aria-labelledby="transport-heading"><h2 id="transport-heading">${icon('pin')}Cara ke sana</h2><p class="guide-amap">${amapIdsForPage(page.slug).map((id, _, ids) => ids.length > 1 ? amapLink(id, places[id].name, true) : amapLink(id, page.name)).join('')}</p><p class="guide-origin">Dari ${e(guide.gettingThere.origin)}</p><ol class="guide-steps">${guide.gettingThere.steps.map(step => `<li>${e(step)}</li>`).join('')}</ol>${page.placeId && guide.stopAccess?.[page.placeId] ? `<div class="guide-last-leg"><h3>Menuju ${e(page.name)}</h3><p>${e(guide.stopAccess[page.placeId])}</p></div>` : ''}<p class="guide-duration">${icon('clock')}<span>${e(guide.gettingThere.duration)}</span></p><div class="guide-references"><h3>Sumber rute</h3><div>${sourceLinks}</div></div></section>
         <section class="guide-panel" id="costs" aria-labelledby="cost-heading"><h2 id="cost-heading">${icon('wallet')}Biaya kunjungan</h2>${page.placeId ? `<p class="guide-cost-context">Tarif kawasan ${e(guide.name)}. Tiket bersama tidak perlu dihitung ulang untuk tiap pemberhentian.</p>` : ''}<p class="guide-cost-note">Mata uang tercantum pada setiap harga. ${publishedCost ? 'Perhatikan komponen, musim, dan status harga.' : 'Tarif yang belum memiliki rujukan pasti ditandai untuk konfirmasi.'}</p>${hasChinesePrices ? renderExchangeRate() : ''}<dl class="guide-costs">${guide.costs.map(cost => `<div><dt>${e(cost.label)}<span class="cost-status ${cost.status}">${cost.status === 'published' ? 'Tarif terpublikasi' : cost.status === 'estimate' ? 'Anggaran acuan' : 'Perlu konfirmasi'}</span></dt><dd><strong>${currencyText(cost.amount)}</strong><p>${currencyText(cost.detail)}</p>${cost.source ? external(`Sumber tarif: ${sourceTitle(cost.source)}`, cost.source) : ''}</dd></div>`).join('')}</dl><p class="guide-checked">Diperiksa ${checked}. Harga dan operasional dapat berubah; cocokkan dengan tanggal kunjungan sebelum membayar.</p></section>
       </div>
       <aside class="guide-side-column" aria-label="Rencana kunjungan">

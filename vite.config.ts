@@ -12,9 +12,15 @@ import { trainsView, trainsPath } from './src/trains.ts';
 import { costsView, costsPath } from './src/costs-render.ts';
 import { escapeHtml } from './src/render.ts';
 import { renderPrintDocument } from './src/print-render.ts';
-import { pdfPath } from './src/itinerary.ts';
+import { days, pdfPath } from './src/itinerary.ts';
+import { amapIdsForPage, amapProblems } from './src/amap.ts';
 import { socialImage } from './src/social-image.ts';
 import { generatePdfFromUrl } from './ops/generate-pdf.mjs';
+
+// Every itinerary stop and place page renders an Amap link; a missing entry must stop the build, not ship a broken page.
+const amapIds = [...days.flatMap(day => day.events.flatMap(event => event.kind === 'stop' ? [event.place] : [])), ...placePages.flatMap(page => amapIdsForPage(page.slug))];
+const amapErrors = amapProblems(amapIds);
+if (amapErrors.length) throw new Error(`src/amap.ts: ${amapErrors.join('; ')}`);
 
 const printStyles = readFileSync(new URL('./src/print.css', import.meta.url), 'utf8');
 

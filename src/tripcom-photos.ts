@@ -27,6 +27,12 @@ export const tripcomPhotos: Record<string, Photo> = {
     "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/chengdu/chunxi-road-99590/", "origin": "Trip.com",
     "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
   },
+  "tripcom-chengdu-skp-tower": {
+    "id": "tripcom-chengdu-skp-tower", "width": 1440, "height": 1022, "sizes": [480, 960, 1440],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/chengdu/tower-of-life-142239549/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/chengdu/tower-of-life-142239549/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
   "tripcom-chonggu": {
     "id": "tripcom-chonggu", "width": 1440, "height": 960, "sizes": [480, 960, 1440],
     "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/daocheng-county/daocheng-yading-scenic-area-chonggu-temple-80449/",
@@ -238,6 +244,7 @@ export const tripcomPlacePhotos: Record<string, { id: string; alt: string }> = {
   "blue-moon": { id: "tripcom-blue-moon", alt: "Danau toska di kaki pegunungan bersalju, diapit lereng berhutan dengan pohon larch keemasan musim gugur." },
   "caicun": { id: "tripcom-caicun", alt: "Kapal-kapal wisata putih bersandar di dermaga kecil di tepi Danau Erhai yang biru, dengan pegunungan di seberang danau." },
   "chengdu": { id: "tripcom-chengdu", alt: "Jalan raya di kawasan Chunxi Road pada malam hari, dengan gedung IFS berpatung panda, butik mewah yang terang, dan jejak cahaya mobil." },
+  "chengdu-skp-tower": { id: "tripcom-chengdu-skp-tower", alt: "Tiang-tiang air Menara Vitality di Chengdu SKP menyala biru pada malam hari, dengan kolam melengkung di depannya dan gedung tinggi di kejauhan." },
   "chonggu": { id: "tripcom-chonggu", alt: "Bangunan biara Tibet beratap emas di tepi hutan, dengan sungai kecil hijau toska dan semak merah serta kuning musim gugur di depannya." },
   "dali-old-town": { id: "tripcom-dali-old-town", alt: "Gerbang Selatan Kota Kuno Dali dengan menara bertingkat berhias lentera merah di atas tembok bata dan taman bunga di depannya." },
   "daocheng": { id: "tripcom-daocheng", alt: "Stupa putih besar dikelilingi deretan stupa kecil di Daocheng, dengan jalan setapak batu membelah rumput keemasan." },

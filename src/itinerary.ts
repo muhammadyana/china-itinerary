@@ -30,7 +30,8 @@ export const pdfPath = 'China-Itinerary-8-21-November-2026.pdf';
 export const pdfDownloadUrl = `/${pdfPath}?v=${Date.now()}`;
 export const places: Record<string, Place> = {
   tfu: { name: 'Chengdu Tianfu (TFU)', chinese: '成都天府国际机场', description: 'Tiba di Terminal 2 dengan penerbangan domestik dari Shanghai Pudong. Ambil bagasi, lalu menuju hotel di Chengdu sebelum jalan sore di kota.', page: 5, photo: 'tfu', alt: 'Area dalam Terminal 1 Bandara Chengdu Tianfu dengan papan petunjuk dan pengunjung.' },
-  chengdu: { name: 'Jalan sore di Chengdu', chinese: '春熙路 / 成都太古里', description: 'Mulai santai di pusat kota: telusuri Chunxi Road dan gang terbuka Taikoo Li, lalu makan malam sebelum kembali ke hotel.', photo: 'chengdu-chunxi', alt: 'Jalan pejalan kaki Chunxi Road dengan bangunan berfasad emas dan pengunjung.', photoNote: chengduGuidePhotos['chengdu-chunxi'].photoNote },
+  chengdu: { name: 'Jalan sore di Chengdu', chinese: '春熙路 / 成都太古里', description: 'Kawasan Chunxi Road dan gang terbuka Taikoo Li dekat hotel. Hari ini cukup untuk makan siang telat dan belanja bekal sebelum berangkat ke Chengdu SKP.', photo: 'chengdu-chunxi', alt: 'Jalan pejalan kaki Chunxi Road dengan bangunan berfasad emas dan pengunjung.', photoNote: chengduGuidePhotos['chengdu-chunxi'].photoNote },
+  'chengdu-skp-tower': { name: 'Menara Vitality, Chengdu SKP', chinese: '成都SKP 生机之塔', description: 'Enam tiang air setinggi 26 dan 39 meter di taman terbuka mal Chengdu SKP. Airnya mengalir turun di sepanjang tiang, dan setelah gelap cincin lampunya berganti warna.' },
   'chengdu-east': { name: 'Stasiun Chengdu East', chinese: '成都东站', description: 'Di Chengdu Dong, siapkan paspor untuk pemeriksaan sebelum naik kereta menuju Huanglongjiuzhai.', page: 5, photo: 'chengdu-east', alt: 'Area pintu masuk Stasiun Chengdu East dengan papan nama stasiun.' },
   huanglongjiuzhai: { name: 'Stasiun Huanglongjiuzhai', chinese: '黄龙九寨站', description: 'Stasiun di wilayah Songpan ini menjadi titik berganti kendaraan menuju gerbang Jiuzhaigou.', page: 5, photo: 'huanglongjiuzhai', alt: 'Fasad Stasiun Huanglongjiuzhai di antara pegunungan.' },
   'jiuzhaigou-hotel': { name: 'Goukou / Pengfeng', description: 'Menginap satu malam pada 9 November dekat pintu masuk taman, sebelum naik shuttle 06.20 ke stasiun pada 10 November.', page: 3 },
@@ -105,23 +106,23 @@ const snow: Practical = {title:'Kondisi jalan',text:'Lintasan tinggi rawan salju
 export const days: Day[] = [
  {
   "date": "2026-11-08",
-  "title": "Sore pertama di Chengdu",
-  "shortTitle": "Jalan-jalan di Chengdu",
+  "title": "Chengdu dan Menara Vitality",
+  "shortTitle": "Chengdu & Menara Vitality",
   "region": "Sichuan",
   "route": [
     "Shanghai Pudong",
     "Chengdu Tianfu",
     "Pusat kota Chengdu",
     "Chunxi Road",
-    "Taikoo Li"
+    "Chengdu SKP"
   ],
   "overnight": {
     "name": "Chengdu",
     "area": "Pusat kota, sekitar Chunxi Road / Taikoo Li",
     "detail": "Malam pertama di Chengdu. Pilih hotel yang mudah dijangkau taksi untuk keberangkatan ke Chengdu East besok pagi; nama hotel belum ditentukan."
   },
-  "transport": "Pesawat dari Shanghai, taksi / DiDi ke hotel, lalu jalan kaki",
-  "intro": "Tiba dari Shanghai setelah transit semalam di Pudong. Setelah menyimpan koper, jalan santai di pusat Chengdu lalu bermalam di sini.",
+  "transport": "Pesawat dari Shanghai, taksi / DiDi ke hotel, lalu DiDi pulang-pergi ke Chengdu SKP",
+  "intro": "Tiba dari Shanghai setelah transit semalam di Pudong. Setelah menyimpan koper dan makan siang telat dekat Chunxi Road, sore sampai malam di Menara Vitality, Chengdu SKP. Pulang lebih awal karena besok kereta pukul 06.14.",
   "events": [
     {
       "kind": "transfer",
@@ -152,14 +153,27 @@ export const days: Day[] = [
     {
       "kind": "stop",
       "place": "chengdu",
-      "time": "±16.00–18.30",
-      "note": "Jalan pelan di Chunxi Road lalu Taikoo Li. Cahaya keemasan 17.37–18.11: foto panda di fasad IFS dan atap Taikoo Li saat lampu menyala. Daftar mal di bawah memuat pilihan lain; cukup satu kawasan, lalu kembali ke hotel untuk Maghrib."
+      "time": "±15.00–15.45",
+      "note": "Makan siang telat di kedai 清真 atau 兰州拉面 dekat Chunxi Road, sekalian beli bekal berlabel 清真 untuk makan malam di SKP. Foto panda IFS tidak muat di jadwal ini; kembali ke hotel untuk Asar sekitar 15.51."
     },
     {
       "kind": "transfer",
-      "mode": "walk",
-      "title": "Kembali ke hotel di Chengdu",
-      "detail": "Istirahat dan siapkan keberangkatan pagi ke stasiun. Gunakan taksi lokal jika hotel tidak dekat rute jalan kaki."
+      "mode": "car",
+      "title": "Hotel ke Chengdu SKP",
+      "detail": "DiDi ±16.10 ke 成都SKP 生机之塔, sekitar 12,5 km atau ±15 menit tanpa macet; lihat estimasi Minggu sore di aplikasi. Metro jalur 1 butuh ±50–55 menit dari hotel, jadi tidak muat di jadwal ini."
+    },
+    {
+      "kind": "stop",
+      "place": "chengdu-skp-tower",
+      "time": "±16.30–19.50",
+      "note": "Survei sudut selagi terang, lalu cahaya keemasan 17.37–18.11 dan langit biru ±18.26–18.45. Lampu cincin menara menyala setelah gelap; jamnya tidak diumumkan pengelola, sumber pihak ketiga menyebut ±19.00–19.30. Bawa bekal 清真: belum ada kedai halal terverifikasi di dekat SKP. Opsional bila lampu sudah menyala: Tianfu Twin Towers dan Jiaozi Park, sekitar 2,2 km ke utara. Perjalanannya ±25–30 menit, jadi waktu di sana hanya ±10–15 menit; Minggu tidak ada pertunjukan tematik, layar LED menyala 19.00–22.00.",
+      "status": "Wajib"
+    },
+    {
+      "kind": "transfer",
+      "mode": "car",
+      "title": "Chengdu SKP ke hotel",
+      "detail": "DiDi sekitar 12 km, atau sekitar 10 km dari stasiun 金融城 bila mampir ke Twin Towers. Tiba di hotel ±20.10, atau ±20.45 bila mampir ke Twin Towers, dan tidur paling lambat 22.00; besok berangkat 05.15."
     }
   ],
   "practical": [
@@ -185,7 +199,7 @@ export const days: Day[] = [
     },
     {
       "title": "Malam pertama di Chengdu",
-      "text": "Jalan-jalan dan bermalam di kota. Reservasi hotel masih perlu ditentukan; tidak ada penjemputan Jiuzhaigou malam ini."
+      "text": "Malam ini wajib ke Menara Vitality di Chengdu SKP, sekitar 12,5 km di selatan hotel. Pulang ±20.30 dan tidur sebelum 22.00 karena DiDi ke Chengdu East berangkat 05.15. Reservasi hotel masih perlu ditentukan; tidak ada penjemputan Jiuzhaigou malam ini."
     },
     {
       "title": "Siapkan kereta Senin pagi",
@@ -197,7 +211,7 @@ export const days: Day[] = [
     },
     {
       "title": "Cari makan halal",
-      "text": "Cari tanda 清真 dan konfirmasikan bahan langsung kepada penjual. Siapkan juga bekal berlabel 清真 untuk 9–12 November; belum ditemukan restoran halal di Lixian dan dekat Bipenggou."
+      "text": "Belum ada kedai halal terverifikasi di sekitar Chengdu SKP dan Financial City, jadi beli bekal berlabel 清真 saat makan siang dekat Chunxi Road, sekalian untuk 9–12 November; belum ditemukan restoran halal di Lixian dan dekat Bipenggou. Sebuah blog (Juni 2026) menyebut kedai 清真 di sekitar Masjid Huangcheng (皇城清真寺) dekat Tianfu Square; belum diverifikasi, jadi konfirmasikan bahan langsung kepada penjual."
     }
   ],
   "pages": [

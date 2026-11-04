@@ -11,7 +11,7 @@ const COVER_PHOTO_ID = 'highlight-jiuzhaigou';
 // Rendition targets by printed size; ops/generate-pdf.mjs then resamples each image to its printed box.
 const RENDITION = { cover: 1600, band: 1440, guideBand: 1440, thumbnail: 480 } as const;
 // Visual-check overrides: the rule picks the TFU terminal interior on 8 November and a hazy, mostly empty Erhai sky on 20 November.
-const leadOverrides: Record<string, string> = { '2026-11-08': 'chengdu', '2026-11-20': 'dali-old-town' };
+const leadOverrides: Record<string, string> = { '2026-11-08': 'chengdu-skp-tower', '2026-11-20': 'dali-old-town' };
 // Visual-check focus: a centred crop of the square Chunxi Road photo makes its hotel billboard the subject.
 const photoFocus: Record<string, string> = { 'chengdu-chunxi': '50% 78%' };
 const sourceLink = (label: string, url: string) => `<a href="${e(url)}">${e(label)}</a>`;

@@ -119,6 +119,7 @@ export const weatherLocations: Record<string, WeatherLocation> = {
 
 export const weatherLocationForGuide: Record<string, string> = {
   chengdu: 'chengdu',
+  'chengdu-skp-tower': 'chengdu',
   jiuzhaigou: 'jiuzhaigou',
   bipenggou: 'bipenggou',
   siguniangshan: 'rilong',

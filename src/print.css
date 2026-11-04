@@ -161,8 +161,8 @@ body.print-document { margin: 0; padding: 0; background: var(--color-glass-solid
 .print-document .chengdu-evening-fact h4,.print-document .chengdu-evening-budget h4 { margin: 0 0 1mm; font-size: 8.3pt; }
 .print-document .chengdu-evening-fact h4 svg,.print-document .chengdu-evening-budget h4 svg { width: 9pt; height: 9pt; color: var(--color-accent); }
 .print-document .chengdu-evening-sources { margin-top: 1mm; }
-.print-document .chengdu-evening-source,.print-document .chengdu-evening-map { display: block; width: auto; min-height: 0; margin-block: 1mm 0; padding: 0; border: 0; border-radius: 0; background: none; font-size: 7.8pt; }
-.print-document .chengdu-evening-map > svg,.print-document .chengdu-evening-source > svg { display: none; }
+.print-document .chengdu-evening-source,.print-document .chengdu-evening-map,.print-document .chengdu-evening-guide { display: block; width: auto; min-height: 0; margin-block: 1mm 0; padding: 0; border: 0; border-radius: 0; background: none; font-size: 7.8pt; }
+.print-document .chengdu-evening-map > svg,.print-document .chengdu-evening-source > svg,.print-document .chengdu-evening-guide > svg { display: none; }
 .print-document .chengdu-evening-budget { margin-top: 3mm; padding: 3mm 4mm; border-radius: 3mm; break-inside: avoid; }
 .print-document .chengdu-evening-checked { margin-top: 2mm; color: var(--color-muted); }
 
