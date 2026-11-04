@@ -1,0 +1,51 @@
+/* Preparation page: what is done, what to book and when, costs, and practical safety notes. */
+.prepare-page { padding-top: var(--space-xl); }
+.prepare-intro { display: grid; gap: var(--space-md); max-width: 64ch; }
+.prepare-intro h1 { max-width: 16ch; text-wrap: balance; }
+.prepare-intro .lead { color: var(--color-ink); }
+.prepare-done { display: grid; gap: var(--space-xs); margin: var(--space-xs) 0 0; padding: 0; list-style: none; }
+.prepare-done li { display: flex; align-items: flex-start; gap: var(--space-sm); padding: var(--space-sm) var(--space-md); border-radius: 16px; background: var(--color-glass-solid); color: var(--color-ink-2); }
+.prepare-done svg { flex: none; width: 20px; height: 20px; margin-top: 2px; color: var(--color-accent); }
+.prepare-done strong { color: var(--color-ink); font-weight: 600; }
+
+.prepare-section { margin-top: var(--space-3xl); scroll-margin-top: var(--site-navigation-clearance); }
+.prepare-section h2 { font-size: var(--text-section); line-height: 1.05; letter-spacing: -.035em; }
+.prepare-section-lead { max-width: 68ch; margin-top: var(--space-sm); color: var(--color-ink-2); }
+.prepare-group { margin-top: var(--space-xl); }
+.prepare-group h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2xs) var(--space-sm); font-size: var(--text-title); }
+.prepare-group h3 span { color: var(--color-muted); font-size: 15px; font-weight: 400; }
+.prepare-bookings { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: var(--space-md); margin-top: var(--space-md); }
+.prepare-booking { display: grid; align-content: start; gap: var(--space-xs); padding: var(--space-lg); border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-glass-solid); }
+.prepare-booking-date { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2xs) var(--space-sm); color: var(--color-accent); font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.prepare-booking-date strong { color: var(--color-ink); font-weight: 500; }
+.prepare-booking h4 { font-size: 20px; line-height: 1.25; letter-spacing: -.015em; }
+.prepare-booking dl { display: grid; margin: 0; }
+.prepare-booking dl > div { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: var(--space-sm); padding-block: var(--space-xs); border-top: 1px solid var(--color-rule); }
+.prepare-booking dt { color: var(--color-ink); font-size: 14px; font-weight: 500; }
+.prepare-booking dd { margin: 0; color: var(--color-ink-2); font-size: 14px; }
+.prepare-link a,.prepare-sources a { display: inline-flex; align-items: center; gap: var(--space-2xs); min-height: 44px; color: var(--color-accent); font-size: 14px; font-weight: 500; overflow-wrap: anywhere; }
+.prepare-link svg,.prepare-sources svg { flex: none; width: 14px; height: 14px; }
+
+.prepare-costs { width: 100%; max-width: 760px; margin-top: var(--space-lg); border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.prepare-costs th,.prepare-costs td { padding: var(--space-sm) var(--space-sm) var(--space-sm) 0; border-bottom: 1px solid var(--color-rule); text-align: left; vertical-align: top; }
+.prepare-costs thead th { color: var(--color-muted); font-size: 13px; font-weight: 500; }
+.prepare-costs td { color: var(--color-ink-2); }
+.prepare-costs tfoot th,.prepare-costs tfoot td { border-bottom: 0; color: var(--color-ink); font-weight: 600; }
+
+.prepare-list { display: grid; gap: var(--space-sm); max-width: 72ch; margin: var(--space-md) 0 0; padding-left: 1.2em; color: var(--color-ink-2); }
+.prepare-list a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+.prepare-contacts { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: var(--space-sm); max-width: 980px; margin: var(--space-lg) 0 0; }
+.prepare-contacts > div { padding: var(--space-md); border: 1px solid var(--color-rule); border-radius: 20px; background: var(--color-glass-solid); }
+.prepare-contacts dt { color: var(--color-muted); font-size: 13px; }
+.prepare-contacts dd { margin: var(--space-2xs) 0 0; color: var(--color-ink-2); font-size: 14px; }
+.prepare-contacts dd a { display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; color: var(--color-ink); font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.prepare-contacts dd span { display: block; }
+.prepare-sources { display: grid; gap: 0; margin: var(--space-sm) 0 0; padding: 0; list-style: none; }
+
+@media (max-width: 599px) {
+  .prepare-page { padding-top: var(--space-lg); }
+  .prepare-intro h1 { font-size: 40px; }
+  .prepare-section { margin-top: var(--space-2xl); }
+  .prepare-booking { padding: var(--space-md); }
+  .prepare-booking dl > div { grid-template-columns: minmax(0, 1fr); gap: var(--space-2xs); }
+}

@@ -9,6 +9,7 @@ import './destination-cards.css';
 import './chengdu-evening.css';
 import './stays.css';
 import './route-map.css';
+import './prepare.css';
 import { initializeCurrency } from './currency.ts';
 import { initializeSiteNavigation } from './site-navigation.ts';
 import { initializeGuide } from './guide-main.ts';

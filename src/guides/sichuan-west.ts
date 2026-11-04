@@ -32,7 +32,7 @@ export const westernGuides: DestinationGuide[] = [
   {
     slug: 'yuzixi', name: 'Yuzixi', region: 'Sichuan', placeIds: ['yuzixi'],
     summary: 'Punggung bukit terbuka untuk melihat jajaran Gongga dan Yala, dengan akses terakhir yang harus dicek sehari sebelumnya.',
-    gettingThere: { origin: 'Hotel di Xinduqiao', steps: ['Pesan penjemputan pulang-pergi dengan sopir lokal, lalu tunjukkan pin 鱼子西.', 'Konfirmasikan apakah mobil yang sama boleh naik sampai titik pandang atau perlu kendaraan penghubung lokal.'], duration: 'Jam berangkat perlu dihitung sopir; target 06.30 dalam PDF bukan jaminan akses terbuka.', sources: [localTourSource.url] },
+    gettingThere: { origin: 'Hotel di Xinduqiao', steps: ['Pesan penjemputan pulang-pergi dengan sopir lokal, lalu tunjukkan pin 鱼子西.', 'Konfirmasikan apakah mobil yang sama boleh naik sampai titik pandang atau perlu kendaraan penghubung lokal.'], duration: 'Sekitar 37 km atau 40–60 menit dari Xinduqiao. Itinerary berangkat 07.30 saat langit sudah terang (matahari terbit 07.37), bukan 06.30 dalam PDF.', sources: [localTourSource.url] },
     stopAccess: { yuzixi: 'Mobil dari Xinduqiao, lalu kendaraan penghubung lokal bila diwajibkan di akses terakhir.' },
     costs: [
       { label: 'Biaya kebersihan', amount: 'Acuan CNY 30 / orang', detail: 'Angka dari paket operator lokal, bukan tarif resmi tetap untuk 13 November. Tanyakan nilai yang berlaku sebelum naik.', status: 'estimate', source: localTourSource.url },
@@ -98,7 +98,7 @@ export const westernGuides: DestinationGuide[] = [
   {
     slug: 'g318', name: 'G318 & Tianlu 18 Bends', region: 'Sichuan', placeIds: ['gaoersi', 'tianlu'],
     summary: 'Jalan pegunungan dari Xinduqiao ke Litang, dengan titik pandang tikungan di kawasan Yajiang.',
-    gettingThere: { origin: 'Xinduqiao', steps: ['Berangkat dengan mobil sewaan melalui G318 ke arah Yajiang dan Litang.', 'Minta sopir memilih titik berhenti yang dibuka di koridor Gao’ersi dan Tianlu 18 Bends. Tianlu berada di ruas Yajiang menuju Litang, bukan di pusat Xinduqiao.'], duration: 'PDF mengalokasikan sekitar 4 jam berkendara; minta sopir menghitung ulang rute dan kondisi hari itu.', sources: [roadSource.url] },
+    gettingThere: { origin: 'Xinduqiao', steps: ['Berangkat dengan mobil sewaan melalui G318 ke arah Yajiang dan Litang.', 'Minta sopir memilih titik berhenti yang dibuka di koridor Gao’ersi dan Tianlu 18 Bends. Tianlu berada di ruas Yajiang menuju Litang, bukan di pusat Xinduqiao.'], duration: 'Sekitar 195 km dan 3,5–4 jam berkendara, belum termasuk berhenti. PDF menyebut 4 jam; minta sopir mengecek kondisi hari itu.', sources: [roadSource.url] },
     stopAccess: { gaoersi: 'Lewati koridor Gao’ersi bersama sopir di G318; akses ke lintasan lama atau titik pandang harus dikonfirmasi terpisah.', tianlu: 'Turun di area parkir titik pandang Tianlu 18 Bends pada ruas Yajiang ke Litang; jangan berhenti di tikungan.' },
     costs: [
       { label: 'Mobil antar kota', amount: 'Sesuai penawaran', detail: 'Masukkan waktu menunggu untuk titik foto dalam harga etape Xinduqiao ke Litang.', status: 'unconfirmed' },
@@ -111,7 +111,7 @@ export const westernGuides: DestinationGuide[] = [
   {
     slug: 'litang', name: 'Litang & biaranya', region: 'Sichuan', placeIds: ['litang', 'litang-monastery'],
     summary: 'Sore berjalan ringan di kota dataran tinggi dan kompleks Biara Litang.',
-    gettingThere: { origin: 'Xinduqiao melalui G318', steps: ['Tiba dengan mobil dari Xinduqiao, lalu check-in atau titipkan barang di hotel.', 'Minta sopir mengantar ke 长青春科尔寺; lanjutkan berjalan mengikuti area biara yang dibuka.'], duration: 'Rencana PDF: sekitar 4 jam berkendara dari Xinduqiao, sebelum berhenti dan perubahan kondisi jalan.', sources: [litangSource.url, roadSource.url] },
+    gettingThere: { origin: 'Xinduqiao melalui G318', steps: ['Tiba dengan mobil dari Xinduqiao, lalu check-in atau titipkan barang di hotel.', 'Minta sopir mengantar ke 长青春科尔寺; lanjutkan berjalan mengikuti area biara yang dibuka.'], duration: 'Sekitar 195 km dan 3,5–4 jam berkendara dari Xinduqiao, belum termasuk berhenti dan perubahan kondisi jalan.', sources: [litangSource.url, roadSource.url] },
     stopAccess: { litang: 'Gunakan hotel di kota sebagai titik mulai jalan santai; mobil lokal untuk jarak yang lebih jauh.', 'litang-monastery': 'Minta sopir menuju 长青春科尔寺 di sisi bukit kota, lalu cek akses aula dan kendaraan internal di pintu masuk.' },
     costs: [
       { label: 'Akses biara dan kendaraan internal', amount: 'Perlu konfirmasi', detail: 'Tarif terkini dan cakupan aula belum terverifikasi. Tanyakan sebelum menggunakan kendaraan atau pemandu internal.', status: 'unconfirmed' },
@@ -164,7 +164,7 @@ export const westernGuides: DestinationGuide[] = [
   {
     slug: 'xiangcheng', name: 'Xiangcheng & Daxueshan', region: 'Sichuan', placeIds: ['xiangcheng', 'daxueshan'],
     summary: 'Rumah-rumah putih dan lintasan pegunungan pada etape panjang menuju Shangri-La di Yunnan.',
-    gettingThere: { origin: 'Riwa, setelah dua malam di basis Yading', steps: ['Berangkat sekitar 07.00 sesuai rencana PDF dengan sopir yang menerima perjalanan lintas provinsi.', 'Lewati koridor Xiangcheng menuju Shangri-La, dengan jalur aktual dan titik Daxueshan dikonfirmasi sopir.', 'Akhiri perjalanan di hotel Dukezong, Yunnan; pastikan bukan kembali ke Shangri-La Town di Sichuan.'], duration: 'Rencana PDF: sekitar 8 jam di luar berhenti dan perubahan kondisi jalan.', sources: [xiangchengSource.url] },
+    gettingThere: { origin: 'Riwa, setelah dua malam di basis Yading', steps: ['Berangkat 07.45 dengan sopir yang menerima perjalanan lintas provinsi, dan tinggalkan simpang Qingmai ke selatan paling lambat 12.00.', 'Lewati koridor Xiangcheng menuju Shangri-La, dengan jalur aktual dan titik Daxueshan dikonfirmasi sopir.', 'Akhiri perjalanan di hotel Dukezong, Yunnan; pastikan bukan kembali ke Shangri-La Town di Sichuan.'], duration: 'Sekitar 310 km dan 7,5–9 jam berkendara, ditambah sekitar 1 jam berhenti. Jika terlambat atau ada salju, bermalam di Xiangcheng.', sources: [xiangchengSource.url] },
     stopAccess: { xiangcheng: 'Singgah di tempat parkir desa atau kota yang disepakati sepanjang etape Riwa ke Yunnan; minta izin sebelum masuk rumah.', daxueshan: 'Pemberhentian lintasan mengikuti rute yang disetujui sopir hari itu. Turun hanya jika jalan terbuka dan ada tempat aman.' },
     costs: [
       { label: 'Mobil lintas provinsi', amount: 'Penawaran satu arah', detail: 'Minta harga sampai hotel Dukezong berikut biaya pengembalian kendaraan dan menginap sopir, bila ada.', status: 'unconfirmed' },

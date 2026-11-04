@@ -39,7 +39,7 @@ export const yunnanGuides: DestinationGuide[] = [
         'Simpan koper dan jelajahi kota tua dengan berjalan kaki. Gunakan pin 独克宗古城, bukan Shangri-La Town di Sichuan.',
         'Jika tiba sebelum gelap dan masih bertenaga, lanjutkan ke Bukit Guishan di dalam kawasan kota tua.',
       ],
-      duration: 'Sekitar 8 jam berkendara dari Riwa menurut rencana PDF, belum termasuk berhenti; kondisi lintasan dapat mengubahnya.',
+      duration: 'Sekitar 310 km dan 7,5–9 jam berkendara dari Riwa, ditambah berhenti; target tiba 17.00–17.30, sebelum matahari terbenam.',
       sources: [dukezongTickets, guishanTickets],
     },
     stopAccess: {

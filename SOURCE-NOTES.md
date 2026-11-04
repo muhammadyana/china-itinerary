@@ -178,6 +178,10 @@ Recent references include the 31 October Jiuzhaigou notice, 25 October Yading vi
 
 The interface uses a fixed warm-light palette under both device color preferences. Glass effects apply to controls and navigation; practical reading panels remain opaque, with reduced-transparency and increased-contrast fallbacks.
 
+## Preparation page and 13/14/17 November timings (4 November 2026)
+
+`/places/prepare/` and the revised 13, 14 and 17 November days rest on research re-checked by independent verifiers on 4 November 2026: 12306 sale-start hours and the 15-day presale window, Qunar train listings for each date, Jiuzhaigou sold-out notices, the Jade Dragon cable-car rules (22 Sep 2026), the 2026 Jade Dragon and Impression Lijiang tariffs, WeChat Pay and Alipay foreign-card rules, Telkomsel's 14 Sep 2026 RoaMAX catalogue, KBRI Beijing's hotline, CDC altitude guidance, and computed sunrise, sunset and Kemenag prayer times. Unresolved: whether Yading, Jiuzhaigou and the Jade Dragon cable car accept passports in their mini programs, the 2026 Yuzixi registration rule, whether Indonesian roaming reaches WhatsApp and Google, and Friday khutbah time at the Kangding mosque. Visa, flights and Alipay/WeChat Pay are marked done because the traveller said so.
+
 ## Route map (4 November 2026)
 
 Province outlines and river centerlines on `/places/map/` come from Natural Earth 10m admin-1 states/provinces and rivers + lake centerlines (public domain, GeoJSON from the `nvkelso/natural-earth-vector` repository, downloaded 4 November 2026), clipped to the trip area and simplified to about 2.5 km by `ops/prepare-route-map.mjs`. Natural Earth admin-1 boundaries are not authoritative borders. Town points reuse the verified weather coordinates. Approximate references: Huanglongjiuzhai station (32.78 N, 103.63 E), Pingwu (32.41 N, 104.53 E, not a stop; it keeps the 10 November line on the expressway detour) and the Dujiangyan lunch stop (31.00 N, 103.62 E). Lines join points in visiting order and are not road geometry.
