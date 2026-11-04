@@ -326,7 +326,7 @@ for (const width of [320, 390]) {
 
     await page.goto('/#2026-11-19');
     await expect(page.locator('#day-view .sleep-summary')).toContainText('Menginap di Dali');
-    for (const id of ['jade-dragon', 'impression-lijiang', 'blue-moon']) {
+    for (const id of ['jade-dragon', 'impression-lijiang']) {
       const stop = page.locator(`#day-view li[id^="stop-${id}-"]`);
       const badge = stop.locator('[data-weather-location]');
       await expectReading(badge, 'ganhaizi', '1', '-3');

@@ -1,5 +1,7 @@
 import { galleryPhotos, guideForPlace, pageForPlace, placePath } from './guides.ts';
 import { dayTimelines, type TimelineStep } from './day-timelines.ts';
+import { bookingsForDate, preparePath, type Booking, type Link } from './bookings.ts';
+import { openTripsForDate, type OpenTrip } from './open-trips.ts';
 import { routeMapPath } from './route-map-main.ts';
 import { renderWeather } from './weather.ts';
 import { weatherLocationForGuide } from './weather-locations.ts';
@@ -75,10 +77,33 @@ function timelineEvent(event: Event, index: number, events: Event[]) {
 }
 export const timelineList = (steps: TimelineStep[]) => `<ol class="day-timeline" role="list">${steps.map(([time, text]) => `<li><span class="day-timeline-time">${e(time)}</span><span>${currencyText(text)}</span></li>`).join('')}</ol>`;
 const daySchedule = (date: string) => dayTimelines[date]?.length ? `<section class="day-schedule" aria-labelledby="schedule-heading"><div class="section-heading"><h3 id="schedule-heading">Timeline</h3><span>Waktu China (UTC+8)</span></div>${timelineList(dayTimelines[date])}</section>` : '';
+// Transport legs plus priced tickets for one date; stays have their own link in the day header.
+const dayBookings = (date: string) => bookingsForDate(date).filter(item => item.mode || item.cost);
+const bookingIcon = (mode?: Booking['mode']) => icon(mode === 'train' || mode === 'metro' ? 'train' : mode === 'bus' || mode === 'shuttle' ? 'bus' : mode === 'plane' ? 'plane' : mode ? 'car' : 'wallet');
+export const costLabel = (cost: NonNullable<Booking['cost']>) => cost.min === cost.max ? `CNY ${cost.min} / ${cost.per}` : `CNY ${cost.min}–${cost.max} / ${cost.per}`;
+const bookingLink = (link: Link) => link.url.startsWith('/') ? `<a class="text-link" href="${e(link.url)}">${e(link.label)}</a>` : external(link.label, link.url);
+function dayBooking(item: Booking) {
+ return `<li class="day-booking">${bookingIcon(item.mode)}<div><p class="day-booking-title"><strong>${e(item.item)}</strong>${item.cost ? `<span>${currencyText(costLabel(item.cost))}</span>` : ''}</p><p>${currencyText(item.note)}</p><p class="day-booking-channel">${currencyText(item.channel)}</p>${item.link ? bookingLink(item.link) : ''}</div></li>`;
+}
+function openTripItem(trip: OpenTrip) {
+ return `<li class="day-booking">${icon('bus')}<div><p class="day-booking-title"><strong>${e(trip.name)}</strong><span>${currencyText(trip.price)}</span></p><p>${currencyText(trip.fit)}</p><p class="day-booking-channel">${e(trip.platform)}</p>${bookingLink(trip.link)}</div></li>`;
+}
+function dayTransport(date: string) {
+ const items = dayBookings(date); const trips = openTripsForDate(date);
+ if (!items.length && !trips.length) return '';
+ const list = (entries: string[]) => `<ul class="day-bookings" role="list">${entries.join('')}</ul>`;
+ return `<section class="day-transport" id="day-transport" aria-labelledby="transport-heading" tabindex="-1"><div class="section-heading"><h3 id="transport-heading">Transport & pemesanan</h3><span>Harga dicek 4 November</span></div>${items.length ? list(items.map(dayBooking)) : ''}${trips.length ? `<h4 class="day-open-trips-title">Alternatif open trip & tur</h4>${list(trips.map(openTripItem))}` : ''}<p class="day-transport-more"><a class="text-link" href="${preparePath}#bookings">Semua pemesanan dan jam bukanya</a></p></section>`;
+}
+export function printTransport(date: string) {
+ const items = dayBookings(date); const trips = openTripsForDate(date);
+ if (!items.length && !trips.length) return '';
+ const row = (title: string, price: string, text: string) => `<li><strong>${e(title)}</strong>${price ? ` · ${currencyText(price)}` : ''}<span>${currencyText(text)}</span></li>`;
+ return `<section class="print-transport"><h3>Transport & pemesanan</h3><ul>${items.map(item => row(item.item, item.cost ? costLabel(item.cost) : '', `${item.note} ${item.channel}`)).join('')}${trips.map(trip => row(`Open trip: ${trip.name}`, trip.price, trip.fit)).join('')}</ul></section>`;
+}
 export function dayView(day: Day) {
  const index=days.indexOf(day);const stayBase=day.overnight?stayBaseForDate(day.date):undefined;
- return `<header class="day-header"><div class="date-line"><time datetime="${day.date}">${fullDate(day.date)}</time><span>Hari ${index+1} / 14</span></div><div class="day-title-row"><h2 id="day-heading" tabindex="-1">${e(day.title)}</h2><button type="button" class="icon-button share-button" data-action="share" aria-label="Salin tautan hari ini">${icon('share')}</button></div><div class="day-essentials"><div class="sleep-summary">${icon(day.overnight?'bed':'plane')}<div><strong>${day.overnight?`Menginap di ${e(day.overnight.name)}`:'Pulang ke Jakarta'}</strong><p>${day.overnight?e(day.overnight.area):'Jam penerbangan mengikuti tiket'}</p>${day.overnight?.elevation?`<span class="elevation">${e(day.overnight.elevation)}</span>`:''}${stayBase?`<a class="sleep-stays-link" href="${staysPath}#${stayBase.id}">Rekomendasi hotel & hostel${icon('right')}</a>`:''}</div></div><div class="transport-summary">${icon('train')}<div><span>Perjalanan hari ini</span><p>${e(day.transport)}</p></div></div></div><p class="day-intro">${e(day.intro)}</p><div class="day-route" aria-label="Rute hari ini">${day.route.map((place,i)=>`${i?icon('right'):''}<span>${e(place)}</span>`).join('')}</div></header>
- ${daySchedule(day.date)}<section class="daily-stops" aria-labelledby="stops-heading"><div class="section-heading"><h3 id="stops-heading">Cerita hari ini</h3><span>Waktu China (UTC+8)</span></div><ol class="timeline">${day.events.map(timelineEvent).join('')}</ol></section>
+ return `<header class="day-header"><div class="date-line"><time datetime="${day.date}">${fullDate(day.date)}</time><span>Hari ${index+1} / 14</span></div><div class="day-title-row"><h2 id="day-heading" tabindex="-1">${e(day.title)}</h2><button type="button" class="icon-button share-button" data-action="share" aria-label="Salin tautan hari ini">${icon('share')}</button></div><div class="day-essentials"><div class="sleep-summary">${icon(day.overnight?'bed':'plane')}<div><strong>${day.overnight?`Menginap di ${e(day.overnight.name)}`:'Pulang ke Jakarta'}</strong><p>${day.overnight?e(day.overnight.area):'Jam penerbangan mengikuti tiket'}</p>${day.overnight?.elevation?`<span class="elevation">${e(day.overnight.elevation)}</span>`:''}${stayBase?`<a class="sleep-stays-link" href="${staysPath}#${stayBase.id}">Rekomendasi hotel & hostel${icon('right')}</a>`:''}</div></div><div class="transport-summary">${icon('train')}<div><span>Perjalanan hari ini</span><p>${e(day.transport)}</p>${dayBookings(day.date).length || openTripsForDate(day.date).length ? `<a class="transport-detail-link" href="#day-transport" data-action="transport">Detail transport & pemesanan${icon('right')}</a>` : ''}</div></div></div><p class="day-intro">${e(day.intro)}</p><div class="day-route" aria-label="Rute hari ini">${day.route.map((place,i)=>`${i?icon('right'):''}<span>${e(place)}</span>`).join('')}</div></header>
+ ${daySchedule(day.date)}${dayTransport(day.date)}<section class="daily-stops" aria-labelledby="stops-heading"><div class="section-heading"><h3 id="stops-heading">Cerita hari ini</h3><span>Waktu China (UTC+8)</span></div><ol class="timeline">${day.events.map(timelineEvent).join('')}</ol></section>
  ${renderChengduEvening(day.date)}<section class="practical" aria-labelledby="practical-heading"><div class="section-heading"><h3 id="practical-heading">Info praktis</h3>${icon('info')}</div>${day.practical.some(note => hasCnyAmount(note.text)) ? renderExchangeRate() : ''}<div class="practical-list">${day.practical.map(n=>`<details><summary>${e(n.title)}${icon('down')}</summary><div class="practical-content"><p>${currencyText(n.text)}</p>${n.link?external(n.link.label,n.link.url):''}${n.copy?`<button type="button" class="copy-place" data-action="copy-place" data-copy="${e(n.copy)}">${icon('copy')}<span lang="zh-Hans">${e(n.copy)}</span><span>Salin</span></button>`:''}</div></details>`).join('')}</div></section>
  <div class="night-detail">${icon(day.overnight?'bed':'plane')}<p>${day.overnight?e(day.overnight.detail):'Tidak ada malam hotel tambahan dalam itinerary. Periksa tiket dan ketentuan check-in maskapai.'}</p></div>
  ${day.sourceNote ? `<p class="stop-note day-source-note">${e(day.sourceNote)}</p>` : ''}<div class="day-end"><a class="text-link" href="${pdfDownloadUrl}" target="_blank" rel="noopener noreferrer">Unduh itinerary terbaru<span class="visually-hidden"> (buka tab baru)</span></a><span>PDF dari konten website</span></div>

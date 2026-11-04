@@ -46,6 +46,7 @@ python3 -m unittest discover -s ops -p 'test_*.py' -v   # deploy handler/packagi
 - `src/itinerary.ts`: `places` (stable IDs), `days` with events, `highlights`, `photos`, `userPhotos`, `bookingOptions`, `pdfPath`. `src/guide-photos-*.ts` feed extra photo records into it.
 - `src/guides/*.ts`: per-region `DestinationGuide` data typed by `src/guide-types.ts` (costs carry `status: 'published' | 'estimate' | 'unconfirmed'`, sources carry optional `publishedAt`, guides carry `checkedAt`).
 - `src/guides.ts`: merges region guides, drops transit stops, derives `placePages` (one page per guide plus one per additional stop), `pageBySlug`, `pageForPlace`, gallery/cover selection. A new guide or `placeIds` entry automatically gets a static page.
+- `src/bookings.ts`: everything to book or pay for, by `tripDate` (`until` for multi-day items, `mode` for transport legs). The preparation page groups it by urgency; each day panel and the PDF list a date's items under "Transport & pemesanan". `src/open-trips.ts`: open trips and tours per date with an honest `fit` note. `src/day-timelines.ts`: the hour-by-hour plan per date.
 - `src/weather-locations.ts`: verified coordinates per guide group. `src/chengdu-evening.ts`: first-night options shared by day view, Chengdu guide and PDF.
 - `source/*.json`: provenance records for photos, coordinates and the currency snapshot (not imported by code).
 

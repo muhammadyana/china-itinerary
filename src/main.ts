@@ -157,6 +157,12 @@ document.addEventListener('click', event => {
   if (!button || (button instanceof HTMLButtonElement && button.disabled)) return;
   const action = button.dataset.action;
   if (action === 'skip') { event.preventDefault(); $('#day-heading').focus(); }
+  else if (action === 'transport' && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
+    event.preventDefault();
+    const section = $('#day-transport');
+    section.scrollIntoView({block:'start'});
+    section.focus({preventScroll:true});
+  }
   else if ((action === 'itinerary' || action === 'gallery') && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
     event.preventDefault();
     const target = action === 'gallery' ? $('#user-gallery') : $('#itinerary');

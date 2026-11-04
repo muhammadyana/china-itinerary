@@ -36,11 +36,11 @@ test('Impression Lijiang is required between the glacier and valley without chan
   const day = days.find(item => item.date === visitDate)!;
   expect(day.overnight?.name).toBe('Dali');
   const sequence = day.events.flatMap(event => {
-    if (event.kind === 'stop' && ['jade-dragon', placeId, 'blue-moon'].includes(event.place)) return [event.place];
+    if (event.kind === 'stop' && ['jade-dragon', placeId].includes(event.place)) return [event.place];
     if (event.kind === 'transfer' && event.mode === 'train' && /Dali/.test(event.title)) return ['train-to-dali'];
     return [];
   });
-  expect(sequence).toEqual(['jade-dragon', placeId, 'blue-moon', 'train-to-dali']);
+  expect(sequence).toEqual(['jade-dragon', placeId, 'train-to-dali']);
   const stop = day.events.find(event => event.kind === 'stop' && event.place === placeId)!;
   expect(stop.status).toBe('Wajib');
   if (stop.kind === 'stop') {

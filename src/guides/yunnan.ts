@@ -17,7 +17,6 @@ const impressionLijiangBooking = 'https://www.wingontravel.com/things-to-do/deta
 const impressionLijiangTrip = 'https://id.trip.com/travel-guide/attraction/yulong/impressions-lijiang-performance-10758688/';
 const lijiangFee = 'https://www.ctdsb.net/c1716_202507/2486302.html';
 const dukezongTickets = 'https://piao.qunar.com/ticket/detail_188282.html?from=mpshouye_hotdest_sight';
-const guishanTickets = 'https://piao.qunar.com/ticket/detail_474029.html';
 const daliDirectory = 'https://www.yndali.gov.cn/dlsrmzf/c106716/pc/content/1983786742782726144/content_1983786742782726144.html';
 const erhaiReport = 'https://paper.people.com.cn/rmrb/pc/content/202505/22/content_30074694.html';
 const caicunGuide = 'https://touch.go.qunar.com/poi/5740099';
@@ -29,35 +28,32 @@ const greenLakeEntrance = 'https://ditu.amap.com/place/B036706ZJA';
 
 export const yunnanGuides: DestinationGuide[] = [
   {
-    slug: 'dukezong', name: 'Dukezong & Bukit Guishan', region: 'Yunnan',
-    placeIds: ['dukezong', 'guishan'],
-    summary: 'Jalan berbatu dan rumah kayu menjadi sambutan pertama di Shangri-La; roda doa emas di Bukit Guishan bisa dikunjungi bila sempat.',
+    slug: 'dukezong', name: 'Dukezong', region: 'Yunnan',
+    placeIds: ['dukezong'],
+    summary: 'Jalan berbatu dan rumah kayu menjadi sambutan pertama di Shangri-La, setelah perjalanan panjang dari Riwa.',
     gettingThere: {
       origin: 'Riwa, Sichuan, pada 17 November',
       steps: [
         'Pukul 08.00, naik taksi atau mobil carteran dari Riwa ke Xiangcheng, sekitar 3–3,5 jam, dengan tarif yang disepakati semalam.',
         'Di 乡城长途汽车站, beli tiket bus 14.30 ke Shangri-La dengan paspor. Perjalanan sekitar 5 jam; bus tiba sekitar 19.30–20.00, setelah gelap. Jika bus batal karena salju, bermalam di Xiangcheng dan naik bus 08.00 besok.',
         'Setiba di kota Shangri-La, naik taksi ke hotel di Dukezong. Gunakan pin 独克宗古城, bukan Shangri-La Town di Sichuan.',
-        'Bukit Guishan dilewati malam ini karena sudah gelap. Singgah sebentar pada 18 November hanya jika waktu memungkinkan.',
       ],
       duration: 'Sekitar 3–3,5 jam naik taksi ke Xiangcheng, menunggu bus 14.30, lalu sekitar 5 jam naik bus. Tiba sekitar 19.30–20.00, setelah matahari terbenam sekitar 18.30.',
-      sources: [dukezongTickets, guishanTickets],
+      sources: [dukezongTickets],
     },
     stopAccess: {
       dukezong: 'Dari titik turun taksi di tepi Dukezong, berjalan menuju penginapan dan gang kota tua.',
-      guishan: 'Dari Dukezong, berjalan ke 龟山公园 dan ikuti tangga menuju roda doa. Tidak dikunjungi saat tiba malam 17 November; singgah pada 18 November hanya jika waktu memungkinkan.',
     },
     costs: [
       { label: 'Kawasan Kota Tua Dukezong', amount: 'Gratis', detail: 'Qunar mencantumkan akses kota tua gratis. Belanja, pertunjukan, dan layanan berbayar terpisah.', status: 'published', source: dukezongTickets },
-      { label: 'Bukit Guishan', amount: 'Referensi: gratis', detail: 'Qunar menyebut taman tanpa tiket masuk. Akses bangunan, kegiatan, dan jam masuk dapat berbeda; periksa papan di lokasi sebelum menaiki tangga.', status: 'estimate', source: guishanTickets },
       { label: 'Taksi Riwa ke Xiangcheng', amount: 'Perlu konfirmasi', detail: 'Tarif belum ditemukan. Sepakati harga dengan sopir pada malam 16 November sebelum berangkat.', status: 'unconfirmed' },
       { label: 'Bus Xiangcheng ke Shangri-La', amount: 'Sekitar CNY 86 / orang', detail: 'Acuan rencana untuk bus 14.30; beli di terminal dengan paspor. Taksi ke hotel setelah tiba dibayar terpisah.', status: 'estimate' },
     ],
-    visitDuration: 'Alokasi rencana 1 sampai 2 jam setelah check-in; Guishan bersifat opsional.',
+    visitDuration: 'Alokasi rencana 1 sampai 2 jam setelah check-in, atau singkat saat mengambil koper pada 18 November.',
     bestTime: 'Malam 17 November setelah check-in bila masih bertenaga, atau siang 18 November saat kembali dari Songzanlin untuk makan dan mengambil koper.',
-    tips: ['Simpan nama dan pin hotel sebelum tiba agar koper tidak perlu ditarik jauh di jalan berbatu.', 'Pakai sepatu dengan pijakan baik dan bawa lapisan hangat untuk berjalan malam.', 'Ambil foto jalan utama lebih dulu; naik ke Guishan hanya jika waktu dan tenaga cukup.'],
+    tips: ['Simpan nama dan pin hotel sebelum tiba agar koper tidak perlu ditarik jauh di jalan berbatu.', 'Pakai sepatu dengan pijakan baik dan bawa lapisan hangat untuk berjalan malam.'],
     cautions: ['Ini kota Shangri-La di Yunnan, berbeda dari basis Yading di Riwa, Sichuan.', 'Setelah perjalanan panjang, persingkat kunjungan bila tubuh perlu beristirahat.'],
-    sources: [{ title: 'Qunar: akses dan lokasi Dukezong', url: dukezongTickets, kind: 'operator' }, { title: 'Qunar: lokasi dan akses Bukit Guishan', url: guishanTickets, kind: 'operator' }],
+    sources: [{ title: 'Qunar: akses dan lokasi Dukezong', url: dukezongTickets, kind: 'operator' }],
     checkedAt: '2026-11-03',
   },
   {
@@ -125,14 +121,14 @@ export const yunnanGuides: DestinationGuide[] = [
   },
   {
     slug: 'jade-dragon', name: 'Jade Dragon & Glacier Park', region: 'Yunnan', placeIds: ['jade-dragon', 'cable-car'],
-    summary: 'Glacier Park membuka pagi, disusul pertunjukan Impression Lijiang dan Blue Moon Valley sebelum kereta malam ke Dali.',
+    summary: 'Glacier Park membuka pagi 19 November, disusul pertunjukan Impression Lijiang sebelum kereta malam ke Dali. Blue Moon Valley dikunjungi sehari sebelumnya.',
     gettingThere: {
       origin: 'Hotel sekitar Dayan, Lijiang, pada 19 November',
       steps: [
         'Pesan mobil berangkat pagi dari hotel menuju Jade Dragon. Acuan pengelola dari kota ke Ganhaizi sekitar 80 menit; sesuaikan waktu berangkat dengan slot gondola, antrean, dan sesi Impression Lijiang.',
         'Alternatif terbaru: dari pusat pengunjung baru Baisha, ada kereta wisata ke kawasan. Promo mulai 3 November 2026 menggabungkan tiket masuk dan kereta; cek sambungan ke shuttle dan slot gondola sebelum mengganti rencana mobil.',
         'Validasi tiket kawasan dan reservasi 冰川公园索道, lalu ikuti shuttle menuju stasiun bawah Big Cable Car.',
-        'Gondola membawa kamu ke area sekitar 4.506 m. Turun cukup awal untuk menuju 印象丽江剧场 di Ganhaizi; minta petugas menunjukkan sambungan shuttle yang aktif. Impression Lijiang didahulukan sebelum Blue Moon Valley.',
+        'Gondola membawa kamu ke area sekitar 4.506 m. Turun cukup awal untuk menuju 印象丽江剧场 di Ganhaizi; minta petugas menunjukkan sambungan shuttle yang aktif. Dengan sesi 14.50, turun paling lambat ±12.30.',
       ],
       duration: 'Sekitar 80 menit berkendara dari kota menurut pengumuman pengelola; antrean shuttle dan gondola di luar waktu itu.',
       sources: [jadeDragonNotice, jadeDragonGuide, jadeDragonTrain, jadeDragonTravelNotice, impressionLijiangVenue],
@@ -142,14 +138,14 @@ export const yunnanGuides: DestinationGuide[] = [
       'jade-dragon': 'Naik Big Cable Car ke stasiun atas, lalu ikuti jalur resmi Glacier Park. Tetapkan batas waktu turun agar tiba sebelum sesi Impression Lijiang.',
     },
     costs: [
-      { label: 'Tiket masuk kawasan Jade Dragon', amount: 'CNY 100 / orang', detail: 'Akses kawasan yang sama untuk Glacier Park, teater Impression Lijiang, dan Blue Moon Valley hari ini. Tiket pertunjukan dibeli terpisah.', status: 'published', source: jadeDragonSummerNotice },
+      { label: 'Tiket masuk kawasan Jade Dragon', amount: 'CNY 100 / orang', detail: 'Akses kawasan untuk Glacier Park dan teater Impression Lijiang pada 19 November. Tiket ini berlaku satu hari; Blue Moon Valley pada 18 November butuh tiket kawasan sendiri. Tiket pertunjukan dibeli terpisah.', status: 'published', source: jadeDragonSummerNotice },
       { label: 'Shuttle antartitik di kawasan', amount: 'CNY 20 / orang', detail: 'Cek apakah sudah termasuk paket gondola. Jangan menambahkan biaya shuttle dua kali.', status: 'published', source: jadeDragonNotice },
       { label: 'Big Cable Car pulang-pergi', amount: 'Acuan CNY 120 / orang', detail: 'Tarif publikasi pengelola Juli 2026, di luar masuk kawasan dan shuttle. Konfirmasikan total paket serta slot 19 November di kanal resmi sebelum membayar.', status: 'published', source: jadeDragonSummerNotice },
       { label: 'Alternatif tiket kawasan + kereta wisata', amount: 'CNY 120 satu arah / CNY 130 pulang-pergi', detail: 'Promo operator 3 November 2026 sampai 5 Februari 2027, dilaporkan 2 November. Ini pilihan pengganti tiket masuk CNY 100 beserta transportasi kereta dari Baisha, bukan biaya tambahan wajib. Gondola dan shuttle internal harus diperiksa terpisah.', status: 'published', source: jadeDragonTrain },
       { label: 'Mobil dari Lijiang dan pengantaran ke stasiun', amount: 'Perlu konfirmasi', detail: 'Minta harga yang menyebut waktu menunggu, pengambilan bagasi, dan tujuan akhir Stasiun Lijiang.', status: 'unconfirmed' },
     ],
     visitDuration: 'Alokasi rencana 3 sampai 4 jam untuk akses dan Glacier Park; pendekkan waktu di atas jika perlu agar sesi Impression Lijiang tetap terkejar.',
-    bestTime: 'Slot gondola pagi 19 November, dengan waktu turun mengikuti tiket pertunjukan siang atau sore yang tersedia.',
+    bestTime: 'Slot gondola pagi 19 November, saat langit biasanya lebih cerah; sekitar 2,5–3 jam di atas sebelum Impression Lijiang 14.50.',
     tips: ['Periksa slot gondola dan sesi Impression Lijiang di kanal resmi 丽江旅游集团; nama pada pesanan harus sesuai paspor.', 'Bawa jaket hangat, sarung tangan, kacamata matahari, dan bekal halal.', 'Tetapkan waktu turun untuk pertunjukan, lalu waktu keluar kawasan untuk mengambil koper dan mengejar kereta ke Dali.'],
     cautions: ['Pengumuman 9 Oktober 2026 menjadwalkan Glacier Park kembali beroperasi 31 Oktober setelah perawatan. Itu bukan jaminan layanan 19 November; cek pemberitahuan terbaru dan slot saat memesan.', 'Jika antrean gondola terlalu panjang, persingkat atau lewati Glacier Park agar Impression Lijiang tetap menjadi prioritas. Saat cuaca buruk, ikuti status operasional kawasan dan teater secara terpisah.', 'Area atas berada di ketinggian tinggi. Bila tidak nyaman, hentikan pendakian dan minta bantuan petugas; tidak perlu memaksakan titik tertinggi.'],
     sources: [
@@ -165,14 +161,14 @@ export const yunnanGuides: DestinationGuide[] = [
   },
   {
     slug: 'impression-lijiang', name: 'Impression Lijiang', region: 'Yunnan', placeIds: ['impression-lijiang'],
-    summary: 'Panggung merah terbuka dengan Jade Dragon sebagai latar: pertunjukan utama pada 19 November, setelah Glacier Park dan sebelum Blue Moon Valley.',
+    summary: 'Panggung merah terbuka dengan Jade Dragon sebagai latar: pertunjukan utama pada 19 November, setelah Glacier Park dan sebelum kereta malam ke Dali.',
     gettingThere: {
       origin: 'Glacier Park setelah gondola pagi pada 19 November',
       steps: [
         'Turun dari Glacier Park dan arahkan perjalanan ke 印象丽江剧场 di Ganhaizi, di dalam kawasan Jade Dragon. Konfirmasikan halte serta sambungan shuttle dengan petugas.',
-        'Tangkapan layar Trip.com yang diberikan pada 3 November menampilkan pilihan 13:20 dan 14:50 untuk 19 November 2026, dalam waktu setempat Tiongkok (UTC+8). Utamakan 13:20; pilihan sesi sudah terlihat, tetapi tiket belum dipesan.',
+        'Tangkapan layar Trip.com yang diberikan pada 3 November menampilkan pilihan 13:20 dan 14:50 untuk 19 November 2026, dalam waktu setempat Tiongkok (UTC+8). Utamakan 14:50 agar Glacier Park tidak terburu-buru; pilihan sesi sudah terlihat, tetapi tiket belum dipesan.',
         'Siapkan tiket pertunjukan terpisah dari tiket masuk kawasan. Acuan penjual tiket menyarankan tiba 30 sampai 60 menit sebelum mulai; ikuti batas masuk pada tiket yang diterbitkan.',
-        'Setelah pertunjukan, lanjut ke Blue Moon Valley, lalu kembali ke mobil untuk mengambil koper dan menuju Stasiun Lijiang. Sesi 14:50 menjadi cadangan hanya jika durasi danau dipersingkat dan sambungan kereta malam ke Dali masih cukup.',
+        'Setelah pertunjukan, kembali ke mobil untuk ke kota, makan malam, mengambil koper, lalu menuju Stasiun Lijiang untuk C442 20.22. Blue Moon Valley sudah dikunjungi pada 18 November sore.',
       ],
       duration: 'Waktu dari gondola ke teater mengikuti shuttle dan antrean hari itu. Sisihkan 30 sampai 60 menit di teater sebelum pertunjukan, di luar perpindahan.',
       sources: [impressionLijiangVenue, jadeDragonSummerNotice, impressionLijiangBooking, impressionLijiangTrip],
@@ -182,12 +178,12 @@ export const yunnanGuides: DestinationGuide[] = [
       { label: 'Referensi Trip.com untuk 19 November', amount: 'Mulai Rp462.162', detail: 'Harga terendah pada kalender di tangkapan layar pengguna, diberikan 3 November 2026. Tersedia pilihan biasa dan VIP, tetapi jenis kursi belum dipilih; ini bukan harga final kursi atau tiket yang sudah dipesan. Cek ulang sesi, kursi, dan total saat memesan.', status: 'estimate', source: impressionLijiangTrip },
       { label: 'Tiket pertunjukan reguler', amount: 'Biasa CNY 280 / VIP CNY 346', detail: 'Tarif pengelola yang dipublikasikan Juli 2026. Harga akhir, kategori kursi, dan ketersediaan 19 November belum dikonfirmasi; tiket kawasan dan transportasi tidak termasuk.', status: 'published', source: jadeDragonSummerNotice },
       { label: 'Promo musim gugur, bersyarat', amount: 'Acuan CNY 180 / tiket biasa', detail: 'Promo 15 Oktober sampai 20 Desember 2026 mensyaratkan mengikuti akun resmi dan interaksi yang ditentukan. Laporan juga meminta bukti kedatangan di Lijiang. Konfirmasikan kelayakan paspor asing, kuota, dan cara penukaran sebelum mengandalkan harga ini.', status: 'estimate', source: impressionLijiangAutumnOffer },
-      { label: 'Akses kawasan dan shuttle', amount: 'Kawasan CNY 100 + shuttle CNY 20', detail: 'Komponen yang sama dengan kunjungan Glacier Park dan Blue Moon Valley hari ini; jangan menjumlahkannya lagi untuk setiap tempat. Periksa isi paket yang dibeli.', status: 'published', source: jadeDragonSummerNotice },
+      { label: 'Akses kawasan dan shuttle', amount: 'Kawasan CNY 100 + shuttle CNY 20', detail: 'Komponen yang sama dengan kunjungan Glacier Park hari ini; jangan menjumlahkannya lagi. Paket Trip.com CNY 488 sudah mencakup kawasan, gondola, dan pertunjukan. Periksa isi paket yang dibeli.', status: 'published', source: jadeDragonSummerNotice },
     ],
     visitDuration: 'Pertunjukan sekitar 60 menit menurut referensi pemesanan. Alokasikan 1½ sampai 2 jam termasuk tiba lebih awal, di luar transfer.',
-    bestTime: 'Utamakan 13:20 pada 19 November; 14:50 sebagai cadangan dengan waktu Blue Moon Valley dan transfer ke Dali yang lebih ketat. Keduanya pilihan yang terlihat di Trip.com, belum dipesan; waktu setempat Tiongkok (UTC+8).',
-    tips: ['Pastikan nama pada tiket sesuai paspor dan simpan bukti pemesanan sebelum berangkat dari hotel.', 'Bawa jaket, topi, dan kacamata matahari untuk panggung terbuka di Ganhaizi, sekitar 3.100 m.', 'Minta sopir menyiapkan rute setelah pertunjukan: Blue Moon Valley, bagasi, lalu Stasiun Lijiang.', 'Jika memilih promo, tanyakan persyaratan langsung kepada operator sebelum membayar; jangan menganggap diskon otomatis berlaku.'],
-    cautions: ['Impression Lijiang adalah agenda wajib dalam rencana ini. Jika gondola terlambat, pendekkan atau lewati Glacier Park; pendekkan Blue Moon Valley bila waktu ke stasiun terbatas.', 'Pilihan 13:20 dan 14:50 terlihat pada tangkapan layar 19 November, tetapi ketersediaan akhir, harga kursi, dan reservasi belum dikonfirmasi. Cocokkan sesi dengan kereta ke Dali sebelum membayar.', 'Pertunjukan berada di luar ruang; perubahan cuaca atau operasional dapat mengubah sesi. Periksa pemberitahuan operator pada hari kunjungan.'],
+    bestTime: 'Utamakan 14:50 pada 19 November agar pagi di Glacier Park lebih panjang; 13:20 sebagai cadangan bila slot gondola sangat pagi. Keduanya pilihan yang terlihat di Trip.com, belum dipesan; waktu setempat Tiongkok (UTC+8).',
+    tips: ['Pastikan nama pada tiket sesuai paspor dan simpan bukti pemesanan sebelum berangkat dari hotel.', 'Bawa jaket, topi, dan kacamata matahari untuk panggung terbuka di Ganhaizi, sekitar 3.100 m.', 'Minta sopir menyiapkan rute setelah pertunjukan: kota tua untuk makan malam dan bagasi, lalu Stasiun Lijiang.', 'Jika memilih promo, tanyakan persyaratan langsung kepada operator sebelum membayar; jangan menganggap diskon otomatis berlaku.'],
+    cautions: ['Impression Lijiang adalah agenda wajib dalam rencana ini. Jika gondola terlambat, pendekkan Glacier Park agar pertunjukan tetap terkejar.', 'Pilihan 13:20 dan 14:50 terlihat pada tangkapan layar 19 November, tetapi ketersediaan akhir, harga kursi, dan reservasi belum dikonfirmasi. Cocokkan sesi dengan kereta ke Dali sebelum membayar.', 'Pertunjukan berada di luar ruang; perubahan cuaca atau operasional dapat mengubah sesi. Periksa pemberitahuan operator pada hari kunjungan.'],
     sources: [
       { title: 'Trip.com: pilihan sesi dan tiket Impression Lijiang', url: impressionLijiangTrip, kind: 'operator', note: 'Halaman diperiksa 3 November 2026. Tangkapan layar pengguna pada tanggal yang sama memilih 19 November: opsi 13:20 atau 14:50, biasa atau VIP, harga kalender terendah Rp462.162. Sesi dan kursi belum dipilih atau dipesan; harga akhir dapat berubah.' },
       { title: 'Pengelola Jade Dragon: tarif dan kanal resmi pertunjukan', url: jadeDragonSummerNotice, kind: 'official', publishedAt: '2026-07-02', note: 'Pengumuman pengelola dimuat Xinhua. Tarif reguler menjadi acuan terpisah dari penawaran Trip.com; harga akhir dan reservasi 19 November belum dikonfirmasi.' },
@@ -201,23 +197,23 @@ export const yunnanGuides: DestinationGuide[] = [
     slug: 'blue-moon-valley', name: 'Blue Moon Valley', region: 'Yunnan', placeIds: ['blue-moon'],
     summary: 'Danau toska di kaki Jade Dragon, dengan jalur tepi air untuk berjalan dan berhenti memotret.',
     gettingThere: {
-      origin: 'Teater Impression Lijiang di Ganhaizi setelah pertunjukan 19 November',
+      origin: 'Stasiun Lijiang, 18 November setelah kereta C984 dari Shangri-La',
       steps: [
-        'Setelah Impression Lijiang selesai, tanyakan halte bus wisata kawasan menuju 蓝月谷. Ikuti rute shuttle yang ditunjukkan petugas.',
+        'Dari Stasiun Lijiang, titip koper di hotel dekat Dayan, lalu mobil atau DiDi sekitar 45–60 menit ke kawasan Jade Dragon. Beli tiket kawasan dan shuttle, lalu naik bus wisata ke halte 蓝月谷.',
         'Jelajahi tepian danau dengan berjalan kaki. Kendaraan listrik lokal bersifat pilihan, berbeda dari bus antartitik kawasan.',
-        'Kembali ke titik jemput yang disepakati untuk mengambil koper dan menuju Stasiun Lijiang.',
+        'Kembali ke halte shuttle sebelum gelap, lalu mobil sekitar 1 jam ke kota tua untuk malam di Dayan.',
       ],
       duration: 'Waktu perpindahan mengikuti rute dan antrean bus hari itu; sisihkan ruang dalam jadwal untuk perjalanan kembali ke kota.',
       sources: [jadeDragonNotice, jadeDragonGuide],
     },
     stopAccess: { 'blue-moon': 'Turun di halte 蓝月谷, lalu ikuti jalur resmi di tepi danau. Tanyakan halte pulang sebelum mulai berjalan.' },
     costs: [
-      { label: 'Akses dalam kawasan Jade Dragon', amount: 'CNY 100 / orang untuk kawasan', detail: 'Gunakan tiket kawasan yang sama dari rangkaian Glacier Park dan Impression Lijiang hari ini; jangan menjumlahkan tiket masuk kedua untuk lembah.', status: 'published', source: jadeDragonNotice },
+      { label: 'Akses dalam kawasan Jade Dragon', amount: 'CNY 100 / orang untuk kawasan', detail: 'Pada 18 November dibeli tersendiri, ditambah shuttle CNY 20. Tiket berlaku satu hari, jadi tidak bisa dipakai lagi untuk Glacier Park besoknya.', status: 'published', source: jadeDragonNotice },
       { label: 'Shuttle kawasan', amount: 'CNY 20 / orang', detail: 'Komponen yang sama pada rangkaian Jade Dragon, bukan biaya shuttle baru untuk setiap pemberhentian. Periksa isi paket.', status: 'published', source: jadeDragonNotice },
       { label: 'Kendaraan listrik di lembah', amount: 'Opsional, cek tarif setempat', detail: 'Pengelola menyatakan kendaraan listrik Blue Moon Valley tidak wajib. Jalan kaki adalah pilihan jika kondisi tubuh dan jalur memungkinkan.', status: 'unconfirmed', source: jadeDragonNotice },
     ],
     visitDuration: 'Alokasi rencana 45 sampai 90 menit di tepi danau setelah pertunjukan; sesuaikan dengan waktu kembali ke stasiun.',
-    bestTime: 'Sore 19 November setelah Impression Lijiang. Sisihkan waktu mengambil koper dan menuju kereta malam ke Dali.',
+    bestTime: 'Sore 18 November, sekitar 15.00–17.30, saat cahaya miring membuat air toska lebih hidup. Pemeriksaan tiket kawasan berhenti 16.30.',
     tips: ['Foto dari jalur pejalan kaki; jangan turun ke air atau melintasi pembatas.', 'Tentukan titik kembali sebelum berjalan agar tidak perlu menelusuri seluruh lembah dua kali.', 'Jika rangkaian pagi terlambat, utamakan sesi Impression Lijiang dan pendekkan kunjungan danau agar transfer ke stasiun tetap cukup.'],
     cautions: ['Warna air dan jarak pandang dipengaruhi cuaca; foto galeri bukan janji kondisi pada hari kunjungan.', 'Tiket gondola tidak diperlukan untuk sekadar mengunjungi lembah, tetapi akses kawasan tetap mengikuti ketentuan masuk.'],
     sources: [

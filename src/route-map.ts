@@ -56,7 +56,7 @@ export const mapLegs: Record<string, MapLeg[]> = {
   '2026-11-15': [...go('bus', 'litang', 'daocheng'), ...go('car', 'daocheng', 'riwa')],
   '2026-11-16': go('bus', 'riwa', 'yading', 'riwa'),
   '2026-11-17': [...go('car', 'riwa', 'xiangcheng'), ...go('bus', 'xiangcheng', 'shangri-la')],
-  '2026-11-18': go('train', 'shangri-la', 'lijiang'),
+  '2026-11-18': [...go('train', 'shangri-la', 'lijiang'), ...go('car', 'lijiang', 'ganhaizi', 'lijiang')],
   '2026-11-19': [...go('car', 'lijiang', 'ganhaizi', 'lijiang'), ...go('train', 'lijiang', 'dali')],
   '2026-11-20': go('train', 'dali', 'kunming'),
   '2026-11-21': [],

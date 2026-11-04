@@ -33,22 +33,6 @@ export const northernGuidePhotos: Record<string, Photo> = {
     "origin": "PDF",
     "photoNote": "Kompleks Muya Monastery dengan latar pegunungan, sesuai PDF perjalanan. Tanggal pengambilan mengikuti sumber PDF; bukan konfirmasi kondisi saat kunjungan."
   },
-  "guishan-refreshed": {
-    "id": "guishan-refreshed",
-    "width": 4000,
-    "height": 5328,
-    "sizes": [
-      480,
-      960,
-      1440
-    ],
-    "author": "瑞丽江的河水",
-    "source": "https://commons.wikimedia.org/wiki/File:%E9%A6%99%E6%A0%BC%E9%87%8C%E6%8B%89%E5%A4%A7%E4%BD%9B%E5%AF%BA_-_%E8%BD%AC%E7%BB%8F%E7%AD%92_-_2025-05-09_01.jpg",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "origin": "Wikimedia Commons",
-    "photoNote": "Roda doa emas di Bukit Guishan, Dukezong; diambil 9 Mei 2025. Foto arsip, bukan kondisi November 2026."
-  },
   "guide-n-sifangjie": {
     "id": "guide-n-sifangjie",
     "width": 700,
@@ -129,7 +113,6 @@ export const northernGuidePhotos: Record<string, Photo> = {
 export const northernPlacePhotoIds: Record<string, string> = {
   "moshi": "guide-n-moshi",
   "muya": "guide-n-muya",
-  "guishan": "guishan-refreshed",
   "sifangjie": "guide-n-sifangjie",
   "wuhua": "guide-n-wuhua",
   "caicun": "guide-n-caicun",
@@ -140,7 +123,6 @@ export const northernPlacePhotoIds: Record<string, string> = {
 export const northernPhotoDescriptions: Record<string, string> = {
   "guide-n-moshi": "Formasi batu abu-abu di Moshi Park, sesuai PDF perjalanan.",
   "guide-n-muya": "Kompleks Muya Monastery dengan latar pegunungan, sesuai PDF perjalanan.",
-  "guishan-refreshed": "Roda doa emas raksasa di Bukit Guishan berdiri di antara pepohonan dengan langit biru dan pengunjung di bagian bawahnya.",
   "guide-n-sifangjie": "Bangunan di alun-alun Sifangjie, Kota Tua Lijiang.",
   "guide-n-wuhua": "Pemandangan Kota Tua Dali dari Menara Wuhua, sesuai keterangan PDF.",
   "guide-n-caicun": "Referensi pemandangan Danau Erhai dari PDF; foto ini tidak memastikan tampilan Dermaga Caicun.",

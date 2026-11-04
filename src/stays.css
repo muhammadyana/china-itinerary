@@ -65,9 +65,9 @@
 
 .stays-page > .guide-source-section { margin-top: var(--space-3xl); }
 
-.day-essentials .sleep-stays-link { display: flex; width: fit-content; align-items: center; gap: var(--space-2xs); min-height: 44px; margin-top: var(--space-2xs); color: var(--color-accent); font-size: 14px; font-weight: 500; text-decoration: none; }
-.day-essentials .sleep-stays-link svg { width: 16px; height: 16px; }
-.day-essentials .sleep-stays-link:hover { color: var(--color-autumn-hover); }
+.day-essentials .sleep-stays-link, .day-essentials .transport-detail-link { display: flex; width: fit-content; align-items: center; gap: var(--space-2xs); min-height: 44px; margin-top: var(--space-2xs); color: var(--color-accent); font-size: 14px; font-weight: 500; text-decoration: none; }
+.day-essentials .sleep-stays-link svg, .day-essentials .transport-detail-link svg { width: 16px; height: 16px; }
+.day-essentials .sleep-stays-link:hover, .day-essentials .transport-detail-link:hover { color: var(--color-autumn-hover); }
 
 @media (max-width: 959px) {
   .stay-base-header { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }

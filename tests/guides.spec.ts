@@ -87,16 +87,16 @@ test('a nested destination works without JavaScript, reloads directly, and links
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
   try {
-    await page.goto(`${baseURL}/places/guishan/`);
-    await expect(page.locator('#place-title')).toHaveText(places.guishan.name);
-    await expect(page.locator('.guide-last-leg')).toContainText('龟山公园');
+    await page.goto(`${baseURL}/places/sifangjie/`);
+    await expect(page.locator('#place-title')).toHaveText(places.sifangjie.name);
+    await expect(page.locator('.guide-last-leg')).toContainText('四方街');
     await expect(page.locator('#costs')).toContainText('Tarif kawasan');
     await expect(page.locator('.guide-provenance time')).toBeVisible();
     await expect(page.locator('.guide-references a').first()).toBeVisible();
     await expect(page.locator('#sources li a').first()).toBeVisible();
-    await expect(page.locator('.guide-date-link')).toHaveAttribute('href', '/#2026-11-17');
+    await expect(page.locator('.guide-date-link')).toHaveAttribute('href', '/#2026-11-18');
     await page.reload();
-    await expect(page.locator('#place-title')).toHaveText(places.guishan.name);
+    await expect(page.locator('#place-title')).toHaveText(places.sifangjie.name);
     await page.goto(`${baseURL}/places/`);
     await page.locator('a[href="/places/dali/"]').first().click();
     await expect(page.locator('#place-title')).toHaveText('Kota Tua Dali & Menara Wuhua');
