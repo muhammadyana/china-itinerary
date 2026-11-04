@@ -74,21 +74,27 @@
   .route-timeline { position: fixed; inset: auto 0 0; z-index: var(--z-sticky-nav); padding: var(--space-xs) 0 calc(var(--space-xs) + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--color-glass-edge); background-color: var(--color-glass-solid); box-shadow: var(--glass-shadow); }
   .route-timeline h2 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .route-timeline ol { display: flex; gap: var(--space-xs); margin: 0; padding: 0 var(--gutter); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none; }
-  .route-entry { flex: 0 0 min(78vw, 300px); grid-template-columns: 28px minmax(0, 1fr); gap: var(--space-xs); padding: var(--space-sm); border: 1px solid var(--color-rule); border-radius: 18px; background: var(--color-paper); scroll-snap-align: start; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .route-entry { position: relative; flex: 0 0 min(86vw, 300px); grid-template-columns: 28px minmax(0, 1fr); align-items: center; gap: var(--space-sm); padding: 10px 62px 10px 12px; border: 1px solid var(--color-rule); border-radius: 18px; background: var(--color-paper); scroll-snap-align: start; cursor: pointer; -webkit-tap-highlight-color: transparent; }
   .route-entry.is-selected { border-color: var(--color-accent); background: var(--color-rust-wash); }
   .route-entry-number { width: 28px; height: 28px; }
-  .route-entry h3 { font-size: 16px; }
-  .route-entry-path { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 14px; }
+  .route-entry-body { gap: 1px; }
+  .route-entry-date { flex-wrap: nowrap; overflow: hidden; font-size: 12px; white-space: nowrap; }
+  .route-entry-date span:first-of-type { display: none; }
+  .route-entry h3 { font-size: 16px; line-height: 1.2; }
+  .route-entry-path { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 13px; }
   .route-entry-meta, .route-entry-sleep { display: none; }
-  .route-entry .text-link { min-height: 44px; }
+  /* The schedule link becomes a round arrow on the card edge; its label stays for screen readers. */
+  .route-entry .route-entry-open { position: absolute; top: 50%; right: 10px; justify-content: center; width: 44px; min-width: 44px; height: 44px; min-height: 44px; border: 1px solid var(--color-rule-2); border-radius: var(--radius-pill); background: var(--color-paper); transform: translateY(-50%); }
+  .route-entry.is-selected .route-entry-open { border-color: var(--color-accent); background: var(--color-accent); color: var(--color-on-autumn); }
+  .route-entry .route-entry-open svg { width: 18px; height: 18px; }
+  .route-entry-open-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 }
-:root { --route-strip-height: 150px; }
+:root { --route-strip-height: 124px; }
 
 @media (max-width: 599px) {
   .route-map-page { padding-top: var(--space-lg); }
   .route-map-intro h1 { font-size: 40px; }
   .route-map { border-radius: 20px; }
-  .route-entry { padding-inline: var(--space-2xs); }
 }
 
 @media (prefers-reduced-motion: reduce) {

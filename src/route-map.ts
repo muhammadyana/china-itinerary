@@ -153,7 +153,7 @@ function timelineEntry(index: number) {
       <p class="route-entry-path">${day.route.map(e).join(' <span aria-hidden="true">→</span><span class="visually-hidden">, lalu </span> ')}</p>
       <p class="route-entry-meta">${e(day.transport)}</p>
       <p class="route-entry-sleep">${icon('bed')}${day.overnight ? `Menginap di ${e(day.overnight.name)}${day.overnight.elevation ? ` · ${e(day.overnight.elevation)}` : ''}` : 'Terbang pulang ke Jakarta'}</p>
-      <a class="text-link" href="/#${day.date}">Buka jadwal hari ${index + 1}${icon('right')}</a>
+      <a class="text-link route-entry-open" href="/#${day.date}"><span class="route-entry-open-label">Buka jadwal hari ${index + 1}</span>${icon('right')}</a>
     </div>
   </li>`;
 }
