@@ -11,6 +11,7 @@ import { renderSiteNavigation } from './site-navigation.ts';
 import { logoPaths } from './logo.ts';
 import { renderChengduEvening } from './chengdu-evening.ts';
 import { stayBaseForDate, staysPath } from './stays.ts';
+import { renderOverland } from './overland.ts';
 import {days, places, photos, userPhotos, highlights, pdfDownloadUrl, bookingOptions, type Day, type Event, type Highlight} from './itinerary.ts';
 export const escapeHtml = (value: string) => value.replace(/[&<>"']/g,c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
 const e = escapeHtml;
@@ -166,7 +167,7 @@ export function shell() {
  <main class="container">${tripHero()}${userGallery()}
  ${arrivalSummary()}${tripHighlights()}<div class="itinerary-intro" id="itinerary"><h2 tabindex="-1">Perjalananmu,<br>hari demi hari.</h2><div class="itinerary-actions"><button type="button" class="quiet-button" data-action="pick-day">${icon('calendar')}<span>Jelajahi 14 hari</span></button><button type="button" class="quiet-button" data-action="overview">Rute${icon('right')}</button></div></div>
  <div class="journey-layout"><aside class="day-sidebar" aria-label="Daftar hari perjalanan"><div class="sidebar-title"><h2>November 2026</h2>${icon('calendar')}</div><ol class="sidebar-days">${pickerItems(days[0].date)}</ol><button class="route-link" type="button" data-action="overview">Lihat seluruh rute${icon('right')}</button></aside><article id="day-view" class="day-view" aria-label="Jadwal hari terpilih">${dayView(days[0])}</article></div>
- <noscript><p class="no-script">Pemilih hari memerlukan JavaScript. Jadwal hari pertama tetap tersedia di sini. <a href="${pdfDownloadUrl}">PDF memuat itinerary terbaru 14 hari</a>, dibuat otomatis dari konten website.</p></noscript></main>
+ <noscript><p class="no-script">Pemilih hari memerlukan JavaScript. Jadwal hari pertama tetap tersedia di sini. <a href="${pdfDownloadUrl}">PDF memuat itinerary terbaru 14 hari</a>, dibuat otomatis dari konten website.</p></noscript>${renderOverland()}</main>
  <footer class="site-footer container"><div class="footer-top"><p>Perjalanan yang sudah ditata.<br>Tinggal menikmati jalannya.</p><a class="quiet-button" href="${pdfDownloadUrl}" download>${icon('download')}<span>Unduh PDF terbaru</span></a></div>${credits()}<div class="footer-bottom"><span>Sichuan & Yunnan, November 2026</span><span>Semua jam dalam UTC+8</span>${siteCredit()}</div></footer>
  <nav class="mobile-daybar" aria-label="Pemilih hari"><button type="button" class="icon-button" data-action="previous" aria-label="Hari sebelumnya" disabled>${icon('left')}</button><button type="button" class="mobile-picker" id="mobile-picker" data-action="pick-day"><span><strong id="current-date">8 November</strong><span id="current-count">Hari 1 dari 14</span></span>${icon('down')}</button><button type="button" class="icon-button" data-action="next" aria-label="Hari berikutnya">${icon('right')}</button></nav>
  <dialog id="day-picker" class="day-picker" aria-labelledby="picker-title"><header class="dialog-header"><div><h2 id="picker-title">Pilih hari perjalanan</h2><p>November 2026</p></div><button type="button" class="icon-button" data-action="close" aria-label="Tutup pemilih hari" autofocus>${icon('close')}</button></header><ol id="picker-days" class="picker-days">${pickerItems(days[0].date,'modal')}</ol></dialog>

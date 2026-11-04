@@ -285,6 +285,8 @@ dialog::backdrop { background: var(--color-backdrop); }
  .day-sidebar { display: none; }
  .mobile-daybar { position: fixed; display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); inset: auto 16px calc(var(--space-sm) + env(safe-area-inset-bottom, 0px)); z-index: 300; padding: var(--space-xs); background: var(--color-paper); color: var(--color-ink); border-radius: 22px; box-shadow: 0 8px 30px var(--color-dock-shadow); }
  .mobile-daybar > .icon-button { border: 0; }
+ /* Keep keyboard-focused links above the fixed daybar (WCAG 2.4.11). */
+ html { scroll-padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
  .mobile-picker { display: flex; align-items: center; justify-content: center; gap: var(--space-sm); min-width: 0; min-height: 48px; padding: 0 var(--space-xs); flex: 1; border-radius: 14px; background: var(--color-paper-2); color: var(--color-ink); }
  .mobile-picker strong { display: block; font-size: 15px; font-weight: 600; white-space: nowrap; }
  #current-count { display: block; font-size: 11px; color: var(--color-muted); }
@@ -407,7 +409,7 @@ dialog::backdrop { background: var(--color-backdrop); }
 .home-arrival:hover .arrival-open { color: var(--color-accent); }
 .trip-highlights { margin-top: 72px; }
 .highlights-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-xl); margin-bottom: 32px; }
-.highlights-heading h2,.itinerary-intro h2 { font-family: var(--font-body); font-weight: 600; letter-spacing: -.04em; font-size: clamp(36px,4.5vw,58px); line-height: 1.05; }
+.highlights-heading h2,.itinerary-intro h2,.overland h2 { font-family: var(--font-body); font-weight: 600; letter-spacing: -.04em; font-size: clamp(36px,4.5vw,58px); line-height: 1.05; }
 .highlights-heading > p { max-width: 35ch; color: var(--color-muted); font-size: 15px; line-height: 1.65; }
 .highlights-grid { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); column-gap: var(--space-lg); row-gap: 32px; }
 .highlight-card { display: block; grid-column: span 2; min-width: 0; text-decoration: none; border-radius: var(--radius-card); }
@@ -505,7 +507,7 @@ dialog::backdrop { background: var(--color-backdrop); }
  .arrival-open svg { width: 22px; height: 22px; }
  .trip-highlights { margin-top: var(--space-xl); }
  .highlights-heading { display: block; margin-bottom: var(--space-lg); }
- .highlights-heading h2,.itinerary-intro h2 { font-size: 36px; }
+ .highlights-heading h2,.itinerary-intro h2,.overland h2 { font-size: 36px; }
  .highlights-heading > p { max-width: 35ch; font-size: 14px; margin-top: var(--space-md); }
  .highlights-grid { display: flex; gap: var(--space-md); overflow-x: auto; scroll-snap-type: x proximity; padding: var(--space-2xs) var(--space-2xs) var(--space-md); margin: calc(-1 * var(--space-2xs)); scrollbar-width: thin; }
  .highlight-card,.highlight-card:last-child { flex: 0 0 86%; scroll-snap-align: start; display: block; padding: 0; }
