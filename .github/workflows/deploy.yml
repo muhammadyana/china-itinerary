@@ -108,7 +108,7 @@ jobs:
           curl --fail --silent --show-error --max-time 30 \
             https://china.muhammadyana.me/ > index.html
           grep -q 'hero-track' index.html
-          for slug in jiuzhaigou dali guishan; do
+          for slug in jiuzhaigou dali sifangjie; do
             curl --fail --silent --show-error --max-time 30 \
               "https://china.muhammadyana.me/places/$slug/?revision=$GITHUB_SHA" > "guide-$slug.html"
             grep -q "data-guide=\"$slug\"" "guide-$slug.html"
