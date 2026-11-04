@@ -5,6 +5,8 @@ import { guideView, placesIndex } from './src/guide-render.ts';
 import { coverPhoto, pageBySlug, placePages, placePath, type GalleryPhoto, type PlacePage } from './src/guides.ts';
 import { staysView } from './src/stays-render.ts';
 import { staysPath } from './src/stays.ts';
+import { routeMapView } from './src/route-map.ts';
+import { routeMapPath } from './src/route-map-main.ts';
 import { escapeHtml } from './src/render.ts';
 import { renderPrintDocument } from './src/print-render.ts';
 import { pdfPath } from './src/itinerary.ts';
@@ -39,6 +41,7 @@ function destinationHtml(html: string, page?: PlacePage) {
  return socialMeta(pageHtml(html, title, description, page ? placePath(page.slug) : '/places/', page ? guideView(page) : placesIndex()), page && coverPhoto(page));
 }
 
+const routeMapHtml = (html: string) => pageHtml(html, 'Peta rute 14 hari | China 2026', 'Peta titik ke titik perjalanan Sichuan dan Yunnan, 8 sampai 21 November 2026: urutan hari, moda, dan tempat menginap.', routeMapPath, routeMapView());
 const staysHtml = (html: string) => pageHtml(html, 'Hotel & hostel per malam | China 2026', 'Satu hotel dan satu hostel untuk setiap kota menginap di Sichuan dan Yunnan, 8 sampai 20 November 2026, dengan harga perkiraan dan bukti menerima paspor asing.', staysPath, staysView());
 export default defineConfig({
  base: '/',
@@ -90,6 +93,7 @@ export default defineConfig({
    const path = (context.originalUrl || context.path).split('?')[0];
    if (/^\/places\/?$/.test(path)) return destinationHtml(html);
    if (path === staysPath || `${path}/` === staysPath) return staysHtml(html);
+   if (path === routeMapPath || `${path}/` === routeMapPath) return routeMapHtml(html);
    const slug = path.match(/^\/places\/([a-z0-9-]+)\/?$/)?.[1];
    const page = slug ? pageBySlug.get(slug) : undefined;
    return page ? destinationHtml(html, page) : html.replace('<!--app-->', shell());
@@ -107,6 +111,8 @@ export default defineConfig({
     this.emitFile({ type: 'asset', fileName: 'places/index.html', source: destinationHtml(template) });
     if (pageBySlug.has('stays')) throw new Error('A place guide cannot use the reserved stays slug');
     this.emitFile({ type: 'asset', fileName: 'places/stays/index.html', source: staysHtml(template) });
+    if (pageBySlug.has('map')) throw new Error('A place guide cannot use the reserved map slug');
+    this.emitFile({ type: 'asset', fileName: 'places/map/index.html', source: routeMapHtml(template) });
     for (const page of placePages) {
      this.emitFile({ type: 'asset', fileName: `places/${page.slug}/index.html`, source: destinationHtml(template, page) });
     }
