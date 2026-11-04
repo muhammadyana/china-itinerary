@@ -1,6 +1,7 @@
 import { days, places } from './itinerary.ts';
 import { pageForPlace, placePath } from './guides.ts';
 import { planningPages, renderSiteSearch, searchTrigger } from './site-search.ts';
+import { logoMark } from './logo.ts';
 
 const initializedDocuments = new WeakSet<Document>();
 const escapeHtml = (value: string) => value.replace(/[&<>"']/g, character => ({
@@ -11,13 +12,12 @@ interface NavLink { href: string; label: string; action?: string }
 type Region = 'Sichuan' | 'Yunnan';
 interface Destination { slug: string; name: string; region: Region }
 
-const topLinks: { before: NavLink[]; after: NavLink[] } = {
-  before: [{ href: '/', label: 'Beranda' }],
-  after: [
-    { href: '/#user-gallery', label: 'Galeri', action: 'gallery' },
-    { href: '/#route', label: 'Rute', action: 'overview' },
-  ],
-};
+const home: NavLink = { href: '/', label: 'Beranda' };
+
+const topLinks: NavLink[] = [
+  { href: '/#user-gallery', label: 'Galeri', action: 'gallery' },
+  { href: '/#route', label: 'Rute', action: 'overview' },
+];
 
 const itineraryLinks: NavLink[] = [
   { href: '/#itinerary', label: 'Lihat itinerary 14 hari', action: 'itinerary' },
@@ -37,6 +37,10 @@ function destinations(): Destination[] {
 }
 
 const actionAttribute = (action?: string) => action ? ` data-action="${escapeHtml(action)}"` : '';
+
+// The logo stands in for the visible label; aria-label keeps the link's name.
+const homeLink = ({ href, label }: NavLink) =>
+  `<a class="site-navigation-link site-navigation-home" href="${escapeHtml(href)}" aria-label="${escapeHtml(label)}">${logoMark()}</a>`;
 
 const topLink = ({ href, label, action }: NavLink) =>
   `<a class="site-navigation-link" href="${escapeHtml(href)}"${actionAttribute(action)}>${escapeHtml(label)}</a>`;
@@ -62,7 +66,7 @@ function placeMenu() {
 }
 
 export function renderSiteNavigation(): string {
-  const items = [...topLinks.before.map(topLink), itineraryMenu(), placeMenu(), ...topLinks.after.map(topLink), searchTrigger()].join('');
+  const items = [homeLink(home), itineraryMenu(), placeMenu(), ...topLinks.map(topLink), searchTrigger()].join('');
   return `<nav class="site-navigation" aria-label="Navigasi utama">${items}</nav>${renderSiteSearch()}`;
 }
 

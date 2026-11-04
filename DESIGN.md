@@ -26,6 +26,7 @@ Geist is the active display and body face, at weights 400, 500, and 600. Heading
 | Link / focus accent | `#884827` |
 | Glass | `#fffaf2a8` |
 | Primary amber action | `#f2ce8d` |
+| Logo mark: mountain / snow / maple leaf | `#2f67ad` / `#ffffff` / `#d9622b` |
 
 ## Material and interaction
 

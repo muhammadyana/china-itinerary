@@ -59,6 +59,27 @@ html {
   flex: 1 1 auto;
 }
 
+/* The logo home link stays a compact square and takes no share of the spare room. */
+.site-navigation .site-navigation-home {
+  flex: 0 0 44px;
+  padding: 0;
+}
+
+.site-navigation-home svg {
+  width: 26px;
+  height: 26px;
+  transition: transform var(--dur-micro) var(--ease-out);
+}
+
+/* The mark keeps its colours, and the shared glass hover matches the pill, so it needs its own visible surface. */
+.site-navigation .site-navigation-home:hover {
+  background-color: var(--color-paper-2);
+}
+
+.site-navigation-home:hover svg {
+  transform: translateY(-1px);
+}
+
 .site-navigation .nav-menu {
   flex: 1 1 auto;
   min-width: 0;
@@ -232,8 +253,8 @@ html {
   }
 }
 
-/* With chevrons the bar needs about 330px, so the narrowest phones drop them. */
-@media (max-width: 365px) {
+/* With chevrons the bar needs about 316px, so the narrowest phones drop them. */
+@media (max-width: 355px) {
   .nav-menu-chevron {
     display: none;
   }
@@ -263,7 +284,8 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   .site-navigation .site-navigation-link,
-  .site-navigation .nav-menu > summary {
+  .site-navigation .nav-menu > summary,
+  .site-navigation-home svg {
     transition: none;
   }
 }

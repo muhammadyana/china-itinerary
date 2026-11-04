@@ -8,6 +8,7 @@ import { weatherLocationForGuide } from './weather-locations.ts';
 import { currencyText, hasCnyAmount, renderExchangeRate } from './currency.ts';
 import type { PhotoContent } from './photo-viewer.ts';
 import { renderSiteNavigation } from './site-navigation.ts';
+import { logoPaths } from './logo.ts';
 import { renderChengduEvening } from './chengdu-evening.ts';
 import { stayBaseForDate, staysPath } from './stays.ts';
 import {days, places, photos, userPhotos, highlights, pdfDownloadUrl, bookingOptions, type Day, type Event, type Highlight} from './itinerary.ts';
@@ -30,7 +31,8 @@ const paths: Record<string,string> = {
  pin:'<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
  copy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/>',share:'<path d="M12 16V3m-5 5 5-5 5 5M5 13v8h14v-8"/>',
  download:'<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>',expand:'<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/>',check:'<path d="m5 12 4 4L19 6"/>',
- mountain:'<path d="m3 20 7-15 11 15H3Zm4-8 4 2 2-5m1 11 3-6"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/>',
+ // The mountain entry is the site logo.
+ mountain:logoPaths,info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/>',
 };
 export function icon(name: string) {return `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name] || paths.pin}</svg>`;}
 const dateObject = (date: string) => new Date(`${date}T12:00:00+08:00`);
