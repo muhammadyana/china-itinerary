@@ -1,0 +1,71 @@
+/* Calm option page: the route map and day strip from route-map.css, then comparison, day cards and booking cards from prepare.css. */
+.calm-intro .prepare-link { margin-top: calc(var(--space-xs) * -1); }
+
+.calm-compare h3 { font-size: var(--text-title); line-height: 1.2; }
+.calm-compare > h3 { margin-top: var(--space-xl); }
+.calm-compare-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-md); margin-top: var(--space-lg); }
+.calm-compare-column { padding: var(--space-lg); border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-glass-solid); }
+.calm-compare-column:nth-child(2) { border-color: var(--color-accent); }
+
+.calm-list { display: grid; gap: var(--space-xs); max-width: 72ch; margin: var(--space-sm) 0 0; padding-left: 1.2em; color: var(--color-ink-2); }
+.calm-list li::marker { color: var(--color-accent); }
+
+.calm-days { display: grid; gap: var(--space-lg); }
+.calm-days > :is(h2, .prepare-section-lead) { margin-top: 0; }
+.calm-days > .prepare-section-lead { margin-top: calc(var(--space-sm) - var(--space-lg)); }
+.calm-day { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--space-lg) var(--space-2xl); padding: var(--space-xl); border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-glass-solid); overflow-wrap: break-word; scroll-margin-top: var(--site-navigation-clearance); }
+.calm-day-header { grid-column: 1 / -1; display: grid; gap: var(--space-sm); max-width: 72ch; }
+.calm-day-date { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2xs) var(--space-sm); color: var(--color-accent); font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.calm-day-date span:not(.calm-day-same) { color: var(--color-muted); font-weight: 500; }
+.calm-day-same { padding: 2px var(--space-sm); border-radius: var(--radius-pill); background: var(--color-rust-wash); color: var(--color-ink); font-size: 13px; font-weight: 500; }
+.calm-day h3 { font-size: var(--text-title); line-height: 1.2; letter-spacing: -.015em; text-wrap: balance; }
+.calm-day-intro { color: var(--color-ink-2); }
+.calm-day-note { padding: var(--space-sm) var(--space-md); border-left: 3px solid var(--color-warning); border-radius: 0 16px 16px 0; background: var(--color-warning-surface); color: var(--color-ink); }
+.calm-day-note .prepare-link { display: flex; flex-wrap: wrap; gap: 0 var(--space-md); }
+.calm-day h4 { color: var(--color-muted); font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.calm-day .day-timeline { margin-top: var(--space-xs); }
+.calm-day .day-timeline li { grid-template-columns: 7.5rem minmax(0, 1fr); }
+.calm-day-side { display: grid; align-content: start; gap: var(--space-sm); }
+.calm-day-side > h4 { margin-top: var(--space-xs); }
+
+.calm-day-facts { display: grid; margin: 0; }
+.calm-day-facts > div { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: var(--space-sm); padding-block: var(--space-xs); border-top: 1px solid var(--color-rule); }
+.calm-day-facts dt { color: var(--color-ink); font-size: 14px; font-weight: 500; }
+.calm-day-facts dd { margin: 0; color: var(--color-ink-2); font-size: 14px; }
+
+.calm-stops { display: grid; gap: var(--space-xs); margin: 0; padding: 0; list-style: none; }
+.calm-stop { display: grid; gap: var(--space-2xs); padding: var(--space-sm) var(--space-md) var(--space-2xs); border-radius: 18px; background: var(--color-paper); }
+.calm-stop h5 { margin: 0; color: var(--color-ink); font-size: 16px; font-weight: 600; line-height: 1.3; }
+.calm-stop h5 span { color: var(--color-muted); font-weight: 500; }
+.calm-stop > p:not(.calm-stop-links) { color: var(--color-ink-2); font-size: 14px; }
+.calm-stop-links { display: flex; flex-wrap: wrap; gap: 0 var(--space-md); }
+.calm-stop-links svg { width: 16px; height: 16px; }
+
+.calm-risks { border-top: 1px solid var(--color-rule); }
+.calm-risks summary { display: flex; align-items: center; justify-content: space-between; min-height: 44px; color: var(--color-ink); font-size: 14px; font-weight: 600; cursor: pointer; list-style: none; }
+.calm-risks summary::-webkit-details-marker { display: none; }
+.calm-risks summary svg { width: 18px; height: 18px; color: var(--color-accent); transition: transform var(--dur-short) var(--ease-out); }
+.calm-risks[open] summary svg { transform: rotate(180deg); }
+.calm-risks .calm-list { margin: 0 0 var(--space-sm); font-size: 14px; }
+
+.calm-page .prepare-group .calm-list { margin-top: var(--space-md); }
+
+@media (max-width: 959px) {
+  /* The day strip pins to the screen bottom only while the map is in view, then scrolls away with it, so it never covers the day cards. */
+  .calm-page .route-timeline { position: sticky; margin-inline: calc(var(--gutter) * -1); }
+  .calm-page + .guide-footer { padding-bottom: calc(var(--space-2xl) + env(safe-area-inset-bottom, 0px)); }
+  .calm-compare-grid { grid-template-columns: minmax(0, 1fr); }
+  .calm-day { grid-template-columns: minmax(0, 1fr); padding: var(--space-lg); }
+}
+
+@media (max-width: 599px) {
+  .calm-intro h1 { font-size: 40px; }
+  .calm-compare-column { padding: var(--space-md); }
+  .calm-day { gap: var(--space-md); padding: var(--space-md); border-radius: 20px; }
+  .calm-day .day-timeline li { grid-template-columns: minmax(0, 1fr); }
+  .calm-day-facts > div { grid-template-columns: minmax(0, 1fr); gap: var(--space-2xs); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calm-risks summary svg { transition: none; }
+}

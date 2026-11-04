@@ -11,6 +11,7 @@ import './stays.css';
 import './route-map.css';
 import './prepare.css';
 import './costs.css';
+import './calm.css';
 import './overland.css';
 import './site-search.css';
 import { initializeCurrency } from './currency.ts';

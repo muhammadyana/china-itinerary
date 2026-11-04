@@ -25,6 +25,8 @@ const amapPlaces: Record<string, AmapPlace> = {
   'five-flower': { keyword: '五花海', city: '513225', near: 'jiuzhaigou' },
   shuzheng: { keyword: '树正群海', city: '513225', near: 'jiuzhaigou' },
   bipenggou: { keyword: '毕棚沟', city: '513222', near: 'bipenggou' },
+  // The weather point is the gate visitor centre itself (OSM way 1351805644), so the calm option pins it.
+  'bipenggou-gate': { keyword: '毕棚沟游客中心', city: '513222', near: 'bipenggou', marker: true },
   siguniangshan: { keyword: '四姑娘山', city: '513227', near: 'rilong' },
   maobiliang: { keyword: '猫鼻梁', city: '513227', near: 'rilong' },
   // Renamed 四姑娘山镇; the old name 日隆镇 is no longer indexed.
@@ -83,6 +85,24 @@ const amapPlaces: Record<string, AmapPlace> = {
   nancheng: { keyword: '南城清真寺', city: '530100', near: 'kunming' },
   'green-lake': { keyword: '翠湖公园', city: '530100', near: 'kunming' },
   kmg: { keyword: '昆明长水国际机场', city: '530100' },
+  // Calm-option stops (src/calm-route.ts): OpenStreetMap names from the 5 November 2026 research, checked against
+  // Baidu Map suggestions the same day. 五彩池 and 长海 also exist elsewhere; the county code keeps the Jiuzhaigou ones.
+  'mirror-lake': { keyword: '镜海', city: '513225', near: 'jiuzhaigou' },
+  'long-lake': { keyword: '长海', city: '513225', near: 'jiuzhaigou' },
+  'five-colour-pond': { keyword: '五彩池', city: '513225', near: 'jiuzhaigou' },
+  nuorilang: { keyword: '诺日朗瀑布', city: '513225', near: 'jiuzhaigou' },
+  'pearl-shoals': { keyword: '珍珠滩瀑布', city: '513225', near: 'jiuzhaigou' },
+  songpan: { keyword: '松潘古城', city: '513224' },
+  'songpan-mosque': { keyword: '松潘清真北寺', city: '513224' },
+  'maoxian-station': { keyword: '茂县站', city: '513223' },
+  'huangcheng-mosque': { keyword: '皇城清真寺', city: '510100', near: 'chengdu' },
+  'panda-base': { keyword: '成都大熊猫繁育研究基地', city: '510100' },
+  // Baidu lists the towers as 成都金融城双子塔; 天府双塔 ranks a bank in Nanchong first.
+  'tianfu-twin-towers': { keyword: '成都金融城双子塔', city: '510100' },
+  'chengdu-south': { keyword: '成都南站', city: '510100' },
+  // 上虎跳峡 is the Shangri-La side; the Lijiang side has its own Tiger Leaping Gorge entrance.
+  'upper-tiger-leaping-gorge': { keyword: '上虎跳峡', city: '533401' },
+  napahai: { keyword: '纳帕海', city: '533401' },
 };
 
 // Pages covering places too far apart for one search get one link per place (Sister Lakes is 100+ km from the viewpoint).

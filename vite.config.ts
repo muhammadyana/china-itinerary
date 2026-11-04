@@ -7,6 +7,8 @@ import { staysView } from './src/stays-render.ts';
 import { staysPath } from './src/stays.ts';
 import { routeMapView } from './src/route-map.ts';
 import { routeMapPath } from './src/route-map-main.ts';
+import { calmPath, calmRouteProblems, calmView } from './src/calm-render.ts';
+import { calmStopIds } from './src/calm-route.ts';
 import { prepareView, preparePath } from './src/prepare.ts';
 import { trainsView, trainsPath } from './src/trains.ts';
 import { costsView, costsPath } from './src/costs-render.ts';
@@ -18,9 +20,11 @@ import { socialImage } from './src/social-image.ts';
 import { generatePdfFromUrl } from './ops/generate-pdf.mjs';
 
 // Every itinerary stop and place page renders an Amap link; a missing entry must stop the build, not ship a broken page.
-const amapIds = [...days.flatMap(day => day.events.flatMap(event => event.kind === 'stop' ? [event.place] : [])), ...placePages.flatMap(page => amapIdsForPage(page.slug))];
+const amapIds = [...days.flatMap(day => day.events.flatMap(event => event.kind === 'stop' ? [event.place] : [])), ...placePages.flatMap(page => amapIdsForPage(page.slug)), ...calmStopIds];
 const amapErrors = amapProblems(amapIds);
 if (amapErrors.length) throw new Error(`src/amap.ts: ${amapErrors.join('; ')}`);
+const calmErrors = calmRouteProblems();
+if (calmErrors.length) throw new Error(`src/calm-route.ts: ${calmErrors.join('; ')}`);
 
 const printStyles = readFileSync(new URL('./src/print.css', import.meta.url), 'utf8');
 
@@ -54,6 +58,7 @@ const routeMapHtml = (html: string) => pageHtml(html, 'Peta rute 14 hari | China
 const prepareHtml = (html: string) => pageHtml(html, 'Persiapan & pemesanan | China 2026', 'Yang sudah beres, yang harus dipesan dan kapan, perkiraan biaya, internet, serta nomor darurat untuk perjalanan Sichuan dan Yunnan 8–21 November 2026.', preparePath, prepareView());
 const trainsHtml = (html: string) => pageHtml(html, 'Kereta & timeline | China 2026', 'Link Trip.com untuk semua kereta, slot tiket Jiuzhaigou, dan timeline jam demi jam 8–10 November 2026 dari Chengdu ke Bipenggou.', trainsPath, trainsView());
 const costsHtml = (html: string) => pageHtml(html, 'Rincian biaya | China 2026', 'Rincian biaya perjalanan Sichuan dan Yunnan 8–21 November 2026 per hari: kereta, bus, tiket masuk, mobil, dan penginapan, dalam yuan dan rupiah.', costsPath, costsView());
+const calmHtml = (html: string) => pageHtml(html, 'Opsi santai: kereta ke Yunnan | China 2026', 'Alternatif yang lebih tenang untuk Sichuan dan Yunnan 8–21 November 2026: dua hari di Jiuzhaigou, Bipenggou seharian, Panda Base, kereta D239 ke Lijiang, dan Upper Tiger Leaping Gorge, dengan peta rute dan daftar pemesanan.', calmPath, calmView());
 const staysHtml = (html: string) => pageHtml(html, 'Hotel & hostel per malam | China 2026', 'Satu hotel dan satu hostel untuk setiap kota menginap di Sichuan dan Yunnan, 8 sampai 20 November 2026, dengan harga perkiraan dan bukti menerima paspor asing.', staysPath, staysView());
 export default defineConfig({
  base: '/',
@@ -109,6 +114,7 @@ export default defineConfig({
    if (path === preparePath || `${path}/` === preparePath) return prepareHtml(html);
    if (path === trainsPath || `${path}/` === trainsPath) return trainsHtml(html);
    if (path === costsPath || `${path}/` === costsPath) return costsHtml(html);
+   if (path === calmPath || `${path}/` === calmPath) return calmHtml(html);
    const slug = path.match(/^\/places\/([a-z0-9-]+)\/?$/)?.[1];
    const page = slug ? pageBySlug.get(slug) : undefined;
    return page ? destinationHtml(html, page) : html.replace('<!--app-->', shell());
@@ -134,6 +140,8 @@ export default defineConfig({
     this.emitFile({ type: 'asset', fileName: 'places/trains/index.html', source: trainsHtml(template) });
     if (pageBySlug.has('costs')) throw new Error('A place guide cannot use the reserved costs slug');
     this.emitFile({ type: 'asset', fileName: 'places/costs/index.html', source: costsHtml(template) });
+    if (pageBySlug.has('calm')) throw new Error('A place guide cannot use the reserved calm slug');
+    this.emitFile({ type: 'asset', fileName: 'places/calm/index.html', source: calmHtml(template) });
     for (const page of placePages) {
      this.emitFile({ type: 'asset', fileName: `places/${page.slug}/index.html`, source: destinationHtml(template, page) });
     }
