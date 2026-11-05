@@ -109,7 +109,7 @@ const calmOwnDays: CalmDay[] = [
     route: ['Chengdu East', 'Huanglongjiuzhai', 'Jiuzhaigou'],
     overnight: { name: 'Jiuzhaigou', elevation: '±2.000 m', detail: `Malam pertama dari dua dekat gerbang (Pengfeng/Goukou). ${calmStayPicks('2026-11-09')}` },
     transport: 'DiDi ke Chengdu East, C5772 07.30 ke Huanglongjiuzhai, bus 团子出行 10.00 dari stasiun ke gerbang (1,5–2 jam menurut panduan pihak ketiga). Hari ini tidak masuk taman, jadi bus 13.50 atau mobil dari stasiun juga cukup.',
-    intro: 'Hari perjalanan tanpa masuk taman, jadi cukup satu tiket Jiuzhaigou untuk besok. C5772 07.30 tersambung ke bus 团子出行 10.00 dari stasiun; sekitar tengah hari sudah di penginapan, lalu sore untuk istirahat, belanja bekal, dan melihat jalan ke gerbang. Tidak ada batas masuk 14.00 hari ini, jadi bus 13.50 juga cukup bila bus 10.00 penuh atau tidak menerima paspor.',
+    intro: 'Hari perjalanan tanpa masuk taman, jadi cukup satu tiket Jiuzhaigou untuk besok. C5772 07.30 tersambung ke bus 团子出行 10.00 dari stasiun; sekitar tengah hari sudah di penginapan, lalu sore untuk istirahat, belanja bekal, dan melihat jalan ke gerbang. Malamnya, bila buka, jalan-jalan ke night market di Zhangzha. Tidak ada batas masuk 14.00 hari ini, jadi bus 13.50 juga cukup bila bus 10.00 penuh atau tidak menerima paspor.',
     steps: [
       ['±05.55', 'Subuh di hotel, lalu sarapan dari bekal.'],
       ['±06.30', 'DiDi ke Chengdu East; tiba 30–45 menit sebelum kereta untuk pemeriksaan paspor.'],
@@ -118,6 +118,7 @@ const calmOwnDays: CalmDay[] = [
       ['±12.00–13.00', 'Check-in, atau titip koper bila kamar belum siap, di penginapan 1,2–1,8 km dari pusat pengunjung. Zuhur mulai 12.51; sebagai musafir kamu boleh menjamaknya dengan Asar.'],
       ['Sore', 'Istirahat; hari ini tidak ada tiket taman. Beli bekal makan siang dan air untuk besok di Pengfeng, lalu jalan kaki ke pusat pengunjung supaya tahu rute dan lamanya untuk besok pagi. Asar 15.47.'],
       ['18.09', 'Maghrib; Isya 19.34. Makan malam halal di Pengfeng (ulasan September 2025 menyebut ada restoran 清真).'],
+      ['±19.15–20.15', 'Jalan-jalan ke Jiuzhai Night Market (九寨夜市) di kota Zhangzha, masuk gratis; cari lokasinya di Amap. Ada Zhuoma Market (卓玛市集) dengan jajanan lokal dan panggung tari Tibet dan Qiang tiap malam (laporan Mei sampai musim panas 2026). Jam buka November belum ketemu dan di luar musim ramai bisa sepi atau tutup. Jajanannya, seperti sate yak, belum tentu halal, jadi cukup lihat-lihat dan foto.'],
       ['±20.30', 'Cek tiket 10 November (slot 08.00–10.00), isi baterai, kosongkan kartu memori, lalu tidur cepat.'],
     ],
     stops: [
@@ -568,6 +569,7 @@ export const calmSources: Link[] = [
   { label: 'OpenStreetMap: jalur pengunjung Upper Tiger Leaping Gorge', url: 'https://www.openstreetmap.org/way/708347464' },
   { label: 'OpenStreetMap: Napahai', url: 'https://www.openstreetmap.org/way/36897816' },
   { label: 'OpenStreetMap: Masjid Huangcheng', url: 'https://www.openstreetmap.org/way/582845149' },
+  { label: 'Science and Technology Daily: Jiuzhai Night Market di Zhangzha, Zhuoma Market dan tari Tibet–Qiang tiap malam (21 September 2026)', url: 'https://www.stdaily.com/web/gdxw/2026-09/21/content_585121.html' },
   { label: 'Pengelola Jiuzhaigou: tiket 2 November habis, kuota 41.000, jam masuk dan tutup (31 Oktober 2026)', url: 'https://www.jiuzhai.com/news/notice/11492-2026-10-31-09-08-46' },
   { label: 'Jiuzhaigou: halaman tiket resmi (dicek 5 November 2026)', url: 'https://www.jiuzhai.com/intelligent-service/tickets' },
   { label: 'Guangming/SCTV: stok tiket Jiuzhaigou dirilis 08.00 dan 17.00 (4 Oktober 2026)', url: 'https://m.gmw.cn/2026-10/04/content_1304571698.htm' },
