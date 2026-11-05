@@ -8,7 +8,7 @@ import { openTripsForDate } from './open-trips.ts';
 import { planSwitch, renderSiteNavigation } from './site-navigation.ts';
 import { renderChengduEvening } from './chengdu-evening.ts';
 import { daysByDate, type Day } from './itinerary.ts';
-import { calmDays, calmItineraryPath, calmPlaces, calmPreparePath, calmPath, placeFor, type CalmDay, type CalmStop } from './calm-route.ts';
+import { calmDays, calmGlance, calmItineraryPath, calmPlaces, calmPreparePath, calmPath, placeFor, type CalmDay, type CalmStop } from './calm-route.ts';
 import { calmStayBaseForDate, calmStaysHref } from './calm-stays.ts';
 import { calmDayBookings } from './calm-prepare.ts';
 import { noteItem } from './calm-render.ts';
@@ -50,6 +50,26 @@ function stops(day: CalmDay, key: string) {
   return stopsSection(day.stops.map((stop, index) => calmStop(stop, index, key)).join(''), key, '');
 }
 
+// "Sekilas hari ini": where you sleep, what to book, what to carry and the one thing not to miss, before the timeline.
+const bookingName = (item: string) => item.split(/[:,]/)[0].trim();
+function glanceBookings(day: CalmDay) {
+  const items = day.fromMain ? dayBookings(day.date).map(item => item.item) : calmDayBookings(day.date).filter(item => !item.alternative).map(item => item.item);
+  return items.map(bookingName);
+}
+const glanceRow = (label: string, value: string) => value ? `<div><dt>${e(label)}</dt><dd>${currencyText(value)}</dd></div>` : '';
+function glance(day: CalmDay, key: string) {
+  const facts = calmGlance[day.date];
+  const sleep = day.overnight ? `${day.overnight.name}${day.overnight.elevation ? `, ${day.overnight.elevation}` : ''}` : '';
+  const book = glanceBookings(day);
+  const rows = [
+    glanceRow('Tidur', sleep),
+    book.length ? `<div><dt>Pesan</dt><dd><ul role="list">${book.map(item => `<li>${currencyText(item)}</li>`).join('')}</ul></dd></div>` : '',
+    glanceRow('Bawa', facts?.bring ?? ''),
+    glanceRow('Ingat', facts?.remember ?? ''),
+  ].join('');
+  return rows ? `<section class="day-glance" aria-labelledby="glance-heading${key}"><h3 id="glance-heading${key}">Sekilas hari ini</h3><dl>${rows}</dl></section>` : '';
+}
+
 const notes = (day: CalmDay) => day.notes.length ? `<div class="calm-panel-notes">${day.notes.map(noteItem).join('')}</div>` : '';
 
 const risks = (day: CalmDay, key: string) => day.risks.length ? `<section class="practical calm-panel-risks" aria-labelledby="risks-heading${key}"><div class="section-heading"><h3 id="risks-heading${key}">Risiko hari ini</h3>${icon('info')}</div><ul class="calm-list" role="list">${day.risks.map(risk => `<li>${currencyText(risk)}</li>`).join('')}</ul></section>` : '';
@@ -77,7 +97,7 @@ function dayPanel(day: CalmDay, index: number) {
   const transport = transportSection(rows, trips, { key, more: `${calmPreparePath}#bookings`, checked: day.fromMain ? undefined : 'Harga dicek 4–5 November' });
   const night = day.overnight ? nightDetail(day.overnight, currencyText(day.overnight.detail)) : nightDetail(null);
   return `<article class="day-view calm-day-view" id="${day.date}" data-calm-day="${day.date}" aria-labelledby="day-heading${key}">${dayHeader(day, index, key, rows.length + trips.length > 0)}
- ${daySchedule(day.steps, key)}${transport}${stops(day, key)}
+ ${glance(day, key)}${daySchedule(day.steps, key)}${transport}${stops(day, key)}
  ${main ? renderChengduEvening(day.date) : ''}${notes(day)}${main ? practicalSection(main.practical, key) : ''}${risks(day, key)}
  ${night}
  ${main?.sourceNote ? `<p class="stop-note day-source-note">${e(main.sourceNote)}</p>` : ''}${pagination(index)}</article>`;

@@ -45,7 +45,7 @@ const calmDay = (date: string) => {
 function stepText(date: string, time: string) {
   const step = calmDay(date).steps.find(([at]) => at === time);
   if (!step) throw new Error(`calm-route.ts: no ${time} step on ${date}`);
-  return step[1];
+  return step[2] ?? step[1];
 }
 function riskText(date: string, word: string) {
   const risk = calmDay(date).risks.find(text => text.includes(word));

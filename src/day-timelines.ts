@@ -1,7 +1,8 @@
 // Hour-by-hour plan per itinerary day, in China time (UTC+8). Shown in the day panel, the PDF and the trains page.
 // Paced for a photographer on 4 November 2026: longer blocks at the main sights, golden hour, prayer times and buffers,
 // re-checked against train, bus, park and sunset times. Prayer times follow Kemenag criteria computed per town.
-export type TimelineStep = [time: string, text: string];
+/** With `detail`, `text` is a short action shown in bold and `detail` the fuller note under it. */
+export type TimelineStep = [time: string, text: string, detail?: string];
 
 export const dayTimelines: Record<string, TimelineStep[]> = {
   '2026-11-08': [

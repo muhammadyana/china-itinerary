@@ -43,6 +43,8 @@
 .day-timeline { display: grid; gap: 0; max-width: 760px; margin: var(--space-md) 0 0; padding: 0; list-style: none; }
 .day-timeline li { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: var(--space-md); padding-block: var(--space-sm); border-top: 1px solid var(--color-rule); color: var(--color-ink-2); }
 .day-timeline-time { color: var(--color-accent); font-weight: 600; font-variant-numeric: tabular-nums; }
+.day-timeline-title { display: block; color: var(--color-ink); font-weight: 600; }
+.day-timeline-detail { display: block; margin-top: var(--space-2xs); color: var(--color-muted); font-size: 0.875rem; line-height: 1.55; }
 .prepare-section-lead strong { color: var(--color-ink); font-weight: 600; }
 .prepare-section-lead a { color: var(--color-accent); font-weight: 500; text-decoration: none; }
 .prepare-sources { display: grid; gap: 0; margin: var(--space-sm) 0 0; padding: 0; list-style: none; }

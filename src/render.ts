@@ -91,7 +91,8 @@ export function timelineEvent(event: Event, index: number, events: Event[], key 
  const sequence=events.slice(0,index+1).filter(item=>item.kind==='stop').length;
  return stopCard(event.place, places[event.place], sequence, `stop-${event.place}-${index}${key}`, event);
 }
-export const timelineList = (steps: TimelineStep[]) => `<ol class="day-timeline" role="list">${steps.map(([time, text]) => `<li><span class="day-timeline-time">${e(time)}</span><span>${currencyText(text)}</span></li>`).join('')}</ol>`;
+const timelineText = (text: string, detail?: string) => detail ? `<strong class="day-timeline-title">${currencyText(text)}</strong><span class="day-timeline-detail">${currencyText(detail)}</span>` : currencyText(text);
+export const timelineList = (steps: TimelineStep[]) => `<ol class="day-timeline" role="list">${steps.map(([time, text, detail]) => `<li><span class="day-timeline-time">${e(time)}</span><span>${timelineText(text, detail)}</span></li>`).join('')}</ol>`;
 export const daySchedule = (steps: TimelineStep[] | undefined, key = '') => steps?.length ? `<section class="day-schedule" aria-labelledby="schedule-heading${key}"><div class="section-heading"><h3 id="schedule-heading${key}">Timeline</h3><span>Waktu China (UTC+8)</span></div>${timelineList(steps)}</section>` : '';
 // Transport legs plus priced tickets for one date; stays have their own link in the day header.
 export const dayBookings = (date: string) => bookingsForDate(date).filter(item => item.mode || item.cost);
