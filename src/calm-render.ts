@@ -118,7 +118,7 @@ export function calmView() {
   <main class="container route-map-page calm-page" data-route-map>
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="/places/">Tempat</a>${icon('right')}<span>Opsi santai</span></nav>
     ${intro()}
-    ${routeMapLayout(calmRoute)}
+    <div id="calm-map">${routeMapLayout(calmRoute)}</div>
     <section class="prepare-section calm-days" aria-labelledby="calm-days-title"><h2 id="calm-days-title">Hari demi hari</h2>
       <p class="prepare-section-lead">Jam memakai waktu China (WIB + 1 jam). Waktu salat dihitung dengan kriteria Kemenag untuk kota tempat kamu berada.</p>
       ${calmDays.map(dayCard).join('')}

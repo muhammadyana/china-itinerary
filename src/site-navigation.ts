@@ -1,6 +1,6 @@
 import { days, places } from './itinerary.ts';
 import { pageForPlace, placePath } from './guides.ts';
-import { planningPages, renderSiteSearch, searchTrigger } from './site-search.ts';
+import { mainPlanPages, renderSiteSearch, searchTrigger, tripPlanningPages } from './site-search.ts';
 import { logoMark } from './logo.ts';
 
 const initializedDocuments = new WeakSet<Document>();
@@ -19,9 +19,14 @@ const topLinks: NavLink[] = [
   { href: '/#route', label: 'Rute', action: 'overview' },
 ];
 
-const itineraryLinks: NavLink[] = [
+const mainPlanLinks: NavLink[] = [
   { href: '/#itinerary', label: 'Lihat itinerary 14 hari', action: 'itinerary' },
-  ...planningPages,
+  ...mainPlanPages,
+];
+
+const calmPlanLinks: NavLink[] = [
+  { href: '/places/calm/#calm-days-title', label: 'Itinerary santai' },
+  { href: '/places/calm/#calm-map', label: 'Peta rute santai' },
 ];
 
 // One menu entry per guide page, in the order the itinerary first visits it.
@@ -58,7 +63,15 @@ const regionGroup = (region: Region, places: Destination[]) =>
 const navMenu = (name: string, label: string, panel: string) =>
   `<details class="nav-menu ${name}-menu"><summary>${label}<span class="nav-menu-chevron" aria-hidden="true"></span></summary><div class="nav-menu-panel ${name}-menu-panel">${panel}</div></details>`;
 
-const itineraryMenu = () => navMenu('itinerary', 'Itinerary', itineraryLinks.map(panelLink).join(''));
+// The two plans side by side; the trip pages below them stay untitled.
+const itineraryGroup = (title: string, links: NavLink[]) =>
+  `<section class="itinerary-menu-group">${title ? `<h2>${title}</h2>` : ''}<ol role="list">${links.map(link => `<li>${panelLink(link)}</li>`).join('')}</ol></section>`;
+
+const itineraryMenu = () => navMenu('itinerary', 'Itinerary', [
+  itineraryGroup('Rencana utama', mainPlanLinks),
+  itineraryGroup('Opsi santai', calmPlanLinks),
+  itineraryGroup('', tripPlanningPages),
+].join(''));
 
 function placeMenu() {
   const places = destinations();

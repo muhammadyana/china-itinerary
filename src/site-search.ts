@@ -19,15 +19,18 @@ const resultLimit = 20;
 const tripTimeZone = 'Asia/Shanghai';
 const searchLabel = 'Cari tempat dan itinerary';
 
-// Also the planning links of the Itinerary menu. trains.ts and calm-render.ts import the navigation and costs.ts computes every line on load, so their paths stay literals here.
-export const planningPages: PlanningPage[] = [
-  { href: staysPath, label: 'Hotel & hostel per malam', keywords: 'penginapan menginap akomodasi' },
+// Also the planning links of the Itinerary menu, which groups them the same way. trains.ts and calm-render.ts import the navigation and costs.ts computes every line on load, so their paths stay literals here.
+export const mainPlanPages: PlanningPage[] = [
   { href: routeMapPath, label: 'Peta rute 14 hari', keywords: 'map perjalanan' },
-  { href: '/places/calm/', label: 'Opsi santai: kereta ke Yunnan', keywords: 'alternatif pilihan rute santai calm Jiuzhaigou dua hari Songpan Maoxian Bipenggou Panda Base Huangcheng Jumat D239 Lijiang Tiger Leaping Gorge Upper Gorge Napahai' },
+  { href: staysPath, label: 'Hotel & hostel per malam', keywords: 'penginapan menginap akomodasi' },
+];
+const calmPlanPage: PlanningPage = { href: '/places/calm/', label: 'Opsi santai: kereta ke Yunnan', keywords: 'alternatif pilihan rute santai calm Jiuzhaigou dua hari Songpan Maoxian Bipenggou Panda Base Huangcheng Jumat D239 Lijiang Tiger Leaping Gorge Upper Gorge Napahai' };
+export const tripPlanningPages: PlanningPage[] = [
   { href: preparePath, label: 'Persiapan & pemesanan', keywords: 'booking tiket biaya pembayaran internet darurat KBRI asuransi' },
   { href: '/places/costs/', label: 'Rincian biaya', keywords: 'biaya harga budget anggaran rupiah yuan total per hari' },
   { href: '/places/trains/', label: 'Kereta & timeline', keywords: 'tiket kereta train stasiun jadwal jam' },
 ];
+export const planningPages: PlanningPage[] = [...mainPlanPages, calmPlanPage, ...tripPlanningPages];
 
 const tripDate = (date: string) => new Date(`${date}T12:00:00+08:00`);
 const dayMonth = new Intl.DateTimeFormat('id-ID', { day: 'numeric', month: 'long', timeZone: tripTimeZone });

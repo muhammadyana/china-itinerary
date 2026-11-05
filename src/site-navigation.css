@@ -162,12 +162,19 @@ html {
   font-weight: 500;
 }
 
-.place-menu-group {
+.place-menu-group,
+.itinerary-menu-group {
   padding-block: var(--space-sm);
   border-top: 1px solid var(--color-rule);
 }
 
-.place-menu-group h2 {
+.itinerary-menu-group:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.place-menu-group h2,
+.itinerary-menu-group h2 {
   margin: 0;
   padding: var(--space-sm) var(--space-md);
   color: var(--color-muted);
@@ -178,7 +185,8 @@ html {
   line-height: 1.4;
 }
 
-.place-menu-group ol {
+.place-menu-group ol,
+.itinerary-menu-group ol {
   margin: 0;
   padding: 0;
   list-style: none;
