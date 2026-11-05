@@ -122,7 +122,7 @@ The browser suite covers all generated documents, complete sightseeing-stop cove
 
 ## GitHub Actions and Nginx
 
-The [Test and deploy](.github/workflows/deploy.yml) workflow runs on pull requests and pushes to `main`. CI installs Node 24, runs the build and browser tests, and packages a verified static archive. Only pushes to `main` or manual runs on `main` can deploy to the `production` environment.
+The [Build and deploy](.github/workflows/deploy.yml) workflow runs on pull requests and pushes to `main`. CI installs Node 24, runs the build (no tests, by the owner's decision of 6 November 2026), and packages a verified static archive. Only pushes to `main` or manual runs on `main` can deploy to the `production` environment.
 
 Nginx serves `current/public` on the server and proxies `/api/ask/` to the trip assistant, which is installed by hand and is not part of the workflow. The dedicated deployment key is restricted to the `ops/deploy.py` handler and cannot run arbitrary shell commands. The handler validates the archive and hashes, activates the release atomically, checks origin HTTPS, and restores the previous release if verification fails. The workflow also checks the commit marker over public HTTPS.
 

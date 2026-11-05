@@ -1,4 +1,4 @@
-name: Test and deploy
+name: Build and deploy
 
 on:
   push:
@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build and test
+    name: Build
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -28,22 +28,8 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
+      # Chromium renders the PDF during the build. CI runs no tests (owner's decision, 6 November 2026).
       - run: npx playwright install --with-deps chromium
-      - name: Test restricted deployment handler
-        run: python3 -m unittest discover -s ops -p 'test_*.py' -v
-      # Test failures are reported but do not block deployment (owner's decision, 4 November 2026).
-      - name: Test itinerary and destination guides
-        id: e2e
-        continue-on-error: true
-        run: npm run test:e2e
-        env:
-          CI: 'true'
-      - name: Report failing tests
-        if: steps.e2e.outcome == 'failure'
-        run: |
-          echo "::warning::End-to-end tests failed; deploying anyway. See the test-evidence artifact."
-          printf '### End-to-end tests failed\n\nDeployment continued; see the test-evidence artifact.\n' >> "$GITHUB_STEP_SUMMARY"
-      # A clean build after the tests, so a build interrupted inside the test run is never packaged.
       - name: Build site
         run: npm run build
       - name: Package static site
@@ -54,16 +40,6 @@ jobs:
           path: site.tar.gz
           if-no-files-found: error
           retention-days: 7
-      - name: Save test evidence
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: test-evidence-${{ github.run_id }}
-          path: |
-            artifacts/
-            test-results/
-          if-no-files-found: ignore
-          retention-days: 14
 
   deploy:
     name: Deploy to Nginx

@@ -64,7 +64,7 @@ npm run check:ask                 # typecheck ops/ask/ (npx tsc does not cover i
 
 ## Deployment
 
-`.github/workflows/deploy.yml`: on PRs and pushes to `main`, run the ops unit tests (blocking), `npm run test:e2e` (non-blocking: failures only warn), a clean `npm run build` (blocking), then `ops/package.py`. Only `main` deploys, over a restricted SSH key to `ops/deploy.py` on the server.
+`.github/workflows/deploy.yml`: on PRs and pushes to `main`, run `npm run build`, then `ops/package.py`. CI runs no tests (owner's decision, 6 November 2026). Only `main` deploys, over a restricted SSH key to `ops/deploy.py` on the server.
 
 `allowed_path()` in `ops/deploy.py` (also used by `ops/package.py`) is a strict allowlist of output paths: root `index.html`/`release.json`/icons, `assets/*.{js,css,woff2}`, `photos/*.{webp,avif}`, `places/<slug>/index.html`, `social/<photo-id>.jpg` (one card per place page, made by `ops/prepare-social-images.mjs`), two exact PDF names and `print/index.html`. Any new output path fails packaging. Adding one means updating `allowed_path()` and its coverage in `ops/test_deploy.py`, and the root-owned installed copy on the server must be updated separately before deploying (see `ops/README.md`).
 
@@ -72,7 +72,7 @@ The trip assistant is not part of this pipeline: `ops/ask/install.sh` installs i
 
 ## Content and repo rules
 
-- Do not add new test files or test cases (owner's rule, 4 November 2026). Keep the existing suite and make it pass; adjust an existing test only when a change breaks it.
+- Do not add new test files or test cases (owner's rule, 4 November 2026). Since 6 November 2026 the owner also wants the tests skipped: do not run them as part of routine changes and keep them out of CI ("abaikan unit test, jangan dimasukin ke github action"). The suites stay in the repo for manual use; `npx tsc` and `npm run build` are the checks.
 - New research: include source URLs, applicable season and the real check date (`checkedAt`). Set `publishedAt` only for a verified publication date. Never present an old quote or temporary offer as a confirmed future price; use `estimate`/`unconfirmed`.
 - Photo capture dates stay distinct from itinerary dates; unknown dates/locations stay explicit.
 - Pages must work without JavaScript (prerendered content, native `<details>`, `<dialog>`, popover). Theme is light-only, with solid fallbacks for reduced transparency.
