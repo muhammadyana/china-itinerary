@@ -3,14 +3,14 @@ import { createChat, expiredMessage, type ChatController } from './ask-chat.ts';
 import { askWidget } from './ask-render.ts';
 import { isUnlocked, setUnlocked } from './ask-state.ts';
 
-// The assistant is private: the floating button exists only on a device that unlocked it on /places/ask/.
+// The floating button shows on every page; the password is asked inside it, so nobody needs /places/ask/ first.
 export function initializeAsk(): void {
   const panel = document.querySelector<HTMLElement>('[data-ask-page] [data-ask-root]');
   if (panel) mountPage(panel);
-  else if (isUnlocked()) mountWidget();
+  else mountWidget();
 }
 
-// Without the flag the session is never checked, so a visitor's browser makes no request.
+// Without the flag the session is never checked, so a browser makes no request until someone logs in.
 async function checkSession(chat: ChatController, onExpired: () => void) {
   try {
     if (await sessionActive()) return;
@@ -65,10 +65,11 @@ function mountWidget() {
   document.documentElement.classList.add('ask-widget');
   const button = document.querySelector<HTMLButtonElement>('.ask-fab')!;
   const dialog = document.querySelector<HTMLDialogElement>('#ask-dialog')!;
-  const chat = createChat(dialog);
+  const chat = createChat(dialog, { onUnauthorized: () => setUnlocked(false) });
   let checked = false;
   let unfit: () => void = () => undefined;
-  chat.showChat();
+  if (isUnlocked()) chat.showChat();
+  else chat.showLogin();
 
   button.addEventListener('click', () => {
     chat.refreshContext();
@@ -78,9 +79,9 @@ function mountWidget() {
     // Touch screens open on the conversation, not the keyboard.
     if (matchMedia('(hover: hover) and (pointer: fine)').matches || chat.isLoginShown()) chat.focus();
     else dialog.querySelector<HTMLElement>('[data-ask="close"]')!.focus();
-    if (!checked) {
+    if (!checked && isUnlocked()) {
       checked = true;
-      void checkSession(chat, () => undefined);
+      void checkSession(chat, () => setUnlocked(false));
     }
   });
   dialog.addEventListener('click', event => {
@@ -95,14 +96,6 @@ function mountWidget() {
   dialog.addEventListener('close', () => {
     unfit();
     if (!document.querySelector('dialog[open]')) document.documentElement.classList.remove('dialog-open');
-    // Closing the expired-session form means "not now": this device stops showing the assistant.
-    if (chat.isLoginShown()) {
-      setUnlocked(false);
-      button.remove();
-      dialog.remove();
-      document.documentElement.classList.remove('ask-widget');
-      return;
-    }
     button.focus({ preventScroll: true });
   });
 }
