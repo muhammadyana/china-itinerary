@@ -18,7 +18,7 @@ export interface RouteDay {
 }
 export interface RouteDefinition { points: Record<string, MapPoint>; days: RouteDay[] }
 
-const at = (id: string, name: string, label?: LabelSide): MapPoint => ({ name, latitude: weatherLocations[id].latitude, longitude: weatherLocations[id].longitude, label });
+export const at = (id: string, name: string, label?: LabelSide): MapPoint => ({ name, latitude: weatherLocations[id].latitude, longitude: weatherLocations[id].longitude, label });
 
 // Towns reuse the verified weather coordinates; points without a label are drawn as pass-through dots.
 export const mapPoints: Record<string, MapPoint> = {

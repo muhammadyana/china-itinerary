@@ -236,6 +236,12 @@ export const tripcomPhotos: Record<string, Photo> = {
     "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/kangding/zimei-pass-20952310/",
     "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/kangding/zimei-pass-20952310/", "origin": "Trip.com",
     "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
+  "tripcom-zhongshuge-bookstore": {
+    "id": "tripcom-zhongshuge-bookstore", "width": 1440, "height": 960, "sizes": [480, 960, 1440],
+    "author": "Trip.com", "source": "https://www.trip.com/moments/detail/dujiangyan-911-154687262/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/moments/detail/dujiangyan-911-154687262/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
   }
 };
 
@@ -278,5 +284,6 @@ export const tripcomPlacePhotos: Record<string, { id: string; alt: string }> = {
   "xiangcheng": { id: "tripcom-xiangcheng", alt: "Desa rumah Tibet bercat putih berbingkai merah dan sebuah stupa putih di dataran lembah, berlatar bukit keemasan diterpa cahaya sore dan langit biru berawan." },
   "xinduqiao": { id: "tripcom-xinduqiao", alt: "Deretan rumah Tibet di kaki gunung berselimut salju tipis, dengan lereng dan pepohonan musim gugur keemasan." },
   "zheduo": { id: "tripcom-zheduo", alt: "Stupa putih dan bendera doa warna-warni di puncak celah gunung bersalju, dengan jalan berkelok menuruni lereng di bawah langit biru." },
-  "zimei": { id: "tripcom-zimei", alt: "Puncak Gongga bersalju berpendar jingga diterpa cahaya matahari, menjulang di atas lautan awan." }
+  "zimei": { id: "tripcom-zimei", alt: "Puncak Gongga bersalju berpendar jingga diterpa cahaya matahari, menjulang di atas lautan awan." },
+  "zhongshuge-bookstore": { id: "tripcom-zhongshuge-bookstore", alt: "Menara buku bundar yang diterangi cincin lampu di tengah toko buku Zhongshu Ge Dujiangyan, dikelilingi tangga spiral berpagar hitam, dinding rak buku melengkung, dan poster panda di sisi kanan." }
 };

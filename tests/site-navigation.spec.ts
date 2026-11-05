@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { days } from '../src/itinerary';
-import { pageForPlace, placePath } from '../src/guides';
+import { mainPlanGuides, pageForPlace, placePages, placePath } from '../src/guides';
 
 const excludedStops = new Set([
   'tfu', 'chengdu-east', 'huanglongjiuzhai', 'jiuzhaigou-hotel', 'bipenggou-gate', 'rilong', 'danba',
@@ -10,6 +10,12 @@ const excludedStops = new Set([
 const sightseeingStops = [...new Set(days.flatMap(day => day.events.flatMap(event =>
   event.kind === 'stop' && !excludedStops.has(event.place) ? [event.place] : [],
 )))];
+// Each region lists the main plan's stops in itinerary order, then the guides only the calm option visits.
+const calmOnlyPages = placePages.filter(page => !mainPlanGuides.includes(page.guide));
+const regionLinks = (region: string) => [
+  ...sightseeingStops.filter(id => pageForPlace.get(id)!.guide.region === region).map(id => placePath(pageForPlace.get(id)!.slug)),
+  ...calmOnlyPages.filter(page => page.guide.region === region).map(page => placePath(page.slug)),
+];
 
 test.use({ viewport: { width: 390, height: 844 } });
 test.beforeEach(async ({ page }) => {
@@ -67,15 +73,14 @@ test('all three page types expose every sightseeing stop once in regional itiner
     await navigation.locator('.place-menu > summary').click();
     await expect(navigation.getByRole('link', { name: 'Lihat semua tempat' })).toHaveAttribute('href', '/places/');
     const links = await navigation.locator('.place-menu-group a').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')));
-    expect(links).toHaveLength(40);
-    expect(new Set(links).size).toBe(40);
-    expect(links).toEqual(sightseeingStops.map(id => placePath(pageForPlace.get(id)!.slug)));
+    expect(links).toHaveLength(40 + calmOnlyPages.length);
+    expect(new Set(links).size).toBe(links.length);
+    expect(links).toEqual([...regionLinks('Sichuan'), ...regionLinks('Yunnan')]);
     await expect(navigation.locator('.place-menu-group h2')).toHaveText(['Sichuan', 'Yunnan']);
 
     for (const region of ['Sichuan', 'Yunnan']) {
       const group = navigation.locator('.place-menu-group').filter({ has: page.getByRole('heading', { name: region, exact: true }) });
-      const expected = sightseeingStops.filter(id => pageForPlace.get(id)!.guide.region === region).map(id => placePath(pageForPlace.get(id)!.slug));
-      expect(await group.locator('a').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')))).toEqual(expected);
+      expect(await group.locator('a').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')))).toEqual(regionLinks(region));
     }
   }
 });

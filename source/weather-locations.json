@@ -430,6 +430,21 @@
         "display_name": "印象丽江, G674;S223, 大具乡, 玉龙纳西族自治县, 丽江市, 云南省, 中国"
       },
       "selectionReason": "The Nominatim representative point of the Impression Lijiang theater footprint provides a named Ganhaizi-area reference, not a Glacier Park summit point."
+    },
+    "dujiangyan": {
+      "provider": "OpenStreetMap / Nominatim",
+      "source": "https://www.openstreetmap.org/node/8071545317",
+      "checkedAt": "2026-11-05",
+      "record": {
+        "osm_type": "node",
+        "osm_id": 8071545317,
+        "latitude": 30.9582302,
+        "longitude": 103.6218853,
+        "tags": { "name:en": "Zhong Shu Ge", "shop": "books" },
+        "display_name": "Zhong Shu Ge, S401, 中兴, 玉堂街道, 都江堰市"
+      },
+      "crossCheck": "Trip.com attraction 101876802 gives GCJ-02 30.955814, 103.623317; converted to WGS84 that is about 61 m from this node.",
+      "selectionReason": "The Zhongshu Ge Dujiangyan store on 2F of Chengdu Sunac Mall (至臻路1号融创茂二楼), the calm option's 13 November stop. The node carries no Chinese name; the mall building is not named in OpenStreetMap."
     }
   }
 }

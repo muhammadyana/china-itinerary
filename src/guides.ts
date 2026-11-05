@@ -32,6 +32,8 @@ export const pageForPlace = new Map(guides.flatMap(guide => guide.placeIds.map(i
 export const guideForPlace = new Map(guides.flatMap(guide => guide.placeIds.map(id => [id, guide] as const)));
 export const placePath = (slug: string) => `/places/${slug}/`;
 export const guideDates = (page: PlacePage) => days.filter(day => day.events.some(event => event.kind === 'stop' && (page.placeId ? event.place === page.placeId : page.guide.placeIds.includes(event.place))));
+// Guides the main plan visits; a calm-option-only guide stays out of the print journal and the PDF.
+export const mainPlanGuides = guides.filter(guide => guideDates(pageBySlug.get(guide.slug)!).length);
 
 export interface GalleryPhoto { id: string; title: string; alt: string; note?: string }
 const extraPhotos: Record<string, GalleryPhoto[]> = {

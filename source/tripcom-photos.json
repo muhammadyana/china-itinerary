@@ -627,5 +627,21 @@
   ],
   "alt": "Tiang-tiang air Menara Vitality di Chengdu SKP menyala biru pada malam hari, dengan kolam melengkung di depannya dan gedung tinggi di kejauhan.",
   "note": "First photo in the Trip.com Tower of Life POI header, downloaded 2026-11-05 as a 1920x1363 JPEG. Night shot: four of the six columns lit cyan above the curved pool, towers on the right; the other two are out of frame, so the alt text does not give a count. Capture date unknown. Files exist at 480, 960 and 1440."
+ },
+ {
+  "placeId": "zhongshuge-bookstore",
+  "id": "tripcom-zhongshuge-bookstore",
+  "status": "ok",
+  "pageUrl": "https://www.trip.com/moments/detail/dujiangyan-911-154687262/",
+  "imageUrl": "https://ak-d.tripcdn.com/images/1mi13224x9aywdp5t0C48.jpg",
+  "width": 1440,
+  "height": 960,
+  "sizes": [
+   480,
+   960,
+   1440
+  ],
+  "alt": "Menara buku bundar yang diterangi cincin lampu di tengah toko buku Zhongshu Ge Dujiangyan, dikelilingi tangga spiral berpagar hitam, dinding rak buku melengkung, dan poster panda di sisi kanan.",
+  "note": "og:image of the Trip.com Moments post by 'Yongzhe' ('A One-Day Trip to Dujiangyan: Don't Miss Zhongshuge', posted 13 Oct 2026; the post text names 2nd floor, Sunac Mall Dujiangyan). Downloaded 2026-11-05 as a 1440x1920 portrait JPEG (Trip.com lists the original as 1731x2308) and cropped to 1440x960 (rows 640-1600), keeping the lit book tower, the black spiral staircase and the Chengdu panda poster that match the owner's Instagram screenshot. Three small visitors, nobody posing. Capture date unknown. Files exist at 480, 960 and 1440; social card 1200x630. Not used: Moments posts 150422141 and 146492383 tagged to this POI show Zhongshuge Tianjin, and the 'Dujiangyan Library' POI 32803901 is a different place."
  }
 ]

@@ -1,5 +1,5 @@
 import { days, places, type Day } from './itinerary.ts';
-import { guideDates, placePages, placePath, type PlacePage } from './guides.ts';
+import { guideDates, mainPlanGuides, placePages, placePath, type PlacePage } from './guides.ts';
 import { staysPath } from './stays.ts';
 import { routeMapPath } from './route-map-main.ts';
 import { preparePath } from './bookings.ts';
@@ -30,7 +30,7 @@ export const planTopics: PlanTopic[] = [
   {
     topic: 'Peta rute',
     main: { href: routeMapPath, label: 'Peta rute 14 hari', keywords: 'map perjalanan' },
-    calm: { href: '/places/calm/', label: 'Opsi santai: kereta ke Yunnan', keywords: 'peta rute santai calm alternatif pilihan Jiuzhaigou dua hari Songpan Maoxian Bipenggou Panda Base Huangcheng Jumat D239 Lijiang Tiger Leaping Gorge Upper Gorge Napahai' },
+    calm: { href: '/places/calm/', label: 'Opsi santai: kereta ke Yunnan', keywords: 'peta rute santai calm alternatif pilihan Jiuzhaigou dua hari Songpan Maoxian Bipenggou Panda Base Huangcheng Jumat Zhongshu Ge Zhongshuge 钟书阁 Dujiangyan toko buku D239 Lijiang Tiger Leaping Gorge Upper Gorge Napahai' },
   },
   {
     topic: 'Hotel & hostel',
@@ -74,7 +74,7 @@ function placeEntry(page: PlacePage): SearchEntry {
   return {
     href: placePath(page.slug),
     title: page.name,
-    detail: ['Tempat', page.guide.region, dates.join(', ')].filter(Boolean).join(' · '),
+    detail: ['Tempat', page.guide.region, dates.join(', '), mainPlanGuides.includes(page.guide) ? '' : 'opsi santai'].filter(Boolean).join(' · '),
     names: [page.name],
     fields: [...chinese, page.guide.name, page.guide.region, page.guide.summary, ...dates],
   };

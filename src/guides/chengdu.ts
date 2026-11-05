@@ -16,6 +16,25 @@ const metroLine1 = 'https://www.openstreetmap.org/relation/7913598';
 const osmRouting = 'https://routing.openstreetmap.de/';
 const sunTimes = 'https://aa.usno.navy.mil/api/rstt/oneday?date=2026-11-08&coords=30.5693,104.0678&tz=8';
 const halalBlog = 'https://wildgreatwall.com/halal-restaurants-in-chengdu-china/';
+const zhongshugeTrip = 'https://www.trip.com/travel-guide/attraction/dujiangyan/zhongshuge-101876802/';
+const zhongshugeMoments = 'https://www.trip.com/moments/poi-zhongshuge-101876802/';
+const zhongshugeFree = 'https://hk.trip.com/moments/poi-zhongshuge-101876802/';
+const zhongshugeQuiet = 'https://www.trip.com/moments/detail/dujiangyan-911-145400564/';
+const zhongshugeClosing = 'https://www.trip.com/moments/detail/dujiangyan-911-154025957/';
+const zhongshugeStationRide = 'https://www.trip.com/moments/detail/dujiangyan-911-155198647/';
+const zhongshugePhoto = 'https://www.trip.com/moments/detail/dujiangyan-911-154687262/';
+const zhongshugeBlog = 'https://thirdeyetraveller.com/dujiangyan-zhongshuge-bookstore-chengdu/';
+const zhongshugePeoplesDaily = 'https://cpc.people.com.cn/n1/2026/1004/c64387-40809265.html';
+const zhongshugeOpening = 'https://m.winshang.com/news676990.html';
+const zhongshugeDesign = 'https://www.archdaily.com/948542';
+const zhongshugeHours2025 = 'https://9sc.cn/sichuan/29651.html';
+const zhongshugeShoots = 'https://sichuan.scol.com.cn/ggxw/202012/57988305.html';
+const zhongshugeNews = 'https://www.sohu.com/a/1084514291_123753';
+const zhongshugeNode = 'https://www.openstreetmap.org/node/8071545317';
+const dujiangyanTrains = 'https://kyfw.12306.cn/otn/leftTicket/queryG?leftTicketDTO.train_date=2026-11-13&leftTicketDTO.from_station=CDW&leftTicketDTO.to_station=DDW&purpose_codes=ADULT';
+const metroLine2 = 'https://en.wikipedia.org/wiki/Line_2_(Chengdu_Metro)';
+const dujiangyanHalal = 'https://www.trip.com/restaurant/china/dujiangyan/detail/restaurant-37275565/';
+const dujiangyanMosque = 'https://www.openstreetmap.org/node/11269203511';
 
 export const chengduGuides: DestinationGuide[] = [
   {
@@ -230,6 +249,198 @@ export const chengduGuides: DestinationGuide[] = [
         kind: 'reference',
         publishedAt: '2026-06-27',
         note: 'Blog pribadi; status halal kedai yang disebut belum diverifikasi.',
+      },
+    ],
+    checkedAt: '2026-11-05',
+  },
+  {
+    slug: 'zhongshuge-bookstore',
+    name: 'Toko Buku Zhongshu Ge, Dujiangyan',
+    region: 'Sichuan',
+    placeIds: ['zhongshuge-bookstore'],
+    summary: 'Cabang toko buku 钟书阁 (Zhongshuge) di lantai 2 mal Sunac (成都融创茂), Dujiangyan, sekitar 58 km berkendara dari Chunxi Road. Di tengahnya ada menara buku bundar yang dililit tangga spiral hitam; dinding bukunya menirukan bendungan Dujiangyan, dan langit-langitnya cermin. Tempat ini hanya ada di opsi santai: wajib, Jumat 13 November sore sampai malam setelah salat Jumat.',
+    gettingThere: {
+      origin: 'Hotel di Chunxi Road, Jumat 13 November (opsi santai)',
+      steps: [
+        'Setelah salat Jumat, makan siang, dan istirahat, pesan DiDi sekitar 16.30 ke 钟书阁(融创茂店) atau 成都融创茂. Alamatnya 至臻路1号 融创茂 二楼 (lantai 2). Beberapa unggahan menulis 都江堰大道211号; Trip.com dan sumber lain memakai 至臻路1号.',
+        'Jaraknya sekitar 58 km, ±45 menit tanpa macet menurut OSRM. Third Eye Traveller menulis 60–90 menit, tergantung lalu lintas. Mal ini bagian dari kompleks Sunac (taman hiburan, taman air, dan snow world) di barat daya pusat kota Dujiangyan.',
+        'Pulang dengan DiDi ke hotel, sekitar 58 km. Simpan alamat hotel dalam bahasa Mandarin.',
+        'Cadangan untuk pergi: Metro jalur 2 dari 春熙路 ke ujung barat 犀浦 (15 stasiun tanpa ganti kereta), kereta S 犀浦 → 都江堰 (18–30 menit, 34 kereta pada 13 November menurut 12306), lalu DiDi 10–15 menit dari Stasiun Dujiangyan, 1,4 km garis lurus dari toko. Beli tiket kereta di 12306 atau Trip.com dengan paspor; sebagian kereta sudah tinggal sedikit kursi.',
+        'Untuk pulang malam, kereta S tidak dipakai: kereta terakhir ke 犀浦 berangkat 22.30 (tiba 22.50), tetapi jam Metro jalur 2 terakhir dari 犀浦 belum ditemukan.',
+      ],
+      duration: 'DiDi ±45 menit sekali jalan tanpa macet menurut perhitungan rute OpenStreetMap, bukan waktu nyata; pengunjung menyebut 60–90 menit. Lewat kereta S lebih lama karena berganti Metro, kereta, dan mobil; lama Metro ke 犀浦 (±30–35 menit) hanya dari satu panduan tanpa tanggal.',
+      sources: [zhongshugeBlog, zhongshugeTrip, osmRouting, dujiangyanTrains],
+    },
+    stopAccess: {
+      'zhongshuge-bookstore': 'Toko ada di lantai 2 mal 成都融创茂 (Sunac Mall), di jalan S401 kawasan 玉堂街道. Menara buku dan tangga spiralnya ada di tengah toko, yang terdiri atas dua lantai. Jangan tertukar dengan Perpustakaan Dujiangyan di 玉垒路51号.',
+    },
+    costs: [
+      {
+        label: 'Masuk toko buku',
+        amount: 'Gratis',
+        detail: 'Trip.com mencantumkan masuk gratis, begitu juga Third Eye Traveller (Juni 2026) dan unggahan pengunjung Mei 2026. Tidak ditemukan sumber soal reservasi atau tiket.',
+        status: 'published',
+        source: zhongshugeFree,
+      },
+      {
+        label: 'DiDi hotel Chunxi Road ↔ toko',
+        amount: '±CNY 100 sekali jalan',
+        detail: 'Satu-satunya angka dari pelancong: Third Eye Traveller membayar sekitar CNY 100 dengan DiDi (artikel Juni 2026, tanggal perjalanan tidak disebut). Belum ada tarif resmi; lihat estimasi di aplikasi DiDi, termasuk untuk pulang malam.',
+        status: 'estimate',
+        source: zhongshugeBlog,
+      },
+      {
+        label: 'Kereta S 犀浦 ↔ 都江堰, cadangan',
+        amount: 'CNY 10',
+        detail: 'Kelas dua, harga 12306 untuk 14 November (dicek 5 November 2026); jadwal 13 November sama. Belum termasuk Metro jalur 2 ke 犀浦 (CNY 4–6 menurut satu panduan tanpa tanggal) dan DiDi dari Stasiun Dujiangyan (CNY 13–20 menurut unggahan Trip.com 18 Oktober 2026).',
+        status: 'published',
+        source: dujiangyanTrains,
+      },
+    ],
+    visitDuration: 'Sekitar 2¾ jam, ±17.45–20.30; setengah jam terakhirnya masuk jam sebelum tutup yang menurut pengunjung paling sepi. Ringkasan Trip.com menyebut kunjungan biasa 30–60 menit; Third Eye Traveller menyarankan 1–2 jam.',
+    bestTime: 'Paling sepi saat buka pukul 10.00 pada hari kerja, atau satu jam terakhir sebelum tutup; paling ramai siang menjelang sore, akhir pekan, dan hari libur. Jumat 13 November masih libur sekolah Chengdu, jadi itinerary memakai sore sampai malam. Third Eye Traveller datang 1–2 jam sebelum tutup dan menyebut toko ramai, tetapi masih bisa untuk foto. Jam buka 10.00–21.00 setiap hari menurut Trip.com.',
+    tips: [
+      'Simpan pin toko dari tautan Amap di bagian Cara ke sana, dan nama 成都融创茂 untuk sopir DiDi, juga alamat hotel dalam bahasa Mandarin untuk pulang.',
+      'Sudut foto terbaik ada di sekitar tangga spiral di tengah toko, menurut Third Eye Traveller. Rombongan tur sering berkumpul di tangga; tunggu sampai mereka pergi.',
+      'Rekam dengan tangan dan tanpa suara keras. Belum ditemukan aturan tertulis soal tripod atau gimbal, jadi tanyakan dulu di kasir. Pada 2020 staf menyebut pemotretan komersial umumnya tidak diizinkan, sedangkan foto pengunjung dibiarkan.',
+      'Bawa bekal 清真 dari Huangchengba. Tidak ditemukan kedai halal di mal Sunac. Dua kedai bernama 清真 di pusat kota Dujiangyan, sekitar 3,7 km dari toko, belum diverifikasi; 清真贝贝烧烤纸包鱼 buka 10.30–24.00 menurut Trip.com.',
+      'Belum diketahui ada musala di mal. Masjid terdekat, 清真寺 di 南街49号 (kota tua 灌县古城), sekitar 10 menit naik mobil; belum dicek apakah aktif dan menerima pengunjung.',
+    ],
+    cautions: [
+      'Jam buka berbeda antarsumber: 10.00–21.00 (Trip.com dan unggahan 2026), 09.00–20.00 (Third Eye Traveller, Juni 2026), dan 10.00–22.00 (9sc.cn, Mei 2025, mengutip situs resmi). Telepon toko +86 28 6142 7881 (Trip.com) sebelum berangkat.',
+      'Toko pernah membatasi jumlah pengunjung saat terlalu ramai (laporan Desember 2020, saat itu lebih dari 3.000 pengunjung sehari). 13 November hari terakhir libur sekolah Chengdu yang menyambung akhir pekan, jadi keramaiannya belum bisa ditebak.',
+      'Jangan tertukar dengan cabang Zhongshu Ge lain, termasuk cabang di kota Chengdu, atau dengan Perpustakaan Dujiangyan. Beberapa unggahan Trip.com yang ditandai di tempat ini sebenarnya cabang Tianjin.',
+    ],
+    sources: [
+      {
+        title: "People's Daily: 钟书阁都江堰店, dinding buku seperti bendungan",
+        url: zhongshugePeoplesDaily,
+        kind: 'reference',
+        publishedAt: '2026-10-04',
+        note: 'Nama resmi 钟书阁都江堰店; bendungan Dujiangyan diolah menjadi dinding buku, dengan unsur panda.',
+      },
+      {
+        title: 'Winshang: Zhongshu Ge buka di Dujiangyan',
+        url: zhongshugeOpening,
+        kind: 'reference',
+        publishedAt: '2020-09-29',
+        note: 'Buka 19 September 2020 sebagai toko bertema wisata budaya pertama jaringan ini; langit-langit cermin.',
+      },
+      {
+        title: 'ArchDaily: Dujiangyan Zhongshuge Bookstore / X+Living',
+        url: zhongshugeDesign,
+        kind: 'reference',
+        note: 'Perancang X+Living, 2020, 973 m².',
+      },
+      {
+        title: 'Trip.com: Zhongshuge, Dujiangyan',
+        url: zhongshugeTrip,
+        kind: 'reference',
+        note: 'Alamat 至臻路1号 融创茂 二楼 dan titik peta.',
+      },
+      {
+        title: 'Trip.com Moments: Zhongshuge, jam buka dan telepon',
+        url: zhongshugeMoments,
+        kind: 'reference',
+        note: 'Buka 10.00–21.00; telepon +86 28 6142 7881. Ringkasan: kunjungan biasa 30–60 menit, paling ramai siang menjelang sore dan akhir pekan.',
+      },
+      {
+        title: 'Trip.com (Hong Kong): Zhongshuge, masuk gratis',
+        url: zhongshugeFree,
+        kind: 'reference',
+        note: 'Ringkasan halaman menyebut 免費入場 (masuk gratis).',
+      },
+      {
+        title: 'Third Eye Traveller: Dujiangyan Zhongshuge Bookstore',
+        url: zhongshugeBlog,
+        kind: 'reference',
+        publishedAt: '2026-06-30',
+        note: 'DiDi 60–90 menit dan sekitar CNY 100; jam 09.00–20.00 (berbeda dari Trip.com); 1–2 jam di dalam; datang saat buka atau satu jam sebelum tutup.',
+      },
+      {
+        title: 'Trip.com Moments: hari kerja pukul 10.00 paling sepi',
+        url: zhongshugeQuiet,
+        kind: 'reference',
+        publishedAt: '2026-05-11',
+        note: 'Jam 10.00–21.00 setiap hari dan masuk gratis.',
+      },
+      {
+        title: 'Trip.com Moments: tiba 5 menit sebelum tutup',
+        url: zhongshugeClosing,
+        kind: 'reference',
+        publishedAt: '2026-10-07',
+        note: 'Hampir tidak ada orang lain di foto menjelang tutup.',
+      },
+      {
+        title: 'Trip.com Moments: DiDi dari Stasiun Dujiangyan',
+        url: zhongshugeStationRide,
+        kind: 'reference',
+        publishedAt: '2026-10-18',
+        note: '10–15 menit, CNY 13–20, ke mal 融创茂.',
+      },
+      {
+        title: 'Trip.com Moments: sumber foto menara buku',
+        url: zhongshugePhoto,
+        kind: 'reference',
+        publishedAt: '2026-10-13',
+        note: 'Foto dipotong ke format lanskap; tanggal pengambilan tidak diketahui.',
+      },
+      {
+        title: '9sc.cn: jam buka Zhongshu Ge',
+        url: zhongshugeHours2025,
+        kind: 'reference',
+        publishedAt: '2025-05-06',
+        note: 'Mengutip situs resmi: 10.00–22.00. Berbeda dari Trip.com.',
+      },
+      {
+        title: 'Sichuan Online: toko buku menjadi tempat swafoto',
+        url: zhongshugeShoots,
+        kind: 'reference',
+        publishedAt: '2020-12-17',
+        note: 'Pemotretan komersial umumnya tidak diizinkan, foto pengunjung dibiarkan; pernah membatasi pengunjung; lebih dari 3.000 pengunjung sehari.',
+      },
+      {
+        title: 'China News Service lewat Sohu: pengunjung di Zhongshu Ge Dujiangyan',
+        url: zhongshugeNews,
+        kind: 'reference',
+        publishedAt: '2026-10-06',
+        note: 'Toko buka dan ramai saat libur Hari Nasional 2026.',
+      },
+      {
+        title: 'OpenStreetMap: titik Zhong Shu Ge',
+        url: zhongshugeNode,
+        kind: 'reference',
+        note: '30,9582302, 103,6218853 (WGS84); dipakai untuk Amap, cuaca, dan peta opsi santai.',
+      },
+      {
+        title: 'FOSSGIS OSRM: perhitungan rute jalan kaki dan mobil',
+        url: osmRouting,
+        kind: 'reference',
+        note: 'Chunxi Road ↔ toko sekitar 58 km dan ±45 menit tanpa macet; Stasiun Dujiangyan ke toko 2,1 km dengan mobil atau 1,8 km jalan kaki. Dihitung 5 November 2026.',
+      },
+      {
+        title: '12306: kereta 犀浦 ↔ 都江堰, 13 November',
+        url: dujiangyanTrains,
+        kind: 'official',
+        note: '34 kereta S ke Dujiangyan (pertama 07.37, terakhir 22.50) dan 30 kereta kembali (terakhir 22.30), kelas dua CNY 10. Dicek 5 November 2026.',
+      },
+      {
+        title: 'Wikipedia: Metro Chengdu jalur 2',
+        url: metroLine2,
+        kind: 'reference',
+        note: 'Chunxi Road sampai 犀浦 tanpa ganti kereta; 犀浦 ujung barat jalur.',
+      },
+      {
+        title: 'Trip.com: 清真贝贝烧烤纸包鱼, Dujiangyan',
+        url: dujiangyanHalal,
+        kind: 'reference',
+        note: 'Buka 10.30–24.00; status halal hanya dari nama, belum diverifikasi.',
+      },
+      {
+        title: 'OpenStreetMap: masjid di 南街49号, Dujiangyan',
+        url: dujiangyanMosque,
+        kind: 'reference',
+        note: 'Belum dicek apakah aktif dan jam salatnya.',
       },
     ],
     checkedAt: '2026-11-05',

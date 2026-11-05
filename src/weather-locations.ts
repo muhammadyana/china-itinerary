@@ -15,6 +15,11 @@ export const weatherLocations: Record<string, WeatherLocation> = {
     source: 'https://geocoding-api.open-meteo.com/v1/get?id=1815286&language=en',
     note: 'Acuan pusat kota Chengdu, bukan lokasi hotel tertentu.',
   },
+  dujiangyan: {
+    id: 'dujiangyan', name: 'Dujiangyan · Zhongshu Ge', latitude: 30.9582302, longitude: 103.6218853,
+    source: 'https://www.openstreetmap.org/node/8071545317',
+    note: 'Titik toko buku Zhongshu Ge di mal Sunac, barat daya pusat kota Dujiangyan. Kunjungannya di dalam ruangan; suhu ini untuk perjalanan pergi dan pulang.',
+  },
   jiuzhaigou: {
     id: 'jiuzhaigou', name: 'Jiuzhaigou · Zhangzha', latitude: 33.29597, longitude: 103.86495,
     source: 'https://geocoding-api.open-meteo.com/v1/get?id=1793060&language=en',
@@ -120,6 +125,7 @@ export const weatherLocations: Record<string, WeatherLocation> = {
 export const weatherLocationForGuide: Record<string, string> = {
   chengdu: 'chengdu',
   'chengdu-skp-tower': 'chengdu',
+  'zhongshuge-bookstore': 'dujiangyan',
   jiuzhaigou: 'jiuzhaigou',
   bipenggou: 'bipenggou',
   siguniangshan: 'rilong',

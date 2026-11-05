@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { days, pdfPath, photos, places } from '../src/itinerary';
 import { stayBaseForDate, stayBases, stayNights } from '../src/stays';
-import { guides, pageForPlace, placePath } from '../src/guides';
+import { mainPlanGuides, pageForPlace, placePath } from '../src/guides';
 import { chengduEveningMalls } from '../src/chengdu-evening';
 
 test('the build publishes a newly generated PDF separately from the archived source', async ({ page, request, baseURL }) => {
@@ -50,7 +50,7 @@ test('the printable document preserves all days, current stops, guide costs, sou
     }
   }
 
-  for (const guide of guides) {
+  for (const guide of mainPlanGuides) {
     const section = page.locator(`[data-print-guide="${guide.slug}"]`);
     await expect(section).toHaveCount(1);
     for (const cost of guide.costs) await expect(section).toContainText(cost.label);

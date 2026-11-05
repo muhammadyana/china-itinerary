@@ -18,6 +18,8 @@ const amapPlaces: Record<string, AmapPlace> = {
   tfu: { keyword: '成都天府国际机场', city: '510100' },
   chengdu: { keyword: '春熙路', city: '510100', near: 'chengdu' },
   'chengdu-skp-tower': { keyword: '生机之塔', city: '510100' },
+  // Zhongshuge is a chain with another store in Chengdu (in99); pin the Dujiangyan store's OpenStreetMap point.
+  'zhongshuge-bookstore': { keyword: '钟书阁（融创茂店）', city: '510181', near: 'dujiangyan', marker: true },
   'chengdu-east': { keyword: '成都东站', city: '510100' },
   huanglongjiuzhai: { keyword: '黄龙九寨站', city: '513224' },
   jiuzhaigou: { keyword: '九寨沟风景名胜区', city: '513225', near: 'jiuzhaigou' },

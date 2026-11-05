@@ -1,6 +1,6 @@
 import { bookingOptions, days, highlights, pdfPath, photos, places, userPhotos, type Day, type Event, type Photo, type UserPhoto } from './itinerary.ts';
 import { dayTimelines } from './day-timelines.ts';
-import { coverPhoto, guides, pageBySlug, pageForPlace, placePath } from './guides.ts';
+import { coverPhoto, mainPlanGuides, pageBySlug, pageForPlace, placePath } from './guides.ts';
 import { currencyText, renderExchangeRate } from './currency.ts';
 import { escapeHtml as e, fullDate, icon, printTransport, timelineList } from './render.ts';
 import { CHENGDU_EVENING_DATE, renderChengduEvening } from './chengdu-evening.ts';
@@ -142,7 +142,7 @@ function printIndex(ledger: PhotoLedger): string {
 
 function printGuides(ledger: PhotoLedger): string {
   return `<section class="print-appendix" id="print-guides"><h2>Panduan tempat & sumber</h2><p class="print-section-intro">Informasi berikut berasal dari data panduan website pada saat PDF dibuat. Status tarif, tanggal pemeriksaan, dan sumber dipertahankan; tiket dan jadwal yang belum dikonfirmasi tetap perlu diperiksa.</p>
-  ${guides.map(guide => {
+  ${mainPlanGuides.map(guide => {
     const cover = coverPhoto(pageBySlug.get(guide.slug)!);
     const image = cover ? ledger.image(cover.id, cover.alt, RENDITION.guideBand, `Panduan ${guide.name}`) : '';
     return `<article class="print-guide" data-print-guide="${e(guide.slug)}">

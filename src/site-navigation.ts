@@ -1,5 +1,5 @@
 import { days, places } from './itinerary.ts';
-import { pageForPlace, placePath } from './guides.ts';
+import { mainPlanGuides, pageForPlace, placePages, placePath } from './guides.ts';
 import { calmItineraryPage, planTopics, renderSiteSearch, searchTrigger } from './site-search.ts';
 import { logoMark } from './logo.ts';
 
@@ -30,16 +30,19 @@ const plans = { main: { short: 'Utama', name: 'rencana utama' }, calm: { short: 
 type Plan = keyof typeof plans;
 const pagePath = (href: string) => href.split('#')[0];
 
-// One menu entry per guide page, in the order the itinerary first visits it.
+// One menu entry per guide page, in the order the itinerary first visits it; pages only the calm option visits follow.
 function destinations(): Destination[] {
   const seen = new Set<string>();
-  return days.flatMap(day => day.events.flatMap(event => {
+  const mainPlan = days.flatMap(day => day.events.flatMap(event => {
     if (event.kind !== 'stop') return [];
     const page = pageForPlace.get(event.place);
     if (!page || seen.has(page.slug)) return [];
     seen.add(page.slug);
     return [{ slug: page.slug, name: places[event.place].name, region: page.guide.region }];
   }));
+  const calmOnly = placePages.filter(page => !mainPlanGuides.includes(page.guide))
+    .map(page => ({ slug: page.slug, name: `${page.name} (opsi santai)`, region: page.guide.region }));
+  return [...mainPlan, ...calmOnly];
 }
 
 const actionAttribute = (action?: string) => action ? ` data-action="${escapeHtml(action)}"` : '';

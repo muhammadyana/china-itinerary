@@ -1,7 +1,8 @@
 import { days, places, type Day, type Place } from './itinerary.ts';
 import { dayTimelines, type TimelineStep } from './day-timelines.ts';
-import { go, type MapLeg, type MapPoint, type Mode } from './route-map.ts';
+import { at, go, type MapLeg, type MapPoint, type Mode } from './route-map.ts';
 import type { Booking, Link, TransportMode, Urgency } from './bookings.ts';
+import { placePath } from './guides.ts';
 import { calmStayBases, calmStayPicks, calmStaysHref, calmStaysPath, nightList, stayPicksText, type CalmStayBase } from './calm-stays.ts';
 
 // The calm option ("opsi santai"): a one-way alternative to the main plan, researched and re-checked on 5 November 2026.
@@ -58,6 +59,7 @@ export const calmMapPoints: Record<string, MapPoint> = {
   maoxian: { name: 'Maoxian', latitude: 31.7279208, longitude: 103.9424872, label: 'e' },
   'long-lake': { name: 'Long Lake', latitude: 33.0436025, longitude: 103.9318624 },
   'upper-gorge': { name: 'Upper Gorge', latitude: 27.1926037, longitude: 100.112808, label: 'w' },
+  dujiangyan: at('dujiangyan', 'Dujiangyan'),
 };
 
 // Legs for the calm days; 8 and 18–21 November use the main map's legs.
@@ -66,14 +68,14 @@ export const calmLegs: Record<string, MapLeg[]> = {
   '2026-11-10': go('bus', 'jiuzhaigou', 'long-lake', 'jiuzhaigou'),
   '2026-11-11': [...go('car', 'jiuzhaigou', 'songpan', 'huanglongjiuzhai'), ...go('train', 'huanglongjiuzhai', 'maoxian'), ...go('car', 'maoxian', 'bipenggou')],
   '2026-11-12': [],
-  '2026-11-13': go('car', 'bipenggou', 'chengdu'),
+  '2026-11-13': [...go('car', 'bipenggou', 'chengdu'), ...go('car', 'chengdu', 'dujiangyan', 'chengdu')],
   '2026-11-14': [],
   '2026-11-15': go('train', 'chengdu', 'lijiang'),
   '2026-11-16': go('car', 'lijiang', 'upper-gorge', 'shangri-la'),
   '2026-11-17': [],
 };
 // Day numbers moved off other numbers and legs on the calm map, in map pixels.
-export const calmBadgeShifts: Record<string, readonly [number, number]> = { '2026-11-08': [10, -19], '2026-11-09': [12, 58], '2026-11-10': [36, -4], '2026-11-12': [-15, 37], '2026-11-14': [9, 13], '2026-11-16': [-8, -14] };
+export const calmBadgeShifts: Record<string, readonly [number, number]> = { '2026-11-08': [10, -19], '2026-11-09': [12, 58], '2026-11-10': [36, -4], '2026-11-12': [-15, 37], '2026-11-13': [-16, 18], '2026-11-14': [9, 13], '2026-11-16': [-8, -14] };
 // Days that stay in one place name their local transport in the day list.
 export const calmLocalModes: Record<string, Mode[]> = { '2026-11-12': ['bus'], '2026-11-14': ['car'] };
 
@@ -89,6 +91,8 @@ function fromMainPlan(date: string): CalmDay {
 
 const highTrailNotice = { label: 'Pemberitahuan kota, 10 Februari', url: 'https://www.sohu.com/a/986025656_120815119' };
 const highTrailOperator = { label: 'Pengelola, 1 Mei', url: 'https://m.gmw.cn/2026-05/09/content_1304450375.htm' };
+const zhongshugeHours = { label: 'Trip.com: Zhongshu Ge Dujiangyan buka 10.00–21.00 (dicek 5 November 2026)', url: 'https://www.trip.com/moments/poi-zhongshuge-101876802/' };
+const routeGateToBookstore = { label: 'OSRM (FOSSGIS): gerbang Bipenggou ke Zhongshu Ge Dujiangyan, 144 km, 1 jam 40 menit tanpa macet (5 November 2026)', url: 'https://routing.openstreetmap.de/routed-car/route/v1/driving/102.9849,31.4155;103.6218853,30.9582302?overview=false' };
 
 const calmOwnDays: CalmDay[] = [
   {
@@ -233,11 +237,11 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-13', title: 'Kembali ke Chengdu untuk salat Jumat', shortTitle: 'Salat Jumat di Chengdu',
-    route: ['Bipenggou', 'Dujiangyan', 'Chengdu', 'Masjid Huangcheng'],
+    date: '2026-11-13', title: 'Salat Jumat dan Zhongshu Ge Dujiangyan', shortTitle: 'Salat Jumat & Zhongshu Ge',
+    route: ['Bipenggou', 'Chengdu', 'Masjid Huangcheng', 'Zhongshu Ge Dujiangyan', 'Chengdu'],
     overnight: { name: 'Chengdu', detail: `Chunxi Road, malam pertama dari dua, 1–1,5 km garis lurus dari Masjid Huangcheng. ${calmStayPicks('2026-11-13')}` },
-    transport: 'Mobil lokal Bipenggou → Chengdu, sekitar 200 km (OSRM 2 jam 18 menit; sisihkan 3–3¼ jam); taksi atau jalan kaki ke masjid.',
-    intro: 'Satu-satunya kali opsi ini kembali ke Chengdu, demi salat Jumat di Masjid Huangcheng. Sore istirahat setelah tiga hari di pegunungan.',
+    transport: 'Mobil lokal Bipenggou → Chengdu, sekitar 200 km (OSRM 2 jam 18 menit; sisihkan 3–3¼ jam); taksi atau jalan kaki ke masjid; DiDi pulang-pergi hotel ↔ Zhongshu Ge Dujiangyan, sekitar 58 km sekali jalan (OSRM ±45 menit; pengunjung menyebut 60–90 menit).',
+    intro: 'Satu-satunya kali opsi ini kembali ke Chengdu, demi salat Jumat di Masjid Huangcheng. Setelah makan siang dan istirahat, sore sampai malam di toko buku Zhongshu Ge Dujiangyan (wajib); setengah jam terakhirnya masuk jam sebelum tutup yang menurut pengunjung paling sepi. Kembali ke hotel ±21.30.',
     steps: [
       ['±06.03', 'Subuh di penginapan; sarapan; check-out. Matahari terbit 07.34.'],
       ['07.45', 'Berangkat dengan sopir lokal, idealnya sopir Maoxian 11 November. Shuttle bersama Trip.com Bipenggou → Chengdu hanya cadangan, karena jam berangkat paling awalnya belum pasti.'],
@@ -245,18 +249,28 @@ const calmOwnDays: CalmDay[] = [
       ['±11.00–11.30', 'Turun di hotel dan titip koper. Bila mobil baru tiba lewat 11.45, langsung ke masjid dan titip koper sesudahnya.'],
       ['±11.30–12.00', 'Taksi atau jalan kaki ke Masjid Huangcheng, 1–1,5 km garis lurus dari hotel usulan (waktu jalan kaki belum dicek).'],
       ['±12.00–14.00', 'Salat Jumat di Masjid Huangcheng (皇城清真寺), Qingyang. Zuhur 12.50. Jam khotbah belum pasti: Athancity (5 November 2026) belum punya jadwal Jumat dari masjid mana pun di Chengdu; azan Jumat kota yang dihitungnya untuk 6 November 12.47, dan jam khotbah berbeda per masjid. Telepon +86 28 8612 7422 (halaman Trip.com).'],
-      ['±14.00–15.00', 'Makan siang halal hangat dekat masjid; unggahan pengunjung menyebut kedai daging sapi Huangchengba (belum diverifikasi).'],
-      ['±15.00–18.00', 'Check-in dan istirahat. Asar 15.49.'],
-      ['18.10', 'Maghrib; Isya 19.33. Makan malam dekat Chunxi Road.'],
+      ['±14.00–15.00', 'Makan siang halal hangat dekat masjid; unggahan pengunjung menyebut kedai daging sapi Huangchengba (belum diverifikasi). Sekalian beli bekal 清真 untuk makan malam: belum ditemukan kedai halal di mal Sunac Dujiangyan.'],
+      ['±15.00–16.30', 'Check-in dan istirahat. Asar 15.49 di hotel. Siapkan kamera, baterai cadangan, kain lap lensa, sajadah, dan bekal.'],
+      ['±16.30–17.45', 'DiDi ke 钟书阁 di lantai 2 成都融创茂 (Sunac Mall), Dujiangyan, sekitar 58 km: ±45 menit tanpa macet menurut OSRM, 60–90 menit menurut pengunjung. Jumat sore di hari terakhir libur sekolah, jadi lihat estimasi di aplikasi.'],
+      ['±17.45–18.12', 'Toko Buku Zhongshu Ge (钟书阁都江堰店), masuk gratis. Keliling dua lantai dulu dan cari sudut menara buku serta tangga spiral. Belum ditemukan aturan tertulis soal tripod atau gimbal: tanyakan di kasir, dan bila ragu rekam dengan tangan.'],
+      ['±18.12', 'Maghrib waktu Dujiangyan, 2 menit setelah Chengdu, di sudut tenang (belum diketahui ada musala di mal), atau dijamak takhir dengan Isya (19.33) di hotel.'],
+      ['±18.20–20.30', 'Blok foto dan video utama. Pengunjung menyebut satu jam terakhir sebelum tutup paling sepi (20.00–21.00 bila tutup 21.00, jam menurut Trip.com), jadi baru ±30 menit terakhir blok ini masuk jam itu; Third Eye Traveller datang 1–2 jam sebelum tutup dan menyebut toko ramai, tetapi masih bisa untuk foto. Satu unggahan Oktober 2026 tiba 5 menit sebelum tutup dan hampir tidak ada orang lain di foto. Bila masih kuat, tinggal sampai ±20.50 dan kembali ke hotel ±22.00. Bila petugas bilang tutup 20.00 (jam menurut Third Eye Traveller), blok ini tinggal ±1 jam 40 menit. Makan bekal di luar toko.'],
+      ['±20.30–21.30', 'DiDi kembali ke hotel, sekitar 58 km (OSRM ±45 menit tanpa macet).'],
+      ['±21.30', 'Isya, dan Maghrib bila dijamak takhir. Cadangkan file dan isi baterai; tidur paling lambat 22.30. Besok DiDi 06.55 ke Panda Base.'],
     ],
     stops: [
       { place: 'huangcheng-mosque', note: 'Salat Jumat. Alamat berbeda antarsumber (小河街2号 di OSM, 永靖街80号 di islamichina); pakai nama 皇城清真寺.' },
-      { place: 'chengdu', note: 'Makan malam dekat hotel di Chunxi Road; dua malam di sini.' },
+      { place: 'zhongshuge-bookstore', note: 'Wajib. Sekitar 17.45–20.30; setengah jam terakhirnya masuk jam sebelum tutup yang menurut pengunjung paling sepi. Masuk gratis. Jam buka 10.00–21.00 menurut Trip.com; sumber lain berbeda.' },
+      { place: 'chengdu', note: 'Hotel di Chunxi Road; dua malam di sini.' },
     ],
-    notes: [],
+    notes: [
+      { text: 'Mobil pagi memang melewati Dujiangyan, tetapi toko baru buka 10.00. Dari Bipenggou pukul 07.45, mobil tiba di toko sekitar 10.00, dan 1½ jam di dalam membuat kamu baru sampai di Masjid Huangcheng ±12.30–12.40, padahal Zuhur 12.50 dan jam khotbah belum diketahui. Karena itu toko buku dikunjungi sore sampai malam; setengah jam terakhirnya masuk jam sebelum tutup, yang menurut pengunjung paling sepi.', links: [zhongshugeHours, routeGateToBookstore] },
+    ],
     risks: [
       'Jam khotbah belum diketahui; tiba di masjid pukul 12.00 memberi kelonggaran bila khotbah mulai sekitar 13.00.',
-      '13 November hari terakhir libur sekolah; kondisi lalu lintas kota belum diketahui.',
+      '13 November hari terakhir libur sekolah yang menyambung akhir pekan: lalu lintas kota dan jalan ke Dujiangyan Jumat sore belum diketahui, dan saran pengunjung bahwa hari kerja paling sepi belum tentu berlaku di toko buku.',
+      'Hari panjang: berangkat dari Bipenggou 07.45, kembali ke hotel ±21.30, dan besok DiDi 06.55 ke Panda Base. Bila terlalu lelah, cadangannya 14 November sore setelah Panda Base, menggantikan kunjungan kedua ke Menara Vitality; akhir pekan dan siang menjelang sore adalah jam paling ramai di toko.',
+      'Jam buka toko berbeda antarsumber: 10.00–21.00 (Trip.com), 09.00–20.00 (Third Eye Traveller, Juni 2026), 10.00–22.00 (9sc.cn, Mei 2025). Telepon toko +86 28 6142 7881 (Trip.com) sebelum berangkat.',
     ],
     fromMain: false,
   },
@@ -391,6 +405,8 @@ const mondayTrainNote: CalmNote = { text: 'Di opsi santai, kereta Senin pagi uta
 
 export const calmDays: CalmDay[] = [{ ...fromMainPlan('2026-11-08'), notes: [mondayTrainNote] }, ...calmOwnDays, ...['2026-11-18', '2026-11-19', '2026-11-20', '2026-11-21'].map(fromMainPlan)];
 export const calmStopIds = calmDays.flatMap(day => day.stops.map(stop => stop.place));
+/** The calm option's own days that stop at any of these places; a guide the main plan never visits links to them. */
+export const calmVisitDays = (placeIds: string[]) => calmDays.filter(day => !day.fromMain && day.stops.some(stop => placeIds.includes(stop.place)));
 
 export const calmComparison = {
   dropped: [
@@ -404,6 +420,7 @@ export const calmComparison = {
     'Kota tua Songpan dan Masjid Utara Songpan dengan makan siang halal, lalu kereta C5754 ke Maoxian (11 November).',
     'Bipenggou seharian penuh (12 November) dengan dua malam di gerbang.',
     'Salat Jumat di Masjid Huangcheng (13 November) dan Panda Base pagi (14 November).',
+    'Toko buku Zhongshu Ge di Dujiangyan, wajib: Jumat 13 November sore sampai malam, setelah salat Jumat.',
     'Kereta pemandangan D239 Chengdu South → Lijiang (15 November).',
     'Upper Tiger Leaping Gorge di perjalanan darat ke Shangri-La (16 November).',
     'Dua malam di Shangri-La, dengan 17 November sebagai hari santai dan Napahai opsional.',
@@ -414,6 +431,7 @@ export const calmTradeOffs = [
   'Dataran tinggi Sichuan barat dan Yading hilang seluruhnya: tidak ada Litang (4.014 m), danau Yading, atau G318. Risiko ketinggian dan jalan tanah ikut berkurang.',
   'Rute kembali ke Chengdu sekali, 13 November, demi salat Jumat dan Panda Base.',
   '11 November memakai tiga kendaraan dalam sehari, dan harga kedua mobilnya baru perkiraan.',
+  '13 November jadi hari panjang: mobil dari Bipenggou pagi, salat Jumat, lalu DiDi pulang-pergi sekitar 58 km sekali jalan ke Zhongshu Ge; kembali ke hotel ±21.30.',
   'Libur sekolah Chengdu 11–13 November, ditambah akhir pekan, jatuh tepat di Bipenggou dan Panda Base: siap antre dan beli tiket lebih dulu.',
   'Malam 16 November naik sekitar 900 m sekaligus dari Lijiang ke Shangri-La, jadi 17 November dibuat ringan.',
   'Penginapan dekat gerbang Bipenggou di atas batas Rp500.000 selama libur sekolah; yang di bawah batas sekitar 10 menit berkendara dari gerbang.',
@@ -446,6 +464,7 @@ export const calmBookingGroups: CalmBookingGroup[] = [
       { date: '2026-11-11', item: 'C5754 Huanglongjiuzhai 14.14 → Maoxian 15.00, satu kursi', urgency: 'now', mode: 'train', price: 'CNY 66 kelas dua (12306, 5 November); kelas satu CNY 105 sudah habis.', cost: { min: 66, max: 66, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan.', opens: 'Sudah dijual; 12306 menunjukkan kursi kelas dua pada 5 November, dan halaman rute Trip.com mencantumkan C5754.', link: { label: 'Trip.com: Huanglongjiuzhai ke Maoxian', url: tripcomTrain('huanglongjiuzhai', 'maoxian') } },
       { date: '2026-11-15', item: 'D239 Chengdu South 08.33 → Lijiang 17.46, satu kursi', urgency: 'now', mode: 'train', price: 'CNY 376 kelas dua (12306, 5 November); kelas satu CNY 602, tinggal 3 kursi. Tidak ada kereta tidur.', cost: { min: 376, max: 376, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan.', opens: 'Sudah dijual: tiket dibuka 15 hari sebelumnya, dan 12306 masih menunjukkan kursi kelas dua untuk 15 November pada 5 November.', link: { label: 'Trip.com: Chengdu ke Lijiang', url: tripcomTrain('chengdu', 'lijiang') } },
       { date: '2026-11-16', item: 'Tiket Upper Tiger Leaping Gorge (sisi Shangri-La)', urgency: 'onsite', price: 'CNY 45 dewasa (FieldGuide, 2 November 2026, dan panduan Ctrip tanpa tanggal); Qunar dan Trip.com tidak menjual tiket masuk saja. Eskalator opsional CNY 80 pulang-pergi atau CNY 60 naik saja (Qunar). Di Trip.com untuk 16 November: tiket dengan shuttle pulang-pergi dari Dukezong CNY 143, ditambah eskalator CNY 223.', cost: { min: 45, max: 125, per: 'orang' }, channel: 'Di lokasi, atau lewat situs pengelola.', opens: 'Buka 08.00–18.00, masuk terakhir 18.00 (Ctrip dan Trip.com). Pengelola melaporkan buka normal; longsor 30 Juli dan 3 September berada di luar area pengunjung.', link: { label: 'Pengelola Tiger Leaping Gorge', url: 'https://www.xgllhtx.cn/' } },
+      { date: '2026-11-13', item: 'Toko Buku Zhongshu Ge, Dujiangyan: masuk gratis, DiDi pulang-pergi dari hotel', urgency: 'onsite', mode: 'taxi', price: 'Masuk gratis (Trip.com dan Third Eye Traveller). DiDi belum punya tarif resmi: satu pelancong (Third Eye Traveller, artikel Juni 2026) membayar sekitar CNY 100 sekali jalan, jadi sekitar CNY 200 pulang-pergi. Sekitar 58 km sekali jalan, ±45 menit tanpa macet menurut OSRM; tarif Jumat sore dan malam bisa berbeda.', cost: { min: 200, max: 200, per: 'mobil' }, channel: 'DiDi ke 钟书阁(融创茂店) sekitar 16.30, pulang ±20.30. Cadangan untuk pergi: Metro jalur 2 ke 犀浦, kereta S ke 都江堰 (CNY 10 di 12306 atau Trip.com; sebagian kereta tinggal sedikit kursi), lalu DiDi 10–15 menit dari stasiun.', opens: 'Tidak perlu membeli tiket. Lihat estimasi waktu dan tarif DiDi di aplikasi sebelum memesan.', link: { label: 'Panduan Zhongshu Ge', url: placePath('zhongshuge-bookstore') } },
     ],
   },
   {
@@ -493,6 +512,7 @@ export const calmUnknowns = [
   'Penginapan: apakah promo menginap pertama Trip.com berlaku untuk lebih dari satu pemesanan per akun, harga Sofis Svyain untuk 13–15 November, apakah Xingyun mendaftarkan paspor asing, dan apakah pemilik Xinlan mau mengantar ke gerbang 12 November pagi.',
   'Bipenggou: masuk terakhir (15.00 menurut Trip.com, 15.30 menurut Tongcheng), jam bus terakhir turun, apakah tiket mobil listrik pulang-pergi boleh turun di Moon Bay dan Red Stone Beach, dan waktu berjalan kaki.',
   'Masjid Huangcheng: jam khotbah 13 November, alamat pasti (小河街2号 atau 永靖街80号), dan waktu jalan kaki dari hotel.',
+  'Zhongshu Ge Dujiangyan: jam buka pasti (10.00–21.00 menurut Trip.com, 09.00–20.00 atau 10.00–22.00 menurut sumber lain), aturan tripod, gimbal, dan video, keramaian Jumat 13 November, tarif DiDi, ada tidaknya musala di mal, dan apakah masjid di 南街 Dujiangyan aktif.',
   'Kedai halal yang benar-benar buka di Shangri-La dan Dukezong (dua daftar Ctrip offline per 5 November), dan di kota tua Lijiang, yang juga belum diverifikasi rencana utama.',
   'Upper Tiger Leaping Gorge: tarif resmi tiket dan eskalator (angka di sini dari FieldGuide, Qunar, dan Trip.com), dan apakah sinar matahari sampai ke sungai pada pertengahan November.',
   'Shuttle 16 November: apakah Trip.com mengizinkan satu orang membayar paket 87712606 yang minimal dua orang, dan tempat untuk koper 28–30 inci di kedua shuttle.',
@@ -530,6 +550,12 @@ export const calmSources: Link[] = [
   { label: 'OSRM: Jiuzhaigou ke Songpan, 104 km (5 November 2026)', url: 'https://router.project-osrm.org/route/v1/driving/103.9167742,33.2689518;103.5961504,32.6404283?overview=false' },
   { label: 'OSRM: Stasiun Maoxian ke gerbang Bipenggou, 132 km (5 November 2026)', url: 'https://router.project-osrm.org/route/v1/driving/103.9424872,31.7279208;102.9849,31.4155?overview=false&steps=true' },
   { label: 'OSRM: gerbang Bipenggou ke Chunxi Road, 200 km (5 November 2026)', url: 'https://router.project-osrm.org/route/v1/driving/102.9849,31.4155;104.0739845,30.6623577?overview=false' },
+  routeGateToBookstore,
+  { label: 'OSRM (FOSSGIS): Chunxi Road ke Zhongshu Ge Dujiangyan, 58,5 km, ±45 menit tanpa macet (5 November 2026)', url: 'https://routing.openstreetmap.de/routed-car/route/v1/driving/104.0739845,30.6623577;103.6218853,30.9582302?overview=false' },
+  { label: 'OpenStreetMap: Zhong Shu Ge, Dujiangyan', url: 'https://www.openstreetmap.org/node/8071545317' },
+  zhongshugeHours,
+  { label: 'Third Eye Traveller: Zhongshu Ge Dujiangyan, DiDi 60–90 menit dan sekitar CNY 100 (30 Juni 2026)', url: 'https://thirdeyetraveller.com/dujiangyan-zhongshuge-bookstore-chengdu/' },
+  { label: '12306: kereta S 犀浦 ↔ 都江堰 13 November; kelas dua CNY 10 menurut harga 14 November (dicek 5 November 2026)', url: 'https://kyfw.12306.cn/otn/leftTicket/queryG?leftTicketDTO.train_date=2026-11-13&leftTicketDTO.from_station=CDW&leftTicketDTO.to_station=DDW&purpose_codes=ADULT' },
   { label: 'OSRM: Dayan ke Upper Tiger Leaping Gorge dan Dukezong (5 November 2026)', url: 'https://router.project-osrm.org/route/v1/driving/100.22072,26.86879;100.112808,27.1926037;99.7075855,27.8105134?overview=false' },
   { label: 'Open-Meteo: ketinggian Songpan, Stasiun Maoxian, gerbang Bipenggou, dan celah rencana C (5 November 2026)', url: 'https://api.open-meteo.com/v1/elevation?latitude=32.93,32.6404283,31.7279208,31.4155&longitude=103.31,103.5961504,103.9424872,102.9849' },
   { label: 'OpenStreetMap: Kota Tua Songpan', url: 'https://www.openstreetmap.org/way/519012579' },

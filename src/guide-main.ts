@@ -1,5 +1,5 @@
 import { pageBySlug, galleryPhotos } from './guides.ts';
-import { guidePhotoDetail } from './guide-render.ts';
+import { guidePhotoDetail } from './guide-photo.ts';
 import { updatePhotoContent } from './photo-viewer.ts';
 
 const SHARE_LABEL = 'Bagikan';

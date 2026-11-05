@@ -21,6 +21,7 @@ const calmNotIncluded = [
 const calmMethodNotes = [
   ...methodNotes,
   'Mobil 11, 13, dan 16 November belum punya penawaran. Angkanya dihitung dari tarif Trip.com: sewa per jam di Aba dan Lijiang, dan untuk 11 November mulai dari transfer tanpa singgah di Songpan.',
+  'DiDi ke toko buku Zhongshu Ge 13 November memakai satu laporan pelancong: sekitar CNY 100 sekali jalan (Third Eye Traveller, Juni 2026), dihitung dua kali untuk pulang-pergi.',
   'Malam 9–17 November memakai harga untuk tanggal dan jumlah tamu itu; 8 dan 18–20 November memakai harga rencana utama.',
 ];
 
