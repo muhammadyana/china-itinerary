@@ -14,6 +14,7 @@ import { calmPrepareView } from './src/calm-prepare.ts';
 import { prepareView, preparePath } from './src/prepare.ts';
 import { trainsView, trainsPath } from './src/trains.ts';
 import { costsView, costsPath } from './src/costs-render.ts';
+import { askPath, askView } from './src/ask-render.ts';
 import { escapeHtml } from './src/render.ts';
 import { renderPrintDocument } from './src/print-render.ts';
 import { days, pdfPath } from './src/itinerary.ts';
@@ -63,9 +64,15 @@ const costsHtml = (html: string) => pageHtml(html, 'Rincian biaya | China 2026',
 const calmHtml = (html: string) => pageHtml(html, 'Opsi santai: kereta ke Yunnan | China 2026', 'Alternatif yang lebih tenang untuk Sichuan dan Yunnan 8–21 November 2026: dua hari di Jiuzhaigou, Bipenggou seharian, Panda Base, kereta D239 ke Lijiang, dan Upper Tiger Leaping Gorge, dengan peta rute dan daftar pemesanan.', calmPath, calmView());
 const calmItineraryHtml = (html: string) => pageHtml(html, 'Itinerary santai | China 2026', 'Opsi santai Sichuan dan Yunnan 8–21 November 2026, hari demi hari: timeline, transport dan pemesanan, tempat, serta risiko tiap hari.', calmItineraryPath, calmItineraryView());
 const calmPrepareHtml = (html: string) => pageHtml(html, 'Persiapan santai | China 2026', 'Yang harus dipesan dan kapan kalau memilih opsi santai Sichuan dan Yunnan 8–21 November 2026, yang jangan dibeli, internet, pembayaran, serta nomor darurat.', calmPreparePath, calmPrepareView());
+// The assistant's unlock page stays out of search engines; the extra tag leaves the replaced meta tags untouched.
+const askHtml = (html: string) => pageHtml(html, 'Tanya AI | China 2026', 'Asisten perjalanan pribadi untuk rencana Sichuan dan Yunnan 8–21 November 2026. Khusus pemilik perjalanan.', askPath, askView())
+ .replace('</head>', ' <meta name="robots" content="noindex, nofollow">\n</head>');
 const staysHtml = (html: string) => pageHtml(html, 'Hotel & hostel per malam | China 2026', 'Satu hotel dan satu hostel untuk setiap kota menginap di Sichuan dan Yunnan, 8 sampai 20 November 2026, dengan harga perkiraan dan bukti menerima paspor asing.', staysPath, staysView());
 export default defineConfig({
  base: '/',
+ // Development only: the assistant service runs beside the dev server. Preview would inherit the proxy, so it opts out.
+ server: { proxy: { '/api/ask': 'http://127.0.0.1:8790' } },
+ preview: { proxy: {} },
  plugins: [{
   name: 'prerender-itinerary',
   configureServer(server) {
@@ -121,6 +128,7 @@ export default defineConfig({
    if (path === calmPath || `${path}/` === calmPath) return calmHtml(html);
    if (path === calmItineraryPath || `${path}/` === calmItineraryPath) return calmItineraryHtml(html);
    if (path === calmPreparePath || `${path}/` === calmPreparePath) return calmPrepareHtml(html);
+   if (path === askPath || `${path}/` === askPath) return askHtml(html);
    const slug = path.match(/^\/places\/([a-z0-9-]+)\/?$/)?.[1];
    const page = slug ? pageBySlug.get(slug) : undefined;
    return page ? destinationHtml(html, page) : html.replace('<!--app-->', shell());
@@ -152,6 +160,8 @@ export default defineConfig({
     this.emitFile({ type: 'asset', fileName: 'places/calm-itinerary/index.html', source: calmItineraryHtml(template) });
     if (pageBySlug.has('calm-prepare')) throw new Error('A place guide cannot use the reserved calm-prepare slug');
     this.emitFile({ type: 'asset', fileName: 'places/calm-prepare/index.html', source: calmPrepareHtml(template) });
+    if (pageBySlug.has('ask')) throw new Error('A place guide cannot use the reserved ask slug');
+    this.emitFile({ type: 'asset', fileName: 'places/ask/index.html', source: askHtml(template) });
     for (const page of placePages) {
      this.emitFile({ type: 'asset', fileName: `places/${page.slug}/index.html`, source: destinationHtml(template, page) });
     }

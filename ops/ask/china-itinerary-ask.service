@@ -1,0 +1,23 @@
+[Unit]
+Description=China itinerary trip assistant API (/api/ask/)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/china-itinerary-ask.env
+ExecStart=/usr/bin/node /opt/china-itinerary-ask/ask-server.mjs
+Restart=on-failure
+RestartSec=2
+# Reads only the public site files, which nginx already reads through the o+x /home/deploy.
+DynamicUser=yes
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+MemoryMax=384M
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target
