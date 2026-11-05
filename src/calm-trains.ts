@@ -6,8 +6,8 @@ import { cnyRange } from './costs.ts';
 import { currencyText } from './currency.ts';
 import { escapeHtml as e } from './render.ts';
 import {
-  jiuzhaigouSlots, luggageSection, luggageSources, mainTrainCard, perPerson, slotsSection, ticketsSection, timelineSection, trainBookings, trainsView,
-  type TrainCard, type TrainsPage,
+  luggageSection, luggageSources, mainTrainCard, perPerson, slotsSection, ticketsSection, timelineSection, trainBookings, trainsView,
+  type SlotRow, type TrainCard, type TrainsPage,
 } from './trains.ts';
 
 export const calmTrainsPath = '/places/calm-trains/';
@@ -31,10 +31,9 @@ function parkTicket(date: string) {
   return currencyText(cnyRange(ticket.cost));
 }
 
-// C5772's arrival and gate times are the main plan's row; the calm option enters the park the next morning.
-const lateSlot = jiuzhaigouSlots[1];
-const calmSlots = [
-  { ...lateSlot, trains: 'C5772 07.30, lalu bus 团子出行 10.00', slot: 'Masuk 10 November, 08:00–10:00' },
+// The calm option reaches Jiuzhaigou by the Trip.com shuttle; this row is the train fallback (12306 and 团子出行, 6 November 2026).
+const calmSlots: SlotRow[] = [
+  { trains: 'Cadangan: C6376 14.34, lalu bus 团子出行 17.30', arrive: '16.58', gate: '±19.00–19.30 (perkiraan)', slot: 'Masuk 10 November, 08:00–10:00' },
 ];
 
 // A calm day's own step or risk, rendered again here so each fact stays in calm-route.ts only.
@@ -56,8 +55,7 @@ function riskText(date: string, word: string) {
 
 // Station-to-gate facts the day plan does not carry, from the 团子出行 timetable, 12306 and OSRM, re-checked 5 November 2026.
 const gateNotes = [
-  stepText('2026-11-09', '10.00'),
-  'Bus 10.00 juga berhenti di kawasan hotel: 千古情, 星宇大酒店, 月亮湾停车场, dan 鲁能小镇. OSRM memberi 67 menit tanpa macet untuk 91,5 km.',
+  'Bus 团子出行 dari Stasiun Huanglongjiuzhai ke 九寨沟口客运站 pada 9 November: 08.00, 08.40, 10.00, 13.50, 16.00, dan 17.30 (terakhir), CNY 51 dengan tiket atas nama asli. Lama perjalanan tidak tercantum; panduan pihak ketiga menyebut 1,5–2 jam, dan OSRM memberi 67 menit tanpa macet untuk 91,5 km.',
   riskText('2026-11-09', '团子出行'),
   'Stasiun juga punya area ride-hail resmi. Sepakati harga mobil sebelum naik, dan jangan ikut sopir yang menghampiri di area kedatangan. Shuttle stasiun Trip.com 104850127 mengikuti jadwal kereta, tetapi harga dan jamnya belum terlihat.',
 ];
@@ -102,8 +100,8 @@ const calmTrainsPage: TrainsPage = {
   path: calmTrainsPath, parent: { label: 'Opsi santai', url: calmPath }, current: 'Kereta & timeline santai', title: 'Kereta opsi santai, jam demi jam.',
   intro: `Link Trip.com untuk setiap kereta opsi santai, cara dari stasiun ke gerbang Jiuzhaigou, transfer di setiap hari kereta, aturan bagasi, dan timeline jam demi jam untuk ${trainDays.length} hari kereta.`,
   sections: [
-    ticketsSection('Jam rilis tiket dalam WIB; jam kereta memakai waktu China (WIB + 1 jam). Sampai 16 November kamu sendiri, jadi satu kursi; mulai 18 November temanmu ikut, jadi dua kursi atas nama paspor masing-masing. Kereta 9, 11, dan 15 November dicek di 12306 pada 5 November 2026; 18–20 November sama dengan rencana utama.', cards),
-    slotsSection('Ke gerbang Jiuzhaigou', `Opsi santai memakai satu tiket <strong>Ticket + Sightseeing Bus Ticket (Adult, Non-Chinese mainland visitors)</strong> di Trip.com: ${parkTicket('2026-11-10')} untuk 10 November, slot 08.00–10.00, dipakai pagi dari penginapan. 9 November hanya perjalanan ke gerbang tanpa masuk taman, jadi batas masuk 14.00 tidak berlaku hari itu:`, calmSlots, list(gateNotes)),
+    ticketsSection('Jam rilis tiket dalam WIB; jam kereta memakai waktu China (WIB + 1 jam). Sampai 16 November kamu sendiri, jadi satu kursi; mulai 18 November temanmu ikut, jadi dua kursi atas nama paspor masing-masing. Kereta 11 dan 15 November dicek di 12306 pada 5 November 2026, cadangan 9 November pada 6 November; 18–20 November sama dengan rencana utama.', cards),
+    slotsSection('Ke gerbang Jiuzhaigou', `Opsi santai memakai satu tiket <strong>Ticket + Sightseeing Bus Ticket (Adult, Non-Chinese mainland visitors)</strong> di Trip.com: ${parkTicket('2026-11-10')} untuk 10 November, slot 08.00–10.00, dipakai pagi dari penginapan. Ke Jiuzhaigou pada 9 November naik shuttle Trip.com dari Chunxi Road 14.30 tanpa kereta (lihat Hari 2); kereta di bawah hanya cadangan bila shuttle tidak bisa dipesan:`, calmSlots, list(gateNotes)),
     transfersSection(),
     luggageSection(),
     timelineSection('Timeline hari kereta', trainDays.map(day => ({ date: day.date, title: `${weekdayDate(day.date)} · ${day.shortTitle}`, steps: day.steps, href: `${calmItineraryPath}#${day.date}` }))),

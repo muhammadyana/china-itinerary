@@ -64,18 +64,18 @@ export const calmMapPoints: Record<string, MapPoint> = {
 
 // Legs for the calm days; 8 and 18–21 November use the main map's legs.
 export const calmLegs: Record<string, MapLeg[]> = {
-  '2026-11-09': [...go('train', 'chengdu', 'huanglongjiuzhai'), ...go('car', 'huanglongjiuzhai', 'jiuzhaigou')],
+  '2026-11-09': [...go('car', 'chengdu', 'dujiangyan', 'chengdu'), ...go('car', 'chengdu', 'jiuzhaigou')],
   '2026-11-10': go('bus', 'jiuzhaigou', 'long-lake', 'jiuzhaigou'),
   '2026-11-11': [...go('car', 'jiuzhaigou', 'songpan', 'huanglongjiuzhai'), ...go('train', 'huanglongjiuzhai', 'maoxian'), ...go('car', 'maoxian', 'bipenggou')],
   '2026-11-12': [],
-  '2026-11-13': [...go('car', 'bipenggou', 'chengdu'), ...go('car', 'chengdu', 'dujiangyan', 'chengdu')],
+  '2026-11-13': go('car', 'bipenggou', 'chengdu'),
   '2026-11-14': [],
   '2026-11-15': go('train', 'chengdu', 'lijiang'),
   '2026-11-16': go('car', 'lijiang', 'upper-gorge', 'shangri-la'),
   '2026-11-17': [],
 };
 // Day numbers moved off other numbers and legs on the calm map, in map pixels.
-export const calmBadgeShifts: Record<string, readonly [number, number]> = { '2026-11-08': [10, -19], '2026-11-09': [12, 58], '2026-11-10': [36, -4], '2026-11-12': [-15, 37], '2026-11-13': [-16, 18], '2026-11-14': [9, 13], '2026-11-16': [-8, -14] };
+export const calmBadgeShifts: Record<string, readonly [number, number]> = { '2026-11-08': [10, -19], '2026-11-09': [25, 5], '2026-11-10': [36, -4], '2026-11-12': [-15, 37], '2026-11-13': [-16, 18], '2026-11-14': [9, 13], '2026-11-16': [-8, -14] };
 // Days that stay in one place name their local transport in the day list.
 export const calmLocalModes: Record<string, Mode[]> = { '2026-11-12': ['bus'], '2026-11-14': ['car'] };
 
@@ -94,41 +94,39 @@ const highTrailOperator = { label: 'Pengelola, 1 Mei', url: 'https://m.gmw.cn/20
 const zhongshugeHours = { label: 'Trip.com: Zhongshu Ge Dujiangyan buka 10.00–21.00 (dicek 5 November 2026)', url: 'https://www.trip.com/moments/poi-zhongshuge-101876802/' };
 const routeGateToBookstore = { label: 'OSRM (FOSSGIS): gerbang Bipenggou ke Zhongshu Ge Dujiangyan, 144 km, 1 jam 40 menit tanpa macet (5 November 2026)', url: 'https://routing.openstreetmap.de/routed-car/route/v1/driving/102.9849,31.4155;103.6218853,30.9582302?overview=false' };
 
-// Huanglong was weighed for 9 November on 6 November 2026 and kept optional: it costs more than the park day it would replace.
-const huanglongNote: CalmNote = {
-  text: 'Opsional, dan lebih mahal dari tiket Jiuzhaigou yang dihemat: Huanglong (黄龙) searah dari stasiun, sekitar 29 km ke kereta gantung, lalu sekitar 107 km ke Jiuzhaigou (OSRM tanpa macet: 26 dan 85 menit). Bus 10.00 tidak singgah di sana, jadi perlu mobil yang muat koper. Tiket, kereta gantung, dan harga mobil 2026 belum dicek; tur Trip.com untuk rute ini mulai US$113 per orang di mobil bersama menurut cuplikan pencarian harga 17 September. Huanglong ada di 3.100–3.550 m, jadi risiko mabuk ketinggian naik karena pagi itu kamu baru berangkat dari Chengdu (±500 m).',
-  links: [
-    { label: 'Trip.com 104802434: Stasiun Huanglongjiuzhai → Huanglong → Jiuzhaigou, tur sehari (dicek 6 November 2026)', url: 'https://www.trip.com/things-to-do/detail/104802434/' },
-    { label: 'OSRM (FOSSGIS): stasiun → kereta gantung Huanglong → pusat pengunjung Jiuzhaigou, 29 + 107 km (6 November 2026)', url: 'https://routing.openstreetmap.de/routed-car/route/v1/driving/103.6133889,32.7477854;103.8370829,32.7542178;103.9167742,33.2689518?overview=false' },
-  ],
-};
-
 const calmOwnDays: CalmDay[] = [
   {
-    date: '2026-11-09', title: 'Kereta lebih siang ke Jiuzhaigou, sore istirahat', shortTitle: 'Ke Jiuzhaigou, istirahat',
-    route: ['Chengdu East', 'Huanglongjiuzhai', 'Jiuzhaigou'],
+    date: '2026-11-09', title: 'Zhongshu Ge pagi, shuttle siang ke Jiuzhaigou', shortTitle: 'Zhongshu Ge, lalu ke Jiuzhaigou',
+    route: ['Chunxi Road', 'Zhongshu Ge Dujiangyan', 'Chunxi Road', 'Jiuzhaigou'],
     overnight: { name: 'Jiuzhaigou', elevation: '±2.000 m', detail: `Malam pertama dari dua dekat gerbang (Pengfeng/Goukou). ${calmStayPicks('2026-11-09')}` },
-    transport: 'DiDi ke Chengdu East, C5772 07.30 ke Huanglongjiuzhai, bus 团子出行 10.00 dari stasiun ke gerbang (1,5–2 jam menurut panduan pihak ketiga). Hari ini tidak masuk taman, jadi bus 13.50 atau mobil dari stasiun juga cukup.',
-    intro: 'Hari perjalanan tanpa masuk taman, jadi cukup satu tiket Jiuzhaigou untuk besok. C5772 07.30 tersambung ke bus 团子出行 10.00 dari stasiun; sekitar tengah hari sudah di penginapan, lalu sore untuk istirahat, belanja bekal, dan melihat jalan ke gerbang. Malamnya, bila buka, jalan-jalan ke night market di Zhangzha. Tidak ada batas masuk 14.00 hari ini, jadi bus 13.50 juga cukup bila bus 10.00 penuh atau tidak menerima paspor.',
+    transport: 'DiDi pulang-pergi hotel ↔ Zhongshu Ge Dujiangyan, sekitar 58 km sekali jalan (OSRM ±45 menit; pengunjung menyebut 60–90 menit). Shuttle Trip.com Chengdu → Jiuzhaigou dari Chunxi Road 14.30, lama perjalanan belum dicek. Cadangan: C6376 14.34 Chengdu East → Huanglongjiuzhai 16.58, lalu bus 团子出行 17.30 ke gerbang.',
+    intro: 'Pagi untuk toko buku Zhongshu Ge Dujiangyan (wajib), tepat saat buka pukul 10.00 di hari kerja, jam yang menurut pengunjung paling sepi. Siang kembali ke Chunxi Road, lalu shuttle ke Jiuzhaigou dan tiba malam. Tiket taman baru dipakai besok pagi, jadi hari ini tidak ada batas jam masuk.',
     steps: [
-      ['±05.55', 'Subuh di hotel, lalu sarapan dari bekal.'],
-      ['±06.30', 'DiDi ke Chengdu East; tiba 30–45 menit sebelum kereta untuk pemeriksaan paspor.'],
-      ['07.30', 'C5772 ke Huanglongjiuzhai, tiba 09.31.'],
-      ['10.00', 'Bus 团子出行 dari Stasiun Huanglongjiuzhai ke gerbang Jiuzhaigou (CNY 51, tiket atas nama asli), 29 menit setelah kereta tiba. Lama perjalanan tidak tercantum; panduan pihak ketiga menyebut 1,5–2 jam, jadi tiba di gerbang sekitar 11.30–12.00 (perkiraan). Bila penuh, bus berikutnya 13.50.'],
-      ['±12.00–13.00', 'Check-in, atau titip koper bila kamar belum siap, di penginapan 1,2–1,8 km dari pusat pengunjung. Zuhur mulai 12.51; sebagai musafir kamu boleh menjamaknya dengan Asar.'],
-      ['Sore', 'Istirahat; hari ini tidak ada tiket taman. Beli bekal makan siang dan air untuk besok di Pengfeng, lalu jalan kaki ke pusat pengunjung supaya tahu rute dan lamanya untuk besok pagi. Asar 15.47.'],
-      ['18.09', 'Maghrib; Isya 19.34. Makan malam halal di Pengfeng (ulasan September 2025 menyebut ada restoran 清真).'],
-      ['±19.15–20.15', 'Jalan-jalan ke Jiuzhai Night Market (九寨夜市) di kota Zhangzha, masuk gratis; cari lokasinya di Amap. Ada Zhuoma Market (卓玛市集) dengan jajanan lokal dan panggung tari Tibet dan Qiang tiap malam (laporan Mei sampai musim panas 2026). Jam buka November belum ketemu dan di luar musim ramai bisa sepi atau tutup. Jajanannya, seperti sate yak, belum tentu halal, jadi cukup lihat-lihat dan foto.'],
-      ['±20.30', 'Cek tiket 10 November (slot 08.00–10.00), isi baterai, kosongkan kartu memori, lalu tidur cepat.'],
+      ['±05.55', 'Subuh di hotel; sarapan.'],
+      ['±08.30', 'Check-out dan titip koper di resepsionis. Bawa kamera, baterai cadangan, kain lap lensa, dan air.'],
+      ['±08.45–10.00', 'DiDi ke 钟书阁(融创茂店), lantai 2 成都融创茂 (Sunac Mall), Dujiangyan, sekitar 58 km: ±45 menit tanpa macet menurut OSRM, 60–90 menit menurut pengunjung. Senin pagi jam berangkat kerja, jadi lihat estimasi di aplikasi.'],
+      ['10.00–11.30', 'Toko Buku Zhongshu Ge (钟书阁都江堰店), masuk gratis, buka 10.00 menurut Trip.com. Menurut pengunjung, hari kerja saat toko baru buka adalah jam paling sepi. Cari sudut menara buku dan tangga spiral. Belum ditemukan aturan tertulis soal tripod atau gimbal: tanyakan di kasir, dan bila ragu rekam dengan tangan.'],
+      ['±11.30–12.45', 'DiDi kembali ke hotel di Chunxi Road, sekitar 58 km.'],
+      ['±12.45–13.45', 'Zuhur (sekitar 12.48) dan makan siang halal. Masjid Huangcheng 1–1,5 km dari hotel; unggahan pengunjung menyebut kedai daging sapi Huangchengba di dekatnya (belum diverifikasi). Beli bekal 清真 untuk makan malam di jalan. Sebagai musafir, Asar boleh dijamak dengan Zuhur.'],
+      ['±13.45–14.15', 'Ambil koper, lalu ke titik jemput Chunxi Road Subway Station Exit E1. Datang 15 menit lebih awal.'],
+      ['14.30', 'Shuttle Trip.com ke Jiuzhaigou (ada juga jam 14.00 dan 14.15). Lama perjalanan belum dicek: Trip.com menyebut 3–4 jam untuk shuttle sejenis dan panduan lain 4–5 jam lewat tol 绵九, jadi tiba sekitar 18.00–19.30 (perkiraan). Maghrib sekitar 18.09 jatuh di jalan; jamak takhir dengan Isya di penginapan.'],
+      ['±18.00–19.30', 'Tiba dan check-in di penginapan dekat gerbang. Titik turun shuttle belum dicek; tanyakan saat memesan apakah diantar sampai hotel.'],
+      ['Malam', 'Maghrib dan Isya dijamak takhir. Makan bekal, atau di restoran 清真 Pengfeng (ulasan September 2025). Bila tiba sebelum 19.30 dan masih kuat, Jiuzhai Night Market (九寨夜市) di Zhangzha bisa dilihat sebentar; jam buka November belum ketemu dan jajanannya belum tentu halal.'],
+      ['±21.00', 'Cek tiket 10 November (slot 08.00–10.00), isi baterai, lalu tidur cepat.'],
     ],
     stops: [
-      { place: 'chengdu-east', note: 'C5772 07.30.' },
-      { place: 'huanglongjiuzhai', note: 'Bus 团子出行 10.00 ke gerbang taman, sekitar 1,5–2 jam.' },
+      { place: 'zhongshuge-bookstore', note: 'Wajib. Sekitar 10.00–11.30, saat toko baru buka. Masuk gratis. Jam buka 10.00–21.00 menurut Trip.com; sumber lain berbeda.' },
+      { place: 'chengdu', note: 'Titip koper di hotel Chunxi Road; shuttle dijemput di Chunxi Road Exit E1.' },
       { place: 'jiuzhaigou-hotel', note: 'Dua malam, 9 dan 10 November, dekat zona pengunjung.' },
     ],
-    notes: [huanglongNote],
+    notes: [
+      { text: 'Toko buku dipindah dari Jumat 13 November ke pagi ini. Senin 9 November hari kerja dan belum masuk libur sekolah Chengdu (11–13 November), sedangkan Jumat sore jatuh di hari terakhir libur sekolah.', links: [zhongshugeHours] },
+    ],
     risks: [
-      'Belum pasti 团子出行 menerima paspor asing untuk bus 10.00. Bila C5772 terlambat atau bus penuh, naik bus 13.50, atau mobil dari area taksi resmi stasiun, sekitar CNY 220–280 (perkiraan Mei 2026).',
+      'Lama shuttle dan titik turunnya belum dicek, begitu pula apakah koper 28–30 inci muat di "Ordinary car"; "Nanny car" (MPV) lebih lega. Tanyakan ke Trip.com sebelum membayar.',
+      'Bila DiDi kembali dari Dujiangyan terlambat, shuttle 16.30 masih ada, tetapi tiba sekitar 20.30–21.30 (perkiraan).',
+      'Bila shuttle tidak bisa dipesan atau koper tidak muat, naik kereta: C6376 14.34 dari Chengdu East (CNY 143, kursi tersedia di 12306 pada 6 November, sekitar 10 km dari hotel), tiba di Huanglongjiuzhai 16.58, lalu bus 团子出行 17.30 (CNY 51, bus terakhir hari itu) ke 九寨沟口客运站, sekitar 1,5–2 jam. Belum pasti 团子出行 menerima paspor asing; bila tidak, mobil dari area taksi resmi stasiun sekitar CNY 220–280 (perkiraan Mei 2026).',
+      'Jam buka toko berbeda antarsumber: 10.00–21.00 (Trip.com), 09.00–20.00 (Third Eye Traveller, Juni 2026), 10.00–22.00 (9sc.cn, Mei 2025). Telepon toko +86 28 6142 7881 (Trip.com) sebelum berangkat.',
     ],
     fromMain: false,
   },
@@ -243,11 +241,11 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-13', title: 'Salat Jumat dan Zhongshu Ge Dujiangyan', shortTitle: 'Salat Jumat & Zhongshu Ge',
-    route: ['Bipenggou', 'Chengdu', 'Masjid Huangcheng', 'Zhongshu Ge Dujiangyan', 'Chengdu'],
+    date: '2026-11-13', title: 'Bipenggou ke Chengdu, salat Jumat', shortTitle: 'Salat Jumat di Chengdu',
+    route: ['Bipenggou', 'Chengdu', 'Masjid Huangcheng', 'Chunxi Road'],
     overnight: { name: 'Chengdu', detail: `Chunxi Road, malam pertama dari dua, 1–1,5 km garis lurus dari Masjid Huangcheng. ${calmStayPicks('2026-11-13')}` },
-    transport: 'Mobil lokal Bipenggou → Chengdu, sekitar 200 km (OSRM 2 jam 18 menit; sisihkan 3–3¼ jam); taksi atau jalan kaki ke masjid; DiDi pulang-pergi hotel ↔ Zhongshu Ge Dujiangyan, sekitar 58 km sekali jalan (OSRM ±45 menit; pengunjung menyebut 60–90 menit).',
-    intro: 'Satu-satunya kali opsi ini kembali ke Chengdu, demi salat Jumat di Masjid Huangcheng. Setelah makan siang dan istirahat, sore sampai malam di toko buku Zhongshu Ge Dujiangyan (wajib); setengah jam terakhirnya masuk jam sebelum tutup yang menurut pengunjung paling sepi. Kembali ke hotel ±21.30.',
+    transport: 'Mobil lokal Bipenggou → Chengdu, sekitar 200 km (OSRM 2 jam 18 menit; sisihkan 3–3¼ jam); taksi atau jalan kaki ke masjid.',
+    intro: 'Satu-satunya kali opsi ini kembali ke Chengdu, demi salat Jumat di Masjid Huangcheng. Toko buku Zhongshu Ge sudah dikunjungi 9 November, jadi sore sampai malam bebas untuk istirahat sebelum Panda Base besok pagi.',
     steps: [
       ['±06.03', 'Subuh di penginapan; sarapan; check-out. Matahari terbit 07.34.'],
       ['07.45', 'Berangkat dengan sopir lokal, idealnya sopir Maoxian 11 November. Shuttle bersama Trip.com Bipenggou → Chengdu hanya cadangan, karena jam berangkat paling awalnya belum pasti.'],
@@ -255,28 +253,19 @@ const calmOwnDays: CalmDay[] = [
       ['±11.00–11.30', 'Turun di hotel dan titip koper. Bila mobil baru tiba lewat 11.45, langsung ke masjid dan titip koper sesudahnya.'],
       ['±11.30–12.00', 'Taksi atau jalan kaki ke Masjid Huangcheng, 1–1,5 km garis lurus dari hotel usulan (waktu jalan kaki belum dicek).'],
       ['±12.00–14.00', 'Salat Jumat di Masjid Huangcheng (皇城清真寺), Qingyang. Zuhur 12.50. Jam khotbah belum pasti: Athancity (5 November 2026) belum punya jadwal Jumat dari masjid mana pun di Chengdu; azan Jumat kota yang dihitungnya untuk 6 November 12.47, dan jam khotbah berbeda per masjid. Telepon +86 28 8612 7422 (halaman Trip.com).'],
-      ['±14.00–15.00', 'Makan siang halal hangat dekat masjid; unggahan pengunjung menyebut kedai daging sapi Huangchengba (belum diverifikasi). Sekalian beli bekal 清真 untuk makan malam: belum ditemukan kedai halal di mal Sunac Dujiangyan.'],
-      ['±15.00–16.30', 'Check-in dan istirahat. Asar 15.49 di hotel. Siapkan kamera, baterai cadangan, kain lap lensa, sajadah, dan bekal.'],
-      ['±16.30–17.45', 'DiDi ke 钟书阁 di lantai 2 成都融创茂 (Sunac Mall), Dujiangyan, sekitar 58 km: ±45 menit tanpa macet menurut OSRM, 60–90 menit menurut pengunjung. Jumat sore di hari terakhir libur sekolah, jadi lihat estimasi di aplikasi.'],
-      ['±17.45–18.12', 'Toko Buku Zhongshu Ge (钟书阁都江堰店), masuk gratis. Keliling dua lantai dulu dan cari sudut menara buku serta tangga spiral. Belum ditemukan aturan tertulis soal tripod atau gimbal: tanyakan di kasir, dan bila ragu rekam dengan tangan.'],
-      ['±18.12', 'Maghrib waktu Dujiangyan, 2 menit setelah Chengdu, di sudut tenang (belum diketahui ada musala di mal), atau dijamak takhir dengan Isya (19.33) di hotel.'],
-      ['±18.20–20.30', 'Blok foto dan video utama. Pengunjung menyebut satu jam terakhir sebelum tutup paling sepi (20.00–21.00 bila tutup 21.00, jam menurut Trip.com), jadi baru ±30 menit terakhir blok ini masuk jam itu; Third Eye Traveller datang 1–2 jam sebelum tutup dan menyebut toko ramai, tetapi masih bisa untuk foto. Satu unggahan Oktober 2026 tiba 5 menit sebelum tutup dan hampir tidak ada orang lain di foto. Bila masih kuat, tinggal sampai ±20.50 dan kembali ke hotel ±22.00. Bila petugas bilang tutup 20.00 (jam menurut Third Eye Traveller), blok ini tinggal ±1 jam 40 menit. Makan bekal di luar toko.'],
-      ['±20.30–21.30', 'DiDi kembali ke hotel, sekitar 58 km (OSRM ±45 menit tanpa macet).'],
-      ['±21.30', 'Isya, dan Maghrib bila dijamak takhir. Cadangkan file dan isi baterai; tidur paling lambat 22.30. Besok DiDi 06.55 ke Panda Base.'],
+      ['±14.00–15.00', 'Makan siang halal hangat dekat masjid; unggahan pengunjung menyebut kedai daging sapi Huangchengba (belum diverifikasi).'],
+      ['±15.00–16.30', 'Check-in dan istirahat. Asar 15.49 di hotel.'],
+      ['Sore–malam', 'Bebas. Cadangkan file Bipenggou, isi baterai, dan istirahat setelah dua hari di ketinggian. Maghrib sekitar 18.10; Isya 19.33. Makan malam halal di sekitar Huangchengba.'],
+      ['±22.00', 'Tidur. Besok DiDi 06.55 ke Panda Base.'],
     ],
     stops: [
       { place: 'huangcheng-mosque', note: 'Salat Jumat. Alamat berbeda antarsumber (小河街2号 di OSM, 永靖街80号 di islamichina); pakai nama 皇城清真寺.' },
-      { place: 'zhongshuge-bookstore', note: 'Wajib. Sekitar 17.45–20.30; setengah jam terakhirnya masuk jam sebelum tutup yang menurut pengunjung paling sepi. Masuk gratis. Jam buka 10.00–21.00 menurut Trip.com; sumber lain berbeda.' },
       { place: 'chengdu', note: 'Hotel di Chunxi Road; dua malam di sini.' },
     ],
-    notes: [
-      { text: 'Mobil pagi memang melewati Dujiangyan, tetapi toko baru buka 10.00. Dari Bipenggou pukul 07.45, mobil tiba di toko sekitar 10.00, dan 1½ jam di dalam membuat kamu baru sampai di Masjid Huangcheng ±12.30–12.40, padahal Zuhur 12.50 dan jam khotbah belum diketahui. Karena itu toko buku dikunjungi sore sampai malam; setengah jam terakhirnya masuk jam sebelum tutup, yang menurut pengunjung paling sepi.', links: [zhongshugeHours, routeGateToBookstore] },
-    ],
+    notes: [],
     risks: [
       'Jam khotbah belum diketahui; tiba di masjid pukul 12.00 memberi kelonggaran bila khotbah mulai sekitar 13.00.',
-      '13 November hari terakhir libur sekolah yang menyambung akhir pekan: lalu lintas kota dan jalan ke Dujiangyan Jumat sore belum diketahui, dan saran pengunjung bahwa hari kerja paling sepi belum tentu berlaku di toko buku.',
-      'Hari panjang: berangkat dari Bipenggou 07.45, kembali ke hotel ±21.30, dan besok DiDi 06.55 ke Panda Base. Bila terlalu lelah, cadangannya 14 November sore setelah Panda Base, menggantikan kunjungan kedua ke Menara Vitality; akhir pekan dan siang menjelang sore adalah jam paling ramai di toko.',
-      'Jam buka toko berbeda antarsumber: 10.00–21.00 (Trip.com), 09.00–20.00 (Third Eye Traveller, Juni 2026), 10.00–22.00 (9sc.cn, Mei 2025). Telepon toko +86 28 6142 7881 (Trip.com) sebelum berangkat.',
+      '13 November hari terakhir libur sekolah yang menyambung akhir pekan: lalu lintas dari Bipenggou ke Chengdu Jumat pagi belum diketahui.',
     ],
     fromMain: false,
   },
@@ -406,8 +395,8 @@ const calmOwnDays: CalmDay[] = [
   },
 ];
 
-// 8 November's plan and practical notes prepare the main plan's C5746 06.14; the calm option takes C5772 07.30 and enters the park on 10 November.
-const mondayTrainNote: CalmNote = { text: 'Di opsi santai, kereta Senin pagi adalah C5772 07.30 dengan DiDi sekitar 06.30 (lihat Hari 2), dan 9 November tidak masuk taman. DiDi 05.15 dan C5746 06.14 yang disebut di hari ini tidak dipakai.', links: [] };
+// 8 November's plan and practical notes prepare the main plan's C5746 06.14; the calm option spends 9 November morning in Dujiangyan and enters the park on 10 November.
+const mondayTrainNote: CalmNote = { text: 'Di opsi santai, Senin pagi dipakai ke toko buku Zhongshu Ge Dujiangyan dan shuttle ke Jiuzhaigou baru berangkat 14.30 dari Chunxi Road (lihat Hari 2). DiDi 05.15 dan C5746 06.14 yang disebut di hari ini tidak dipakai.', links: [] };
 
 export const calmDays: CalmDay[] = [{ ...fromMainPlan('2026-11-08'), notes: [mondayTrainNote] }, ...calmOwnDays, ...['2026-11-18', '2026-11-19', '2026-11-20', '2026-11-21'].map(fromMainPlan)];
 export const calmStopIds = calmDays.flatMap(day => day.stops.map(stop => stop.place));
@@ -419,14 +408,14 @@ export const calmComparison = {
     'Sichuan barat: 理小路 ke Rilong dan Siguniangshan, Danba, Moshi Park, Tagong, Xinduqiao, Kangding, dan G318 ke Litang (11–14 November).',
     'Daocheng dan Yading: Haizi Shan, Riwa, Chonggu, Luorong, Milk Lake, Five-Colour Lake, dan Pearl Lake (15–16 November), lalu jalan Xiangcheng dan Daxueshan ke Shangri-La (17 November).',
     'Kereta kembali ke Chengdu dan bus ke Lixian pada 10 November, juga malam di Lixian.',
-    'Berangkat 05.15 pada 9 November: opsi santai naik C5772 07.30 dan baru masuk taman keesokan paginya.',
+    'Berangkat 05.15 dan kereta ke Huanglongjiuzhai pada 9 November: opsi santai naik shuttle siang dari Chunxi Road dan baru masuk taman keesokan paginya.',
   ],
   added: [
-    'Malam kedua di Jiuzhaigou: 9 November sore bebas, lalu 10 November seharian di taman dengan satu tiket. Selain Five Flower Lake dan Shuzheng, hari itu juga ke Mirror Lake, Long Lake, Five-Colour Pond, Nuorilang, dan Pearl Shoals.',
+    'Malam kedua di Jiuzhaigou: 9 November tiba malam, lalu 10 November seharian di taman dengan satu tiket. Selain Five Flower Lake dan Shuzheng, hari itu juga ke Mirror Lake, Long Lake, Five-Colour Pond, Nuorilang, dan Pearl Shoals.',
     'Kota tua Songpan dan Masjid Utara Songpan dengan makan siang halal, lalu kereta C5754 ke Maoxian (11 November).',
     'Bipenggou seharian penuh (12 November) dengan dua malam di gerbang.',
     'Salat Jumat di Masjid Huangcheng (13 November) dan Panda Base pagi (14 November).',
-    'Toko buku Zhongshu Ge di Dujiangyan, wajib: Jumat 13 November sore sampai malam, setelah salat Jumat.',
+    'Toko buku Zhongshu Ge di Dujiangyan, wajib: Senin 9 November pagi saat toko baru buka, sebelum shuttle ke Jiuzhaigou.',
     'Kereta pemandangan D239 Chengdu South → Lijiang (15 November).',
     'Upper Tiger Leaping Gorge di perjalanan darat ke Shangri-La (16 November).',
     'Dua malam di Shangri-La, dengan 17 November sebagai hari santai dan Napahai opsional.',
@@ -437,7 +426,7 @@ export const calmTradeOffs = [
   'Dataran tinggi Sichuan barat dan Yading hilang seluruhnya: tidak ada Litang (4.014 m), danau Yading, atau G318. Risiko ketinggian dan jalan tanah ikut berkurang.',
   'Rute kembali ke Chengdu sekali, 13 November, demi salat Jumat dan Panda Base.',
   '11 November memakai tiga kendaraan dalam sehari, dan harga kedua mobilnya baru perkiraan.',
-  '13 November jadi hari panjang: mobil dari Bipenggou pagi, salat Jumat, lalu DiDi pulang-pergi sekitar 58 km sekali jalan ke Zhongshu Ge; kembali ke hotel ±21.30.',
+  '9 November jadi hari panjang: DiDi pulang-pergi sekitar 58 km sekali jalan ke Zhongshu Ge pagi, lalu shuttle ke Jiuzhaigou yang lamanya belum dicek; tiba sekitar 18.00–19.30 (perkiraan).',
   'Libur sekolah Chengdu 11–13 November, ditambah akhir pekan, jatuh tepat di Bipenggou dan Panda Base: siap antre dan beli tiket lebih dulu.',
   'Malam 16 November naik sekitar 900 m sekaligus dari Lijiang ke Shangri-La, jadi 17 November dibuat ringan.',
   'Penginapan dekat gerbang Bipenggou di atas batas Rp500.000 selama libur sekolah; yang di bawah batas sekitar 10 menit berkendara dari gerbang.',
@@ -465,11 +454,12 @@ export const calmBookingGroups: CalmBookingGroup[] = [
       { date: '2026-11-12', item: 'Tiket Bipenggou + bus taman + mobil listrik pulang-pergi', urgency: 'now', price: 'CNY 190 untuk 12 November di Trip.com, dicek 5 November: paket non-daratan berisi tiket, bus taman, dan mobil listrik pulang-pergi di kedua ruas (harga normal CNY 220). Tiket CNY 140 dengan bus taman tanpa mobil listrik hanya tercantum di Qunar, tanpa tanggal; Trip.com mengarahkan tiket biasa ke akun WeChat resmi. Mobil listrik saja CNY 60.', cost: { min: 190, max: 190, per: 'orang' }, channel: 'Trip.com, paket non-daratan; voucher ditukar dengan paspor di loket.', opens: 'Sudah dijual. Beli hari ini: libur sekolah 11–13 November, dan tahun lalu tiket 13–14 November habis. Masuk terakhir 15.00 menurut Trip.com (Tongcheng: 15.30).', link: { label: 'Trip.com: Bipenggou', url: bipenggouTickets } },
       { date: '2026-11-14', item: 'Panda Base, sesi pagi Sabtu 14 November', urgency: 'now', price: 'CNY 55 dewasa (halaman resmi; Trip.com untuk 14 November, dicek 5 November). Bus wisata di dalam taman opsional, CNY 30.', cost: { min: 55, max: 55, per: 'orang' }, channel: 'Trip.com, platform resmi menurut halaman tiket Panda Base; cadangan akun WeChat atau mini program resmi.', opens: 'Dijual sampai 14 hari sebelumnya, jadi sudah buka; berhenti saat kuota harian habis. Beli hari ini.', link: { label: 'Trip.com: Panda Base', url: 'https://www.trip.com/travel-guide/attraction/chengdu/chengdu-research-base-of-giant-panda-breeding-76342?poiType=3&locale=en-US' } },
       { date: '2026-11-10', item: 'Jiuzhaigou + bus taman, 10 November', urgency: 'now', price: 'CNY 280 (CNY 190 + bus CNY 90), tarif musim ramai sampai 15 November menurut halaman tiket resmi; Trip.com menjualnya untuk 10 November pada 5 November. Slot 08.00–10.00. Satu tiket cukup karena 9 November tidak masuk taman.', cost: { min: 280, max: 280, per: 'orang' }, channel: 'Trip.com: Admission + Sightseeing Bus, Adult (Non-Chinese mainland visitors); cadangan mini program 九寨沟旅游官方平台, dengan daftar tunggu bila habis.', opens: 'Sudah dijual; kuota 41.000 per hari dan pernah habis. Stok dirilis setiap hari 08.00 dan 17.00, dan tiket yang dibatalkan kembali ke stok (Guangming, 4 Oktober 2026).', link: { label: 'Trip.com: Jiuzhaigou', url: 'https://www.trip.com/travel-guide/attraction/jiuzhaigou/jiuzhaigou-national-park-89895/?scene=ticket' } },
-      { date: '2026-11-09', item: 'C5772 Chengdu East 07.30 → Huanglongjiuzhai 09.31 + bus ke gerbang', urgency: 'now', mode: 'train', price: 'C5772 CNY 143 kelas dua, CNY 230 kelas satu (12306, 5 November). Bus 团子出行 10.00 dari Stasiun Huanglongjiuzhai ke gerbang Jiuzhaigou CNY 51, 29 menit setelah kereta tiba; 49 kursi kosong pada 5 November. Bila bus 10.00 penuh, bus berikutnya 13.50; hari ini tidak masuk taman, jadi tidak ada batas jam.', cost: { min: 194, max: 194, per: 'orang' }, channel: 'Kereta: Trip.com, atau 12306 sebagai cadangan. Bus: 团子出行 dengan nama asli.', opens: 'Sudah dijual; 12306 menunjukkan kursi kelas dua untuk 9 November pada 5 November. Belum pasti 团子出行 menerima paspor asing.', link: { label: 'Trip.com: Chengdu ke Huanglongjiuzhai', url: tripcomTrain('chengdu', 'huanglongjiuzhai') } },
+      { date: '2026-11-09', item: 'Shuttle Trip.com Chengdu → Jiuzhaigou, jemput Chunxi Road 14.30', urgency: 'now', mode: 'shuttle', price: 'IDR 328.648 untuk 9 November, sekitar CNY 120 (harga terendah per tanggal di Trip.com, dilihat 6 November; tanggal lain IDR 302.973). Pilihan mobil Ordinary car atau Nanny car (MPV); jam 08.00–10.30, 14.00, 14.15, 14.30, dan 16.30. Lama perjalanan belum dicek: Trip.com menyebut 3–4 jam untuk shuttle sejenis, panduan lain 4–5 jam lewat tol 绵九.', cost: { min: 120, max: 120, per: 'orang' }, channel: 'Trip.com: Chengdu-Jiuzhaigou shuttle bus (Individual), one-way Chengdu → Jiuzhaigou, titik jemput Chunxi Road Subway Station Exit E1.', opens: 'Sudah dijual. Tanyakan titik turun dan apakah koper 28–30 inci muat sebelum membayar.', link: { label: 'Trip.com: Jiuzhaigou, bagian shuttle', url: 'https://www.trip.com/travel-guide/attraction/jiuzhaigou/jiuzhaigou-national-park-89895/?scene=ticket' } },
+      { date: '2026-11-09', item: 'Cadangan 9 November: C6376 Chengdu East 14.34 → Huanglongjiuzhai 16.58 + bus 17.30 ke gerbang', urgency: 'now', mode: 'train', alternative: true, price: 'C6376 CNY 143 kelas dua, CNY 230 kelas satu (12306, 6 November; kursi tersedia). Bus 团子出行 17.30 dari Stasiun Huanglongjiuzhai ke 九寨沟口客运站 CNY 51, bus terakhir hari itu, 49 kursi.', cost: { min: 194, max: 194, per: 'orang' }, channel: 'Kereta: Trip.com, atau 12306 sebagai cadangan. Bus: 团子出行 dengan nama asli.', opens: 'Sudah dijual. Belum pasti 团子出行 menerima paspor asing.', link: { label: 'Trip.com: Chengdu ke Huanglongjiuzhai', url: tripcomTrain('chengdu', 'huanglongjiuzhai') } },
       { date: '2026-11-11', item: 'C5754 Huanglongjiuzhai 14.14 → Maoxian 15.00, satu kursi', urgency: 'now', mode: 'train', price: 'CNY 66 kelas dua (12306, 5 November); kelas satu CNY 105 sudah habis.', cost: { min: 66, max: 66, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan.', opens: 'Sudah dijual; 12306 menunjukkan kursi kelas dua pada 5 November, dan halaman rute Trip.com mencantumkan C5754.', link: { label: 'Trip.com: Huanglongjiuzhai ke Maoxian', url: tripcomTrain('huanglongjiuzhai', 'maoxian') } },
       { date: '2026-11-15', item: 'D239 Chengdu South 08.33 → Lijiang 17.46, satu kursi', urgency: 'now', mode: 'train', price: 'CNY 376 kelas dua (12306, 5 November); kelas satu CNY 602, tinggal 3 kursi. Tidak ada kereta tidur.', cost: { min: 376, max: 376, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan.', opens: 'Sudah dijual: tiket dibuka 15 hari sebelumnya, dan 12306 masih menunjukkan kursi kelas dua untuk 15 November pada 5 November.', link: { label: 'Trip.com: Chengdu ke Lijiang', url: tripcomTrain('chengdu', 'lijiang') } },
       { date: '2026-11-16', item: 'Tiket Upper Tiger Leaping Gorge (sisi Shangri-La)', urgency: 'onsite', price: 'CNY 45 dewasa (FieldGuide, 2 November 2026, dan panduan Ctrip tanpa tanggal); Qunar dan Trip.com tidak menjual tiket masuk saja. Eskalator opsional CNY 80 pulang-pergi atau CNY 60 naik saja (Qunar). Di Trip.com untuk 16 November: tiket dengan shuttle pulang-pergi dari Dukezong CNY 143, ditambah eskalator CNY 223.', cost: { min: 45, max: 125, per: 'orang' }, channel: 'Di lokasi, atau lewat situs pengelola.', opens: 'Buka 08.00–18.00, masuk terakhir 18.00 (Ctrip dan Trip.com). Pengelola melaporkan buka normal; longsor 30 Juli dan 3 September berada di luar area pengunjung.', link: { label: 'Pengelola Tiger Leaping Gorge', url: 'https://www.xgllhtx.cn/' } },
-      { date: '2026-11-13', item: 'Toko Buku Zhongshu Ge, Dujiangyan: masuk gratis, DiDi pulang-pergi dari hotel', urgency: 'onsite', mode: 'taxi', price: 'Masuk gratis (Trip.com dan Third Eye Traveller). DiDi belum punya tarif resmi: satu pelancong (Third Eye Traveller, artikel Juni 2026) membayar sekitar CNY 100 sekali jalan, jadi sekitar CNY 200 pulang-pergi. Sekitar 58 km sekali jalan, ±45 menit tanpa macet menurut OSRM; tarif Jumat sore dan malam bisa berbeda.', cost: { min: 200, max: 200, per: 'mobil' }, channel: 'DiDi ke 钟书阁(融创茂店) sekitar 16.30, pulang ±20.30. Cadangan untuk pergi: Metro jalur 2 ke 犀浦, kereta S ke 都江堰 (CNY 10 di 12306 atau Trip.com; sebagian kereta tinggal sedikit kursi), lalu DiDi 10–15 menit dari stasiun.', opens: 'Tidak perlu membeli tiket. Lihat estimasi waktu dan tarif DiDi di aplikasi sebelum memesan.', link: { label: 'Panduan Zhongshu Ge', url: placePath('zhongshuge-bookstore') } },
+      { date: '2026-11-09', item: 'Toko Buku Zhongshu Ge, Dujiangyan: masuk gratis, DiDi pulang-pergi dari hotel', urgency: 'onsite', mode: 'taxi', price: 'Masuk gratis (Trip.com dan Third Eye Traveller). DiDi belum punya tarif resmi: satu pelancong (Third Eye Traveller, artikel Juni 2026) membayar sekitar CNY 100 sekali jalan, jadi sekitar CNY 200 pulang-pergi. Sekitar 58 km sekali jalan, ±45 menit tanpa macet menurut OSRM; tarif jam sibuk Senin pagi bisa berbeda.', cost: { min: 200, max: 200, per: 'mobil' }, channel: 'DiDi ke 钟书阁(融创茂店) sekitar 08.45, kembali ±11.30. Cadangan untuk pergi: Metro jalur 2 ke 犀浦, kereta S ke 都江堰 (CNY 10 di 12306 atau Trip.com; sebagian kereta tinggal sedikit kursi), lalu DiDi 10–15 menit dari stasiun.', opens: 'Tidak perlu membeli tiket. Lihat estimasi waktu dan tarif DiDi di aplikasi sebelum memesan.', link: { label: 'Panduan Zhongshu Ge', url: placePath('zhongshuge-bookstore') } },
     ],
   },
   {
@@ -509,7 +499,7 @@ export const calmDoNotBuy = [
 ];
 
 export const calmUnknowns = [
-  '9 November: apakah 团子出行 menerima paspor asing untuk bus 10.00 dari stasiun, lama perjalanan bus itu (tidak tercantum; 1,5–2 jam menurut panduan pihak ketiga), harga dan jam shuttle Trip.com 104850127 setelah C5772, dan ketersediaan slot Jiuzhaigou 12.00–14.00.',
+  '9 November: lama shuttle Trip.com Chengdu → Jiuzhaigou, titik turunnya, dan apakah koper 28–30 inci muat. Untuk cadangan kereta: apakah 团子出行 menerima paspor asing untuk bus 17.30, dan lama perjalanan bus itu (tidak tercantum; 1,5–2 jam menurut panduan pihak ketiga).',
   'Penawaran nyata untuk semua mobil: Jiuzhaigou → Songpan → Stasiun Huanglongjiuzhai (11 November), Stasiun Maoxian → Bipenggou (11 November), Bipenggou → Chengdu (13 November), dan Lijiang → Upper Gorge → Shangri-La (16 November); angka di rincian biaya hanya perkiraan dari tarif sewa per jam. Juga biaya kembali kosong, apakah titik jemput dan antar (Jiuzhaigou, Stasiun Maoxian, Bipenggou, Chengdu, Shangri-La) masuk area gratis sewa Trip.com, dan apakah satu sopir lokal bisa mengambil 11 dan 13 November.',
   'Status G213 Maoxian–Wenchuan setelah pengumuman pengalihan 16 September, dan apakah Dingziba dibuka lagi setelah laporan 22 Oktober.',
   'Nama restoran halal di Songpan, dan apakah Masjid Utara Songpan menerima musafir untuk salat.',
@@ -517,24 +507,25 @@ export const calmUnknowns = [
   'Penginapan: apakah promo menginap pertama Trip.com berlaku untuk lebih dari satu pemesanan per akun, harga Sofis Svyain untuk 13–15 November, apakah Xingyun mendaftarkan paspor asing, dan apakah pemilik Xinlan mau mengantar ke gerbang 12 November pagi.',
   'Bipenggou: masuk terakhir (15.00 menurut Trip.com, 15.30 menurut Tongcheng), jam bus terakhir turun, apakah tiket mobil listrik pulang-pergi boleh turun di Moon Bay dan Red Stone Beach, dan waktu berjalan kaki.',
   'Masjid Huangcheng: jam khotbah 13 November, alamat pasti (小河街2号 atau 永靖街80号), dan waktu jalan kaki dari hotel.',
-  'Zhongshu Ge Dujiangyan: jam buka pasti (10.00–21.00 menurut Trip.com, 09.00–20.00 atau 10.00–22.00 menurut sumber lain), aturan tripod, gimbal, dan video, keramaian Jumat 13 November, tarif DiDi, ada tidaknya musala di mal, dan apakah masjid di 南街 Dujiangyan aktif.',
+  'Zhongshu Ge Dujiangyan: jam buka pasti (10.00–21.00 menurut Trip.com, 09.00–20.00 atau 10.00–22.00 menurut sumber lain), aturan tripod, gimbal, dan video, keramaian Senin pagi 9 November, tarif DiDi, lama shuttle Trip.com ke Jiuzhaigou dan titik turunnya, ada tidaknya musala di mal, dan apakah masjid di 南街 Dujiangyan aktif.',
   'Kedai halal yang benar-benar buka di Shangri-La dan Dukezong (dua daftar Ctrip offline per 5 November), dan di kota tua Lijiang, yang juga belum diverifikasi rencana utama.',
   'Upper Tiger Leaping Gorge: tarif resmi tiket dan eskalator (angka di sini dari FieldGuide, Qunar, dan Trip.com), dan apakah sinar matahari sampai ke sungai pada pertengahan November.',
   'Shuttle 16 November: apakah Trip.com mengizinkan satu orang membayar paket 87712606 yang minimal dua orang, dan tempat untuk koper 28–30 inci di kedua shuttle.',
   'Napahai: tarif resmi November 2026 (sumber 2025 menyebut gratis, WestChinaGo tanpa tanggal CNY 60) dan pintu masuk mana yang gratis.',
-  'Seberapa ketat petugas menerapkan batas bagasi untuk koper 28–30 inci di C5772, C5754, D239, dan C984: 160 cm dan 20 kg menurut China Railway, 130 cm per barang menurut Trip.com.',
+  'Seberapa ketat petugas menerapkan batas bagasi untuk koper 28–30 inci di C5754, D239, dan C984: 160 cm dan 20 kg menurut China Railway, 130 cm per barang menurut Trip.com.',
   'Jam lampu Menara Vitality, dan apakah pertunjukan Twin Towers 14 November benar-benar berlangsung (pemberitahuan terakhir Oktober 2025).',
   'Apakah Bipenggou 3 hari 2 malam dengan satu hari penuh di taman sesuai maksudmu.',
 ];
 
 // Trains, the station transfers around them and the luggage rule; the calm trains page lists these, the calm page all.
 export const calmTrainSources: Link[] = [
+  { label: '12306: kereta 9 November sore Chengdu → Huanglongjiuzhai (C6366, C6376, C5796, D280), kursi dan tarif C6376, dicek 6 November 2026', url: 'https://kyfw.12306.cn/otn/leftTicket/init?linktypeid=dc' },
   { label: '12306: kursi dan tarif kereta 9, 11, dan 15 November (C5772, C6362, C5746, C5754, C5764, C5804, C5784, D239), dicek 5 November 2026', url: 'https://kyfw.12306.cn/otn/leftTicket/init?linktypeid=dc' },
   { label: '12306: jam, kursi, dan tarif C984 18 November dan C442 19 November; D8704 pada daftar 19 November sebagai acuan 20 November (dicek 5 November 2026)', url: 'https://kyfw.12306.cn/otn/leftTicket/init?linktypeid=dc' },
   { label: 'Trip.com: Chengdu ke Lijiang, hanya D239 08.33 → 17.46 (5 November 2026)', url: 'https://id.trip.com/trains/china/route/chengdu-to-lijiang/' },
   { label: 'Trip.com: Huanglongjiuzhai ke Maoxian, termasuk C5754 (5 November 2026)', url: 'https://id.trip.com/trains/china/route/huanglongjiuzhai-to-maoxian/' },
   { label: 'Trip.com: Chengdu ke Huanglongjiuzhai, penjualan 15 hari sebelumnya (5 November 2026)', url: 'https://id.trip.com/trains/china/route/chengdu-to-huanglongjiuzhai/' },
-  { label: '团子出行: bus Stasiun Huanglongjiuzhai → gerbang Jiuzhaigou 9 November, termasuk 10.00 dan 08.40, CNY 51 (dicek 5 November 2026)', url: 'https://www.tz12306.com/ticket/search_513224_松潘_1_513225_九寨沟_1.html' },
+  { label: '团子出行: bus Stasiun Huanglongjiuzhai → 九寨沟口客运站 9 November, 08.00, 08.40, 10.00, 13.50, 16.00, dan 17.30 (terakhir), CNY 51 (dicek 6 November 2026)', url: 'https://www.tz12306.com/ticket/search_513224_松潘_1_513225_九寨沟_1.html' },
   { label: 'WanderInChina: transport Jiuzhaigou, bus stasiun 1,5–2 jam dan mobil pribadi CNY 220–280 (20 Mei 2026)', url: 'https://wanderinchina.com/destinations/jiuzhaigou/transport/' },
   { label: 'Trip.com 104850127: shuttle Stasiun Huanglongjiuzhai → Jiuzhaigou, jadwal mengikuti kereta, tanpa harga atau jam yang terlihat (dicek 5 November 2026)', url: 'https://us.trip.com/things-to-do/detail/104850127/' },
   { label: 'OSRM: Stasiun Huanglongjiuzhai ke pusat pengunjung Jiuzhaigou, 91,5 km (5 November 2026)', url: 'https://router.project-osrm.org/route/v1/driving/103.6133889,32.7477854;103.9167742,33.2689518?overview=false' },
