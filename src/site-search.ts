@@ -30,7 +30,7 @@ export const planTopics: PlanTopic[] = [
   {
     topic: 'Peta rute',
     main: { href: routeMapPath, label: 'Peta rute 14 hari', keywords: 'map perjalanan' },
-    calm: { href: '/places/calm/', label: 'Opsi santai: kereta ke Yunnan', keywords: 'peta rute santai calm alternatif pilihan Jiuzhaigou dua hari Songpan Maoxian Bipenggou Panda Base Huangcheng Jumat Zhongshu Ge Zhongshuge 钟书阁 Dujiangyan toko buku D239 Lijiang Tiger Leaping Gorge Upper Gorge Napahai' },
+    calm: { href: '/places/calm/', label: 'Opsi santai: kereta ke Yunnan', keywords: 'peta rute santai calm alternatif pilihan Jiuzhaigou dua malam Songpan Maoxian Bipenggou Panda Base Huangcheng Jumat Zhongshu Ge Zhongshuge 钟书阁 Dujiangyan toko buku D239 Lijiang Tiger Leaping Gorge Upper Gorge Napahai' },
   },
   {
     topic: 'Hotel & hostel',

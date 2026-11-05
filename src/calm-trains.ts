@@ -31,11 +31,10 @@ function parkTicket(date: string) {
   return currencyText(cnyRange(ticket.cost));
 }
 
-// C5772 takes the later slot and C5746 stays the fallback; arrival, gate and slot are the main plan's rows.
-const [earlySlot, lateSlot] = jiuzhaigouSlots;
+// C5772's arrival and gate times are the main plan's row; the calm option enters the park the next morning.
+const lateSlot = jiuzhaigouSlots[1];
 const calmSlots = [
-  { ...lateSlot, trains: 'C5772 07.30, lalu bus 团子出行 10.00' },
-  { ...earlySlot, trains: 'Cadangan: C5746 06.14, lalu bus 08.40 atau shuttle Trip.com 08.30' },
+  { ...lateSlot, trains: 'C5772 07.30, lalu bus 团子出行 10.00', slot: 'Masuk 10 November, 08:00–10:00' },
 ];
 
 // A calm day's own step or risk, rendered again here so each fact stays in calm-route.ts only.
@@ -59,7 +58,6 @@ function riskText(date: string, word: string) {
 const gateNotes = [
   stepText('2026-11-09', '10.00'),
   'Bus 10.00 juga berhenti di kawasan hotel: 千古情, 星宇大酒店, 月亮湾停车场, dan 鲁能小镇. OSRM memberi 67 menit tanpa macet untuk 91,5 km.',
-  'C5782 06.45 (tiba 08.30) masih bisa naik bus 08.40, tetapi hanya 10 menit setelah tiba. Cadangan yang mepet.',
   riskText('2026-11-09', '团子出行'),
   'Stasiun juga punya area ride-hail resmi. Sepakati harga mobil sebelum naik, dan jangan ikut sopir yang menghampiri di area kedatangan. Shuttle stasiun Trip.com 104850127 mengikuti jadwal kereta, tetapi harga dan jamnya belum terlihat.',
 ];
@@ -105,7 +103,7 @@ const calmTrainsPage: TrainsPage = {
   intro: `Link Trip.com untuk setiap kereta opsi santai, cara dari stasiun ke gerbang Jiuzhaigou, transfer di setiap hari kereta, aturan bagasi, dan timeline jam demi jam untuk ${trainDays.length} hari kereta.`,
   sections: [
     ticketsSection('Jam rilis tiket dalam WIB; jam kereta memakai waktu China (WIB + 1 jam). Sampai 16 November kamu sendiri, jadi satu kursi; mulai 18 November temanmu ikut, jadi dua kursi atas nama paspor masing-masing. Kereta 9, 11, dan 15 November dicek di 12306 pada 5 November 2026; 18–20 November sama dengan rencana utama.', cards),
-    slotsSection('Ke gerbang Jiuzhaigou', `Opsi santai memakai dua tiket penuh <strong>Ticket + Sightseeing Bus Ticket (Adult, Non-Chinese mainland visitors)</strong> di Trip.com: ${parkTicket('2026-11-09')} untuk 9 November dan ${parkTicket('2026-11-10')} untuk 10 November. Tiket 10 November dipakai pagi dari penginapan. Batas masuk pukul 14.00, jadi pilih slot 9 November sesuai kereta:`, calmSlots, list(gateNotes)),
+    slotsSection('Ke gerbang Jiuzhaigou', `Opsi santai memakai satu tiket <strong>Ticket + Sightseeing Bus Ticket (Adult, Non-Chinese mainland visitors)</strong> di Trip.com: ${parkTicket('2026-11-10')} untuk 10 November, slot 08.00–10.00, dipakai pagi dari penginapan. 9 November hanya perjalanan ke gerbang tanpa masuk taman, jadi batas masuk 14.00 tidak berlaku hari itu:`, calmSlots, list(gateNotes)),
     transfersSection(),
     luggageSection(),
     timelineSection('Timeline hari kereta', trainDays.map(day => ({ date: day.date, title: `${weekdayDate(day.date)} · ${day.shortTitle}`, steps: day.steps, href: `${calmItineraryPath}#${day.date}` }))),

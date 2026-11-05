@@ -93,7 +93,7 @@ function intro() {
   const same = calmDays.filter(day => day.fromMain).map(day => `${dayMonth(day.date)}: ${day.title}.`);
   return `<div class="route-map-intro calm-intro">
       <h1 id="calm-title">Opsi santai, sekali jalan ke Yunnan.</h1>
-      <p class="lead">Alternatif yang lebih tenang untuk 8–21 November: dua hari di Jiuzhaigou, Bipenggou seharian, kembali ke Chengdu sekali untuk salat Jumat dan panda, lalu kereta D239 ke Lijiang. ${nights} malam di ${bases.size} tempat menginap.</p>
+      <p class="lead">Alternatif yang lebih tenang untuk 8–21 November: dua malam dan satu hari penuh di Jiuzhaigou, Bipenggou seharian, kembali ke Chengdu sekali untuk salat Jumat dan panda, lalu kereta D239 ke Lijiang. ${nights} malam di ${bases.size} tempat menginap.</p>
       <p>Rencana utama tidak berubah. Halaman ini untuk membandingkan dan memilih; 8 November dan 18–21 November diambil langsung dari rencana utama. Diperiksa <time datetime="${calmCheckedAt}">${fullDay(calmCheckedAt)}</time>.</p>
       <p class="prepare-link calm-page-links">${internalLink(calmItineraryPath, 'Itinerary santai, hari demi hari')}${internalLink(calmPreparePath, 'Persiapan santai')}</p>
     </div>

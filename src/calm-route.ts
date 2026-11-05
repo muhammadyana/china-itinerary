@@ -94,75 +94,80 @@ const highTrailOperator = { label: 'Pengelola, 1 Mei', url: 'https://m.gmw.cn/20
 const zhongshugeHours = { label: 'Trip.com: Zhongshu Ge Dujiangyan buka 10.00–21.00 (dicek 5 November 2026)', url: 'https://www.trip.com/moments/poi-zhongshuge-101876802/' };
 const routeGateToBookstore = { label: 'OSRM (FOSSGIS): gerbang Bipenggou ke Zhongshu Ge Dujiangyan, 144 km, 1 jam 40 menit tanpa macet (5 November 2026)', url: 'https://routing.openstreetmap.de/routed-car/route/v1/driving/102.9849,31.4155;103.6218853,30.9582302?overview=false' };
 
+// Huanglong was weighed for 9 November on 6 November 2026 and kept optional: it costs more than the park day it would replace.
+const huanglongNote: CalmNote = {
+  text: 'Opsional, dan lebih mahal dari tiket Jiuzhaigou yang dihemat: Huanglong (黄龙) searah dari stasiun, sekitar 29 km ke kereta gantung, lalu sekitar 107 km ke Jiuzhaigou (OSRM tanpa macet: 26 dan 85 menit). Bus 10.00 tidak singgah di sana, jadi perlu mobil yang muat koper. Tiket, kereta gantung, dan harga mobil 2026 belum dicek; tur Trip.com untuk rute ini mulai US$113 per orang di mobil bersama menurut cuplikan pencarian harga 17 September. Huanglong ada di 3.100–3.550 m, jadi risiko mabuk ketinggian naik karena pagi itu kamu baru berangkat dari Chengdu (±500 m).',
+  links: [
+    { label: 'Trip.com 104802434: Stasiun Huanglongjiuzhai → Huanglong → Jiuzhaigou, tur sehari (dicek 6 November 2026)', url: 'https://www.trip.com/things-to-do/detail/104802434/' },
+    { label: 'OSRM (FOSSGIS): stasiun → kereta gantung Huanglong → pusat pengunjung Jiuzhaigou, 29 + 107 km (6 November 2026)', url: 'https://routing.openstreetmap.de/routed-car/route/v1/driving/103.6133889,32.7477854;103.8370829,32.7542178;103.9167742,33.2689518?overview=false' },
+  ],
+};
+
 const calmOwnDays: CalmDay[] = [
   {
-    date: '2026-11-09', title: 'Kereta lebih siang, Jiuzhaigou hari pertama', shortTitle: 'Jiuzhaigou hari pertama',
-    route: ['Chengdu East', 'Huanglongjiuzhai', 'Five Flower Lake', 'Shuzheng', 'Jiuzhaigou'],
+    date: '2026-11-09', title: 'Kereta lebih siang ke Jiuzhaigou, sore istirahat', shortTitle: 'Ke Jiuzhaigou, istirahat',
+    route: ['Chengdu East', 'Huanglongjiuzhai', 'Jiuzhaigou'],
     overnight: { name: 'Jiuzhaigou', elevation: '±2.000 m', detail: `Malam pertama dari dua dekat gerbang (Pengfeng/Goukou). ${calmStayPicks('2026-11-09')}` },
-    transport: 'DiDi ke Chengdu East, C5772 07.30 ke Huanglongjiuzhai, bus 团子出行 10.00 dari stasiun ke gerbang (1,5–2 jam menurut panduan pihak ketiga), bus taman. Cadangan: C5746 06.14 dengan bus 08.40 atau shuttle 08.30, seperti rencana utama.',
-    intro: 'Dengan dua hari di taman, pagi ini tidak perlu berangkat sebelum subuh: C5772 07.30 tersambung ke bus 团子出行 10.00 dari stasiun ke gerbang. Bila bus itu tidak bisa dipesan dengan paspor atau sudah penuh, naik C5746 06.14 dengan bus 08.40 atau shuttle 08.30 seperti rencana utama, dan DiDi 05.15 di akhir 8 November tetap berlaku. Siang sampai sore di Five Flower Lake dan Shuzheng.',
+    transport: 'DiDi ke Chengdu East, C5772 07.30 ke Huanglongjiuzhai, bus 团子出行 10.00 dari stasiun ke gerbang (1,5–2 jam menurut panduan pihak ketiga). Hari ini tidak masuk taman, jadi bus 13.50 atau mobil dari stasiun juga cukup.',
+    intro: 'Hari perjalanan tanpa masuk taman, jadi cukup satu tiket Jiuzhaigou untuk besok. C5772 07.30 tersambung ke bus 团子出行 10.00 dari stasiun; sekitar tengah hari sudah di penginapan, lalu sore untuk istirahat, belanja bekal, dan melihat jalan ke gerbang. Tidak ada batas masuk 14.00 hari ini, jadi bus 13.50 juga cukup bila bus 10.00 penuh atau tidak menerima paspor.',
     steps: [
       ['±05.55', 'Subuh di hotel, lalu sarapan dari bekal.'],
       ['±06.30', 'DiDi ke Chengdu East; tiba 30–45 menit sebelum kereta untuk pemeriksaan paspor.'],
-      ['07.30', 'C5772 ke Huanglongjiuzhai, tiba 09.31. Cadangan bila bus 10.00 tidak bisa dipesan: C5746 06.14 dengan bus 08.40 atau shuttle 08.30.'],
-      ['10.00', 'Bus 团子出行 dari Stasiun Huanglongjiuzhai ke gerbang Jiuzhaigou (CNY 51, tiket atas nama asli), 29 menit setelah kereta tiba. Lama perjalanan tidak tercantum; panduan pihak ketiga menyebut 1,5–2 jam, jadi tiba di gerbang sekitar 11.30–12.00 (perkiraan). C6362 08.12 tidak tersambung: bus berikutnya 13.50.'],
-      ['±11.45–12.15', 'Titip koper di penginapan, 1,2–1,8 km dari pusat pengunjung. Masuk di slot 12.00–14.00; batas masuk 14.00 dan taman tutup 18.00 (pengumuman 31 Oktober).'],
-      ['±12.15–13.15', 'Bus taman ke Nuorilang, lalu bus Rize ke arah 原始森林; turun di 五花海, 45–60 menit.'],
-      ['±13.15–15.00', 'Five Flower Lake selagi matahari tinggi dan warna air paling kuat. Zuhur (mulai 12.51) di sudut tenang dengan bekal makan siang; sebagai musafir kamu boleh menjamaknya dengan Asar.'],
-      ['±15.00–16.45', 'Bus turun ke Shuzheng. Pantulan di danau lebih tenang menjelang sore, dan dasar lembah mulai teduh ±16.30. Asar 15.47 bila tidak dijamak.'],
-      ['±16.45–17.30', 'Bus ke gerbang; keluar paling lambat 17.30.'],
-      ['±17.30–18.15', 'Check-in. Maghrib 18.09; Isya 19.34.'],
-      ['Malam', 'Makan malam halal di Pengfeng (ulasan September 2025 menyebut ada restoran 清真). Cek tiket 10 November, slot 08.00–10.00.'],
+      ['07.30', 'C5772 ke Huanglongjiuzhai, tiba 09.31.'],
+      ['10.00', 'Bus 团子出行 dari Stasiun Huanglongjiuzhai ke gerbang Jiuzhaigou (CNY 51, tiket atas nama asli), 29 menit setelah kereta tiba. Lama perjalanan tidak tercantum; panduan pihak ketiga menyebut 1,5–2 jam, jadi tiba di gerbang sekitar 11.30–12.00 (perkiraan). Bila penuh, bus berikutnya 13.50.'],
+      ['±12.00–13.00', 'Check-in, atau titip koper bila kamar belum siap, di penginapan 1,2–1,8 km dari pusat pengunjung. Zuhur mulai 12.51; sebagai musafir kamu boleh menjamaknya dengan Asar.'],
+      ['Sore', 'Istirahat; hari ini tidak ada tiket taman. Beli bekal makan siang dan air untuk besok di Pengfeng, lalu jalan kaki ke pusat pengunjung supaya tahu rute dan lamanya untuk besok pagi. Asar 15.47.'],
+      ['18.09', 'Maghrib; Isya 19.34. Makan malam halal di Pengfeng (ulasan September 2025 menyebut ada restoran 清真).'],
+      ['±20.30', 'Cek tiket 10 November (slot 08.00–10.00), isi baterai, kosongkan kartu memori, lalu tidur cepat.'],
     ],
     stops: [
-      { place: 'chengdu-east', note: 'C5772 07.30; cadangan C5746 06.14.' },
+      { place: 'chengdu-east', note: 'C5772 07.30.' },
       { place: 'huanglongjiuzhai', note: 'Bus 团子出行 10.00 ke gerbang taman, sekitar 1,5–2 jam.' },
-      { place: 'five-flower', note: 'Sekitar 13.15–15.00, saat matahari tinggi.' },
-      { place: 'shuzheng', note: 'Menjelang sore, saat pantulan lebih tenang.' },
       { place: 'jiuzhaigou-hotel', note: 'Dua malam, 9 dan 10 November, dekat zona pengunjung.' },
     ],
-    notes: [],
+    notes: [huanglongNote],
     risks: [
-      'Belum pasti 团子出行 menerima paspor asing untuk bus 10.00. Bila C5772 terlambat atau bus penuh, bus berikutnya 13.50 terlalu siang untuk batas masuk 14.00; yang tersisa mobil dari area taksi resmi stasiun, sekitar CNY 220–280 (perkiraan Mei 2026).',
-      'Bila tiba di gerbang lewat 14.00, tiket 9 November hangus dan 10 November jadi satu-satunya hari di taman.',
-      'Tiket bisa habis: 2 November dinyatakan habis pada batas 41.000 pengunjung (pengumuman 31 Oktober).',
+      'Belum pasti 团子出行 menerima paspor asing untuk bus 10.00. Bila C5772 terlambat atau bus penuh, naik bus 13.50, atau mobil dari area taksi resmi stasiun, sekitar CNY 220–280 (perkiraan Mei 2026).',
     ],
     fromMain: false,
   },
   {
-    date: '2026-11-10', title: 'Jiuzhaigou hari kedua: Mirror Lake dulu, Zechawa siang', shortTitle: 'Jiuzhaigou hari kedua',
-    route: ['Jiuzhaigou', 'Mirror Lake', 'Long Lake', 'Nuorilang', 'Pearl Shoals', 'Jiuzhaigou'],
+    date: '2026-11-10', title: 'Jiuzhaigou seharian: Mirror Lake pagi, Five Flower Lake siang', shortTitle: 'Jiuzhaigou seharian',
+    route: ['Jiuzhaigou', 'Mirror Lake', 'Long Lake', 'Nuorilang', 'Five Flower Lake', 'Pearl Shoals', 'Shuzheng', 'Jiuzhaigou'],
     overnight: { name: 'Jiuzhaigou', elevation: '±2.000 m', detail: 'Penginapan yang sama, malam kedua dari dua.' },
     transport: 'Jalan kaki atau taksi ke gerbang; bus taman (cabang Rize dan Zechawa berpisah di Nuorilang). Lama perjalanan bus belum dicek.',
-    intro: 'Hari penuh kedua dengan tiket terpisah. Mirror Lake lebih dulu selagi angin pagi pelan, Long Lake dan Five-Colour Pond saat matahari tinggi, lalu Nuorilang dan Pearl Shoals.',
+    intro: 'Satu hari penuh di taman dengan satu tiket, masuk saat gerbang buka. Mirror Lake selagi angin pagi pelan, Long Lake dan Five-Colour Pond menjelang siang, Five Flower Lake dan Pearl Shoals saat matahari tinggi, lalu Shuzheng menjelang sore.',
     steps: [
-      ['±05.58', 'Subuh di hotel; sarapan dari bekal halal.'],
+      ['±05.58', 'Subuh di hotel; sarapan dari bekal halal. Bawa bekal makan siang dan air; jangan mengandalkan makanan di taman.'],
       ['±07.30', 'Jalan kaki atau taksi ke gerbang. Matahari terbit 07.31.'],
-      ['08.00', 'Masuk dengan tiket kedua yang dibeli terpisah, slot 08.00–10.00.'],
-      ['±08.00–08.40', 'Bus taman ke Nuorilang, lalu bus Rize sedikit ke atas sampai Mirror Lake (镜海).'],
-      ['±08.40–09.30', 'Pantulan Mirror Lake. Menurut Ctrip waktu terbaiknya sebelum 09.00 atau setelah 17.00 saat angin pelan; lewat ±09.00 angin biasanya memecah pantulan.'],
-      ['±09.30–10.15', 'Bus kembali ke Nuorilang, lalu bus Zechawa sampai ujungnya di Long Lake (长海).'],
-      ['±10.15–12.30', 'Long Lake, lalu jalur kayu turun ke Five-Colour Pond (五彩池) saat matahari tinggi. Di sini dingin: simpan baterai cadangan di dalam jaket dan waspadai es di jalur kayu.'],
-      ['±12.30–13.15', 'Zuhur (mulai 12.51) di sudut tenang; makan siang dari bekal, jangan mengandalkan makanan di taman. Bus turun ke Nuorilang.'],
-      ['±13.15–14.00', 'Air terjun Nuorilang (诺日朗瀑布).'],
-      ['±14.00–15.30', 'Bus Rize ke halte Pearl Shoals (珍珠滩), lalu jalur kayu melewati air terjunnya. Lama berjalan belum dicek.'],
-      ['±15.30–16.45', 'Bagian Shuzheng yang terlewat kemarin, atau istirahat. Asar 15.47.'],
+      ['08.00', 'Masuk saat gerbang buka, slot 08.00–10.00. Bus taman ke Nuorilang, lalu bus Rize sedikit ke atas sampai Mirror Lake (镜海).'],
+      ['±08.40–09.15', 'Pantulan Mirror Lake. Menurut Ctrip waktu terbaiknya sebelum 09.00 atau setelah 17.00 saat angin pelan; lewat ±09.00 angin biasanya memecah pantulan.'],
+      ['±09.15–10.00', 'Bus kembali ke Nuorilang, lalu bus Zechawa sampai ujungnya di Long Lake (长海).'],
+      ['±10.00–11.30', 'Long Lake, lalu jalur kayu turun ke Five-Colour Pond (五彩池). Di sini dingin: simpan baterai cadangan di dalam jaket dan waspadai es di jalur kayu.'],
+      ['±11.30–12.15', 'Bus turun ke Nuorilang. Air terjun Nuorilang (诺日朗瀑布) dekat halte; singgah sebentar bila antrean bus pendek.'],
+      ['±12.15–12.45', 'Bus Rize ke arah 原始森林; turun di 五花海.'],
+      ['±12.45–14.15', 'Five Flower Lake saat matahari tinggi dan warna air paling kuat. Zuhur (mulai 12.51) di sudut tenang dengan bekal makan siang; sebagai musafir kamu boleh menjamaknya dengan Asar.'],
+      ['±14.15–15.00', 'Jalur kayu turun ke Pearl Shoals (珍珠滩) dan air terjunnya, lalu naik bus dari halte Pearl Shoals. Lama berjalan belum dicek.'],
+      ['±15.00–16.45', 'Bus turun ke Shuzheng. Pantulan di danau lebih tenang menjelang sore, dan dasar lembah mulai teduh ±16.30. Asar 15.47 bila tidak dijamak. Persingkat atau lewati bila jadwal mundur.'],
       ['±16.45–17.30', 'Bus ke gerbang; keluar paling lambat 17.30, taman tutup 18.00.'],
       ['18.08', 'Maghrib; Isya 19.33. Makan malam halal di Pengfeng. Beli sarapan dan camilan untuk mobil 11 November.'],
       ['±20.30', 'Pastikan mobil 07.30, tiket C5754, dan penjemputan di Maoxian. Cek pengumuman jalan Aba dan Sichuan untuk G213 Maoxian–Wenchuan. Pindah ke rencana B (C5784 09.04) hanya bila kereta, mobil, atau jalan itu batal.'],
     ],
     stops: [
-      { place: 'mirror-lake', note: 'Sekitar 08.40–09.30, sebelum angin datang.' },
+      { place: 'mirror-lake', note: 'Sekitar 08.40–09.15, sebelum angin datang.' },
       { place: 'long-lake' },
       { place: 'five-colour-pond' },
       { place: 'nuorilang' },
+      { place: 'five-flower', note: 'Sekitar 12.45–14.15, saat matahari tinggi.' },
       { place: 'pearl-shoals' },
+      { place: 'shuzheng', note: 'Menjelang sore, saat pantulan lebih tenang.' },
     ],
     notes: [],
     risks: [
-      'Tiket masuk kedua (二次进沟) hanya muncul di unggahan pihak ketiga yang tidak bertanggal dan saling bertentangan. Halaman tiket resmi tidak mencantumkannya, jadi beli tiket penuh kedua.',
+      'Hanya satu hari di taman. Tiket bisa habis: 2 November dinyatakan habis pada batas 41.000 pengunjung (pengumuman 31 Oktober). Bila tiket 10 November habis, cadangannya tiket 9 November slot 12.00–14.00, karena bus 10.00 tiba di gerbang sekitar 11.30–12.00.',
       'Pemesanan atas nama asli (人证合一): paspor harus cocok, satu tiket per identitas per tanggal.',
       'Seluruh taman dibuka lagi 30 Juli 2026 setelah longsor 26 Juli. Jalur masih bisa ditutup karena cuaca.',
+      'Lama perjalanan bus taman dan jalur kayu belum dicek, jadi urutan ini padat. Bila mundur, persingkat Shuzheng lebih dulu.',
       'Angin bisa datang sebelum 09.00; pantulan Mirror Lake tidak dijamin.',
     ],
     fromMain: false,
@@ -400,8 +405,8 @@ const calmOwnDays: CalmDay[] = [
   },
 ];
 
-// 8 November's plan and practical notes prepare the main plan's C5746 06.14; the calm option prefers C5772 07.30 (9 November).
-const mondayTrainNote: CalmNote = { text: 'Di opsi santai, kereta Senin pagi utamanya C5772 07.30 dengan DiDi sekitar 06.30 (lihat Hari 2). DiDi 05.15 dan C5746 06.14 yang disebut di hari ini hanya cadangan bila bus 团子出行 10.00 dari stasiun tidak bisa dipesan.', links: [] };
+// 8 November's plan and practical notes prepare the main plan's C5746 06.14; the calm option takes C5772 07.30 and enters the park on 10 November.
+const mondayTrainNote: CalmNote = { text: 'Di opsi santai, kereta Senin pagi adalah C5772 07.30 dengan DiDi sekitar 06.30 (lihat Hari 2), dan 9 November tidak masuk taman. DiDi 05.15 dan C5746 06.14 yang disebut di hari ini tidak dipakai.', links: [] };
 
 export const calmDays: CalmDay[] = [{ ...fromMainPlan('2026-11-08'), notes: [mondayTrainNote] }, ...calmOwnDays, ...['2026-11-18', '2026-11-19', '2026-11-20', '2026-11-21'].map(fromMainPlan)];
 export const calmStopIds = calmDays.flatMap(day => day.stops.map(stop => stop.place));
@@ -413,10 +418,10 @@ export const calmComparison = {
     'Sichuan barat: 理小路 ke Rilong dan Siguniangshan, Danba, Moshi Park, Tagong, Xinduqiao, Kangding, dan G318 ke Litang (11–14 November).',
     'Daocheng dan Yading: Haizi Shan, Riwa, Chonggu, Luorong, Milk Lake, Five-Colour Lake, dan Pearl Lake (15–16 November), lalu jalan Xiangcheng dan Daxueshan ke Shangri-La (17 November).',
     'Kereta kembali ke Chengdu dan bus ke Lixian pada 10 November, juga malam di Lixian.',
-    'Berangkat 05.15 pada 9 November, yang kini hanya cadangan bila bus 10.00 setelah C5772 tidak bisa dipesan.',
+    'Berangkat 05.15 pada 9 November: opsi santai naik C5772 07.30 dan baru masuk taman keesokan paginya.',
   ],
   added: [
-    'Hari kedua di Jiuzhaigou (10 November): Mirror Lake pagi, Long Lake dan Five-Colour Pond siang, Nuorilang, dan Pearl Shoals.',
+    'Malam kedua di Jiuzhaigou: 9 November sore bebas, lalu 10 November seharian di taman dengan satu tiket. Selain Five Flower Lake dan Shuzheng, hari itu juga ke Mirror Lake, Long Lake, Five-Colour Pond, Nuorilang, dan Pearl Shoals.',
     'Kota tua Songpan dan Masjid Utara Songpan dengan makan siang halal, lalu kereta C5754 ke Maoxian (11 November).',
     'Bipenggou seharian penuh (12 November) dengan dua malam di gerbang.',
     'Salat Jumat di Masjid Huangcheng (13 November) dan Panda Base pagi (14 November).',
@@ -458,9 +463,8 @@ export const calmBookingGroups: CalmBookingGroup[] = [
     items: [
       { date: '2026-11-12', item: 'Tiket Bipenggou + bus taman + mobil listrik pulang-pergi', urgency: 'now', price: 'CNY 190 untuk 12 November di Trip.com, dicek 5 November: paket non-daratan berisi tiket, bus taman, dan mobil listrik pulang-pergi di kedua ruas (harga normal CNY 220). Tiket CNY 140 dengan bus taman tanpa mobil listrik hanya tercantum di Qunar, tanpa tanggal; Trip.com mengarahkan tiket biasa ke akun WeChat resmi. Mobil listrik saja CNY 60.', cost: { min: 190, max: 190, per: 'orang' }, channel: 'Trip.com, paket non-daratan; voucher ditukar dengan paspor di loket.', opens: 'Sudah dijual. Beli hari ini: libur sekolah 11–13 November, dan tahun lalu tiket 13–14 November habis. Masuk terakhir 15.00 menurut Trip.com (Tongcheng: 15.30).', link: { label: 'Trip.com: Bipenggou', url: bipenggouTickets } },
       { date: '2026-11-14', item: 'Panda Base, sesi pagi Sabtu 14 November', urgency: 'now', price: 'CNY 55 dewasa (halaman resmi; Trip.com untuk 14 November, dicek 5 November). Bus wisata di dalam taman opsional, CNY 30.', cost: { min: 55, max: 55, per: 'orang' }, channel: 'Trip.com, platform resmi menurut halaman tiket Panda Base; cadangan akun WeChat atau mini program resmi.', opens: 'Dijual sampai 14 hari sebelumnya, jadi sudah buka; berhenti saat kuota harian habis. Beli hari ini.', link: { label: 'Trip.com: Panda Base', url: 'https://www.trip.com/travel-guide/attraction/chengdu/chengdu-research-base-of-giant-panda-breeding-76342?poiType=3&locale=en-US' } },
-      { date: '2026-11-09', item: 'Jiuzhaigou + bus taman, 9 November', urgency: 'now', price: 'CNY 280 (CNY 190 + bus CNY 90), tarif 1 April–15 November di halaman tiket resmi; Trip.com menjualnya untuk 9 November pada 5 November. Slot 12.00–14.00 dengan C5772, atau 10.00–12.00 dengan C5746.', cost: { min: 280, max: 280, per: 'orang' }, channel: 'Trip.com: Admission + Sightseeing Bus, Adult (Non-Chinese mainland visitors); cadangan mini program 九寨沟旅游官方平台.', opens: 'Sudah dijual; kuota 41.000 per hari dan pernah habis. Ketersediaan slot 12.00–14.00 belum dicek.', link: { label: 'Trip.com: Jiuzhaigou', url: 'https://www.trip.com/travel-guide/attraction/jiuzhaigou/jiuzhaigou-national-park-89895/?scene=ticket' } },
-      { date: '2026-11-10', item: 'Jiuzhaigou kedua + bus taman, 10 November', urgency: 'now', price: 'CNY 280 (190 + 90), tarif musim ramai sampai 15 November menurut halaman tiket resmi; Trip.com menjualnya untuk 10 November pada 5 November. Tidak ada diskon dua hari atau masuk kedua di halaman resmi maupun di Trip.com.', cost: { min: 280, max: 280, per: 'orang' }, channel: 'Trip.com, produk yang sama dengan tanggal terpisah; cadangan mini program 九寨沟旅游官方平台, dengan daftar tunggu bila habis.', opens: 'Sudah dijual. Stok dirilis setiap hari 08.00 dan 17.00, dan tiket yang dibatalkan kembali ke stok (Guangming, 4 Oktober 2026).', link: { label: 'Trip.com: Jiuzhaigou', url: 'https://www.trip.com/travel-guide/attraction/jiuzhaigou/jiuzhaigou-national-park-89895/?scene=ticket' } },
-      { date: '2026-11-09', item: 'C5772 Chengdu East 07.30 → Huanglongjiuzhai 09.31 + bus ke gerbang', urgency: 'now', mode: 'train', price: 'C5772 CNY 143 kelas dua, CNY 230 kelas satu (12306, 5 November). Bus 团子出行 10.00 dari Stasiun Huanglongjiuzhai ke gerbang Jiuzhaigou CNY 51, 29 menit setelah kereta tiba; 49 kursi kosong pada 5 November. Cadangan: C5746 06.14 (CNY 143) dengan bus 08.40 (CNY 51) atau shuttle Trip.com 08.30 (CNY 35, dicek 4 November).', cost: { min: 194, max: 194, per: 'orang' }, channel: 'Kereta: Trip.com, atau 12306 sebagai cadangan. Bus: 团子出行 dengan nama asli.', opens: 'Sudah dijual; 12306 menunjukkan kursi kelas dua untuk 9 November pada 5 November. Belum pasti 团子出行 menerima paspor asing.', link: { label: 'Trip.com: Chengdu ke Huanglongjiuzhai', url: tripcomTrain('chengdu', 'huanglongjiuzhai') } },
+      { date: '2026-11-10', item: 'Jiuzhaigou + bus taman, 10 November', urgency: 'now', price: 'CNY 280 (CNY 190 + bus CNY 90), tarif musim ramai sampai 15 November menurut halaman tiket resmi; Trip.com menjualnya untuk 10 November pada 5 November. Slot 08.00–10.00. Satu tiket cukup karena 9 November tidak masuk taman.', cost: { min: 280, max: 280, per: 'orang' }, channel: 'Trip.com: Admission + Sightseeing Bus, Adult (Non-Chinese mainland visitors); cadangan mini program 九寨沟旅游官方平台, dengan daftar tunggu bila habis.', opens: 'Sudah dijual; kuota 41.000 per hari dan pernah habis. Stok dirilis setiap hari 08.00 dan 17.00, dan tiket yang dibatalkan kembali ke stok (Guangming, 4 Oktober 2026).', link: { label: 'Trip.com: Jiuzhaigou', url: 'https://www.trip.com/travel-guide/attraction/jiuzhaigou/jiuzhaigou-national-park-89895/?scene=ticket' } },
+      { date: '2026-11-09', item: 'C5772 Chengdu East 07.30 → Huanglongjiuzhai 09.31 + bus ke gerbang', urgency: 'now', mode: 'train', price: 'C5772 CNY 143 kelas dua, CNY 230 kelas satu (12306, 5 November). Bus 团子出行 10.00 dari Stasiun Huanglongjiuzhai ke gerbang Jiuzhaigou CNY 51, 29 menit setelah kereta tiba; 49 kursi kosong pada 5 November. Bila bus 10.00 penuh, bus berikutnya 13.50; hari ini tidak masuk taman, jadi tidak ada batas jam.', cost: { min: 194, max: 194, per: 'orang' }, channel: 'Kereta: Trip.com, atau 12306 sebagai cadangan. Bus: 团子出行 dengan nama asli.', opens: 'Sudah dijual; 12306 menunjukkan kursi kelas dua untuk 9 November pada 5 November. Belum pasti 团子出行 menerima paspor asing.', link: { label: 'Trip.com: Chengdu ke Huanglongjiuzhai', url: tripcomTrain('chengdu', 'huanglongjiuzhai') } },
       { date: '2026-11-11', item: 'C5754 Huanglongjiuzhai 14.14 → Maoxian 15.00, satu kursi', urgency: 'now', mode: 'train', price: 'CNY 66 kelas dua (12306, 5 November); kelas satu CNY 105 sudah habis.', cost: { min: 66, max: 66, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan.', opens: 'Sudah dijual; 12306 menunjukkan kursi kelas dua pada 5 November, dan halaman rute Trip.com mencantumkan C5754.', link: { label: 'Trip.com: Huanglongjiuzhai ke Maoxian', url: tripcomTrain('huanglongjiuzhai', 'maoxian') } },
       { date: '2026-11-15', item: 'D239 Chengdu South 08.33 → Lijiang 17.46, satu kursi', urgency: 'now', mode: 'train', price: 'CNY 376 kelas dua (12306, 5 November); kelas satu CNY 602, tinggal 3 kursi. Tidak ada kereta tidur.', cost: { min: 376, max: 376, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan.', opens: 'Sudah dijual: tiket dibuka 15 hari sebelumnya, dan 12306 masih menunjukkan kursi kelas dua untuk 15 November pada 5 November.', link: { label: 'Trip.com: Chengdu ke Lijiang', url: tripcomTrain('chengdu', 'lijiang') } },
       { date: '2026-11-16', item: 'Tiket Upper Tiger Leaping Gorge (sisi Shangri-La)', urgency: 'onsite', price: 'CNY 45 dewasa (FieldGuide, 2 November 2026, dan panduan Ctrip tanpa tanggal); Qunar dan Trip.com tidak menjual tiket masuk saja. Eskalator opsional CNY 80 pulang-pergi atau CNY 60 naik saja (Qunar). Di Trip.com untuk 16 November: tiket dengan shuttle pulang-pergi dari Dukezong CNY 143, ditambah eskalator CNY 223.', cost: { min: 45, max: 125, per: 'orang' }, channel: 'Di lokasi, atau lewat situs pengelola.', opens: 'Buka 08.00–18.00, masuk terakhir 18.00 (Ctrip dan Trip.com). Pengelola melaporkan buka normal; longsor 30 Juli dan 3 September berada di luar area pengunjung.', link: { label: 'Pengelola Tiger Leaping Gorge', url: 'https://www.xgllhtx.cn/' } },
