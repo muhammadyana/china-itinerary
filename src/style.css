@@ -415,7 +415,7 @@ dialog::backdrop { background: var(--color-backdrop); }
 .home-arrival:hover .arrival-open { color: var(--color-accent); }
 .trip-highlights { margin-top: 72px; }
 .highlights-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-xl); margin-bottom: 32px; }
-.highlights-heading h2,.itinerary-intro h2,.overland h2 { font-family: var(--font-body); font-weight: 600; letter-spacing: -.04em; font-size: clamp(36px,4.5vw,58px); line-height: 1.05; }
+.highlights-heading h2,.itinerary-intro :is(h1,h2),.overland h2 { font-family: var(--font-body); font-weight: 600; letter-spacing: -.04em; font-size: clamp(36px,4.5vw,58px); line-height: 1.05; }
 .highlights-heading > p { max-width: 35ch; color: var(--color-muted); font-size: 15px; line-height: 1.65; }
 .highlights-grid { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); column-gap: var(--space-lg); row-gap: 32px; }
 .highlight-card { display: block; grid-column: span 2; min-width: 0; text-decoration: none; border-radius: var(--radius-card); }
@@ -513,7 +513,7 @@ dialog::backdrop { background: var(--color-backdrop); }
  .arrival-open svg { width: 22px; height: 22px; }
  .trip-highlights { margin-top: var(--space-xl); }
  .highlights-heading { display: block; margin-bottom: var(--space-lg); }
- .highlights-heading h2,.itinerary-intro h2,.overland h2 { font-size: 36px; }
+ .highlights-heading h2,.itinerary-intro :is(h1,h2),.overland h2 { font-size: 36px; }
  .highlights-heading > p { max-width: 35ch; font-size: 14px; margin-top: var(--space-md); }
  .highlights-grid { display: flex; gap: var(--space-md); overflow-x: auto; scroll-snap-type: x proximity; padding: var(--space-2xs) var(--space-2xs) var(--space-md); margin: calc(-1 * var(--space-2xs)); scrollbar-width: thin; }
  .highlight-card,.highlight-card:last-child { flex: 0 0 86%; scroll-snap-align: start; display: block; padding: 0; }

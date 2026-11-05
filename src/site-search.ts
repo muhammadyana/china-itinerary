@@ -25,12 +25,14 @@ export const mainPlanPages: PlanningPage[] = [
   { href: staysPath, label: 'Hotel & hostel per malam', keywords: 'penginapan menginap akomodasi' },
 ];
 const calmPlanPage: PlanningPage = { href: '/places/calm/', label: 'Opsi santai: kereta ke Yunnan', keywords: 'alternatif pilihan rute santai calm Jiuzhaigou dua hari Songpan Maoxian Bipenggou Panda Base Huangcheng Jumat D239 Lijiang Tiger Leaping Gorge Upper Gorge Napahai' };
+export const calmItineraryPage: PlanningPage = { href: '/places/calm-itinerary/', label: 'Itinerary santai', keywords: 'opsi santai calm hari demi hari jadwal timeline per hari alternatif' };
+export const calmPreparePage: PlanningPage = { href: '/places/calm-prepare/', label: 'Persiapan santai', keywords: 'opsi santai calm booking pesan tiket kereta mobil hotel jangan dibeli persiapan' };
 export const tripPlanningPages: PlanningPage[] = [
   { href: preparePath, label: 'Persiapan & pemesanan', keywords: 'booking tiket biaya pembayaran internet darurat KBRI asuransi' },
   { href: '/places/costs/', label: 'Rincian biaya', keywords: 'biaya harga budget anggaran rupiah yuan total per hari' },
   { href: '/places/trains/', label: 'Kereta & timeline', keywords: 'tiket kereta train stasiun jadwal jam' },
 ];
-export const planningPages: PlanningPage[] = [...mainPlanPages, calmPlanPage, ...tripPlanningPages];
+export const planningPages: PlanningPage[] = [...mainPlanPages, calmPlanPage, calmItineraryPage, calmPreparePage, ...tripPlanningPages];
 
 const tripDate = (date: string) => new Date(`${date}T12:00:00+08:00`);
 const dayMonth = new Intl.DateTimeFormat('id-ID', { day: 'numeric', month: 'long', timeZone: tripTimeZone });

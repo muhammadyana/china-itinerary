@@ -20,9 +20,10 @@ import { initializeSiteSearch } from './site-search.ts';
 import { initializeGuide } from './guide-main.ts';
 import { initializeRouteMap } from './route-map-main.ts';
 import { initializePhotoLoading } from './photo-loading.ts';
-import { updatePhotoContent } from './photo-viewer.ts';
-import { days, daysByDate, places, userPhotos } from './itinerary.ts';
-import { dayView, pickerItems, photoDetail, userPhotoDetail, overviewContent, icon, fullDate } from './render.ts';
+import { clipboardCopy, modalDialogs, photoViewer, showPhotoErrors, statusAnnouncer } from './day-controls.ts';
+import { initializeCalmItinerary } from './calm-itinerary-main.ts';
+import { days, daysByDate, places } from './itinerary.ts';
+import { dayView, pickerItems, overviewContent, fullDate } from './render.ts';
 
 function initializeItinerary() {
 const $ = <T extends HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
@@ -30,14 +31,13 @@ let current = dateFromHash();
 const dayRoot = $('#day-view');
 const picker = $<HTMLDialogElement>('#day-picker');
 const photoDialog = $<HTMLDialogElement>('#photo-dialog');
-const photoCounter = $('#photo-count');
-const photoNavigation = Array.from(photoDialog.querySelectorAll<HTMLButtonElement>('[data-action="photo-previous"], [data-action="photo-next"]'));
-const userPhotoIds = Object.keys(userPhotos);
-let userPhotoIndex: number | null = null;
 const overview = $<HTMLDialogElement>('#overview-dialog');
 const copyDialog = $<HTMLDialogElement>('#copy-dialog');
-const returnFocus = new WeakMap<HTMLDialogElement, HTMLElement>();
-let statusTimer: ReturnType<typeof setTimeout>;
+const dialogs = modalDialogs([picker,photoDialog,overview,copyDialog]);
+const { open: openDialog, returnFocus } = dialogs;
+const announce = statusAnnouncer($('#status'));
+const photoView = photoViewer(photoDialog, openDialog);
+const copyText = clipboardCopy(copyDialog, dialogs, announce);
 const heroTrack = $('.hero-track');
 const heroSlides = Array.from(document.querySelectorAll<HTMLElement>('.hero-slide'));
 let heroIndex = 0;
@@ -59,11 +59,6 @@ function dateFromHash() {
   const date = window.location.hash.slice(1);
   if (['itinerary', 'user-gallery', 'route'].includes(date) && daysByDate.has(history.state?.date)) return history.state.date as string;
   return daysByDate.has(date) ? date : days[0].date;
-}
-function announce(message: string) {
-  clearTimeout(statusTimer);
-  $('#status').textContent = message;
-  statusTimer = setTimeout(() => { $('#status').textContent = ''; }, 4500);
 }
 function updateNavigation() {
   const day = daysByDate.get(current)!;
@@ -89,11 +84,6 @@ function showDay(date: string, { push = false, scroll = false, announceChange = 
   if (scroll) dayRoot.scrollIntoView({block:'start', behavior:'instant'});
   if (announceChange) announce(`${fullDate(date)}. ${daysByDate.get(date)!.overnight ? `Menginap di ${daysByDate.get(date)!.overnight!.name}.` : 'Penerbangan pulang ke Jakarta.'}`);
 }
-function openDialog(dialog: HTMLDialogElement, opener: HTMLElement) {
-  returnFocus.set(dialog, opener);
-  dialog.showModal();
-  document.documentElement.classList.add('dialog-open');
-}
 function openOverview(opener: HTMLElement, push = false) {
   $('#overview-content').innerHTML = overviewContent(current);
   if (push && location.hash !== '#route') history.pushState({date:current}, '', '#route');
@@ -102,51 +92,6 @@ function openOverview(opener: HTMLElement, push = false) {
 overview.addEventListener('close', () => {
   if (location.hash === '#route') history.replaceState({date:current}, '', `#${current}`);
 });
-function showUserPhoto(index: number) {
-  userPhotoIndex = (index + userPhotoIds.length) % userPhotoIds.length;
-  updatePhotoContent(photoDialog, userPhotoDetail(userPhotoIds[userPhotoIndex]));
-  photoCounter.textContent = `${userPhotoIndex + 1} / ${userPhotoIds.length}`;
-  photoNavigation.forEach(button => { button.hidden = false; button.disabled = userPhotoIds.length < 2; });
-}
-photoDialog.addEventListener('keydown', event => {
-  if (userPhotoIndex === null || (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft')) return;
-  event.preventDefault();
-  showUserPhoto(userPhotoIndex + (event.key === 'ArrowRight' ? 1 : -1));
-});
-photoDialog.addEventListener('close', () => { userPhotoIndex = null; });
-const dialogs = [picker,photoDialog,overview,copyDialog];
-for (const dialog of dialogs) {
-  dialog.addEventListener('close', () => {
-    const anotherDialogOpen = dialogs.some(item => item.open);
-    document.documentElement.classList.toggle('dialog-open',anotherDialogOpen);
-    if (anotherDialogOpen) return;
-    const opener = returnFocus.get(dialog);
-    if (opener?.isConnected) opener.focus({preventScroll:true});
-  });
-  dialog.addEventListener('click', event => {
-    if (event.target !== dialog) return;
-    const r = dialog.getBoundingClientRect();
-    if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close();
-  });
-}
-async function copyText(text: string, button: HTMLElement, success: string) {
-  const original = button.innerHTML;
-  button.setAttribute('aria-busy','true');
-  try {
-    await navigator.clipboard.writeText(text);
-    button.innerHTML = `${icon('check')}<span>Tersalin</span>`;
-    announce(success);
-    setTimeout(() => { if(button.isConnected) button.innerHTML = original; },2200);
-  } catch {
-    const input = $<HTMLInputElement>('#manual-copy');
-    input.value = text;
-    const sourceDialog = button.closest('dialog');
-    const opener = sourceDialog ? returnFocus.get(sourceDialog) ?? button : button;
-    sourceDialog?.close();
-    openDialog(copyDialog,opener);
-    input.focus(); input.select();
-  } finally { button.removeAttribute('aria-busy'); }
-}
 document.addEventListener('click', event => {
   if (!(event.target instanceof Element)) return;
   const dateLink = event.target.closest<HTMLAnchorElement>('[data-date]');
@@ -189,26 +134,13 @@ document.addEventListener('click', event => {
   else if (action === 'pick-day') {
     $('#picker-days').innerHTML = pickerItems(current,'modal'); openDialog(picker,button);
   } else if (action === 'close') button.closest('dialog')?.close();
-  else if (action === 'user-photo') {
-    const index = userPhotoIds.indexOf(button.dataset.photo!);
-    if (index < 0) return;
-    showUserPhoto(index);
-    openDialog(photoDialog,button);
-  }
-  else if (action === 'photo-previous' || action === 'photo-next') {
-    if (userPhotoIndex !== null) showUserPhoto(userPhotoIndex + (action === 'photo-next' ? 1 : -1));
-  }
+  else if (action === 'user-photo') photoView.openUser(button);
+  else if (action === 'photo-previous' || action === 'photo-next') photoView.step(action === 'photo-next' ? 1 : -1);
   else if (action === 'overview' && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
     event.preventDefault();
     openOverview(button, button instanceof HTMLAnchorElement);
   }
-  else if (action === 'photo') {
-    userPhotoIndex = null;
-    photoCounter.textContent = '';
-    photoNavigation.forEach(control => { control.hidden = true; });
-    updatePhotoContent(photoDialog, photoDetail(button.dataset.place!));
-    openDialog(photoDialog,button);
-  }
+  else if (action === 'photo') photoView.openPlace(button);
   else if (action === 'previous' || action === 'next') {
     const index = days.findIndex(day => day.date === current) + (action === 'next' ? 1 : -1);
     if (days[index]) showDay(days[index].date,{push:true,scroll:true});
@@ -220,13 +152,7 @@ document.addEventListener('click', event => {
     void copyText(url.href,button,'Tautan hari ini tersalin.');
   }
 });
-document.addEventListener('error', event => {
-  if (!(event.target instanceof HTMLImageElement)) return;
-  const image = event.target; image.hidden = true;
-  const message = document.createElement('span'); message.className = 'photo-error';
-  message.textContent = 'Foto belum termuat. Ketuk untuk melihat keterangan dan sumbernya.';
-  image.parentElement?.append(message);
-},true);
+showPhotoErrors();
 const historyChanged = () => {
   const date = dateFromHash();
   if (date !== current) showDay(date,{scroll:daysByDate.has(location.hash.slice(1))});
@@ -243,7 +169,9 @@ if (location.hash === '#route') openOverview($('.site-navigation [data-action="o
 }
 
 initializePhotoLoading();
+const calmItinerary = document.querySelector<HTMLElement>('[data-calm-itinerary]');
 if (document.getElementById('day-view')) initializeItinerary();
+else if (calmItinerary) initializeCalmItinerary(calmItinerary);
 else initializeGuide();
 initializeRouteMap();
 initializeWeather();

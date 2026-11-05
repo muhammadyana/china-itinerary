@@ -38,6 +38,8 @@ The destination directory uses the shared `renderDestinationCard` renderer, wide
 
 The initial page is prerendered so the first day and PDF link remain available without JavaScript. Selecting a day requires JavaScript. Each date uses a `#YYYY-MM-DD` fragment; Back/Forward restores the corresponding date.
 
+The calm option has the same two planning views. `/places/calm-itinerary/` (`src/calm-itinerary.ts`) reuses the homepage's day components from `src/render.ts`; all 14 days are prerendered and stack in order without JavaScript; with it, a one-line inline script sets `.js` before the panels are parsed so `src/calm.css` shows only the linked day (`:target`) from the first paint, and `src/calm-itinerary-main.ts` then shows one day at a time with the same `#YYYY-MM-DD` history, sidebar, mobile day bar and picker. `/places/calm-prepare/` (`src/calm-prepare.ts`) mirrors `/places/prepare/` with the main plan's bookings for 8 and 18–21 November plus the calm bookings, grouped by urgency, and a section of what not to buy. Dialogs, copy buttons and the photo viewer for both day views live in `src/day-controls.ts`.
+
 `npm run build` exports a script-free print document and generates the downloadable PDF with Playwright Chromium. Download links receive a fresh cache key per build and browser session so a CDN cannot retain an earlier itinerary at the same URL. The development server generates the PDF on request from freshly loaded source data; concurrent downloads share the in-progress generation. Both paths use local resources only and include a generation timestamp and author credit.
 
 ## Current temperature

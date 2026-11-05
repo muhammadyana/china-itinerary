@@ -1,6 +1,6 @@
 import { days, places } from './itinerary.ts';
 import { pageForPlace, placePath } from './guides.ts';
-import { mainPlanPages, renderSiteSearch, searchTrigger, tripPlanningPages } from './site-search.ts';
+import { calmItineraryPage, calmPreparePage, mainPlanPages, renderSiteSearch, searchTrigger, tripPlanningPages } from './site-search.ts';
 import { logoMark } from './logo.ts';
 
 const initializedDocuments = new WeakSet<Document>();
@@ -25,8 +25,9 @@ const mainPlanLinks: NavLink[] = [
 ];
 
 const calmPlanLinks: NavLink[] = [
-  { href: '/places/calm/#calm-days-title', label: 'Itinerary santai' },
+  calmItineraryPage,
   { href: '/places/calm/#calm-map', label: 'Peta rute santai' },
+  calmPreparePage,
 ];
 
 // One menu entry per guide page, in the order the itinerary first visits it.
