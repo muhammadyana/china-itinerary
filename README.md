@@ -1,6 +1,6 @@
 # Autumn in China
 
-A static travel guide with a Bahasa Indonesia interface for 8–21 November 2026. Built with Vite, TypeScript, semantic HTML, and plain CSS.
+A static travel guide with a Bahasa Indonesia interface for 8–21 November 2026, plus an optional private trip assistant. Built with Vite, TypeScript, semantic HTML, and plain CSS.
 
 Public website: [china.muhammadyana.me](https://china.muhammadyana.me). Browse the [destination directory](https://china.muhammadyana.me/places/) or open a guide such as [/places/jiuzhaigou/](https://china.muhammadyana.me/places/jiuzhaigou/).
 
@@ -22,7 +22,15 @@ npm run preview -- --host 127.0.0.1 --port 4173
 
 Open <http://127.0.0.1:4173/>. To jump directly to 20 November, open <http://127.0.0.1:4173/#2026-11-20>.
 
-Upload the contents of `dist/` to a static host. Assets use root-relative paths; deploy at the domain root. Nginx serves each destination directory through its generated `index.html`; the site requires no backend, API keys, third-party font loading, or runtime image service. The PDF is downloaded only when its link is opened.
+Upload the contents of `dist/` to a static host. Assets use root-relative paths; deploy at the domain root. Nginx serves each destination directory through its generated `index.html`; the pages require no backend, API keys, third-party font loading, or runtime image service. The PDF is downloaded only when its link is opened. The only server-side piece is the optional trip assistant below; without it the site works unchanged and visitors never see it.
+
+## Trip assistant (Tanya AI)
+
+The site stays static; the assistant is a separate, same-origin service. Nginx proxies `/api/ask/` to a small Node server (`ops/ask/`, bundled into one file by `npm run build:ask`, typechecked by `npm run check:ask`) on `127.0.0.1:8790`. It reads the deployed HTML of every page except `/places/ask/`, the 14-day print page first, sends that text as a cached system prompt to the Anthropic API (`claude-haiku-5-5`, web search at most 3 times per question) and streams the answer back as server-sent events. It reads the live release, so every content deploy updates what the assistant knows.
+
+The unlock page `/places/ask/` is `noindex` and appears in no menu or search. After the password is accepted, the browser holds a 30-day HttpOnly session cookie and an `ask-unlocked` flag in `localStorage`; only then does a floating "Tanya AI" button appear on every page. Each question carries the page path, title and what is on screen (the selected day on the homepage, route map and calm option). Browsers without the flag make no `/api/ask` request. Client code: `src/ask*.ts` and `src/ask.css`; answers are built as DOM nodes, never `innerHTML`.
+
+Locally, `npm run dev` proxies `/api/ask` to `127.0.0.1:8790` (`vite preview` does not). Run the bundled server there with `ASK_DEV=1`, `ASK_SITE_ROOT=dist` and the environment keys listed in [ops/README.md](ops/README.md#trip-assistant-service), which also covers installation and costs.
 
 ## Update the itinerary
 
@@ -114,6 +122,6 @@ The browser suite covers all generated documents, complete sightseeing-stop cove
 
 The [Test and deploy](.github/workflows/deploy.yml) workflow runs on pull requests and pushes to `main`. CI installs Node 24, runs the build and browser tests, and packages a verified static archive. Only pushes to `main` or manual runs on `main` can deploy to the `production` environment.
 
-Nginx serves `current/public` on the server. The dedicated deployment key is restricted to the `ops/deploy.py` handler and cannot run arbitrary shell commands. The handler validates the archive and hashes, activates the release atomically, checks origin HTTPS, and restores the previous release if verification fails. The workflow also checks the commit marker over public HTTPS.
+Nginx serves `current/public` on the server and proxies `/api/ask/` to the trip assistant, which is installed by hand and is not part of the workflow. The dedicated deployment key is restricted to the `ops/deploy.py` handler and cannot run arbitrary shell commands. The handler validates the archive and hashes, activates the release atomically, checks origin HTTPS, and restores the previous release if verification fails. The workflow also checks the commit marker over public HTTPS.
 
 Nginx configuration: [ops/nginx.conf](ops/nginx.conf). Installation, environment secrets, and rollback: [ops/README.md](ops/README.md). Raw photos, build archives, local evidence, and credentials are excluded from Git; all WebP assets required for the build are in `public/`.

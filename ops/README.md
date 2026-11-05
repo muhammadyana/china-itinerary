@@ -33,7 +33,37 @@ The `production` environment allows only the `main` branch. It contains secrets 
 
 `.github/workflows/deploy.yml` tests pull requests without deployment credentials. A successful push or manual run on `main` uploads the tested artifact, invokes the restricted handler, and verifies the revision at public HTTPS `/release.json`. Actions are pinned to full commit SHAs. Builds use Node 24 and Playwright Chromium; local tests use installed Google Chrome.
 
-The checked-in `nginx.conf` matches the active site: HTTP redirects to HTTPS, static assets are served from `current/public`, and the shared ACME webroot stays outside releases. Nginx configuration and certificate renewal are server administration tasks, not part of the upload protocol.
+The checked-in `nginx.conf` matches the active site: HTTP redirects to HTTPS, static assets are served from `current/public`, and the shared ACME webroot stays outside releases. Its `/api/ask/` block is an inline copy of `ask/nginx-ask.conf`; on the server, `ask/install.sh` adds `include snippets/china-itinerary-ask.conf;` at that position instead, and leaves a site file that already has its own `/api/ask/` block unchanged. Nginx configuration and certificate renewal are server administration tasks, not part of the upload protocol.
+
+## Trip assistant service
+
+"Tanya AI" is an optional, password-protected Node service behind the same origin. Static deploys do not touch it: it reads the HTML of the live release from `current/public` (every page except `places/ask/`) and rebuilds that text when the `current` symlink changes, so new content reaches the assistant without a restart. `places/ask/index.html` is a normal `places/<slug>/index.html` path for `deploy.py`.
+
+- `china-itinerary-ask.service`: systemd unit (`DynamicUser`, read-only filesystem) running `/usr/bin/node /opt/china-itinerary-ask/ask-server.mjs` on `127.0.0.1:8790`.
+- `nginx-ask.conf`: installed as `/etc/nginx/snippets/china-itinerary-ask.conf`; proxies `/api/ask/` without buffering.
+- `install.sh`: installs or updates the bundle, unit, env file and snippet; rolls nginx back if `nginx -t` fails.
+- Source, bundled by `npm run build:ask` into `ops/ask/dist/ask-server.mjs` (Node built-ins only) and typechecked by `npm run check:ask`: `server.ts` (routes, Origin and JSON checks, streaming), `auth.ts` (scrypt password, signed session cookie), `chat.ts` (request limits, Anthropic call, web search), `prompt.ts` (instructions, China date and current page), `corpus.ts` (HTML to text), `limits.ts`, `config.ts`.
+
+Endpoints: `GET /api/ask/health`, `GET /api/ask/session`, `POST /api/ask/login`, `POST /api/ask/logout` and `POST /api/ask/chat` (server-sent events). Error bodies are `{"error": "<Indonesian message>"}`.
+
+`/etc/china-itinerary-ask.env` (root:root `0600`, written by `install.sh`) holds `ANTHROPIC_API_KEY`, `ASK_PASSWORD_HASH` (scrypt) and `ASK_SESSION_SECRET` (generated). Optional keys keep their defaults when absent: `ASK_SITE_ROOT`, `ASK_ORIGIN` (`https://china.muhammadyana.me`), `ASK_HOST`, `ASK_PORT` (`8790`), `ASK_WEB_SEARCH_MAX_USES` (`3`). `ASK_DEV=1` also accepts `http://localhost` origins and is for local runs only.
+
+Install or update from a Mac:
+
+```sh
+npm run build:ask
+ssh deploy@119.28.110.221 'install -d -m 0700 ~/china-itinerary-ask'
+scp ops/ask/dist/ask-server.mjs ops/ask/china-itinerary-ask.service ops/ask/nginx-ask.conf ops/ask/install.sh deploy@119.28.110.221:china-itinerary-ask/
+ssh -t deploy@119.28.110.221 'sudo bash ~/china-itinerary-ask/install.sh'
+```
+
+The files stay in `deploy`'s home, not in `/tmp`: root runs them, so no other account may be able to write there, and they survive a reboot for later reruns. `install.sh` refuses a staging directory or file that is not owned by root or the sudo user, or that group or others can write. The script asks for the Anthropic API key and the assistant password; both are required on the first install, and an empty answer keeps the current value. It restarts the service, waits for `/api/ask/health`, reloads nginx and prints the public `/api/ask/session` check.
+
+- Rotate the key or password: rerun the commands above and type only the new value. A new password signs out every device.
+- Sign out every device without changing the password: delete the `ASK_SESSION_SECRET` line from the env file, then rerun `install.sh`; it generates a new secret.
+- Logs: `journalctl -u china-itinerary-ask -f`. Each chat logs one line with duration, stop reason and token counts (input, cache read and write, output, searches); questions and answers are never logged.
+
+Cost: the model is `claude-haiku-5-5`. The site text is about 505,000 characters, roughly 170,000–200,000 tokens (Anthropic's rule of thumb is about 2.5 characters per token; not yet counted with the API), so requests fall in Haiku 5.5's higher price tier for prompts over 100,000 tokens. That text is cached for one hour: a question after an idle hour writes the cache at twice the input rate, questions within the hour read it at a tenth and keep it alive. Web search runs at most 3 times per question and is billed per search. In-process limits apply to everyone together and reset on restart: 30 chats per 10 minutes, 300 per 24 hours, and 10 failed logins per 15 minutes (which also locks out the owner for that time). Set a monthly spend limit for the key's workspace in the Anthropic Console as the hard cap.
 
 ## Activation and recovery
 

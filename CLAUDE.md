@@ -21,6 +21,8 @@ npx playwright test tests/guides.spec.ts          # one file
 npx playwright test tests/guides.spec.ts -g "…"   # one test by title
 PLAYWRIGHT_PORT=4180 npm run test:e2e             # when 4173 is taken
 python3 -m unittest discover -s ops -p 'test_*.py' -v   # deploy handler/packaging tests
+npm run build:ask                 # bundle the trip assistant service to ops/ask/dist/ask-server.mjs
+npm run check:ask                 # typecheck ops/ask/ (npx tsc does not cover it)
 ```
 
 - Build and tests need local Google Chrome (Playwright `channel: 'chrome'` outside CI; CI uses installed Chromium).
@@ -56,6 +58,8 @@ python3 -m unittest discover -s ops -p 'test_*.py' -v   # deploy handler/packagi
 
 **Runtime APIs (browser only, no keys):** Open-Meteo in `src/weather.ts`, Frankfurter ECB rate in `src/currency.ts`. Prerendered pages carry a dated static CNY→IDR rate (constant in `src/currency.ts`); weather has no static reading. Tests must stub these with `page.route(...)` (existing specs abort or fulfill them); CI must not hit live APIs. `currencyText()` escapes plain text before adding conversion markup: pass it text, never HTML.
 
+**Trip assistant (`/api/ask/`, the only same-origin backend, optional and private):** the Node service in `ops/ask/` answers with `claude-haiku-5-5` and reads the deployed HTML (every page except `/places/ask/`) as its knowledge, so content deploys update it automatically; keep page content meaningful as plain text. `src/ask*.ts` drive the unlock page `/places/ask/` (`noindex`, deliberately left out of the menus and `planningPages`/search) and the floating widget, which mounts only after a device unlocked it (`ask-unlocked` in `localStorage`); without that flag the browser sends no `/api/ask` request, so tests need no stub. Answers become DOM nodes in `src/ask-markdown.ts`, never `innerHTML`. `npm run dev` proxies `/api/ask` to `127.0.0.1:8790`; `vite preview` does not.
+
 **PDF:** `ops/generate-pdf.mjs` opens `/print/` in Chromium, aborts every request outside the page origin and fails on any non-OK response. Print output must use local resources only. `pdfDownloadUrl` appends a `Date.now()` cache key.
 
 ## Deployment
@@ -63,6 +67,8 @@ python3 -m unittest discover -s ops -p 'test_*.py' -v   # deploy handler/packagi
 `.github/workflows/deploy.yml`: on PRs and pushes to `main`, run the ops unit tests (blocking), `npm run test:e2e` (non-blocking: failures only warn), a clean `npm run build` (blocking), then `ops/package.py`. Only `main` deploys, over a restricted SSH key to `ops/deploy.py` on the server.
 
 `allowed_path()` in `ops/deploy.py` (also used by `ops/package.py`) is a strict allowlist of output paths: root `index.html`/`release.json`/icons, `assets/*.{js,css,woff2}`, `photos/*.{webp,avif}`, `places/<slug>/index.html`, `social/<photo-id>.jpg` (one card per place page, made by `ops/prepare-social-images.mjs`), two exact PDF names and `print/index.html`. Any new output path fails packaging. Adding one means updating `allowed_path()` and its coverage in `ops/test_deploy.py`, and the root-owned installed copy on the server must be updated separately before deploying (see `ops/README.md`).
+
+The trip assistant is not part of this pipeline: `ops/ask/install.sh` installs it by hand as the `china-itinerary-ask` systemd service on `127.0.0.1:8790`, and nginx proxies `/api/ask/` to it (see "Trip assistant service" in `ops/README.md`). A static deploy needs no restart: the service rebuilds its text when `current` changes.
 
 ## Content and repo rules
 
