@@ -264,7 +264,7 @@ export const chengduGuides: DestinationGuide[] = [
       steps: [
         'Check-out dan titip koper di hotel, lalu pesan DiDi sekitar 08.45 ke 钟书阁(融创茂店) atau 成都融创茂. Alamatnya 至臻路1号 融创茂 二楼 (lantai 2). Beberapa unggahan menulis 都江堰大道211号; Trip.com dan sumber lain memakai 至臻路1号.',
         'Jaraknya sekitar 58 km, ±45 menit tanpa macet menurut OSRM. Third Eye Traveller menulis 60–90 menit, tergantung lalu lintas. Mal ini bagian dari kompleks Sunac (taman hiburan, taman air, dan snow world) di barat daya pusat kota Dujiangyan.',
-        'Kembali dengan DiDi ke hotel, sekitar 58 km, untuk mengambil koper sebelum shuttle ke Jiuzhaigou dari Xinnanmen Bus Station (新南门汽车站), sekitar 1 km dari hotel. Simpan alamat hotel dalam bahasa Mandarin.',
+        'Kembali dengan DiDi ke hotel, sekitar 58 km, untuk mengambil koper sebelum shuttle ke Jiuzhaigou dari Xinnanmen Bus Station (新南门汽车站), sekitar 3 km dari hotel. Simpan alamat hotel dalam bahasa Mandarin.',
         'Cadangan untuk pergi: Metro jalur 2 dari 春熙路 ke ujung barat 犀浦 (15 stasiun tanpa ganti kereta), kereta S 犀浦 → 都江堰 (18–30 menit; 34 kereta pada 13 November menurut 12306, jadwal 9 November belum dicek), lalu DiDi 10–15 menit dari Stasiun Dujiangyan, 1,4 km garis lurus dari toko. Beli tiket kereta di 12306 atau Trip.com dengan paspor; sebagian kereta sudah tinggal sedikit kursi.',
         'Untuk kembali, DiDi lebih aman daripada kereta S dan Metro, karena langsung ke hotel tempat koper dititip dan shuttle berangkat 14.00.',
       ],
