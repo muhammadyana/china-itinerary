@@ -1,12 +1,11 @@
 import { escapeHtml as e, icon, siteCredit, amapLink, timelineList } from './render.ts';
 import { currencyText } from './currency.ts';
-import { renderSiteNavigation } from './site-navigation.ts';
+import { planSwitch, renderSiteNavigation } from './site-navigation.ts';
 import { pageForPlace, placePath } from './guides.ts';
-import { routeMapPath } from './route-map-main.ts';
 import { preparePath, type Link } from './bookings.ts';
 import { dayModes, mapLegs, mapPoints, overnightPoint, routeMapLayout, type RouteDefinition } from './route-map.ts';
 import {
-  calmBadgeShifts, calmBookingGroups, calmCheckedAt, calmComparison, calmDays, calmDoNotBuy, calmDoNotBuyLead, calmItineraryPath, calmLegs, calmLocalModes,
+  calmBadgeShifts, calmBookingGroups, calmCheckedAt, calmComparison, calmDays, calmDoNotBuy, calmDoNotBuyLead, calmItineraryPath, calmLegs, calmLocalModes, calmPath,
   calmMapPoints, calmPlaces, calmPreparePath, calmSources, calmTradeOffs, calmUnknowns, placeFor, type CalmDay, type CalmNote, type CalmStop,
 } from './calm-route.ts';
 import { bookingCard } from './prepare.ts';
@@ -96,7 +95,7 @@ function intro() {
       <h1 id="calm-title">Opsi santai, sekali jalan ke Yunnan.</h1>
       <p class="lead">Alternatif yang lebih tenang untuk 8–21 November: dua hari di Jiuzhaigou, Bipenggou seharian, kembali ke Chengdu sekali untuk salat Jumat dan panda, lalu kereta D239 ke Lijiang. ${nights} malam di ${bases.size} tempat menginap.</p>
       <p>Rencana utama tidak berubah. Halaman ini untuk membandingkan dan memilih; 8 November dan 18–21 November diambil langsung dari rencana utama. Diperiksa <time datetime="${calmCheckedAt}">${fullDay(calmCheckedAt)}</time>.</p>
-      <p class="prepare-link calm-page-links">${internalLink(calmItineraryPath, 'Itinerary santai, hari demi hari')}${internalLink(calmPreparePath, 'Persiapan santai')}${internalLink(routeMapPath, 'Bandingkan dengan peta rute utama')}</p>
+      <p class="prepare-link calm-page-links">${internalLink(calmItineraryPath, 'Itinerary santai, hari demi hari')}${internalLink(calmPreparePath, 'Persiapan santai')}</p>
     </div>
     <section class="prepare-section calm-compare" aria-labelledby="calm-compare-title"><h2 id="calm-compare-title">Dibanding rencana utama</h2>
       <div class="calm-compare-grid">${compareColumn('Hilang', calmComparison.dropped)}${compareColumn('Bertambah', calmComparison.added)}${compareColumn('Tetap sama', [...same, 'Temanmu bergabung 17 November malam di Shangri-La.'])}</div>
@@ -106,9 +105,10 @@ function intro() {
 
 export function calmView() {
   return `<a class="skip-link" href="#calm-days-title">Langsung ke hari demi hari</a>
-  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation()}</header>
+  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation(calmPath)}</header>
   <main class="container route-map-page calm-page" data-route-map>
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="/places/">Tempat</a>${icon('right')}<span>Opsi santai</span></nav>
+    ${planSwitch(calmPath)}
     ${intro()}
     <div id="calm-map">${routeMapLayout(calmRoute)}</div>
     <section class="prepare-section calm-days" aria-labelledby="calm-days-title"><h2 id="calm-days-title">Hari demi hari</h2>

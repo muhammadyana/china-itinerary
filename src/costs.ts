@@ -37,9 +37,10 @@ const sentences = (text: string) => text.split(/(?<=\.)\s+/);
 
 const category = (item: Booking): CostCategory => !item.mode ? 'tickets' : item.mode === 'car' || item.mode === 'taxi' ? 'cars' : 'transit';
 
-function bookingLine(item: Booking): CostLine {
+export function bookingLine(item: Booking): CostLine {
   const people = item.cost?.per === 'mobil' && item.tripDate > sharedFrom ? 2 : 1;
-  const fee = item.mode === 'train' && item.tripDate === tripcomFee.date
+  // The checkout was seen for the main plan's own 9 November train; the calm option's C5772 shows its own caveat instead.
+  const fee = bookings.includes(item) && item.mode === 'train' && item.tripDate === tripcomFee.date
     ? `Halaman pembayaran Trip.com untuk C5746 kelas dua, dilihat 4 November: tiket ${tripcomFee.ticket} ditambah biaya pemesanan ${tripcomFee.fee}, total ${tripcomFee.total}.` : undefined;
   // The note's own sentence about a missing or unsure fare, priced or not; an unpriced line without one points to where to book.
   const caveat = sentences(item.note).find(sentence => /\bbelum\b/.test(sentence)) ?? (item.cost ? undefined : sentences(item.channel)[0]);
@@ -51,7 +52,7 @@ function bookingLine(item: Booking): CostLine {
 }
 
 // A night spans the cheaper pick's lowest rate to the dearer pick's highest rate.
-function stayLine(base: StayBase, date: string): CostLine {
+export function stayLine(base: StayBase, date: string): CostLine {
   const [hotel, hostel] = [nightShare(base.hotel, date), nightShare(base.hostel, date)];
   const split = date >= sharedFrom && [base.hotel, base.hostel].some(stay => stay.room === 'Kamar privat');
   return {
@@ -72,11 +73,15 @@ export const sumLines = (lines: CostLine[]): Range => lines.reduce((total, line)
 // currencyText() reads plain digits, so CNY amounts carry no thousands separator.
 export const cnyRange = (value: Range) => value.min === value.max ? `CNY ${value.min}` : `CNY ${value.min}–${value.max}`;
 
+// Each helper takes a plan's lines and defaults to the main plan's.
 // Your share of all nights.
-export const stayTotal = () => sumLines(costLines.filter(line => line.category === 'stays'));
+export const stayTotal = (lines = costLines) => sumLines(lines.filter(line => line.category === 'stays'));
 // What the friend pays from Shangri-La on: Yunnan tickets, their room share and their half of each car or taxi.
-export const friendShare = () => sumLines(costLines.filter(line => line.withFriend));
+export const friendShare = (lines = costLines) => sumLines(lines.filter(line => line.withFriend));
 
-export const linesForDate = (date: string) => costLines.filter(line => line.date === date)
+export const linesForDate = (date: string, lines = costLines) => lines.filter(line => line.date === date)
   .sort((a, b) => costCategories.findIndex(item => item.id === a.category) - costCategories.findIndex(item => item.id === b.category));
-export const categoryTotals = () => costCategories.map(item => ({ ...item, ...sumLines(costLines.filter(line => line.category === item.id)) }));
+export const categoryTotals = (lines = costLines) => costCategories.map(item => ({ ...item, ...sumLines(lines.filter(line => line.category === item.id)) }));
+
+/** One plan's breakdown: its lines and days, and where a night's stays card and a day's schedule live. */
+export interface CostPlan { lines: CostLine[]; days: { date: string; shortTitle: string; overnight: object | null }[]; staysPath: string; dayHref: (date: string) => string }

@@ -44,7 +44,7 @@ function legBooking(leg: OverlandLeg): Booking {
   return booking;
 }
 
-// The leg's own fare as its booking note states it, e.g. "C984 12.00, tiba 13.44 (CNY 63)" or "CNY 82 ke Daocheng".
+// The leg's own fare as its booking note states it, e.g. "C984 12.00, tiba 13.40 (CNY 63)" or "CNY 82 ke Daocheng".
 function legCost(leg: OverlandLeg, booking: Booking): Booking['cost'] {
   if (!leg.fare || !booking.cost) return booking.cost;
   const fare = booking.note.match(leg.fare)?.[1];

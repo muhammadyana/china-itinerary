@@ -13,26 +13,47 @@ const escapeHtml = (value: string) => value.replace(/[&<>"']/g, character => ({
 // `date` marks a day result, so the homepage's day navigation handles it in place.
 interface SearchEntry { href: string; title: string; detail: string; names: string[]; fields: string[]; date?: string }
 interface IndexedEntry { entry: SearchEntry; names: string[]; text: string }
-interface PlanningPage { href: string; label: string; keywords: string }
+export interface PlanningPage { href: string; label: string; keywords: string }
 
 const resultLimit = 20;
 const tripTimeZone = 'Asia/Shanghai';
 const searchLabel = 'Cari tempat dan itinerary';
 
-// Also the planning links of the Itinerary menu, which groups them the same way. trains.ts and calm-render.ts import the navigation and costs.ts computes every line on load, so their paths stay literals here.
-export const mainPlanPages: PlanningPage[] = [
-  { href: routeMapPath, label: 'Peta rute 14 hari', keywords: 'map perjalanan' },
-  { href: staysPath, label: 'Hotel & hostel per malam', keywords: 'penginapan menginap akomodasi' },
-];
-const calmPlanPage: PlanningPage = { href: '/places/calm/', label: 'Opsi santai: kereta ke Yunnan', keywords: 'alternatif pilihan rute santai calm Jiuzhaigou dua hari Songpan Maoxian Bipenggou Panda Base Huangcheng Jumat D239 Lijiang Tiger Leaping Gorge Upper Gorge Napahai' };
+/** A planning topic, with its main-plan page and its calm-option twin. */
+export interface PlanTopic { topic: string; main: PlanningPage; calm: PlanningPage }
+
+// The planning pages in pairs. They feed search, the Itinerary menu (one row per topic, after the 14-day itinerary itself)
+// and the links between twins. The trains, costs and calm pages import the navigation, and costs.ts computes every line
+// on load, so their paths stay literals here.
 export const calmItineraryPage: PlanningPage = { href: '/places/calm-itinerary/', label: 'Itinerary santai', keywords: 'opsi santai calm hari demi hari jadwal timeline per hari alternatif' };
-export const calmPreparePage: PlanningPage = { href: '/places/calm-prepare/', label: 'Persiapan santai', keywords: 'opsi santai calm booking pesan tiket kereta mobil hotel jangan dibeli persiapan' };
-export const tripPlanningPages: PlanningPage[] = [
-  { href: preparePath, label: 'Persiapan & pemesanan', keywords: 'booking tiket biaya pembayaran internet darurat KBRI asuransi' },
-  { href: '/places/costs/', label: 'Rincian biaya', keywords: 'biaya harga budget anggaran rupiah yuan total per hari' },
-  { href: '/places/trains/', label: 'Kereta & timeline', keywords: 'tiket kereta train stasiun jadwal jam' },
+export const planTopics: PlanTopic[] = [
+  {
+    topic: 'Peta rute',
+    main: { href: routeMapPath, label: 'Peta rute 14 hari', keywords: 'map perjalanan' },
+    calm: { href: '/places/calm/', label: 'Opsi santai: kereta ke Yunnan', keywords: 'peta rute santai calm alternatif pilihan Jiuzhaigou dua hari Songpan Maoxian Bipenggou Panda Base Huangcheng Jumat D239 Lijiang Tiger Leaping Gorge Upper Gorge Napahai' },
+  },
+  {
+    topic: 'Hotel & hostel',
+    main: { href: staysPath, label: 'Hotel & hostel per malam', keywords: 'penginapan menginap akomodasi' },
+    calm: { href: '/places/calm-stays/', label: 'Hotel & hostel santai', keywords: 'opsi santai calm penginapan menginap akomodasi hotel hostel guesthouse per malam paspor asing' },
+  },
+  {
+    topic: 'Persiapan & pemesanan',
+    main: { href: preparePath, label: 'Persiapan & pemesanan', keywords: 'booking tiket biaya pembayaran internet darurat KBRI asuransi' },
+    calm: { href: '/places/calm-prepare/', label: 'Persiapan santai', keywords: 'opsi santai calm booking pesan tiket kereta mobil hotel jangan dibeli persiapan pemesanan' },
+  },
+  {
+    topic: 'Rincian biaya',
+    main: { href: '/places/costs/', label: 'Rincian biaya', keywords: 'biaya harga budget anggaran rupiah yuan total per hari' },
+    calm: { href: '/places/calm-costs/', label: 'Rincian biaya santai', keywords: 'opsi santai calm biaya harga budget anggaran rupiah yuan total per hari' },
+  },
+  {
+    topic: 'Kereta & timeline',
+    main: { href: '/places/trains/', label: 'Kereta & timeline', keywords: 'tiket kereta train stasiun jadwal jam' },
+    calm: { href: '/places/calm-trains/', label: 'Kereta & timeline santai', keywords: 'opsi santai calm tiket kereta train stasiun jadwal jam bagasi koper transfer bus C5772 C5754 D239' },
+  },
 ];
-export const planningPages: PlanningPage[] = [...mainPlanPages, calmPlanPage, calmItineraryPage, calmPreparePage, ...tripPlanningPages];
+export const planningPages: PlanningPage[] = [...planTopics.map(topic => topic.main), calmItineraryPage, ...planTopics.map(topic => topic.calm)];
 
 const tripDate = (date: string) => new Date(`${date}T12:00:00+08:00`);
 const dayMonth = new Intl.DateTimeFormat('id-ID', { day: 'numeric', month: 'long', timeZone: tripTimeZone });

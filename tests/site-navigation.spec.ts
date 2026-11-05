@@ -63,7 +63,7 @@ test('all three page types expose every sightseeing stop once in regional itiner
     const navigation = page.getByRole('navigation', { name: 'Navigasi utama', exact: true });
     await expect(navigation.getByRole('link', { name: 'Beranda', exact: true })).toHaveAttribute('href', '/');
     await navigation.locator('.itinerary-menu > summary').click();
-    await expect(navigation.getByRole('link', { name: 'Lihat itinerary 14 hari' })).toHaveAttribute('href', '/#itinerary');
+    await expect(navigation.getByRole('link', { name: 'Itinerary 14 hari, rencana utama' })).toHaveAttribute('href', '/#itinerary');
     await navigation.locator('.place-menu > summary').click();
     await expect(navigation.getByRole('link', { name: 'Lihat semua tempat' })).toHaveAttribute('href', '/places/');
     const links = await navigation.locator('.place-menu-group a').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')));
@@ -166,7 +166,7 @@ test('the Itinerary anchor restores its selected day through Back and reload', a
   const dayDate = page.locator('#day-view .date-line time');
   await expect(dayDate).toHaveAttribute('datetime', '2026-11-19');
   await page.locator('.itinerary-menu > summary').click();
-  await page.locator('.site-navigation').getByRole('link', { name: 'Lihat itinerary 14 hari' }).click();
+  await page.locator('.site-navigation').getByRole('link', { name: 'Itinerary 14 hari, rencana utama' }).click();
   await expect(page).toHaveURL(/\/#itinerary$/);
   await expect(dayDate).toHaveAttribute('datetime', '2026-11-19');
   await expect(page.locator('#itinerary')).toBeInViewport();

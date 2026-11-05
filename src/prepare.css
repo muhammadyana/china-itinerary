@@ -33,7 +33,7 @@
 .prepare-costs tfoot th,.prepare-costs tfoot td { border-bottom: 0; color: var(--color-ink); font-weight: 600; }
 
 .prepare-list { display: grid; gap: var(--space-sm); max-width: 72ch; margin: var(--space-md) 0 0; padding-left: 1.2em; color: var(--color-ink-2); }
-.prepare-list a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+.prepare-list a { color: var(--color-accent); font-weight: 500; text-decoration: none; }
 .prepare-contacts { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: var(--space-sm); max-width: 980px; margin: var(--space-lg) 0 0; }
 .prepare-contacts > div { padding: var(--space-md); border: 1px solid var(--color-rule); border-radius: 20px; background: var(--color-glass-solid); }
 .prepare-contacts dt { color: var(--color-muted); font-size: 13px; }
@@ -44,7 +44,7 @@
 .day-timeline li { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: var(--space-md); padding-block: var(--space-sm); border-top: 1px solid var(--color-rule); color: var(--color-ink-2); }
 .day-timeline-time { color: var(--color-accent); font-weight: 600; font-variant-numeric: tabular-nums; }
 .prepare-section-lead strong { color: var(--color-ink); font-weight: 600; }
-.prepare-section-lead a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+.prepare-section-lead a { color: var(--color-accent); font-weight: 500; text-decoration: none; }
 .prepare-sources { display: grid; gap: 0; margin: var(--space-sm) 0 0; padding: 0; list-style: none; }
 
 @media (max-width: 599px) {

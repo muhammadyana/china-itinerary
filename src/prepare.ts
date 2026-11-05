@@ -1,8 +1,8 @@
 import { escapeHtml as e, icon, siteCredit } from './render.ts';
 import { currencyText, renderExchangeRate } from './currency.ts';
-import { renderSiteNavigation } from './site-navigation.ts';
-import { bookings, type Booking, type Link, type Urgency } from './bookings.ts';
-import { cnyRange as range, costLines, costsPath, friendShare, stayTotal, sumLines } from './costs.ts';
+import { planSwitch, renderSiteNavigation } from './site-navigation.ts';
+import { bookings, preparePath, type Booking, type Link, type Urgency } from './bookings.ts';
+import { cnyRange as range, costLines, costsPath, friendShare, stayTotal, sumLines, type CostLine } from './costs.ts';
 
 export { bookings, preparePath, type Booking } from './bookings.ts';
 export { stayTotal } from './costs.ts';
@@ -28,14 +28,23 @@ const urgencyGroups: { id: Urgency; title: string; lead: string }[] = [
 ];
 
 // The table groups the same rounded lines as the cost breakdown page, so both show one total.
-const linesPer = (per: 'orang' | 'mobil') => sumLines(costLines.filter(line => line.booking?.cost?.per === per));
-export function costRows() {
+const linesPer = (per: 'orang' | 'mobil', lines: CostLine[]) => sumLines(lines.filter(line => line.booking?.cost?.per === per));
+export function costRows(lines = costLines) {
   const rows = [
-    { label: 'Tiket, kereta, bus, dan shuttle', basis: 'per orang', ...linesPer('orang') },
-    { label: 'Mobil sewa, taksi, dan transfer', basis: 'bagianmu; dari 18 November dibagi dua', ...linesPer('mobil') },
-    { label: 'Penginapan 13 malam', basis: 'bagianmu; kamar 17–20 November dibagi dua', ...stayTotal() },
+    { label: 'Tiket, kereta, bus, dan shuttle', basis: 'per orang', ...linesPer('orang', lines) },
+    { label: 'Mobil sewa, taksi, dan transfer', basis: 'bagianmu; dari 18 November dibagi dua', ...linesPer('mobil', lines) },
+    { label: 'Penginapan 13 malam', basis: 'bagianmu; kamar 17–20 November dibagi dua', ...stayTotal(lines) },
   ];
   return { rows, total: { min: rows.reduce((sum, row) => sum + row.min, 0), max: rows.reduce((sum, row) => sum + row.max, 0) } };
+}
+
+/** The cost table, the friend's share and the link to a plan's breakdown, below a section lead. */
+export function costSummary(lines: CostLine[], breakdownPath: string) {
+  const costs = costRows(lines);
+  return `<table class="prepare-costs"><thead><tr><th scope="col">Pos</th><th scope="col">Dasar</th><th scope="col">Perkiraan</th></tr></thead><tbody>${costs.rows.map(row => `<tr><th scope="row">${e(row.label)}</th><td>${e(row.basis)}</td><td>${currencyText(range(row))}</td></tr>`).join('')}</tbody><tfoot><tr><th scope="row">Total bagianmu</th><td></td><td>${currencyText(range(costs.total))}</td></tr></tfoot></table>
+      <p class="prepare-section-lead">${currencyText(`Bagian temanmu mulai 17 November: tiket Yunnan, separuh kamar, dan separuh mobil atau taksi, ${range(friendShare(lines))}.`)}</p>
+      <p class="prepare-link"><a href="${e(breakdownPath)}">Rincian biaya per hari${icon('right')}</a></p>
+      ${renderExchangeRate()}`;
 }
 
 const shortDate = (date: string) => `${Number(date.slice(-2))} Nov`;
@@ -77,6 +86,7 @@ export const checkedOn = (date: string) => new Intl.DateTimeFormat('id-ID', { da
 export const ganziHospitalSource: Link = { label: 'Haodf: RS Rakyat Prefektur Ganzi', url: 'https://www.haodf.com/hospital/4582614466/jieshao.html' };
 export const prepareSources: Link[] = [
   { label: '12306: jam mulai penjualan per stasiun', url: 'https://www.12306.cn/index/view/infos/sale_time.html' },
+  { label: '12306: jam dan tarif C984 dan C442, serta D8704 pada daftar 19 November (dicek 5 November 2026)', url: 'https://kyfw.12306.cn/otn/leftTicket/init?linktypeid=dc' },
   { label: 'China Railway: verifikasi paspor di 12306 (2023)', url: 'http://www.china-railway.com.cn/xwzx/ywsl/202311/t20231130_131696.html' },
   { label: 'Jiuzhaigou: pengumuman tiket habis', url: 'https://www.jiuzhai.com/news/notice/11492-2026-10-31-09-08-46' },
   { label: 'Xinhua Yunnan: tarif Jade Dragon dan Impression Lijiang 2026', url: 'https://www.yn.xinhuanet.com/20260702/e8f8d1a27e2845b4bf54cfc5ef8f5d36/c.html' },
@@ -156,12 +166,12 @@ export function planSections(notes: PlanNotes) {
 }
 
 export function prepareView() {
-  const costs = costRows();
   const checked = checkedOn(preparedAt);
   return `<a class="skip-link" href="#prepare-title">Langsung ke persiapan</a>
-  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation()}</header>
+  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation(preparePath)}</header>
   <main class="container prepare-page" data-prepare>
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="/places/">Tempat</a>${icon('right')}<span>Persiapan</span></nav>
+    ${planSwitch(preparePath)}
     <div class="prepare-intro">
       <h1 id="prepare-title">Sebelum berangkat, satu halaman.</h1>
       <p class="lead">Yang sudah beres, yang harus dipesan beserta jam bukanya, perkiraan biaya, cara tetap online, dan nomor penting. Diperiksa <time datetime="${preparedAt}">${checked}</time>.</p>
@@ -170,10 +180,7 @@ export function prepareView() {
     ${section('bookings', 'Pesan dan kapan', `<p class="prepare-section-lead">${bookingRules} Semua link kereta dan timeline 8–10 November ada di <a href="/places/trains/">Kereta & timeline</a>.</p>
       ${urgencySections(bookings.map(mainBookingCard))}`)}
     ${section('costs', 'Perkiraan biaya', `<p class="prepare-section-lead">Dijumlahkan dari harga di halaman ini dan pilihan penginapan termurah sampai termahal per malam. Dihitung untuk bagianmu: Sichuan sendiri, lalu kamar 17–20 November dibagi dua dengan temanmu. Belum termasuk makan, oleh-oleh, makan dan menginap sopir, biaya satu arah mobil, serta biaya pemesanan Trip.com.</p>
-      <table class="prepare-costs"><thead><tr><th scope="col">Pos</th><th scope="col">Dasar</th><th scope="col">Perkiraan</th></tr></thead><tbody>${costs.rows.map(row => `<tr><th scope="row">${e(row.label)}</th><td>${e(row.basis)}</td><td>${currencyText(range(row))}</td></tr>`).join('')}</tbody><tfoot><tr><th scope="row">Total bagianmu</th><td></td><td>${currencyText(range(costs.total))}</td></tr></tfoot></table>
-      <p class="prepare-section-lead">${currencyText(`Bagian temanmu mulai 17 November: tiket Yunnan, separuh kamar, dan separuh mobil atau taksi, ${range(friendShare())}.`)}</p>
-      <p class="prepare-link"><a href="${costsPath}">Rincian biaya per hari${icon('right')}</a></p>
-      ${renderExchangeRate()}`)}
+      ${costSummary(costLines, costsPath)}`)}
     ${planSections(mainPlanNotes)}
     ${sourcesSection(`Diperiksa ${checked} dan dicek ulang secara terpisah. Harga, jam rilis dan aturan dapat berubah; ikuti pengumuman resmi saat memesan.`, prepareSources)}
   </main>

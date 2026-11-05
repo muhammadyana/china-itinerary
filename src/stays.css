@@ -45,7 +45,7 @@
 .stay-facts dt { display: flex; align-items: flex-start; gap: var(--space-xs); color: var(--color-ink); font-size: 14px; font-weight: 500; }
 .stay-facts dt svg { width: 16px; height: 16px; margin-top: 2px; color: var(--color-accent); }
 .stay-facts dd { margin: 0; color: var(--color-ink-2); font-size: 14px; }
-.stay-facts dd span { display: block; margin-top: var(--space-2xs); }
+.stay-facts dd > span:not(.currency-estimate) { display: block; margin-top: var(--space-2xs); }
 .stay-links { display: flex; flex-wrap: wrap; gap: 0 var(--space-lg); }
 .stay-links a { display: inline-flex; align-items: center; gap: var(--space-xs); min-height: 44px; font-size: 14px; font-weight: 500; text-decoration: none; }
 .stay-sources { border-top: 1px solid var(--color-rule); font-size: 13px; }

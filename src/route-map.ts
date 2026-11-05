@@ -2,7 +2,8 @@ import { days } from './itinerary.ts';
 import { weatherLocations } from './weather-locations.ts';
 import { provinceShapes, riverLines } from './route-map-geo.ts';
 import { escapeHtml as e, icon, siteCredit } from './render.ts';
-import { renderSiteNavigation } from './site-navigation.ts';
+import { planSwitch, renderSiteNavigation } from './site-navigation.ts';
+import { routeMapPath } from './route-map-main.ts';
 
 export type Mode = 'car' | 'train' | 'bus' | 'plane';
 type LabelSide = 'n' | 's' | 'e' | 'w' | 'sw';
@@ -209,9 +210,10 @@ export function routeMapView() {
   const bases = new Set(days.flatMap(day => day.overnight ? [day.overnight.name] : []));
   const nights = days.filter(day => day.overnight).length;
   return `<a class="skip-link" href="#route-timeline-title">Langsung ke urutan hari</a>
-  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation()}</header>
+  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation(routeMapPath)}</header>
   <main class="container route-map-page" data-route-map>
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="/places/">Tempat</a>${icon('right')}<span>Peta rute</span></nav>
+    ${planSwitch(routeMapPath)}
     <div class="route-map-intro">
       <h1 id="route-map-heading">Rute ${days.length} hari, titik demi titik.</h1>
       <p class="lead">Dari Chengdu ke Kunming: ${nights} malam di ${bases.size} tempat menginap, sebagian besar lewat darat. Garis di peta menghubungkan titik menurut urutan kunjungan, bukan jalur jalan sebenarnya.</p>

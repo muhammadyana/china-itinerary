@@ -1,34 +1,30 @@
-import { escapeHtml as e, icon, siteCredit, dayBookings } from './render.ts';
-import { currencyText, renderExchangeRate } from './currency.ts';
-import { renderSiteNavigation } from './site-navigation.ts';
+import { escapeHtml as e, icon, siteCredit } from './render.ts';
+import { currencyText } from './currency.ts';
+import { planSwitch, renderSiteNavigation } from './site-navigation.ts';
 import { preparePath } from './bookings.ts';
 import {
-  bookingRules, checkedOn, diqingHospital, doneList, ganziHospitalSource, link, list, mainBookingCard, planSections, prepareSources, section, sourcesSection, urgencySections,
+  bookingRules, checkedOn, costSummary, diqingHospital, doneList, ganziHospitalSource, link, list, mainBookingCard, planSections, prepareSources, section, sourcesSection, urgencySections,
   type BookingCard, type PlanNotes,
 } from './prepare.ts';
+import { cnyRange } from './costs.ts';
+import { calmCostLines, calmCostsPath, calmSharedBookings } from './calm-costs.ts';
 import {
-  calmBookingGroups, calmCheckedAt, calmDays, calmDoNotBuy, calmDoNotBuyLead, calmItineraryPath, calmPath, calmSources, type CalmBooking,
+  calmBookingGroups, calmCheckedAt, calmDoNotBuy, calmDoNotBuyLead, calmItineraryPath, calmPath, calmPreparePath, calmSources, type CalmBooking,
 } from './calm-route.ts';
 
 // The calm option's own bookings from calm-route.ts, plus the main plan's bookings for the days the two plans share.
 export const calmCard = (item: CalmBooking, id?: string): BookingCard => ({
-  date: item.date, until: item.until, title: item.item, urgency: item.urgency, link: item.link, id,
+  date: item.date, until: item.until, title: item.item, urgency: item.urgency, link: item.link, id, price: item.cost && `${cnyRange(item.cost)} / ${item.cost.per}`,
   facts: [['Harga', currencyText(item.price)], ['Cara pesan', currencyText(item.channel)], ['Dibuka', currencyText(item.opens)]],
 });
-const covers = (item: CalmBooking, date: string) => item.date <= date && date <= (item.until ?? item.date);
-const stayItems = calmBookingGroups.filter(group => group.id === 'stays').flatMap(group => group.items);
-/** The calm stay booked for a night, and the id its card carries on the calm preparation page. */
-export const calmStayFor = (date: string) => stayItems.find(item => covers(item, date));
-export const stayCardId = (item: CalmBooking) => `stay-${item.date}`;
+/** The id a stays card carries on the calm preparation page. */
+const stayCardId = (item: CalmBooking) => `stay-${item.date}`;
 /** Tickets and transport for one calm-only date; stays have their own link in the day header, as on the homepage.
  * A ticket or car with `until` is two one-way trips (the Maoxian–Bipenggou car), so it shows on those two dates only. */
 export const calmDayBookings = (date: string) => calmBookingGroups.filter(group => group.id !== 'stays').flatMap(group => group.items.filter(item => item.date === date || item.until === date));
 
-const sharedDates = calmDays.filter(day => day.fromMain).map(day => day.date);
-// The main plan's own items for the shared dates: the same transport and ticket rows its day panels list.
-const sharedBookings = [...new Set(sharedDates.flatMap(dayBookings))];
 const calmCards = () => [
-  ...sharedBookings.map(mainBookingCard),
+  ...calmSharedBookings.map(mainBookingCard),
   ...calmBookingGroups.flatMap(group => group.items.map(item => calmCard(item, group.id === 'stays' ? stayCardId(item) : undefined))),
 ].sort((a, b) => a.date.localeCompare(b.date));
 
@@ -46,7 +42,7 @@ const pageLink = (url: string, label: string) => link({ url, label });
 function intro() {
   return `<div class="prepare-intro">
       <h1 id="prepare-title">Persiapan opsi santai, satu halaman.</h1>
-      <p class="lead">Kalau memilih opsi santai: yang sudah beres, yang harus dipesan beserta jam bukanya, cara tetap online, dan nomor penting. Diperiksa <time datetime="${calmCheckedAt}">4–5 November 2026</time>.</p>
+      <p class="lead">Kalau memilih opsi santai: yang sudah beres, yang harus dipesan beserta jam bukanya, perkiraan biaya, cara tetap online, dan nomor penting. Diperiksa <time datetime="${calmCheckedAt}">4–5 November 2026</time>.</p>
       <p class="prepare-link calm-page-links">${pageLink(calmItineraryPath, 'Itinerary santai, hari demi hari')}${pageLink(calmPath, 'Bandingkan dengan rencana utama')}</p>
       ${doneList()}
     </div>`;
@@ -58,19 +54,19 @@ const bookingsSection = () => section('bookings', 'Pesan dan kapan', `<p class="
 
 const doNotBuySection = () => section('do-not-buy', 'Jangan dibeli kalau pilih opsi ini', `<p class="prepare-section-lead">${e(calmDoNotBuyLead)}</p>${list(calmDoNotBuy.map(currencyText))}`);
 
-// Costs stay uncomputed: most car and hotel prices for the new dates are still unknown.
-const costsSection = () => section('costs', 'Perkiraan biaya', `<p class="prepare-section-lead">Rincian biaya belum dihitung untuk opsi santai: harga semua mobil dan hotel untuk tanggal-tanggal baru belum diketahui.</p>
-      <p class="prepare-link">${pageLink(`${calmPath}#unknowns`, 'Yang belum diketahui')}</p>
-      ${renderExchangeRate()}`);
+// The main preparation page's cost table, summed from the calm option's own lines (calm-costs.ts).
+const costsSection = () => section('costs', 'Perkiraan biaya', `<p class="prepare-section-lead">Dijumlahkan dari harga di halaman ini dan pilihan penginapan termurah sampai termahal per malam di halaman Hotel &amp; hostel santai. Mobil 11, 13, dan 16 November baru perkiraan dari tarif sewa per jam Trip.com. Dihitung untuk bagianmu: sendiri sampai 16 November, lalu kamar mulai malam 17 November dan mobil mulai 18 November dibagi dua dengan temanmu. Belum termasuk makan, oleh-oleh, makan dan menginap sopir, biaya kembali kosong mobil, pilihan cadangan, taksi kota yang belum terdaftar, serta biaya pemesanan Trip.com.</p>
+      ${costSummary(calmCostLines, calmCostsPath)}`);
 
 // The calm page shows no Ganzi hospital, so it drops that source.
 const sources = () => sourcesSection(`Opsi santai diperiksa ${checkedOn(calmCheckedAt)}; bagian umum serta 8 dan 18–21 November memakai sumber rencana utama, diperiksa 4 November 2026. Harga, jam rilis dan aturan dapat berubah; ikuti pengumuman resmi saat memesan.`, [...calmSources, ...prepareSources.filter(source => source !== ganziHospitalSource)]);
 
 export function calmPrepareView() {
   return `<a class="skip-link" href="#prepare-title">Langsung ke persiapan</a>
-  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation()}</header>
+  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation(calmPreparePath)}</header>
   <main class="container prepare-page" data-prepare>
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="${calmPath}">Opsi santai</a>${icon('right')}<span>Persiapan santai</span></nav>
+    ${planSwitch(calmPreparePath)}
     ${intro()}
     ${bookingsSection()}
     ${doNotBuySection()}

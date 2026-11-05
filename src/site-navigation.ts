@@ -1,6 +1,6 @@
 import { days, places } from './itinerary.ts';
 import { pageForPlace, placePath } from './guides.ts';
-import { calmItineraryPage, calmPreparePage, mainPlanPages, renderSiteSearch, searchTrigger, tripPlanningPages } from './site-search.ts';
+import { calmItineraryPage, planTopics, renderSiteSearch, searchTrigger } from './site-search.ts';
 import { logoMark } from './logo.ts';
 
 const initializedDocuments = new WeakSet<Document>();
@@ -19,16 +19,16 @@ const topLinks: NavLink[] = [
   { href: '/#route', label: 'Rute', action: 'overview' },
 ];
 
-const mainPlanLinks: NavLink[] = [
-  { href: '/#itinerary', label: 'Lihat itinerary 14 hari', action: 'itinerary' },
-  ...mainPlanPages,
+// One row per planning topic, each with the main plan and the calm option. The 14-day itinerary is the homepage,
+// which search reaches day by day instead of as a planning page.
+interface PlanRow { topic: string; main: NavLink; calm: NavLink }
+const planRows: PlanRow[] = [
+  { topic: 'Itinerary 14 hari', main: { href: '/#itinerary', label: 'Itinerary 14 hari', action: 'itinerary' }, calm: calmItineraryPage },
+  ...planTopics,
 ];
-
-const calmPlanLinks: NavLink[] = [
-  calmItineraryPage,
-  { href: '/places/calm/#calm-map', label: 'Peta rute santai' },
-  calmPreparePage,
-];
+const plans = { main: { short: 'Utama', name: 'rencana utama' }, calm: { short: 'Santai', name: 'opsi santai' } };
+type Plan = keyof typeof plans;
+const pagePath = (href: string) => href.split('#')[0];
 
 // One menu entry per guide page, in the order the itinerary first visits it.
 function destinations(): Destination[] {
@@ -64,23 +64,35 @@ const regionGroup = (region: Region, places: Destination[]) =>
 const navMenu = (name: string, label: string, panel: string) =>
   `<details class="nav-menu ${name}-menu"><summary>${label}<span class="nav-menu-chevron" aria-hidden="true"></span></summary><div class="nav-menu-panel ${name}-menu-panel">${panel}</div></details>`;
 
-// The two plans side by side; the trip pages below them stay untitled.
-const itineraryGroup = (title: string, links: NavLink[]) =>
-  `<section class="itinerary-menu-group">${title ? `<h2>${title}</h2>` : ''}<ol role="list">${links.map(link => `<li>${panelLink(link)}</li>`).join('')}</ol></section>`;
+// Both plans as a pair of real links; the visible "Utama"/"Santai" gains its topic in the accessible name.
+function planChoice(row: PlanRow, plan: Plan, current: string) {
+  const link = row[plan];
+  const currentPage = pagePath(link.href) === current ? ' aria-current="page"' : '';
+  return `<a class="plan-choice" href="${escapeHtml(link.href)}"${actionAttribute(link.action)} aria-label="${escapeHtml(`${row.topic}, ${plans[plan].name}`)}"${currentPage}>${plans[plan].short}</a>`;
+}
 
-const itineraryMenu = () => navMenu('itinerary', 'Itinerary', [
-  itineraryGroup('Rencana utama', mainPlanLinks),
-  itineraryGroup('Opsi santai', calmPlanLinks),
-  itineraryGroup('', tripPlanningPages),
-].join(''));
+const planRow = (row: PlanRow, current: string) =>
+  `<li class="plan-row"><span class="plan-row-topic">${escapeHtml(row.topic)}</span><span class="plan-row-choices">${planChoice(row, 'main', current)}${planChoice(row, 'calm', current)}</span></li>`;
+
+const itineraryMenu = (current: string) =>
+  navMenu('itinerary', 'Itinerary', `<ol class="plan-rows" role="list">${planRows.map(row => planRow(row, current)).join('')}</ol>`);
+
+/** On a planning page (or the homepage itinerary), a quiet link to the same topic in the other plan; empty elsewhere. */
+export function planSwitch(current: string): string {
+  const row = planRows.find(item => pagePath(item.main.href) === current || pagePath(item.calm.href) === current);
+  if (!row) return '';
+  const [target, label] = pagePath(row.main.href) === current ? [row.calm, 'Lihat versi opsi santai'] : [row.main, 'Lihat versi rencana utama'];
+  return `<p class="plan-switch"><a class="text-link" href="${escapeHtml(target.href)}">${label}</a></p>`;
+}
 
 function placeMenu() {
   const places = destinations();
   return navMenu('place', 'Tempat', [panelLink({ href: '/places/', label: 'Lihat semua tempat' }), regionGroup('Sichuan', places), regionGroup('Yunnan', places)].join(''));
 }
 
-export function renderSiteNavigation(): string {
-  const items = [homeLink(home), itineraryMenu(), placeMenu(), ...topLinks.map(topLink), searchTrigger()].join('');
+/** `current` is the page's path, so the Itinerary menu can mark it. */
+export function renderSiteNavigation(current = ''): string {
+  const items = [homeLink(home), itineraryMenu(current), placeMenu(), ...topLinks.map(topLink), searchTrigger()].join('');
   return `<nav class="site-navigation" aria-label="Navigasi utama">${items}</nav>${renderSiteSearch()}`;
 }
 

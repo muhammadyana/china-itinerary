@@ -377,7 +377,7 @@ export const stayBases: StayBase[] = [
     hostel: {
       kind: 'Hostel', name: 'Kunming Upland International Youth Hostel', chinese: '昆明倾城国际青年旅舍', chineseAddress: '昆明市五华区华山西路92号',
       room: 'Kamar privat', location: 'Huashan West Road No. 92, antara Green Lake dan Kota Tua; 3 menit ke metro Huashan West Road dan sekitar 1,6 km ke kawasan halal.',
-      price: 'CNY 147–178 per malam', priceNote: 'Hostelworld untuk 20 November 2026: Standard Single Private Ensuite CNY 147–158, Standard Double CNY 166–178.',
+      price: 'CNY 166–178 per malam', priceNote: 'Hostelworld untuk 20 November 2026, dicek untuk satu tamu: Standard Double CNY 166–178. Standard Single Private Ensuite CNY 147–158 hanya untuk satu orang, jadi tidak dihitung untuk malam berdua.',
       foreignGuests: 'Hostelworld 9,4 dari 1.818 penilaian; ada ulasan tamu Kanada, Inggris, Australia, dan Italia pada 2026.',
       rooms: 'Resepsionis 24 jam, lift, penitipan bagasi gratis. Tanpa sarapan.',
       reason: 'Hostel besar bernilai tinggi dengan kamar privat di bawah batas dan resepsionis 24 jam.',

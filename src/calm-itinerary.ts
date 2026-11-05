@@ -1,16 +1,16 @@
 import {
   escapeHtml as e, icon, siteCredit, renderPhotoDialog, pickerItems, timelineEvent, stopCard, daySchedule, dayBookings, dayBooking, bookingRow,
   transportSection, dayDateLine, dayTitleRow, sleepSummary, staysLink, transportSummary, dayRoute, stopsSection, practicalSection, nightDetail,
-  pickDayButton, daySidebar, mobileDaybar, dayPickerDialog, copyDialog, statusMessage, openTripItem, type Overnight,
+  pickDayButton, daySidebar, mobileDaybar, dayPickerDialog, copyDialog, statusMessage, openTripItem, costLabel, type Overnight,
 } from './render.ts';
 import { currencyText } from './currency.ts';
 import { openTripsForDate } from './open-trips.ts';
-import { renderSiteNavigation } from './site-navigation.ts';
+import { planSwitch, renderSiteNavigation } from './site-navigation.ts';
 import { renderChengduEvening } from './chengdu-evening.ts';
 import { daysByDate, type Day } from './itinerary.ts';
-import { stayBaseForDate, stayBases, staysPath } from './stays.ts';
-import { calmDays, calmPlaces, calmPreparePath, calmPath, placeFor, type CalmDay, type CalmStop } from './calm-route.ts';
-import { calmDayBookings, calmStayFor, stayCardId } from './calm-prepare.ts';
+import { calmDays, calmItineraryPath, calmPlaces, calmPreparePath, calmPath, placeFor, type CalmDay, type CalmStop } from './calm-route.ts';
+import { calmStayBaseForDate, calmStaysHref } from './calm-stays.ts';
+import { calmDayBookings } from './calm-prepare.ts';
 import { noteItem } from './calm-render.ts';
 
 // The homepage's "hari demi hari" view for the calm option. Every day is prerendered so the page reads in order without
@@ -20,27 +20,19 @@ import { noteItem } from './calm-render.ts';
 const keyFor = (date: string) => `-${date}`;
 const mainDay = (day: CalmDay): Day | undefined => day.fromMain ? daysByDate.get(day.date) : undefined;
 
-// Calm nights link to their own stay card, which may book two nights at once; the stays page picks hotels per night,
-// so it is linked only for the main plan's own nights (8 and 18–20 November).
-function stayLinks(day: CalmDay) {
-  if (!day.overnight) return '';
-  const base = stayBaseForDate(day.date);
-  const stay = day.fromMain ? undefined : calmStayFor(day.date);
-  if (!stay) return base ? staysLink(`${staysPath}#${base.id}`, 'Rekomendasi hotel & hostel') : '';
-  const unchecked = base?.name === day.overnight.name ? '' : '<p>Belum dicek untuk malam ini di halaman Hotel & hostel.</p>';
-  return `${unchecked}${staysLink(`${calmPreparePath}#${stayCardId(stay)}`, 'Usulan penginapan opsi santai')}`;
-}
+// Every night, shared ones included, links to its section on the calm stays page so the reader stays in the calm option.
+const stayLinks = (day: CalmDay) => day.overnight ? staysLink(calmStaysHref(day.date), 'Rekomendasi hotel & hostel santai') : '';
 
-// The calm data names the base, not its area; the stays page describes the same base for another night.
+// The calm data names the base, not its area; the calm stays page describes it.
 function overnightFor(day: CalmDay): Overnight | null {
   if (!day.overnight) return null;
   const main = mainDay(day)?.overnight;
-  return main ?? { ...day.overnight, area: stayBases.find(base => base.name === day.overnight!.name)?.area ?? '' };
+  return main ?? { ...day.overnight, area: calmStayBaseForDate(day.date)?.area ?? '' };
 }
 
 function transportRows(day: CalmDay) {
   if (day.fromMain) return dayBookings(day.date).map(dayBooking);
-  return calmDayBookings(day.date).map(item => bookingRow(item.mode, item.item, '', item.price, item.channel, item.link));
+  return calmDayBookings(day.date).map(item => bookingRow(item.mode, item.item, item.cost ? costLabel(item.cost) : '', item.price, item.channel, item.link));
 }
 
 // Multi-day open trips are the Sichuan group tours the calm option says not to buy; the one-day ones on shared days still apply.
@@ -92,7 +84,7 @@ function dayPanel(day: CalmDay, index: number) {
 }
 
 function intro() {
-  return `<div class="itinerary-intro"><h1 id="calm-itinerary-title">Opsi santai,<br>hari demi hari.</h1><div class="itinerary-actions">${pickDayButton()}<a class="quiet-button" href="${calmPath}#calm-map">Peta${icon('right')}</a></div></div>`;
+  return `<div class="itinerary-intro"><h1 id="calm-itinerary-title">Opsi santai,<br>hari demi hari.</h1><div class="itinerary-actions">${pickDayButton()}<a class="quiet-button" href="${calmPath}#calm-map">Peta${icon('right')}</a>${planSwitch(calmItineraryPath)}</div></div>`;
 }
 
 // Runs before the panels are parsed, so calm.css shows only the linked day from the first paint instead of 14 days that then collapse.
@@ -101,7 +93,7 @@ const earlyScript = '<script data-cfasync="false">document.documentElement.class
 export function calmItineraryView() {
   const first = calmDays[0].date;
   return `${earlyScript}<a class="skip-link" href="#calm-itinerary-days" data-action="skip">Langsung ke jadwal</a>
-  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation()}</header>
+  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation(calmItineraryPath)}</header>
   <main class="container calm-itinerary-page" data-calm-itinerary>
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="${calmPath}">Opsi santai</a>${icon('right')}<span>Itinerary santai</span></nav>
     ${intro()}

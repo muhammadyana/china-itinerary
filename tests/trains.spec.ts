@@ -25,7 +25,7 @@ test('the trains page shows tickets, the Jiuzhaigou slots and the 8-10 November 
 
   await page.goto('/');
   await page.locator('.itinerary-menu > summary').click();
-  await expect(page.locator('.itinerary-menu-panel').getByRole('link', { name: 'Kereta & timeline' })).toHaveAttribute('href', trainsPath);
+  await expect(page.locator('.itinerary-menu-panel').getByRole('link', { name: 'Kereta & timeline, rencana utama' })).toHaveAttribute('href', trainsPath);
 });
 
 for (const width of [320, 390, 1440]) {

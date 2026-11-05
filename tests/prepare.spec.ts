@@ -41,7 +41,7 @@ test('the preparation page works without JavaScript and is reachable from the pl
 
   await page.goto('/');
   await page.locator('.itinerary-menu > summary').click();
-  await expect(page.locator('.itinerary-menu-panel').getByRole('link', { name: 'Persiapan & pemesanan' })).toHaveAttribute('href', preparePath);
+  await expect(page.locator('.itinerary-menu-panel').getByRole('link', { name: 'Persiapan & pemesanan, rencana utama' })).toHaveAttribute('href', preparePath);
 });
 
 for (const width of [320, 390, 1440]) {

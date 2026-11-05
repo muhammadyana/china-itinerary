@@ -95,7 +95,7 @@ test('the day panel and navigation reach the stays, including the 320px places p
   await expect(page.locator('.day-essentials .sleep-stays-link')).toHaveCount(0);
   await page.setViewportSize({ width: 320, height: 760 });
   await page.locator('.itinerary-menu > summary').click();
-  await page.locator('.itinerary-menu-panel').getByRole('link', { name: 'Hotel & hostel per malam' }).click();
+  await page.locator('.itinerary-menu-panel').getByRole('link', { name: 'Hotel & hostel, rencana utama' }).click();
   await expect(page).toHaveURL(new RegExp(`${staysPath}$`));
 });
 
