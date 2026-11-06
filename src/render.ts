@@ -74,10 +74,25 @@ function stopUserPhotos(placeId: string) {
  return shots.length ? `<ul class="stop-user-photos" role="list" aria-label="Foto kirimanmu">${shots.map(shot => stopUserPhoto(shot.id, shot.title, shot.alt)).join('')}</ul>` : '';
 }
 function status(value?: string) {return value ? `<span class="state ${value==='Terkonfirmasi'?'confirmed':''}">${e(value)}</span>`:'';}
-// The homepage lists the main plan's days; the calm itinerary passes its own.
-export function pickerItems(current: string, variant = 'sidebar', list: Pick<Day,'date'|'title'|'shortTitle'>[] = days) {
- return list.map((day,index) => `<li><a class="date-choice" href="#${day.date}" data-date="${day.date}" ${current===day.date?'aria-current="date"':''} aria-label="${fullDate(day.date)}, ${e(day.title)}"><span class="date-number">${day.date.slice(-2)}</span><span class="date-choice-text"><span class="choice-meta">${weekday(day.date)}${variant==='sidebar'?` / Hari ${index+1}`:''}</span><span class="choice-title">${e(day.shortTitle)}</span></span>${icon('right')}</a></li>`).join('');
+// The day picker dialog's list; the homepage lists the main plan's days, the calm itinerary passes its own.
+export function pickerItems(current: string, list: Pick<Day,'date'|'title'|'shortTitle'>[] = days) {
+ return list.map(day => `<li><a class="date-choice" href="#${day.date}" data-date="${day.date}" ${current===day.date?'aria-current="date"':''} aria-label="${fullDate(day.date)}, ${e(day.title)}"><span class="date-number">${day.date.slice(-2)}</span><span class="date-choice-text"><span class="choice-meta">${weekday(day.date)}</span><span class="choice-title">${e(day.shortTitle)}</span></span>${icon('right')}</a></li>`).join('');
 }
+/** One day in the sidebar shared by the homepage and the calm itinerary: its province and the transport it uses. */
+export interface SidebarDay { date: string; title: string; shortTitle: string; region: string; modes: string[] }
+const shortWeekday = new Intl.DateTimeFormat('id-ID', { weekday: 'short', timeZone: 'Asia/Shanghai' });
+function sidebarDay(day: SidebarDay, current: string) {
+ const modes = [...new Set(day.modes)].slice(0, 2).map(mode => icon(mode)).join('');
+ return `<li class="sidebar-day" data-region="${day.region.toLowerCase()}"><a class="date-choice" href="#${day.date}" data-date="${day.date}"${current === day.date ? ' aria-current="date"' : ''} aria-label="${fullDate(day.date)}, ${e(day.title)}"><span class="date-number"><small>${shortWeekday.format(new Date(`${day.date}T12:00:00+08:00`))}</small>${day.date.slice(-2)}</span><span class="date-choice-text"><span class="choice-title">${e(day.shortTitle)}</span></span>${modes ? `<span class="choice-modes">${modes}</span>` : ''}</a></li>`;
+}
+/** Sidebar days grouped under a province heading wherever the region changes. */
+export const sidebarItems = (list: SidebarDay[], current: string) => list.flatMap((day, index) => {
+ const heading = index === 0 || day.region !== list[index - 1].region ? [`<li class="sidebar-region" data-region="${day.region.toLowerCase()}" aria-hidden="true">${e(day.region)}</li>`] : [];
+ return [...heading, sidebarDay(day, current)];
+}).join('');
+// The main plan's transport per day, from its transfer events; walking and the cable car are not travel modes here.
+const travelModes = new Set(['car', 'train', 'bus', 'plane']);
+const mainSidebarDays = (): SidebarDay[] => days.map(day => ({ ...day, modes: day.events.flatMap(event => event.kind === 'transfer' && travelModes.has(event.mode) ? [event.mode] : []) }));
 // Day panel pieces shared by the homepage and the calm itinerary. `key` keeps ids unique when one page holds several panels; the homepage leaves it empty.
 export interface StopDetails { time?: string; note?: string; status?: string }
 /** One stop card. `covered` is false for places without a guide page or weather (the calm option's own stops). */
@@ -219,11 +234,11 @@ export function shell() {
  return `<a class="skip-link" href="#day-heading" data-action="skip">Langsung ke jadwal</a><header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation('/')}</header>
  <main class="container">${tripHero()}${userGallery()}
  ${arrivalSummary()}${tripHighlights()}<div class="itinerary-intro" id="itinerary"><h2 tabindex="-1">Rencana utama,<br>hari demi hari.</h2><div class="itinerary-actions">${pickDayButton()}<button type="button" class="quiet-button" data-action="overview">Rute${icon('right')}</button>${planSwitch('/')}</div></div>
- <div class="journey-layout">${daySidebar(pickerItems(days[0].date),`<button class="route-link" type="button" data-action="overview">Lihat seluruh rute${icon('right')}</button>`)}<article id="day-view" class="day-view" aria-label="Jadwal hari terpilih">${dayView(days[0])}</article></div>
+ <div class="journey-layout">${daySidebar(sidebarItems(mainSidebarDays(), days[0].date),`<button class="route-link" type="button" data-action="overview">Lihat seluruh rute${icon('right')}</button>`)}<article id="day-view" class="day-view" aria-label="Jadwal hari terpilih">${dayView(days[0])}</article></div>
  <noscript><p class="no-script">Pemilih hari memerlukan JavaScript. Jadwal hari pertama tetap tersedia di sini. <a href="${pdfDownloadUrl}">PDF memuat itinerary terbaru 14 hari</a>, dibuat otomatis dari konten website.</p></noscript>${renderOverland()}</main>
  <footer class="site-footer container"><div class="footer-top"><p>Perjalanan yang sudah ditata.<br>Tinggal menikmati jalannya.</p><a class="quiet-button" href="${pdfDownloadUrl}" download>${icon('download')}<span>Unduh PDF terbaru</span></a></div>${credits()}<div class="footer-bottom"><span>Sichuan & Yunnan, November 2026</span><span>Semua jam dalam UTC+8</span>${siteCredit()}</div></footer>
  ${mobileDaybar()}
- ${dayPickerDialog(pickerItems(days[0].date,'modal'))}
+ ${dayPickerDialog(pickerItems(days[0].date))}
  <dialog id="overview-dialog" class="overview-dialog" aria-labelledby="overview-title"><header class="dialog-header"><h2 id="overview-title">Dari Chengdu ke Kunming</h2><button type="button" class="icon-button" data-action="close" aria-label="Tutup ringkasan rute" autofocus>${icon('close')}</button></header><div id="overview-content"></div></dialog>
  ${renderPhotoDialog('home')}
  ${copyDialog()}

@@ -135,7 +135,7 @@ document.addEventListener('click', event => {
     section?.querySelector<HTMLElement>('h3')?.focus({preventScroll:true});
   }
   else if (action === 'pick-day') {
-    $('#picker-days').innerHTML = pickerItems(current,'modal'); openDialog(picker,button);
+    $('#picker-days').innerHTML = pickerItems(current); openDialog(picker,button);
   } else if (action === 'close') button.closest('dialog')?.close();
   else if (action === 'user-photo') photoView.openUser(button);
   else if (action === 'photo-previous' || action === 'photo-next') photoView.step(action === 'photo-next' ? 1 : -1);
