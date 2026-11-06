@@ -66,6 +66,50 @@ export const yunnanGuides: DestinationGuide[] = [
     checkedAt: '2026-11-03',
   },
   {
+    slug: 'upper-tiger-leaping-gorge', name: 'Upper Tiger Leaping Gorge', region: 'Yunnan', placeIds: ['upper-tiger-leaping-gorge'],
+    summary: 'Ngarai Sungai Jinsha di sisi Shangri-La: jalur pengunjung dan eskalator turun ke batu besar di tengah arus, disinggahi di perjalanan darat Lijiang ke Shangri-La.',
+    gettingThere: {
+      origin: 'Hotel di Lijiang pada 16 November (opsi santai)',
+      steps: [
+        'Mobil sewa dengan koper dari Lijiang lewat kota Hutiaoxia (Qiaotou) ke pintu Upper Gorge, sekitar 80 km (OSRM 1 jam 16 menit tanpa macet).',
+        'Beli tiket di lokasi atau lewat situs pengelola, lalu turun lewat jalur pengunjung; eskalator opsional.',
+        'Lanjut dengan mobil yang sama ke Dukezong, Shangri-La, sekitar 98 km (OSRM 1 jam 31 menit).',
+        'Tanpa mobil: shuttle satu arah Trip.com Lijiang → Upper Gorge → Dukezong (CNY 100 per orang untuk 16 November, dicek 5 November 2026) berangkat jauh lebih pagi, dengan sekitar 1,5 jam di ngarai.',
+      ],
+      duration: 'Sekitar 1 jam 15 menit dari Lijiang dan 1 jam 30 menit ke Shangri-La menurut OSRM tanpa macet; jalan gunung bisa lebih lama.',
+      sources: ['https://www.xgllhtx.cn/traffic.html', 'https://www.trip.com/travel-guide/attraction/shangri-la/shangri-la-tiger-leaping-gorge-10558694/?curr=CNY'],
+    },
+    stopAccess: { 'upper-tiger-leaping-gorge': 'Dari pintu masuk, jalur pengunjung menurun ke tepi Sungai Jinsha dan batu "lompatan harimau" di tengah arus. Eskalator membantu saat naik kembali.' },
+    costs: [
+      { label: 'Tiket masuk Upper Gorge', amount: 'CNY 45 / orang', detail: 'Angka FieldGuide (2 November 2026) dan panduan Ctrip tanpa tanggal; Qunar dan Trip.com tidak menjual tiket masuk saja. Konfirmasikan di loket.', status: 'unconfirmed', source: 'https://fieldguidetochina.com/places/tiger-leaping-gorge/' },
+      { label: 'Eskalator', amount: 'CNY 80 pulang-pergi / CNY 60 naik saja', detail: 'Tarif Qunar dan Trip.com, dicek 5 November 2026; bukan tarif resmi pengelola.', status: 'unconfirmed', source: 'https://touch.piao.qunar.com/touch/detail_2561958500.html' },
+      { label: 'Mobil sewa Lijiang → Upper Gorge → Dukezong', amount: 'Perkiraan CNY 725 / mobil', detail: 'Hitungan dari sewa per jam Trip.com di Lijiang untuk 16 November, belum termasuk biaya kembali kosong; pengelola menyebut CNY 300–800 per mobil dari Lijiang (tanpa tanggal).', status: 'estimate', source: 'https://www.trip.com/chartered-car-seo/hourly/lijiang/?curr=CNY' },
+    ],
+    visitDuration: 'Alokasi rencana sekitar 2½ jam, ±10.00–12.30, termasuk turun dan naik kembali.',
+    bestTime: 'Menjelang siang, saat sinar matahari lebih mungkin sampai ke dasar ngarai daripada pagi; belum diverifikasi. Buka 08.00–18.00 dengan masuk terakhir 18.00 menurut Ctrip dan Trip.com.',
+    tips: [
+      'Pakai sepatu bersol kasar: tangga dan batu di tepi sungai bisa basah oleh percikan.',
+      'Simpan tenaga untuk naik kembali; eskalator membantu bila kaki lelah.',
+      'Bawa bekal makan siang dan air, lalu makan di mobil menuju Shangri-La.',
+    ],
+    cautions: [
+      'Trek High Trail resmi dilarang: pemberitahuan Pemerintah Kota Shangri-La 10 Februari 2026 mengancam denda CNY 100–5000, dan pengelola menutup seluruh High Trail sejak 1 Mei 2026. Upper Gorge tetap buka.',
+      'Longsor 30 Juli dan 3 September 2026 terjadi di luar area pengunjung menurut pengelola; cek pengumuman pengelola sebelum berangkat.',
+      'Jangan melewati pagar ke batu di tengah arus.',
+    ],
+    sources: [
+      { title: 'Pengelola Tiger Leaping Gorge: status buka dan pemberitahuan longsor', url: 'https://www.xgllhtx.cn/', kind: 'official', note: 'Dicek 5 November 2026.' },
+      { title: 'Pengelola Tiger Leaping Gorge: panduan lalu lintas', url: 'https://www.xgllhtx.cn/traffic.html', kind: 'official', note: 'Tanpa tanggal.' },
+      { title: 'Pemberitahuan Pemerintah Kota Shangri-La tentang larangan High Trail', url: 'https://www.sohu.com/a/986025656_120815119', kind: 'reference', publishedAt: '2026-02-10' },
+      { title: 'Xiaoxiang Morning News lewat Guangming: High Trail ditutup, Upper Gorge tetap buka', url: 'https://m.gmw.cn/2026-05/09/content_1304450375.htm', kind: 'reference', publishedAt: '2026-05-09' },
+      { title: 'Field Guide to China: Tiger Leaping Gorge', url: 'https://fieldguidetochina.com/places/tiger-leaping-gorge/', kind: 'reference', publishedAt: '2026-11-02' },
+      { title: 'Ctrip: Upper Tiger Leaping Gorge, jam buka', url: 'https://you.ctrip.com/sight/xianggelila106/12236.html', kind: 'operator', note: 'Dicek 5 November 2026.' },
+      { title: 'Qunar: 虎跳峡 sisi Shangri-La, eskalator', url: 'https://touch.piao.qunar.com/touch/detail_2561958500.html', kind: 'operator', note: 'Dicek 5 November 2026.' },
+      { title: 'Trip.com: Tiger Leaping Gorge sisi Shangri-La', url: 'https://www.trip.com/travel-guide/attraction/shangri-la/shangri-la-tiger-leaping-gorge-10558694/', kind: 'operator', note: 'Foto dan shuttle; dicek 5–6 November 2026.' },
+    ],
+    checkedAt: '2026-11-05',
+  },
+  {
     slug: 'songzanlin', name: 'Biara Songzanlin', region: 'Yunnan', placeIds: ['songzanlin'],
     summary: 'Atap emas di lereng bukit, sebelum melanjutkan perjalanan dengan kereta ke Lijiang.',
     gettingThere: {

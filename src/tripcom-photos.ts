@@ -377,5 +377,6 @@ export const tripcomPlacePhotos: Record<string, { id: string; alt: string }> = {
   "zimei": { id: "tripcom-zimei", alt: "Puncak Gongga bersalju berpendar jingga diterpa cahaya matahari, menjulang di atas lautan awan." },
   "zhongshuge-bookstore": { id: "tripcom-zhongshuge-bookstore", alt: "Menara buku bundar yang diterangi cincin lampu di tengah toko buku Zhongshu Ge Dujiangyan, dikelilingi tangga spiral berpagar hitam, dinding rak buku melengkung, dan poster panda di sisi kanan." },
   "jiuzhaigou-hotel": { id: "tripcom-jiuzhaigou-hotel", alt: "Danau toska dengan batang kayu berlumut di dasarnya, memantulkan hutan musim gugur berwarna kuning, jingga dan merah." },
-  "cable-car": { id: "tripcom-cable-car", alt: "Kabin kereta gantung biru melintas di atas lereng berbatu yang tertutup salju di Gunung Salju Naga Giok." }
+  "cable-car": { id: "tripcom-cable-car", alt: "Kabin kereta gantung biru melintas di atas lereng berbatu yang tertutup salju di Gunung Salju Naga Giok." },
+  "upper-tiger-leaping-gorge": { id: "tripcom-upper-tiger-leaping-gorge", alt: "Sungai hijau toska bergolak di antara bebatuan besar di dasar ngarai sempit bertebing curam, dengan jalur papan kayu dan mulut terowongan di sisi tebing." }
 };

@@ -110,6 +110,11 @@ export const weatherLocations: Record<string, WeatherLocation> = {
     source: 'https://www.openstreetmap.org/way/1000080741',
     note: 'Acuan area teater Impression Lijiang di Ganhaizi; suhu Glacier Park dan Blue Moon Valley dapat berbeda.',
   },
+  'upper-gorge': {
+    id: 'upper-gorge', name: 'Upper Tiger Leaping Gorge', latitude: 27.1926037, longitude: 100.112808,
+    source: 'https://www.openstreetmap.org/?mlat=27.1926037&mlon=100.112808#map=15/27.1926/100.1128',
+    note: 'Acuan area pengunjung Upper Gorge di sisi Shangri-La; dasar ngarai lebih rendah dan bisa lebih hangat.',
+  },
   dali: {
     id: 'dali', name: 'Kota Tua Dali', latitude: 25.68863, longitude: 100.15894,
     source: 'https://geocoding-api.open-meteo.com/v1/get?id=12277235&language=en',
@@ -126,6 +131,7 @@ export const weatherLocationForGuide: Record<string, string> = {
   chengdu: 'chengdu',
   'chengdu-skp-tower': 'chengdu',
   'zhongshuge-bookstore': 'dujiangyan',
+  'upper-tiger-leaping-gorge': 'upper-gorge',
   jiuzhaigou: 'jiuzhaigou',
   bipenggou: 'bipenggou',
   siguniangshan: 'rilong',

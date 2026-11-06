@@ -169,7 +169,7 @@ svg { flex-shrink: 0; }
 .stop-user-photos li { flex: 0 0 auto; }
 .stop-user-photo { display: block; width: 88px; height: 88px; padding: 0; border-radius: 12px; overflow: clip; background: var(--color-paper-2); scroll-snap-align: start; }
 .stop-user-photo img { width: 100%; height: 100%; object-fit: cover; }
-.photo-open { position: absolute; inset: auto 8px 8px auto; display: flex; align-items: center; gap: var(--space-xs); background: var(--color-photo-caption); color: var(--color-on-autumn); padding: var(--space-xs) var(--space-xs); font-size: 11px; border-radius: 2px; }
+.photo-open { position: absolute; inset: auto 10px 10px auto; display: flex; align-items: center; gap: var(--space-xs); background: var(--color-hero-base); color: var(--color-on-autumn); padding: 4px 10px; font-size: 12px; font-weight: 500; border-radius: var(--radius-pill); }
 .photo-open svg { width: 14px; height: 14px; }
 .stop-photo:hover .photo-open { background: var(--color-autumn); }
 .transfer { display: flex; align-items: flex-start; gap: var(--space-sm); margin: var(--space-2xs) 0; padding: var(--space-md) 0; }
