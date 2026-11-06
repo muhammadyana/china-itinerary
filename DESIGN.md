@@ -15,7 +15,7 @@ The interface stays in Bahasa Indonesia. Code identifiers, comments, tests, and 
 
 `src/style.css` defines the fixed light color tokens. `tokens.css` supplies the spacing scale and locally hosted fonts; `base.css` provides the reset. `src/glass.css` contains the shared glass material and destination-page layout.
 
-Geist is the active display and body face, at weights 400, 500, and 600. Page titles, day titles and the homepage hero use Yellowtail (locally hosted, OFL), a brush script, through `--font-script`; smaller headers and the printed PDF stay in Geist. Headings are sentence case with compact tracking. Body text is 16px with comfortable leading; supporting labels stay readable on phones. Colors use role-based CSS variables. Warm autumn accents reconnect the destination guides with the original homepage palette.
+Satoshi (Fontshare, ITF Free Font License) is the display face for titles, subtitles and headers, at weight 700 through `--font-display`; Geist is the body face, at weights 400, 500, and 600. The license allows self-hosting but not publishing the font file in a repository, so `ops/fetch-fonts.mjs` downloads it into the gitignored `fonts/` folder before `npm run dev` and `npm run build`. The printed PDF keeps Geist headings. Headings are sentence case with compact tracking. Body text is 16px with comfortable leading; supporting labels stay readable on phones. Colors use role-based CSS variables. Warm autumn accents reconnect the destination guides with the original homepage palette.
 
 | Role | Value |
 | --- | --- |

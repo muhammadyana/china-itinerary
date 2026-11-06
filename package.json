@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build && node ops/generate-pdf.mjs",
+    "dev": "node ops/fetch-fonts.mjs && vite",
+    "build": "node ops/fetch-fonts.mjs && tsc && vite build && node ops/generate-pdf.mjs",
     "preview": "vite preview",
     "test:e2e": "playwright test",
     "build:ask": "vite build --config ops/ask/vite.config.ts",
@@ -21,8 +21,5 @@
     "puppeteer-core": "^25.16.0",
     "typescript": "~7.0.2",
     "vite": "^8.3.5"
-  },
-  "dependencies": {
-    "@fontsource/yellowtail": "^5.3.0"
   }
 }

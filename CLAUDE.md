@@ -14,7 +14,7 @@ Static travel guide (Vite + TypeScript + plain CSS, no UI framework, no client r
 
 ```sh
 npm run dev                       # Vite dev server; /print/ and the PDF are generated on request
-npm run build                     # tsc && vite build && node ops/generate-pdf.mjs
+npm run build                     # fetch Satoshi, tsc && vite build && node ops/generate-pdf.mjs
 npx tsc                           # typecheck only (covers src/ only, not tests/, vite.config.ts or ops/)
 npm run test:e2e                  # Playwright; builds + previews on 127.0.0.1:4173 unless a server is already there
 npx playwright test tests/guides.spec.ts          # one file

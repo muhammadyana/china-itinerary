@@ -8,6 +8,8 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+# Satoshi is downloaded at build time (ops/fetch-fonts.mjs); its license forbids publishing the file in a repository.
+/fonts/
 dist
 dist-ssr
 *.local
