@@ -23,12 +23,12 @@ const topLinks: NavLink[] = [
 // which search reaches day by day instead of as a planning page.
 interface PlanRow { topic: string; main: NavLink; calm: NavLink }
 const planRows: PlanRow[] = [
-  { topic: 'Itinerary 14 hari', main: { href: '/#itinerary', label: 'Itinerary 14 hari', action: 'itinerary' }, calm: calmItineraryPage },
+  { topic: 'Itinerary 14 hari', main: { href: '/?plan=utama#itinerary', label: 'Itinerary 14 hari' }, calm: calmItineraryPage },
   ...planTopics,
 ];
 const plans = { main: { short: 'Utama', name: 'rencana utama' }, calm: { short: 'Santai', name: 'opsi santai' } };
 type Plan = keyof typeof plans;
-const pagePath = (href: string) => href.split('#')[0];
+const pagePath = (href: string) => { const path = href.split('#')[0].split('?')[0]; return path || '/'; };
 
 // One menu entry per guide page, in the order the itinerary first visits it; pages only the calm option visits follow.
 function destinations(): Destination[] {
@@ -74,8 +74,9 @@ function planChoice(row: PlanRow, plan: Plan, current: string) {
   return `<a class="plan-choice" href="${escapeHtml(link.href)}"${actionAttribute(link.action)} aria-label="${escapeHtml(`${row.topic}, ${plans[plan].name}`)}"${currentPage}>${plans[plan].short}</a>`;
 }
 
+// Santai first: calm is the active plan (AGENTS.md). Utama stays reachable as the second choice.
 const planRow = (row: PlanRow, current: string) =>
-  `<li class="plan-row"><span class="plan-row-topic">${escapeHtml(row.topic)}</span><span class="plan-row-choices">${planChoice(row, 'main', current)}${planChoice(row, 'calm', current)}</span></li>`;
+  `<li class="plan-row"><span class="plan-row-topic">${escapeHtml(row.topic)}</span><span class="plan-row-choices">${planChoice(row, 'calm', current)}${planChoice(row, 'main', current)}</span></li>`;
 
 const itineraryMenu = (current: string) =>
   navMenu('itinerary', 'Itinerary', `<ol class="plan-rows" role="list">${planRows.map(row => planRow(row, current)).join('')}</ol>`);

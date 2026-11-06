@@ -297,3 +297,7 @@ At the owner's request after a PlacesSearch for casual 清真 near Taikoo Li / I
 - **苏坦·中东料理 The Sultan (Taikoo Li):** IslamiChina destination guide (The Sultan Taikoo Li branch) lists 2F unit 2307B, Middle Eastern/Turkish, about CNY 135 per person, hours 11.00–22.00. Used as the named mall option for late lunch on 8 November and the ±14.30–15.15 slot on 9 November.
 - **皇城坝牛肉 Huangchengba Beef:** Google Maps (checked 6 November 2026) gives 三桂前街49号 near 皇城清真寺, hours about 10.30–22.00, rating 4.4. Used as the primary Zuhur lunch on 9 November and as the classic alternative on 8 November. Cadangan nearby: 悦香村牛肉 (same area; name only).
 - **IFS:** no verified 清真 cafe or restaurant was found in the same search; the calm text states that explicitly rather than inventing a name.
+
+## Default itinerary is the calm option (6 November 2026)
+
+The owner asked to make the santai (calm) itinerary the default when opening the itinerary without choosing the main plan. Changes: the Itinerary menu lists Santai before Utama; `/#itinerary` redirects to `/places/calm-itinerary/` unless `?plan=utama` is set; the Utama choice uses `/?plan=utama#itinerary`; the homepage itinerary block is labeled rencana utama and links to the active calm itinerary. Main-plan pages are otherwise unchanged.

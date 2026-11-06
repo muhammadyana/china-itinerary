@@ -171,6 +171,12 @@ if (location.hash === '#route') openOverview($('.site-navigation [data-action="o
 }
 
 initializePhotoLoading();
+// Default itinerary is the calm option. /#itinerary and the nav "itinerary" action open santai unless ?plan=utama.
+const wantsMainPlan = new URLSearchParams(location.search).get('plan') === 'utama';
+if (location.pathname === '/' && location.hash === '#itinerary' && !wantsMainPlan) {
+  location.replace('/places/calm-itinerary/');
+}
+
 const calmItinerary = document.querySelector<HTMLElement>('[data-calm-itinerary]');
 if (document.getElementById('day-view')) initializeItinerary();
 else if (calmItinerary) initializeCalmItinerary(calmItinerary);

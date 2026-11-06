@@ -8,6 +8,7 @@ import { weatherLocationForGuide } from './weather-locations.ts';
 import { currencyText, hasCnyAmount, renderExchangeRate } from './currency.ts';
 import type { PhotoContent } from './photo-viewer.ts';
 import { planSwitch, renderSiteNavigation } from './site-navigation.ts';
+import { calmItineraryPath } from './calm-route.ts';
 import { logoPaths } from './logo.ts';
 import { renderChengduEvening } from './chengdu-evening.ts';
 import { stayBaseForDate, staysPath } from './stays.ts';
@@ -201,7 +202,7 @@ export const statusMessage = '<div class="status-message" id="status" role="stat
 export function shell() {
  return `<a class="skip-link" href="#day-heading" data-action="skip">Langsung ke jadwal</a><header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation('/')}</header>
  <main class="container">${tripHero()}${userGallery()}
- ${arrivalSummary()}${tripHighlights()}<div class="itinerary-intro" id="itinerary"><h2 tabindex="-1">Perjalananmu,<br>hari demi hari.</h2><div class="itinerary-actions">${pickDayButton()}<button type="button" class="quiet-button" data-action="overview">Rute${icon('right')}</button>${planSwitch('/')}</div></div>
+ ${arrivalSummary()}${tripHighlights()}<div class="itinerary-intro" id="itinerary"><p class="plan-switch"><a class="text-link" href="${calmItineraryPath}">Rencana aktif: opsi santai — buka itinerary santai</a></p><h2 tabindex="-1">Rencana utama,<br>hari demi hari.</h2><div class="itinerary-actions">${pickDayButton()}<button type="button" class="quiet-button" data-action="overview">Rute${icon('right')}</button>${planSwitch('/')}</div></div>
  <div class="journey-layout">${daySidebar(pickerItems(days[0].date),`<button class="route-link" type="button" data-action="overview">Lihat seluruh rute${icon('right')}</button>`)}<article id="day-view" class="day-view" aria-label="Jadwal hari terpilih">${dayView(days[0])}</article></div>
  <noscript><p class="no-script">Pemilih hari memerlukan JavaScript. Jadwal hari pertama tetap tersedia di sini. <a href="${pdfDownloadUrl}">PDF memuat itinerary terbaru 14 hari</a>, dibuat otomatis dari konten website.</p></noscript>${renderOverland()}</main>
  <footer class="site-footer container"><div class="footer-top"><p>Perjalanan yang sudah ditata.<br>Tinggal menikmati jalannya.</p><a class="quiet-button" href="${pdfDownloadUrl}" download>${icon('download')}<span>Unduh PDF terbaru</span></a></div>${credits()}<div class="footer-bottom"><span>Sichuan & Yunnan, November 2026</span><span>Semua jam dalam UTC+8</span>${siteCredit()}</div></footer>
