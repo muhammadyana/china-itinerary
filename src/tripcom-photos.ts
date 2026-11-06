@@ -3,6 +3,96 @@ import type { Photo } from './itinerary.ts';
 // Place photos taken from each place's Trip.com page at the site owner's request (4 November 2026).
 // Copyright stays with Trip.com; every photo credits Trip.com and links to the page it came from.
 export const tripcomPhotos: Record<string, Photo> = {
+  "tripcom-mirror-lake": {
+    "id": "tripcom-mirror-lake", "width": 1080, "height": 720, "sizes": [480,  960,  1080],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/jiuzhaigou/mirror-lake-85284/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/jiuzhaigou/mirror-lake-85284/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
+  "tripcom-long-lake": {
+    "id": "tripcom-long-lake", "width": 1200, "height": 798, "sizes": [480,  960,  1200],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/jiuzhaigou/long-lake-85325/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/jiuzhaigou/long-lake-85325/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
+  "tripcom-five-colour-pond": {
+    "id": "tripcom-five-colour-pond", "width": 900, "height": 598, "sizes": [480,  900],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/jiuzhaigou/five-coloured-pool-85324/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/jiuzhaigou/five-coloured-pool-85324/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
+  "tripcom-nuorilang": {
+    "id": "tripcom-nuorilang", "width": 1244, "height": 801, "sizes": [480,  960,  1244],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/jiuzhaigou/nuorilang-waterfall-85281/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/jiuzhaigou/nuorilang-waterfall-85281/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
+  "tripcom-pearl-shoals": {
+    "id": "tripcom-pearl-shoals", "width": 1244, "height": 829, "sizes": [480,  960,  1244],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/jiuzhaigou/pearl-shoal-waterfall-91821/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/jiuzhaigou/pearl-shoal-waterfall-91821/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
+  "tripcom-huanglong": {
+    "id": "tripcom-huanglong", "width": 1209, "height": 680, "sizes": [480,  960,  1209],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/songpan/huanglong-national-scenic-area-75864/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/songpan/huanglong-national-scenic-area-75864/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
+  "tripcom-songpan": {
+    "id": "tripcom-songpan", "width": 573, "height": 360, "sizes": [480,  573],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/songpan/songpan-ancient-city-85463/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/songpan/songpan-ancient-city-85463/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
+  "tripcom-songpan-mosque": {
+    "id": "tripcom-songpan-mosque", "width": 541, "height": 360, "sizes": [480,  541],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/songpan/songpan-northern-mosque-23579280/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/songpan/songpan-northern-mosque-23579280/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
+  "tripcom-jiuzhaigou-hotel": {
+    "id": "tripcom-jiuzhaigou-hotel", "width": 750, "height": 494, "sizes": [480,  750],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/jiuzhaigou/jiuzhaigou-national-park-89895/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/jiuzhaigou/jiuzhaigou-national-park-89895/", "origin": "Trip.com",
+    "photoNote": "Foto kawasan Taman Nasional Jiuzhaigou dari Trip.com, bukan foto Desa Pengfeng atau penginapan; Trip.com tidak punya halaman untuk kawasan gerbang. Tanggal pengambilan tidak tersedia."
+  },
+  "tripcom-maoxian-station": {
+    "id": "tripcom-maoxian-station", "width": 1440, "height": 959, "sizes": [480,  960,  1440],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/mao-county/ancient-qiang-city-of-china-10798007/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/mao-county/ancient-qiang-city-of-china-10798007/", "origin": "Trip.com",
+    "photoNote": "Foto Kota Kuno Qiang (中国羌城) di Kabupaten Maoxian dari Trip.com; Trip.com tidak punya halaman atau foto Stasiun Maoxian. Tanggal pengambilan tidak tersedia."
+  },
+  "tripcom-huangcheng-mosque": {
+    "id": "tripcom-huangcheng-mosque", "width": 1440, "height": 960, "sizes": [480,  960,  1440],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/chengdu/huangcheng-mosque-13765090/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/chengdu/huangcheng-mosque-13765090/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
+  "tripcom-tianfu-twin-towers": {
+    "id": "tripcom-tianfu-twin-towers", "width": 1440, "height": 960, "sizes": [480,  960,  1440],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/chengdu/tianfu-twin-towers-of-chengdu-financial-city-149994616/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/chengdu/tianfu-twin-towers-of-chengdu-financial-city-149994616/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
+  "tripcom-upper-tiger-leaping-gorge": {
+    "id": "tripcom-upper-tiger-leaping-gorge", "width": 1440, "height": 960, "sizes": [480,  960,  1440],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/shangri-la/shangri-la-tiger-leaping-gorge-10558694/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/shangri-la/shangri-la-tiger-leaping-gorge-10558694/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
+  "tripcom-napahai": {
+    "id": "tripcom-napahai", "width": 1440, "height": 720, "sizes": [480,  960,  1440],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/shangri-la/napa-hai-76337/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/shangri-la/napa-hai-76337/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
+  "tripcom-cable-car": {
+    "id": "tripcom-cable-car", "width": 1440, "height": 957, "sizes": [480,  960,  1440],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/yulong/glacier-park-cableway-98276833/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/yulong/glacier-park-cableway-98276833/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
   "tripcom-bipenggou": {
     "id": "tripcom-bipenggou", "width": 1440, "height": 960, "sizes": [480, 960, 1440],
     "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/li-county/bipeng-valley-89964/",
@@ -285,5 +375,7 @@ export const tripcomPlacePhotos: Record<string, { id: string; alt: string }> = {
   "xinduqiao": { id: "tripcom-xinduqiao", alt: "Deretan rumah Tibet di kaki gunung berselimut salju tipis, dengan lereng dan pepohonan musim gugur keemasan." },
   "zheduo": { id: "tripcom-zheduo", alt: "Stupa putih dan bendera doa warna-warni di puncak celah gunung bersalju, dengan jalan berkelok menuruni lereng di bawah langit biru." },
   "zimei": { id: "tripcom-zimei", alt: "Puncak Gongga bersalju berpendar jingga diterpa cahaya matahari, menjulang di atas lautan awan." },
-  "zhongshuge-bookstore": { id: "tripcom-zhongshuge-bookstore", alt: "Menara buku bundar yang diterangi cincin lampu di tengah toko buku Zhongshu Ge Dujiangyan, dikelilingi tangga spiral berpagar hitam, dinding rak buku melengkung, dan poster panda di sisi kanan." }
+  "zhongshuge-bookstore": { id: "tripcom-zhongshuge-bookstore", alt: "Menara buku bundar yang diterangi cincin lampu di tengah toko buku Zhongshu Ge Dujiangyan, dikelilingi tangga spiral berpagar hitam, dinding rak buku melengkung, dan poster panda di sisi kanan." },
+  "jiuzhaigou-hotel": { id: "tripcom-jiuzhaigou-hotel", alt: "Danau toska dengan batang kayu berlumut di dasarnya, memantulkan hutan musim gugur berwarna kuning, jingga dan merah." },
+  "cable-car": { id: "tripcom-cable-car", alt: "Kabin kereta gantung biru melintas di atas lereng berbatu yang tertutup salju di Gunung Salju Naga Giok." }
 };

@@ -1,4 +1,4 @@
-import { userPhotos } from './itinerary.ts';
+import { places, userPhotos, type Place } from './itinerary.ts';
 import { icon, photoDetail, userPhotoDetail } from './render.ts';
 import { updatePhotoContent } from './photo-viewer.ts';
 
@@ -63,7 +63,8 @@ export function clipboardCopy(copyDialog: HTMLDialogElement, { open, returnFocus
 }
 
 /** Stop photos open alone; the traveller's own photos page through the whole user gallery, also with the arrow keys. */
-export function photoViewer(dialog: HTMLDialogElement, open: OpenDialog) {
+/** `place` resolves a stop's place; the calm page passes one that also knows its own stops. */
+export function photoViewer(dialog: HTMLDialogElement, open: OpenDialog, place: (id: string) => Place | undefined = id => places[id]) {
   const counter = dialog.querySelector<HTMLElement>('#photo-count')!;
   const navigation = Array.from(dialog.querySelectorAll<HTMLButtonElement>('[data-action="photo-previous"], [data-action="photo-next"]'));
   const ids = Object.keys(userPhotos);
@@ -92,7 +93,7 @@ export function photoViewer(dialog: HTMLDialogElement, open: OpenDialog) {
       index = null;
       counter.textContent = '';
       navigation.forEach(control => { control.hidden = true; });
-      updatePhotoContent(dialog, photoDetail(button.dataset.place!));
+      updatePhotoContent(dialog, photoDetail(button.dataset.place!, place(button.dataset.place!)));
       open(dialog,button);
     },
   };

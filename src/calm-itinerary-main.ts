@@ -1,5 +1,6 @@
 import { fullDate } from './render.ts';
 import { clipboardCopy, modalDialogs, photoViewer, showPhotoErrors, statusAnnouncer } from './day-controls.ts';
+import { placeFor } from './calm-places.ts';
 
 const dayMonth = new Intl.DateTimeFormat('id-ID', { day: 'numeric', month: 'long', timeZone: 'Asia/Shanghai' });
 const modified = (event: MouseEvent) => event.ctrlKey || event.metaKey || event.shiftKey || event.altKey;
@@ -16,7 +17,7 @@ export function initializeCalmItinerary(root: HTMLElement) {
   const mobilePicker = document.querySelector<HTMLElement>('#mobile-picker')!;
   const dialogs = modalDialogs([picker, photoDialog, copyDialog]);
   const announce = statusAnnouncer(document.querySelector<HTMLElement>('#status')!);
-  const photos = photoViewer(photoDialog, dialogs.open);
+  const photos = photoViewer(photoDialog, dialogs.open, placeFor);
   const copyText = clipboardCopy(copyDialog, dialogs, announce);
   const panelFor = (date: string) => panels[dates.indexOf(date)];
   const heading = (date: string) => panelFor(date).querySelector<HTMLElement>('.day-title-row h2')!;

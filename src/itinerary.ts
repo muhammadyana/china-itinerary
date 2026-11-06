@@ -76,7 +76,7 @@ export const places: Record<string, Place> = {
   'jade-dragon': { name: 'Glacier Park, Jade Dragon', chinese: '玉龙雪山', description: 'Jalur kayu dan gardu pandang di stasiun atas menghadap punggung gunung bersalju.', page: 24, photo: 'jade-dragon', alt: 'Gunung bersalju dan kawasan gletser Jade Dragon.' },
   'impression-lijiang': { name: 'Impression Lijiang', chinese: '印象丽江', description: 'Panggung merah terbuka di Ganhaizi menjadi latar pertunjukan musik dan tari, dengan Jade Dragon Snow Mountain menjulang di belakang para pemain.', photo: 'impression-lijiang', alt: 'Pemain pertunjukan Impression Lijiang di panggung merah bertingkat dengan latar pegunungan bersalju.' },
   'blue-moon': { name: 'Blue Moon Valley', chinese: '蓝月谷', description: 'Rangkaian danau toska bertingkat di kaki Jade Dragon, satu kawasan dan satu tiket dengan kereta gantung gletser.', page: 24, photo: 'highlight-blue-moon', alt: 'Danau toska Blue Moon Valley di kaki Jade Dragon Snow Mountain.' },
-  'dali-station': { name: 'Stasiun Dali (Xiaguan)', chinese: '大理站', description: 'Stasiun di Xiaguan dihubungkan dengan hotel dekat kota tua menggunakan taksi.', page: 23 },
+  'dali-station': { name: 'Stasiun Dali (Xiaguan)', chinese: '大理站', description: 'Stasiun di Xiaguan dihubungkan dengan hotel dekat kota tua menggunakan taksi.', page: 23, photo: 'commons-dali-station', alt: 'Foto udara gedung Stasiun Dali beratap gelombang putih di antara perbukitan hijau, dengan area depan stasiun yang masih dibangun.' },
   erhai: { name: 'Danau Erhai', chinese: '洱海', description: 'Jalan pagi di tepi barat danau dimulai dari Dermaga Caicun, sekitar 3–4 km dari gerbang timur kota tua.', page: 25, photo: 'highlight-erhai', alt: 'Pemandangan Danau Erhai dengan garis pegunungan di seberang.', photoNote: 'Foto memperlihatkan Danau Erhai, bukan verifikasi pin Dermaga Caicun.' },
   caicun: { name: 'Dermaga Caicun', chinese: '才村码头', description: 'Titik mulai menyusuri tepi barat Erhai sebelum kembali ke Kota Tua Dali.', page: 23 },
   'dali-old-town': { name: 'Kota Tua Dali', chinese: '大理古城', description: 'Dari Menara Wuhua terlihat deretan atap kota tua; telusuri gangnya lalu cari makan di Bo’ai Road.', page: 25, photo: 'highlight-dali', alt: 'Gerbang selatan Kota Tua Dali diterangi cahaya keemasan di bawah langit biru malam.', photoNote: 'Foto menampilkan gerbang selatan Kota Tua Dali, bukan Menara Wuhua. Suasana malam sebagai gambaran tempat; kunjungan dijadwalkan siang.' },
@@ -85,7 +85,7 @@ export const places: Record<string, Place> = {
   nancheng: { name: 'Masjid Nancheng', chinese: '南城清真寺', description: 'Gerbang masjid menjadi salah satu patokan di pusat Kunming, dekat kawasan makan malam terakhir.', page: 26, photo: 'nancheng', alt: 'Bangunan Masjid Nancheng di pusat Kunming.' },
   shuncheng: { name: 'Kawasan Shuncheng', chinese: '顺城', description: 'Kawasan Hui di sekitar Masjid Shuncheng menjadi tujuan makan, termasuk sarapan terakhir di Kunming.', page: 26, photo: 'shuncheng', alt: 'Masjid Shuncheng yang menandai kawasan Hui di Kunming.' },
   'green-lake': { name: 'Green Lake (Cuihu)', chinese: '翠湖', description: 'Danau kota dengan jalur jalan kaki di tepi air dapat dikunjungi jika jam penerbangan memungkinkan.', page: 27, photo: 'green-lake', alt: 'Taman dan perairan Green Lake atau Cuihu di Kunming.' },
-  kmg: { name: 'Bandara Changshui (KMG)', chinese: '昆明长水国际机场', description: 'Terminal beratap keemasan menjadi titik keberangkatan pulang dari Kunming ke Jakarta.', page: 27, photo: 'kmg', alt: 'Terminal Bandara Internasional Kunming Changshui.' },
+  kmg: { name: 'Bandara Changshui (KMG)', chinese: '昆明长水国际机场', description: 'Terminal beratap keemasan menjadi titik keberangkatan pulang dari Kunming ke Jakarta.', page: 27, photo: 'commons-kmg', alt: 'Atap keemasan bergelombang terminal Bandara Changshui di atas jalur antar keberangkatan, dengan kolam dan taman di sisi kanan.' },
 };
 for (const [placeId, photoId] of Object.entries({ ...northernPlacePhotoIds, ...westernPlacePhotoIds })) {
   const photo = northernGuidePhotos[photoId] ?? westernGuidePhotos[photoId];
@@ -433,6 +433,24 @@ export const photos: Record<string, Photo> = {
     author: 'JIN Qin', source: 'https://unsplash.com/photos/a-group-of-people-standing-on-top-of-a-red-structure-OXeuIsqPvUM',
     license: 'Unsplash License', licenseUrl: 'https://unsplash.com/license', origin: 'Unsplash',
     photoNote: 'Pertunjukan Impression Lijiang di panggung merah terbuka dengan latar Jade Dragon Snow Mountain. Dipublikasikan 22 Mei 2023; tanggal pengambilan tidak tersedia. Foto arsip, bukan konfirmasi kondisi November 2026.',
+  },
+  "commons-chengdu-south": {
+    "id": "commons-chengdu-south", "width": 1440, "height": 961, "sizes": [480, 960, 1440],
+    "author": "Siyuwj", "source": "https://commons.wikimedia.org/wiki/File:Chengdunan_Railway_Station_at_night,_2017-09-18.jpg",
+    "license": "CC BY-SA 4.0", "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/", "origin": "Wikimedia Commons",
+    "photoNote": "Gedung Stasiun Chengdu South pada malam hari. Diambil 18 September 2017; Trip.com tidak punya foto stasiun ini."
+  },
+  "commons-dali-station": {
+    "id": "commons-dali-station", "width": 1440, "height": 810, "sizes": [480, 960, 1440],
+    "author": "瑞丽江的河水", "source": "https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E7%90%86%E7%AB%99_-_%E8%88%AA%E6%8B%8D_-_2024-10-13.jpg",
+    "license": "CC BY-SA 4.0", "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/", "origin": "Wikimedia Commons",
+    "photoNote": "Foto udara Stasiun Dali (Xiaguan) saat area depannya masih dibangun. Diambil 13 Oktober 2024; Trip.com tidak punya foto stasiun ini."
+  },
+  "commons-kmg": {
+    "id": "commons-kmg", "width": 1440, "height": 960, "sizes": [480, 960, 1440],
+    "author": "Zhangmoon618", "source": "https://commons.wikimedia.org/wiki/File:Kunming_new_airport_terminal_2012-9-26.jpg",
+    "license": "CC BY-SA 3.0", "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/", "origin": "Wikimedia Commons",
+    "photoNote": "Jalur antar keberangkatan terminal Bandara Changshui. Diambil 26 September 2012; Trip.com tidak punya foto bandara ini."
   },
   ...chengduGuidePhotos,
   ...tripcomPhotos,

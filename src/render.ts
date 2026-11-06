@@ -78,9 +78,9 @@ export function pickerItems(current: string, variant = 'sidebar', list: Pick<Day
 }
 // Day panel pieces shared by the homepage and the calm itinerary. `key` keeps ids unique when one page holds several panels; the homepage leaves it empty.
 export interface StopDetails { time?: string; note?: string; status?: string }
-/** One stop card. `covered` is false for places without a guide page, weather or photos (the calm option's own stops). */
+/** One stop card. `covered` is false for places without a guide page or weather (the calm option's own stops). */
 export function stopCard(id: string, p: Place, sequence: number, elementId: string, details: StopDetails, covered = true) {
- const hasPhoto=covered && p.photo && photos[p.photo];
+ const hasPhoto=p.photo && photos[p.photo];
  const guide = covered ? guideForPlace.get(id) : undefined;
  const page = covered ? pageForPlace.get(id) : undefined;
  const weather = hasPhoto && guide ? renderWeather(weatherLocationForGuide[guide.slug], elementId) : '';
@@ -144,12 +144,12 @@ export function dayView(day: Day) {
 export function overviewContent(current: string) {
  return `<p class="dialog-intro">14 hari, 13 malam. Sembilan malam di Sichuan, empat di Yunnan. <a href="${routeMapPath}">Lihat di peta</a></p><ol class="overview-list">${days.map(day=>`<li><a href="#${day.date}" data-date="${day.date}" ${current===day.date?'aria-current="date"':''}><time datetime="${day.date}">${day.date.slice(-2)} Nov</time><span><strong>${e(day.title)}</strong><span>${day.overnight?`Menginap di ${e(day.overnight.name)}`:'Penerbangan pulang'}</span></span>${icon('right')}</a></li>`).join('')}</ol><details class="booking-options"><summary>Mobil & alternatif paket${icon('down')}</summary>${bookingOptions.map((o,i)=>`<div class="booking-option"><h3>${e(o.title)}</h3><p>${e(o.description)}</p>${external(i===0?'Lihat penyedia mobil':'Lihat paket alternatif',o.url)}</div>`).join('')}</details>`;
 }
-export function photoDetail(placeId: string): PhotoContent {
- const p=places[placeId];const photo=p.photo?photos[p.photo]:undefined;
+export function photoDetail(placeId: string, p: Place = places[placeId]): PhotoContent {
+const photo=p.photo?photos[p.photo]:undefined;
  if(!photo) return { image: '', caption: `<h2 id="photo-title">${e(p.name)}</h2><p>Foto belum tersedia.</p>` };
  return {
   image: photoImage(photo.id,p.alt||p.name,true,'(min-width: 960px) 850px, calc(100vw - 40px)'),
-  caption: `<h2 id="photo-title">${e(p.name)}</h2><p>${e(p.description)}</p>${p.photoNote?`<p class="photo-note">${e(p.photoNote)}</p>`:''}${photo.photoNote?`<p class="photo-note">${e(photo.photoNote)}</p>`:''}<p class="photo-note">Foto referensi; warna daun dan kondisi lapangan dapat berbeda saat perjalanan.</p>${copyPlace(placeId)}<div class="photo-credit" data-credits>Foto: ${e(photo.author)}. ${photo.licenseUrl===photo.source?e(photo.license):external(photo.license,photo.licenseUrl)}<br>${external('Buka sumber foto',photo.source)}<span>Diubah ukurannya ke WebP; tampilan daftar dipotong sesuai bingkai. Lisensi asal tetap berlaku.</span></div>`,
+  caption: `<h2 id="photo-title">${e(p.name)}</h2><p>${e(p.description)}</p>${p.photoNote?`<p class="photo-note">${e(p.photoNote)}</p>`:''}${photo.photoNote?`<p class="photo-note">${e(photo.photoNote)}</p>`:''}<p class="photo-note">Foto referensi; warna daun dan kondisi lapangan dapat berbeda saat perjalanan.</p>${copyPlace(placeId,p)}<div class="photo-credit" data-credits>Foto: ${e(photo.author)}. ${photo.licenseUrl===photo.source?e(photo.license):external(photo.license,photo.licenseUrl)}<br>${external('Buka sumber foto',photo.source)}<span>Diubah ukurannya ke WebP; tampilan daftar dipotong sesuai bingkai. Lisensi asal tetap berlaku.</span></div>`,
  };
 }
 export function userPhotoDetail(id: string, titleId = 'photo-title'): PhotoContent {

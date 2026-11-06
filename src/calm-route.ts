@@ -1,4 +1,4 @@
-import { days, places, type Day, type Place } from './itinerary.ts';
+import { days, type Day } from './itinerary.ts';
 import { dayTimelines, type TimelineStep } from './day-timelines.ts';
 import { at, go, type MapLeg, type MapPoint, type Mode } from './route-map.ts';
 import type { Booking, Link, TransportMode, Urgency } from './bookings.ts';
@@ -34,26 +34,7 @@ export interface CalmBooking {
 /** `stays` items are the nights; the day panels list only the other groups, like the homepage. */
 export interface CalmBookingGroup { id: 'tickets' | 'cars' | 'stays'; title: string; lead: string; items: CalmBooking[] }
 
-// Stops the main plan does not visit. Names and Chinese keywords are the OpenStreetMap names used in the research.
-export const calmPlaces: Record<string, Place> = {
-  'mirror-lake': { name: 'Mirror Lake', chinese: '镜海', description: 'Danau panjang di lembah Rize yang memantulkan hutan dan lereng saat angin pelan.' },
-  'long-lake': { name: 'Long Lake', chinese: '长海', description: 'Danau di ujung cabang Zechawa, halte terakhir bus taman di lembah itu.' },
-  'five-colour-pond': { name: 'Five-Colour Pond', chinese: '五彩池', description: 'Kolam kecil biru-hijau di bawah Long Lake, dicapai lewat jalur kayu menurun.' },
-  nuorilang: { name: 'Air Terjun Nuorilang', chinese: '诺日朗瀑布', description: 'Air terjun lebar di Nuorilang, tempat bus taman berganti ke cabang Rize atau Zechawa.' },
-  'pearl-shoals': { name: 'Pearl Shoals', chinese: '珍珠滩瀑布', description: 'Air mengalir di atas dasar batu yang landai lalu jatuh sebagai air terjun; dilewati jalur kayu.' },
-  huanglong: { name: 'Huanglong', chinese: '黄龙风景名胜区', description: 'Teras kolam travertin kuning dan biru di lembah Songpan, sekitar 3.100–3.576 m. Ropeway naik, jalur kayu ke Five-Colour Pool, lalu turun ke gerbang.' },
-  songpan: { name: 'Kota Tua Songpan', chinese: '松潘古城', description: 'Kota bertembok sekitar 2.860 m dengan gerbang dan tembok batu: tempat menginap setelah Huanglong, lalu pagi sebelum kereta ke Maoxian.' },
-  'songpan-mosque': { name: 'Masjid Utara Songpan', chinese: '松潘清真北寺', description: 'Masjid di Shuncheng North Road, patokan untuk makan siang halal. Belum dicek apakah musafir boleh salat di dalam.' },
-  'maoxian-station': { name: 'Stasiun Maoxian', chinese: '茂县站', description: 'Stasiun kereta sekitar 9 km dari pusat Kabupaten Maoxian. Sopir yang dipesan menjemput di sini.' },
-  'huangcheng-mosque': { name: 'Masjid Huangcheng', chinese: '皇城清真寺', description: 'Masjid di Qingyang, di barat stasiun metro Tianfu Square, di tengah kedai halal Huangchengba.' },
-  'panda-base': { name: 'Panda Base Chengdu', chinese: '成都大熊猫繁育研究基地', description: 'Pusat penangkaran panda raksasa di utara kota. November–Februari sesi pagi 08.00–12.00; panda paling aktif tak lama setelah buka.' },
-  'tianfu-twin-towers': { name: 'Tianfu Twin Towers', chinese: '天府双塔', description: 'Dua menara Financial City berlayar LED, dilihat dari danau Jiaozi Park atau jembatan 交子之环. Pertunjukan tematik hanya Jumat dan Sabtu 20.00.' },
-  'chengdu-south': { name: 'Stasiun Chengdu South', chinese: '成都南站', description: 'Stasiun keberangkatan D239 ke Lijiang, sekitar 8 km dari hotel di Chunxi Road.' },
-  'upper-tiger-leaping-gorge': { name: 'Upper Tiger Leaping Gorge', chinese: '上虎跳峡', description: 'Bagian hulu ngarai di sisi Shangri-La. Jalur pengunjung dan eskalator turun ke tepi Sungai Jinsha.' },
-  napahai: { name: 'Napahai', chinese: '纳帕海', description: 'Danau musiman dan padang rumput di cagar alam sekitar 8 km barat laut Dukezong.' },
-};
-
-export const placeFor = (id: string): Place | undefined => calmPlaces[id] ?? places[id];
+export { calmPlaces, placeFor } from './calm-places.ts';
 
 // New map points (WGS84 from OpenStreetMap, checked 5 November 2026); the shared towns reuse the main map's points.
 export const calmMapPoints: Record<string, MapPoint> = {
