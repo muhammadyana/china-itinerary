@@ -347,3 +347,12 @@ The traveller asked for a photo on every place card, from Trip.com or the most r
 ## Jiuzhaigou nights booked (6 November 2026)
 
 From the traveller's Trip.com check-in voucher: Leyu Youth Hostel (乐鱼青年旅舍, Bianbian Street No. 25, Longkang Village), check-in 9 November, check-out 11 November, two nights, "Bed in Single Room with Shared Bathroom (Male Only)", one adult, no meals, IDR 406,629 prepaid including VAT IDR 24,898, late check-out until 14.00 as a reward. Free cancellation until 14.00 on 9 November. The booking number and PIN stay off the site. The calm stays page now shows this hostel alone for 9–10 November, priced at about CNY 75 a night at the stored rate.
+
+## 16 November: Tea Horse and MoYe cliff cafes (6 November 2026)
+
+The traveller asked for Tea Horse (a cafe stop) and "Mo Ye Snow Mountain Cliff Hotel Cafe" (from someone else's itinerary) on the Tiger Leaping Gorge day. The day now runs Lijiang 08.00 → Upper Gorge ±09.30–11.30 → Tea Horse ±11.45–12.45 → MoYe ±13.00–14.15 → Dukezong ±16.00.
+
+- **Tea Horse Guesthouse (茶马客栈):** Trip.com hotel 2106783 sells beds for 16 November (CNY 50 dorm bed, checked 6 November 2026 in the traveller's Chrome); amenities list cafe, restaurant and bar; 9.2 from 1,068 reviews. OpenStreetMap way 523179408 places it on the High Trail in Yongsheng. A 2026 Chinese guide gives a shared car from Qiaotou at about CNY 30 and 20 minutes; reaching it by car avoids the 28 switchbacks. Cafe prices not checked.
+- **MoYe Snow Mountain Cliff Hotel (墨野·雪山悬崖酒店):** Trip.com hotel 124373464, "beside Shenchuan Bridge, Dashengou, Bendiwan Village Group", 9.3 from 759 reviews; restaurant 11.00–21.00; parking "exclusively for guests". A 2026 smzdm review says the cliff cafe (栖崖咖啡) takes non-guests; phone +86 186 8797 3666 (Ctrip). Pin uses the OpenStreetMap Shenchuan Bridge (way 138570589); Trip.com's own map point is 27.254298, 100.159123 in its map datum.
+- **Driving (OSRM, 6 November 2026):** Lijiang → Upper Gorge 81.0 km / 77 min; → Tea Horse 7.3 km / 13 min; → Shenchuan Bridge 11.9 km / 16 min; → Dukezong 110.8 km / 103 min. The car estimate becomes CNY 890 for ±211 km from the same Trip.com Lijiang hourly rate.
+- **High Trail:** hiking stays out of the plan (Shangri-La notice, 10 February 2026; operator closure, 1 May 2026). Driving to a village guesthouse is not named in those notices; 2026 aggregator posts describe the trail as walkable, which conflicts with the official notices.

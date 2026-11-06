@@ -85,7 +85,7 @@ export const yunnanGuides: DestinationGuide[] = [
       { label: 'Eskalator', amount: 'CNY 80 pulang-pergi / CNY 60 naik saja', detail: 'Tarif Qunar dan Trip.com, dicek 5 November 2026; bukan tarif resmi pengelola.', status: 'unconfirmed', source: 'https://touch.piao.qunar.com/touch/detail_2561958500.html' },
       { label: 'Mobil sewa Lijiang → Upper Gorge → Dukezong', amount: 'Perkiraan CNY 725 / mobil', detail: 'Hitungan dari sewa per jam Trip.com di Lijiang untuk 16 November, belum termasuk biaya kembali kosong; pengelola menyebut CNY 300–800 per mobil dari Lijiang (tanpa tanggal).', status: 'estimate', source: 'https://www.trip.com/chartered-car-seo/hourly/lijiang/?curr=CNY' },
     ],
-    visitDuration: 'Alokasi rencana sekitar 2½ jam, ±10.00–12.30, termasuk turun dan naik kembali.',
+    visitDuration: 'Alokasi rencana sekitar 2 jam, ±09.30–11.30, termasuk turun dan naik kembali; setelahnya opsi santai mampir ke kafe Tea Horse dan MoYe.',
     bestTime: 'Menjelang siang, saat sinar matahari lebih mungkin sampai ke dasar ngarai daripada pagi; belum diverifikasi. Buka 08.00–18.00 dengan masuk terakhir 18.00 menurut Ctrip dan Trip.com.',
     tips: [
       'Pakai sepatu bersol kasar: tangga dan batu di tepi sungai bisa basah oleh percikan.',

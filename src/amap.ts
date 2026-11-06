@@ -105,6 +105,9 @@ const amapPlaces: Record<string, AmapPlace> = {
   'chengdu-south': { keyword: '成都南站', city: '510100' },
   // 上虎跳峡 is the Shangri-La side; the Lijiang side has its own Tiger Leaping Gorge entrance.
   'upper-tiger-leaping-gorge': { keyword: '上虎跳峡', city: '533401' },
+  // Both names repeat elsewhere in China, so pin the OpenStreetMap points.
+  'tea-horse-guesthouse': { keyword: '茶马客栈', city: '533401', near: 'tea-horse', marker: true },
+  'moye-cliff-cafe': { keyword: '墨野雪山悬崖酒店', city: '533401', near: 'moye', marker: true },
   napahai: { keyword: '纳帕海', city: '533401' },
 };
 

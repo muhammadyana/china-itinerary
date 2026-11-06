@@ -115,6 +115,16 @@ export const weatherLocations: Record<string, WeatherLocation> = {
     source: 'https://www.openstreetmap.org/?mlat=27.1926037&mlon=100.112808#map=15/27.1926/100.1128',
     note: 'Acuan area pengunjung Upper Gorge di sisi Shangri-La; dasar ngarai lebih rendah dan bisa lebih hangat.',
   },
+  'tea-horse': {
+    id: 'tea-horse', name: 'Tea Horse Guesthouse', latitude: 27.2098777, longitude: 100.1112355,
+    source: 'https://www.openstreetmap.org/way/523179408',
+    note: 'Titik penginapan 茶马客栈 di OpenStreetMap; dipakai untuk pin Amap.',
+  },
+  moye: {
+    id: 'moye', name: 'MoYe, Jembatan Shenchuan', latitude: 27.2581504, longitude: 100.1581967,
+    source: 'https://www.openstreetmap.org/way/138570589',
+    note: 'Titik Jembatan Shenchuan (神川大桥) di OpenStreetMap; hotel MoYe menulis alamatnya "di samping Jembatan Shenchuan".',
+  },
   dali: {
     id: 'dali', name: 'Kota Tua Dali', latitude: 25.68863, longitude: 100.15894,
     source: 'https://geocoding-api.open-meteo.com/v1/get?id=12277235&language=en',

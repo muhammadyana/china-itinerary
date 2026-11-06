@@ -46,7 +46,7 @@ const checklistGroups: ChecklistGroup[] = [
       { id: 'huanglong-car-11nov', label: 'Mobil Jiuzhaigou→Huanglong→Songpan (11 Nov)' },
       { id: 'maoxian-bipenggou-12nov', label: 'Mobil Maoxian→Bipenggou (12 Nov)' },
       { id: 'bipenggou-shuttle-14nov', label: 'Shuttle Bipenggou 09.20→Chengdu (14 Nov)' },
-      { id: 'lijiang-gorge-dukezong', label: 'Mobil Lijiang→Upper Gorge→Dukezong' },
+      { id: 'lijiang-gorge-dukezong', label: 'Mobil Lijiang→Upper Gorge→Tea Horse→MoYe→Dukezong (16 Nov 08.00)' },
       { id: 'tfu-hotel-8nov', label: 'Transfer TFU→hotel 8 Nov' },
     ],
   },

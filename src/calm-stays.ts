@@ -103,7 +103,7 @@ const desti: Stay = {
 const huaqianYuexia: Stay = {
   kind: 'Guesthouse', name: 'Huaqian Yuexia Inn', chinese: '丽江大研古城五一街花前月夏客栈', chineseAddress: '大研古镇五一街文生巷76号',
   room: 'Kamar privat',
-  location: 'Di dalam Kota Tua Dayan, kawasan Jalan Wuyi: mobil berhenti di gerbang utama, lalu 5–10 menit jalan kaki; menurut ulasan September 2026 pemilik membawa koper dari gerbang dengan sepeda. Mobil 08.30 pada 16 November menjemput di gerbang, bukan di pintu.',
+  location: 'Di dalam Kota Tua Dayan, kawasan Jalan Wuyi: mobil berhenti di gerbang utama, lalu 5–10 menit jalan kaki; menurut ulasan September 2026 pemilik membawa koper dari gerbang dengan sepeda. Mobil 08.00 pada 16 November menjemput di gerbang, bukan di pintu.',
   price: 'CNY 66 per malam',
   priceNote: 'Trip.com untuk satu orang, 15–16 November: Cozy Queen CNY 66 termasuk pajak, label diskon "Surprise Savings" 18%, bisa dibatalkan gratis; tinggal 1 kamar dengan harga ini pada 5 November.',
   foreignGuests: 'Trip.com: menerima tamu dari semua negara. Ada ulasan tamu Malaysia pada Oktober 2026.',
