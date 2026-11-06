@@ -3,6 +3,12 @@ import type { Photo } from './itinerary.ts';
 // Place photos taken from each place's Trip.com page at the site owner's request (4 November 2026).
 // Copyright stays with Trip.com; every photo credits Trip.com and links to the page it came from.
 export const tripcomPhotos: Record<string, Photo> = {
+  "tripcom-pudacuo": {
+    "id": "tripcom-pudacuo", "width": 1440, "height": 960, "sizes": [480, 960, 1440],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/shangri-la/potatso-national-park-85835/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/shangri-la/potatso-national-park-85835/", "origin": "Trip.com",
+    "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
+  },
   "tripcom-tea-horse": {
     "id": "tripcom-tea-horse", "width": 1440, "height": 810, "sizes": [480, 960, 1440],
     "author": "Trip.com", "source": "https://us.trip.com/hotels/shangri-la-hotel-detail-2106783/tiger-leaping-gorge-tea-horse-guesthouse/",
