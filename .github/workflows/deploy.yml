@@ -83,7 +83,8 @@ jobs:
           jq -e '.revision == env.GITHUB_SHA' release.json
           curl --fail --silent --show-error --max-time 30 \
             https://china.muhammadyana.me/ > index.html
-          grep -q 'hero-track' index.html
+          grep -q 'id="app"' index.html
+          grep -q 'Opsi santai' index.html
           for slug in jiuzhaigou dali sifangjie; do
             curl --fail --silent --show-error --max-time 30 \
               "https://china.muhammadyana.me/places/$slug/?revision=$GITHUB_SHA" > "guide-$slug.html"
