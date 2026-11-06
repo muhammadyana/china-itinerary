@@ -31,8 +31,9 @@ function parkTicket(date: string) {
   return currencyText(cnyRange(ticket.cost));
 }
 
-// The calm option reaches Jiuzhaigou by the Trip.com shuttle; this row is the train fallback (12306 and 团子出行, 6 November 2026).
+// The calm option reaches Jiuzhaigou by C5756; the earlier C6376+bus row stays as a fallback (12306 and 团子出行, 6 November 2026).
 const calmSlots: SlotRow[] = [
+  { trains: 'C5756 17.05, lalu taksi/shuttle stasiun ke gukou', arrive: '19.10', gate: '±20.30–21.00 (perkiraan)', slot: 'Masuk 10 November, 08:00–10:00' },
   { trains: 'Cadangan: C6376 14.34, lalu bus 团子出行 17.30', arrive: '16.58', gate: '±19.00–19.30 (perkiraan)', slot: 'Masuk 10 November, 08:00–10:00' },
 ];
 
@@ -101,7 +102,7 @@ const calmTrainsPage: TrainsPage = {
   intro: `Link Trip.com untuk setiap kereta opsi santai, cara dari stasiun ke gerbang Jiuzhaigou, transfer di setiap hari kereta, aturan bagasi, dan timeline jam demi jam untuk ${trainDays.length} hari kereta.`,
   sections: [
     ticketsSection('Jam rilis tiket dalam WIB; jam kereta memakai waktu China (WIB + 1 jam). Sampai 16 November kamu sendiri, jadi satu kursi; mulai 18 November temanmu ikut, jadi dua kursi atas nama paspor masing-masing. Kereta 11 dan 15 November dicek di 12306 pada 5 November 2026, cadangan 9 November pada 6 November; 18–20 November sama dengan rencana utama.', cards),
-    slotsSection('Ke gerbang Jiuzhaigou', `Opsi santai memakai satu tiket <strong>Ticket + Sightseeing Bus Ticket (Adult, Non-Chinese mainland visitors)</strong> di Trip.com: ${parkTicket('2026-11-10')} untuk 10 November, slot 08.00–10.00, dipakai pagi dari penginapan. Ke Jiuzhaigou pada 9 November naik shuttle Trip.com dari Xinnanmen Bus Station siang tanpa kereta (lihat Hari 2); kereta di bawah hanya cadangan bila shuttle tidak bisa dipesan:`, calmSlots, list(gateNotes)),
+    slotsSection('Ke gerbang Jiuzhaigou', `Opsi santai memakai satu tiket <strong>Ticket + Sightseeing Bus Ticket (Adult, Non-Chinese mainland visitors)</strong> di Trip.com: ${parkTicket('2026-11-10')} untuk 10 November, slot 08.00–10.00, dipakai pagi dari penginapan. Ke Jiuzhaigou pada 9 November naik <strong>C5756</strong> Chengdu East 17.05 → Huanglongjiuzhai 19.10, lalu taksi atau shuttle stasiun ke gukou (lihat Hari 2). Baris cadangan di bawah untuk berangkat lebih awal dari East:`, calmSlots, list(gateNotes)),
     transfersSection(),
     luggageSection(),
     timelineSection('Timeline hari kereta', trainDays.map(day => ({ date: day.date, title: `${weekdayDate(day.date)} · ${day.shortTitle}`, steps: day.steps, href: `${calmItineraryPath}#${day.date}` }))),
