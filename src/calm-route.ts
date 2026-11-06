@@ -414,9 +414,21 @@ const calmOwnDays: CalmDay[] = [
 ];
 
 // 8 November's plan and practical notes prepare the main plan's C5746 06.14; the calm option spends 9 November morning in Dujiangyan and enters the park on 10 November.
-const mondayTrainNote: CalmNote = { text: 'Di opsi santai, Senin pagi dipakai ke toko buku Zhongshu Ge Dujiangyan dan shuttle ke Jiuzhaigou baru berangkat siang dari Xinnanmen Bus Station (lihat Hari 2). DiDi 05.15 dan C5746 06.14 yang disebut di hari ini tidak dipakai.', links: [] };
+const mondayTrainNote: CalmNote = { text: 'Di opsi santai, Senin pagi dipakai ke toko buku Zhongshu Ge Dujiangyan dan shuttle ke Jiuzhaigou baru berangkat siang dari Xinnanmen Bus Station (lihat Hari 2). Kereta C5746 06.14 di Info praktis milik rencana utama dan tidak dipakai di sini.', links: [] };
 
-export const calmDays: CalmDay[] = [{ ...fromMainPlan('2026-11-08'), overnight: { name: 'Chengdu', detail: 'Mcsrh Hotel Chunxi Road Taikoo Li (Mcsrh麦嘉·拾趣酒店, 春熙路太古里店), sudah dipesan untuk satu malam: Room M1, Rp292.719. Besok pagi koper bisa dititip di sini sebelum ke Zhongshu Ge.' }, notes: [mondayTrainNote] }, ...calmOwnDays, ...['2026-11-18', '2026-11-19', '2026-11-20', '2026-11-21'].map(fromMainPlan)];
+// The main plan's first night ends early for the 06.14 train; the calm option leaves late on 9 November, so its evening differs.
+const mainFirstDay = fromMainPlan('2026-11-08');
+const calmFirstEvening: TimelineStep[] = [
+  ['±21.10–21.40', 'Siapkan tas untuk besok', 'Pisahkan tas kecil untuk 9–13 November (Jiuzhaigou dan Bipenggou, bawa baju hangat) dari koper besar, yang dititip di hotel bila hotel setuju. Cek e-tiket shuttle Trip.com 14.00 dari Xinnanmen Bus Station dan isi semua baterai.'],
+  ['±21.45', 'Tidur', 'Tidur. Besok tanpa kereta subuh: check-out ±08.30, DiDi ke Zhongshu Ge 08.45.'],
+];
+const calmFirstDay: CalmDay = {
+  ...mainFirstDay,
+  intro: 'Tiba dari Shanghai setelah transit semalam di Pudong. Check-in di Mcsrh Hotel dekat Chunxi Road (sudah dipesan), makan siang telat, lalu sore sampai malam di Menara Vitality, Chengdu SKP. Besok tidak ada kereta subuh: pagi ke Zhongshu Ge, siang shuttle ke Jiuzhaigou.',
+  steps: [...mainFirstDay.steps.slice(0, -calmFirstEvening.length), ...calmFirstEvening],
+};
+
+export const calmDays: CalmDay[] = [{ ...calmFirstDay, overnight: { name: 'Chengdu', detail: 'Mcsrh Hotel Chunxi Road Taikoo Li (Mcsrh麦嘉·拾趣酒店, 春熙路太古里店), sudah dipesan untuk satu malam: Room M1, Rp292.719. Besok pagi koper bisa dititip di sini sebelum ke Zhongshu Ge.' }, notes: [mondayTrainNote] }, ...calmOwnDays, ...['2026-11-18', '2026-11-19', '2026-11-20', '2026-11-21'].map(fromMainPlan)];
 /** "Sekilas hari ini": what to carry and the one thing not to miss, each restating a fact from that day's plan. */
 export interface CalmGlance { bring: string; remember: string }
 export const calmGlance: Record<string, CalmGlance> = {

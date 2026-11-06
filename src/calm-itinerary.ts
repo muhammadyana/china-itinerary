@@ -21,11 +21,17 @@ const keyFor = (date: string) => `-${date}`;
 const mainDay = (day: CalmDay): Day | undefined => day.fromMain ? daysByDate.get(day.date) : undefined;
 
 // Every night, shared ones included, links to its section on the calm stays page so the reader stays in the calm option.
-const stayLinks = (day: CalmDay) => day.overnight ? staysLink(calmStaysHref(day.date), 'Rekomendasi hotel & hostel santai') : '';
+const bookedHotel = (day: CalmDay) => {
+  const base = calmStayBaseForDate(day.date);
+  return base?.booked ? base.hotel.name : undefined;
+};
+const stayLinks = (day: CalmDay) => day.overnight ? staysLink(calmStaysHref(day.date), bookedHotel(day) ? 'Detail hotel yang dipesan' : 'Rekomendasi hotel & hostel santai') : '';
 
 // The calm data names the base, not its area; the calm stays page describes it.
 function overnightFor(day: CalmDay): Overnight | null {
   if (!day.overnight) return null;
+  const booked = bookedHotel(day);
+  if (booked) return { ...day.overnight, area: `${booked}, sudah dipesan` };
   const main = mainDay(day)?.overnight;
   return main ?? { ...day.overnight, area: calmStayBaseForDate(day.date)?.area ?? '' };
 }
@@ -59,7 +65,8 @@ function glanceBookings(day: CalmDay) {
 const glanceRow = (label: string, value: string) => value ? `<div><dt>${e(label)}</dt><dd>${currencyText(value)}</dd></div>` : '';
 function glance(day: CalmDay, key: string) {
   const facts = calmGlance[day.date];
-  const sleep = day.overnight ? `${day.overnight.name}${day.overnight.elevation ? `, ${day.overnight.elevation}` : ''}` : '';
+  const booked = bookedHotel(day);
+  const sleep = day.overnight ? `${day.overnight.name}${day.overnight.elevation ? `, ${day.overnight.elevation}` : ''}${booked ? `: ${booked} (sudah dipesan)` : ''}` : '';
   const book = glanceBookings(day);
   const rows = [
     glanceRow('Tidur', sleep),
