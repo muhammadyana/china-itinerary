@@ -39,7 +39,7 @@ npm run check:ask                 # typecheck ops/ask/ (npx tsc does not cover i
 **Search:** `src/site-search.ts` builds the index (place pages, itinerary days, planning pages) and renders the nav trigger and the `<dialog>` that `renderSiteNavigation()` appends; `initializeSiteSearch()` wires it from `main.ts`. Without JavaScript the trigger is a plain link to `/places/`.
 
 **Prerender plugin (`vite.config.ts`, `prerender-itinerary`):**
-- Homepage: `transformIndexHtml` replaces `<!--app-->` in `index.html` with `shell()`.
+- Homepage: `transformIndexHtml` replaces `<!--app-->` in `index.html` with `homeItineraryView()` (the santai days, staying on `/`). `shell()` is the rencana utama page, mounted in the browser only when `?plan=utama`.
 - `generateBundle` emits `places/index.html`, one `places/<slug>/index.html` per entry in `placePages`, and the script-free `print/index.html`. Per-page title, description, Open Graph, canonical and body are swapped into the `index.html` template by regex (`<!--page-start-->…<!--page-end-->`), so keep those markers and meta tag shapes intact.
 - Adds `data-cfasync="false"` to module scripts (Cloudflare Rocket Loader exclusion).
 - Dev middleware serves `/print/` through `ssrLoadModule` and the PDF on demand.

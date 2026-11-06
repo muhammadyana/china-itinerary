@@ -1,7 +1,7 @@
 import {
   escapeHtml as e, icon, siteCredit, renderPhotoDialog, pickerItems, timelineEvent, stopCard, daySchedule, dayBookings, dayBooking, bookingRow,
   transportSection, dayDateLine, dayTitleRow, sleepSummary, staysLink, transportSummary, dayRoute, stopsSection, practicalSection, nightDetail,
-  pickDayButton, daySidebar, mobileDaybar, dayPickerDialog, copyDialog, statusMessage, openTripItem, costLabel, type Overnight,
+  pickDayButton, daySidebar, mobileDaybar, dayPickerDialog, copyDialog, statusMessage, openTripItem, costLabel, userGallery, type Overnight,
 } from './render.ts';
 import { currencyText } from './currency.ts';
 import { openTripsForDate } from './open-trips.ts';
@@ -13,9 +13,10 @@ import { calmStayBaseForDate, calmStaysHref } from './calm-stays.ts';
 import { calmDayBookings } from './calm-prepare.ts';
 import { noteItem } from './calm-render.ts';
 
-// The homepage's "hari demi hari" view for the calm option. Every day is prerendered so the page reads in order without
-// JavaScript; calm-itinerary-main.ts then shows one day at a time. 8 and 18–21 November render the main plan's own day
-// (timeline, bookings, stops, practical notes) through the homepage components, so the two pages cannot drift apart.
+// Day-by-day view of the active santai plan. Every day is prerendered so the page reads in order without JavaScript;
+// calm-itinerary-main.ts then shows one day at a time. `homeItineraryView` is bare `/`. `calmItineraryView` keeps
+// `/places/calm-itinerary/` for older links. 8 and 18–21 November render the main plan's own day (timeline, bookings,
+// stops, practical notes) through the shared day components, so those days cannot drift apart.
 
 const keyFor = (date: string) => `-${date}`;
 const mainDay = (day: CalmDay): Day | undefined => day.fromMain ? daysByDate.get(day.date) : undefined;
@@ -110,12 +111,30 @@ function dayPanel(day: CalmDay, index: number) {
  ${main?.sourceNote ? `<p class="stop-note day-source-note">${e(main.sourceNote)}</p>` : ''}${pagination(index)}</article>`;
 }
 
-function intro() {
-  return `<div class="itinerary-intro"><h1 id="calm-itinerary-title">Opsi santai,<br>hari demi hari.</h1><div class="itinerary-actions">${pickDayButton()}<a class="quiet-button" href="${calmPath}#calm-map">Peta${icon('right')}</a>${planSwitch(calmItineraryPath)}</div></div>`;
+function intro(home: boolean) {
+  const actions = home
+    ? `${pickDayButton()}${planSwitch('/', 'calm')}`
+    : `${pickDayButton()}<a class="quiet-button" href="${calmPath}#calm-map">Peta${icon('right')}</a>${planSwitch(calmItineraryPath, 'calm')}`;
+  return `<div class="itinerary-intro"${home ? ' id="itinerary"' : ''}><h1 id="calm-itinerary-title">Opsi santai,<br>hari demi hari.</h1><div class="itinerary-actions">${actions}</div></div>`;
 }
+
+function dayLayout(home: boolean) {
+  const first = calmDays[0].date;
+  const footer = home ? '' : `<a class="route-link" href="${calmPath}#calm-map">Lihat peta rute santai${icon('right')}</a>`;
+  return `<div class="journey-layout" id="${home ? 'route' : 'calm-itinerary-days'}">${daySidebar(pickerItems(first, 'sidebar', calmDays), footer)}<div class="calm-day-panels">${calmDays.map(dayPanel).join('')}</div></div>`;
+}
+
+const dayChrome = (first: string) => `${mobileDaybar('mobile-daybar calm-daybar')}
+  ${dayPickerDialog(pickerItems(first, 'modal', calmDays))}
+  ${renderPhotoDialog('home')}
+  ${copyDialog()}
+  ${statusMessage}`;
 
 // Runs before the panels are parsed, so calm.css shows only the linked day from the first paint instead of 14 days that then collapse.
 const earlyScript = '<script data-cfasync="false">document.documentElement.classList.add(\'js\')</script>';
+// Same first-paint rule, plus a hide for `?plan=utama` until main.ts mounts the rencana utama shell.
+// data-cfasync keeps Cloudflare Rocket Loader from rewriting the script type and delaying it.
+const homeEarlyScript = '<script data-cfasync="false">document.documentElement.classList.add(\'js\');try{if(new URLSearchParams(location.search).get(\'plan\')===\'utama\'){document.documentElement.setAttribute(\'data-home-plan\',\'utama\');var s=document.createElement(\'style\');s.textContent=\'html[data-home-plan="utama"] #app{visibility:hidden}\';document.head.appendChild(s);}}catch(e){}</script>';
 
 export function calmItineraryView() {
   const first = calmDays[0].date;
@@ -123,13 +142,23 @@ export function calmItineraryView() {
   <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation(calmItineraryPath)}</header>
   <main class="container calm-itinerary-page" data-calm-itinerary>
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="${calmPath}">Opsi santai</a>${icon('right')}<span>Itinerary santai</span></nav>
-    ${intro()}
-    <div class="journey-layout" id="calm-itinerary-days">${daySidebar(pickerItems(first, 'sidebar', calmDays), `<a class="route-link" href="${calmPath}#calm-map">Lihat peta rute santai${icon('right')}</a>`)}<div class="calm-day-panels">${calmDays.map(dayPanel).join('')}</div></div>
+    ${intro(false)}
+    ${dayLayout(false)}
   </main>
   <footer class="container guide-footer calm-itinerary-footer"><a href="${calmPath}">Kembali ke opsi santai</a>${siteCredit()}</footer>
-  ${mobileDaybar('mobile-daybar calm-daybar')}
-  ${dayPickerDialog(pickerItems(first, 'modal', calmDays))}
-  ${renderPhotoDialog('home')}
-  ${copyDialog()}
-  ${statusMessage}`;
+  ${dayChrome(first)}`;
+}
+
+/** Bare `/`. The santai days are the page; nothing here sends the reader to `/places/calm-itinerary/`. */
+export function homeItineraryView() {
+  const first = calmDays[0].date;
+  return `${homeEarlyScript}<a class="skip-link" href="#itinerary" data-action="skip">Langsung ke jadwal</a>
+  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation('/')}</header>
+  <main class="container calm-itinerary-page" data-calm-itinerary data-home-itinerary>
+    ${intro(true)}
+    ${dayLayout(true)}
+    ${userGallery()}
+  </main>
+  <footer class="container guide-footer calm-itinerary-footer">${siteCredit()}</footer>
+  ${dayChrome(first)}`;
 }

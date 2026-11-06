@@ -9,7 +9,7 @@ import { routeMapView } from './src/route-map.ts';
 import { routeMapPath } from './src/route-map-main.ts';
 import { calmPath, calmRouteProblems, calmView } from './src/calm-render.ts';
 import { calmItineraryPath, calmPreparePath, calmStopIds } from './src/calm-route.ts';
-import { calmItineraryView } from './src/calm-itinerary.ts';
+import { calmItineraryView, homeItineraryView } from './src/calm-itinerary.ts';
 import { calmPrepareView } from './src/calm-prepare.ts';
 import { calmStaysPath, calmStaysView } from './src/calm-stays-render.ts';
 import { calmCostsPath, calmCostsView } from './src/calm-costs-render.ts';
@@ -140,7 +140,10 @@ export default defineConfig({
    if (path === askPath || `${path}/` === askPath) return askHtml(html);
    const slug = path.match(/^\/places\/([a-z0-9-]+)\/?$/)?.[1];
    const page = slug ? pageBySlug.get(slug) : undefined;
-   return page ? destinationHtml(html, page) : html.replace('<!--app-->', shell());
+   if (page) return destinationHtml(html, page);
+   // Build reports `/index.html`; the dev server reports `/`. Both are the santai homepage.
+   const isHome = path === '/' || path === '' || path === '/index.html';
+   return html.replace('<!--app-->', isHome ? homeItineraryView() : shell());
   },
   generateBundle: {
    order: 'post',
