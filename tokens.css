@@ -1,5 +1,6 @@
 /* Hallmark · theme: Specimen, brief-pinned pine / paper / rust · v2.0.0 */
 @font-face { font-family: 'Bodoni Moda'; src: url('./node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-wght-normal.woff2') format('woff2'); font-style: normal; font-weight: 400 900; font-display: swap; }
+@font-face { font-family: 'Fraunces'; src: url('./node_modules/@fontsource-variable/fraunces/files/fraunces-latin-full-normal.woff2') format('woff2'); font-style: normal; font-weight: 100 900; font-display: swap; }
 @font-face { font-family: 'Geist'; src: url('./node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2') format('woff2'); font-style: normal; font-weight: 100 900; font-display: swap; }
 :root {
   color-scheme: light;

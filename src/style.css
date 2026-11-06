@@ -35,7 +35,7 @@
  --color-map-water: #7da1a6; --color-map-water-ink: #4c6f74; --color-water-wash: #e3ecea;
  --color-route-car: #e0661b; --color-route-train: #c99a0a; --color-route-bus: #2e8540; --color-route-plane: #cc2f2f;
  --color-logo-mountain: #2f67ad; --color-logo-snow: #ffffff; --color-logo-leaf: #d9622b;
- --font-display: 'Geist', system-ui, sans-serif; --font-body: 'Geist', system-ui, sans-serif;
+ --font-display: 'Fraunces', Georgia, serif; --display-variation: 'SOFT' 100, 'WONK' 1; --font-body: 'Geist', system-ui, sans-serif;
  --font-outlier: var(--font-body); --display-weight: 600;
  --container: 1280px; --gutter: 40px; --gap-columns: 40px;
  --radius-card: 28px; --radius-pill: 100px; --tracking-display: -.035em;
@@ -48,6 +48,8 @@
 
 html { scroll-padding-top: 24px; }
 body { font-synthesis: none; }
+/* Fraunces' soft, wonky cut for every display face; axes a font lacks are ignored. */
+h1, h2, h3, h4, legend, .date-number, .stop-sequence, .arrival-date strong, .footer-top p { font-variation-settings: var(--display-variation); }
 button,a,summary { -webkit-tap-highlight-color: var(--color-transparent); }
 button { color: inherit; cursor: pointer; border: 0; }
 button,a { touch-action: manipulation; }
@@ -79,7 +81,7 @@ svg { flex-shrink: 0; }
 .hero { position: relative; isolation: isolate; display: flex; align-items: flex-end; min-height: 530px; overflow: hidden; border-radius: 24px; background: var(--color-autumn); color: var(--color-on-autumn); }
 .hero::after { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(180deg,var(--color-hero-clear) 15%,var(--color-hero-mid) 47%,var(--color-hero-base) 100%); }
 .hero-copy { position: relative; z-index: 1; padding: 48px; width: 100%; display: grid; grid-template-columns: minmax(0,1fr) auto; gap: var(--space-lg); align-items: end; }
-.hero h1 { grid-column: 1 / -1; font-family: var(--font-body); font-size: clamp(3.5rem,6.5vw,6rem); font-weight: 600; line-height: .99; letter-spacing: -.04em; max-width: 12ch; }
+.hero h1 { grid-column: 1 / -1; font-family: var(--font-display); font-size: clamp(3.5rem,6.5vw,6rem); font-weight: 600; line-height: .99; letter-spacing: -.04em; max-width: 12ch; }
 .hero-subtitle { color: var(--color-on-autumn); line-height: 1.6; font-size: 16px; }
 .hero-subtitle span { display: block; color: var(--color-on-autumn-muted); font-size: 14px; }
 .primary-button { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-sm); min-height: 54px; padding: var(--space-md) var(--space-lg); border-radius: var(--radius-pill); background: var(--color-gold); color: var(--color-accent-ink); font-weight: 600; font-size: 16px; white-space: nowrap; }
@@ -97,7 +99,7 @@ svg { flex-shrink: 0; }
 .journey-layout { display: grid; grid-template-columns: 228px minmax(0,1fr); gap: 56px; align-items: start; margin-top: 56px; }
 .day-sidebar { position: sticky; top: 24px; align-self: start; max-height: calc(100dvh - 48px); overflow-y: auto; padding: 0 var(--space-xs) var(--space-sm) 0; scrollbar-width: thin; }
 .sidebar-title { display: flex; justify-content: space-between; align-items: center; padding-bottom: var(--space-md); border-bottom: 1px solid var(--color-rule); }
-.sidebar-title h2 { font-family: var(--font-body); font-size: 16px; font-weight: 600; letter-spacing: 0; }
+.sidebar-title h2 { font-family: var(--font-display); font-size: 16px; font-weight: 600; letter-spacing: 0; }
 .sidebar-title svg { color: var(--color-muted); }
 .sidebar-days,.picker-days,.overview-list { list-style: none; padding: 0; margin: var(--space-xs) 0 0; }
 .date-choice { display: flex; gap: var(--space-sm); align-items: center; padding: var(--space-sm) var(--space-xs); min-height: 62px; text-decoration: none; border-radius: var(--radius-card); }
@@ -114,7 +116,7 @@ svg { flex-shrink: 0; }
 .date-line { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-xs); color: var(--color-muted); font-size: 13px; }
 .date-line time { color: var(--color-accent); }
 .day-title-row { display: flex; align-items: flex-start; gap: var(--space-md); margin-top: var(--space-md); }
-.day-title-row h2 { font-family: var(--font-body); font-weight: 600; letter-spacing: -.035em; flex: 1; max-width: 25ch; font-size: var(--text-section); line-height: 1.1; }
+.day-title-row h2 { font-family: var(--font-display); font-weight: 600; letter-spacing: -.035em; flex: 1; max-width: 25ch; font-size: var(--text-section); line-height: 1.1; }
 .share-button { border: 1px solid var(--color-rule-2); }
 .day-intro { margin-top: var(--space-md); max-width: 65ch; color: var(--color-ink-2); }
 .day-route { display: flex; gap: var(--space-xs); align-items: center; flex-wrap: wrap; margin-top: 20px; font-size: 12px; color: var(--color-muted); }
@@ -130,7 +132,7 @@ svg { flex-shrink: 0; }
 .transport-summary p { font-size: 14px; margin-top: var(--space-2xs); }
 .daily-stops { margin-top: var(--space-xl); }
 .section-heading { display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); }
-.section-heading h3 { font-family: var(--font-body); font-size: 16px; letter-spacing: 0; font-weight: 600; }
+.section-heading h3 { font-family: var(--font-display); font-size: 16px; letter-spacing: 0; font-weight: 600; }
 .section-heading > span { font-size: 12px; color: var(--color-muted); }
 .timeline { list-style: none; padding: 0; margin: var(--space-lg) 0 0; }
 .stop { padding: var(--space-lg) 0; border-top: 1px solid var(--color-rule); }
@@ -416,7 +418,7 @@ dialog::backdrop { background: var(--color-backdrop); }
 .home-arrival:hover .arrival-open { color: var(--color-accent); }
 .trip-highlights { margin-top: 72px; }
 .highlights-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-xl); margin-bottom: 32px; }
-.highlights-heading h2,.itinerary-intro :is(h1,h2),.overland h2 { font-family: var(--font-body); font-weight: 600; letter-spacing: -.04em; font-size: clamp(36px,4.5vw,58px); line-height: 1.05; }
+.highlights-heading h2,.itinerary-intro :is(h1,h2),.overland h2 { font-family: var(--font-display); font-weight: 600; letter-spacing: -.04em; font-size: clamp(36px,4.5vw,58px); line-height: 1.05; }
 .highlights-heading > p { max-width: 35ch; color: var(--color-muted); font-size: 15px; line-height: 1.65; }
 .highlights-grid { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); column-gap: var(--space-lg); row-gap: 32px; }
 .highlight-card { display: block; grid-column: span 2; min-width: 0; text-decoration: none; border-radius: var(--radius-card); }

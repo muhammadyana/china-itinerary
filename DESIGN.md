@@ -15,7 +15,7 @@ The interface stays in Bahasa Indonesia. Code identifiers, comments, tests, and 
 
 `src/style.css` defines the fixed light color tokens. `tokens.css` supplies the spacing scale and locally hosted fonts; `base.css` provides the reset. `src/glass.css` contains the shared glass material and destination-page layout.
 
-Geist is the active display and body face, at weights 400, 500, and 600. Headings are sentence case with compact tracking. Body text is 16px with comfortable leading; supporting labels stay readable on phones. Colors use role-based CSS variables. Warm autumn accents reconnect the destination guides with the original homepage palette.
+Titles, subtitles and section headers use Fraunces (locally hosted variable font) with its soft, wonky axes (`SOFT` 100, `WONK` 1) at weight 600; Geist is the body face, at weights 400, 500, and 600. The printed PDF keeps Geist headings. Headings are sentence case with compact tracking. Body text is 16px with comfortable leading; supporting labels stay readable on phones. Colors use role-based CSS variables. Warm autumn accents reconnect the destination guides with the original homepage palette.
 
 | Role | Value |
 | --- | --- |
