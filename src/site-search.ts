@@ -29,27 +29,27 @@ export const calmItineraryPage: PlanningPage = { href: '/places/calm-itinerary/'
 export const planTopics: PlanTopic[] = [
   {
     topic: 'Peta rute',
-    main: { href: routeMapPath, label: 'Peta rute 14 hari', keywords: 'map perjalanan' },
+    main: { href: `${routeMapPath}?plan=utama`, label: 'Peta rute 14 hari', keywords: 'map perjalanan' },
     calm: { href: '/places/calm/', label: 'Opsi santai: kereta ke Yunnan', keywords: 'peta rute santai calm alternatif pilihan Jiuzhaigou dua malam Songpan Maoxian Bipenggou Panda Base Huangcheng Jumat Zhongshu Ge Zhongshuge 钟书阁 Dujiangyan toko buku D239 Lijiang Tiger Leaping Gorge Upper Gorge Napahai' },
   },
   {
     topic: 'Hotel & hostel',
-    main: { href: staysPath, label: 'Hotel & hostel per malam', keywords: 'penginapan menginap akomodasi' },
+    main: { href: `${staysPath}?plan=utama`, label: 'Hotel & hostel per malam', keywords: 'penginapan menginap akomodasi' },
     calm: { href: '/places/calm-stays/', label: 'Hotel & hostel santai', keywords: 'opsi santai calm penginapan menginap akomodasi hotel hostel guesthouse per malam paspor asing' },
   },
   {
     topic: 'Persiapan & pemesanan',
-    main: { href: preparePath, label: 'Persiapan & pemesanan', keywords: 'booking tiket biaya pembayaran internet darurat KBRI asuransi' },
+    main: { href: `${preparePath}?plan=utama`, label: 'Persiapan & pemesanan', keywords: 'booking tiket biaya pembayaran internet darurat KBRI asuransi' },
     calm: { href: '/places/calm-prepare/', label: 'Persiapan santai', keywords: 'opsi santai calm booking pesan tiket kereta mobil hotel jangan dibeli persiapan pemesanan' },
   },
   {
     topic: 'Rincian biaya',
-    main: { href: '/places/costs/', label: 'Rincian biaya', keywords: 'biaya harga budget anggaran rupiah yuan total per hari' },
+    main: { href: '/places/costs/?plan=utama', label: 'Rincian biaya', keywords: 'biaya harga budget anggaran rupiah yuan total per hari' },
     calm: { href: '/places/calm-costs/', label: 'Rincian biaya santai', keywords: 'opsi santai calm biaya harga budget anggaran rupiah yuan total per hari' },
   },
   {
     topic: 'Kereta & timeline',
-    main: { href: '/places/trains/', label: 'Kereta & timeline', keywords: 'tiket kereta train stasiun jadwal jam' },
+    main: { href: '/places/trains/?plan=utama', label: 'Kereta & timeline', keywords: 'tiket kereta train stasiun jadwal jam' },
     calm: { href: '/places/calm-trains/', label: 'Kereta & timeline santai', keywords: 'opsi santai calm tiket kereta train stasiun jadwal jam bagasi koper transfer bus C5772 C5754 D239' },
   },
 ];

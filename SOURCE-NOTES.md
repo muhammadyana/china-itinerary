@@ -301,3 +301,7 @@ At the owner's request after a PlacesSearch for casual 清真 near Taikoo Li / I
 ## Default itinerary is the calm option (6 November 2026)
 
 The owner asked to make the santai (calm) itinerary the default when opening the itinerary without choosing the main plan. Changes: the Itinerary menu lists Santai before Utama; `/#itinerary` redirects to `/places/calm-itinerary/` unless `?plan=utama` is set; the Utama choice uses `/?plan=utama#itinerary`; the homepage itinerary block is labeled rencana utama and links to the active calm itinerary. Main-plan pages are otherwise unchanged.
+
+## Default all planning twins to santai (6 November 2026)
+
+The owner asked that every utama/santai pair default to santai, not only the itinerary: route map, stays, preparation, costs and trains. `src/main.ts` redirects those main-plan paths to their calm twins unless `?plan=utama` is present; the Utama menu links carry that query so they still open. Santai remains listed first in the Itinerary menu.

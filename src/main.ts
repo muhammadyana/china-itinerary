@@ -171,10 +171,27 @@ if (location.hash === '#route') openOverview($('.site-navigation [data-action="o
 }
 
 initializePhotoLoading();
-// Default itinerary is the calm option. /#itinerary and the nav "itinerary" action open santai unless ?plan=utama.
+// Default every utama/santai twin to the calm option unless ?plan=utama.
 const wantsMainPlan = new URLSearchParams(location.search).get('plan') === 'utama';
-if (location.pathname === '/' && location.hash === '#itinerary' && !wantsMainPlan) {
-  location.replace('/places/calm-itinerary/');
+const mainToCalm: Record<string, string> = {
+  '/places/map': '/places/calm/',
+  '/places/map/': '/places/calm/',
+  '/places/stays': '/places/calm-stays/',
+  '/places/stays/': '/places/calm-stays/',
+  '/places/prepare': '/places/calm-prepare/',
+  '/places/prepare/': '/places/calm-prepare/',
+  '/places/costs': '/places/calm-costs/',
+  '/places/costs/': '/places/calm-costs/',
+  '/places/trains': '/places/calm-trains/',
+  '/places/trains/': '/places/calm-trains/',
+};
+if (!wantsMainPlan) {
+  if (location.pathname === '/' && location.hash === '#itinerary') {
+    location.replace('/places/calm-itinerary/');
+  } else {
+    const calm = mainToCalm[location.pathname];
+    if (calm) location.replace(calm + location.hash);
+  }
 }
 
 const calmItinerary = document.querySelector<HTMLElement>('[data-calm-itinerary]');
