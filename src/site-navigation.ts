@@ -70,7 +70,10 @@ const navMenu = (name: string, label: string, panel: string) =>
 // Both plans as a pair of real links; the visible "Utama"/"Santai" gains its topic in the accessible name.
 function planChoice(row: PlanRow, plan: Plan, current: string) {
   const link = row[plan];
-  const currentPage = pagePath(link.href) === current ? ' aria-current="page"' : '';
+  // Homepage `/` is shared; utama links use `?plan=utama` so bare `/` must not look selected.
+  const isUtamaQueryHome = plan === 'main' && pagePath(link.href) === '/' && link.href.includes('plan=utama');
+  const matches = pagePath(link.href) === current && !(isUtamaQueryHome && current === '/');
+  const currentPage = matches ? ' aria-current="page"' : '';
   return `<a class="plan-choice" href="${escapeHtml(link.href)}"${actionAttribute(link.action)} aria-label="${escapeHtml(`${row.topic}, ${plans[plan].name}`)}"${currentPage}>${plans[plan].short}</a>`;
 }
 

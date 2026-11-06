@@ -186,8 +186,8 @@ const mainToCalm: Record<string, string> = {
   '/places/trains/': '/places/calm-trains/',
 };
 if (!wantsMainPlan) {
-  if (location.pathname === '/' && location.hash === '#itinerary') {
-    location.replace('/places/calm-itinerary/');
+  if (location.pathname === '/' || location.pathname === '') {
+    location.replace('/places/calm-itinerary/' + location.hash);
   } else {
     const calm = mainToCalm[location.pathname];
     if (calm) location.replace(calm + location.hash);

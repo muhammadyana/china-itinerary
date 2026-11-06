@@ -305,3 +305,7 @@ The owner asked to make the santai (calm) itinerary the default when opening the
 ## Default all planning twins to santai (6 November 2026)
 
 The owner asked that every utama/santai pair default to santai, not only the itinerary: route map, stays, preparation, costs and trains. `src/main.ts` redirects those main-plan paths to their calm twins unless `?plan=utama` is present; the Utama menu links carry that query so they still open. Santai remains listed first in the Itinerary menu.
+
+## Homepage defaults to santai (6 November 2026)
+
+Bare `/` redirected to `/places/calm-itinerary/` unless `?plan=utama` (inline script + `main.ts`). The Itinerary menu no longer marks Utama as current on the shared homepage path; Santai stays first and is current on calm pages.
