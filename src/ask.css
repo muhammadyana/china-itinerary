@@ -6,7 +6,7 @@
 .ask-panel .ask-conversation { height: min(70dvh, 720px); min-height: 420px; border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-glass-solid); overflow: hidden; }
 .ask-panel .ask-login { max-width: 460px; padding: var(--space-lg); border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-glass-solid); }
 
-.ask-chat { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.ask-chat { display: flex; flex-direction: column; flex: 1; min-height: 0; font-size: 15px; }
 .ask-conversation { display: flex; flex-direction: column; flex: 1; min-height: 0; }
 .ask-scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: var(--space-md); scrollbar-width: thin; scrollbar-color: var(--color-rule-2) var(--color-transparent); }
 
@@ -21,6 +21,7 @@
 
 /* Empty state */
 .ask-empty { display: grid; gap: var(--space-md); padding-block: var(--space-xs); color: var(--color-ink-2); }
+.ask-hint { color: var(--color-muted); font-size: var(--text-sm); }
 .ask-suggestions { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin: 0; padding: 0; list-style: none; }
 .ask-chip { min-height: 44px; padding: var(--space-xs) var(--space-md); border: 1px solid var(--color-rule-2); border-radius: var(--radius-pill); background: var(--color-glass-solid); color: var(--color-ink); font-size: var(--text-sm); text-align: left; transition: background-color var(--dur-micro) ease, color var(--dur-micro) ease; }
 .ask-chip:hover { background: var(--color-paper-2); color: var(--color-accent); }
@@ -30,7 +31,7 @@
 .ask-message { display: flex; flex-direction: column; min-width: 0; }
 .ask-message-user { align-items: flex-end; }
 .ask-message-user .ask-bubble { max-width: 85%; padding: var(--space-sm) var(--space-md); border-radius: 20px 20px 6px 20px; background: var(--color-autumn); color: var(--color-on-autumn); white-space: pre-wrap; overflow-wrap: anywhere; }
-.ask-message-assistant .ask-bubble { color: var(--color-ink); line-height: 1.6; overflow-wrap: anywhere; }
+.ask-message-assistant .ask-bubble { color: var(--color-ink); line-height: 1.55; overflow-wrap: anywhere; }
 .ask-bubble > * + * { margin-top: var(--space-sm); }
 .ask-bubble :is(ul,ol) { margin-bottom: 0; padding-left: 1.4em; }
 .ask-bubble li + li { margin-top: var(--space-2xs); }
@@ -63,6 +64,11 @@
 .ask-composer textarea:focus-visible { outline-offset: 2px; }
 .ask-send,.ask-stop { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: var(--color-autumn); color: var(--color-on-autumn); }
 .ask-send:hover,.ask-stop:hover { background: var(--color-autumn-hover); }
+/* Location toggle: outlined when off, filled when the position goes with every question. */
+.ask-locate { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border: 1px solid var(--color-rule-2); border-radius: 50%; background: var(--color-paper); color: var(--color-ink-2); transition: background-color var(--dur-micro) ease, color var(--dur-micro) ease; }
+.ask-locate:hover { color: var(--color-accent); }
+.ask-locate[aria-pressed="true"] { border-color: var(--color-accent); background: var(--color-rust-wash); color: var(--color-accent); }
+.ask-locate:disabled { opacity: .6; }
 .ask-stop svg { fill: currentColor; }
 
 /* Floating button: bottom right, above whatever the page pins to the bottom edge. */
@@ -106,7 +112,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .ask-status.is-working::before { animation: none; }
-  .ask-chip { transition: none; }
+  .ask-chip,.ask-locate { transition: none; }
 }
 
 @media print {

@@ -6,12 +6,14 @@ export const askPath = '/places/ask/';
 type Variant = 'page' | 'dialog';
 
 const suggestions = ['Besok jadwalnya apa?', 'Tiket apa yang harus dibeli sekarang?', 'Jelaskan halaman ini'];
+const locationHint = 'Ketuk ikon lokasi di samping kolom tanya, lalu tanya rute, misalnya "ke hotel naik apa dari sini?". Aku buatkan link Amap-nya.';
 
 const suggestionChip = (text: string) => `<li><button type="button" class="ask-chip" data-ask-suggestion>${e(text)}</button></li>`;
 
 const emptyState = () => `<div class="ask-empty" data-ask-empty>
   <p>Tanya apa saja soal perjalananmu. Aku hafal jadwal 14 hari, opsi santai, setiap tempat, penginapan, biaya, kereta, dan persiapan.</p>
   <ul class="ask-suggestions" role="list" aria-label="Contoh pertanyaan">${suggestions.map(suggestionChip).join('')}</ul>
+  <p class="ask-hint">${e(locationHint)}</p>
 </div>`;
 
 // The hidden username lets password managers store the password under a name.
@@ -28,6 +30,7 @@ function loginForm(variant: Variant) {
 function composer(variant: Variant) {
   const id = `ask-input-${variant}`;
   return `<form class="ask-composer" data-ask-composer>
+    <button type="button" class="ask-locate" data-ask="locate" aria-pressed="false" aria-label="Kirim lokasiku ke Tanya AI">${icon('pin')}</button>
     <label class="visually-hidden" for="${id}">Pertanyaanmu</label>
     <textarea id="${id}" name="question" rows="1" maxlength="4000" placeholder="Tanya soal perjalananmu…" enterkeyhint="send"></textarea>
     <button type="submit" class="ask-send" aria-label="Kirim pertanyaan">${icon('send')}</button>

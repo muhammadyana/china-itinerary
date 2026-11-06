@@ -1,7 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import type { AskConfig } from './config.ts';
 import type { Corpus } from './corpus.ts';
-import { INSTRUCTIONS, dynamicContext, type PageContext } from './prompt.ts';
+import { INSTRUCTIONS, dynamicContext, type PageContext, type UserLocation } from './prompt.ts';
 
 export interface ChatMessage {
   role: 'user' | 'assistant';
@@ -11,6 +11,7 @@ export interface ChatMessage {
 export interface ChatRequest {
   messages: ChatMessage[];
   page: PageContext;
+  location?: UserLocation;
 }
 
 export type ChatEvent =
@@ -52,11 +53,24 @@ function parsePage(value: unknown): PageContext | undefined {
   return detail ? { path, title, detail } : { path, title };
 }
 
+const inRange = (value: unknown, min: number, max: number): value is number => typeof value === 'number' && Number.isFinite(value) && value >= min && value <= max;
+
+// The phone's WGS-84 fix, sent only after the owner taps the location button. Absent is fine; malformed is a bad request.
+function parseLocation(value: unknown): UserLocation | undefined | null {
+  if (value === undefined) return undefined;
+  if (!isRecord(value)) return null;
+  const { lat, lng, accuracy, at } = value;
+  if (!inRange(lat, -90, 90) || !inRange(lng, -180, 180) || !inRange(accuracy, 0, 100_000) || !inRange(at, 0, 8.64e15)) return null;
+  return { lat, lng, accuracy, at };
+}
+
 /** Returns the request, or an Indonesian error message for a 400 response. */
 export function parseChatRequest(body: unknown): ChatRequest | string {
   if (!isRecord(body) || !Array.isArray(body.messages)) return INVALID;
   const page = parsePage(body.page);
   if (!page) return INVALID;
+  const location = parseLocation(body.location);
+  if (location === null) return INVALID;
   const raw: unknown[] = body.messages;
   if (!raw.length || raw.length % 2 === 0) return INVALID; // alternating, starting and ending with "user"
   if (raw.length > LIMITS.messages) return 'Percakapan terlalu panjang. Mulai percakapan baru, ya.';
@@ -73,7 +87,7 @@ export function parseChatRequest(body: unknown): ChatRequest | string {
     messages.push({ role, content: content.trim() ? content : '(tidak ada jawaban)' });
   }
   if (total > LIMITS.total) return 'Percakapan terlalu panjang. Mulai percakapan baru, ya.';
-  return { messages, page };
+  return location ? { messages, page, location } : { messages, page };
 }
 
 function failureMessage(error: unknown): string {
@@ -128,7 +142,7 @@ export function createChat(config: AskConfig): ChatRunner {
     const sources = new Map<string, string>();
     const system: Anthropic.TextBlockParam[] = [
       { type: 'text', text: `${corpus.text}\n\n${INSTRUCTIONS}`, cache_control: { type: 'ephemeral', ttl: '1h' } },
-      { type: 'text', text: dynamicContext(request.page, corpus.urls) },
+      { type: 'text', text: dynamicContext(request.page, corpus.urls, new Date(), request.location) },
     ];
     let messages: Anthropic.MessageParam[] = request.messages.map(message => ({ role: message.role, content: message.content }));
     let stopReason = 'unknown';

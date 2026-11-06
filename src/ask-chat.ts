@@ -1,5 +1,6 @@
 import { AskError, chat, isAbort, login, unreachableMessage } from './ask-api.ts';
 import { renderMarkdown, safeHref } from './ask-markdown.ts';
+import { LocationError, readLocation, type SharedLocation } from './ask-location.ts';
 import { limits, loadHistory, pageContext, requestMessages, saveHistory, setUnlocked, trimHistory, type Message, type Source } from './ask-state.ts';
 
 export interface ChatOptions {
@@ -99,6 +100,7 @@ export function createChat(root: HTMLElement, options: ChatOptions = {}): ChatCo
   const input = find<HTMLTextAreaElement>('[data-ask-composer] textarea');
   const send = find<HTMLButtonElement>('.ask-send');
   const stop = find<HTMLButtonElement>('.ask-stop');
+  const locate = find<HTMLButtonElement>('[data-ask="locate"]');
   const loginForm = find<HTMLFormElement>('[data-ask-login]');
   const password = find<HTMLInputElement>('[data-ask-login] input[type="password"]');
   const loginError = find('[data-ask-login-error]');
@@ -106,6 +108,40 @@ export function createChat(root: HTMLElement, options: ChatOptions = {}): ChatCo
   let history = loadHistory();
   let controller: AbortController | null = null;
   let failedTurn: { nodes: HTMLElement[]; question: string } | null = null;
+  // Shared only after a tap; every question re-reads it so a walking traveller sends where they are now.
+  let position: SharedLocation | null = null;
+
+  function setPosition(next: SharedLocation | null) {
+    position = next;
+    locate.setAttribute('aria-pressed', String(Boolean(next)));
+    locate.setAttribute('aria-label', next ? 'Lokasi ikut terkirim. Ketuk untuk berhenti mengirim' : 'Kirim lokasiku ke Tanya AI');
+  }
+
+  async function toggleLocation() {
+    if (position) {
+      setPosition(null);
+      setStatus('Lokasi tidak dikirim lagi.');
+      return;
+    }
+    locate.disabled = true;
+    setStatus('Membaca lokasi…');
+    try {
+      const next = await readLocation(0);
+      setPosition(next);
+      setStatus(`Lokasi terpasang (±${next.accuracy} m). Ikut terkirim di setiap pertanyaan.`);
+    } catch (error) {
+      setStatus(error instanceof LocationError ? error.message : 'Lokasi gagal dibaca. Coba lagi.');
+    } finally {
+      locate.disabled = false;
+    }
+  }
+
+  // A fresh fix before each question; a failed read keeps the last one rather than dropping the position.
+  async function currentPosition() {
+    if (!position) return undefined;
+    try { setPosition(await readLocation(undefined, 5_000)); } catch { /* keep the last fix; its age goes with it */ }
+    return position ?? undefined;
+  }
 
   const distanceToEnd = () => scroller.scrollHeight - scroller.scrollTop - scroller.clientHeight;
   // New text keeps the end in view only while the reader is there; any upward scroll stops that until they return.
@@ -191,7 +227,8 @@ export function createChat(root: HTMLElement, options: ChatOptions = {}): ChatCo
     });
     try {
       const page = pageContext();
-      for await (const event of chat(requestMessages(history, question, page), page, turnController.signal)) {
+      const where = await currentPosition();
+      for await (const event of chat(requestMessages(history, question, page), page, turnController.signal, where)) {
         if (event.type === 'text') {
           text += event.text;
           setStatus('');
@@ -302,6 +339,7 @@ export function createChat(root: HTMLElement, options: ChatOptions = {}): ChatCo
     void ask(question);
   });
   stop.addEventListener('click', () => controller?.abort());
+  locate.addEventListener('click', () => { void toggleLocation(); });
   root.addEventListener('click', event => {
     const target = event.target instanceof Element ? event.target : null;
     const chip = target?.closest<HTMLButtonElement>('[data-ask-suggestion]');

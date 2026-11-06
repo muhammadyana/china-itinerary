@@ -1,4 +1,5 @@
 import { isSource, type PageContext, type Source } from './ask-state.ts';
+import type { SharedLocation } from './ask-location.ts';
 
 export type ChatEvent =
   | { type: 'status'; text: string }
@@ -109,8 +110,8 @@ export async function* readEvents(body: ReadableStream<Uint8Array>): AsyncGenera
   }
 }
 
-export async function* chat(messages: ChatMessage[], page: PageContext, signal: AbortSignal): AsyncGenerator<ChatEvent> {
-  const response = await call('chat', { method: 'POST', headers: { ...jsonHeaders, Accept: 'text/event-stream' }, body: JSON.stringify({ messages, page }), signal });
+export async function* chat(messages: ChatMessage[], page: PageContext, signal: AbortSignal, location?: SharedLocation): AsyncGenerator<ChatEvent> {
+  const response = await call('chat', { method: 'POST', headers: { ...jsonHeaders, Accept: 'text/event-stream' }, body: JSON.stringify(location ? { messages, page, location } : { messages, page }), signal });
   if (!response.ok || !response.body) throw await failure(response);
   yield* readEvents(response.body);
 }
