@@ -23,9 +23,9 @@
 .route-leg { fill: none; stroke-linecap: round; transition: stroke-width var(--dur-short) var(--ease-out); }
 .route-leg-car { stroke: var(--color-accent); stroke-width: 3; }
 .route-leg-train { stroke: var(--color-ink-2); stroke-width: 3; stroke-dasharray: 7 5; stroke-linecap: butt; }
-.route-leg-bus { stroke: var(--color-accent); stroke-width: 2.4; stroke-dasharray: 2 4; }
-.route-leg-plane { stroke: var(--color-muted); stroke-width: 2.4; stroke-dasharray: .5 6; }
-.route-arrow-head { fill: var(--color-muted); }
+.route-leg-bus { stroke: var(--color-route-bus); stroke-width: 2.4; stroke-dasharray: 2 4; }
+.route-leg-plane { stroke: var(--color-route-plane); stroke-width: 2.4; stroke-dasharray: .5 6; }
+.route-arrow-head { fill: var(--color-route-plane); }
 .route-day,.route-badge { transition: opacity var(--dur-short) var(--ease-out); }
 .route-day a { cursor: pointer; }
 .route-day:hover .route-leg,.route-day.is-active .route-leg { stroke-width: 5.5; }
@@ -45,8 +45,8 @@
 .route-legend li { display: inline-flex; align-items: center; gap: var(--space-xs); }
 .route-legend-line { width: 28px; border-top: 3px solid var(--color-accent); }
 .route-legend-line.is-train { border-top-color: var(--color-ink-2); border-top-style: dashed; }
-.route-legend-line.is-bus { border-top-style: dotted; }
-.route-legend-line.is-plane { border-top-color: var(--color-muted); border-top-style: dotted; }
+.route-legend-line.is-bus { border-top-color: var(--color-route-bus); border-top-style: dotted; }
+.route-legend-line.is-plane { border-top-color: var(--color-route-plane); border-top-style: dotted; }
 .route-legend-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--color-ink-2); }
 .route-legend-dot.is-overnight { width: 12px; height: 12px; border: 2px solid var(--color-ink); background: var(--color-glass-solid); }
 
