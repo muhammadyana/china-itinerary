@@ -493,7 +493,7 @@ const bipenggouTickets = 'https://www.trip.com/travel-guide/attraction/li-county
 const stayBooking = (base: CalmStayBase): CalmBooking => ({
   date: base.nights[0], until: base.nights.length > 1 ? base.nights[base.nights.length - 1] : undefined,
   item: `${base.name}, malam ${nightList(base.nights)}`, urgency: 'now',
-  price: stayPicksText(base),
+  price: base.booked ? base.hotel.price : stayPicksText(base), booked: base.booked ? base.hotel.priceNote : undefined,
   channel: `${[...new Set([base.hotel, base.hostel].map(stay => stay.links[0].label))].join(' atau ')}; dua pilihan per malam beserta sumbernya di halaman Hotel & hostel santai.`,
   opens: 'Bisa dipesan sekarang.', link: { label: 'Hotel & hostel santai', url: calmStaysHref(base.nights[0]) },
 });

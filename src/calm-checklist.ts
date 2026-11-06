@@ -29,7 +29,7 @@ const checklistGroups: ChecklistGroup[] = [
     title: 'Hotel belum dikonfirmasi',
     items: [
       { id: 'pudong-7nov', label: 'Pudong / Aerotel transit 7 Nov' },
-      { id: 'jiuzhaigou-9-10', label: 'Jiuzhaigou 9–10' },
+      { id: 'jiuzhaigou-9-10', label: 'Jiuzhaigou 9–10 (Leyu Youth Hostel)', booked: true },
       { id: 'songpan-11', label: 'Songpan 11' },
       { id: 'bipenggou-12-13', label: 'Bipenggou 12–13' },
       { id: 'chengdu-14', label: 'Chengdu 14' },

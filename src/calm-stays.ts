@@ -140,24 +140,23 @@ export const calmStayBases: CalmStayBase[] = [
     },
   },
   {
-    ...jiuzhaigou, id: '2026-11-09', nights: ['2026-11-09', '2026-11-10'], fromMain: false,
+    ...jiuzhaigou, id: '2026-11-09', nights: ['2026-11-09', '2026-11-10'], fromMain: false, booked: true,
     notes: [
-      'Jiuzhaigou Yinghai Holiday Hotel, pilihan rencana utama, paling dekat ke pusat pengunjung (sekitar 1,2 km garis lurus), tetapi di atas batas untuk 9 November: Simple 2-bed Room CNY 220 termasuk pajak. Untuk 10 November Standard Room CNY 181. Keduanya harga promo menginap pertama Trip.com, bisa dibatalkan gratis, check-out sebelum 12.00.',
+      'Sudah dipesan di Trip.com pada 6 November: dua malam, 9–11 November, sudah dibayar.',
+      'Check-in mulai 14.00; check-out sebelum 12.00, dengan bonus check-out terlambat sampai 14.00. Pagi 11 November mobil ke Huanglong menjemput 07.30, jadi bonus itu tidak terpakai.',
       ...jiuzhaigou.notes.filter(note => note.startsWith('Hindari')),
     ],
-    hotel: dandelion,
-    hostel: {
+    hotel: {
       ...jiuzhaigou.hostel,
-      location: 'Bianbian Street No. 25, Desa Longkang: sekitar 1,8 km garis lurus dari pusat pengunjung, 20–30 menit jalan kaki. Paling jauh dari gerbang di antara tiga pilihan di sini; untuk masuk 08.00 pada 10 November mungkin perlu taksi.',
-      price: 'CNY 79 per ranjang (promo menginap pertama)',
-      priceNote: 'Trip.com untuk satu orang, termasuk pajak: ranjang di dorm khusus pria CNY 79 per malam untuk 9–10 dan 10–11 November, CNY 158 bila dipesan sekaligus. Harga promo menginap pertama, potongan 62% dari CNY 204; bisa dibatalkan gratis. Trip.com menulis tinggal 2 ranjang pada 5 November.',
-      reason: 'Hostel rencana utama untuk 9 November, dengan harga yang sama untuk kedua malam opsi ini.',
-      sources: [
-        { title: 'Trip.com list, Jiuzhaigou Tourist Center zone, 9–11 Nov 2026 (dorm bed CNY 79 per night incl. tax)', url: jiuzhaigouList('2026-11-09', '2026-11-11') },
-        ...jiuzhaigou.hostel.sources.slice(0, 1),
-        jiuzhaigouGate,
-      ],
+      room: 'Kamar privat',
+      location: 'Bianbian Street No. 25, Desa Longkang, Zhangzha: sekitar 1,8 km garis lurus dari pusat pengunjung, 20–30 menit jalan kaki. Untuk masuk 08.00 pada 10 November mungkin perlu taksi.',
+      price: 'CNY 75 per malam',
+      priceNote: 'Sudah dipesan di Trip.com: IDR 406.629 untuk 9–11 November (dua malam, termasuk PPN IDR 24.898), dibayar online; sekitar CNY 75 per malam dengan kurs tersimpan. Tipe "Bed in Single Room with Shared Bathroom (Male Only)": satu ranjang single untuk satu orang, kamar mandi bersama, tanpa sarapan.',
+      reason: 'Sudah dipesan untuk kedua malam di Jiuzhaigou.',
+      links: [trip('https://us.trip.com/hotels/detail/?hotelId=121135583&checkIn=2026-11-09&checkOut=2026-11-11&adult=1&crn=1&curr=CNY')],
     },
+    // Not shown while the base is booked; kept as the fallback if the booking is cancelled.
+    hostel: dandelion,
   },
   {
     id: '2026-11-11', name: 'Songpan', area: 'Kota tua Songpan, sekitar Shuncheng North Street dan Masjid Utara.', nights: ['2026-11-11'], fromMain: false,
@@ -311,5 +310,5 @@ export const stayPicksText = (base: StayBase) => `${base.hotel.name} ${base.hote
 export const calmStayPicks = (date: string) => {
   const base = calmStayBaseForDate(date);
   if (!base) throw new Error(`calm-stays.ts has no night ${date}`);
-  return `Usulan: ${stayPicksText(base)}`;
+  return base.booked ? `Sudah dipesan: ${base.hotel.name}, ${base.hotel.price}.` : `Usulan: ${stayPicksText(base)}`;
 };
