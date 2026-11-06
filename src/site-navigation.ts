@@ -19,9 +19,8 @@ const topLinks: NavLink[] = [
   { href: '/#route', label: 'Rute', action: 'overview' },
 ];
 
-// One row per planning topic, each with the main plan and the calm option. The 14-day itinerary is the homepage:
-// Santai is `/#itinerary`, Utama is `/?plan=utama#itinerary`. Search still reaches each day on its own.
-const legacyCalmItinerary = '/places/calm-itinerary/';
+// One row per planning topic, each with the main plan and the calm option. The 14-day itinerary is the homepage,
+// which search reaches day by day instead of as a planning page.
 interface PlanRow { topic: string; main: NavLink; calm: NavLink }
 const planRows: PlanRow[] = [
   { topic: 'Itinerary 14 hari', main: { href: '/?plan=utama#itinerary', label: 'Itinerary 14 hari' }, calm: calmItineraryPage },
@@ -71,11 +70,9 @@ const navMenu = (name: string, label: string, panel: string) =>
 // Both plans as a pair of real links; the visible "Utama"/"Santai" gains its topic in the accessible name.
 function planChoice(row: PlanRow, plan: Plan, current: string) {
   const link = row[plan];
-  const linkPath = pagePath(link.href);
-  // Homepage `/` is shared. Utama links carry `?plan=utama`, so bare `/` selects Santai, not Utama.
-  const isUtamaQueryHome = plan === 'main' && linkPath === '/' && link.href.includes('plan=utama');
-  const isSantaiHome = plan === 'calm' && linkPath === '/' && current === legacyCalmItinerary;
-  const matches = (linkPath === current && !(isUtamaQueryHome && current === '/')) || isSantaiHome;
+  // Homepage `/` is shared; utama links use `?plan=utama` so bare `/` must not look selected.
+  const isUtamaQueryHome = plan === 'main' && pagePath(link.href) === '/' && link.href.includes('plan=utama');
+  const matches = pagePath(link.href) === current && !(isUtamaQueryHome && current === '/');
   const currentPage = matches ? ' aria-current="page"' : '';
   return `<a class="plan-choice" href="${escapeHtml(link.href)}"${actionAttribute(link.action)} aria-label="${escapeHtml(`${row.topic}, ${plans[plan].name}`)}"${currentPage}>${plans[plan].short}</a>`;
 }
@@ -87,18 +84,11 @@ const planRow = (row: PlanRow, current: string) =>
 const itineraryMenu = (current: string) =>
   navMenu('itinerary', 'Itinerary', `<ol class="plan-rows" role="list">${planRows.map(row => planRow(row, current)).join('')}</ol>`);
 
-/** On a planning page (or the homepage itinerary), a quiet link to the same topic in the other plan; empty elsewhere.
- * Both itinerary choices share the path `/`, so `active` says which one this page is showing. */
-export function planSwitch(current: string, active: Plan = 'main'): string {
-  const row = planRows.find(item => pagePath(item.main.href) === current || pagePath(item.calm.href) === current)
-    ?? (current === legacyCalmItinerary ? planRows[0] : undefined);
+/** On a planning page (or the homepage itinerary), a quiet link to the same topic in the other plan; empty elsewhere. */
+export function planSwitch(current: string): string {
+  const row = planRows.find(item => pagePath(item.main.href) === current || pagePath(item.calm.href) === current);
   if (!row) return '';
-  const mainPath = pagePath(row.main.href);
-  const calmPath = pagePath(row.calm.href);
-  const showingMain = current === legacyCalmItinerary ? false
-    : mainPath !== calmPath ? mainPath === current
-    : active === 'main';
-  const [target, label] = showingMain ? [row.calm, 'Lihat versi opsi santai'] : [row.main, 'Lihat versi rencana utama'];
+  const [target, label] = pagePath(row.main.href) === current ? [row.calm, 'Lihat versi opsi santai'] : [row.main, 'Lihat versi rencana utama'];
   return `<p class="plan-switch"><a class="text-link" href="${escapeHtml(target.href)}">${label}</a></p>`;
 }
 
@@ -127,14 +117,11 @@ function syncPlanChoiceCurrent(ownerDocument: Document) {
     const choices = [...row.querySelectorAll<HTMLAnchorElement>('.plan-choice')];
     if (choices.length < 2) continue;
     const [calm, main] = choices;
-    const calmPath = pagePath(calm.getAttribute('href') || '');
-    const mainPath = pagePath(main.getAttribute('href') || '');
-    // Bare `/` is Santai. Utama is current only with ?plan=utama. The old calm-itinerary URL counts as Santai too.
-    if (calmPath === '/' && mainPath === '/' && here === '/') {
-      (wantsMain ? main : calm).setAttribute('aria-current', 'page');
-    } else if ((here === legacyCalmItinerary && calmPath === '/') || calmPath === here || (mainPath === here && !wantsMain)) {
+    const calmHere = pagePath(calm.getAttribute('href') || '') === here;
+    const mainHere = pagePath(main.getAttribute('href') || '') === here;
+    if (calmHere || (mainHere && !wantsMain) || (here === '/' && !wantsMain && pagePath(calm.getAttribute('href') || '').includes('calm-itinerary'))) {
       calm.setAttribute('aria-current', 'page');
-    } else if (mainPath === here && wantsMain) {
+    } else if ((mainHere && wantsMain) || (here === '/' && wantsMain && pagePath(main.getAttribute('href') || '') === '/')) {
       main.setAttribute('aria-current', 'page');
     }
   }

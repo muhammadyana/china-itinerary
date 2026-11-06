@@ -44,8 +44,7 @@ export function initializeCalmItinerary(root: HTMLElement) {
     document.querySelectorAll<HTMLButtonElement>('.mobile-daybar [data-action="next"]').forEach(button => { button.disabled = index === dates.length - 1; });
     document.querySelector('#current-date')!.textContent = dayMonth.format(new Date(`${date}T12:00:00+08:00`));
     document.querySelector('#current-count')!.textContent = `Hari ${index + 1} dari ${dates.length}`;
-    const titleSuffix = root.hasAttribute('data-home-itinerary') ? 'Musim Gugur di China' : 'Itinerary santai';
-    document.title = `${heading(date).textContent} | ${fullDate(date)} | ${titleSuffix}`;
+    document.title = `${heading(date).textContent} | ${fullDate(date)} | Itinerary santai`;
     if (scroll) panelFor(date).scrollIntoView({ block: 'start', behavior: 'instant' });
     if (announceChange) announce(`${fullDate(date)}. ${panelFor(date).querySelector('.sleep-summary strong')?.textContent ?? ''}.`);
   }

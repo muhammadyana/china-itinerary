@@ -26,7 +26,7 @@ import { clipboardCopy, modalDialogs, photoViewer, showPhotoErrors, statusAnnoun
 import { initializeCalmItinerary } from './calm-itinerary-main.ts';
 import { initializeCalmChecklist } from './calm-checklist.ts';
 import { days, daysByDate, places } from './itinerary.ts';
-import { dayView, pickerItems, overviewContent, fullDate, shell } from './render.ts';
+import { dayView, pickerItems, overviewContent, fullDate } from './render.ts';
 
 function initializeItinerary() {
 const $ = <T extends HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
@@ -171,10 +171,9 @@ if (location.hash === '#route') openOverview($('.site-navigation [data-action="o
 
 }
 
-// Bare `/` already is the santai itinerary. `?plan=utama` swaps in the rencana utama shell and stays on `/`.
-// Map, stays, preparation, costs and trains still open their santai twins unless `?plan=utama`.
+initializePhotoLoading();
+// Default every utama/santai twin to the calm option unless ?plan=utama.
 const wantsMainPlan = new URLSearchParams(location.search).get('plan') === 'utama';
-const onHome = location.pathname === '/' || location.pathname === '';
 const mainToCalm: Record<string, string> = {
   '/places/map': '/places/calm/',
   '/places/map/': '/places/calm/',
@@ -187,28 +186,21 @@ const mainToCalm: Record<string, string> = {
   '/places/trains': '/places/calm-trains/',
   '/places/trains/': '/places/calm-trains/',
 };
-if (onHome && wantsMainPlan) {
-  const app = document.getElementById('app');
-  if (app) app.innerHTML = shell();
-} else if (!wantsMainPlan) {
+if (!wantsMainPlan) {
+  // Landing `/` stays the original homepage (hero + rencana utama). Only twin planning pages bounce to santai.
   const calm = mainToCalm[location.pathname];
   if (calm) location.replace(calm + location.hash);
 }
 
-try {
-  initializePhotoLoading();
-  const calmItinerary = document.querySelector<HTMLElement>('[data-calm-itinerary]');
-  if (document.getElementById('day-view')) initializeItinerary();
-  else if (calmItinerary) initializeCalmItinerary(calmItinerary);
-  else initializeGuide();
-  initializeRouteMap();
-  initializeWeather();
-  initializeCurrency();
-  initializeSiteNavigation();
-  initializeSiteSearch();
-  initializeAsk();
-  initializeCalmChecklist();
-} finally {
-  document.documentElement.removeAttribute('data-home-plan');
-  document.documentElement.classList.add('js');
-}
+const calmItinerary = document.querySelector<HTMLElement>('[data-calm-itinerary]');
+if (document.getElementById('day-view')) initializeItinerary();
+else if (calmItinerary) initializeCalmItinerary(calmItinerary);
+else initializeGuide();
+initializeRouteMap();
+initializeWeather();
+initializeCurrency();
+initializeSiteNavigation();
+initializeSiteSearch();
+initializeAsk();
+initializeCalmChecklist();
+document.documentElement.classList.add('js');
