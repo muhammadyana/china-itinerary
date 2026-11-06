@@ -128,3 +128,17 @@ html:not(.js) :is(.calm-daybar, .calm-itinerary-page :is([data-action="pick-day"
   .day-timeline-rich .day-timeline-time { grid-column: 2; grid-row: 1; justify-self: start; margin-top: .4rem; }
   .day-timeline-rich .day-timeline-body { grid-column: 2; grid-row: 2; padding: var(--space-xs) var(--space-sm); }
 }
+
+/* Calm itinerary sidebar: compact rows, the date in a chip on a rail, one-line titles. */
+#calm-itinerary-days .sidebar-days { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; }
+#calm-itinerary-days .sidebar-days > li { min-width: 0; }
+#calm-itinerary-days .sidebar-days::before { content: ''; position: absolute; top: 24px; bottom: 24px; left: 25px; width: 2px; background: var(--color-rule); }
+#calm-itinerary-days .sidebar-days .date-choice { position: relative; z-index: 1; min-height: 48px; gap: 10px; padding: 6px 8px; border-radius: 14px; }
+#calm-itinerary-days .sidebar-days .date-number { display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid var(--color-rule); border-radius: 11px; background: var(--color-paper); font-size: 15px; font-weight: 600; }
+#calm-itinerary-days .sidebar-days .choice-title { overflow: hidden; font-size: 13px; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
+#calm-itinerary-days .sidebar-days .choice-meta { font-size: 11px; line-height: 1.3; }
+#calm-itinerary-days .sidebar-days .date-choice > svg { display: none; }
+#calm-itinerary-days .sidebar-days .date-choice[aria-current] { background: var(--color-rust-wash); color: var(--color-ink); }
+#calm-itinerary-days .sidebar-days .date-choice[aria-current] .choice-meta { color: var(--color-accent); }
+#calm-itinerary-days .sidebar-days .date-choice[aria-current] .choice-title { font-weight: 600; }
+#calm-itinerary-days .sidebar-days .date-choice[aria-current] .date-number { border-color: var(--color-autumn); background: var(--color-autumn); color: var(--color-on-autumn); }
