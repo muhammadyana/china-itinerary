@@ -289,3 +289,11 @@ On 6 November 2026 the owner chose the calm option as the plan ("Jadinya versi s
 At the owner's request ("buat itinerary nya lebih enak dan mudah dimengerti"; they chose the "Ringkas + detail" format), each step on the calm itinerary now shows a short action in bold and keeps the full researched text under it as the detail. `TimelineStep` gained an optional third element for this. The main plan's own pages keep their single-line steps. The shared days (8 and 18–21 November) get their titles from `mainStepTitles` in `src/calm-route.ts`, which fails the build if the step count changes. A "Sekilas hari ini" box (sleep, bookings, what to carry, one thing to remember) sits above each calm timeline. Its "Bawa" and "Ingat" lines restate facts already in that day's plan and add no new claims.
 
 **6 November 2026, Chengdu night booked.** The owner booked Mcsrh Hotel (Chengdu Chunxi Road Taikoo Li Branch) on Trip.com for 8–9 November: one night, Room M1 (double bed), Rp292.719, status "Dikonfirmasi" (owner's screenshot). The calm stays page now shows only this hotel for 8 November, marked as booked, and the calm costs price that night at about CNY 107 instead of the main plan's range. Multi-day luggage storage (9–13 November) is not confirmed with the hotel.
+
+## Chengdu 清真 restos for calm Day 1–2 (6 November 2026)
+
+At the owner's request after a PlacesSearch for casual 清真 near Taikoo Li / IFS for 8–9 November 2026, only the calm Day 1 and Day 2 meal copy was named with verified options. Other calm and main-plan days were left alone.
+
+- **苏坦·中东料理 The Sultan (Taikoo Li):** IslamiChina destination guide (The Sultan Taikoo Li branch) lists 2F unit 2307B, Middle Eastern/Turkish, about CNY 135 per person, hours 11.00–22.00. Used as the named mall option for late lunch on 8 November and the ±14.30–15.15 slot on 9 November.
+- **皇城坝牛肉 Huangchengba Beef:** Google Maps (checked 6 November 2026) gives 三桂前街49号 near 皇城清真寺, hours about 10.30–22.00, rating 4.4. Used as the primary Zuhur lunch on 9 November and as the classic alternative on 8 November. Cadangan nearby: 悦香村牛肉 (same area; name only).
+- **IFS:** no verified 清真 cafe or restaurant was found in the same search; the calm text states that explicitly rather than inventing a name.

@@ -125,9 +125,9 @@ const calmOwnDays: CalmDay[] = [
       ['±08.45–10.00', 'DiDi ke Dujiangyan', 'DiDi ke 钟书阁(融创茂店), lantai 2 成都融创茂 (Sunac Mall), Dujiangyan, sekitar 58 km: ±45 menit tanpa macet menurut OSRM, 60–90 menit menurut pengunjung. Senin pagi jam berangkat kerja, jadi lihat estimasi di aplikasi.'],
       ['10.00–11.15', 'Toko Buku Zhongshu Ge', 'Toko Buku Zhongshu Ge (钟书阁都江堰店), masuk gratis, buka 10.00 menurut Trip.com. Menurut pengunjung, hari kerja saat toko baru buka adalah jam paling sepi. Cari sudut menara buku dan tangga spiral. Belum ditemukan aturan tertulis soal tripod atau gimbal: tanyakan di kasir, dan bila ragu rekam dengan tangan.'],
       ['±11.15–12.30', 'DiDi kembali ke hotel', 'DiDi kembali ke hotel di Chunxi Road, sekitar 58 km.'],
-      ['±12.30–13.20', 'Zuhur & makan siang halal', 'Zuhur (sekitar 12.48) dan makan siang 清真 dekat hotel. Masjid Huangcheng 1–1,5 km; unggahan pengunjung menyebut kedai daging sapi Huangchengba di dekatnya (belum diverifikasi). Beli bekal 清真 untuk makan malam di kereta atau di penginapan. Sebagai musafir, Asar boleh dijamak dengan Zuhur.'],
+      ['±12.30–13.20', 'Zuhur & makan siang halal', 'Zuhur (sekitar 12.48) lalu makan siang 清真. Pilihan utama dekat Masjid Huangcheng (±1–1,5 km dari hotel): 皇城坝牛肉 Huangchengba Beef, 三桂前街49号, buka sekitar 10.30–22.00 (Google Maps, dicek 6 November 2026). Cadangan di kawasan yang sama: 悦香村牛肉. Beli bekal 清真 untuk makan malam di kereta atau di penginapan. Sebagai musafir, Asar boleh dijamak dengan Zuhur.'],
       ['±13.20–14.30', 'Taikoo Li & Daci Temple', 'Jalan kaki dari hotel ke Chengdu Taikoo Li (成都太古里) dan halaman Daci Temple di tengahnya. Area outdoor mall + rumah kayu: bagus untuk foto siang–sore. Masuk gratis; temple biasanya tutup sekitar 17.00.'],
-      ['±14.30–15.15', 'Kopi / foto cafe', 'Kopi atau foto di % Arabica Taikoo Li atau M Stand di kawasan yang sama (desain unik, cocok untuk foto). Jangan jauh dari Chunxi supaya tetap dekat hotel dan East Station.'],
+      ['±14.30–15.15', 'The Sultan atau kopi foto', 'Makan ringan / resto santai 清真 di Taikoo Li: 苏坦·中东料理 The Sultan, lantai 2 unit 2307B (IslamiChina: Middle Eastern/Turkish, sekitar CNY 135 per orang, jam 11.00–22.00; dicek 6 November 2026). Di IFS belum ditemukan cafe atau resto 清真 terverifikasi. Bila hanya kopi/foto, % Arabica atau M Stand di Taikoo Li tetap opsi desain. Jangan jauh dari Chunxi supaya buffer ke East Station longgar.'],
       ['±15.15–16.00', 'IFS panda & rooftop', 'Jalan ke IFS di sebelah Taikoo Li (skywalk). Foto panda climbing di fasad dan rooftop/sky garden; opsional Ralph’s Coffee atau Grid Coffee. Asar bila belum dijamak.'],
       ['±16.00–16.20', 'Ambil koper di hotel', 'Balik hotel ambil koper yang dititip. Cek e-tiket C5756 dan paspor.'],
       ['±16.20–16.45', 'Ke Chengdu East', 'DiDi atau metro ke Chengdu East (成都东站), sekitar 6–8 km dari Chunxi / Taikoo Li: DiDi ±15–25 menit, sisakan buffer macet Senin sore. Target di stasiun ±16.45.'],
@@ -145,6 +145,7 @@ const calmOwnDays: CalmDay[] = [
     notes: [
       { text: 'Toko buku dipindah dari Jumat 13 November ke pagi ini. Senin 9 November hari kerja dan belum masuk libur sekolah Chengdu (11–13 November), sedangkan Jumat sore jatuh di hari terakhir libur sekolah.', links: [zhongshugeHours] },
       { text: 'Sore kota sengaja di Taikoo Li / IFS dekat hotel, bukan Kuanzhai atau Doll House (Manhattan Nature), supaya buffer ke Chengdu East untuk C5756 17.05 tetap longgar.', links: [] },
+      { text: 'Resto 清真 9 November (dicek 6 November 2026): Huangchengba Beef dekat masjid untuk Zuhur; The Sultan di Taikoo Li lantai 2 untuk sore. Cek label 清真 di pintu. Sumber: Google Maps (Huangchengba jam 10.30–22.00) dan IslamiChina (The Sultan).', links: [{ label: 'IslamiChina: The Sultan Taikoo Li', url: 'https://www.islamichinatravel.com/destination-guide/chengdu/chengdu-halal-restaurants/the-sultan-taikoo-li-branch/' }] },
     ],
     risks: [
       'C5756 tiba 19.10, setelah bus 团子出行 terakhir (17.30). Siapkan taksi/DiDi dari area resmi stasiun atau shuttle stasiun Trip.com; sepakati harga sebelum naik. Belum pasti 团子出行 menerima paspor asing pada bus siang (bila suatu saat ganti ke C6376).',
@@ -428,13 +429,19 @@ const calmFirstEvening: TimelineStep[] = [
   ['±21.10–21.40', 'Siapkan tas untuk besok', 'Pisahkan tas kecil untuk 9–13 November (Jiuzhaigou dan Bipenggou, bawa baju hangat) dari koper besar, yang dititip di hotel bila hotel setuju. Cek e-tiket C5756 17.05 Chengdu East → Huanglongjiuzhai dan isi semua baterai.'],
   ['±21.45', 'Tidur', 'Tidur. Besok tanpa kereta subuh: check-out ±08.30, DiDi ke Zhongshu Ge 08.45; sore Taikoo Li lalu kereta 17.05.'],
 ];
+const chengduHalalDay1Note: CalmNote = {
+  text: 'Resto 清真 dekat Chunxi / Taikoo Li untuk 8 November (dicek 6 November 2026): 苏坦·中东料理 The Sultan di Taikoo Li lantai 2 unit 2307B (Middle Eastern/Turkish, sekitar CNY 135 per orang, jam 11.00–22.00 menurut IslamiChina) untuk makan siang telat atau makan malam sebelum / sesudah SKP; 皇城坝牛肉 Huangchengba Beef di 三桂前街49号 dekat Masjid Huangcheng (buka sekitar 10.30–22.00, Google Maps) bila mau 清真 klasik. Di IFS belum ditemukan cafe/resto 清真 terverifikasi. Cek label 清真 di pintu.',
+  links: [{ label: 'IslamiChina: The Sultan Taikoo Li', url: 'https://www.islamichinatravel.com/destination-guide/chengdu/chengdu-halal-restaurants/the-sultan-taikoo-li-branch/' }],
+};
+const calmFirstDayLunch: TimelineStep = ['±15.00–15.45', 'Makan siang halal', 'Makan siang telat 清真 dekat Chunxi / Taikoo Li. Pilihan utama di mall: 苏坦·中东料理 The Sultan, lantai 2 Taikoo Li unit 2307B (IslamiChina: Middle Eastern/Turkish, sekitar CNY 135 per orang, 11.00–22.00; dicek 6 November 2026). Alternatif klasik dekat Masjid Huangcheng: 皇城坝牛肉 Huangchengba Beef, 三桂前街49号, sekitar 10.30–22.00 (Google Maps, 6 November 2026). Di IFS belum ada opsi 清真 terverifikasi. Sekalian beli bekal berlabel 清真 untuk makan malam di SKP dan 9–10 November, ditambah cadangan tahan lama untuk 11–12 November. Belum ada kedai 清真 terverifikasi di dekat SKP.'];
 const calmFirstDay: CalmDay = {
   ...mainFirstDay,
-  intro: 'Tiba dari Shanghai setelah transit semalam di Pudong. Check-in di Mcsrh Hotel dekat Chunxi Road (sudah dipesan), makan siang telat, lalu sore sampai malam di Menara Vitality, Chengdu SKP. Besok tidak ada kereta subuh: pagi ke Zhongshu Ge, sore Taikoo Li, lalu kereta C5756 ke Jiuzhaigou.',
-  steps: [...mainFirstDay.steps.slice(0, -calmFirstEvening.length), ...calmFirstEvening],
+  intro: 'Tiba dari Shanghai setelah transit semalam di Pudong. Check-in di Mcsrh Hotel dekat Chunxi Road (sudah dipesan), makan siang telat 清真 di Taikoo Li atau Huangchengba, lalu sore sampai malam di Menara Vitality, Chengdu SKP. Besok tidak ada kereta subuh: pagi ke Zhongshu Ge, sore Taikoo Li, lalu kereta C5756 ke Jiuzhaigou.',
+  steps: [...mainFirstDay.steps.slice(0, -calmFirstEvening.length).map(step => step[0] === '±15.00–15.45' ? calmFirstDayLunch : step), ...calmFirstEvening],
+  notes: [...(mainFirstDay.notes ?? []), chengduHalalDay1Note, mondayTrainNote],
 };
 
-export const calmDays: CalmDay[] = [{ ...calmFirstDay, overnight: { name: 'Chengdu', detail: 'Mcsrh Hotel Chunxi Road Taikoo Li (Mcsrh麦嘉·拾趣酒店, 春熙路太古里店), sudah dipesan untuk satu malam: Room M1, Rp292.719. Besok pagi koper bisa dititip di sini sebelum ke Zhongshu Ge.' }, notes: [mondayTrainNote] }, ...calmOwnDays, ...['2026-11-18', '2026-11-19', '2026-11-20', '2026-11-21'].map(fromMainPlan)];
+export const calmDays: CalmDay[] = [{ ...calmFirstDay, overnight: { name: 'Chengdu', detail: 'Mcsrh Hotel Chunxi Road Taikoo Li (Mcsrh麦嘉·拾趣酒店, 春熙路太古里店), sudah dipesan untuk satu malam: Room M1, Rp292.719. Besok pagi koper bisa dititip di sini sebelum ke Zhongshu Ge.' } }, ...calmOwnDays, ...['2026-11-18', '2026-11-19', '2026-11-20', '2026-11-21'].map(fromMainPlan)];
 /** "Sekilas hari ini": what to carry and the one thing not to miss, each restating a fact from that day's plan. */
 export interface CalmGlance { bring: string; remember: string }
 export const calmGlance: Record<string, CalmGlance> = {
