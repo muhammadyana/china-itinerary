@@ -103,6 +103,30 @@ export function renderSiteNavigation(current = ''): string {
   return `<nav class="site-navigation" aria-label="Navigasi utama">${items}</nav>${renderSiteSearch()}`;
 }
 
+
+/** Mark Santai current by default; Utama only when this page was opened with ?plan=utama. */
+function syncPlanChoiceCurrent(ownerDocument: Document) {
+  const location = ownerDocument.defaultView?.location;
+  if (!location) return;
+  const wantsMain = new URLSearchParams(location.search).get('plan') === 'utama';
+  const here = pagePath(location.pathname);
+  for (const link of ownerDocument.querySelectorAll<HTMLAnchorElement>('.plan-choice')) {
+    link.removeAttribute('aria-current');
+  }
+  for (const row of ownerDocument.querySelectorAll('.plan-row')) {
+    const choices = [...row.querySelectorAll<HTMLAnchorElement>('.plan-choice')];
+    if (choices.length < 2) continue;
+    const [calm, main] = choices;
+    const calmHere = pagePath(calm.getAttribute('href') || '') === here;
+    const mainHere = pagePath(main.getAttribute('href') || '') === here;
+    if (calmHere || (mainHere && !wantsMain) || (here === '/' && !wantsMain && pagePath(calm.getAttribute('href') || '').includes('calm-itinerary'))) {
+      calm.setAttribute('aria-current', 'page');
+    } else if ((mainHere && wantsMain) || (here === '/' && wantsMain && pagePath(main.getAttribute('href') || '') === '/')) {
+      main.setAttribute('aria-current', 'page');
+    }
+  }
+}
+
 export function initializeSiteNavigation(root: ParentNode = document): void {
   const navigation = root instanceof HTMLElement && root.matches('.site-navigation')
     ? root : root.querySelector<HTMLElement>('.site-navigation');
@@ -131,4 +155,6 @@ export function initializeSiteNavigation(root: ParentNode = document): void {
     activeMenu.querySelector('summary')?.focus();
     event.preventDefault();
   });
+
+  syncPlanChoiceCurrent(ownerDocument);
 }

@@ -309,3 +309,7 @@ The owner asked that every utama/santai pair default to santai, not only the iti
 ## Homepage defaults to santai (6 November 2026)
 
 Bare `/` redirected to `/places/calm-itinerary/` unless `?plan=utama` (inline script + `main.ts`). The Itinerary menu no longer marks Utama as current on the shared homepage path; Santai stays first and is current on calm pages.
+
+## Plan menu always prefers Santai (6 November 2026)
+
+Main twin pages highlighted Santai in the static HTML (map, prepare). `initializeSiteNavigation` now syncs `aria-current` from the live URL so Utama is only current with `?plan=utama`. Earlier deploy runs for the default-santai commits were cancelled in GitHub Actions; this push should ship the homepage redirect too.

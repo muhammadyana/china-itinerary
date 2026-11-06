@@ -168,7 +168,7 @@ export function planSections(notes: PlanNotes) {
 export function prepareView() {
   const checked = checkedOn(preparedAt);
   return `<a class="skip-link" href="#prepare-title">Langsung ke persiapan</a>
-  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation(preparePath)}</header>
+  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation('/places/calm-prepare/')}</header>
   <main class="container prepare-page" data-prepare>
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="/places/">Tempat</a>${icon('right')}<span>Persiapan</span></nav>
     ${planSwitch(preparePath)}

@@ -210,7 +210,7 @@ export function routeMapView() {
   const bases = new Set(days.flatMap(day => day.overnight ? [day.overnight.name] : []));
   const nights = days.filter(day => day.overnight).length;
   return `<a class="skip-link" href="#route-timeline-title">Langsung ke urutan hari</a>
-  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation(routeMapPath)}</header>
+  <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation('/places/calm/')}</header>
   <main class="container route-map-page" data-route-map>
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="/places/">Tempat</a>${icon('right')}<span>Peta rute</span></nav>
     ${planSwitch(routeMapPath)}
