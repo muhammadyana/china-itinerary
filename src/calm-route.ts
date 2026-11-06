@@ -101,7 +101,7 @@ const calmOwnDays: CalmDay[] = [
   {
     date: '2026-11-09', title: 'Zhongshu Ge pagi, Taikoo Li sore, kereta ke Jiuzhaigou', shortTitle: 'Zhongshu Ge, Taikoo Li, ke Jiuzhaigou',
     route: ['Chunxi Road', 'Zhongshu Ge Dujiangyan', 'Taikoo Li', 'Chengdu East', 'Jiuzhaigou'],
-    overnight: { name: 'Jiuzhaigou', elevation: '±2.000 m', detail: `Malam pertama dari dua dekat gerbang (Pengfeng/Goukou). ${calmStayPicks('2026-11-09')}` },
+    overnight: { name: 'Jiuzhaigou', elevation: '±2.000 m', detail: `Malam pertama dari dua di Leyu Youth Hostel (乐鱼青年旅舍), Desa Longkang, sekitar 1,8 km dari gerbang. ${calmStayPicks('2026-11-09')}` },
     transport: 'Pagi DiDi pulang-pergi ke Zhongshu Ge Dujiangyan, ±58 km sekali jalan. Sore jalan kaki di Chunxi / Taikoo Li / IFS dekat hotel, lalu DiDi atau metro ke Chengdu East. Kereta C5756 17.05 → Huanglongjiuzhai 19.10, lalu taksi/shuttle ke gukou. Cadangan: C5786 18.38, atau shuttle Trip.com 14.00 dari Xinnanmen bila kursi kereta habis.',
     intro: 'Pagi untuk toko buku Zhongshu Ge Dujiangyan (wajib), tepat saat buka pukul 10.00 di hari kerja, jam yang menurut pengunjung paling sepi. Siang kembali ke hotel Chunxi, Zuhur, lalu sore santai di Taikoo Li dan IFS sebelum kereta sore ke Jiuzhaigou. Tiket taman baru dipakai besok pagi, jadi hari ini tidak ada batas jam masuk.',
     steps: [
@@ -117,7 +117,7 @@ const calmOwnDays: CalmDay[] = [
       ['±16.00–16.20', 'Ambil koper di hotel', 'Balik hotel ambil koper yang dititip. Cek e-tiket C5756 dan paspor.'],
       ['±16.20–16.45', 'Ke Chengdu East', 'DiDi atau metro ke Chengdu East (成都东站), sekitar 6–8 km dari Chunxi / Taikoo Li: DiDi ±15–25 menit, sisakan buffer macet Senin sore. Target di stasiun ±16.45.'],
       ['17.05', 'Kereta C5756 ke Huanglongjiuzhai', 'C5756 Chengdu East 17.05 → Huanglongjiuzhai 19.10, tiket sudah dibeli (Trip.com, 6 November). Maghrib sekitar 18.09 jatuh di kereta; jamak takhir dengan Isya di penginapan.'],
-      ['±19.10–20.30', 'Tiba stasiun, ke gukou & check-in', 'Tiba Huanglongjiuzhai 19.10. Bus 团子出行 terakhir hari itu 17.30 sudah lewat, jadi naik taksi/DiDi dari area resmi stasiun ke penginapan dekat gerbang (sekitar 1,5–2 jam / ±90 km; acuan mobil Mei 2026 CNY 220–280) atau shuttle stasiun Trip.com bila tersedia. Check-in di Pengfeng/Goukou.'],
+      ['±19.10–20.30', 'Tiba stasiun, ke gukou & check-in', 'Tiba Huanglongjiuzhai 19.10. Bus 团子出行 terakhir hari itu 17.30 sudah lewat, jadi naik taksi/DiDi dari area resmi stasiun ke Leyu Youth Hostel (乐鱼青年旅舍, 边边街25号, Desa Longkang; sekitar 1,5–2 jam / ±90 km; acuan mobil Mei 2026 CNY 220–280) atau shuttle stasiun Trip.com bila tersedia. Check-in di Leyu (mulai 14.00, jadi tiba malam tidak masalah).'],
       ['Malam', 'Salat & makan malam', 'Maghrib dan Isya dijamak takhir. Makan bekal, atau di restoran 清真 Pengfeng (ulasan September 2025). Bila masih kuat dan pasar buka, Jiuzhai Night Market (九寨夜市) di Zhangzha bisa dilihat sebentar; jam buka November belum ketemu dan jajanannya belum tentu halal.'],
       ['±21.30', 'Siapkan besok, tidur', 'Cek tiket 10 November (slot 08.00–10.00), isi baterai, lalu tidur.'],
     ],
@@ -125,7 +125,7 @@ const calmOwnDays: CalmDay[] = [
       { place: 'zhongshuge-bookstore', note: 'Wajib. Sekitar 10.00–11.15, saat toko baru buka. Masuk gratis. Jam buka 10.00–21.00 menurut Trip.com; sumber lain berbeda.' },
       { place: 'chengdu', note: 'Sore di Chunxi / Taikoo Li / IFS dekat hotel; koper diambil ±16.00 sebelum ke Chengdu East.' },
       { place: 'chengdu-east', note: 'C5756 17.05 → Huanglongjiuzhai 19.10.' },
-      { place: 'jiuzhaigou-hotel', note: 'Dua malam, 9 dan 10 November, dekat zona pengunjung.' },
+      { place: 'jiuzhaigou-hotel', note: 'Dua malam, 9 dan 10 November, di Leyu Youth Hostel (sudah dipesan), sekitar 1,8 km dari gerbang.' },
     ],
     notes: [
       { text: 'Toko buku dipindah dari Jumat 13 November ke pagi ini. Senin 9 November hari kerja dan belum masuk libur sekolah Chengdu (11–13 November), sedangkan Jumat sore jatuh di hari terakhir libur sekolah.', links: [zhongshugeHours] },
@@ -143,12 +143,12 @@ const calmOwnDays: CalmDay[] = [
   {
     date: '2026-11-10', title: 'Jiuzhaigou seharian: Mirror Lake pagi, Five Flower Lake siang', shortTitle: 'Jiuzhaigou seharian',
     route: ['Jiuzhaigou', 'Mirror Lake', 'Long Lake', 'Nuorilang', 'Five Flower Lake', 'Pearl Shoals', 'Shuzheng', 'Jiuzhaigou'],
-    overnight: { name: 'Jiuzhaigou', elevation: '±2.000 m', detail: 'Penginapan yang sama, malam kedua dari dua.' },
-    transport: 'Jalan kaki atau taksi ke gerbang; bus taman (cabang Rize dan Zechawa berpisah di Nuorilang). Lama perjalanan bus belum dicek.',
+    overnight: { name: 'Jiuzhaigou', elevation: '±2.000 m', detail: 'Leyu Youth Hostel lagi, malam kedua dari dua (sudah dipesan).' },
+    transport: 'Jalan kaki 20–30 menit atau taksi dari Leyu Youth Hostel ke gerbang; bus taman (cabang Rize dan Zechawa berpisah di Nuorilang). Lama perjalanan bus belum dicek.',
     intro: 'Satu hari penuh di taman dengan satu tiket, masuk saat gerbang buka. Mirror Lake selagi angin pagi pelan, Long Lake dan Five-Colour Pond menjelang siang, Five Flower Lake dan Pearl Shoals saat matahari tinggi, lalu Shuzheng menjelang sore.',
     steps: [
-      ['±05.58', 'Subuh & sarapan', 'Subuh di hotel; sarapan dari bekal halal. Bawa bekal makan siang dan air; jangan mengandalkan makanan di taman.'],
-      ['±07.30', 'Jalan ke gerbang', 'Jalan kaki atau taksi ke gerbang. Matahari terbit 07.31.'],
+      ['±05.58', 'Subuh & sarapan', 'Subuh di Leyu Youth Hostel; sarapan dari bekal halal (hostel tanpa sarapan). Bawa bekal makan siang dan air; jangan mengandalkan makanan di taman.'],
+      ['±07.30', 'Jalan ke gerbang', 'Dari Leyu sekitar 1,8 km: jalan kaki 20–30 menit, atau taksi supaya pasti di gerbang 08.00. Matahari terbit 07.31.'],
       ['08.00', 'Masuk taman, bus ke Mirror Lake', 'Masuk saat gerbang buka, slot 08.00–10.00. Bus taman ke Nuorilang, lalu bus Rize sedikit ke atas sampai Mirror Lake (镜海).'],
       ['±08.40–09.15', 'Foto Mirror Lake', 'Pantulan Mirror Lake. Menurut Ctrip waktu terbaiknya sebelum 09.00 atau setelah 17.00 saat angin pelan; lewat ±09.00 angin biasanya memecah pantulan.'],
       ['±09.15–10.00', 'Bus ke Long Lake', 'Bus kembali ke Nuorilang, lalu bus Zechawa sampai ujungnya di Long Lake (长海).'],
@@ -188,8 +188,8 @@ const calmOwnDays: CalmDay[] = [
     transport: 'Mobil pribadi Trip.com Jiuzhaigou → Huanglong (±107 km; OSRM 85 menit, operator menyebut ±2½ jam) → Songpan (±41 km, OSRM 36 menit); ropeway naik di Huanglong, lalu jalan kaki turun.',
     intro: 'Satu hari penuh di Huanglong, teras kolam travertin kuning dan biru di 3.100–3.576 m. Naik ropeway, berjalan ke Five-Colour Pool saat matahari tinggi, lalu turun lewat jalur kayu. Sore ke Songpan dan menginap di sana, sehingga besok pagi kota tua tidak terburu-buru sebelum kereta ke Maoxian.',
     steps: [
-      ['±05.59', 'Subuh, sarapan, check-out', 'Subuh di hotel; sarapan; check-out. Bawa bekal makan siang dan air: belum ada makanan halal yang terverifikasi di Huanglong.'],
-      ['07.30', 'Dijemput mobil ke Huanglong', 'Mobil pribadi Trip.com dijemput di penginapan (jam jemput paling awal paket ini 07.30). Lewat Chuanzhusi dan terowongan Xueshanliang (雪山梁隧道). Matahari terbit 07.32.'],
+      ['±05.59', 'Subuh, sarapan, check-out', 'Subuh di Leyu Youth Hostel; sarapan; check-out. Bawa bekal makan siang dan air: belum ada makanan halal yang terverifikasi di Huanglong.'],
+      ['07.30', 'Dijemput mobil ke Huanglong', 'Mobil pribadi Trip.com menjemput di Leyu Youth Hostel, Desa Longkang (jam jemput paling awal paket ini 07.30). Lewat Chuanzhusi dan terowongan Xueshanliang (雪山梁隧道). Matahari terbit 07.32.'],
       ['±07.30–10.00', 'Perjalanan ke Huanglong', 'Sekitar 107 km: OSRM 85 menit tanpa macet, operator Trip.com menyebut ±2½ jam. Minum obat antimabuk dan banyak minum air.'],
       ['±10.00–10.30', 'Masuk & ropeway naik', 'Masuk dengan paspor yang dipakai memesan, lalu ropeway naik (CNY 80). Penjualan tiket ropeway berhenti 16.30 menurut pengumuman Mei 2026; November 2024 pernah dimajukan ke 16.00.'],
       ['±10.30–12.30', 'Ke Five-Colour Pool', 'Dari stasiun atas sekitar 2,9 km ke Five-Colour Pool (五彩池, ±3.576 m), jalan pelan di jalur kayu. Kolam paling berwarna saat matahari tinggi. Pos oksigen gratis ada di sepanjang jalur. Bus wisata di atas (CNY 15) hanya dijual di abatour.com.'],
