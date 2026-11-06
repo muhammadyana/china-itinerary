@@ -24,6 +24,7 @@ import { initializeRouteMap } from './route-map-main.ts';
 import { initializePhotoLoading } from './photo-loading.ts';
 import { clipboardCopy, modalDialogs, photoViewer, showPhotoErrors, statusAnnouncer } from './day-controls.ts';
 import { initializeCalmItinerary } from './calm-itinerary-main.ts';
+import { initializeCalmChecklist } from './calm-checklist.ts';
 import { days, daysByDate, places } from './itinerary.ts';
 import { dayView, pickerItems, overviewContent, fullDate } from './render.ts';
 
@@ -204,4 +205,5 @@ initializeCurrency();
 initializeSiteNavigation();
 initializeSiteSearch();
 initializeAsk();
+initializeCalmChecklist();
 document.documentElement.classList.add('js');

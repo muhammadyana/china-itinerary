@@ -40,7 +40,7 @@ export const planTopics: PlanTopic[] = [
   {
     topic: 'Persiapan & pemesanan',
     main: { href: `${preparePath}?plan=utama`, label: 'Persiapan & pemesanan', keywords: 'booking tiket biaya pembayaran internet darurat KBRI asuransi' },
-    calm: { href: '/places/calm-prepare/', label: 'Persiapan santai', keywords: 'opsi santai calm booking pesan tiket kereta mobil hotel jangan dibeli persiapan pemesanan' },
+    calm: { href: '/places/calm-prepare/', label: 'Persiapan santai', keywords: 'opsi santai calm booking pesan tiket kereta mobil hotel jangan dibeli persiapan pemesanan checklist centang' },
   },
   {
     topic: 'Rincian biaya',
