@@ -408,9 +408,11 @@ export const days: Day[] = [
 ];
 export const daysByDate = new Map(days.map((day) => [day.date, day]));
 // Highlights point to stops in the current website itinerary; each image may show the wider destination.
-export interface Highlight { place: string; date: string; region: 'Sichuan' | 'Yunnan'; title: string; caption: string; photo?: string; alt?: string }
+/** `calm` marks a place only the calm option visits: its links open the calm itinerary instead of the homepage day. */
+export interface Highlight { place: string; date: string; region: 'Sichuan' | 'Yunnan'; title: string; caption: string; photo?: string; alt?: string; calm?: boolean }
 export const highlights: Highlight[] = [
  {place:'five-flower',date:'2026-11-09',region:'Sichuan',title:'Jiuzhaigou',caption:'Danau jernih, hutan penuh warna.',photo:"highlight-jiuzhaigou",alt:"Danau di Jiuzhaigou memantulkan hutan musim gugur dan pegunungan."},
+ {place:'huanglong',date:'2026-11-11',region:'Sichuan',title:'Huanglong',caption:'Teras kolam travertin toska di kaki puncak salju.',calm:true},
  {place:'songzanlin',date:'2026-11-18',region:'Yunnan',title:'Shangri-La',caption:'Atap emas Biara Songzanlin di atas bukit.'},
  {place:'bipenggou',date:'2026-11-11',region:'Sichuan',title:'Bipenggou',caption:'Larch keemasan dan danau tenang di bawah puncak granit.'},
  {place:'dayan',date:'2026-11-18',region:'Yunnan',title:'Kota Tua Lijiang',caption:'Atap kota tua, kanal, dan pegunungan di kejauhan.',photo:'highlight-lijiang',alt:'Panorama atap Kota Tua Lijiang dengan pegunungan bersalju di kejauhan.'},

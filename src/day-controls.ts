@@ -1,5 +1,5 @@
-import { places, userPhotos, type Place } from './itinerary.ts';
-import { icon, photoDetail, userPhotoDetail } from './render.ts';
+import { places, type Place } from './itinerary.ts';
+import { galleryIds, galleryPhotoDetail, icon, photoDetail } from './render.ts';
 import { updatePhotoContent } from './photo-viewer.ts';
 
 // Dialogs, status messages, clipboard and photo viewer shared by the homepage day view and the calm itinerary.
@@ -62,16 +62,16 @@ export function clipboardCopy(copyDialog: HTMLDialogElement, { open, returnFocus
   };
 }
 
-/** Stop photos open alone; the traveller's own photos page through the whole user gallery, also with the arrow keys. */
+/** Stop photos open alone; gallery photos page through the whole homepage gallery, also with the arrow keys. */
 /** `place` resolves a stop's place; the calm page passes one that also knows its own stops. */
 export function photoViewer(dialog: HTMLDialogElement, open: OpenDialog, place: (id: string) => Place | undefined = id => places[id]) {
   const counter = dialog.querySelector<HTMLElement>('#photo-count')!;
   const navigation = Array.from(dialog.querySelectorAll<HTMLButtonElement>('[data-action="photo-previous"], [data-action="photo-next"]'));
-  const ids = Object.keys(userPhotos);
+  const ids = galleryIds;
   let index: number | null = null;
   const showUserPhoto = (next: number) => {
     index = (next + ids.length) % ids.length;
-    updatePhotoContent(dialog, userPhotoDetail(ids[index]));
+    updatePhotoContent(dialog, galleryPhotoDetail(ids[index]));
     counter.textContent = `${index + 1} / ${ids.length}`;
     navigation.forEach(button => { button.hidden = false; button.disabled = ids.length < 2; });
   };

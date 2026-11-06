@@ -8,6 +8,7 @@ import { weatherLocationForGuide } from './weather-locations.ts';
 import { currencyText, hasCnyAmount, renderExchangeRate } from './currency.ts';
 import type { PhotoContent } from './photo-viewer.ts';
 import { planSwitch, renderSiteNavigation } from './site-navigation.ts';
+import { calmItineraryPage } from './site-search.ts';
 import { logoPaths } from './logo.ts';
 import { renderChengduEvening } from './chengdu-evening.ts';
 import { stayBaseForDate, staysPath } from './stays.ts';
@@ -191,8 +192,14 @@ export function userPhotoDetail(id: string, titleId = 'photo-title'): PhotoConte
   caption: `<h2 id="${e(titleId)}">${e(photo.title)}</h2><p>${e(photo.caption)}</p><div class="photo-credit">${e(photo.credit)}<span>Foto dikirim dan disetujui pengguna untuk halaman ini. Tanggal pengambilan tidak dicantumkan.</span><span>Ukuran disesuaikan ke WebP; warna foto dipertahankan.</span></div>`,
  };
 }
+// The homepage gallery: the traveller's own photos, then reference photos of places keyed by photo id. The track and the
+// photo viewer read the same list; a reference photo opens with its place's description and source credit.
+const galleryPlaces: Record<string, string> = { [places.huanglong.photo!]: 'huanglong' };
+export const galleryIds = [...Object.keys(userPhotos), ...Object.keys(galleryPlaces)];
+export const galleryPhotoDetail = (id: string) => galleryPlaces[id] ? photoDetail(galleryPlaces[id]) : userPhotoDetail(id);
+const galleryItem = (id: string) => userPhotos[id] ? { title: userPhotos[id].title, alt: userPhotos[id].alt } : { title: places[galleryPlaces[id]].name, alt: places[galleryPlaces[id]].alt || places[galleryPlaces[id]].name };
 function userGallery() {
- return `<details class="journey-gallery" id="user-gallery" open><summary id="gallery-heading"><span>Galeri pilihanmu</span><span>${Object.keys(userPhotos).length} foto ${icon('down')}</span></summary><p class="gallery-intro">Warna yang ingin ditemui di perjalanan. Geser untuk melihat koleksi foto pilihanmu.</p><div class="gallery-track" role="region" aria-label="Koleksi foto musim gugur">${Object.values(userPhotos).map(p=>`<button class="gallery-photo" type="button" data-action="user-photo" data-photo="${p.id}" aria-label="Perbesar ${e(p.title)}">${photoImage(p.id,p.alt,false,'(min-width: 960px) 300px, 260px')}<span>${e(p.title)}</span></button>`).join('')}</div></details>`;
+ return `<details class="journey-gallery" id="user-gallery" open><summary id="gallery-heading"><span>Galeri pilihanmu</span><span>${galleryIds.length} foto ${icon('down')}</span></summary><p class="gallery-intro">Warna yang ingin ditemui di perjalanan. Geser untuk melihat koleksi foto pilihanmu.</p><div class="gallery-track" role="region" aria-label="Koleksi foto musim gugur">${galleryIds.map(id=>{const p=galleryItem(id);return `<button class="gallery-photo" type="button" data-action="user-photo" data-photo="${id}" aria-label="Perbesar ${e(p.title)}">${photoImage(id,p.alt,false,'(min-width: 960px) 300px, 260px')}<span>${e(p.title)}</span></button>`;}).join('')}</div></details>`;
 }
 function credits() {
  return `<details class="credits"><summary>Sumber & kredit foto${icon('down')}</summary><p>Itinerary website menjadi acuan perjalanan 8–21 November 2026: menginap di Chengdu pada 8 November, menuju Jiuzhaigou pada 9 November, dan wajib menonton Impression Lijiang pada 19 November. PDF disimpan sebagai arsip rute awal. Foto menggambarkan tempat, bukan jaminan cuaca atau akses saat kunjungan. Penginapan adalah area rencana, bukan nama hotel yang sudah dipesan.</p><ul data-credits>${Object.values(photos).map(p=>`<li>${external(p.id.replaceAll('-',' '),p.source)}: ${e(p.author)}, ${p.licenseUrl===p.source?e(p.license):external(p.license,p.licenseUrl)}. WebP, ukuran disesuaikan; crop hanya pada tampilan.${p.photoNote?`<span class="credit-note">${e(p.photoNote)}</span>`:''}</li>`).join('')}</ul><details><summary>Tempat yang belum memiliki foto${icon('down')}</summary><p>${Object.values(places).filter(p=>!p.photo||!photos[p.photo]).map(p=>e(p.name)).join('; ')}.</p><p>Izin pakai atau kecocokan foto belum cukup jelas. Deskripsi dari PDF tetap tersedia.</p></details></details>`;
@@ -201,17 +208,20 @@ function resolveHighlightImage(highlight: Highlight) {
  const place = places[highlight.place];
  return {id: highlight.photo || place.photo!, alt: highlight.alt || place.alt || highlight.title};
 }
+// A calm-only highlight opens its day in the calm itinerary; the others switch the homepage's day view.
+const highlightDayLink = (highlight: Highlight) => highlight.calm ? `href="${calmItineraryPage.href}#${highlight.date}"` : `href="#${highlight.date}" data-date="${highlight.date}"`;
+const highlightDate = (highlight: Highlight) => `${Number(highlight.date.slice(-2))} November${highlight.calm ? ' (opsi santai)' : ''}`;
 function renderHighlightCard(highlight: Highlight) {
  const image = resolveHighlightImage(highlight);
- return `<a class="highlight-card" href="${placePath(guideForPlace.get(highlight.place)!.slug)}" data-highlight="${highlight.place}" aria-label="Buka panduan ${e(highlight.title)}"><div class="highlight-image">${photoImage(image.id,image.alt,false,'(min-width: 960px) 580px, 300px')}<span class="highlight-date">${icon('calendar')}${Number(highlight.date.slice(-2))} November</span></div><div class="highlight-copy"><div><h4>${e(highlight.title)}</h4><p>${e(highlight.caption)}</p></div><span class="highlight-go" aria-hidden="true">${icon('right')}</span></div></a>`;
+ return `<a class="highlight-card" href="${placePath(guideForPlace.get(highlight.place)!.slug)}" data-highlight="${highlight.place}" aria-label="Buka panduan ${e(highlight.title)}"><div class="highlight-image">${photoImage(image.id,image.alt,false,'(min-width: 960px) 580px, 300px')}<span class="highlight-date">${icon('calendar')}${highlightDate(highlight)}</span></div><div class="highlight-copy"><div><h4>${e(highlight.title)}</h4><p>${e(highlight.caption)}</p></div><span class="highlight-go" aria-hidden="true">${icon('right')}</span></div></a>`;
 }
 function renderHeroSlide(highlight: Highlight, index: number, total: number) {
  const image = resolveHighlightImage(highlight);
- return `<figure class="hero-slide ${index===0?'is-active':''}" role="group" aria-roledescription="slide" aria-label="${index+1} dari ${total}: ${e(highlight.title)}" ${index===0?'':'inert'}>${photoImage(image.id,image.alt,index===0,'(min-width: 1280px) 1200px, calc(100vw - 32px)')}<figcaption><a href="#${highlight.date}" data-date="${highlight.date}"><span>${e(highlight.title)}</span><span class="hero-region">${highlight.region}</span><span>${Number(highlight.date.slice(-2))} November${icon('right')}</span></a></figcaption></figure>`;
+ return `<figure class="hero-slide ${index===0?'is-active':''}" role="group" aria-roledescription="slide" aria-label="${index+1} dari ${total}: ${e(highlight.title)}" ${index===0?'':'inert'}>${photoImage(image.id,image.alt,index===0,'(min-width: 1280px) 1200px, calc(100vw - 32px)')}<figcaption><a ${highlightDayLink(highlight)}><span>${e(highlight.title)}</span><span class="hero-region">${highlight.region}</span><span>${highlightDate(highlight)}${icon('right')}</span></a></figcaption></figure>`;
 }
 function tripHighlights() {
  const regions = [
-  {name:'Sichuan',description:'Jiuzhaigou, Bipenggou, Siguniangshan, Tagong, dan Yading. Dari hutan berwarna sampai dataran tinggi Ganzi.'},
+  {name:'Sichuan',description:'Jiuzhaigou, Huanglong, Bipenggou, Siguniangshan, Tagong, dan Yading. Dari hutan berwarna sampai dataran tinggi Ganzi.'},
   {name:'Yunnan',description:'Shangri-La, Lijiang, dan Dali. Biara di bukit, kota tua, serta danau di kaki pegunungan.'},
  ] as const;
  return `<section class="trip-highlights" aria-labelledby="highlights-heading"><div class="highlights-heading"><h2 id="highlights-heading">Jelajahi Sichuan &amp; Yunnan.</h2><p>Dari pegunungan Sichuan sampai kota tua di Yunnan. Pilih wilayahnya, lalu buka panduan tempat untuk melihat rute, biaya, dan galeri.</p></div><nav class="region-navigation" aria-label="Pilih wilayah destinasi">${regions.map(region=>`<button type="button" class="region-link" data-action="region" data-region="${region.name}" aria-controls="region-${region.name.toLowerCase()}"><span>${region.name}</span>${icon('down')}</button>`).join('')}</nav>${regions.map(region=>`<section class="region-highlights" data-region="${region.name}" id="region-${region.name.toLowerCase()}" aria-labelledby="region-heading-${region.name.toLowerCase()}"><header class="region-heading"><h3 id="region-heading-${region.name.toLowerCase()}" tabindex="-1">${region.name}</h3><p>${region.description}</p></header><div class="highlights-grid" role="region" aria-label="Sorotan destinasi ${region.name}">${highlights.filter(highlight=>highlight.region===region.name).map(renderHighlightCard).join('')}</div><p class="highlights-hint">Geser untuk melihat destinasi ${region.name}.</p></section>`).join('')}</section>`;
