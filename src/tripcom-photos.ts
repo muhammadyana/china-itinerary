@@ -57,6 +57,24 @@ export const tripcomPhotos: Record<string, Photo> = {
     "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/songpan/huanglong-national-scenic-area-75864/", "origin": "Trip.com",
     "photoNote": "Foto dari halaman Trip.com tempat ini. Tanggal pengambilan tidak tersedia; warna dan kondisi saat kunjungan bisa berbeda."
   },
+  "tripcom-huanglong-autumn": {
+    "id": "tripcom-huanglong-autumn", "width": 1440, "height": 960, "sizes": [480,  960,  1440],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/songpan/huanglong-national-scenic-area-75864/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/songpan/huanglong-national-scenic-area-75864/", "origin": "Trip.com",
+    "photoNote": "Foto galeri halaman Trip.com Huanglong, diambil 7 November 2026. Tanggal pengambilan foto tidak tersedia; warna kolam dan salju saat kunjungan bisa berbeda."
+  },
+  "tripcom-huanglong-terraces": {
+    "id": "tripcom-huanglong-terraces", "width": 1000, "height": 643, "sizes": [480,  960,  1000],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/songpan/huanglong-national-scenic-area-75864/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/songpan/huanglong-national-scenic-area-75864/", "origin": "Trip.com",
+    "photoNote": "Foto galeri halaman Trip.com Huanglong, diambil 7 November 2026. Tanggal pengambilan foto tidak tersedia; warna kolam dan salju saat kunjungan bisa berbeda."
+  },
+  "tripcom-huanglong-snow": {
+    "id": "tripcom-huanglong-snow", "width": 1440, "height": 959, "sizes": [480,  960,  1440],
+    "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/songpan/huanglong-national-scenic-area-75864/",
+    "license": "Hak cipta Trip.com; dipakai atas permintaan pemilik situs", "licenseUrl": "https://www.trip.com/travel-guide/attraction/songpan/huanglong-national-scenic-area-75864/", "origin": "Trip.com",
+    "photoNote": "Foto galeri halaman Trip.com Huanglong, diambil 7 November 2026. Tanggal pengambilan foto tidak tersedia; warna kolam dan salju saat kunjungan bisa berbeda."
+  },
   "tripcom-songpan": {
     "id": "tripcom-songpan", "width": 573, "height": 360, "sizes": [480,  573],
     "author": "Trip.com", "source": "https://www.trip.com/travel-guide/attraction/songpan/songpan-ancient-city-85463/",

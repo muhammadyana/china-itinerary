@@ -53,6 +53,47 @@ export const northernGuides: DestinationGuide[] = [
     ], checkedAt: '2026-11-03',
   },
   {
+    slug: 'huanglong', name: 'Huanglong', region: 'Sichuan', placeIds: ['huanglong'],
+    summary: 'Teras kolam travertin kuning dan biru di lembah Songpan, 3.100–3.576 m: ropeway naik, jalan kaki ke Five-Colour Pool, lalu turun lewat jalur kayu. Hanya ada di opsi santai, 11 November.',
+    gettingThere: {
+      origin: 'Leyu Youth Hostel, Jiuzhaigou, pada 11 November (opsi santai)',
+      steps: [
+        'Mobil pribadi Trip.com (paket 74320777) menjemput 07.30 di sekitar gerbang Jiuzhaigou, lalu lewat Chuanzhusi dan terowongan Xueshanliang ke gerbang Huanglong, sekitar 107 km.',
+        'Masuk dengan paspor yang dipakai memesan, lalu naik ropeway ke stasiun atas.',
+        'Setelah turun ke gerbang, mobil yang sama melanjutkan sekitar 41 km ke Songpan. Paket berakhir di Stasiun Songpan, jadi minta diantar ke kota tua atau naik taksi sekitar 5 km.',
+      ],
+      duration: 'Jiuzhaigou ke Huanglong: OSRM 85 menit tanpa macet, operator Trip.com menyebut sekitar 2½ jam. Huanglong ke kota tua Songpan: OSRM 36 menit.',
+      sources: ['https://us.trip.com/things-to-do/detail/74320777/?curr=CNY', 'https://www.trip.com/travel-guide/attraction/songpan/huanglong-national-scenic-area-75864/'],
+    },
+    stopAccess: { huanglong: 'Dari stasiun atas ropeway sekitar 2,9 km di jalur kayu ke Five-Colour Pool (五彩池) dan Huanglong Temple (黄龙古寺), lalu turun lewat jalur utama melewati teras kolam ke gerbang. Jarak ini dari panduan perjalanan, bukan angka resmi.' },
+    costs: [
+      { label: 'Tiket masuk', amount: 'CNY 170 / orang', detail: 'Admission ticket (Non-Chinese mainland visitors) di Trip.com untuk 11 November, dicek 6 November 2026; harga musim ramai 1 Juni–15 Desember. Atas nama paspor, tanpa loket di lokasi.', status: 'published', source: 'https://www.trip.com/travel-guide/attraction/songpan/huanglong-national-scenic-area-75864/' },
+      { label: 'Ropeway naik', amount: 'CNY 80 / orang', detail: 'Trip.com untuk 11 November, dicek 6 November 2026. Turun CNY 40 menurut artikel Desember 2025 dan tidak dijual di Trip.com; rencana ini jalan kaki turun.', status: 'published', source: 'https://www.trip.com/travel-guide/attraction/songpan/huanglong-national-scenic-area-75864/' },
+      { label: 'Mobil pribadi Jiuzhaigou → Huanglong → Songpan', amount: 'CNY 480 / mobil', detail: 'Trip.com 74320777 paket C, mobil 5 kursi, sekitar 4 jam di Huanglong, untuk 11 November (dicek 6 November 2026); tiket taman tidak termasuk.', status: 'published', source: 'https://us.trip.com/things-to-do/detail/74320777/?curr=CNY' },
+    ],
+    visitDuration: 'Alokasi rencana sekitar 10.00–14.30: ropeway naik, jalan ke Five-Colour Pool, makan bekal, lalu turun. Panduan menyebut putaran utama sekitar 7 km, 3–4 jam.',
+    bestTime: 'Sampai Five-Colour Pool saat matahari tinggi, sekitar tengah hari, ketika warna kolam paling kuat. Penjualan tiket ropeway berhenti 16.30 menurut pengumuman Mei 2026 (November 2024 pernah 16.00), jadi jam November 2026 belum pasti.',
+    tips: [
+      'Bawa bekal makan siang dan air: belum ada makanan halal yang terverifikasi di Huanglong.',
+      'Jalan pelan di 3.500 m lebih; pos oksigen gratis ada di sepanjang jalur kayu.',
+      'Bawa jaket dan baterai cadangan: udara dingin di ketinggian cepat menguras baterai ponsel.',
+    ],
+    cautions: [
+      'Tiket harus dipesan paling lambat 18.00 sehari sebelumnya; kuota 13.000 orang per hari.',
+      'Pengumuman resmi terakhir (15 September 2026) tidak menyebut penutupan; cek lagi daftar pengumuman sehari sebelum berangkat.',
+      'Ketinggian 3.100–3.576 m: turun segera bila pusing berat, mual, atau sesak napas.',
+    ],
+    sources: [
+      { title: 'Huanglong: daftar pengumuman resmi', url: 'https://webad.huanglong.com/api/res/api/content/simplifyList?siteCode=site209078&channelCode=jqgg', kind: 'official', note: 'Pengumuman terakhir 15 September 2026, tanpa penutupan; dicek 6 November 2026.' },
+      { title: 'Huanglong: musim ramai 1 Juni–15 Desember', url: 'https://www.huanglong.com/cn/ylfw/lyxz?id=37735', kind: 'official', note: 'Pengumuman 2022.' },
+      { title: 'The Paper: jam ropeway mulai 1 Juni 2026', url: 'https://m.thepaper.cn/newsDetail_forward_33234257', kind: 'reference', publishedAt: '2026-05-26' },
+      { title: 'Weibo dinas pariwisata Sichuan: musim air penuh', url: 'https://www.sina.cn/weibo/detail/5361149462970929.html', kind: 'reference', publishedAt: '2026-11-03' },
+      { title: 'Trip.com: Huanglong, tiket, ropeway dan foto', url: 'https://www.trip.com/travel-guide/attraction/songpan/huanglong-national-scenic-area-75864/', kind: 'operator', note: 'Dicek 6–7 November 2026.' },
+      { title: 'Trip.com: mobil pribadi Jiuzhaigou–Huanglong–Songpan', url: 'https://us.trip.com/things-to-do/detail/74320777/?curr=CNY', kind: 'operator', note: 'Dicek 6 November 2026.' },
+    ],
+    checkedAt: '2026-11-07',
+  },
+  {
     slug: 'bipenggou', name: 'Bipenggou', region: 'Sichuan', placeIds: ['bipenggou'],
     summary: 'Lembah panjang di Lixian dengan hutan larch, Danau Panyang, dan puncak granit bersalju. Bus taman membawa kamu ke bagian atas lembah; satu pagi cukup untuk Shanghaizi dan danau sebelum melintas ke Siguniang.',
     gettingThere: {

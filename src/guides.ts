@@ -40,6 +40,11 @@ const extraPhotos: Record<string, GalleryPhoto[]> = {
   'impression-lijiang': Object.values(userPhotos).filter(photo => photo.location === 'Impression Lijiang, Yulong, Lijiang').map(photo => ({ id: photo.id, title: photo.title, alt: photo.alt })),
   bipenggou: Object.values(userPhotos).filter(photo => photo.location === 'Bipenggou').map(photo => ({ id: photo.id, title: photo.title, alt: photo.alt })),
   chengdu: [{ id: 'chengdu-taikoo', title: 'Malam di Taikoo Li', alt: 'Jalur pejalan kaki dan bangunan Taikoo Li diterangi cahaya malam, dengan gedung tinggi di belakangnya.', note: photos['chengdu-taikoo'].photoNote }],
+  huanglong: [
+    { id: 'tripcom-huanglong-terraces', title: 'Teras kolam Huanglong', alt: 'Kolam-kolam dangkal hijau toska dibatasi dinding travertin keemasan, dengan hutan pinus dan lereng gunung di belakangnya.' },
+    { id: 'tripcom-huanglong', title: 'Kolam dan kuil di Huanglong', alt: 'Teras travertin keemasan berisi kolam dangkal hijau pucat di lembah gunung, dengan dua bangunan kuil beratap abu-abu dan langit biru berawan.' },
+    { id: 'tripcom-huanglong-snow', title: 'Teras kolam saat bersalju', alt: 'Dilihat dari atas, kolam-kolam toska bertingkat dikelilingi pepohonan berselimut salju, dengan kuil di ujung lembah.' },
+  ],
   jiuzhaigou: [{ id: 'highlight-jiuzhaigou', title: 'Musim gugur di Jiuzhaigou', alt: 'Hutan musim gugur memantul di danau Jiuzhaigou.' }],
   siguniangshan: [{ id: 'highlight-siguniang', title: 'Panorama Siguniangshan', alt: 'Puncak bersalju di kawasan Siguniangshan.' }],
   lijiang: [{ id: 'dayan', title: 'Kanal Kota Tua Lijiang', alt: 'Kanal dan jalan batu di Kota Tua Lijiang.' }],

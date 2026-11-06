@@ -110,6 +110,11 @@ export const weatherLocations: Record<string, WeatherLocation> = {
     source: 'https://www.openstreetmap.org/way/1000080741',
     note: 'Acuan area teater Impression Lijiang di Ganhaizi; suhu Glacier Park dan Blue Moon Valley dapat berbeda.',
   },
+  huanglong: {
+    id: 'huanglong', name: 'Huanglong, Songpan', latitude: 32.7571, longitude: 103.82939,
+    source: 'https://www.openstreetmap.org/?mlat=32.7571&mlon=103.82939#map=14/32.7571/103.8294',
+    note: 'Acuan kawasan Huanglong; Five-Colour Pool di ujung atas jalur sekitar 3.576 m bisa jauh lebih dingin.',
+  },
   'upper-gorge': {
     id: 'upper-gorge', name: 'Upper Tiger Leaping Gorge', latitude: 27.1926037, longitude: 100.112808,
     source: 'https://www.openstreetmap.org/?mlat=27.1926037&mlon=100.112808#map=15/27.1926/100.1128',
@@ -143,6 +148,7 @@ export const weatherLocationForGuide: Record<string, string> = {
   'zhongshuge-bookstore': 'dujiangyan',
   'upper-tiger-leaping-gorge': 'upper-gorge',
   jiuzhaigou: 'jiuzhaigou',
+  huanglong: 'huanglong',
   bipenggou: 'bipenggou',
   siguniangshan: 'rilong',
   'moshi-park': 'bamei',
