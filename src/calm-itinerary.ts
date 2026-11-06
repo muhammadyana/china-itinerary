@@ -104,7 +104,7 @@ function dayPanel(day: CalmDay, index: number) {
   const transport = transportSection(rows, trips, { key, more: `${calmPreparePath}#bookings`, checked: day.fromMain ? undefined : 'Harga dicek 4–5 November' });
   const night = day.overnight ? nightDetail(day.overnight, currencyText(day.overnight.detail)) : nightDetail(null);
   return `<article class="day-view calm-day-view" id="${day.date}" data-calm-day="${day.date}" aria-labelledby="day-heading${key}">${dayHeader(day, index, key, rows.length + trips.length > 0)}
- ${glance(day, key)}${daySchedule(day.steps, key)}${transport}${stops(day, key)}
+ ${glance(day, key)}${daySchedule(day.steps, key, true)}${transport}${stops(day, key)}
  ${main ? renderChengduEvening(day.date) : ''}${notes(day)}${main ? practicalSection(main.practical, key) : ''}${risks(day, key)}
  ${night}
  ${main?.sourceNote ? `<p class="stop-note day-source-note">${e(main.sourceNote)}</p>` : ''}${pagination(index)}</article>`;

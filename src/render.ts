@@ -24,6 +24,8 @@ const paths: Record<string,string> = {
  bulb:'<path d="M9 18h6m-6 3h6M8 14a6 6 0 1 1 8 0c-1 1-1 2-1 4H9c0-2 0-3-1-4Z"/>',
  calendar:'<path d="M8 2v4m8-4v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M8 14h2m4 0h2m-8 4h2"/>',
  right:'<path d="m9 5 7 7-7 7"/>',left:'<path d="m15 5-7 7 7 7"/>',down:'<path d="m6 9 6 6 6-6"/>',close:'<path d="m6 6 12 12M6 18 18 6"/>',
+ moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/>',
+ meal:'<path d="M7 3v8m-2-8v4a2 2 0 0 0 4 0V3M7 11v10m10-18c-2 1.2-3 3.4-3 6.5V12h3m0-9v18"/>',
  bed:'<path d="M2 4v16m20-8v8M2 16h20M2 8h6v8m0-6h10a4 4 0 0 1 4 4v2"/>',
  car:'<path d="m5 8 2-5h10l2 5M3 16v3m18-3v3M3 8h18v8H3zM6 12h2m8 0h2"/>',
  train:'<rect x="5" y="3" width="14" height="15" rx="3"/><path d="M5 10h14m-7-7v7m-4 8-2 3m10-3 2 3M8 14h.01M16 14h.01"/>',
@@ -92,8 +94,23 @@ export function timelineEvent(event: Event, index: number, events: Event[], key 
  return stopCard(event.place, places[event.place], sequence, `stop-${event.place}-${index}${key}`, event);
 }
 const timelineText = (text: string, detail?: string) => detail ? `<strong class="day-timeline-title">${currencyText(text)}</strong><span class="day-timeline-detail">${currencyText(detail)}</span>` : currencyText(text);
-export const timelineList = (steps: TimelineStep[]) => `<ol class="day-timeline" role="list">${steps.map(([time, text, detail]) => `<li><span class="day-timeline-time">${e(time)}</span><span>${timelineText(text, detail)}</span></li>`).join('')}</ol>`;
-export const daySchedule = (steps: TimelineStep[] | undefined, key = '') => steps?.length ? `<section class="day-schedule" aria-labelledby="schedule-heading${key}"><div class="section-heading"><h3 id="schedule-heading${key}">Timeline</h3><span>Waktu China (UTC+8)</span></div>${timelineList(steps)}</section>` : '';
+// The icon a step gets in the rich timeline: "Rencana B/C" rows get the info icon, others match their short title, first match wins.
+const stepKinds: [string, RegExp][] = [
+ ['moon', /\b(subuh|zuhur|asar|maghrib|isya|salat|jumat)\b/i], ['meal', /\b(makan|sarapan|kopi)\b/i],
+ ['cable', /ropeway|kereta gantung|cable/i], ['plane', /terbang|pesawat|mendarat|bandara/i], ['train', /kereta|stasiun|\b[CDGK]\d{2,4}\b/],
+ ['bus', /shuttle|\bbus\b|metro/i], ['walk', /^jalan\b|jalan kaki/i], ['car', /mobil|didi|taksi|berangkat|perjalanan|jemput|\bke\b/i],
+ ['bed', /tidur|check-in|check-out|istirahat|siapkan|titip/i],
+];
+const stepKind = (time: string, title: string) => /^rencana\b/i.test(time) ? 'info' : stepKinds.find(([, pattern]) => pattern.test(title))?.[0] ?? 'pin';
+const richStep = ([time, text, detail]: TimelineStep) => {
+ const kind = stepKind(time, text);
+ return `<li data-kind="${kind}"><span class="day-timeline-time">${e(time)}</span><span class="day-timeline-node">${icon(kind)}</span><div class="day-timeline-body">${timelineText(text, detail)}</div></li>`;
+};
+/** `rich` draws the calm itinerary's infographic version: a rail with one icon per step and the text in a card. */
+export const timelineList = (steps: TimelineStep[], rich = false) => rich
+ ? `<ol class="day-timeline day-timeline-rich" role="list">${steps.map(richStep).join('')}</ol>`
+ : `<ol class="day-timeline" role="list">${steps.map(([time, text, detail]) => `<li><span class="day-timeline-time">${e(time)}</span><span>${timelineText(text, detail)}</span></li>`).join('')}</ol>`;
+export const daySchedule = (steps: TimelineStep[] | undefined, key = '', rich = false) => steps?.length ? `<section class="day-schedule" aria-labelledby="schedule-heading${key}"><div class="section-heading"><h3 id="schedule-heading${key}">Timeline</h3><span>Waktu China (UTC+8)</span></div>${timelineList(steps, rich)}</section>` : '';
 // Transport legs plus priced tickets for one date; stays have their own link in the day header.
 export const dayBookings = (date: string) => bookingsForDate(date).filter(item => item.mode || item.cost);
 const bookingIcon = (mode?: Booking['mode']) => icon(mode === 'train' || mode === 'metro' ? 'train' : mode === 'bus' || mode === 'shuttle' ? 'bus' : mode === 'plane' ? 'plane' : mode ? 'car' : 'wallet');
