@@ -49,6 +49,18 @@
 .prepare-section-lead a { color: var(--color-accent); font-weight: 500; text-decoration: none; }
 .prepare-sources { display: grid; gap: 0; margin: var(--space-sm) 0 0; padding: 0; list-style: none; }
 
+.prepare-checklist-settled { max-width: 68ch; margin-top: var(--space-sm); color: var(--color-ink-2); }
+.prepare-checklist-progress { margin-top: var(--space-md); color: var(--color-accent); font-weight: 600; font-variant-numeric: tabular-nums; }
+.prepare-checklist-group { margin-top: var(--space-xl); min-inline-size: 0; padding: 0; border: 0; }
+.prepare-checklist-group legend { display: block; width: 100%; max-width: 40ch; padding: 0; font-family: var(--font-display); font-size: var(--text-title); font-weight: var(--display-weight, 600); line-height: 1.2; letter-spacing: var(--tracking-display); text-wrap: balance; }
+.prepare-checklist { display: grid; gap: var(--space-xs); margin: var(--space-md) 0 0; padding: 0; list-style: none; }
+.prepare-check { display: flex; align-items: flex-start; gap: var(--space-sm); min-height: 44px; padding: var(--space-sm) var(--space-md); border: 1px solid var(--color-rule); border-radius: 16px; background: var(--color-glass-solid); color: var(--color-ink); font-size: 16px; line-height: 1.45; cursor: pointer; touch-action: manipulation; }
+.prepare-check input { flex: none; width: 22px; height: 22px; margin: 1px 0 0; accent-color: var(--color-accent); font-size: 16px; }
+.prepare-check span { min-width: 0; }
+.prepare-check:has(:checked) { background: var(--color-paper-2); }
+.prepare-check:has(:checked) span { color: var(--color-ink-2); text-decoration: line-through; text-decoration-color: var(--color-muted); text-decoration-thickness: 1px; }
+.prepare-check input:focus-visible { outline-offset: 3px; }
+
 @media (max-width: 599px) {
   .prepare-page { padding-top: var(--space-lg); }
   .prepare-intro h1 { font-size: 40px; }

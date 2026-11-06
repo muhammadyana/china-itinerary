@@ -313,3 +313,7 @@ Bare `/` redirected to `/places/calm-itinerary/` unless `?plan=utama` (inline sc
 ## Plan menu always prefers Santai (6 November 2026)
 
 Main twin pages highlighted Santai in the static HTML (map, prepare). `initializeSiteNavigation` now syncs `aria-current` from the live URL so Utama is only current with `?plan=utama`. Earlier deploy runs for the default-santai commits were cancelled in GitHub Actions; this push should ship the homepage redirect too.
+
+## Checklist pemesanan on the calm preparation page (6 November 2026)
+
+`/places/calm-prepare/` adds a "Checklist pemesanan" (`src/calm-checklist.ts`) the traveller ticks by hand. Checked ids are stored in `localStorage` under `calm-prepare-checklist` on that phone and restored on the next visit. The rows are the 6 November gap audit: tickets still to buy, hotels not yet confirmed, cars and transfers, and four site notes. The list adds no prices and no train times beyond those rows. A line under the heading names what is already done and left off the list: the visa, the flights, and Mcsrh Hotel for 8–9 November. The main-plan preparation page is unchanged.

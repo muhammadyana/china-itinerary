@@ -11,6 +11,7 @@ import { calmCostLines, calmCostsPath, calmSharedBookings } from './calm-costs.t
 import {
   calmBookingGroups, calmCheckedAt, calmDoNotBuy, calmDoNotBuyLead, calmItineraryPath, calmPath, calmPreparePath, calmSources, type CalmBooking,
 } from './calm-route.ts';
+import { calmChecklistSection } from './calm-checklist.ts';
 
 // The calm option's own bookings from calm-route.ts, plus the main plan's bookings for the days the two plans share.
 export const calmCard = (item: CalmBooking, id?: string): BookingCard => ({
@@ -43,7 +44,7 @@ function intro() {
   return `<div class="prepare-intro">
       <h1 id="prepare-title">Persiapan opsi santai, satu halaman.</h1>
       <p class="lead">Kalau memilih opsi santai: yang sudah beres, yang harus dipesan beserta jam bukanya, perkiraan biaya, cara tetap online, dan nomor penting. Diperiksa <time datetime="${calmCheckedAt}">4–5 November 2026</time>.</p>
-      <p class="prepare-link calm-page-links">${pageLink(calmItineraryPath, 'Itinerary santai, hari demi hari')}${pageLink(calmPath, 'Bandingkan dengan rencana utama')}</p>
+      <p class="prepare-link calm-page-links">${pageLink(`${calmPreparePath}#checklist`, 'Checklist pemesanan')}${pageLink(calmItineraryPath, 'Itinerary santai, hari demi hari')}${pageLink(calmPath, 'Bandingkan dengan rencana utama')}</p>
       ${doneList()}
     </div>`;
 }
@@ -68,6 +69,7 @@ export function calmPrepareView() {
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="${calmPath}">Opsi santai</a>${icon('right')}<span>Persiapan santai</span></nav>
     ${planSwitch(calmPreparePath)}
     ${intro()}
+    ${calmChecklistSection()}
     ${bookingsSection()}
     ${doNotBuySection()}
     ${costsSection()}
