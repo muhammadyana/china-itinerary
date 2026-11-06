@@ -57,7 +57,7 @@
 .route-entry-number { display: grid; place-items: center; width: 32px; height: 32px; border-radius: var(--radius-pill); background: var(--color-autumn); color: var(--color-on-autumn); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
 .route-entry-body { display: grid; gap: var(--space-2xs); min-width: 0; }
 .route-entry-date { display: flex; flex-wrap: wrap; gap: 0 var(--space-sm); color: var(--color-muted); font-size: 13px; font-variant-numeric: tabular-nums; }
-.route-entry h3 { font-size: 19px; line-height: 1.25; letter-spacing: -.015em; }
+.route-entry h3 { font-size: 19px; line-height: 1.25; letter-spacing: var(--tracking-display); }
 .route-entry-path { color: var(--color-ink-2); overflow-wrap: anywhere; }
 .route-entry-meta { color: var(--color-muted); font-size: 14px; }
 .route-entry-sleep { display: flex; align-items: center; gap: var(--space-xs); color: var(--color-ink); font-size: 14px; }

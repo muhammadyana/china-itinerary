@@ -18,7 +18,7 @@
 .calm-day-date { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2xs) var(--space-sm); color: var(--color-accent); font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
 .calm-day-date span:not(.calm-day-same) { color: var(--color-muted); font-weight: 500; }
 .calm-day-same { padding: 2px var(--space-sm); border-radius: var(--radius-pill); background: var(--color-rust-wash); color: var(--color-ink); font-size: 13px; font-weight: 500; }
-.calm-day h3 { font-size: var(--text-title); line-height: 1.2; letter-spacing: -.015em; text-wrap: balance; }
+.calm-day h3 { font-size: var(--text-title); line-height: 1.2; letter-spacing: var(--tracking-display); text-wrap: balance; }
 .calm-day-intro { color: var(--color-ink-2); }
 .calm-day-note { padding: var(--space-sm) var(--space-md); border-left: 3px solid var(--color-warning); border-radius: 0 16px 16px 0; background: var(--color-warning-surface); color: var(--color-ink); }
 .calm-day-note .prepare-link { display: flex; flex-wrap: wrap; gap: 0 var(--space-md); }
@@ -91,7 +91,7 @@ html:not(.js) :is(.calm-daybar, .calm-itinerary-page :is([data-action="pick-day"
 
 /* "Sekilas hari ini" on the calm day view: labelled rows above the timeline, ruled like the timeline itself. */
 .day-glance { max-width: 760px; margin-top: var(--space-lg); padding: var(--space-md) var(--space-lg) var(--space-xs); border-radius: 20px; background: var(--color-paper-2); color: var(--color-ink); }
-.day-glance h3 { margin: 0 0 var(--space-xs); font-size: 0.9375rem; font-weight: 600; }
+.day-glance h3 { margin: 0 0 var(--space-xs); font-size: 1.25rem; font-weight: var(--display-weight); }
 .day-glance dl { display: grid; margin: 0; }
 .day-glance dl > div { display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: var(--space-md); align-items: baseline; padding-block: var(--space-sm); border-top: 1px solid var(--color-rule); }
 .day-glance dt { color: var(--color-muted); font-size: 0.875rem; }
