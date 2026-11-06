@@ -33,7 +33,7 @@
  --color-photo-badge-edge: #ffffff70; --color-photo-badge-hover: #fffaf22e;
  --color-warning: #77531d; --color-warning-surface: #faf0d9;
  --color-map-water: #7da1a6; --color-map-water-ink: #4c6f74; --color-water-wash: #e3ecea;
- --color-route-bus: #d9622b; --color-route-plane: #2f67ad;
+ --color-route-car: #e0661b; --color-route-train: #c99a0a; --color-route-bus: #2e8540; --color-route-plane: #cc2f2f;
  --color-logo-mountain: #2f67ad; --color-logo-snow: #ffffff; --color-logo-leaf: #d9622b;
  --font-display: 'Geist', system-ui, sans-serif; --font-body: 'Geist', system-ui, sans-serif;
  --font-outlier: var(--font-body); --display-weight: 600;
