@@ -16,6 +16,8 @@ export interface StayBase {
   id: string; name: string; area: string; notes: string[];
   areaPhoto: { id: string; alt: string; label: string };
   hotel: Stay; hostel: Stay;
+  /** The hotel is already booked for these nights: show and price it alone, without the hostel alternative. */
+  booked?: boolean;
 }
 
 export const staysCheckedAt = '2026-11-04';

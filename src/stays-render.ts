@@ -28,7 +28,7 @@ function stayCard(stay: Stay, base: StayBase, compact = false) {
     <div class="stay-card-body">
       <h3 id="${headingId}">${e(stay.name)}</h3>
       ${stay.chinese ? `<p class="stay-chinese" lang="zh-Hans">${e(stay.chinese)}</p>` : ''}
-      <p class="stay-meta"><span class="state${stay.kind === 'Hotel' ? ' confirmed' : ''}">${e(stay.kind)}</span><span class="stay-room">${e(stay.room)}</span>${stay.overBudget ? `<span class="state stay-over-budget">Di atas ${stayBudget.rupiah}</span>` : ''}<strong>${currencyText(stay.price)}</strong></p>
+      <p class="stay-meta"><span class="state${stay.kind === 'Hotel' ? ' confirmed' : ''}">${e(stay.kind)}</span><span class="stay-room">${e(stay.room)}</span>${base.booked && stay === base.hotel ? '<span class="state confirmed">Sudah dipesan</span>' : ''}${stay.overBudget ? `<span class="state stay-over-budget">Di atas ${stayBudget.rupiah}</span>` : ''}<strong>${currencyText(stay.price)}</strong></p>
       <p class="stay-reason">${e(stay.reason)}</p>
       ${compact ? '' : `<dl class="stay-facts">
         <div><dt>${icon('pin')}Lokasi</dt><dd>${e(stay.location)}${stay.chineseAddress ? `<span lang="zh-Hans">${e(stay.chineseAddress)}</span>` : ''}</dd></div>
@@ -55,7 +55,7 @@ function stayBaseSection(base: StayBase, source: StayNights) {
         <div class="stay-base-dates">${source.nights(base).map(day => `<a class="quiet-button" href="${e(source.dayHref(day.date))}">${icon('calendar')}<span>${shortDate(day.date)}<small>${e(day.title)}</small></span>${icon('right')}</a>`).join('')}</div>
       </div>
     </div>
-    <div class="stay-pair">${stayCard(base.hotel, base)}${stayCard(base.hostel, base)}</div>
+    <div class="stay-pair">${stayCard(base.hotel, base)}${base.booked ? '' : stayCard(base.hostel, base)}</div>
   </section>`;
 }
 

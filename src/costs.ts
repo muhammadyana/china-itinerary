@@ -53,7 +53,9 @@ export function bookingLine(item: Booking): CostLine {
 
 // A night spans the cheaper pick's lowest rate to the dearer pick's highest rate.
 export function stayLine(base: StayBase, date: string): CostLine {
-  const [hotel, hostel] = [nightShare(base.hotel, date), nightShare(base.hostel, date)];
+  const hotel = nightShare(base.hotel, date);
+  if (base.booked) return { date, label: `Menginap di ${base.name}`, category: 'stays', basis: 'per malam', cost: hotel, withFriend: date >= sharedFrom, note: `${base.hotel.name}, sudah dipesan`, base };
+  const hostel = nightShare(base.hostel, date);
   const split = date >= sharedFrom && [base.hotel, base.hostel].some(stay => stay.room === 'Kamar privat');
   return {
     date, label: `Menginap di ${base.name}`, category: 'stays', basis: split ? 'per malam, kamar dibagi dua' : 'per malam',

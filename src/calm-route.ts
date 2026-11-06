@@ -416,7 +416,7 @@ const calmOwnDays: CalmDay[] = [
 // 8 November's plan and practical notes prepare the main plan's C5746 06.14; the calm option spends 9 November morning in Dujiangyan and enters the park on 10 November.
 const mondayTrainNote: CalmNote = { text: 'Di opsi santai, Senin pagi dipakai ke toko buku Zhongshu Ge Dujiangyan dan shuttle ke Jiuzhaigou baru berangkat siang dari Xinnanmen Bus Station (lihat Hari 2). DiDi 05.15 dan C5746 06.14 yang disebut di hari ini tidak dipakai.', links: [] };
 
-export const calmDays: CalmDay[] = [{ ...fromMainPlan('2026-11-08'), notes: [mondayTrainNote] }, ...calmOwnDays, ...['2026-11-18', '2026-11-19', '2026-11-20', '2026-11-21'].map(fromMainPlan)];
+export const calmDays: CalmDay[] = [{ ...fromMainPlan('2026-11-08'), overnight: { name: 'Chengdu', detail: 'Mcsrh Hotel Chunxi Road Taikoo Li (Mcsrh麦嘉·拾趣酒店, 春熙路太古里店), sudah dipesan untuk satu malam: Room M1, Rp292.719. Besok pagi koper bisa dititip di sini sebelum ke Zhongshu Ge.' }, notes: [mondayTrainNote] }, ...calmOwnDays, ...['2026-11-18', '2026-11-19', '2026-11-20', '2026-11-21'].map(fromMainPlan)];
 /** "Sekilas hari ini": what to carry and the one thing not to miss, each restating a fact from that day's plan. */
 export interface CalmGlance { bring: string; remember: string }
 export const calmGlance: Record<string, CalmGlance> = {

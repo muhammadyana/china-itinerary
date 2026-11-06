@@ -122,7 +122,21 @@ const lijiang = mainBase('lijiang');
 const shangriLa = mainBase('shangri-la');
 
 export const calmStayBases: CalmStayBase[] = [
-  sharedNight('chengdu', '2026-11-08'),
+  {
+    ...chengdu, id: '2026-11-08', nights: ['2026-11-08'], fromMain: false, booked: true,
+    notes: [
+      'Sudah dipesan di Trip.com pada 6 November: satu malam, 8–9 November.',
+      'Penitipan bagasi gratis menurut halaman Trip.com hotel ini: titip koper pagi 9 November sebelum ke Zhongshu Ge. Bila koper besar mau ditinggal sampai 13 November, tanyakan dulu ke hotel; malam 13–15 November juga mengusulkan hotel yang sama.',
+    ],
+    hotel: {
+      ...mcsrh,
+      location: 'Dekat Chunxi Road dan Taikoo Li: sekitar 1,5 km garis lurus dari Masjid Huangcheng. Ke Xinnanmen Bus Station, titik jemput shuttle 9 November, sekitar 3 km: ±4 menit berkendara tanpa macet atau ±31 menit jalan kaki.',
+      price: 'CNY 107 per malam',
+      priceNote: 'Sudah dipesan di Trip.com: Rp292.719 untuk 8–9 November, Room M1 dengan satu ranjang double, sekitar CNY 107. Pesanan terkonfirmasi.',
+      reason: 'Sudah dipesan untuk malam pertama di Chengdu.',
+      links: [trip('https://us.trip.com/hotels/detail/?hotelId=115543776&checkIn=2026-11-08&checkOut=2026-11-09&adult=1&crn=1&curr=CNY')],
+    },
+  },
   {
     ...jiuzhaigou, id: '2026-11-09', nights: ['2026-11-09', '2026-11-10'], fromMain: false,
     notes: [
