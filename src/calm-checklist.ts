@@ -2,7 +2,8 @@ import { escapeHtml as e } from './render.ts';
 import { section } from './prepare.ts';
 
 // Open items from the 6 November 2026 calm-option gap audit. Ids stay stable so a phone keeps its ticks.
-interface ChecklistItem { id: string; label: string }
+// `booked` items are bought (owner's screenshot, recorded in SOURCE-NOTES.md): they render ticked on every phone.
+interface ChecklistItem { id: string; label: string; booked?: boolean }
 interface ChecklistGroup { id: string; title: string; items: ChecklistItem[] }
 
 const checklistGroups: ChecklistGroup[] = [
@@ -10,6 +11,8 @@ const checklistGroups: ChecklistGroup[] = [
     id: 'tickets',
     title: 'Tiket belum dipesan',
     items: [
+      { id: 'c5756-9nov', label: 'C5756 Chengdu East 17.05 → Huanglongjiuzhai 19.10 (9 Nov, 1 kursi)', booked: true },
+      { id: 'jiuzhaigou-10nov', label: 'Jiuzhaigou + bus taman 10 Nov, slot 08.00–10.00', booked: true },
       { id: 'huanglong-11nov', label: 'Huanglong + ropeway naik 11 Nov' },
       { id: 'c5754-12nov', label: 'C5754 Huanglongjiuzhai 14.14 → Maoxian 15.00 (12 Nov)' },
       { id: 'bipenggou-13nov', label: 'Bipenggou + bus + mobil listrik 13 Nov' },
@@ -61,16 +64,16 @@ const checklistGroups: ChecklistGroup[] = [
 
 const storageKey = 'calm-prepare-checklist';
 
-const checklistItem = (item: ChecklistItem) => `<li><label class="prepare-check"><input type="checkbox" data-check-id="${e(item.id)}"><span>${e(item.label)}</span></label></li>`;
+const checklistItem = (item: ChecklistItem) => `<li><label class="prepare-check"><input type="checkbox" data-check-id="${e(item.id)}"${item.booked ? ' data-booked checked' : ''}><span>${e(item.label)}</span></label></li>`;
 
 const checklistGroup = (group: ChecklistGroup) => `<fieldset class="prepare-checklist-group"><legend id="checklist-${e(group.id)}-title">${e(group.title)}</legend><ul class="prepare-checklist">${group.items.map(checklistItem).join('')}</ul></fieldset>`;
 
-/** The calm preparation page's tick list. Checked state is restored in the browser; the prerender starts clear. */
+/** The calm preparation page's tick list. Checked state is restored in the browser; the prerender ticks only booked items. */
 export function calmChecklistSection() {
   const total = checklistGroups.reduce((sum, group) => sum + group.items.length, 0);
   return section('checklist', 'Checklist pemesanan', `<div data-calm-checklist>
       <p class="prepare-section-lead">Centang yang sudah selesai. Centangan tersimpan di ponsel ini, jadi tetap ada setelah halaman dimuat ulang. Mulai 18 November beli 2 kursi kalau relevan.</p>
-      <p class="prepare-checklist-settled">${e('Sudah beres, tidak ada di daftar ini: visa, tiket pesawat, Mcsrh Hotel 8–9 November, kereta C5756 9 November, dan tiket Jiuzhaigou 10 November.')}</p>
+      <p class="prepare-checklist-settled">${e('Sudah beres, tidak ada di daftar ini: visa, tiket pesawat, dan Mcsrh Hotel 8–9 November.')}</p>
       <p class="prepare-checklist-progress" data-checklist-progress aria-live="polite">0 dari ${total} selesai</p>
       ${checklistGroups.map(checklistGroup).join('')}
     </div>`);
@@ -100,7 +103,7 @@ export function initializeCalmChecklist(root: ParentNode = document) {
   if (!panel) return;
   const boxes = [...panel.querySelectorAll<HTMLInputElement>('input[data-check-id]')];
   const saved = new Set(storedIds());
-  for (const box of boxes) box.checked = saved.has(box.dataset.checkId ?? '');
+  for (const box of boxes) box.checked = box.hasAttribute('data-booked') || saved.has(box.dataset.checkId ?? '');
   const progress = panel.querySelector<HTMLElement>('[data-checklist-progress]');
   const showProgress = () => {
     if (!progress) return;
