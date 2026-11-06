@@ -94,6 +94,7 @@ const amapPlaces: Record<string, AmapPlace> = {
   'five-colour-pond': { keyword: '五彩池', city: '513225', near: 'jiuzhaigou' },
   nuorilang: { keyword: '诺日朗瀑布', city: '513225', near: 'jiuzhaigou' },
   'pearl-shoals': { keyword: '珍珠滩瀑布', city: '513225', near: 'jiuzhaigou' },
+  huanglong: { keyword: '黄龙风景名胜区', city: '513224' },
   songpan: { keyword: '松潘古城', city: '513224' },
   'songpan-mosque': { keyword: '松潘清真北寺', city: '513224' },
   'maoxian-station': { keyword: '茂县站', city: '513223' },

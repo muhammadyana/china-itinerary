@@ -63,11 +63,11 @@ const gateNotes = [
 
 // Transfer facts the bookings do not carry, from the same research, plus the day plan's own station steps.
 const transferNotes: Record<string, string[]> = {
-  '2026-11-11': [
-    'Tanpa mobil sewa pagi: bus 团子出行 dari 九寨沟口长途客运站 ke 黄龙九寨高铁站 (CNY 51) berangkat 06.20, 07.50, 08.50, lalu satu sampai dua kali per jam sampai 18.40. Ke Songpan ada bus 09.05 (CNY 52, 18 kursi pada 5 November), lalu taksi sekitar 13 km ke stasiun; tarifnya belum ada, dan tempat menitip koper di Songpan belum dicek.',
-    stepText('2026-11-11', '14.14'),
-    'Ada juga C5774 11.05 → 11.51; semua kereta ke Maoxian hari itu kelas dua CNY 66.',
-    stepText('2026-11-11', '±15.00–15.15'),
+  '2026-11-12': [
+    'Dari kota tua Songpan ke Stasiun Huanglongjiuzhai sekitar 13 km (OSRM 12 menit) dengan taksi atau DiDi; tarifnya belum dicek. Stasiun Songpan lebih dekat (sekitar 5 km dari kota tua) dan juga punya kereta ke Maoxian, misalnya C5674 14.11 → 14.51 (Trip.com, 6 November; belum dicek di 12306).',
+    stepText('2026-11-12', '14.14'),
+    'Ada juga C5774 11.05 → 11.51 dan C5804 15.15 → 16.08; semua kereta Huanglongjiuzhai → Maoxian hari itu kelas dua CNY 66 (Trip.com, 6 November).',
+    stepText('2026-11-12', '±15.00–15.15'),
   ],
   '2026-11-15': [
     'Stasiun Chengdu South juga dilayani metro 火车南站 (jalur 1, 7, dan 18); jalur 1 ke Tianfu Square sekitar 10 menit (WanderInChina, Juli 2026). Jam kereta pertamanya belum dicek, jadi DiDi tetap pilihan utama; OSRM memberi 9 menit tanpa macet.',
@@ -101,7 +101,7 @@ const calmTrainsPage: TrainsPage = {
   path: calmTrainsPath, parent: { label: 'Opsi santai', url: calmPath }, current: 'Kereta & timeline santai', title: 'Kereta opsi santai, jam demi jam.',
   intro: `Link Trip.com untuk setiap kereta opsi santai, cara dari stasiun ke gerbang Jiuzhaigou, transfer di setiap hari kereta, aturan bagasi, dan timeline jam demi jam untuk ${trainDays.length} hari kereta.`,
   sections: [
-    ticketsSection('Jam rilis tiket dalam WIB; jam kereta memakai waktu China (WIB + 1 jam). Sampai 16 November kamu sendiri, jadi satu kursi; mulai 18 November temanmu ikut, jadi dua kursi atas nama paspor masing-masing. Kereta 11 dan 15 November dicek di 12306 pada 5 November 2026, cadangan 9 November pada 6 November; 18–20 November sama dengan rencana utama.', cards),
+    ticketsSection('Jam rilis tiket dalam WIB; jam kereta memakai waktu China (WIB + 1 jam). Sampai 16 November kamu sendiri, jadi satu kursi; mulai 18 November temanmu ikut, jadi dua kursi atas nama paspor masing-masing. Kereta 12 November dicek di Trip.com pada 6 November 2026 dan kereta 15 November di 12306 pada 5 November 2026, cadangan 9 November pada 6 November; 18–20 November sama dengan rencana utama.', cards),
     slotsSection('Ke gerbang Jiuzhaigou', `Opsi santai memakai satu tiket <strong>Ticket + Sightseeing Bus Ticket (Adult, Non-Chinese mainland visitors)</strong> di Trip.com: ${parkTicket('2026-11-10')} untuk 10 November, slot 08.00–10.00, dipakai pagi dari penginapan. Ke Jiuzhaigou pada 9 November naik <strong>C5756</strong> Chengdu East 17.05 → Huanglongjiuzhai 19.10, lalu taksi atau shuttle stasiun ke gukou (lihat Hari 2). Baris cadangan di bawah untuk berangkat lebih awal dari East:`, calmSlots, list(gateNotes)),
     transfersSection(),
     luggageSection(),

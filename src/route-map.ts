@@ -47,7 +47,7 @@ export const mapPoints: Record<string, MapPoint> = {
 };
 
 export const overnightPoint: Record<string, string> = {
-  Chengdu: 'chengdu', Jiuzhaigou: 'jiuzhaigou', Bipenggou: 'bipenggou', Rilong: 'rilong', Xinduqiao: 'xinduqiao',
+  Chengdu: 'chengdu', Jiuzhaigou: 'jiuzhaigou', Songpan: 'songpan', Bipenggou: 'bipenggou', Rilong: 'rilong', Xinduqiao: 'xinduqiao',
   Litang: 'litang', Riwa: 'riwa', 'Shangri-La': 'shangri-la', Lijiang: 'lijiang', Dali: 'dali', Kunming: 'kunming',
 };
 
