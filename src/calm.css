@@ -130,32 +130,34 @@ html:not(.js) :is(.calm-daybar, .calm-itinerary-page :is([data-action="pick-day"
 }
 
 /* Calm itinerary sidebar: days grouped by province on a coloured rail, the date stacked in a chip, the day's transport as icons. */
-#calm-itinerary-days .day-sidebar { padding: var(--space-sm); border: 1px solid var(--color-glass-edge); border-radius: 28px; background-color: var(--color-glass-solid); background-image: var(--glass-reflection); box-shadow: var(--glass-shadow); }
+#calm-itinerary-days .day-sidebar { padding: var(--space-sm); border: 1px solid var(--color-glass-edge); border-radius: 28px; background-color: var(--color-menu-glass); background-image: linear-gradient(145deg, var(--color-menu-shine), var(--color-transparent) 45%, var(--color-glass-reflection)); box-shadow: inset 0 1px 1px var(--color-glass-inset), inset 0 -1px 1px var(--color-glass-rim), 0 6px 20px var(--color-glass-shadow); }
 #calm-itinerary-days .sidebar-title { padding: 0 var(--space-xs) var(--space-sm); }
 #calm-itinerary-days .sidebar-days { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; margin-top: var(--space-2xs); }
 #calm-itinerary-days .sidebar-days > li { --region: var(--color-accent); --region-wash: var(--color-rust-wash); position: relative; min-width: 0; }
 #calm-itinerary-days .sidebar-days > [data-region="yunnan"] { --region: var(--color-map-water-ink); --region-wash: var(--color-water-wash); }
 #calm-itinerary-days .sidebar-region { margin: var(--space-sm) 0 var(--space-2xs) 8px; color: var(--region); font-size: 12px; font-weight: 600; }
 #calm-itinerary-days .sidebar-region:first-child { margin-top: var(--space-2xs); }
-#calm-itinerary-days .calm-sidebar-day::before { content: ''; position: absolute; top: 0; bottom: 0; left: 27px; width: 2px; background: var(--region); opacity: .35; }
-#calm-itinerary-days .sidebar-region + .calm-sidebar-day::before { top: 50%; }
-#calm-itinerary-days .calm-sidebar-day:has(+ .sidebar-region)::before, #calm-itinerary-days .calm-sidebar-day:last-child::before { bottom: 50%; }
+/* The rail stops at each see-through chip, so it never crosses the date. */
+#calm-itinerary-days .calm-sidebar-day { --rail-in: var(--region); --rail-out: var(--region); }
+#calm-itinerary-days .calm-sidebar-day::before { content: ''; position: absolute; top: 0; bottom: 0; left: 27px; width: 2px; background: linear-gradient(to bottom, var(--rail-in) 0 calc(50% - 21px), var(--color-transparent) 0 calc(50% + 21px), var(--rail-out) 0); opacity: .35; }
+#calm-itinerary-days .sidebar-region + .calm-sidebar-day { --rail-in: var(--color-transparent); }
+#calm-itinerary-days .calm-sidebar-day:has(+ .sidebar-region), #calm-itinerary-days .calm-sidebar-day:last-child { --rail-out: var(--color-transparent); }
 #calm-itinerary-days .sidebar-days .date-choice { position: relative; min-height: 52px; gap: 10px; padding: 5px 8px; border-radius: 16px; color: var(--color-ink); }
 #calm-itinerary-days .sidebar-days .date-choice { transition: background-color 160ms ease, box-shadow 160ms ease; }
-#calm-itinerary-days .sidebar-days .date-choice:hover { background-color: var(--color-glass-hover); box-shadow: inset 0 1px 1px var(--color-glass-inset), 0 2px 8px var(--color-glass-shadow); }
-#calm-itinerary-days .sidebar-days .date-number { display: grid; width: 40px; height: 42px; flex-shrink: 0; place-content: center; border: 1.5px solid var(--region); border-radius: 12px; background-color: var(--color-glass-solid); background-image: var(--glass-reflection); box-shadow: inset 0 1px 1px var(--color-glass-inset), 0 2px 6px var(--color-glass-shadow); color: var(--color-ink); font-size: 16px; font-weight: 600; line-height: 1; text-align: center; }
+#calm-itinerary-days .sidebar-days .date-choice:hover { background-color: var(--color-menu-hover); box-shadow: inset 0 1px 1px var(--color-glass-inset); }
+#calm-itinerary-days .sidebar-days .date-number { display: grid; width: 40px; height: 42px; flex-shrink: 0; place-content: center; border: 1.5px solid color-mix(in srgb, var(--region) 70%, transparent); border-radius: 12px; background-color: var(--color-menu-glass); background-image: linear-gradient(145deg, var(--color-menu-shine), var(--color-transparent) 55%); box-shadow: inset 0 1px 1px var(--color-glass-inset); color: var(--color-ink); font-size: 16px; font-weight: 600; line-height: 1; text-align: center; }
 #calm-itinerary-days .sidebar-days .date-number small { margin-bottom: 2px; color: var(--region); font-size: 10px; font-weight: 500; }
 #calm-itinerary-days .sidebar-days .choice-title { display: -webkit-box; overflow: hidden; font-size: 13px; line-height: 1.3; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 #calm-itinerary-days .choice-modes { display: flex; flex-shrink: 0; gap: 2px; color: var(--region); opacity: .75; }
 #calm-itinerary-days .choice-modes svg { width: 15px; height: 15px; }
-#calm-itinerary-days .sidebar-days .date-choice[aria-current] { background-color: var(--region-wash); background-image: var(--glass-reflection); box-shadow: var(--glass-shadow); color: var(--color-ink); }
+#calm-itinerary-days .sidebar-days .date-choice[aria-current] { background-color: color-mix(in srgb, var(--region-wash) 55%, transparent); background-image: linear-gradient(145deg, var(--color-menu-shine), var(--color-transparent) 50%); box-shadow: inset 0 1px 1px var(--color-glass-inset), 0 4px 14px var(--color-glass-shadow); color: var(--color-ink); }
 #calm-itinerary-days .sidebar-days .date-choice[aria-current] .choice-title { font-weight: 600; }
 #calm-itinerary-days .sidebar-days .date-choice[aria-current] .date-number { background-color: var(--region); background-image: linear-gradient(145deg, var(--color-menu-shine), var(--color-transparent) 55%); color: var(--color-on-autumn); }
 #calm-itinerary-days .sidebar-days .date-choice[aria-current] .date-number small { color: var(--color-on-autumn-muted); }
 #calm-itinerary-days .sidebar-days .date-choice[aria-current] .choice-modes { opacity: 1; }
 #calm-itinerary-days .route-link { margin: var(--space-xs) var(--space-xs) 0; }
 @supports ((backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px))) {
-  #calm-itinerary-days .day-sidebar { background-color: var(--color-glass); -webkit-backdrop-filter: blur(22px) saturate(1.65); backdrop-filter: blur(22px) saturate(1.65); }
+  #calm-itinerary-days .day-sidebar { -webkit-backdrop-filter: blur(22px) saturate(1.65); backdrop-filter: blur(22px) saturate(1.65); }
 }
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
   #calm-itinerary-days .day-sidebar { background: var(--color-glass-solid); border-color: var(--color-rule-2); box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
