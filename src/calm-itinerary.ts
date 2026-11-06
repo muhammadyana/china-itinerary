@@ -1,7 +1,7 @@
 import {
   escapeHtml as e, icon, siteCredit, renderPhotoDialog, pickerItems, timelineEvent, stopCard, daySchedule, dayBookings, dayBooking, bookingRow,
   transportSection, dayDateLine, dayTitleRow, sleepSummary, staysLink, transportSummary, dayRoute, stopsSection, practicalSection, nightDetail,
-  pickDayButton, daySidebar, mobileDaybar, dayPickerDialog, copyDialog, statusMessage, openTripItem, costLabel, type Overnight,
+  pickDayButton, daySidebar, mobileDaybar, fullDate, dayPickerDialog, copyDialog, statusMessage, openTripItem, costLabel, type Overnight,
 } from './render.ts';
 import { currencyText } from './currency.ts';
 import { openTripsForDate } from './open-trips.ts';
@@ -11,7 +11,7 @@ import { daysByDate, type Day } from './itinerary.ts';
 import { calmDays, calmGlance, calmItineraryPath, calmPlaces, calmPreparePath, calmPath, placeFor, type CalmDay, type CalmStop } from './calm-route.ts';
 import { calmStayBaseForDate, calmStaysHref } from './calm-stays.ts';
 import { calmDayBookings } from './calm-prepare.ts';
-import { noteItem } from './calm-render.ts';
+import { calmRoute, noteItem } from './calm-render.ts';
 
 // The homepage's "hari demi hari" view for the calm option. Every day is prerendered so the page reads in order without
 // JavaScript; calm-itinerary-main.ts then shows one day at a time. 8 and 18–21 November render the main plan's own day
@@ -117,6 +117,20 @@ function intro() {
 // Runs before the panels are parsed, so calm.css shows only the linked day from the first paint instead of 14 days that then collapse.
 const earlyScript = '<script data-cfasync="false">document.documentElement.classList.add(\'js\')</script>';
 
+// Sidebar days grouped by province: 15 November already sleeps in Lijiang, so Yunnan starts there.
+const regionOf = (date: string) => date >= '2026-11-15' ? 'Yunnan' : 'Sichuan';
+const shortWeekday = new Intl.DateTimeFormat('id-ID', { weekday: 'short', timeZone: 'Asia/Shanghai' });
+const dayModeIcons = (date: string) => [...new Set(calmRoute.days.find(day => day.date === date)?.modes ?? [])].slice(0, 2).map(icon).join('');
+function sidebarDay(day: CalmDay, current: string) {
+  const modes = dayModeIcons(day.date);
+  return `<li class="calm-sidebar-day" data-region="${regionOf(day.date).toLowerCase()}"><a class="date-choice" href="#${day.date}" data-date="${day.date}"${current === day.date ? ' aria-current="date"' : ''} aria-label="${fullDate(day.date)}, ${e(day.title)}"><span class="date-number"><small>${shortWeekday.format(new Date(`${day.date}T12:00:00+08:00`))}</small>${day.date.slice(-2)}</span><span class="date-choice-text"><span class="choice-title">${e(day.shortTitle)}</span></span>${modes ? `<span class="choice-modes">${modes}</span>` : ''}</a></li>`;
+}
+const sidebarItems = (current: string) => calmDays.flatMap((day, index) => {
+  const region = regionOf(day.date);
+  const heading = index === 0 || region !== regionOf(calmDays[index - 1].date) ? [`<li class="sidebar-region" data-region="${region.toLowerCase()}" aria-hidden="true">${region}</li>`] : [];
+  return [...heading, sidebarDay(day, current)];
+}).join('');
+
 export function calmItineraryView() {
   const first = calmDays[0].date;
   return `${earlyScript}<a class="skip-link" href="#calm-itinerary-days" data-action="skip">Langsung ke jadwal</a>
@@ -124,7 +138,7 @@ export function calmItineraryView() {
   <main class="container calm-itinerary-page" data-calm-itinerary>
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="${calmPath}">Opsi santai</a>${icon('right')}<span>Itinerary santai</span></nav>
     ${intro()}
-    <div class="journey-layout" id="calm-itinerary-days">${daySidebar(pickerItems(first, 'sidebar', calmDays), `<a class="route-link" href="${calmPath}#calm-map">Lihat peta rute santai${icon('right')}</a>`)}<div class="calm-day-panels">${calmDays.map(dayPanel).join('')}</div></div>
+    <div class="journey-layout" id="calm-itinerary-days">${daySidebar(sidebarItems(first), `<a class="route-link" href="${calmPath}#calm-map">Lihat peta rute santai${icon('right')}</a>`)}<div class="calm-day-panels">${calmDays.map(dayPanel).join('')}</div></div>
   </main>
   <footer class="container guide-footer calm-itinerary-footer"><a href="${calmPath}">Kembali ke opsi santai</a>${siteCredit()}</footer>
   ${mobileDaybar('mobile-daybar calm-daybar')}
