@@ -1,6 +1,6 @@
 import { calmBookingGroups, calmDays, calmItineraryPath, calmPath, calmTrainSources, type CalmBooking } from './calm-route.ts';
 import { calmSharedBookings } from './calm-costs.ts';
-import { calmDayBookings } from './calm-prepare.ts';
+import { bookedFact, calmDayBookings } from './calm-prepare.ts';
 import { sourcesSection, type Booking } from './prepare.ts';
 import { cnyRange } from './costs.ts';
 import { currencyText } from './currency.ts';
@@ -14,8 +14,8 @@ export const calmTrainsPath = '/places/calm-trains/';
 
 // The calm option's own trains from calm-route.ts, then the main plan's trains on the days the two plans share.
 const calmTrainCard = (item: CalmBooking): TrainCard => ({
-  date: item.date, price: item.cost && perPerson(item.cost), title: item.item,
-  facts: [['Dibuka', currencyText(item.opens)], ['Harga', currencyText(item.price)], ['Cara pesan', currencyText(item.channel)]], link: item.link,
+  date: item.date, price: item.cost && perPerson(item.cost), title: item.booked ? `${item.item} (sudah dipesan)` : item.item,
+  facts: [...bookedFact(item), ['Dibuka', currencyText(item.opens)], ['Harga', currencyText(item.price)], ['Cara pesan', currencyText(item.channel)]], link: item.link,
 });
 const ownTrains = calmBookingGroups.flatMap(group => group.items).filter(item => item.mode === 'train');
 const sharedTrains = calmSharedBookings.filter(item => trainBookings.includes(item));

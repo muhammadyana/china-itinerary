@@ -10,8 +10,6 @@ const checklistGroups: ChecklistGroup[] = [
     id: 'tickets',
     title: 'Tiket belum dipesan',
     items: [
-      { id: 'c5756-9nov', label: 'C5756 Chengdu East 17.05 → Huanglongjiuzhai 19.10 (9 Nov, 1 kursi)' },
-      { id: 'jiuzhaigou-10nov', label: 'Jiuzhaigou + bus taman 10 Nov, slot 08.00–10.00' },
       { id: 'huanglong-11nov', label: 'Huanglong + ropeway naik 11 Nov' },
       { id: 'c5754-12nov', label: 'C5754 Huanglongjiuzhai 14.14 → Maoxian 15.00 (12 Nov)' },
       { id: 'bipenggou-13nov', label: 'Bipenggou + bus + mobil listrik 13 Nov' },
@@ -72,7 +70,7 @@ export function calmChecklistSection() {
   const total = checklistGroups.reduce((sum, group) => sum + group.items.length, 0);
   return section('checklist', 'Checklist pemesanan', `<div data-calm-checklist>
       <p class="prepare-section-lead">Centang yang sudah selesai. Centangan tersimpan di ponsel ini, jadi tetap ada setelah halaman dimuat ulang. Mulai 18 November beli 2 kursi kalau relevan.</p>
-      <p class="prepare-checklist-settled">${e('Sudah beres, tidak ada di daftar ini: visa, tiket pesawat, dan Mcsrh Hotel 8–9 November.')}</p>
+      <p class="prepare-checklist-settled">${e('Sudah beres, tidak ada di daftar ini: visa, tiket pesawat, Mcsrh Hotel 8–9 November, kereta C5756 9 November, dan tiket Jiuzhaigou 10 November.')}</p>
       <p class="prepare-checklist-progress" data-checklist-progress aria-live="polite">0 dari ${total} selesai</p>
       ${checklistGroups.map(checklistGroup).join('')}
     </div>`);

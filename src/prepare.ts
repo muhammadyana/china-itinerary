@@ -17,7 +17,7 @@ export const doneItems = [
   { title: 'Alipay & WeChat Pay', detail: 'Sudah terverifikasi dengan paspor; kartu Visa dan Mastercard sudah terpasang.' },
 ];
 
-export const doneList = () => `<ul class="prepare-done" role="list">${doneItems.map(item => `<li>${icon('check')}<span><strong>${e(item.title)}</strong> ${e(item.detail)}</span></li>`).join('')}</ul>`;
+export const doneList = (extra: typeof doneItems = []) => `<ul class="prepare-done" role="list">${[...doneItems, ...extra].map(item => `<li>${icon('check')}<span><strong>${e(item.title)}</strong> ${e(item.detail)}</span></li>`).join('')}</ul>`;
 
 export const bookingRules = 'Jam dalam WIB kecuali disebut lain. Penjualan tiket kereta di 12306 dibuka 15 hari sebelumnya, termasuk hari itu. Jika paspormu belum terverifikasi di 12306, verifikasi manual bisa makan 3–5 hari kerja; pakai Trip.com atau loket stasiun di Chengdu pada 8 November.';
 

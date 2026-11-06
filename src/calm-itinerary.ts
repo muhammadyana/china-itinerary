@@ -38,7 +38,7 @@ function overnightFor(day: CalmDay): Overnight | null {
 
 function transportRows(day: CalmDay) {
   if (day.fromMain) return dayBookings(day.date).map(dayBooking);
-  return calmDayBookings(day.date).map(item => bookingRow(item.mode, item.item, item.cost ? costLabel(item.cost) : '', item.price, item.channel, item.link));
+  return calmDayBookings(day.date).map(item => bookingRow(item.mode, item.booked ? `${item.item} (sudah dipesan)` : item.item, item.cost ? costLabel(item.cost) : '', item.booked ? `${item.booked} ${item.price}` : item.price, item.channel, item.link));
 }
 
 // Multi-day open trips are the Sichuan group tours the calm option says not to buy; the one-day ones on shared days still apply.
@@ -59,7 +59,7 @@ function stops(day: CalmDay, key: string) {
 // "Sekilas hari ini": where you sleep, what to book, what to carry and the one thing not to miss, before the timeline.
 const bookingName = (item: string) => item.split(/[:,]/)[0].trim();
 function glanceBookings(day: CalmDay) {
-  const items = day.fromMain ? dayBookings(day.date).map(item => item.item) : calmDayBookings(day.date).filter(item => !item.alternative).map(item => item.item);
+  const items = day.fromMain ? dayBookings(day.date).map(item => item.item) : calmDayBookings(day.date).filter(item => !item.alternative && !item.booked).map(item => item.item);
   return items.map(bookingName);
 }
 const glanceRow = (label: string, value: string) => value ? `<div><dt>${e(label)}</dt><dd>${currencyText(value)}</dd></div>` : '';

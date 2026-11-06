@@ -13,10 +13,13 @@ import {
 } from './calm-route.ts';
 import { calmChecklistSection } from './calm-checklist.ts';
 
+/** The "Status" row a booked item's card leads with. */
+export const bookedFact = (item: CalmBooking): [string, string][] => item.booked ? [['Status', currencyText(item.booked)]] : [];
+
 // The calm option's own bookings from calm-route.ts, plus the main plan's bookings for the days the two plans share.
 export const calmCard = (item: CalmBooking, id?: string): BookingCard => ({
-  date: item.date, until: item.until, title: item.item, urgency: item.urgency, link: item.link, id, price: item.cost && `${cnyRange(item.cost)} / ${item.cost.per}`,
-  facts: [['Harga', currencyText(item.price)], ['Cara pesan', currencyText(item.channel)], ['Dibuka', currencyText(item.opens)]],
+  date: item.date, until: item.until, title: item.booked ? `${item.item} (sudah dipesan)` : item.item, urgency: item.urgency, link: item.link, id, price: item.cost && `${cnyRange(item.cost)} / ${item.cost.per}`,
+  facts: [...bookedFact(item), ['Harga', currencyText(item.price)], ['Cara pesan', currencyText(item.channel)], ['Dibuka', currencyText(item.opens)]],
 });
 /** The id a stays card carries on the calm preparation page. */
 const stayCardId = (item: CalmBooking) => `stay-${item.date}`;
@@ -24,9 +27,12 @@ const stayCardId = (item: CalmBooking) => `stay-${item.date}`;
  * A ticket or car with `until` is two one-way trips (the Maoxian–Bipenggou car), so it shows on those two dates only. */
 export const calmDayBookings = (date: string) => calmBookingGroups.filter(group => group.id !== 'stays').flatMap(group => group.items.filter(item => item.date === date || item.until === date));
 
+// Booked items are listed as done in the intro, not as something to book.
+const calmBooked = () => calmBookingGroups.flatMap(group => group.items).flatMap(item => item.booked ? [{ title: item.item, detail: item.booked }] : []);
+
 const calmCards = () => [
   ...calmSharedBookings.map(mainBookingCard),
-  ...calmBookingGroups.flatMap(group => group.items.map(item => calmCard(item, group.id === 'stays' ? stayCardId(item) : undefined))),
+  ...calmBookingGroups.flatMap(group => group.items.filter(item => !item.booked).map(item => calmCard(item, group.id === 'stays' ? stayCardId(item) : undefined))),
 ].sort((a, b) => a.date.localeCompare(b.date));
 
 // The route-specific lines of the shared sections, from the calm research (calm-route.ts) and the main plan's 19 November.
@@ -45,7 +51,7 @@ function intro() {
       <h1 id="prepare-title">Persiapan opsi santai, satu halaman.</h1>
       <p class="lead">Kalau memilih opsi santai: yang sudah beres, yang harus dipesan beserta jam bukanya, perkiraan biaya, cara tetap online, dan nomor penting. Diperiksa <time datetime="${calmCheckedAt}">4–5 November 2026</time>.</p>
       <p class="prepare-link calm-page-links">${pageLink(`${calmPreparePath}#checklist`, 'Checklist pemesanan')}${pageLink(calmItineraryPath, 'Itinerary santai, hari demi hari')}${pageLink(calmPath, 'Bandingkan dengan rencana utama')}</p>
-      ${doneList()}
+      ${doneList(calmBooked())}
     </div>`;
 }
 

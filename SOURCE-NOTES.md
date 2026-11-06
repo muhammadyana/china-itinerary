@@ -290,6 +290,8 @@ At the owner's request ("buat itinerary nya lebih enak dan mudah dimengerti"; th
 
 **6 November 2026, Chengdu night booked.** The owner booked Mcsrh Hotel (Chengdu Chunxi Road Taikoo Li Branch) on Trip.com for 8–9 November: one night, Room M1 (double bed), Rp292.719, status "Dikonfirmasi" (owner's screenshot). The calm stays page now shows only this hotel for 8 November, marked as booked, and the calm costs price that night at about CNY 107 instead of the main plan's range. Multi-day luggage storage (9–13 November) is not confirmed with the hotel.
 
+**6 November 2026, 9 November train and Jiuzhaigou ticket booked.** The owner's Trip.com order list (screenshot, 17.23 WIB) shows the train Chengdudong (Chengdu East) 17.05 → Huanglongjiuzhai 19.10 on 9 November, one passenger, Rp441.861, status "Tiket sudah dibeli", and the Jiuzhaigou National Park Admission Ticket + Sightseeing Bus, Adult (Non-Chinese mainland visitors), slot 08:00–10:00, valid 10 November, Rp756.757, status "Dikonfirmasi". The screenshot shows no train number or seat class; the departure and arrival times match C5756, the plan's train. Both items are marked booked on the calm pages (`booked` in `calmBookingGroups`) and left out of the to-book lists and the checklist; the calm costs use the paid amounts at the site's rate (about CNY 162 and CNY 277). Order numbers stay off the site.
+
 ## Chengdu 清真 restos for calm Day 1–2 (6 November 2026)
 
 At the owner's request after a PlacesSearch for casual 清真 near Taikoo Li / IFS for 8–9 November 2026, only the calm Day 1 and Day 2 meal copy was named with verified options. Other calm and main-plan days were left alone.
