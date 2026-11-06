@@ -1,5 +1,5 @@
 import {
-  escapeHtml as e, icon, siteCredit, renderPhotoDialog, pickerItems, timelineEvent, stopCard, daySchedule, dayBookings, dayBooking, bookingRow,
+  escapeHtml as e, icon, siteCredit, renderPhotoDialog, pickerItems, timelineEvent, stopCard, daySchedule, dayBooking, bookingRow,
   transportSection, dayDateLine, dayTitleRow, sleepSummary, staysLink, transportSummary, dayRoute, stopsSection, practicalSection, nightDetail,
   pickDayButton, daySidebar, mobileDaybar, fullDate, dayPickerDialog, copyDialog, statusMessage, openTripItem, costLabel, type Overnight,
 } from './render.ts';
@@ -12,9 +12,10 @@ import { calmDays, calmGlance, calmItineraryPath, calmPlaces, calmPreparePath, c
 import { calmStayBaseForDate, calmStaysHref } from './calm-stays.ts';
 import { calmDayBookings } from './calm-prepare.ts';
 import { calmRoute, noteItem } from './calm-render.ts';
+import { calmSharedFor } from './calm-costs.ts';
 
 // The homepage's "hari demi hari" view for the calm option. Every day is prerendered so the page reads in order without
-// JavaScript; calm-itinerary-main.ts then shows one day at a time. 8 and 18–21 November render the main plan's own day
+// JavaScript; calm-itinerary-main.ts then shows one day at a time. 8 and 19–21 November render the main plan's own day
 // (timeline, bookings, stops, practical notes) through the homepage components, so the two pages cannot drift apart.
 
 const keyFor = (date: string) => `-${date}`;
@@ -37,7 +38,7 @@ function overnightFor(day: CalmDay): Overnight | null {
 }
 
 function transportRows(day: CalmDay) {
-  if (day.fromMain) return dayBookings(day.date).map(dayBooking);
+  if (day.fromMain) return calmSharedFor(day.date).map(dayBooking);
   return calmDayBookings(day.date).map(item => bookingRow(item.mode, item.booked ? `${item.item} (sudah dipesan)` : item.item, item.cost ? costLabel(item.cost) : '', item.booked ? `${item.booked} ${item.price}` : item.price, item.channel, item.link));
 }
 
@@ -59,7 +60,7 @@ function stops(day: CalmDay, key: string) {
 // "Sekilas hari ini": where you sleep, what to book, what to carry and the one thing not to miss, before the timeline.
 const bookingName = (item: string) => item.split(/[:,]/)[0].trim();
 function glanceBookings(day: CalmDay) {
-  const items = day.fromMain ? dayBookings(day.date).map(item => item.item) : calmDayBookings(day.date).filter(item => !item.alternative && !item.booked).map(item => item.item);
+  const items = day.fromMain ? calmSharedFor(day.date).map(item => item.item) : calmDayBookings(day.date).filter(item => !item.alternative && !item.booked).map(item => item.item);
   return items.map(bookingName);
 }
 const glanceRow = (label: string, value: string) => value ? `<div><dt>${e(label)}</dt><dd>${currencyText(value)}</dd></div>` : '';
@@ -92,7 +93,7 @@ function pagination(index: number) {
 }
 
 function dayHeader(day: CalmDay, index: number, key: string, hasTransport: boolean) {
-  const same = day.fromMain ? '<span class="calm-same-chip">Sama dengan rencana utama</span>' : '';
+  const same = day.fromMain ? `<span class="calm-same-chip">${day.adjusted ? 'Dari rencana utama, malam disesuaikan' : 'Sama dengan rencana utama'}</span>` : '';
   return `<header class="day-header">${dayDateLine(day.date, index, same)}${dayTitleRow(day.title, key)}<div class="day-essentials">${sleepSummary(overnightFor(day), stayLinks(day))}${transportSummary(day.transport, hasTransport ? `#day-transport${key}` : '')}</div><p class="day-intro">${currencyText(day.intro)}</p>${dayRoute(day.route)}</header>`;
 }
 

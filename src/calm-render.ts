@@ -69,7 +69,7 @@ const risksBlock = (risks: string[]) => risks.length ? `<details class="calm-ris
 
 function dayCard(day: CalmDay, index: number) {
   const id = `calm-${day.date}`;
-  const same = day.fromMain ? '<span class="calm-day-same">Sama dengan rencana utama</span>' : '';
+  const same = day.fromMain ? `<span class="calm-day-same">${day.adjusted ? 'Dari rencana utama, malam disesuaikan' : 'Sama dengan rencana utama'}</span>` : '';
   const mainLink = day.fromMain ? internalLink(`/#${day.date}`, `Buka hari ${index + 1} di itinerary utama`) : '';
   const dayLink = internalLink(`${calmItineraryPath}#${day.date}`, `Buka hari ${index + 1} di itinerary santai`);
   return `<article class="calm-day" id="${id}" aria-labelledby="${id}-title">
@@ -90,11 +90,11 @@ const compareColumn = (title: string, items: string[]) => `<div class="calm-comp
 function intro() {
   const nights = calmDays.filter(day => day.overnight).length;
   const bases = new Set(calmDays.flatMap(day => day.overnight ? [day.overnight.name] : []));
-  const same = calmDays.filter(day => day.fromMain).map(day => `${dayMonth(day.date)}: ${day.title}.`);
+  const same = calmDays.filter(day => day.fromMain && !day.adjusted).map(day => `${dayMonth(day.date)}: ${day.title}.`);
   return `<div class="route-map-intro calm-intro">
       <h1 id="calm-title">Opsi santai, sekali jalan ke Yunnan.</h1>
       <p class="lead">Alternatif yang lebih tenang untuk 8–21 November: dua malam dan satu hari penuh di Jiuzhaigou, Huanglong seharian dengan malam di Songpan, Bipenggou seharian, kembali ke Chengdu sekali, lalu kereta D239 ke Lijiang. ${nights} malam di ${bases.size} tempat menginap.</p>
-      <p>Rencana utama tidak berubah. Halaman ini untuk membandingkan dan memilih; 8 November dan 18–21 November diambil langsung dari rencana utama. Diperiksa <time datetime="${calmCheckedAt}">${fullDay(calmCheckedAt)}</time>.</p>
+      <p>Rencana utama tidak berubah. Halaman ini untuk membandingkan dan memilih; 19–21 November diambil langsung dari rencana utama; 8 November memakai pagi dan sore rencana utama dengan malam sendiri. Diperiksa <time datetime="${calmCheckedAt}">${fullDay(calmCheckedAt)}</time>.</p>
       <p class="prepare-link calm-page-links">${internalLink(calmItineraryPath, 'Itinerary santai, hari demi hari')}${internalLink(calmPreparePath, 'Persiapan santai')}</p>
     </div>
     <section class="prepare-section calm-compare" aria-labelledby="calm-compare-title"><h2 id="calm-compare-title">Dibanding rencana utama</h2>

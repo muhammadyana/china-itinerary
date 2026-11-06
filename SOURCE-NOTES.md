@@ -365,3 +365,10 @@ The traveller found 18 November dull (the calm option already sleeps in Lijiang 
 - **Trains 18 November** (12306, 6 November 2026): C988 15:01→16:14 CNY 49; C374 15:25→16:48 CNY 70; C88 17:25→18:35 CNY 70 (18 left); C400 18:21→19:48 not yet on sale; C442 19:02→20:15 CNY 70; C990 20:25→21:51 CNY 70.
 - **Distances** (OSRM via OpenStreetMap points): Dukezong → Songzanlin visitor area 6.0 km / 7 min; Songzanlin → Pudacuo gate about 26 km / 25–29 min; Pudacuo → Dukezong 25.9 km / 25 min; Dukezong → Shangri-La station 6.1 km / 8 min.
 - **Not checked:** the shuttle's return times, Bita Lake's status on the day, and whether a foreign passport works for the WeChat real-name booking.
+
+### Calm map and shared-booking cleanup (7 November 2026)
+
+- **9 November map leg** now follows the booked C5756 (Chengdu East → Huanglongjiuzhai) and a car to the Jiuzhaigou gate, instead of a straight car line.
+- **Pudacuo map point:** Pudacuo National Park, OpenStreetMap way 832323147 (27.9128041, 99.9030771), via Nominatim on 7 November 2026. Tea Horse and MoYe stay without points: they sit 2–4 km from the Upper Gorge point, under one pixel at map scale.
+- **Lijiang driver:** the main plan's "Mobil + sopir di Lijiang 18–19 November" also meets C984 at 13.40 on 18 November. The calm option arrives on C442 at 20.15 and takes a taxi, so its pages show the same booking for 19 November only; prices and the Ganhaizi note are unchanged.
+- **8 November** is labelled "Dari rencana utama, malam disesuaikan", since its evening and intro differ from the main plan.

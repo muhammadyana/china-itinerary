@@ -20,8 +20,10 @@ export interface CalmDay {
   overnight: { name: string; elevation?: string; detail: string } | null;
   transport: string; intro: string; steps: TimelineStep[]; stops: CalmStop[];
   notes: CalmNote[]; risks: string[];
-  /** Read unchanged from the main plan. */
+  /** Read from the main plan. */
   fromMain: boolean;
+  /** A borrowed day the calm option changes (8 November's evening); labelled as adjusted, not as the same. */
+  adjusted?: boolean;
 }
 /** `urgency` follows the `opens` text, as on the main preparation page; `mode` marks transport legs. `price` is the text
  * shown; `cost` is the same figure as numbers for the cost breakdown, set only when the text gives a price or estimate.
@@ -43,13 +45,16 @@ export const calmMapPoints: Record<string, MapPoint> = {
   huanglong: { name: 'Huanglong', latitude: 32.7571, longitude: 103.82939 },
   maoxian: { name: 'Maoxian', latitude: 31.7279208, longitude: 103.9424872, label: 'e' },
   'long-lake': { name: 'Long Lake', latitude: 33.0436025, longitude: 103.9318624 },
+  // Tea Horse and MoYe sit 2–4 km from this point, under one pixel at map scale, so they get no points of their own.
   'upper-gorge': { name: 'Upper Gorge', latitude: 27.1926037, longitude: 100.112808, label: 'w' },
+  // Pudacuo National Park, OSM way 832323147 (checked 7 November 2026). Unlabelled: about 10 px from Shangri-La on a 390px map.
+  pudacuo: { name: 'Pudacuo', latitude: 27.9128041, longitude: 99.9030771 },
   dujiangyan: at('dujiangyan', 'Dujiangyan'),
 };
 
-// Legs for the calm days; 8 and 18–21 November use the main map's legs.
+// Legs for the calm days; 8 and 19–21 November use the main map's legs.
 export const calmLegs: Record<string, MapLeg[]> = {
-  '2026-11-09': [...go('car', 'chengdu', 'dujiangyan', 'chengdu'), ...go('car', 'chengdu', 'jiuzhaigou')],
+  '2026-11-09': [...go('car', 'chengdu', 'dujiangyan', 'chengdu'), ...go('train', 'chengdu', 'huanglongjiuzhai'), ...go('car', 'huanglongjiuzhai', 'jiuzhaigou')],
   '2026-11-10': go('bus', 'jiuzhaigou', 'long-lake', 'jiuzhaigou'),
   '2026-11-11': go('car', 'jiuzhaigou', 'huanglong', 'songpan'),
   '2026-11-12': [...go('car', 'songpan', 'huanglongjiuzhai'), ...go('train', 'huanglongjiuzhai', 'maoxian'), ...go('car', 'maoxian', 'bipenggou')],
@@ -58,9 +63,10 @@ export const calmLegs: Record<string, MapLeg[]> = {
   '2026-11-15': go('train', 'chengdu', 'lijiang'),
   '2026-11-16': go('car', 'lijiang', 'upper-gorge', 'shangri-la'),
   '2026-11-17': [],
+  '2026-11-18': [...go('car', 'shangri-la', 'pudacuo', 'shangri-la'), ...go('train', 'shangri-la', 'lijiang')],
 };
 // Day numbers moved off other numbers and legs on the calm map, in map pixels.
-export const calmBadgeShifts: Record<string, readonly [number, number]> = { '2026-11-08': [10, -19], '2026-11-09': [25, 5], '2026-11-10': [36, -4], '2026-11-12': [-15, 37], '2026-11-13': [-16, 18], '2026-11-14': [9, 13], '2026-11-16': [-8, -14] };
+export const calmBadgeShifts: Record<string, readonly [number, number]> = { '2026-11-08': [10, -19], '2026-11-09': [18, 60], '2026-11-10': [36, -4], '2026-11-12': [-15, 37], '2026-11-13': [-16, 18], '2026-11-14': [9, 13], '2026-11-16': [-8, -14], '2026-11-17': [-22, -17] };
 // Days that stay in one place name their local transport in the day list.
 export const calmLocalModes: Record<string, Mode[]> = { '2026-11-13': ['bus'] };
 
@@ -469,7 +475,7 @@ const chengduHalalDay1Note: CalmNote = {
 };
 const calmFirstDayLunch: TimelineStep = ['±15.00–15.45', 'Makan siang halal', 'Makan siang telat 清真 dekat Chunxi / Taikoo Li. Pilihan utama di mall: 苏坦·中东料理 The Sultan, lantai 2 Taikoo Li unit 2307B (IslamiChina: Middle Eastern/Turkish, sekitar CNY 135 per orang, 11.00–22.00; dicek 6 November 2026). Alternatif klasik dekat Masjid Huangcheng: 皇城坝牛肉 Huangchengba Beef, 三桂前街49号, sekitar 10.30–22.00 (Google Maps, 6 November 2026). Di IFS belum ada opsi 清真 terverifikasi. Sekalian beli bekal berlabel 清真 untuk makan malam di SKP dan 9–10 November, ditambah cadangan tahan lama untuk 11–13 November. Belum ada kedai 清真 terverifikasi di dekat SKP.'];
 const calmFirstDay: CalmDay = {
-  ...mainFirstDay,
+  ...mainFirstDay, adjusted: true,
   intro: 'Tiba dari Shanghai setelah transit semalam di Pudong. Check-in di Mcsrh Hotel dekat Chunxi Road (sudah dipesan), makan siang telat 清真 di Taikoo Li atau Huangchengba, lalu sore sampai malam di Menara Vitality, Chengdu SKP. Besok tidak ada kereta subuh: pagi ke Zhongshu Ge, sore Taikoo Li, lalu kereta C5756 ke Jiuzhaigou.',
   steps: [...mainFirstDay.steps.slice(0, -calmFirstEvening.length).map(step => step[0] === '±15.00–15.45' ? calmFirstDayLunch : step), ...calmFirstEvening],
   notes: [...(mainFirstDay.notes ?? []), chengduHalalDay1Note, mondayTrainNote],
