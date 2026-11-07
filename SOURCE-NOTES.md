@@ -378,3 +378,10 @@ The traveller found 18 November dull (the calm option already sleeps in Lijiang 
 - New Sichuan guide `huanglong` (calm option only, 11 November), built from the 6 November research above: ticket CNY 170, ropeway up CNY 80, Trip.com car 74320777 CNY 480, OSRM times, ropeway sales cut-off and the official notice list.
 - **Photos:** three more from the Trip.com Huanglong attraction gallery, read in the traveller's logged-in Chrome on 7 November 2026 (`tripcom-huanglong-autumn`, `-terraces`, `-snow`); capture dates not given. The autumn photo is the cover because it is closest to mid-November.
 - **Weather point:** the Huanglong map point (32.7571, 103.82939).
+
+### Huanglong tour booked (8 November 2026)
+
+- The owner's Trip.com order screenshot (06.32 China time, 8 November) shows "1-day tour to Huanglong Scenic Area (includes admission ticket and uphill ride cable car)", package B "Jiuzhaigou car departure + admission ticket + uphill ride cableway, 07:30", 11 November, quantity 1, Rp1,091,136, status Confirmed, free cancellation until 16:00 on 10 November. Trip.com product 98479842; it ends at Huanglongjiuzhai Station around 14:50 per the product page.
+- Trip.com customer service confirmed hotel pick-up at Leyu Youth Hostel (chat, 7 November). It offered a separate station → Songpan transfer at IDR 345,946, which the plan does not use.
+- **DiDi** (owner's app, 7 November): 黄龙九寨站 → 松州古城-北门, 13.2 km / 17 min, Economy CNY 43.8, Standard CNY 46.02.
+- The private car (Trip.com 74320777, CNY 480) and the separate ticket and ropeway purchases are dropped from the calm plan.

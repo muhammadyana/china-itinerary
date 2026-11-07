@@ -13,7 +13,7 @@ const checklistGroups: ChecklistGroup[] = [
     items: [
       { id: 'c5756-9nov', label: 'C5756 Chengdu East 17.05 → Huanglongjiuzhai 19.10 (9 Nov, 1 kursi)', booked: true },
       { id: 'jiuzhaigou-10nov', label: 'Jiuzhaigou + bus taman 10 Nov, slot 08.00–10.00', booked: true },
-      { id: 'huanglong-11nov', label: 'Huanglong + ropeway naik 11 Nov' },
+      { id: 'huanglong-11nov', label: 'Tur Huanglong 11 Nov (tiket + ropeway naik + mobil, jemput 07.30)', booked: true },
       { id: 'c5754-12nov', label: 'C5754 Huanglongjiuzhai 14.14 → Maoxian 15.00 (12 Nov)' },
       { id: 'bipenggou-13nov', label: 'Bipenggou + bus + mobil listrik 13 Nov' },
       { id: 'd239-15nov', label: 'D239 Chengdu South 08.33 → Lijiang 17.46 (15 Nov)' },
@@ -44,7 +44,6 @@ const checklistGroups: ChecklistGroup[] = [
     id: 'cars',
     title: 'Mobil & transfer',
     items: [
-      { id: 'huanglong-car-11nov', label: 'Mobil Jiuzhaigou→Huanglong→Songpan (11 Nov)' },
       { id: 'maoxian-bipenggou-12nov', label: 'Mobil Maoxian→Bipenggou (12 Nov)' },
       { id: 'bipenggou-shuttle-14nov', label: 'Shuttle Bipenggou 09.20→Chengdu (14 Nov)' },
       { id: 'lijiang-gorge-dukezong', label: 'Mobil Lijiang→Upper Gorge→Tea Horse→MoYe→Dukezong (16 Nov 08.00)' },
