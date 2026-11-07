@@ -45,6 +45,11 @@ function currencyMatches(text: string): CurrencyMatch[] {
   });
 }
 
+/** Rupiah text for an amount already in rupiah. */
+export const formatRupiah = (idr: number) => `Rp${numberFormatter.format(Math.round(idr))}`;
+/** Yuan to rupiah at the rate in force (the stored snapshot until the live rate loads). */
+export const cnyToIdr = (cny: number) => cny * currentRate.rate;
+
 function rupiah(amount: number): string {
   return `Rp${numberFormatter.format(Math.round(amount * currentRate.rate))}`;
 }

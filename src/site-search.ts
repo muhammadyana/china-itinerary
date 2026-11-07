@@ -53,7 +53,9 @@ export const planTopics: PlanTopic[] = [
     calm: { href: '/places/calm-trains/', label: 'Kereta & timeline santai', keywords: 'opsi santai calm tiket kereta train stasiun jadwal jam bagasi koper transfer bus C5772 C5754 D239' },
   },
 ];
-export const planningPages: PlanningPage[] = [...planTopics.map(topic => topic.main), calmItineraryPage, ...planTopics.map(topic => topic.calm)];
+// The trip's own spending page has no plan twin.
+export const expensesPage: PlanningPage = { href: '/places/expenses/', label: 'Pengeluaran trip', keywords: 'pengeluaran expense catat uang belanja dibayar total visa pesawat' };
+export const planningPages: PlanningPage[] = [...planTopics.map(topic => topic.main), calmItineraryPage, ...planTopics.map(topic => topic.calm), expensesPage];
 
 const tripDate = (date: string) => new Date(`${date}T12:00:00+08:00`);
 const dayMonth = new Intl.DateTimeFormat('id-ID', { day: 'numeric', month: 'long', timeZone: tripTimeZone });

@@ -8,7 +8,8 @@ export const calmStaysPath = '/places/calm-stays/';
 export const calmStaysCheckedAt = '2026-11-05';
 
 /** A stays.ts base for consecutive calm nights; `id` is the first night's date, the section anchor on the calm stays page. */
-export interface CalmStayBase extends StayBase { nights: string[]; fromMain: boolean }
+/** `paid` is the rupiah amount charged for a booked base, from the owner's order screenshot. */
+export interface CalmStayBase extends StayBase { nights: string[]; fromMain: boolean; paid?: number }
 
 const mainBase = (id: string) => {
   const base = stayBases.find(item => item.id === id);
@@ -125,7 +126,7 @@ const shangriLa = mainBase('shangri-la');
 
 export const calmStayBases: CalmStayBase[] = [
   {
-    ...chengdu, id: '2026-11-08', nights: ['2026-11-08'], fromMain: false, booked: true,
+    ...chengdu, id: '2026-11-08', nights: ['2026-11-08'], fromMain: false, booked: true, paid: 292719,
     notes: [
       'Sudah dipesan di Trip.com pada 6 November: satu malam, 8–9 November.',
       'Penitipan bagasi gratis menurut halaman Trip.com hotel ini: titip koper pagi 9 November sebelum ke Zhongshu Ge. Bila koper besar mau ditinggal sampai 14 November, tanyakan dulu ke hotel; malam 14 November juga mengusulkan hotel yang sama.',
@@ -140,7 +141,7 @@ export const calmStayBases: CalmStayBase[] = [
     },
   },
   {
-    ...jiuzhaigou, id: '2026-11-09', nights: ['2026-11-09', '2026-11-10'], fromMain: false, booked: true,
+    ...jiuzhaigou, id: '2026-11-09', nights: ['2026-11-09', '2026-11-10'], fromMain: false, booked: true, paid: 406629,
     notes: [
       'Sudah dipesan di Trip.com pada 6 November: dua malam, 9–11 November, sudah dibayar.',
       'Check-in mulai 14.00; check-out sebelum 12.00, dengan bonus check-out terlambat sampai 14.00. Pagi 11 November mobil ke Huanglong menjemput 07.30, jadi bonus itu tidak terpakai.',

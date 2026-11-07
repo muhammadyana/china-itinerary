@@ -1,6 +1,6 @@
 import { days, places } from './itinerary.ts';
 import { mainPlanGuides, pageForPlace, placePages, placePath } from './guides.ts';
-import { calmItineraryPage, planTopics, renderSiteSearch, searchTrigger } from './site-search.ts';
+import { calmItineraryPage, expensesPage, planTopics, renderSiteSearch, searchTrigger } from './site-search.ts';
 import { logoMark } from './logo.ts';
 
 const initializedDocuments = new WeakSet<Document>();
@@ -82,7 +82,7 @@ const planRow = (row: PlanRow, current: string) =>
   `<li class="plan-row"><span class="plan-row-topic">${escapeHtml(row.topic)}</span><span class="plan-row-choices">${planChoice(row, 'calm', current)}${planChoice(row, 'main', current)}</span></li>`;
 
 const itineraryMenu = (current: string) =>
-  navMenu('itinerary', 'Itinerary', `<ol class="plan-rows" role="list">${planRows.map(row => planRow(row, current)).join('')}</ol>`);
+  navMenu('itinerary', 'Itinerary', `<ol class="plan-rows" role="list">${planRows.map(row => planRow(row, current)).join('')}</ol>${panelLink(expensesPage)}`);
 
 /** On a planning page (or the homepage itinerary), a quiet link to the same topic in the other plan; empty elsewhere. */
 export function planSwitch(current: string): string {

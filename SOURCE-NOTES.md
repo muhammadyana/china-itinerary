@@ -385,3 +385,8 @@ The traveller found 18 November dull (the calm option already sleeps in Lijiang 
 - Trip.com customer service confirmed hotel pick-up at Leyu Youth Hostel (chat, 7 November). It offered a separate station → Songpan transfer at IDR 345,946, which the plan does not use.
 - **DiDi** (owner's app, 7 November): 黄龙九寨站 → 松州古城-北门, 13.2 km / 17 min, Economy CNY 43.8, Standard CNY 46.02.
 - The private car (Trip.com 74320777, CNY 480) and the separate ticket and ropeway purchases are dropped from the calm plan.
+
+### Expenses page (8 November 2026)
+
+- `/places/expenses/` (noindex) lists what was paid before departure from the booked records' new `paid` field (rupiah from the owner's order screenshots: C5756, Jiuzhaigou ticket, Huanglong tour, Mcsrh, Leyu) plus the flights (Rp2,460,880, Trip.com screenshot) and the visa (Rp1,500,000, owner's message, 8 November 2026). The 9 November shuttle was not booked (owner, 8 November).
+- On-the-road entries are stored only in the phone's `localStorage` (`trip-expenses-v1`), with a JSON backup and restore; yuan convert at the ECB reference rate used across the site.
