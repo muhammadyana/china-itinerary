@@ -78,7 +78,7 @@ const mainStepTitles: Record<string, string[]> = {
   '2026-11-08': ['Subuh & sarapan di Pudong', 'Check-in Juneyao', 'Terbang ke Chengdu', 'Mendarat di Tianfu', 'Taksi ke hotel Chunxi Road', 'Check-in & Zuhur', 'Makan siang halal', 'Asar di hotel', 'DiDi ke Chengdu SKP', 'Keliling SKP selagi terang', 'Foto cahaya keemasan', 'Maghrib', 'Langit biru & lampu menara', 'Bila lampu telat menyala', 'Twin Towers (opsional)', 'DiDi ke hotel', 'Isya di hotel', 'Cek tiket besok', 'Tidur'],
   '2026-11-19': ['Subuh', 'Mobil ke Jade Dragon', 'Ganhaizi (opsional)', 'Masuk kawasan', 'Blue Moon Valley', 'Shuttle kembali', 'Masuk teater', 'Impression Lijiang', 'Ke halte shuttle', 'Slot kereta gantung', 'Glacier Park', 'Turun', 'Mobil ke Stasiun Lijiang', 'Maghrib + Isya', 'Kereta C442 ke Dali', 'Taksi ke penginapan'],
   '2026-11-20': ['Subuh', 'Ke Dermaga Caicun', 'Erhai pagi', 'Sarapan halal', 'Check-out, titip koper', 'Menara Wuhua & kota tua', 'Salat Jumat', 'Makan siang halal', 'Kota tua sore', 'Asar, ke Stasiun Dali', 'Kereta D8704 ke Kunming', 'Ke penginapan Kunming', 'Maghrib & Isya', 'Atur transfer bandara'],
-  '2026-11-21': ['Subuh', 'Green Lake (opsional)', 'Sarapan & check-out', 'Bila terbang lebih awal', 'Ke bandara', 'Terbang ke Jakarta'],
+  '2026-11-21': ['Subuh', 'Green Lake & camar', 'Sarapan halal & check-out', 'Jinma Biji & kota tua', 'Zuhur di Masjid Nancheng', 'Museum atau camar Haigeng', 'Ambil koper, Asar', 'Ke Bandara Changshui', 'Check-in Xiamen Airlines', 'Terbang ke Xiamen, lalu Jakarta'],
 };
 
 function titledSteps(date: string): TimelineStep[] {
@@ -501,7 +501,7 @@ export const calmGlance: Record<string, CalmGlance> = {
   '2026-11-18': { bring: 'Paspor untuk dua tiket, bekal makan siang', remember: 'Kereta C442 berangkat 19.02 ke Lijiang.' },
   '2026-11-19': { bring: 'Jaket tebal, bekal, dan paspor', remember: 'Mobil 06.30; slot kereta gantung 15.00–15.30.' },
   '2026-11-20': { bring: 'Koper siap sebelum 10.45', remember: 'D8704 berangkat 17.42 dari 大理站 (Xiaguan).' },
-  '2026-11-21': { bring: 'Paspor dan tiket pesawat', remember: 'Berangkat ke bandara sesuai jam pesawat.' },
+  '2026-11-21': { bring: 'Paspor dan tiket pesawat', remember: 'MF8426 20.05: ke bandara ±16.30; koper diteruskan sampai Jakarta.' },
 };
 
 export const calmStopIds = calmDays.flatMap(day => day.stops.map(stop => stop.place));
