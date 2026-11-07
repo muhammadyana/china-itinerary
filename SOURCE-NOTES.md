@@ -390,3 +390,4 @@ The traveller found 18 November dull (the calm option already sleeps in Lijiang 
 
 - `/places/expenses/` (noindex) lists what was paid before departure from the booked records' new `paid` field (rupiah from the owner's order screenshots: C5756, Jiuzhaigou ticket, Huanglong tour, Mcsrh, Leyu) plus the flights (Rp2,460,880, Trip.com screenshot) and the visa (Rp1,500,000, owner's message, 8 November 2026). The 9 November shuttle was not booked (owner, 8 November).
 - On-the-road entries are stored only in the phone's `localStorage` (`trip-expenses-v1`), with a JSON backup and restore; yuan convert at the ECB reference rate used across the site.
+- **Return flights** (owner's Trip.com screenshot, 8 November 2026, "Ticket(s) issued"): Xiamen Airlines MF8426 Kunming 20:05 → Xiamen 22:40 on 21 November, then MF867 Xiamen 08:00 → Jakarta 12:35 on 22 November; Rp3,076,210. Added to the expenses page.

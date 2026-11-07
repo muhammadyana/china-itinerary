@@ -12,10 +12,11 @@ export const expensesPath = '/places/expenses/';
 /** `date` is empty for costs paid before the trip without a trip date (the visa). */
 export interface PaidItem { date: string; label: string; idr: number }
 
-// Only the visa and the flights live outside the calm booking and stay data (owner's figures, 7–8 November 2026).
+// Only the visa and the flights (outbound and return) live outside the calm booking and stay data (owner's figures, 7–8 November 2026).
 const beforeTrip: PaidItem[] = [
   { date: '', label: 'Visa China', idr: 1500000 },
   { date: '2026-11-07', label: 'Tiket pesawat Juneyao CGK → Shanghai Pudong → Chengdu Tianfu', idr: 2460880 },
+  { date: '2026-11-21', label: 'Tiket pulang Xiamen Airlines KMG → Xiamen → Jakarta', idr: 3076210 },
 ];
 
 export const paidItems: PaidItem[] = [
