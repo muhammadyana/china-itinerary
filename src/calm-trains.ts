@@ -63,11 +63,9 @@ const gateNotes = [
 
 // Transfer facts the bookings do not carry, from the same research, plus the day plan's own station steps.
 const transferNotes: Record<string, string[]> = {
-  '2026-11-12': [
-    'Dari kota tua Songpan ke Stasiun Huanglongjiuzhai sekitar 13 km (OSRM 12 menit) dengan taksi atau DiDi; tarifnya belum dicek. Stasiun Songpan lebih dekat (sekitar 5 km dari kota tua) dan juga punya kereta ke Maoxian, misalnya C5674 14.11 → 14.51 (Trip.com, 6 November; belum dicek di 12306).',
-    stepText('2026-11-12', '14.14'),
-    'Ada juga C5774 11.05 → 11.51 dan C5804 15.15 → 16.08; semua kereta Huanglongjiuzhai → Maoxian hari itu kelas dua CNY 66 (Trip.com, 6 November).',
-    stepText('2026-11-12', '±15.00–15.15'),
+  '2026-11-11': [
+    stepText('2026-11-11', '16.25'),
+    stepText('2026-11-11', '±18.10–19.00'),
   ],
   '2026-11-15': [
     'Stasiun Chengdu South juga dilayani metro 火车南站 (jalur 1, 7, dan 18); jalur 1 ke Tianfu Square sekitar 10 menit (WanderInChina, Juli 2026). Jam kereta pertamanya belum dicek, jadi DiDi tetap pilihan utama; OSRM memberi 9 menit tanpa macet.',

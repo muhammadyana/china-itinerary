@@ -37,7 +37,7 @@ const calmCards = () => [
 
 // The route-specific lines of the shared sections, from the calm research (calm-route.ts) and the main plan's 19 November.
 const calmPlanNotes: PlanNotes = {
-  cash: 'Bawa uang tunai cadangan untuk kota kecil di Aba; belum ada data penerimaan kartu di Songpan atau Bipenggou. ATM Bank of China menerima Visa dan Mastercard, maksimal CNY 3000 per penarikan.',
+  cash: 'Bawa uang tunai cadangan untuk kota kecil di Aba; belum ada data penerimaan kartu di Huanglong atau Bipenggou. ATM Bank of China menerima Visa dan Mastercard, maksimal CNY 3000 per penarikan.',
   signal: '',
   hospitals: [diqingHospital],
   altitude: 'Rute ini naik ke Yanziyan 3.837 m di Bipenggou, tidur dua malam di Shangri-La 3.300 m, dan naik ke gletser Jade Dragon pada 19 November.',

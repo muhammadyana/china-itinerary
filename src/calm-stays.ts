@@ -48,24 +48,6 @@ const dandelion: Stay = {
   ],
 };
 
-const xingyun: Stay = {
-  kind: 'Hotel', name: 'Li County Bipenggou Xingyun Theme Hotel', chinese: '理县毕棚沟行云主题酒店',
-  room: 'Kamar privat',
-  location: 'Sekitar 10 menit berkendara ke gerbang Bipenggou menurut deskripsi hotel, sekitar 7 km garis lurus dari titik gerbang. Alamatnya menyebut "sekitar 1 km dari pintu masuk", yang kemungkinan pintu jalan 理小路, bukan gerbang taman. Atur mobil ke gerbang untuk 13 November pagi.',
-  price: 'CNY 271 per malam', overBudget: true,
-  priceNote: 'Trip.com untuk satu orang, 12–14 November (dicek 6 November 2026): Guestroom with View dengan dua ranjang, CNY 542 untuk dua malam termasuk pajak, bisa dibatalkan gratis sampai 12 November 18.00. Untuk 11–13 November harganya CNY 177 per malam dengan promo; promo itu tidak terlihat untuk tanggal baru.',
-  foreignGuests: 'Trip.com: menerima tamu dari semua negara; resepsionis 24 jam. Ulasan Oktober 2024 menyebut tamu tidak didaftarkan dengan kartu identitas, jadi telepon dulu (+86-13795795975) untuk memastikan hotel mendaftarkan paspor asing (境外人员住宿登记).',
-  rooms: 'AC, pemanas lantai, dan selimut listrik. Sarapan Tionghoa 07.30–09.00, harganya tidak tercantum. Check-in mulai 14.00. Nilai 7,3 dari 75 ulasan, beragam.',
-  reason: 'Kamar privat dengan bukti menerima tamu asing dan pemanas lantai; untuk 12–14 November sekitar CNY 88 per malam di atas batas, hampir sama dengan Xinlan yang lebih dekat ke gerbang.',
-  links: [trip('https://us.trip.com/hotels/detail/?hotelId=1316249&checkIn=2026-11-12&checkOut=2026-11-14&adult=1&crn=1&curr=CNY')],
-  sources: [
-    { title: 'Trip.com: Xingyun Theme Hotel, 12–14 Nov 2026, 1 adult (CNY 542 for 2 nights, 6 Nov 2026)', url: 'https://us.trip.com/hotels/detail/?hotelId=1316249&checkIn=2026-11-12&checkOut=2026-11-14&adult=1&crn=1&curr=CNY' },
-    { title: 'Trip.com list, Li County/Bipeng Valley, 11–13 Nov 2026, CNY 0–183, sorted by price', url: 'https://www.trip.com/hotels/list?cityId=7751&provinceId=22&countryId=1&checkin=2026-11-11&checkout=2026-11-13&crn=1&adult=1&listFilters=50~50~6652115*50*31.3131589~102.9487368~Bipeng%20Valley~6652115~2,15~Range*15*0~183,17~3*17*3&curr=CNY&locale=en-US' },
-    { title: 'Trip.com: Xingyun Theme Hotel detail (policy)', url: 'https://us.trip.com/hotels/detail/?hotelId=1316249&curr=CNY' },
-    { title: 'Trip.com zh-HK: 理縣畢棚溝行雲主題酒店 (description: about a 10-minute drive to the scenic-area entrance; reviews)', url: 'https://hk.trip.com/hotels/detail/?hotelId=1316249&locale=zh-HK' },
-  ],
-};
-
 const mcsrh: Stay = {
   kind: 'Hotel', name: 'Mcsrh Hotel Chunxi Road Taikoo Li', chinese: 'Mcsrh麦嘉·拾趣酒店(成都春熙路太古里店)', chineseAddress: '商业场街1号附89号',
   room: 'Kamar privat',
@@ -119,7 +101,6 @@ const huaqianYuexia: Stay = {
 };
 
 const jiuzhaigou = mainBase('jiuzhaigou');
-const bipenggou = mainBase('bipenggou');
 const chengdu = mainBase('chengdu');
 const lijiang = mainBase('lijiang');
 const shangriLa = mainBase('shangri-la');
@@ -160,75 +141,11 @@ export const calmStayBases: CalmStayBase[] = [
     hostel: dandelion,
   },
   {
-    id: '2026-11-11', name: 'Songpan', area: 'Kota tua Songpan, sekitar Shuncheng North Street dan Masjid Utara.', nights: ['2026-11-11'], fromMain: false,
-    areaPhoto: { id: 'huanglongjiuzhai', alt: 'Fasad Stasiun Huanglongjiuzhai di antara pegunungan.', label: 'Foto kawasan: Stasiun Huanglongjiuzhai, sekitar 13 km dari Songpan. Bukan foto penginapan.' },
+    ...chengdu, id: '2026-11-11', nights: ['2026-11-11', '2026-11-12', '2026-11-13', '2026-11-14'], fromMain: false,
     notes: [
-      'Satu malam setelah Huanglong, ±2.860 m: lebih tinggi dari Jiuzhaigou (±2.000 m), jadi jalan pelan dan banyak minum.',
-      'Cadangan: Mulin Elegant Residence (Zhenwu Street), CNY 172 untuk 11–12 November, sekitar 580 m dari Masjid Utara menurut Trip.com.',
-      'Kedua halaman Trip.com tidak menyebut makanan halal; makan di restoran 清真 sekitar Masjid Utara.',
-    ],
-    hotel: {
-      kind: 'Guesthouse', name: 'Songpan Tangzhu Frontier Town Chinese Inn', chinese: '松潘唐筑边城客栈', room: 'Kamar privat',
-      location: 'Di dalam kota tua Songpan: sekitar 260 m dari Gerbang Jinyang dan 300–550 m dari Masjid Utara menurut Trip.com.',
-      price: 'CNY 131 per malam',
-      priceNote: 'Trip.com untuk satu orang, 11–12 November (dicek 6 November 2026): Queen Room CNY 131 termasuk pajak, label "Flyer Exclusive" dari akun yang login, tinggal 1 kamar. Bisa dibatalkan gratis sampai 11 November 18.00; bayar online di muka. Halaman yang sama menulis tempat tidurnya "1 single bed", jadi pastikan ukuran ranjang.',
-      foreignGuests: 'Trip.com: menerima tamu dari semua negara/wilayah.',
-      rooms: 'Kamar mandi dalam dan pemanas, sekitar 15 m². Nilai 9,0 dari 63 ulasan.',
-      reason: 'Kamar privat di bawah batas di dalam kota tua, dekat masjid.',
-      links: [trip('https://us.trip.com/hotels/detail/?hotelId=2647152&checkIn=2026-11-11&checkOut=2026-11-12&adult=1&crn=1&curr=CNY')],
-      sources: [
-        { title: 'Trip.com list, Songpan, 11–12 Nov 2026, 1 adult (6 Nov 2026)', url: 'https://us.trip.com/hotels/list?city=1372&checkin=2026-11-11&checkout=2026-11-12&adult=1&crn=1&curr=CNY' },
-        { title: 'Trip.com: Tangzhu Frontier Town Chinese Inn, 11–12 Nov 2026 (CNY 131)', url: 'https://us.trip.com/hotels/detail/?hotelId=2647152&checkIn=2026-11-11&checkOut=2026-11-12&adult=1&crn=1&curr=CNY' },
-      ],
-    },
-    hostel: {
-      kind: 'Hostel', name: "Emma's Guesthouse", chinese: '松潘小欧洲青年旅舍', chineseAddress: '进安镇顺城北街179号', room: 'Ranjang dorm',
-      location: 'Shuncheng North Street No. 179, jalan yang sama dengan Masjid Utara: sekitar 260–400 m dari masjid dan sekitar 200 m dari terminal bus menurut Trip.com.',
-      price: 'CNY 88 per ranjang',
-      priceNote: 'Trip.com untuk satu orang, 11–12 November (dicek 6 November 2026): ranjang di dorm campur CNY 88 termasuk pajak; kamar privat Basic Queen atau 2 ranjang CNY 188. Bisa dibatalkan gratis sampai 11 November 18.00; bayar di penginapan.',
-      foreignGuests: 'Trip.com: menerima tamu dari semua negara/wilayah.',
-      rooms: 'Dorm campur. Nilai 9,2 dari 72 ulasan.',
-      reason: 'Ranjang termurah bernilai tinggi, paling dekat ke Masjid Utara dan restoran 清真 di sekitarnya.',
-      links: [trip('https://us.trip.com/hotels/detail/?hotelId=78380649&checkIn=2026-11-11&checkOut=2026-11-12&adult=1&crn=1&curr=CNY')],
-      sources: [
-        { title: "Trip.com: Emma's Guesthouse, 11–12 Nov 2026 (dorm CNY 88, private CNY 188)", url: 'https://us.trip.com/hotels/detail/?hotelId=78380649&checkIn=2026-11-11&checkOut=2026-11-12&adult=1&crn=1&curr=CNY' },
-      ],
-    },
-  },
-  {
-    ...bipenggou, id: '2026-11-12', nights: ['2026-11-12', '2026-11-13'], fromMain: false,
-    notes: [
-      'Kedua malam jatuh di libur sekolah Chengdu (Rabu–Jumat 11–13 November, menyambung akhir pekan). Harga 12–14 November dicek 6 November; catatan di bawah ini masih untuk 11–13 November. Dalam sekitar 2 km dari gerbang tidak ada kamar di bawah batas; yang paling dekat, Panyang Lake Hotel (sekitar 100 m dari gerbang), CNY 630 untuk dua malam dengan promo menginap pertama, termasuk sarapan.',
-      'Cadangan di kota Lixian, sekitar 18 km garis lurus (±30 menit) dari gerbang: Li County Wuyoucheng Hotel, Deluxe Standard twin CNY 175 per malam dengan promo menginap pertama (CNY 350 untuk dua malam). Cozy Queen dari rencana utama sudah habis untuk tanggal ini, dan Cozy Standard tidak ber-AC. Perlu mobil ke gerbang 13 November dan saat berangkat 14 November.',
-      'Belum terverifikasi: Xuehao Homestay sekitar 7 km dari gerbang, CNY 104 per malam, baru 3 ulasan dan tanpa pembatalan gratis; penerimaan tamu asingnya belum dicek. Good B&B (不鞠民宿) tidak ditemukan lewat pencarian Trip.com, jadi lokasi, harga, dan makanan halalnya belum diketahui.',
-    ],
-    hotel: xingyun,
-    hostel: {
-      ...bipenggou.hostel,
-      overBudget: true,
-      location: 'Desa Zhuangfang, Putou: sekitar 1,7 km dari gerbang menurut ulasan tamu, lebih dari 30 menit jalan kaki menanjak. Pemilik kadang mengantar ke gerbang, tetapi satu ulasan menyebut ia menolak pada pagi yang ramai; tanyakan untuk 13 November pukul 07.30 (telepon +86-18740890417).',
-      price: 'CNY 275 per malam',
-      priceNote: 'Trip.com untuk satu orang, 12–14 November (dicek 6 November 2026): Budget Twin dengan sarapan, CNY 549 untuk dua malam termasuk pajak (±CNY 275 per malam), bisa dibatalkan gratis sampai 12 November 14.00; tinggal 1 kamar dengan harga ini. Comfy Queen CNY 568 untuk dua malam. Untuk 11–13 November CNY 268 per malam.',
-      rooms: 'Selimut listrik, resepsionis 24 jam, check-in mulai 14.00. Label tarif menyebut sarapan; ulasan Oktober 2026 menggambarkannya sebagai satu telur, mantou, dan bubur, tanpa keterangan halal. Ulasan terbaru mengeluhkan debu dan noda di bantal. Budget Twin di lantai dasar dan boleh merokok; minta kamar bebas rokok.',
-      reason: 'Pilihan rencana utama dan yang paling dekat ke gerbang di antara penginapan yang terbukti menerima tamu asing, sekitar CNY 92 per malam di atas batas selama libur sekolah.',
-      links: [trip('https://us.trip.com/hotels/detail/?hotelId=81450342&checkIn=2026-11-12&checkOut=2026-11-14&adult=1&crn=1&curr=CNY')],
-      sources: [
-        { title: 'Trip.com: Xinlan Homestay (理县鑫兰民宿), 12–14 Nov 2026 (CNY 549 for 2 nights, 6 Nov 2026)', url: 'https://us.trip.com/hotels/detail/?hotelId=81450342&checkIn=2026-11-12&checkOut=2026-11-14&adult=1&crn=1&curr=CNY' },
-        { title: 'Trip.com list filtered to Xinlan Homestay, 11–13 Nov 2026', url: 'https://us.trip.com/hotels/list?city=7751&checkin=2026-11-11&checkout=2026-11-13&adult=1&crn=1&curr=CNY&listFilters=31~81450342*31*81450342' },
-        { title: 'Trip.com list filtered to Xinlan Homestay, 12–13 Nov 2026', url: 'https://us.trip.com/hotels/list?city=7751&checkin=2026-11-12&checkout=2026-11-13&adult=1&crn=1&curr=CNY&listFilters=31~81450342*31*81450342' },
-        { title: 'Trip.com: Xinlan Homestay detail (policy, breakfast review of 25 Oct 2026)', url: 'https://us.trip.com/hotels/detail/?hotelId=81450342&curr=CNY' },
-        { title: 'Trip.com list, Li County/Bipeng Valley, 11–13 Nov 2026, CNY 0–400, sorted by distance', url: 'https://www.trip.com/hotels/list?cityId=7751&provinceId=22&countryId=1&checkin=2026-11-11&checkout=2026-11-13&crn=1&adult=1&listFilters=50~50~6652115*50*31.3131589~102.9487368~Bipeng%20Valley~6652115~2,15~Range*15*0~400,17~5*17*5&curr=CNY&locale=en-US' },
-        { title: 'Trip.com list filtered to Wuyoucheng, 11–13 Nov 2026, CNY 110–164 (Cozy Queen sold out)', url: 'https://us.trip.com/hotels/list?city=7751&checkin=2026-11-11&checkout=2026-11-13&adult=1&crn=1&curr=CNY&listFilters=31~12829437*31*12829437,15~Range*15*110~164' },
-        { title: 'Chuanguan: Chengdu autumn school break, 11–13 Nov 2026 (28 Oct 2026)', url: 'https://cbgc.scol.com.cn/news/8095432' },
-      ],
-    },
-  },
-  {
-    ...chengdu, id: '2026-11-14', nights: ['2026-11-14'], fromMain: false,
-    notes: [
-      'Satu malam setelah Bipenggou, di hotel yang sama dengan 8 November. Bila koper besar dititip di sana sejak 9 November, ambil saat check-in.',
-      'Cadangan dekat Masjid Huangcheng: Chengdu Qingxian Hotel (成都清闲酒店), CNY 120 per malam untuk 13–15 November (dicek 5 November); harga 14–15 November belum dicek.',
-      'Waktu berkendara di kartu ini dari OSRM tanpa macet; sisihkan waktu lebih.',
+      'Empat malam di Chunxi Road, basis untuk tur sehari ke Bipenggou (13 November) dan Siguniangshan (14 November); titik kumpul kedua tur di Jinjiang, dekat hotel. Mcsrh adalah hotel yang sama dengan 8 November; koper besar yang dititip sejak 9 November bisa diambil 11 November malam.',
+      'Harga per malam di bawah dicek untuk 14–15 November; harga 11–14 November belum dicek, jadi total empat malam di rincian biaya adalah perkiraan.',
+      'Cadangan dekat Masjid Huangcheng: Chengdu Qingxian Hotel (成都清闲酒店), CNY 120 per malam untuk 13–15 November (dicek 5 November).',
     ],
     hotel: mcsrh,
     hostel: desti,
