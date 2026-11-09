@@ -51,7 +51,7 @@ export const calmMapPoints: Record<string, MapPoint> = {
   rilong: at('rilong', 'Siguniangshan', 'w'),
 };
 
-// Legs for the calm days; 8 and 19–21 November use the main map's legs.
+// Legs for the calm days; 8 and 21 November use the main map's legs.
 export const calmLegs: Record<string, MapLeg[]> = {
   '2026-11-09': [...go('car', 'chengdu', 'dujiangyan', 'chengdu'), ...go('train', 'chengdu', 'huanglongjiuzhai'), ...go('car', 'huanglongjiuzhai', 'jiuzhaigou')],
   '2026-11-10': go('bus', 'jiuzhaigou', 'long-lake', 'jiuzhaigou'),
@@ -579,7 +579,7 @@ export const calmUnknowns = [
   '9 November: lama shuttle Trip.com Chengdu → Jiuzhaigou, titik turunnya, dan apakah koper 28–30 inci muat. Untuk cadangan kereta: apakah 团子出行 menerima paspor asing untuk bus 17.30, dan lama perjalanan bus itu (tidak tercantum; 1,5–2 jam menurut panduan pihak ketiga).',
   'Tur 18 November: harga untuk tanggal itu, apakah koper boleh ikut seharian dan diantar ke Dukezong, dan apakah titik jemputnya hotel kalian di kota tua.',
   'Kereta malam Lijiang → Kunming 20 November: jadwal, harga, dan jam tiba (belum dicek; 12306 tidak bisa diakses 9 November).',
-  'Jam tiba temanmu di Lijiang 17 November dan jam terbangnya dari Kunming 21 November.',
+  'Jam tiba temanmu di Lijiang 17 November. Pulangnya sudah pasti: pesawat yang sama denganmu, MF8426 Kunming 21 November 20.05.',
   'Mobil + sopir Jade Dragon 20 November: penawaran nyata; angka di rincian biaya perkiraan dari tarif sewa per jam.',
   'Penginapan: apakah promo menginap pertama Trip.com berlaku untuk lebih dari satu pemesanan per akun, apakah Xingyun mendaftarkan paspor asing, dan apakah pemilik Xinlan mau mengantar ke gerbang 12 November pagi.',
   'Bipenggou: masuk terakhir (15.00 menurut Trip.com, 15.30 menurut Tongcheng), jam bus terakhir turun, apakah tiket mobil listrik pulang-pergi boleh turun di Moon Bay dan Red Stone Beach, dan waktu berjalan kaki.',

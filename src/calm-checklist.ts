@@ -50,7 +50,7 @@ const checklistGroups: ChecklistGroup[] = [
     title: 'Info / perbaikan situs',
     items: [
       { id: 'day1-c5756', label: 'Hari 1 Info praktis masih teks utama (C5746 subuh) — perlu diselaraskan ke C5756' },
-      { id: 'friend-times', label: 'Tanya teman: jam tiba di Lijiang 17 Nov dan jam terbang dari Kunming 21 Nov' },
+      { id: 'friend-times', label: 'Tanya teman: jam tiba di Lijiang 17 Nov (pulang sama: MF8426 KMG 21 Nov 20.05)' },
     ],
   },
 ];
