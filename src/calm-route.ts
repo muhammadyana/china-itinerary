@@ -327,7 +327,7 @@ const calmOwnDays: CalmDay[] = [
     route: ['Kota Tua Lijiang', 'Sifangjie'],
     overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Malam kedua dari tiga di kota tua. ${calmStayPicks('2026-11-16')}` },
     transport: 'Jalan kaki di kota tua; tidak ada perjalanan antarkota hari ini.',
-    intro: 'Hari kosong setelah 9 jam di D239: tidur cukup, lalu kota tua Lijiang dengan langkah pelan. Tur ke Shangri-La baru 18 November, setelah temanmu tiba.',
+    intro: 'Hari kosong setelah 9 jam di D239: tidur cukup, lalu kota tua Lijiang dengan langkah pelan. Tur ke Shangri-La baru 18 November.',
     steps: [
       ['Pagi', 'Istirahat', 'Bangun tanpa alarm di ±2.400 m; banyak minum.'],
       ['Siang', 'Kota tua Dayan', 'Kanal dan gang kota tua; makan siang di kedai Hui bertanda 清真 (belum diverifikasi; tanyakan di tempat).'],
@@ -342,20 +342,19 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-17', title: 'Lijiang, temanmu tiba', shortTitle: 'Lijiang, teman tiba',
+    date: '2026-11-17', title: 'Hari bebas di Lijiang, siapkan tur', shortTitle: 'Lijiang bebas',
     route: ['Kota Tua Lijiang'],
-    overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Malam ketiga di kota tua, mulai berdua. ${calmStayPicks('2026-11-17')}` },
-    transport: 'Bebas di Lijiang; malam taksi ke Stasiun Lijiang menjemput temanmu (tiba 21.06), ±10 km ke kota tua.',
-    intro: 'Hari bebas kedua di Lijiang sambil menunggu temanmu. Malam ini siapkan tur sehari ke Shangri-La yang berangkat sangat pagi besok.',
+    overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Malam ketiga di kota tua. ${calmStayPicks('2026-11-17')}` },
+    transport: 'Jalan kaki di kota tua; tidak ada perjalanan antarkota hari ini.',
+    intro: 'Hari bebas kedua di Lijiang. Malam ini siapkan tur sehari ke Shangri-La yang berangkat sangat pagi besok.',
     steps: [
       ['Siang', 'Bebas', 'Istirahat atau kota tua lagi; beli bekal halal untuk dua orang besok.'],
       ['Sore', 'Siapkan tur', 'Konfirmasi jemput tur besok (halaman tur menyebut ±06.10) dan siapkan koper untuk ikut seharian.'],
-      ['21.06', 'Temanmu tiba', 'Kereta temanmu tiba di Stasiun Lijiang 21.06. Taksi ±10 km ke gerbang kota tua terdekat hotel, 25–40 menit (acuan CNY 30–50 per mobil, Agustus 2026). Kirim nama hotel dalam huruf Tionghoa ke temanmu.'],
-      ['±22.00', 'Tidur', 'Tidur secepatnya: jemput tur ±06.10.'],
+      ['Malam', 'Tidur awal', 'Tidur awal: jemput tur ±06.10.'],
     ],
-    stops: [{ place: 'dayan', note: 'Bebas, dan titik temu dengan temanmu.' }],
+    stops: [{ place: 'dayan', note: 'Bebas.' }],
     notes: [],
-    risks: ['Temanmu tiba 21.06 dan tur besok jemput ±06.10: malamnya pendek.'],
+    risks: [],
     fromMain: false,
   },
   {
@@ -378,7 +377,7 @@ const calmOwnDays: CalmDay[] = [
     notes: [],
     risks: [
       'Harga tur dicek untuk 16 November; harga 18 November belum dicek.',
-      'Temanmu naik ke ±3.300 m sehari setelah tiba; jalan pelan dan banyak minum.',
+      'Naik ke ±3.300 m dalam sehari; jalan pelan dan banyak minum.',
       'Tiger Leaping Gorge High Trail tetap dilarang; tur hanya ke Upper Gorge.',
     ],
     fromMain: false,
@@ -431,7 +430,7 @@ const calmOwnDays: CalmDay[] = [
       route: ['Erhai', 'Kota Tua Dali', 'Stasiun Dali', 'Kunming', 'Bandara Changshui'],
       overnight: fromMainPlan('2026-11-21').overnight,
       transport: 'Taksi ke Dermaga Caicun dan kembali; taksi dengan koper ke 大理站; kereta siang Dali → Kunming (pilih yang tiba paling lambat ±16.00, jadwal siang belum dicek); DiDi atau taksi ke Bandara Changshui untuk MF8426 20.05.',
-      intro: 'Setengah hari di Dali: cahaya pagi di Erhai dan sarapan halal, lalu kereta siang ke Kunming dan langsung ke bandara. Pesawat 20.05 sama untuk kalian berdua.',
+      intro: 'Setengah hari di Dali: cahaya pagi di Erhai dan sarapan halal, lalu kereta siang ke Kunming dan langsung ke bandara. Pesawat MF8426 berangkat 20.05.',
       steps: [
         ...daliSteps.slice(0, 4),
         ['±10.15–11.15', 'Check-out & Menara Wuhua', 'Check-out dengan koper, lalu Menara Wuhua (五华楼) dan gang Kota Tua Dali sebentar. Titip koper di hotel selama itu.'],
@@ -511,7 +510,7 @@ export const calmComparison = {
     'Empat malam di Chengdu (11–14 November): hari istirahat 12 November, tur sehari ke Bipenggou (13 November) dan ke Siguniangshan, Shuangqiao Valley (14 November).',
     'Toko buku Zhongshu Ge di Dujiangyan, wajib: Senin 9 November pagi saat toko baru buka; sore Taikoo Li / IFS; lalu C5756 ke Jiuzhaigou.',
     'Kereta pemandangan D239 Chengdu South → Lijiang (15 November).',
-    'Tiga malam di Lijiang (15–17 November) sebelum temanmu tiba, lalu tur sehari berdua ke Shangri-La lewat Upper Tiger Leaping Gorge dan Napahai (18 November).',
+    'Tiga malam di Lijiang (15–17 November), lalu tur sehari ke Shangri-La lewat Upper Tiger Leaping Gorge dan Napahai (18 November).',
     'Songzanlin pagi dan kereta sore kembali ke Lijiang (19 November); Jade Dragon dan Impression Lijiang 20 November, lalu C442 malam ke Dali; Erhai pagi 21 November dan kereta siang ke Kunming.',
   ],
 };
@@ -521,7 +520,7 @@ export const calmTradeOffs = [
   'Bipenggou dan Siguniangshan jadi tur sehari dari Chengdu, sekitar 3–4 jam sekali jalan: tidak ada pagi atau sore di lembah, tetapi tanpa mobil pribadi dan tanpa pindah penginapan. Salat Jumat 13 November terlewat karena bus Bipenggou baru kembali ±19.15.',
   '9 November jadi hari panjang: DiDi pulang-pergi sekitar 58 km sekali jalan ke Zhongshu Ge pagi, sore di Taikoo Li, lalu C5756 17.05 (tiba Huanglongjiuzhai 19.10) dan taksi ke gukou.',
   'Libur sekolah Chengdu 11–13 November, ditambah akhir pekan, jatuh tepat di Huanglong dan Bipenggou: siap antre dan beli tiket lebih dulu.',
-  'Malam 18 November naik sekitar 900 m sekaligus dari Lijiang ke Shangri-La, sehari setelah temanmu tiba; 19 November sore sudah turun lagi ke Lijiang.',
+  'Malam 18 November naik sekitar 900 m sekaligus dari Lijiang ke Shangri-La; 19 November sore sudah turun lagi ke Lijiang.',
   'Tidak ada kereta pagi Shangri-La → Lijiang, jadi Jade Dragon pindah ke 20 November dan Dali tinggal setengah hari 21 November. Kereta siang Dali → Kunming harus tepat waktu untuk pesawat 20.05. Salat Jumat 20 November terlewat.',
   'Penginapan dekat gerbang Bipenggou di atas batas Rp500.000 selama libur sekolah; yang di bawah batas sekitar 10 menit berkendara dari gerbang.',
 ];
