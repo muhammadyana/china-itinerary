@@ -14,7 +14,7 @@ import { calmCard } from './calm-prepare.ts';
 export { calmPath } from './calm-route.ts';
 
 // The calm map shares the main map's towns and frame; 8 and 18–21 November reuse the main plan's legs.
-const sharedPoints = ['chengdu', 'jiuzhaigou', 'huanglongjiuzhai', 'bipenggou', 'shangri-la', 'lijiang', 'ganhaizi', 'kunming'];
+const sharedPoints = ['chengdu', 'jiuzhaigou', 'huanglongjiuzhai', 'bipenggou', 'shangri-la', 'lijiang', 'ganhaizi', 'dali', 'kunming'];
 const legsFor = (date: string) => calmLegs[date] ?? mapLegs[date];
 
 export const calmRoute: RouteDefinition = {
@@ -35,7 +35,7 @@ export function calmRouteProblems(): string[] {
     for (const leg of day.legs) for (const id of [leg.from, leg.to]) if (!calmRoute.points[id]) problems.push(`${day.date}: no map point "${id}"`);
     if (!day.legs.length) return;
     if (day.legs[0].from !== calmRoute.days[index - 1]?.night) problems.push(`${day.date}: the first leg does not start at the previous night`);
-    if (day.legs[day.legs.length - 1].to !== day.night) problems.push(`${day.date}: the last leg does not end at the night`);
+    if (day.night && day.legs[day.legs.length - 1].to !== day.night) problems.push(`${day.date}: the last leg does not end at the night`);
   });
   return problems;
 }
@@ -94,11 +94,11 @@ function intro() {
   return `<div class="route-map-intro calm-intro">
       <h1 id="calm-title">Opsi santai, sekali jalan ke Yunnan.</h1>
       <p class="lead">Alternatif yang lebih tenang untuk 8–21 November: dua malam dan satu hari penuh di Jiuzhaigou, Huanglong seharian, lalu empat malam di Chengdu dengan tur sehari ke Bipenggou dan Siguniangshan, lalu kereta D239 ke Lijiang dan tur berdua ke Shangri-La. ${nights} malam di ${bases.size} tempat menginap.</p>
-      <p>Rencana utama tidak berubah. Halaman ini untuk membandingkan dan memilih; 21 November diambil langsung dari rencana utama, dan 20 November memakai hari Jade Dragon rencana utama; 8 November memakai pagi dan sore rencana utama dengan malam sendiri. Diperiksa <time datetime="${calmCheckedAt}">${fullDay(calmCheckedAt)}</time>.</p>
+      <p>Rencana utama tidak berubah. Halaman ini untuk membandingkan dan memilih; 20 dan 21 November memakai hari Jade Dragon dan Dali rencana utama, masing-masing sehari lebih lambat; 8 November memakai pagi dan sore rencana utama dengan malam sendiri. Diperiksa <time datetime="${calmCheckedAt}">${fullDay(calmCheckedAt)}</time>.</p>
       <p class="prepare-link calm-page-links">${internalLink(calmItineraryPath, 'Itinerary santai, hari demi hari')}${internalLink(calmPreparePath, 'Persiapan santai')}</p>
     </div>
     <section class="prepare-section calm-compare" aria-labelledby="calm-compare-title"><h2 id="calm-compare-title">Dibanding rencana utama</h2>
-      <div class="calm-compare-grid">${compareColumn('Hilang', calmComparison.dropped)}${compareColumn('Bertambah', calmComparison.added)}${compareColumn('Tetap sama', [...same, 'Temanmu bergabung 17 November di Lijiang.'])}</div>
+      <div class="calm-compare-grid">${compareColumn('Hilang', calmComparison.dropped)}${compareColumn('Bertambah', calmComparison.added)}${compareColumn('Tetap sama', [...same, 'Temanmu bergabung 17 November malam di Lijiang.'])}</div>
       <h3>Yang perlu ditimbang</h3>${textList(calmTradeOffs)}
     </section>`;
 }

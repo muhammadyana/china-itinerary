@@ -21,7 +21,8 @@ const checklistGroups: ChecklistGroup[] = [
       { id: 'shangri-la-tour-18nov', label: 'Tur Lijiang → Shangri-La 18 Nov (Trip.com 104549480, 2 orang, turun di Dukezong)' },
       { id: 'c988-songzanlin-19nov', label: 'C988 Shangri-La 15.01 → Lijiang 19 Nov (2 kursi) + Songzanlin 19 Nov (2 tiket)' },
       { id: 'impression-jade-20nov', label: 'Impression Lijiang 13.20 + Jade Dragon kawasan/shuttle/Big Cable Car 15.00–15.30 (20 Nov, 2 orang; buka 13 Nov)' },
-      { id: 'lijiang-kunming-20nov', label: 'Kereta malam Lijiang → Kunming 20 Nov (2 kursi, jadwal belum dicek)' },
+      { id: 'c442-20nov', label: 'C442 Lijiang 20.22 → Dali 20 Nov (2 kursi)' },
+      { id: 'dali-kunming-21nov', label: 'Kereta siang Dali → Kunming 21 Nov, tiba paling lambat ±16.00 (2 kursi)' },
     ],
   },
   {
@@ -34,7 +35,7 @@ const checklistGroups: ChecklistGroup[] = [
       { id: 'lijiang-15-17', label: 'Lijiang 15–17 (twin mulai 17 Nov)' },
       { id: 'shangri-la-18', label: 'Shangri-La twin 18' },
       { id: 'lijiang-19', label: 'Lijiang 19' },
-      { id: 'kunming-20', label: 'Kunming 20' },
+      { id: 'dali-20', label: 'Dali 20' },
     ],
   },
   {
@@ -50,7 +51,6 @@ const checklistGroups: ChecklistGroup[] = [
     title: 'Info / perbaikan situs',
     items: [
       { id: 'day1-c5756', label: 'Hari 1 Info praktis masih teks utama (C5746 subuh) — perlu diselaraskan ke C5756' },
-      { id: 'friend-times', label: 'Tanya teman: jam tiba di Lijiang 17 Nov (pulang sama: MF8426 KMG 21 Nov 20.05)' },
     ],
   },
 ];

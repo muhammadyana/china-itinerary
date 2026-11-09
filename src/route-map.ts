@@ -124,8 +124,9 @@ function routeMapSvg({ points: routePoints, days: routeDays }: RouteDefinition) 
   const dayGroups = routeDays.map((day, index) => {
     const legs = day.legs.map(curved);
     const flight = flights.find(item => item.date === day.date);
-    const paths = flight ? `<path class="route-leg route-leg-plane" d="${flight.d}" marker-end="url(#route-arrow)"/><text class="map-flight-label" x="${flight.x}" y="${flight.y}" text-anchor="${flight.anchor}">${flight.label}</text>`
-      : day.legs.map((leg, legIndex) => `<path class="route-leg route-leg-${leg.mode}" d="${legs[legIndex].d}"/>`).join('');
+    // A flight day can also travel by land first (the calm option rides Dali → Kunming before its 21 November flight).
+    const paths = day.legs.map((leg, legIndex) => `<path class="route-leg route-leg-${leg.mode}" d="${legs[legIndex].d}"/>`).join('')
+      + (flight ? `<path class="route-leg route-leg-plane" d="${flight.d}" marker-end="url(#route-arrow)"/><text class="map-flight-label" x="${flight.x}" y="${flight.y}" text-anchor="${flight.anchor}">${flight.label}</text>` : '');
     return `<g class="route-day" data-day="${day.date}"><a href="#day-${day.date}" tabindex="-1"><title>${e(`Hari ${index + 1}, ${shortDate(day.date)}: ${day.title}`)}</title>${paths}</a></g>`;
   }).join('');
   const badges = routeDays.map((day, index) => {

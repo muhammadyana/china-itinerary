@@ -211,7 +211,10 @@ export const calmStayBases: CalmStayBase[] = [
     ...sharedNight('lijiang', '2026-11-19'), fromMain: false,
     notes: ['Hotel rencana utama untuk malam sebelum Jade Dragon, sehari lebih lambat: harga dicek 4 November untuk 18 November, harga 19 November belum dicek.', 'Mobil Jade Dragon menjemput 06.30 dengan koper; 166 Hotel bisa dijangkau mobil sampai pintu.', ...lijiang.notes],
   },
-  sharedNight('kunming', '2026-11-20'),
+  {
+    ...sharedNight('dali', '2026-11-20'), fromMain: false,
+    notes: ['Hotel rencana utama untuk Dali, sehari lebih lambat: harga dicek 4 November untuk 19 November, harga 20 November belum dicek. C442 tiba 22.21, jadi kabari hotel jam tiba.', ...mainBase('dali').notes],
+  },
 ];
 
 export const calmStayBaseForDate = (date: string) => calmStayBases.find(base => base.nights.includes(date));

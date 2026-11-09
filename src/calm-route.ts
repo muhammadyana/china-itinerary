@@ -3,10 +3,10 @@ import { dayTimelines, type TimelineStep } from './day-timelines.ts';
 import { at, go, type MapLeg, type MapPoint, type Mode } from './route-map.ts';
 import type { Booking, Link, TransportMode, Urgency } from './bookings.ts';
 import { placePath } from './guides.ts';
-import { calmStayBases, calmStayPicks, calmStaysHref, calmStaysPath, nightList, stayPicksText, type CalmStayBase } from './calm-stays.ts';
+import { calmStayBases, calmStayPicks, calmStaysHref, nightList, stayPicksText, type CalmStayBase } from './calm-stays.ts';
 
 // The calm option ("opsi santai"): a one-way alternative to the main plan, researched and re-checked on 5 November 2026.
-// 8 and 21 November (and the Jade Dragon day, moved to 20 November) are read from the main plan's days and timelines, so the two pages cannot drift apart.
+// 8 November (and the Jade Dragon and Dali days, moved to 20 and 21 November) are read from the main plan's days and timelines, so the two pages cannot drift apart.
 // The Tiger Leaping Gorge High Trail is formally prohibited, so the 18 November tour stops only at the lawful Upper Gorge viewpoint.
 export const calmCheckedAt = '2026-11-05';
 export const calmPath = '/places/calm/';
@@ -51,7 +51,7 @@ export const calmMapPoints: Record<string, MapPoint> = {
   rilong: at('rilong', 'Siguniangshan', 'w'),
 };
 
-// Legs for the calm days; 8 and 21 November use the main map's legs.
+// Legs for the calm days; 8 November uses the main map's legs.
 export const calmLegs: Record<string, MapLeg[]> = {
   '2026-11-09': [...go('car', 'chengdu', 'dujiangyan', 'chengdu'), ...go('train', 'chengdu', 'huanglongjiuzhai'), ...go('car', 'huanglongjiuzhai', 'jiuzhaigou')],
   '2026-11-10': go('bus', 'jiuzhaigou', 'long-lake', 'jiuzhaigou'),
@@ -64,7 +64,8 @@ export const calmLegs: Record<string, MapLeg[]> = {
   '2026-11-17': [],
   '2026-11-18': go('car', 'lijiang', 'upper-gorge', 'shangri-la'),
   '2026-11-19': go('train', 'shangri-la', 'lijiang'),
-  '2026-11-20': [...go('car', 'lijiang', 'ganhaizi', 'lijiang'), ...go('train', 'lijiang', 'kunming')],
+  '2026-11-20': [...go('car', 'lijiang', 'ganhaizi', 'lijiang'), ...go('train', 'lijiang', 'dali')],
+  '2026-11-21': go('train', 'dali', 'kunming'),
 };
 // Day numbers moved off other numbers and legs on the calm map, in map pixels.
 export const calmBadgeShifts: Record<string, readonly [number, number]> = { '2026-11-08': [10, -19], '2026-11-09': [18, 60], '2026-11-10': [36, -4], '2026-11-12': [-40, 62], '2026-11-16': [-40, 26], '2026-11-17': [-18, 40] };
@@ -344,16 +345,17 @@ const calmOwnDays: CalmDay[] = [
     date: '2026-11-17', title: 'Lijiang, temanmu tiba', shortTitle: 'Lijiang, teman tiba',
     route: ['Kota Tua Lijiang'],
     overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Malam ketiga di kota tua, mulai berdua. ${calmStayPicks('2026-11-17')}` },
-    transport: 'Bebas di Lijiang; jemput temanmu sesuai jam tibanya (belum diketahui).',
+    transport: 'Bebas di Lijiang; malam taksi ke Stasiun Lijiang menjemput temanmu (tiba 21.06), ±10 km ke kota tua.',
     intro: 'Hari bebas kedua di Lijiang sambil menunggu temanmu. Malam ini siapkan tur sehari ke Shangri-La yang berangkat sangat pagi besok.',
     steps: [
       ['Siang', 'Bebas', 'Istirahat atau kota tua lagi; beli bekal halal untuk dua orang besok.'],
-      ['Sesuai jadwal', 'Temanmu tiba', 'Jam dan tempat tibanya belum diketahui; pastikan dia tahu nama hotel dalam huruf Tionghoa.'],
-      ['Malam', 'Siapkan tur', 'Konfirmasi jemput tur besok (halaman tur menyebut ±06.10), siapkan koper untuk ikut seharian, tidur awal.'],
+      ['Sore', 'Siapkan tur', 'Konfirmasi jemput tur besok (halaman tur menyebut ±06.10) dan siapkan koper untuk ikut seharian.'],
+      ['21.06', 'Temanmu tiba', 'Kereta temanmu tiba di Stasiun Lijiang 21.06. Taksi ±10 km ke gerbang kota tua terdekat hotel, 25–40 menit (acuan CNY 30–50 per mobil, Agustus 2026). Kirim nama hotel dalam huruf Tionghoa ke temanmu.'],
+      ['±22.00', 'Tidur', 'Tidur secepatnya: jemput tur ±06.10.'],
     ],
     stops: [{ place: 'dayan', note: 'Bebas, dan titik temu dengan temanmu.' }],
     notes: [],
-    risks: ['Jam tiba temanmu belum diketahui; tur besok berangkat ±06.10.'],
+    risks: ['Temanmu tiba 21.06 dan tur besok jemput ±06.10: malamnya pendek.'],
     fromMain: false,
   },
   {
@@ -406,21 +408,43 @@ const calmOwnDays: CalmDay[] = [
   },
   (() => {
     const jade = fromMainPlan('2026-11-19');
+    const oneDayLater = (text: string) => text.replaceAll('19 November', '20 November');
     return {
-      ...jade, date: '2026-11-20', title: 'Jade Dragon, Blue Moon & Impression, malam ke Kunming', shortTitle: 'Jade Dragon, ke Kunming',
-      route: [...jade.route.filter(stop => stop !== 'Dali'), 'Kunming'],
-      overnight: fromMainPlan('2026-11-20').overnight,
-      transport: 'Mobil + sopir seharian dari Lijiang dengan koper (06.30 ke kawasan Jade Dragon, sore ke Stasiun Lijiang); lalu kereta malam Lijiang → Kunming, jadwal belum dicek.',
-      intro: 'Hari Jade Dragon berdua, sama dengan rencana utama tetapi sehari lebih lambat: Blue Moon Valley pagi, Impression Lijiang 13.20, kereta gantung sore ke Glacier Park, lalu langsung ke stasiun untuk kereta malam ke Kunming.',
-      steps: [
-        ...titledSteps('2026-11-19').slice(0, -2),
-        ['Malam', 'Kereta ke Kunming', 'Kereta malam Lijiang → Kunming; jadwal dan harga belum dicek (12306 tidak bisa diakses 9 November). Sopir mengantar ke Stasiun Lijiang dengan koper.'],
-      ],
+      ...jade, date: '2026-11-20', transport: oneDayLater(jade.transport),
+      intro: 'Hari Jade Dragon berdua, sama dengan rencana utama tetapi sehari lebih lambat: Blue Moon Valley pagi, Impression Lijiang 13.20, kereta gantung sore ke Glacier Park, lalu C442 20.22 ke Dali.',
+      steps: titledSteps('2026-11-19').map(([time, title, detail]): TimelineStep => [time, title, detail && oneDayLater(detail)]),
       notes: [],
       risks: [
         'Tiket kawasan, shuttle, dan kereta gantung dibuka 7 hari sebelumnya: untuk 20 November mulai 13 November.',
         'Hari ini Jumat; salat Jumat terlewat karena seharian di kawasan Jade Dragon.',
-        'Kereta malam ke Kunming belum dicek; bila tidak ada yang cocok, menginap di Lijiang dan naik kereta pagi 21 November.',
+        'Jadwal C442 20.22 → 22.21 dari Trip.com (dicek 9 November); harga dan kursi 20 November belum dicek. Cadangan sebelumnya: C400 19.54 → 22.02.',
+      ],
+      fromMain: false,
+    };
+  })(),
+  (() => {
+    const dali = fromMainPlan('2026-11-20');
+    const daliSteps = titledSteps('2026-11-20');
+    const airport = titledSteps('2026-11-21').slice(-2);
+    return {
+      date: '2026-11-21', title: 'Erhai pagi, kereta siang ke Kunming, terbang pulang', shortTitle: 'Erhai, ke Kunming, pulang',
+      route: ['Erhai', 'Kota Tua Dali', 'Stasiun Dali', 'Kunming', 'Bandara Changshui'],
+      overnight: fromMainPlan('2026-11-21').overnight,
+      transport: 'Taksi ke Dermaga Caicun dan kembali; taksi dengan koper ke 大理站; kereta siang Dali → Kunming (pilih yang tiba paling lambat ±16.00, jadwal siang belum dicek); DiDi atau taksi ke Bandara Changshui untuk MF8426 20.05.',
+      intro: 'Setengah hari di Dali: cahaya pagi di Erhai dan sarapan halal, lalu kereta siang ke Kunming dan langsung ke bandara. Pesawat 20.05 sama untuk kalian berdua.',
+      steps: [
+        ...daliSteps.slice(0, 4),
+        ['±10.15–11.15', 'Check-out & Menara Wuhua', 'Check-out dengan koper, lalu Menara Wuhua (五华楼) dan gang Kota Tua Dali sebentar. Titip koper di hotel selama itu.'],
+        ['±11.15–12.00', 'Taksi ke Stasiun Dali', 'Taksi atau DiDi dengan koper ke 大理站 di Xiaguan, ±17–18 km, 30–40 menit (acuan CNY 55 per mobil, tanpa tanggal). Tiba ±40 menit sebelum kereta.'],
+        ['Siang', 'Kereta ke Kunming', 'Pilih kereta Dali → Kunming yang berangkat paling lambat ±13.30. Trip.com menyebut ±87 kereta per hari (07.04–21.30), tetapi jadwal siangnya belum terlihat; D8704 sore (17.42) terlalu terlambat untuk pesawat. Turun di 昆明站 bila bisa. Zuhur dan Asar dijamak di stasiun atau di bandara.'],
+        ['±15.30–17.15', 'Ke Bandara Changshui', 'DiDi atau taksi dari stasiun Kunming ke Bandara Changshui (昆明长水国际机场). Dari pusat kota (Shuncheng) sekitar 28 km, ±41 menit; dari stasiun belum dicek.'],
+        ...airport,
+      ],
+      stops: dali.stops,
+      notes: [],
+      risks: [
+        'Jadwal kereta siang Dali → Kunming 21 November belum dicek; kereta yang tiba lewat ±16.30 membuat check-in pesawat 20.05 sempit.',
+        'Malam terakhir di Kunming (Green Lake, Masjid Nancheng) tidak masuk opsi ini.',
       ],
       fromMain: false,
     };
@@ -448,7 +472,7 @@ const calmFirstDay: CalmDay = {
   notes: [...(mainFirstDay.notes ?? []), chengduHalalDay1Note, mondayTrainNote],
 };
 
-export const calmDays: CalmDay[] = [{ ...calmFirstDay, overnight: { name: 'Chengdu', detail: 'Mcsrh Hotel Chunxi Road Taikoo Li (Mcsrh麦嘉·拾趣酒店, 春熙路太古里店), sudah dipesan untuk satu malam: Room M1, Rp292.719. Besok pagi koper bisa dititip di sini sebelum ke Zhongshu Ge.' } }, ...calmOwnDays, fromMainPlan('2026-11-21')];
+export const calmDays: CalmDay[] = [{ ...calmFirstDay, overnight: { name: 'Chengdu', detail: 'Mcsrh Hotel Chunxi Road Taikoo Li (Mcsrh麦嘉·拾趣酒店, 春熙路太古里店), sudah dipesan untuk satu malam: Room M1, Rp292.719. Besok pagi koper bisa dititip di sini sebelum ke Zhongshu Ge.' } }, ...calmOwnDays];
 /** "Sekilas hari ini": what to carry and the one thing not to miss, each restating a fact from that day's plan. */
 export interface CalmGlance { bring: string; remember: string }
 export const calmGlance: Record<string, CalmGlance> = {
@@ -464,8 +488,8 @@ export const calmGlance: Record<string, CalmGlance> = {
   '2026-11-17': { bring: 'Bekal halal untuk dua orang besok', remember: 'Tur besok jemput ±06.10; tidur awal.' },
   '2026-11-18': { bring: 'Paspor, bekal makan siang halal, jaket hangat', remember: 'Makan siang tur tidak halal; tur selesai di Dukezong.' },
   '2026-11-19': { bring: 'Paspor untuk dua tiket, jaket', remember: 'C988 15.01 dari Stasiun Shangri-La.' },
-  '2026-11-20': { bring: 'Jaket tebal, bekal, dan paspor', remember: 'Mobil 06.30; slot kereta gantung 15.00–15.30.' },
-  '2026-11-21': { bring: 'Paspor dan tiket pesawat', remember: 'MF8426 20.05: ke bandara ±16.30; koper diteruskan sampai Jakarta.' },
+  '2026-11-20': { bring: 'Jaket tebal, bekal, dan paspor', remember: 'Mobil 06.30; slot kereta gantung 15.00–15.30; C442 20.22 ke Dali.' },
+  '2026-11-21': { bring: 'Paspor, koper, dan jaket penahan angin', remember: 'Kereta siang ke Kunming, lalu langsung ke bandara; MF8426 20.05.' },
 };
 
 export const calmStopIds = calmDays.flatMap(day => day.stops.map(stop => stop.place));
@@ -477,7 +501,8 @@ export const calmComparison = {
     'Sichuan barat: 理小路 ke Rilong dan Siguniangshan, Danba, Moshi Park, Tagong, Xinduqiao, Kangding, dan G318 ke Litang (11–14 November).',
     'Daocheng dan Yading: Haizi Shan, Riwa, Chonggu, Luorong, Milk Lake, Five-Colour Lake, dan Pearl Lake (15–16 November), lalu jalan Xiangcheng dan Daxueshan ke Shangri-La (17 November).',
     'Kereta kembali ke Chengdu dan bus ke Lixian pada 10 November, juga malam di Lixian.',
-    'Dali dan Erhai (19–20 November): malam 19 November di Lijiang, dan 20 November langsung ke Kunming.',
+    'Malam dan pagi di Kunming (Green Lake, Masjid Nancheng), 20–21 November: dari Dali langsung ke bandara.',
+    'Siang dan sore di Dali 20 November: Dali tinggal setengah hari, 21 November pagi.',
     'Berangkat 05.15 pada 9 November di rencana utama: opsi santai pagi ke Zhongshu Ge, sore Taikoo Li, kereta C5756 17.05, dan baru masuk taman keesokan paginya.',
   ],
   added: [
@@ -487,7 +512,7 @@ export const calmComparison = {
     'Toko buku Zhongshu Ge di Dujiangyan, wajib: Senin 9 November pagi saat toko baru buka; sore Taikoo Li / IFS; lalu C5756 ke Jiuzhaigou.',
     'Kereta pemandangan D239 Chengdu South → Lijiang (15 November).',
     'Tiga malam di Lijiang (15–17 November) sebelum temanmu tiba, lalu tur sehari berdua ke Shangri-La lewat Upper Tiger Leaping Gorge dan Napahai (18 November).',
-    'Songzanlin pagi dan kereta sore kembali ke Lijiang (19 November); Jade Dragon dan Impression Lijiang 20 November, lalu kereta malam ke Kunming.',
+    'Songzanlin pagi dan kereta sore kembali ke Lijiang (19 November); Jade Dragon dan Impression Lijiang 20 November, lalu C442 malam ke Dali; Erhai pagi 21 November dan kereta siang ke Kunming.',
   ],
 };
 
@@ -497,7 +522,7 @@ export const calmTradeOffs = [
   '9 November jadi hari panjang: DiDi pulang-pergi sekitar 58 km sekali jalan ke Zhongshu Ge pagi, sore di Taikoo Li, lalu C5756 17.05 (tiba Huanglongjiuzhai 19.10) dan taksi ke gukou.',
   'Libur sekolah Chengdu 11–13 November, ditambah akhir pekan, jatuh tepat di Huanglong dan Bipenggou: siap antre dan beli tiket lebih dulu.',
   'Malam 18 November naik sekitar 900 m sekaligus dari Lijiang ke Shangri-La, sehari setelah temanmu tiba; 19 November sore sudah turun lagi ke Lijiang.',
-  'Dali dan Erhai hilang: tidak ada kereta pagi Shangri-La → Lijiang, jadi Jade Dragon pindah ke 20 November dan malam itu langsung ke Kunming. Salat Jumat 20 November terlewat.',
+  'Tidak ada kereta pagi Shangri-La → Lijiang, jadi Jade Dragon pindah ke 20 November dan Dali tinggal setengah hari 21 November. Kereta siang Dali → Kunming harus tepat waktu untuk pesawat 20.05. Salat Jumat 20 November terlewat.',
   'Penginapan dekat gerbang Bipenggou di atas batas Rp500.000 selama libur sekolah; yang di bawah batas sekitar 10 menit berkendara dari gerbang.',
 ];
 
@@ -512,7 +537,6 @@ const stayBooking = (base: CalmStayBase): CalmBooking => ({
   channel: `${[...new Set([base.hotel, base.hostel].map(stay => stay.links[0].label))].join(' atau ')}; dua pilihan per malam beserta sumbernya di halaman Hotel & hostel santai.`,
   opens: 'Bisa dipesan sekarang.', link: { label: 'Hotel & hostel santai', url: calmStaysHref(base.nights[0]) },
 });
-const sharedNights = calmStayBases.filter(base => base.fromMain).flatMap(base => base.nights);
 
 export const calmBookingGroups: CalmBookingGroup[] = [
   {
@@ -529,7 +553,8 @@ export const calmBookingGroups: CalmBookingGroup[] = [
       { date: '2026-11-19', item: 'C988 Shangri-La 15.01 → Lijiang 16.14, dua kursi', urgency: 'now', mode: 'train', price: 'Jadwal dari Trip.com (dicek 9 November 2026). Pada 18 November C988 kelas dua CNY 49 (12306, 6 November); harga dan kursi 19 November belum dicek. Cadangan: C374 15.25 → 16.48.', cost: { min: 49, max: 70, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan; dua kursi atas nama paspor masing-masing.', opens: 'Sudah dijual.', link: { label: 'Trip.com: Shangri-La ke Lijiang', url: tripcomTrain('shangri-la', 'lijiang') } },
       { date: '2026-11-20', item: 'Jade Dragon: kawasan, shuttle, dan kereta gantung, 2 orang', urgency: 'week', price: 'Tiket kawasan CNY 100, shuttle CNY 20, kereta gantung CNY 120 per orang (rencana utama, dicek untuk 19 November); slot kereta gantung 15.00–15.30. Satu paspor hanya bisa membeli kereta gantung Glacier Park sekali per 90 hari. Bila paspor ditolak: paket Trip.com CNY 488 per orang (kawasan, kereta gantung, Impression Lijiang, antar-jemput kota tua).', channel: 'Tiket kawasan dan shuttle: mini program 玉龙雪山服务 atau Trip.com. Kereta gantung: mini program 丽江旅游集团. Semua atas nama paspor; gerbang tidak menjual tiket.', cost: { min: 240, max: 280, per: 'orang' }, opens: 'Dibuka 7 hari sebelumnya, yaitu 13 November untuk 20 November.', link: { label: 'Panduan Jade Dragon', url: placePath('jade-dragon') } },
       { date: '2026-11-20', item: 'Impression Lijiang 13.20, 2 orang', urgency: 'now', price: 'Sekitar CNY 180 per orang per 4 November (tarif biasa CNY 280); tidak perlu bila mengambil paket Jade Dragon CNY 488.', cost: { min: 180, max: 280, per: 'orang' }, channel: 'Trip.com.', opens: 'Pesan sesi 13.20 untuk 20 November.', link: { label: 'Panduan Impression Lijiang', url: placePath('impression-lijiang') } },
-      { date: '2026-11-20', item: 'Kereta malam Lijiang → Kunming, 2 kursi', urgency: 'now', mode: 'train', price: 'Jadwal dan harga belum dicek (12306 tidak bisa diakses 9 November).', channel: 'Trip.com, atau 12306 sebagai cadangan.', opens: 'Cek dan pesan secepatnya.', link: { label: 'Trip.com: Lijiang ke Kunming', url: tripcomTrain('lijiang', 'kunming') } },
+      { date: '2026-11-20', item: 'C442 Lijiang 20.22 → Dali 22.21, 2 kursi', urgency: 'now', mode: 'train', price: 'Jadwal dari Trip.com (dicek 9 November 2026). Kelas dua CNY 80 pada 19 November menurut rencana utama; harga dan kursi 20 November belum dicek. Cadangan: C400 19.54 → 22.02.', cost: { min: 80, max: 80, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan; dua kursi atas nama paspor masing-masing.', opens: 'Sudah dijual.', link: { label: 'Trip.com: Lijiang ke Dali', url: tripcomTrain('lijiang', 'dali') } },
+      { date: '2026-11-21', item: 'Kereta siang Dali → Kunming, 2 kursi, tiba paling lambat ±16.00', urgency: 'now', mode: 'train', price: 'Jadwal siang belum dicek: Trip.com menyebut ±87 kereta per hari, 07.04–21.30 (9 November 2026). Acuan harga: D8704 kelas dua CNY 145 (rencana utama).', cost: { min: 145, max: 145, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan; turun di 昆明站 bila bisa.', opens: 'Sudah dijual.', link: { label: 'Trip.com: Dali ke Kunming', url: tripcomTrain('dali', 'kunming') } },
       { date: '2026-11-15', item: 'D239 Chengdu South 08.33 → Lijiang 17.46, satu kursi', urgency: 'now', mode: 'train', price: 'CNY 376 kelas dua (12306, 5 November); kelas satu CNY 602, tinggal 3 kursi. Tidak ada kereta tidur.', cost: { min: 376, max: 376, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan.', opens: 'Sudah dijual: tiket dibuka 15 hari sebelumnya, dan 12306 masih menunjukkan kursi kelas dua untuk 15 November pada 5 November.', link: { label: 'Trip.com: Chengdu ke Lijiang', url: tripcomTrain('chengdu', 'lijiang') } },
       { date: '2026-11-09', item: 'Toko Buku Zhongshu Ge, Dujiangyan: masuk gratis, DiDi pulang-pergi dari hotel', urgency: 'onsite', mode: 'taxi', price: 'Masuk gratis (Trip.com dan Third Eye Traveller). DiDi belum punya tarif resmi: satu pelancong (Third Eye Traveller, artikel Juni 2026) membayar sekitar CNY 100 sekali jalan, jadi sekitar CNY 200 pulang-pergi. Sekitar 58 km sekali jalan, ±45 menit tanpa macet menurut OSRM; tarif jam sibuk Senin pagi bisa berbeda.', cost: { min: 200, max: 200, per: 'mobil' }, channel: 'DiDi ke 钟书阁(融创茂店) sekitar 08.45, kembali ±11.30. Cadangan untuk pergi: Metro jalur 2 ke 犀浦, kereta S ke 都江堰 (CNY 10 di 12306 atau Trip.com; sebagian kereta tinggal sedikit kursi), lalu DiDi 10–15 menit dari stasiun.', opens: 'Tidak perlu membeli tiket. Lihat estimasi waktu dan tarif DiDi di aplikasi sebelum memesan.', link: { label: 'Panduan Zhongshu Ge', url: placePath('zhongshuge-bookstore') } },
     ],
@@ -541,14 +566,16 @@ export const calmBookingGroups: CalmBookingGroup[] = [
       { date: '2026-11-20', item: 'Mobil + sopir Lijiang 06.30 → Jade Dragon → Stasiun Lijiang, dengan koper', urgency: 'week', mode: 'car', price: 'Seperti rencana utama: Trip.com sewa per jam di Lijiang mulai CNY 296 (5 kursi) atau CNY 452 (7 kursi) per paket 4 jam/50 km atau 8 jam/100 km; harga 20 November belum dilihat.', channel: 'Trip.com sewa mobil per jam di Lijiang, atau minta hotel mencarikan sopir.', opens: 'Pesan sebelum 20 November; kirim jadwal hari itu.', link: { label: 'Sewa mobil per jam di Trip.com', url: 'https://www.trip.com/chartered-car-seo/hourly/lijiang/?curr=CNY' } },
       { date: '2026-11-19', item: 'Taksi Dukezong ↔ Songzanlin, lalu Dukezong → Stasiun Shangri-La', urgency: 'onsite', mode: 'taxi', price: 'Songzanlin ±6 km sekali jalan: acuan CNY 10 dari situs Songzanlin dan CNY 15 dari catatan Ctrip (Maret 2025), jadi pulang-pergi sekitar CNY 20–30 per mobil. Ke stasiun ±6 km, tarif belum ditemukan.', cost: { min: 20, max: 30, per: 'mobil' }, channel: 'Taksi atau DiDi; cek tarif di aplikasi.', opens: 'Pesan di tempat.' },
       { date: '2026-11-19', item: 'Taksi Stasiun Lijiang → kota tua Lijiang (sore)', urgency: 'onsite', mode: 'taxi', price: '±10 km, 25–40 menit; acuan CNY 30–50 per mobil (Agustus 2026).', cost: { min: 30, max: 50, per: 'mobil' }, channel: 'DiDi atau taksi resmi di pintu keluar stasiun ke gerbang kota tua terdekat hotel; mobil tidak bisa masuk gang Dayan.', opens: 'C988 tiba 16.14.' },
+      { date: '2026-11-20', item: 'Taksi Stasiun Dali → kota tua Dali (malam)', urgency: 'onsite', mode: 'taxi', price: '±17–18 km, ±35 menit; acuan taksi sekitar CNY 55 (rencana utama, tanpa tanggal).', cost: { min: 55, max: 55, per: 'mobil' }, channel: 'DiDi atau taksi resmi di 大理站 (Xiaguan); pastikan tujuannya Kota Tua Dali.', opens: 'C442 tiba 22.21; kabari hotel jam tiba.' },
+      { date: '2026-11-21', item: 'Taksi kota tua Dali → Stasiun Dali, dengan koper', urgency: 'onsite', mode: 'taxi', price: '±17–18 km, 30–40 menit; acuan taksi sekitar CNY 55 (tanpa tanggal).', cost: { min: 55, max: 55, per: 'mobil' }, channel: 'DiDi atau taksi ke 大理站 di Xiaguan.', opens: 'Pesan di tempat.' },
+      { date: '2026-11-21', item: 'DiDi atau taksi stasiun Kunming → Bandara Changshui', urgency: 'onsite', mode: 'car', price: 'Tarif belum dicek; dari pusat kota sekitar 28 km, ±41 menit.', channel: 'DiDi, taksi resmi, atau transfer bandara Trip.com.', opens: 'Pesan di tempat setelah kereta tiba.' },
       { date: '2026-11-18', item: 'Tur gabung Lijiang 06.10 → Upper Gorge → Haba → Dukezong → Napahai, berakhir di Shangri-La, 2 orang', urgency: 'week', mode: 'car', price: 'Rp457.027 per orang untuk 16 November (Trip.com 104549480 Package E, rombongan maksimal 13 orang, dicek 6 November 2026; harga 18 November belum dicek), termasuk tiket, mobil, sopir, dan makan siang jamuan Tibet yang tidak halal. Upper Gorge 1,5 jam dan Napahai 1,5 jam. Nilai 4,9 dari 551 ulasan.', cost: { min: 168, max: 168, per: 'orang' }, channel: 'Trip.com; tanyakan dulu apakah koper boleh ikut seharian dan diantar ke hotel di Dukezong.', opens: 'Pesan paling lambat 02.59 hari itu; batal gratis sampai 18.00 sehari sebelumnya.', link: { label: 'Trip.com: tur Shangri-La + Tiger Leaping Gorge', url: 'https://id.trip.com/things-to-do/detail/104549480?locale=en-ID&curr=IDR' } },
     ],
   },
   {
-    id: 'stays', title: 'Penginapan', lead: 'Harga dicek 5 November untuk tanggal dan jumlah tamu yang tercantum di tiap penginapan; 16–19 November di Lijiang dan Shangri-La belum dicek untuk tanggal barunya. 8 dan 20 November sama dengan rencana utama.',
+    id: 'stays', title: 'Penginapan', lead: 'Harga dicek 5 November untuk tanggal dan jumlah tamu yang tercantum di tiap penginapan; 16–20 November di Lijiang, Shangri-La, dan Dali belum dicek untuk tanggal barunya.',
     items: [
       ...calmStayBases.filter(base => !base.fromMain).map(stayBooking),
-      { date: sharedNights[0], item: `Malam ${nightList(sharedNights)}: penginapan rencana utama`, urgency: 'now', price: 'Sama dengan rencana utama; harga per malam ada di halaman Hotel & hostel santai.', channel: 'Pilihan per malam di halaman Hotel & hostel santai. Pastikan setiap penginapan menerima paspor asing sebelum membayar.', opens: 'Bisa dipesan sekarang.', link: { label: 'Hotel & hostel santai', url: calmStaysPath } },
     ],
   },
 ];
@@ -561,7 +588,7 @@ export const calmDoNotBuy = [
   'Tiket Panda Base 14 November, mobil Jiuzhaigou → Songpan → Stasiun Huanglongjiuzhai, dan C5754 bertanggal 11 November: rencana sebelum Huanglong masuk (6 November).',
   'Hotel di Chengdu untuk 13 November; opsi ini kembali ke Chengdu 14 November.',
   'C984 Shangri-La 12.00 → Lijiang 18 November dan C442 Lijiang → Dali 19 November dari rencana utama; opsi santai kembali dari Shangri-La 19 November dengan C988 15.01.',
-  'Hotel di Dali 19 November dan D8704 Dali → Kunming 20 November: Dali tidak masuk opsi ini.',
+  'Hotel di Dali 19 November, D8704 Dali → Kunming 20 November, hotel di Kunming 20 November, dan transfer hotel Shuncheng → bandara: opsi ini menginap di Dali 20 November dan dari Kunming langsung ke bandara.',
   'Mobil Lijiang → Upper Gorge → Shangri-La 16 November, tiket Upper Gorge terpisah, shuttle 16 November, dan Pudacuo: tur 18 November sudah mencakup Upper Gorge.',
   'Mobil dan sopir 11–12 November untuk Bipenggou → 理小路 → Rilong → Danba → Moshi → Tagong → Xinduqiao.',
   'Hotel di Rilong (11 November), Xinduqiao (12–13 November), Litang (14 November), dan Riwa (15–16 November).',
@@ -578,8 +605,7 @@ export const calmDoNotBuy = [
 export const calmUnknowns = [
   '9 November: lama shuttle Trip.com Chengdu → Jiuzhaigou, titik turunnya, dan apakah koper 28–30 inci muat. Untuk cadangan kereta: apakah 团子出行 menerima paspor asing untuk bus 17.30, dan lama perjalanan bus itu (tidak tercantum; 1,5–2 jam menurut panduan pihak ketiga).',
   'Tur 18 November: harga untuk tanggal itu, apakah koper boleh ikut seharian dan diantar ke Dukezong, dan apakah titik jemputnya hotel kalian di kota tua.',
-  'Kereta malam Lijiang → Kunming 20 November: jadwal, harga, dan jam tiba (belum dicek; 12306 tidak bisa diakses 9 November).',
-  'Jam tiba temanmu di Lijiang 17 November. Pulangnya sudah pasti: pesawat yang sama denganmu, MF8426 Kunming 21 November 20.05.',
+  'Kereta siang Dali → Kunming 21 November: nomor, jam, dan harga (jadwal siang belum terlihat di Trip.com; 12306 tidak bisa diakses 9 November). Juga kursi C442 20 November dan jarak stasiun Kunming ke bandara.',
   'Mobil + sopir Jade Dragon 20 November: penawaran nyata; angka di rincian biaya perkiraan dari tarif sewa per jam.',
   'Penginapan: apakah promo menginap pertama Trip.com berlaku untuk lebih dari satu pemesanan per akun, apakah Xingyun mendaftarkan paspor asing, dan apakah pemilik Xinlan mau mengantar ke gerbang 12 November pagi.',
   'Bipenggou: masuk terakhir (15.00 menurut Trip.com, 15.30 menurut Tongcheng), jam bus terakhir turun, apakah tiket mobil listrik pulang-pergi boleh turun di Moon Bay dan Red Stone Beach, dan waktu berjalan kaki.',
@@ -594,6 +620,8 @@ export const calmUnknowns = [
 
 // Trains, the station transfers around them and the luggage rule; the calm trains page lists these, the calm page all.
 export const calmTrainSources: Link[] = [
+  { label: 'Trip.com: Lijiang ke Dali, C400 19.54 → 22.02 dan C442 20.22 → 22.21 (dicek 9 November 2026)', url: 'https://www.trip.com/trains/china/route/lijiang-to-dali/' },
+  { label: 'Trip.com: Dali ke Kunming, ±87 kereta per hari 07.04–21.30; hanya kereta sore yang terlihat (dicek 9 November 2026)', url: 'https://www.trip.com/trains/china/route/dali-to-kunming/' },
   { label: 'Trip.com: Shangri-La ke Lijiang, kereta pertama C988 15.01 → 16.14, lalu C374 15.25, C88 17.25, C400 18.21, C442 19.02, C990 20.25 (dicek 9 November 2026)', url: 'https://id.trip.com/trains/china/route/shangri-la-to-lijiang/' },
   { label: '12306: kereta 9 November sore Chengdu → Huanglongjiuzhai (C6366, C6376, C5796, D280), kursi dan tarif C6376, dicek 6 November 2026', url: 'https://kyfw.12306.cn/otn/leftTicket/init?linktypeid=dc' },
   { label: '12306: kursi dan tarif kereta 9, 11, dan 15 November (C5772, C6362, C5746, C5754, C5764, C5804, C5784, D239), dicek 5 November 2026', url: 'https://kyfw.12306.cn/otn/leftTicket/init?linktypeid=dc' },

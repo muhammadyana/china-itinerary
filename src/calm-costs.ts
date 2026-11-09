@@ -6,7 +6,7 @@ import { calmStayBases, calmStaysPath } from './calm-stays.ts';
 
 export const calmCostsPath = '/places/calm-costs/';
 
-// The main plan's own transport and ticket rows for the dates the two plans share (8 and 21 November): the same rows
+// The main plan's own transport and ticket rows for the date the two plans share (8 November): the same rows
 // its day panels list, and the set the calm preparation page shows.
 export const calmSharedFor = (date: string) => dayBookings(date);
 export const calmSharedBookings = [...new Set(calmDays.filter(day => day.fromMain).flatMap(day => dayBookings(day.date)))];
