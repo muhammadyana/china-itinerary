@@ -14,7 +14,7 @@ const checklistGroups: ChecklistGroup[] = [
       { id: 'c5756-9nov', label: 'C5756 Chengdu East 17.05 → Huanglongjiuzhai 19.10 (9 Nov, 1 kursi)', booked: true },
       { id: 'jiuzhaigou-10nov', label: 'Jiuzhaigou + bus taman 10 Nov, slot 08.00–10.00', booked: true },
       { id: 'huanglong-11nov', label: 'Tur Huanglong 11 Nov (tiket + ropeway naik + mobil, jemput 07.30)', booked: true },
-      { id: 'c6364-11nov', label: 'C6364 Huanglongjiuzhai 16.25 → Chengdu East 18.07 (11 Nov)' },
+      { id: 'c6374-11nov', label: 'C6374 Huanglongjiuzhai 17.30 → Chengdu East 20.09 (11 Nov, sudah dipesan)' },
       { id: 'bipenggou-bus-13nov', label: 'Bus Chengdu → Bipenggou 13 Nov (Trip.com 100144400, tiket termasuk)' },
       { id: 'siguniang-14nov', label: 'Tur Siguniangshan 14 Nov (Trip.com 89377156 paket J)' },
       { id: 'd239-15nov', label: 'D239 Chengdu South 08.33 → Lijiang 17.46 (15 Nov)' },

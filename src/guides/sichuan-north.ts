@@ -60,9 +60,9 @@ export const northernGuides: DestinationGuide[] = [
       steps: [
         'Tur kecil Trip.com 98479842 (sudah dipesan, paket 07.30 dari Jiuzhaigou) menjemput di Leyu Youth Hostel, lalu lewat Chuanzhusi dan terowongan Xueshanliang ke gerbang Huanglong, sekitar 107 km.',
         'Tiket masuk, ropeway naik, dan mobil wisata kawasan sudah termasuk; bawa paspor yang dipakai memesan.',
-        'Tur selesai di Stasiun Huanglongjiuzhai sekitar 14.50. Dari sana kereta C6364 16.25 ke Chengdu East (tiba 18.07).',
+        'Tur selesai di Stasiun Huanglongjiuzhai sekitar 14.50. Dari sana kereta C6374 17.30 ke Chengdu East (tiba 20.09; sudah dipesan 9 November).',
       ],
-      duration: 'Jiuzhaigou ke Huanglong: OSRM 85 menit tanpa macet, operator menyebut sekitar 2½ jam. Stasiun Huanglongjiuzhai ke Chengdu East: C6364 1 jam 42 menit.',
+      duration: 'Jiuzhaigou ke Huanglong: OSRM 85 menit tanpa macet, operator menyebut sekitar 2½ jam. Stasiun Huanglongjiuzhai ke Chengdu East: C6374 2 jam 39 menit.',
       sources: ['https://id.trip.com/things-to-do/detail/98479842?locale=en-ID&curr=IDR', 'https://www.trip.com/travel-guide/attraction/songpan/huanglong-national-scenic-area-75864/'],
     },
     stopAccess: { huanglong: 'Dari stasiun atas ropeway sekitar 2,9 km di jalur kayu ke Five-Colour Pool (五彩池) dan Huanglong Temple (黄龙古寺), lalu turun lewat jalur utama melewati teras kolam ke gerbang. Jarak ini dari panduan perjalanan, bukan angka resmi.' },

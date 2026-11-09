@@ -64,8 +64,8 @@ const gateNotes = [
 // Transfer facts the bookings do not carry, from the same research, plus the day plan's own station steps.
 const transferNotes: Record<string, string[]> = {
   '2026-11-11': [
-    stepText('2026-11-11', '16.25'),
-    stepText('2026-11-11', '±18.10–19.00'),
+    stepText('2026-11-11', '17.30'),
+    stepText('2026-11-11', '±20.15–21.00'),
   ],
   '2026-11-19': [
     stepText('2026-11-19', '±14.15'),
