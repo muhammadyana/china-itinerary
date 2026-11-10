@@ -20,7 +20,7 @@ const calmNotIncluded = [
 
 const calmMethodNotes = [
   ...methodNotes,
-  'Mobil Jade Dragon 20 November belum punya penawaran; angkanya dihitung dari sewa per jam Trip.com di Lijiang. Tur Huanglong 11 November sudah dibayar; bus Bipenggou 13 November dan tur Siguniangshan 14 November memakai harga produk Trip.com untuk tanggal itu.',
+  'Mobil Jade Dragon 20 November belum punya penawaran; angkanya dihitung dari sewa per jam Trip.com di Lijiang. Tur Huanglong 11 November sudah dibayar; tur Siguniangshan 14 November memakai harga produk Trip.com untuk tanggal itu, dan bus Bipenggou 12 November memakai harga 13 November (harga 12 November belum dicek).',
   'DiDi ke toko buku Zhongshu Ge 9 November memakai satu laporan pelancong: sekitar CNY 100 sekali jalan (Third Eye Traveller, Juni 2026), dihitung dua kali untuk pulang-pergi.',
   'Shuttle Trip.com 9 November dihitung CNY 120 dari harga terendah IDR 328.648 untuk tanggal itu, dengan kurs tersimpan; harga per jenis mobil belum dilihat.',
   'Malam 9–17 November memakai harga untuk tanggal dan jumlah tamu itu; 8 dan 18–20 November memakai harga rencana utama.',

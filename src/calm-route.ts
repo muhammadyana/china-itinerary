@@ -56,8 +56,8 @@ export const calmLegs: Record<string, MapLeg[]> = {
   '2026-11-09': [...go('car', 'chengdu', 'dujiangyan', 'chengdu'), ...go('train', 'chengdu', 'huanglongjiuzhai'), ...go('car', 'huanglongjiuzhai', 'jiuzhaigou')],
   '2026-11-10': go('bus', 'jiuzhaigou', 'long-lake', 'jiuzhaigou'),
   '2026-11-11': [...go('car', 'jiuzhaigou', 'huanglong', 'huanglongjiuzhai'), ...go('train', 'huanglongjiuzhai', 'chengdu')],
-  '2026-11-12': [],
-  '2026-11-13': go('bus', 'chengdu', 'bipenggou', 'chengdu'),
+  '2026-11-12': go('bus', 'chengdu', 'bipenggou', 'chengdu'),
+  '2026-11-13': [],
   '2026-11-14': go('bus', 'chengdu', 'rilong', 'chengdu'),
   '2026-11-15': go('train', 'chengdu', 'lijiang'),
   '2026-11-16': [],
@@ -68,7 +68,7 @@ export const calmLegs: Record<string, MapLeg[]> = {
   '2026-11-21': go('train', 'dali', 'kunming'),
 };
 // Day numbers moved off other numbers and legs on the calm map, in map pixels.
-export const calmBadgeShifts: Record<string, readonly [number, number]> = { '2026-11-08': [10, -19], '2026-11-09': [18, 60], '2026-11-10': [36, -4], '2026-11-12': [-40, 62], '2026-11-16': [-40, 26], '2026-11-17': [-18, 40] };
+export const calmBadgeShifts: Record<string, readonly [number, number]> = { '2026-11-08': [10, -19], '2026-11-09': [18, 60], '2026-11-10': [36, -4], '2026-11-13': [-40, 62], '2026-11-16': [-40, 26], '2026-11-17': [-18, 40] };
 // Days that stay in one place name their local transport in the day list.
 export const calmLocalModes: Record<string, Mode[]> = {};
 
@@ -222,49 +222,49 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-12', title: 'Istirahat di Chengdu', shortTitle: 'Istirahat di Chengdu',
-    route: ['Chunxi Road', 'Huangchengba', 'Chunxi Road'],
-    overnight: { name: 'Chengdu', detail: 'Malam kedua dari empat di Chunxi Road.' },
-    transport: 'Jalan kaki, Metro, atau DiDi di pusat kota; tidak ada perjalanan antarkota hari ini.',
-    intro: 'Hari kosong setelah Huanglong, sebelum dua tur sehari yang berangkat subuh. Pagi istirahat, siang makan halal dan Zuhur di Masjid Huangcheng, sore belanja bekal untuk Bipenggou dan Siguniangshan, lalu tidur awal.',
-    steps: [
-      ['Pagi', 'Istirahat', 'Bangun tanpa alarm; cuci baju dan isi baterai.'],
-      ['±12.00–13.30', 'Makan siang & Zuhur', 'Makan siang halal di kawasan Huangchengba, lalu Zuhur di Masjid Huangcheng (皇城清真寺).'],
-      ['Sore', 'Beli bekal halal', 'Beli makanan berlabel 清真 dan roti untuk makan siang di Bipenggou (13 November) dan Siguniangshan (14 November); keduanya tidak termasuk makan.'],
-      ['Malam', 'Siapkan tur, tidur awal', 'Pastikan pesan dari pengelola bus Bipenggou: titik dan jam kumpul dikirim sehari sebelumnya. Siapkan paspor, baju hangat, bekal; tidur paling lambat 21.30.'],
-    ],
-    stops: [
-      { place: 'huangcheng-mosque', note: 'Zuhur dan makan siang halal di sekitarnya.' },
-      { place: 'chengdu', note: 'Basis empat malam; sore santai di sekitar hotel.' },
-    ],
-    notes: [],
-    risks: ['Bus Bipenggou harus sudah dipesan; batal gratis sampai beberapa hari sebelumnya menurut halaman produk, jadi cek tanggal batasnya saat memesan.'],
-    fromMain: false,
-  },
-  {
-    date: '2026-11-13', title: 'Bipenggou sehari dari Chengdu', shortTitle: 'Bipenggou dari Chengdu',
+    date: '2026-11-12', title: 'Bipenggou sehari dari Chengdu', shortTitle: 'Bipenggou dari Chengdu',
     route: ['Chengdu', 'Bipenggou', 'Danau Panyang', 'Chengdu'],
-    overnight: { name: 'Chengdu', detail: 'Malam ketiga dari empat di Chunxi Road.' },
+    overnight: { name: 'Chengdu', detail: 'Malam kedua dari empat di Chunxi Road.' },
     transport: 'Bus bersama Trip.com 100144400 (paket B): kumpul 05.40 di Yatai Building (亚太大厦), Jinjiang; sekitar 4 jam di taman; kembali ke titik kumpul ±19.15. Tiket masuk termasuk.',
-    intro: 'Satu hari penuh ke Bipenggou dan kembali ke Chengdu malamnya, tanpa menginap di lembah. Hari ini Jumat dan hari terakhir libur sekolah Chengdu, jadi taman bisa ramai, dan salat Jumat terlewat karena bus baru kembali malam.',
+    intro: 'Satu hari penuh ke Bipenggou dan kembali ke Chengdu malamnya, tanpa menginap di lembah. Semalam baru tiba dari Huanglong sekitar 21.00, jadi tidur pendek: lanjutkan tidur di bus. Hari ini masih libur sekolah Chengdu, jadi taman bisa ramai.',
     steps: [
       ['±05.20', 'Ke titik kumpul', 'Jalan atau DiDi ke Yatai Building (亚太大厦), Jinjiang; titik dan jam pasti dikirim pengelola sehari sebelumnya. Bawa paspor, bekal, baju hangat berlapis.'],
       ['05.40', 'Bus berangkat', 'Bus bersama ke Bipenggou. Subuh masuk sekitar pukul 06.00: salat di kursi atau saat bus berhenti.'],
       ['Pagi–siang', 'Perjalanan ke Bipenggou', 'Lewat Dujiangyan dan Lixian; tur sejenis menyebut sekitar 3 jam, lama perjalanan paket ini belum tercantum.'],
       ['±4 jam', 'Di dalam Bipenggou', 'Bus taman naik ke Shanghaizi, lalu Danau Panyang (±3.680 m) dan Yanziyan (3.837 m) bila waktu cukup. Zuhur dijamak dengan Asar, dengan bekal makan siang. Mobil listrik di atas belum tentu termasuk; cek di halaman paket.'],
       ['Sore', 'Bus kembali', 'Kembali ke Chengdu; tiba di titik kumpul sekitar 19.15 menurut halaman tur. Maghrib dan Isya dijamak takhir di hotel.'],
-      ['±19.30', 'Makan malam, tidur awal', 'Makan malam halal dekat hotel; besok kumpul 06.00 untuk Siguniangshan.'],
+      ['±19.30', 'Makan malam, istirahat', 'Makan malam halal dekat hotel; besok hari istirahat dan salat Jumat.'],
     ],
     stops: [
       { place: 'bipenggou', note: 'Sekitar 4 jam di taman, dengan bus taman dari gerbang.' },
     ],
     notes: [],
     risks: [
-      'Sebagian besar sekolah di Chengdu libur 11–13 November, jadi hari ini masih ramai; siap antre bus taman.',
+      'Malam sebelumnya baru tiba dari Huanglong sekitar 21.00: tidur sekitar 6 jam sebelum kumpul 05.40.',
+      'Sebagian besar sekolah di Chengdu libur 11–13 November, jadi hari ini ramai; siap antre bus taman.',
       'Bus naik sekitar 1.300 m dalam satu pagi; bergerak pelan di 3.600–3.800 m.',
       'Pertengahan November adalah akhir warna musim gugur; salju pertama dan es tipis di jalur kayu mungkin terjadi.',
-      'Pertunjukan Twin Towers Jumat 20.00 terlewat karena bus baru tiba ±19.15.',
     ],
+    fromMain: false,
+  },
+  {
+    date: '2026-11-13', title: 'Istirahat & salat Jumat di Chengdu', shortTitle: 'Istirahat, salat Jumat',
+    route: ['Chunxi Road', 'Huangchengba', 'Chunxi Road'],
+    overnight: { name: 'Chengdu', detail: 'Malam ketiga dari empat di Chunxi Road.' },
+    transport: 'Jalan kaki, Metro, atau DiDi di pusat kota; tidak ada perjalanan antarkota hari ini.',
+    intro: 'Hari kosong di antara Bipenggou dan Siguniangshan. Pagi istirahat, siang salat Jumat di Masjid Huangcheng, sore belanja bekal untuk Siguniangshan, lalu tidur awal.',
+    steps: [
+      ['Pagi', 'Istirahat', 'Bangun tanpa alarm; cuci baju dan isi baterai.'],
+      ['±12.00–14.00', 'Salat Jumat', 'Salat Jumat di Masjid Huangcheng (皇城清真寺), sekitar 1,5 km dari hotel. Jam khotbah belum dicek: datang sebelum Zuhur dan tanyakan di masjid. Lalu makan siang halal di kawasan Huangchengba.'],
+      ['Sore', 'Beli bekal halal', 'Beli makanan berlabel 清真 dan roti untuk makan siang di Siguniangshan besok; tur tidak termasuk makan.'],
+      ['Malam', 'Siapkan tur, tidur awal', 'Pastikan pesan dari pengelola tur Siguniangshan: titik dan jam kumpul (06.00, Jinjiang). Siapkan paspor, baju hangat, bekal; tidur paling lambat 21.30.'],
+    ],
+    stops: [
+      { place: 'huangcheng-mosque', note: 'Salat Jumat dan makan siang halal di sekitarnya.' },
+      { place: 'chengdu', note: 'Basis empat malam; sore santai di sekitar hotel.' },
+    ],
+    notes: [],
+    risks: ['Jam khotbah Jumat Masjid Huangcheng belum dicek.'],
     fromMain: false,
   },
   {
@@ -479,8 +479,8 @@ export const calmGlance: Record<string, CalmGlance> = {
   '2026-11-09': { bring: 'Kamera, baterai cadangan, bekal makan malam', remember: 'C5756 17.05 di Chengdu East: di stasiun ±16.45.' },
   '2026-11-10': { bring: 'Bekal siang, air, jaket, baterai cadangan', remember: 'Keluar taman paling lambat 17.30.' },
   '2026-11-11': { bring: 'Paspor, bekal siang, air, jaket, baterai cadangan', remember: 'Tur jemput 07.30 di Leyu; kereta C6374 17.30 dari 黄龙九寨 ke Chengdu.' },
-  '2026-11-12': { bring: 'Uang tunai untuk bekal', remember: 'Beli bekal halal untuk dua tur; tidur paling lambat 21.30.' },
-  '2026-11-13': { bring: 'Paspor, bekal siang, baju hangat berlapis, baterai cadangan', remember: 'Kumpul 05.40 di Yatai Building, Jinjiang.' },
+  '2026-11-12': { bring: 'Paspor, bekal siang, baju hangat berlapis, baterai cadangan', remember: 'Kumpul 05.40 di Yatai Building, Jinjiang.' },
+  '2026-11-13': { bring: 'Pakaian untuk salat Jumat, uang tunai untuk bekal', remember: 'Salat Jumat di Masjid Huangcheng; tidur paling lambat 21.30.' },
   '2026-11-14': { bring: 'Paspor, bekal siang, baju hangat', remember: 'Kumpul 06.00 di Jinjiang; malam kemas koper untuk D239 08.33.' },
   '2026-11-15': { bring: 'Bekal halal untuk 9 jam di kereta', remember: 'D239 berangkat 08.33 dari Chengdu South.' },
   '2026-11-16': { bring: 'Air dan jaket tipis', remember: 'Hari istirahat setelah D239.' },
@@ -507,7 +507,7 @@ export const calmComparison = {
   added: [
     'Malam kedua di Jiuzhaigou: 9 November tiba malam, lalu 10 November seharian di taman dengan satu tiket. Selain Five Flower Lake dan Shuzheng, hari itu juga ke Mirror Lake, Long Lake, Five-Colour Pond, Nuorilang, dan Pearl Shoals.',
     'Huanglong seharian dengan tur kecil (11 November), lalu kereta sore ke Chengdu.',
-    'Empat malam di Chengdu (11–14 November): hari istirahat 12 November, tur sehari ke Bipenggou (13 November) dan ke Siguniangshan, Shuangqiao Valley (14 November).',
+    'Empat malam di Chengdu (11–14 November): tur sehari ke Bipenggou (12 November), hari istirahat dan salat Jumat (13 November), lalu tur sehari ke Siguniangshan, Shuangqiao Valley (14 November).',
     'Toko buku Zhongshu Ge di Dujiangyan, wajib: Senin 9 November pagi saat toko baru buka; sore Taikoo Li / IFS; lalu C5756 ke Jiuzhaigou.',
     'Kereta pemandangan D239 Chengdu South → Lijiang (15 November).',
     'Tiga malam di Lijiang (15–17 November), lalu tur sehari ke Shangri-La lewat Upper Tiger Leaping Gorge dan Napahai (18 November).',
@@ -517,7 +517,7 @@ export const calmComparison = {
 
 export const calmTradeOffs = [
   'Dataran tinggi Sichuan barat dan Yading hilang seluruhnya: tidak ada Litang (4.014 m), danau Yading, atau G318. Risiko ketinggian dan jalan tanah ikut berkurang.',
-  'Bipenggou dan Siguniangshan jadi tur sehari dari Chengdu, sekitar 3–4 jam sekali jalan: tidak ada pagi atau sore di lembah, tetapi tanpa mobil pribadi dan tanpa pindah penginapan. Salat Jumat 13 November terlewat karena bus Bipenggou baru kembali ±19.15.',
+  'Bipenggou dan Siguniangshan jadi tur sehari dari Chengdu, sekitar 3–4 jam sekali jalan: tidak ada pagi atau sore di lembah, tetapi tanpa mobil pribadi dan tanpa pindah penginapan. Bus Bipenggou kumpul 05.40 pada 12 November, pagi setelah tiba dari Huanglong sekitar 21.00.',
   '9 November jadi hari panjang: DiDi pulang-pergi sekitar 58 km sekali jalan ke Zhongshu Ge pagi, sore di Taikoo Li, lalu C5756 17.05 (tiba Huanglongjiuzhai 19.10) dan taksi ke gukou.',
   'Libur sekolah Chengdu 11–13 November, ditambah akhir pekan, jatuh tepat di Huanglong dan Bipenggou: siap antre dan beli tiket lebih dulu.',
   'Malam 18 November naik sekitar 900 m sekaligus dari Lijiang ke Shangri-La; 19 November sore sudah turun lagi ke Lijiang.',
@@ -546,7 +546,7 @@ export const calmBookingGroups: CalmBookingGroup[] = [
       { date: '2026-11-09', item: 'Cadangan: C5786 Chengdu East 18.38 → Huanglongjiuzhai 20.48, atau C6376 14.34 + bus 17.30', urgency: 'now', mode: 'train', alternative: true, price: 'C5786 CNY 143 kelas dua (12306, 6 November). C6376 14.34 → 16.58 CNY 143 + bus 团子出行 17.30 CNY 51 (bus terakhir) bila berangkat lebih awal dari East.', cost: { min: 143, max: 194, per: 'orang' }, channel: 'Kereta: Trip.com atau 12306. Bus: 团子出行 dengan nama asli; belum pasti menerima paspor asing.', opens: 'Sudah dijual.', link: { label: 'Trip.com: Chengdu ke Huanglongjiuzhai', url: tripcomTrain('chengdu', 'huanglongjiuzhai') } },
       { date: '2026-11-09', item: 'Cadangan: shuttle Trip.com Chengdu → Jiuzhaigou, jemput Xinnanmen 14.00', urgency: 'now', mode: 'shuttle', alternative: true, price: 'IDR 328.648 untuk 9 November, sekitar CNY 120 (Trip.com, 6 November). Ordinary car tersedia; Nanny car tidak. OSRM 418 km / ±4 jam 48 menit tanpa macet.', cost: { min: 120, max: 120, per: 'orang' }, channel: 'Trip.com shuttle Individual, titik jemput Xinnanmen Bus Station (新南门汽车站).', opens: 'Sudah dijual. Hanya bila kursi kereta habis atau ingin tiba siang–sore.', link: { label: 'Trip.com: Jiuzhaigou, bagian shuttle', url: 'https://www.trip.com/travel-guide/attraction/jiuzhaigou/jiuzhaigou-national-park-89895/?scene=ticket' } },
       { date: '2026-11-11', item: 'C6374 Huanglongjiuzhai 17.30 → Chengdu East 20.09, satu kursi', paid: 440699, urgency: 'now', mode: 'train', price: 'CNY 143 kelas dua di Trip.com (dicek 9 November 2026); C6364 16.25 kelas dua sudah habis, kelas satu CNY 230. Cadangan lain: C5798 18.19 → 20.39.', cost: { min: 162, max: 162, per: 'orang' }, booked: 'Sudah dibeli di Trip.com pada 9 November: satu kursi, booking 1367845983575165, Rp440.699 (sekitar CNY 162), status Issuing ticket(s).', channel: 'Trip.com, atau 12306 sebagai cadangan; pilih stasiun 黄龙九寨, bukan 松潘.', opens: 'Sudah dipesan.', link: { label: 'Trip.com: Huanglongjiuzhai ke Chengdu', url: tripcomTrain('huanglongjiuzhai', 'chengdu') } },
-      { date: '2026-11-13', item: 'Bus bersama Chengdu → Bipenggou → Chengdu, tiket masuk termasuk', urgency: 'now', mode: 'bus', price: 'CNY 407 per orang untuk 13 November (Trip.com 100144400 paket B, dicek 8 November 2026): bus 43 kursi, tiket Bipenggou, sopir berbahasa Mandarin; kumpul 05.40 Yatai Building, Jinjiang; ±4 jam di taman; kembali ±19.15.', cost: { min: 407, max: 407, per: 'orang' }, channel: 'Trip.com.', opens: 'Sudah dijual.', link: { label: 'Trip.com: bus Chengdu–Bipenggou', url: 'https://id.trip.com/things-to-do/detail/100144400?locale=en-ID&curr=IDR' } },
+      { date: '2026-11-12', item: 'Bus bersama Chengdu → Bipenggou → Chengdu, tiket masuk termasuk', urgency: 'now', mode: 'bus', price: 'CNY 407 per orang untuk 13 November (Trip.com 100144400 paket B, dicek 8 November 2026; harga dan kursi 12 November belum dicek): bus 43 kursi, tiket Bipenggou, sopir berbahasa Mandarin; kumpul 05.40 Yatai Building, Jinjiang; ±4 jam di taman; kembali ±19.15.', cost: { min: 407, max: 407, per: 'orang' }, channel: 'Trip.com.', opens: 'Sudah dijual.', link: { label: 'Trip.com: bus Chengdu–Bipenggou', url: 'https://id.trip.com/things-to-do/detail/100144400?locale=en-ID&curr=IDR' } },
       { date: '2026-11-14', item: 'Tur gabung Chengdu → Siguniangshan (Shuangqiao Valley) → Chengdu', urgency: 'now', mode: 'bus', price: 'CNY 359 per orang untuk 14 November (Trip.com 89377156 paket J, dicek 8 November 2026): bus besar, tiket, bus wisata lembah, dan pemandu; makan siang tidak termasuk; kumpul 06.00 di Jinjiang.', cost: { min: 359, max: 359, per: 'orang' }, channel: 'Trip.com; pilih paket J (Group Tour), bukan paket K (privat).', opens: 'Sudah dijual.', link: { label: 'Trip.com: tur Siguniangshan', url: 'https://id.trip.com/things-to-do/detail/89377156?locale=en-ID&curr=IDR' } },
       { date: '2026-11-19', item: 'Songzanlin, 2 orang', urgency: 'onsite', price: 'Trip.com CNY 55, atau CNY 75 dengan shuttle pulang-pergi; acuan loket CNY 90. Tarif shuttle di loket belum pasti sejak pengumuman 27 Agustus 2026.', cost: { min: 55, max: 90, per: 'orang' }, channel: 'Trip.com (pesan paling lambat 18 November) atau loket dengan paspor.', opens: 'Tidak perlu reservasi; buka sekitar 07.30.', link: { label: 'Trip.com: Songzanlin', url: 'https://www.trip.com/travel-guide/attraction/shangri-la/songzanlin-scenic-spot-76335/?scene=ticket' } },
       { date: '2026-11-19', item: 'C988 Shangri-La 15.01 → Lijiang 16.14, dua kursi', urgency: 'now', mode: 'train', price: 'Jadwal dari Trip.com (dicek 9 November 2026). Pada 18 November C988 kelas dua CNY 49 (12306, 6 November); harga dan kursi 19 November belum dicek. Cadangan: C374 15.25 → 16.48.', cost: { min: 49, max: 70, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan; dua kursi atas nama paspor masing-masing.', opens: 'Sudah dijual.', link: { label: 'Trip.com: Shangri-La ke Lijiang', url: tripcomTrain('shangri-la', 'lijiang') } },
@@ -583,7 +583,7 @@ export const calmDoNotBuyLead = 'Dari rencana utama atau draf lama; tidak dipaka
 export const calmDoNotBuy = [
   'C5784 Huanglongjiuzhai → Chengdu East, shuttle 06.20, dan bus Chadianzi → Lixian, semuanya 10 November.',
   'Hotel di Lixian (Wuyoucheng) untuk 10 November.',
-  'Tiket Bipenggou bertanggal 11 atau 12 November; opsi ini berkunjung 13 November.',
+  'Tiket atau bus Bipenggou bertanggal 11 atau 13 November; opsi ini berkunjung 12 November.',
   'Tiket Panda Base 14 November, mobil Jiuzhaigou → Songpan → Stasiun Huanglongjiuzhai, dan C5754 bertanggal 11 November: rencana sebelum Huanglong masuk (6 November).',
   'Hotel di Chengdu untuk 13 November; opsi ini kembali ke Chengdu 14 November.',
   'C984 Shangri-La 12.00 → Lijiang 18 November dan C442 Lijiang → Dali 19 November dari rencana utama; opsi santai kembali dari Shangri-La 19 November dengan C988 15.01.',

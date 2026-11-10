@@ -143,7 +143,7 @@ export const calmStayBases: CalmStayBase[] = [
   {
     ...chengdu, id: '2026-11-11', nights: ['2026-11-11', '2026-11-12', '2026-11-13', '2026-11-14'], fromMain: false,
     notes: [
-      'Empat malam di Chunxi Road, basis untuk tur sehari ke Bipenggou (13 November) dan Siguniangshan (14 November); titik kumpul kedua tur di Jinjiang, dekat hotel. Mcsrh adalah hotel yang sama dengan 8 November; koper besar yang dititip sejak 9 November bisa diambil 11 November malam.',
+      'Empat malam di Chunxi Road, basis untuk tur sehari ke Bipenggou (12 November) dan Siguniangshan (14 November), dengan hari istirahat 13 November; titik kumpul kedua tur di Jinjiang, dekat hotel. Mcsrh adalah hotel yang sama dengan 8 November; koper besar yang dititip sejak 9 November bisa diambil 11 November malam.',
       'Harga per malam di bawah dicek untuk 14–15 November; harga 11–14 November belum dicek, jadi total empat malam di rincian biaya adalah perkiraan.',
       'Cadangan dekat Masjid Huangcheng: Chengdu Qingxian Hotel (成都清闲酒店), CNY 120 per malam untuk 13–15 November (dicek 5 November).',
     ],
