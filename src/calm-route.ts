@@ -104,7 +104,7 @@ const routeGateToBookstore = { label: 'OSRM (FOSSGIS): gerbang Bipenggou ke Zhon
 
 const calmOwnDays: CalmDay[] = [
   {
-    date: '2026-11-09', title: 'Zhongshu Ge pagi, Taikoo Li sore, kereta ke Jiuzhaigou', shortTitle: 'Zhongshu Ge, Taikoo Li, ke Jiuzhaigou',
+    date: '2026-11-09', title: 'Zhongshu Ge, Taikoo Li & Jiuzhaigou', shortTitle: 'Zhongshu Ge & Jiuzhaigou',
     route: ['Chunxi Road', 'Zhongshu Ge Dujiangyan', 'Taikoo Li', 'Chengdu East', 'Jiuzhaigou'],
     overnight: { name: 'Jiuzhaigou', elevation: '±2.000 m', detail: `Malam pertama dari dua di Leyu Youth Hostel (乐鱼青年旅舍), Desa Longkang, sekitar 1,8 km dari gerbang. ${calmStayPicks('2026-11-09')}` },
     transport: 'Pagi DiDi pulang-pergi ke Zhongshu Ge Dujiangyan, ±58 km sekali jalan. Sore jalan kaki di Chunxi / Taikoo Li / IFS dekat hotel, lalu DiDi atau metro ke Chengdu East. Kereta C5756 17.05 → Huanglongjiuzhai 19.10, lalu taksi/shuttle ke gukou. Cadangan: C5786 18.38, atau shuttle Trip.com 14.00 dari Xinnanmen bila kursi kereta habis.',
@@ -146,7 +146,7 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-10', title: 'Jiuzhaigou seharian: Mirror Lake pagi, Five Flower Lake siang', shortTitle: 'Jiuzhaigou seharian',
+    date: '2026-11-10', title: 'Jiuzhaigou: Mirror Lake & Five Flower Lake', shortTitle: 'Jiuzhaigou',
     route: ['Jiuzhaigou', 'Mirror Lake', 'Long Lake', 'Nuorilang', 'Five Flower Lake', 'Pearl Shoals', 'Shuzheng', 'Jiuzhaigou'],
     overnight: { name: 'Jiuzhaigou', elevation: '±2.000 m', detail: 'Leyu Youth Hostel lagi, malam kedua dari dua (sudah dipesan).' },
     transport: 'Jalan kaki 20–30 menit atau taksi dari Leyu Youth Hostel ke gerbang; bus taman (cabang Rize dan Zechawa berpisah di Nuorilang). Lama perjalanan bus belum dicek.',
@@ -187,7 +187,7 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-11', title: 'Huanglong seharian, kereta sore ke Chengdu', shortTitle: 'Huanglong, ke Chengdu',
+    date: '2026-11-11', title: 'Huanglong & Chengdu', shortTitle: 'Huanglong & Chengdu',
     route: ['Jiuzhaigou', 'Huanglong', 'Five-Colour Pool', 'Huanglongjiuzhai', 'Chengdu'],
     overnight: { name: 'Chengdu', detail: `Kembali ke Chunxi Road untuk empat malam, 11–14 November. ${calmStayPicks('2026-11-11')}` },
     transport: 'Tur kecil Trip.com (sudah dipesan): jemput 07.30 di Leyu, tiket dan ropeway naik termasuk, selesai di Stasiun Huanglongjiuzhai ±14.50; lalu kereta C6374 17.30 ke Chengdu East (tiba 20.09, sudah dipesan) dan Metro atau DiDi ke Chunxi Road.',
@@ -222,7 +222,7 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-12', title: 'Bipenggou sehari dari Chengdu', shortTitle: 'Bipenggou dari Chengdu',
+    date: '2026-11-12', title: 'Bipenggou & Danau Panyang', shortTitle: 'Bipenggou',
     route: ['Chengdu', 'Bipenggou', 'Danau Panyang', 'Chengdu'],
     overnight: { name: 'Chengdu', detail: 'Malam kedua dari empat di Chunxi Road.' },
     transport: 'Bus bersama Trip.com 100144400 (paket B): kumpul 05.40 di Yatai Building (亚太大厦), Jinjiang; sekitar 4 jam di taman; kembali ke titik kumpul ±19.15. Tiket masuk termasuk.',
@@ -248,7 +248,7 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-13', title: 'Istirahat & salat Jumat di Chengdu', shortTitle: 'Istirahat, salat Jumat',
+    date: '2026-11-13', title: 'Chengdu & salat Jumat', shortTitle: 'Chengdu & salat Jumat',
     route: ['Chunxi Road', 'Huangchengba', 'Chunxi Road'],
     overnight: { name: 'Chengdu', detail: 'Malam ketiga dari empat di Chunxi Road.' },
     transport: 'Jalan kaki, Metro, atau DiDi di pusat kota; tidak ada perjalanan antarkota hari ini.',
@@ -268,7 +268,7 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-14', title: 'Siguniangshan sehari dari Chengdu', shortTitle: 'Siguniang dari Chengdu',
+    date: '2026-11-14', title: 'Siguniangshan & Shuangqiao Valley', shortTitle: 'Siguniangshan',
     route: ['Chengdu', 'Terowongan Balang', 'Shuangqiao Valley', 'Chengdu'],
     overnight: { name: 'Chengdu', detail: `Malam keempat di Chunxi Road, sebelum D239 besok pagi. ${calmStayPicks('2026-11-14')}` },
     transport: 'Tur gabung Trip.com 89377156 (paket J): kumpul 06.00 di Asia Pacific Building (亚太大厦) atau Zongfu Building, Jinjiang; bus besar sekitar 4 jam sekali jalan lewat terowongan Balang; tiket, bus wisata Shuangqiao Valley, dan pemandu termasuk.',
@@ -294,7 +294,7 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-15', title: 'D239 dari Chengdu South ke Lijiang', shortTitle: 'Kereta D239 ke Lijiang',
+    date: '2026-11-15', title: 'Kota Tua Lijiang', shortTitle: 'Lijiang',
     route: ['Chengdu South', 'D239', 'Lijiang', 'Dayan'],
     overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Dekat Kota Tua Lijiang; 166 Hotel juga pilihan rencana utama untuk 18 November. ${calmStayPicks('2026-11-15')}` },
     transport: 'DiDi 8,3 km ke Chengdu South (sisihkan 20–30 menit); D239 08.33–17.46 (kelas dua CNY 376); taksi ke kota tua, sekitar 10 km, 25–40 menit, CNY 30–50 per mobil.',
@@ -323,7 +323,7 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-16', title: 'Hari santai di Lijiang', shortTitle: 'Lijiang santai',
+    date: '2026-11-16', title: 'Kota Tua Lijiang & Sifangjie', shortTitle: 'Lijiang & Sifangjie',
     route: ['Kota Tua Lijiang', 'Sifangjie'],
     overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Malam kedua dari tiga di kota tua. ${calmStayPicks('2026-11-16')}` },
     transport: 'Jalan kaki di kota tua; tidak ada perjalanan antarkota hari ini.',
@@ -342,7 +342,7 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-17', title: 'Hari bebas di Lijiang, siapkan tur', shortTitle: 'Lijiang bebas',
+    date: '2026-11-17', title: 'Kota Tua Lijiang, hari bebas', shortTitle: 'Lijiang bebas',
     route: ['Kota Tua Lijiang'],
     overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Malam ketiga di kota tua. ${calmStayPicks('2026-11-17')}` },
     transport: 'Jalan kaki di kota tua; tidak ada perjalanan antarkota hari ini.',
@@ -358,7 +358,7 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-18', title: 'Tur sehari Lijiang ke Shangri-La berdua', shortTitle: 'Tur ke Shangri-La',
+    date: '2026-11-18', title: 'Tiger Leaping Gorge, Napahai & Shangri-La', shortTitle: 'Tiger Leaping & Shangri-La',
     route: ['Lijiang', 'First Bend', 'Upper Tiger Leaping Gorge', 'Haba', 'Xiaozhongdian', 'Dukezong', 'Napahai', 'Shangri-La'],
     overnight: { name: 'Shangri-La', elevation: '3.300 m', detail: `Dukezong, satu malam berdua di kamar twin. ${calmStayPicks('2026-11-18')}` },
     transport: 'Tur gabung Trip.com 104549480 (Package E): jemput ±06.10 di Lijiang, mobil seharian lewat First Bend, Upper Gorge, Haba, dan Xiaozhongdian ke Shangri-La; turun di Dukezong, tidak kembali ke Lijiang.',
@@ -383,7 +383,7 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-19', title: 'Songzanlin pagi, kereta sore ke Lijiang', shortTitle: 'Songzanlin, ke Lijiang',
+    date: '2026-11-19', title: 'Songzanlin & Lijiang', shortTitle: 'Songzanlin & Lijiang',
     route: ['Dukezong', 'Songzanlin', 'Stasiun Shangri-La', 'Lijiang'],
     overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Satu malam berdua dekat kota tua, sebelum Jade Dragon. ${calmStayPicks('2026-11-19')}` },
     transport: 'Taksi atau DiDi ke Songzanlin (±6 km), lalu ke Stasiun Shangri-La; C988 15.01 → Lijiang 16.14 (cadangan C374 15.25 → 16.48); taksi ke kota tua.',
@@ -409,7 +409,7 @@ const calmOwnDays: CalmDay[] = [
     const jade = fromMainPlan('2026-11-19');
     const oneDayLater = (text: string) => text.replaceAll('19 November', '20 November');
     return {
-      ...jade, date: '2026-11-20', transport: oneDayLater(jade.transport),
+      ...jade, date: '2026-11-20', title: 'Jade Dragon, Blue Moon & Dali', shortTitle: 'Jade Dragon & Dali', transport: oneDayLater(jade.transport),
       intro: 'Hari Jade Dragon berdua, sama dengan rencana utama tetapi sehari lebih lambat: Blue Moon Valley pagi, Impression Lijiang 13.20, kereta gantung sore ke Glacier Park, lalu C442 20.22 ke Dali.',
       steps: titledSteps('2026-11-19').map(([time, title, detail]): TimelineStep => [time, title, detail && oneDayLater(detail)]),
       notes: [],
@@ -426,7 +426,7 @@ const calmOwnDays: CalmDay[] = [
     const daliSteps = titledSteps('2026-11-20');
     const airport = titledSteps('2026-11-21').slice(-2);
     return {
-      date: '2026-11-21', title: 'Erhai pagi, kereta siang ke Kunming, terbang pulang', shortTitle: 'Erhai, ke Kunming, pulang',
+      date: '2026-11-21', title: 'Erhai, Kota Tua Dali & Kunming', shortTitle: 'Erhai, Dali & Kunming',
       route: ['Erhai', 'Kota Tua Dali', 'Stasiun Dali', 'Kunming', 'Bandara Changshui'],
       overnight: fromMainPlan('2026-11-21').overnight,
       transport: 'Taksi ke Dermaga Caicun dan kembali; taksi dengan koper ke 大理站; kereta siang Dali → Kunming (pilih yang tiba paling lambat ±16.00, jadwal siang belum dicek); DiDi atau taksi ke Bandara Changshui untuk MF8426 20.05.',
