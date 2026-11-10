@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite';
 import { readFileSync } from 'node:fs';
-import { shell } from './src/render.ts';
+import { mainItineraryView } from './src/render.ts';
+import { homeView } from './src/home.ts';
+import { mainItineraryPath } from './src/site-search.ts';
 import { guideView, placesIndex } from './src/guide-render.ts';
 import { coverPhoto, pageBySlug, placePages, placePath, type GalleryPhoto, type PlacePage } from './src/guides.ts';
 import { staysView } from './src/stays-render.ts';
@@ -66,6 +68,7 @@ const prepareHtml = (html: string) => pageHtml(html, 'Persiapan & pemesanan | Ch
 const trainsHtml = (html: string) => pageHtml(html, 'Kereta & timeline | China 2026', 'Link Trip.com untuk semua kereta, slot tiket Jiuzhaigou, dan timeline jam demi jam 8–10 November 2026 dari Chengdu ke Bipenggou.', trainsPath, trainsView());
 const costsHtml = (html: string) => pageHtml(html, 'Rincian biaya | China 2026', 'Rincian biaya perjalanan Sichuan dan Yunnan 8–21 November 2026 per hari: kereta, bus, tiket masuk, mobil, dan penginapan, dalam yuan dan rupiah.', costsPath, costsView());
 const calmHtml = (html: string) => pageHtml(html, 'Opsi santai: kereta ke Yunnan | China 2026', 'Alternatif yang lebih tenang untuk Sichuan dan Yunnan 8–21 November 2026: dua hari di Jiuzhaigou, Huanglong, Bipenggou seharian, kereta D239 ke Lijiang, dan Upper Tiger Leaping Gorge, dengan peta rute dan daftar pemesanan.', calmPath, calmView());
+const mainItineraryHtml = (html: string) => pageHtml(html, 'Itinerary rencana utama | China 2026', 'Rencana utama Sichuan dan Yunnan 8–21 November 2026, hari demi hari: Sichuan barat, Yading, lalu Yunnan.', mainItineraryPath, mainItineraryView());
 const calmItineraryHtml = (html: string) => pageHtml(html, 'Itinerary santai | China 2026', 'Opsi santai Sichuan dan Yunnan 8–21 November 2026, hari demi hari: timeline, transport dan pemesanan, tempat, serta risiko tiap hari.', calmItineraryPath, calmItineraryView());
 const calmPrepareHtml = (html: string) => pageHtml(html, 'Persiapan santai | China 2026', 'Yang harus dipesan dan kapan kalau memilih opsi santai Sichuan dan Yunnan 8–21 November 2026, yang jangan dibeli, perkiraan biaya, internet, pembayaran, serta nomor darurat.', calmPreparePath, calmPrepareView());
 const calmStaysHtml = (html: string) => pageHtml(html, 'Hotel & hostel santai | China 2026', 'Satu hotel dan satu hostel atau guesthouse untuk setiap malam opsi santai Sichuan dan Yunnan, 8 sampai 20 November 2026, dengan harga untuk tanggal itu dan bukti menerima paspor asing.', calmStaysPath, calmStaysView());
@@ -137,6 +140,7 @@ export default defineConfig({
    if (path === costsPath || `${path}/` === costsPath) return costsHtml(html);
    if (path === calmPath || `${path}/` === calmPath) return calmHtml(html);
    if (path === calmItineraryPath || `${path}/` === calmItineraryPath) return calmItineraryHtml(html);
+   if (path === mainItineraryPath || `${path}/` === mainItineraryPath) return mainItineraryHtml(html);
    if (path === calmPreparePath || `${path}/` === calmPreparePath) return calmPrepareHtml(html);
    if (path === calmStaysPath || `${path}/` === calmStaysPath) return calmStaysHtml(html);
    if (path === calmCostsPath || `${path}/` === calmCostsPath) return calmCostsHtml(html);
@@ -145,7 +149,7 @@ export default defineConfig({
    if (path === askPath || `${path}/` === askPath) return askHtml(html);
    const slug = path.match(/^\/places\/([a-z0-9-]+)\/?$/)?.[1];
    const page = slug ? pageBySlug.get(slug) : undefined;
-   return page ? destinationHtml(html, page) : html.replace('<!--app-->', shell());
+   return page ? destinationHtml(html, page) : html.replace('<!--app-->', homeView());
   },
   generateBundle: {
    order: 'post',
@@ -170,6 +174,8 @@ export default defineConfig({
     this.emitFile({ type: 'asset', fileName: 'places/costs/index.html', source: costsHtml(template) });
     if (pageBySlug.has('calm')) throw new Error('A place guide cannot use the reserved calm slug');
     this.emitFile({ type: 'asset', fileName: 'places/calm/index.html', source: calmHtml(template) });
+    if (pageBySlug.has('main-itinerary')) throw new Error('A place guide cannot use the reserved main-itinerary slug');
+    this.emitFile({ type: 'asset', fileName: 'places/main-itinerary/index.html', source: mainItineraryHtml(template) });
     if (pageBySlug.has('calm-itinerary')) throw new Error('A place guide cannot use the reserved calm-itinerary slug');
     this.emitFile({ type: 'asset', fileName: 'places/calm-itinerary/index.html', source: calmItineraryHtml(template) });
     if (pageBySlug.has('calm-prepare')) throw new Error('A place guide cannot use the reserved calm-prepare slug');

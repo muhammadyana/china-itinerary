@@ -24,6 +24,7 @@ import { initializeRouteMap } from './route-map-main.ts';
 import { initializePhotoLoading } from './photo-loading.ts';
 import { clipboardCopy, modalDialogs, photoViewer, showPhotoErrors, statusAnnouncer } from './day-controls.ts';
 import { initializeCalmItinerary } from './calm-itinerary-main.ts';
+import { initializeHome } from './home-main.ts';
 import { initializeCalmChecklist } from './calm-checklist.ts';
 import { initializeExpenses } from './expenses-main.ts';
 import { days, daysByDate, places } from './itinerary.ts';
@@ -42,23 +43,8 @@ const { open: openDialog, returnFocus } = dialogs;
 const announce = statusAnnouncer($('#status'));
 const photoView = photoViewer(photoDialog, openDialog);
 const copyText = clipboardCopy(copyDialog, dialogs, announce);
-const heroTrack = $('.hero-track');
-const heroSlides = Array.from(document.querySelectorAll<HTMLElement>('.hero-slide'));
-let heroIndex = 0;
-heroTrack.addEventListener('scroll', () => {
-  const index = Math.round(heroTrack.scrollLeft / heroTrack.clientWidth);
-  if(index === heroIndex || !heroSlides[index]) return;
-  heroIndex=index;
-  heroSlides.forEach((slide,i)=>{slide.classList.toggle('is-active',i===index);slide.inert=i!==index;});
-  $('#hero-counter').textContent=`${index+1} / ${heroSlides.length}`;
-}, {passive:true});
 // In-page jumps glide unless the reader asked for reduced motion.
 const glide = (): ScrollBehavior => matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
-function moveHero(direction: number) {
-  const next=(heroIndex+direction+heroSlides.length)%heroSlides.length;
-  heroTrack.scrollTo({left:next*heroTrack.clientWidth,behavior:glide()});
-}
-
 function dateFromHash() {
   const date = window.location.hash.slice(1);
   if (['itinerary', 'user-gallery', 'route'].includes(date) && daysByDate.has(history.state?.date)) return history.state.date as string;
@@ -120,21 +106,6 @@ document.addEventListener('click', event => {
     section.scrollIntoView({block:'start', behavior:glide()});
     section.focus({preventScroll:true});
   }
-  else if ((action === 'itinerary' || action === 'gallery') && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
-    event.preventDefault();
-    const target = action === 'gallery' ? $('#user-gallery') : $('#itinerary');
-    if (target instanceof HTMLDetailsElement) target.open = true;
-    if (location.hash !== `#${target.id}`) history.pushState({date:current}, '', `#${target.id}`);
-    target.scrollIntoView({block:'start', behavior:glide()});
-    target.querySelector<HTMLElement>('summary, h2')?.focus({preventScroll:true});
-  }
-  else if (action === 'hero-next') moveHero(1);
-  else if (action === 'hero-previous') moveHero(-1);
-  else if (action === 'region') {
-    const section = document.getElementById(`region-${button.dataset.region?.toLowerCase()}`);
-    section?.scrollIntoView({block:'start',behavior:glide()});
-    section?.querySelector<HTMLElement>('h3')?.focus({preventScroll:true});
-  }
   else if (action === 'pick-day') {
     $('#picker-days').innerHTML = pickerItems(current); openDialog(picker,button);
   } else if (action === 'close') button.closest('dialog')?.close();
@@ -160,15 +131,14 @@ showPhotoErrors();
 const historyChanged = () => {
   const date = dateFromHash();
   if (date !== current) showDay(date,{scroll:daysByDate.has(location.hash.slice(1))});
-  if (location.hash === '#route') openOverview($('.site-navigation [data-action="overview"]'));
+  if (location.hash === '#route') openOverview($('.itinerary-actions [data-action="overview"]'));
   else if (overview.open) overview.close();
-  if (location.hash === '#user-gallery') $<HTMLDetailsElement>('#user-gallery').open = true;
 };
 window.addEventListener('popstate',historyChanged);
 window.addEventListener('hashchange',historyChanged);
 document.documentElement.classList.add('js');
 showDay(current,{scroll:daysByDate.has(location.hash.slice(1)),announceChange:false});
-if (location.hash === '#route') openOverview($('.site-navigation [data-action="overview"]'));
+if (location.hash === '#route') openOverview($('.itinerary-actions [data-action="overview"]'));
 
 }
 
@@ -176,6 +146,8 @@ initializePhotoLoading();
 // Default every utama/santai twin to the calm option unless ?plan=utama.
 const wantsMainPlan = new URLSearchParams(location.search).get('plan') === 'utama';
 const mainToCalm: Record<string, string> = {
+  '/places/main-itinerary': '/places/calm-itinerary/',
+  '/places/main-itinerary/': '/places/calm-itinerary/',
   '/places/map': '/places/calm/',
   '/places/map/': '/places/calm/',
   '/places/stays': '/places/calm-stays/',
@@ -188,7 +160,7 @@ const mainToCalm: Record<string, string> = {
   '/places/trains/': '/places/calm-trains/',
 };
 if (!wantsMainPlan) {
-  // Landing `/` stays the original homepage (hero + rencana utama). Only twin planning pages bounce to santai.
+  // `/` already shows the calm days under the hero; the main plan's own pages bounce to their santai twins.
   const calm = mainToCalm[location.pathname];
   if (calm) location.replace(calm + location.hash);
 }
@@ -197,6 +169,7 @@ const calmItinerary = document.querySelector<HTMLElement>('[data-calm-itinerary]
 if (document.getElementById('day-view')) initializeItinerary();
 else if (calmItinerary) initializeCalmItinerary(calmItinerary);
 else initializeGuide();
+initializeHome();
 initializeRouteMap();
 initializeWeather();
 initializeCurrency();

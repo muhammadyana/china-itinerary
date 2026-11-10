@@ -1,6 +1,6 @@
 import { days, places } from './itinerary.ts';
 import { mainPlanGuides, pageForPlace, placePages, placePath } from './guides.ts';
-import { calmItineraryPage, expensesPage, planTopics, renderSiteSearch, searchTrigger } from './site-search.ts';
+import { calmItineraryPage, expensesPage, mainItineraryPath, planTopics, renderSiteSearch, searchTrigger } from './site-search.ts';
 import { logoMark } from './logo.ts';
 
 const initializedDocuments = new WeakSet<Document>();
@@ -16,14 +16,14 @@ const home: NavLink = { href: '/', label: 'Beranda' };
 
 const topLinks: NavLink[] = [
   { href: '/#user-gallery', label: 'Galeri', action: 'gallery' },
-  { href: '/#route', label: 'Rute', action: 'overview' },
+  { href: '/places/calm/#calm-map', label: 'Rute' },
 ];
 
-// One row per planning topic, each with the main plan and the calm option. The 14-day itinerary is the homepage,
+// One row per planning topic, each with the main plan and the calm option. The homepage shows the calm 14 days,
 // which search reaches day by day instead of as a planning page.
 interface PlanRow { topic: string; main: NavLink; calm: NavLink }
 const planRows: PlanRow[] = [
-  { topic: 'Itinerary 14 hari', main: { href: '/?plan=utama#itinerary', label: 'Itinerary 14 hari' }, calm: calmItineraryPage },
+  { topic: 'Itinerary 14 hari', main: { href: `${mainItineraryPath}?plan=utama`, label: 'Itinerary 14 hari' }, calm: calmItineraryPage },
   ...planTopics,
 ];
 const plans = { main: { short: 'Utama', name: 'rencana utama' }, calm: { short: 'Santai', name: 'opsi santai' } };

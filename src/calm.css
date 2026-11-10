@@ -63,7 +63,7 @@
 /* Night cards on the calm preparation page are anchor targets from the day panels. */
 .prepare-booking[id] { scroll-margin-top: var(--site-navigation-clearance); }
 html:not(.js) .calm-day-view + .calm-day-view { margin-top: var(--space-3xl); padding-top: var(--space-2xl); border-top: 1px solid var(--color-rule-2); }
-html:not(.js) :is(.calm-daybar, .calm-itinerary-page :is([data-action="pick-day"], .share-button)) { display: none; }
+html:not(.js) :is(.calm-daybar, :is(.calm-itinerary-page, .calm-home-itinerary) :is([data-action="pick-day"], .share-button)) { display: none; }
 /* The page's inline script sets .js before the panels are parsed. Until calm-itinerary-main.ts is ready, show only the linked day, or the first. */
 .js [data-calm-itinerary]:not([data-ready]) .calm-day-panels:has(:target) > :not(:target, :has(:target)),
 .js [data-calm-itinerary]:not([data-ready]) .calm-day-panels:not(:has(:target)) > :not(:first-child) { display: none; }

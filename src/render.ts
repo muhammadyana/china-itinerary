@@ -8,7 +8,7 @@ import { weatherLocationForGuide } from './weather-locations.ts';
 import { currencyText, hasCnyAmount, renderExchangeRate } from './currency.ts';
 import type { PhotoContent } from './photo-viewer.ts';
 import { planSwitch, renderSiteNavigation } from './site-navigation.ts';
-import { calmItineraryPage } from './site-search.ts';
+import { calmItineraryPage, mainItineraryPath } from './site-search.ts';
 import { logoPaths } from './logo.ts';
 import { renderChengduEvening } from './chengdu-evening.ts';
 import { stayBaseForDate, staysPath } from './stays.ts';
@@ -240,13 +240,18 @@ export const mobileDaybar = (className = 'mobile-daybar') => `<nav class="${clas
 export const dayPickerDialog = (items: string) => `<dialog id="day-picker" class="day-picker" aria-labelledby="picker-title"><header class="dialog-header"><div><h2 id="picker-title">Pilih hari perjalanan</h2><p>November 2026</p></div><button type="button" class="icon-button" data-action="close" aria-label="Tutup pemilih hari" autofocus>${icon('close')}</button></header><ol id="picker-days" class="picker-days">${items}</ol></dialog>`;
 export const copyDialog = () => `<dialog id="copy-dialog" class="copy-dialog" aria-labelledby="copy-title"><header class="dialog-header"><h2 id="copy-title">Salin secara manual</h2><button type="button" class="icon-button" data-action="close" aria-label="Tutup salin manual">${icon('close')}</button></header><p>Penyalinan otomatis tidak tersedia. Pilih teks di bawah, lalu salin.</p><label for="manual-copy">Teks untuk disalin</label><input id="manual-copy" readonly></dialog>`;
 export const statusMessage = '<div class="status-message" id="status" role="status" aria-live="polite" aria-atomic="true"></div>';
-export function shell() {
- return `<a class="skip-link" href="#day-heading" data-action="skip">Langsung ke jadwal</a><header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation('/')}</header>
- <main class="container">${tripHero()}${userGallery()}
- ${arrivalSummary()}${tripHighlights()}<div class="itinerary-intro" id="itinerary"><h2 tabindex="-1">Rencana utama,<br>hari demi hari.</h2><div class="itinerary-actions">${pickDayButton()}<button type="button" class="quiet-button" data-action="overview">Rute${icon('right')}</button>${planSwitch('/')}</div></div>
+/** The homepage's opening sections (hero slider, travel gallery, first-day card, regions), shared by no other page. */
+export const homeTop = () => `${tripHero()}${userGallery()}
+ ${arrivalSummary()}${tripHighlights()}`;
+export const siteFooter = () => `<footer class="site-footer container"><div class="footer-top"><p>Perjalanan yang sudah ditata.<br>Tinggal menikmati jalannya.</p><a class="quiet-button" href="${pdfDownloadUrl}" download>${icon('download')}<span>Unduh PDF terbaru</span></a></div>${credits()}<div class="footer-bottom"><span>Sichuan & Yunnan, November 2026</span><span>Semua jam dalam UTC+8</span>${siteCredit()}</div></footer>`;
+
+/** The main plan's 14 days, one at a time; the homepage shows the calm option instead. */
+export function mainItineraryView() {
+ return `<a class="skip-link" href="#day-heading" data-action="skip">Langsung ke jadwal</a><header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation(mainItineraryPath)}</header>
+ <main class="container main-itinerary-page"><div class="itinerary-intro" id="itinerary"><h1 tabindex="-1">Rencana utama,<br>hari demi hari.</h1><div class="itinerary-actions">${pickDayButton()}<button type="button" class="quiet-button" data-action="overview">Rute${icon('right')}</button>${planSwitch(mainItineraryPath)}</div></div>
  <div class="journey-layout">${daySidebar(sidebarItems(mainSidebarDays(), days[0].date),`<button class="route-link" type="button" data-action="overview">Lihat seluruh rute${icon('right')}</button>`)}<article id="day-view" class="day-view" aria-label="Jadwal hari terpilih">${dayView(days[0])}</article></div>
  <noscript><p class="no-script">Pemilih hari memerlukan JavaScript. Jadwal hari pertama tetap tersedia di sini. <a href="${pdfDownloadUrl}">PDF memuat itinerary terbaru 14 hari</a>, dibuat otomatis dari konten website.</p></noscript>${renderOverland()}</main>
- <footer class="site-footer container"><div class="footer-top"><p>Perjalanan yang sudah ditata.<br>Tinggal menikmati jalannya.</p><a class="quiet-button" href="${pdfDownloadUrl}" download>${icon('download')}<span>Unduh PDF terbaru</span></a></div>${credits()}<div class="footer-bottom"><span>Sichuan & Yunnan, November 2026</span><span>Semua jam dalam UTC+8</span>${siteCredit()}</div></footer>
+ ${siteFooter()}
  ${mobileDaybar()}
  ${dayPickerDialog(pickerItems(days[0].date))}
  <dialog id="overview-dialog" class="overview-dialog" aria-labelledby="overview-title"><header class="dialog-header"><h2 id="overview-title">Dari Chengdu ke Kunming</h2><button type="button" class="icon-button" data-action="close" aria-label="Tutup ringkasan rute" autofocus>${icon('close')}</button></header><div id="overview-content"></div></dialog>

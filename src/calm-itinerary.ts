@@ -111,8 +111,8 @@ function dayPanel(day: CalmDay, index: number) {
  ${main?.sourceNote ? `<p class="stop-note day-source-note">${e(main.sourceNote)}</p>` : ''}${pagination(index)}</article>`;
 }
 
-function intro() {
-  return `<div class="itinerary-intro"><h1 id="calm-itinerary-title">Opsi santai,<br>hari demi hari.</h1><div class="itinerary-actions">${pickDayButton()}<a class="quiet-button" href="${calmPath}#calm-map">Peta${icon('right')}</a>${planSwitch(calmItineraryPath)}</div></div>`;
+function intro(heading: 'h1' | 'h2') {
+  return `<div class="itinerary-intro"><${heading} id="calm-itinerary-title" tabindex="-1">Opsi santai,<br>hari demi hari.</${heading}><div class="itinerary-actions">${pickDayButton()}<a class="quiet-button" href="${calmPath}#calm-map">Peta${icon('right')}</a>${planSwitch(calmItineraryPath)}</div></div>`;
 }
 
 // Runs before the panels are parsed, so calm.css shows only the linked day from the first paint instead of 14 days that then collapse.
@@ -122,19 +122,27 @@ const earlyScript = '<script data-cfasync="false">document.documentElement.class
 const regionOf = (date: string) => date >= '2026-11-15' ? 'Yunnan' : 'Sichuan';
 const calmSidebarDays = (): SidebarDay[] => calmDays.map(day => ({ ...day, region: regionOf(day.date), modes: calmRoute.days.find(item => item.date === day.date)?.modes ?? [] }));
 
+const dayLayout = (first: string) => `<div class="journey-layout" id="calm-itinerary-days">${daySidebar(sidebarItems(calmSidebarDays(), first), `<a class="route-link" href="${calmPath}#calm-map">Lihat peta rute santai${icon('right')}</a>`)}<div class="calm-day-panels">${calmDays.map(dayPanel).join('')}</div></div>`;
+const dayChrome = (first: string) => `${mobileDaybar('mobile-daybar calm-daybar')}
+  ${dayPickerDialog(pickerItems(first, calmDays))}
+  ${renderPhotoDialog('home')}
+  ${copyDialog()}
+  ${statusMessage}`;
+
+/** The homepage's itinerary: the calm option's days under the hero, wired by the same script as the calm itinerary page. */
+export const homeItinerarySection = () => `<section class="calm-home-itinerary" id="itinerary" data-calm-itinerary aria-labelledby="calm-itinerary-title">${intro('h2')}${dayLayout(calmDays[0].date)}</section>`;
+export const homeItineraryChrome = () => dayChrome(calmDays[0].date);
+export { earlyScript as calmEarlyScript };
+
 export function calmItineraryView() {
   const first = calmDays[0].date;
   return `${earlyScript}<a class="skip-link" href="#calm-itinerary-days" data-action="skip">Langsung ke jadwal</a>
   <header class="site-header container"><a class="wordmark" href="/" aria-label="Musim Gugur di China, halaman awal">${icon('mountain')}<span>China <span class="wordmark-year">2026</span></span></a>${renderSiteNavigation(calmItineraryPath)}</header>
   <main class="container calm-itinerary-page" data-calm-itinerary>
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="${calmPath}">Opsi santai</a>${icon('right')}<span>Itinerary santai</span></nav>
-    ${intro()}
-    <div class="journey-layout" id="calm-itinerary-days">${daySidebar(sidebarItems(calmSidebarDays(), first), `<a class="route-link" href="${calmPath}#calm-map">Lihat peta rute santai${icon('right')}</a>`)}<div class="calm-day-panels">${calmDays.map(dayPanel).join('')}</div></div>
+    ${intro('h1')}
+    ${dayLayout(first)}
   </main>
   <footer class="container guide-footer calm-itinerary-footer"><a href="${calmPath}">Kembali ke opsi santai</a>${siteCredit()}</footer>
-  ${mobileDaybar('mobile-daybar calm-daybar')}
-  ${dayPickerDialog(pickerItems(first, calmDays))}
-  ${renderPhotoDialog('home')}
-  ${copyDialog()}
-  ${statusMessage}`;
+  ${dayChrome(first)}`;
 }

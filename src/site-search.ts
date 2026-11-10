@@ -25,6 +25,7 @@ export interface PlanTopic { topic: string; main: PlanningPage; calm: PlanningPa
 // The planning pages in pairs. They feed search, the Itinerary menu (one row per topic, after the 14-day itinerary itself)
 // and the links between twins. The trains, costs and calm pages import the navigation, and costs.ts computes every line
 // on load, so their paths stay literals here.
+export const mainItineraryPath = '/places/main-itinerary/';
 export const calmItineraryPage: PlanningPage = { href: '/places/calm-itinerary/', label: 'Itinerary santai', keywords: 'opsi santai calm hari demi hari jadwal timeline per hari alternatif' };
 export const planTopics: PlanTopic[] = [
   {
