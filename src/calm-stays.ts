@@ -141,10 +141,25 @@ export const calmStayBases: CalmStayBase[] = [
     hostel: dandelion,
   },
   {
-    ...chengdu, id: '2026-11-11', nights: ['2026-11-11', '2026-11-12', '2026-11-13', '2026-11-14'], fromMain: false,
+    ...chengdu, id: '2026-11-11', nights: ['2026-11-11', '2026-11-12', '2026-11-13'], fromMain: false, booked: true, paid: 935530,
     notes: [
-      'Empat malam di Chunxi Road, basis untuk tur sehari ke Bipenggou (12 November) dan Siguniangshan (14 November), dengan hari istirahat 13 November; titik kumpul kedua tur di Jinjiang, dekat hotel. Mcsrh adalah hotel yang sama dengan 8 November; koper besar yang dititip sejak 9 November bisa diambil 11 November malam.',
-      'Harga per malam di bawah dicek untuk 14–15 November; harga 11–14 November belum dicek, jadi total empat malam di rincian biaya adalah perkiraan.',
+      'Sudah dipesan di Trip.com pada 11 November: tiga malam, 11–14 November. Basis untuk Bipenggou (12 November) dan hari istirahat 13 November; koper besar yang dititip sejak 9 November bisa diambil 11 November malam.',
+      'Batal gratis sampai 11 November 18.00 waktu setempat; setelah itu biaya batal Rp266.517.',
+    ],
+    hotel: {
+      ...mcsrh,
+      price: 'CNY 115 per malam',
+      priceNote: 'Sudah dipesan di Trip.com: Rp935.530 untuk 11–14 November (tiga malam), sekitar CNY 115 per malam. Pesanan terkonfirmasi.',
+      reason: 'Sudah dipesan untuk 11–13 November, hotel yang sama dengan 8 November.',
+      links: [trip('https://us.trip.com/hotels/detail/?hotelId=115543776&checkIn=2026-11-11&checkOut=2026-11-14&adult=1&crn=1&curr=CNY')],
+    },
+    hostel: desti,
+  },
+  {
+    ...chengdu, id: '2026-11-14', nights: ['2026-11-14'], fromMain: false,
+    notes: [
+      'Malam 14 November belum dipesan: pesanan Mcsrh berakhir 14 November. Perpanjang satu malam di Mcsrh supaya tidak pindah koper setelah tur Siguniangshan, atau pilih hotel dekat Chengdu South untuk D239 08.33 besok.',
+      'Harga per malam di bawah dicek untuk 14–15 November.',
       'Cadangan dekat Masjid Huangcheng: Chengdu Qingxian Hotel (成都清闲酒店), CNY 120 per malam untuk 13–15 November (dicek 5 November).',
     ],
     hotel: mcsrh,

@@ -31,7 +31,8 @@ const checklistGroups: ChecklistGroup[] = [
     items: [
       { id: 'pudong-7nov', label: 'Pudong / Aerotel transit 7 Nov' },
       { id: 'jiuzhaigou-9-10', label: 'Jiuzhaigou 9–10 (Leyu Youth Hostel)', booked: true },
-      { id: 'chengdu-11-14', label: 'Chengdu 11–14 (4 malam, Chunxi Road)' },
+      { id: 'chengdu-11-14', label: 'Chengdu 11–13 (Mcsrh, 3 malam)', booked: true },
+      { id: 'chengdu-14', label: 'Chengdu malam 14 (belum dipesan)' },
       { id: 'lijiang-15-17', label: 'Lijiang 15–17 (twin mulai 17 Nov)' },
       { id: 'shangri-la-18', label: 'Shangri-La twin 18' },
       { id: 'lijiang-19', label: 'Lijiang 19' },
