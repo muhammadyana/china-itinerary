@@ -16,7 +16,7 @@ const checklistGroups: ChecklistGroup[] = [
       { id: 'huanglong-11nov', label: 'Tur Huanglong 11 Nov (tiket + ropeway naik + mobil, jemput 07.30)', booked: true },
       { id: 'c6374-11nov', label: 'C6374 Huanglongjiuzhai 17.30 → Chengdu East 20.09 (11 Nov, sudah dipesan)' },
       { id: 'bipenggou-bus-13nov', label: 'Bus PP Chengdu → Bipenggou 07.30 + tiket Bipenggou 12 Nov', booked: true },
-      { id: 'siguniang-14nov', label: 'Tur Siguniangshan 14 Nov (Trip.com 89377156 paket J)' },
+      { id: 'siguniang-14nov', label: 'Tur Siguniangshan 14 Nov (Trip.com 89377156 paket J)', booked: true },
       { id: 'd239-15nov', label: 'D239 Chengdu South 08.33 → Lijiang 17.46 (15 Nov)' },
       { id: 'shangri-la-tour-18nov', label: 'Tur Lijiang → Shangri-La 18 Nov (Trip.com 104549480, 2 orang, turun di Dukezong)' },
       { id: 'c988-songzanlin-19nov', label: 'C988 Shangri-La 15.01 → Lijiang 19 Nov (2 kursi) + Songzanlin 19 Nov (2 tiket)' },
