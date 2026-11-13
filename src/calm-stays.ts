@@ -156,13 +156,18 @@ export const calmStayBases: CalmStayBase[] = [
     hostel: desti,
   },
   {
-    ...chengdu, id: '2026-11-14', nights: ['2026-11-14', '2026-11-15'], fromMain: false,
+    ...chengdu, id: '2026-11-14', nights: ['2026-11-14', '2026-11-15'], fromMain: false, booked: true, paid: 754697,
     notes: [
-      'Malam 14 dan 15 November belum dipesan: pesanan Mcsrh berakhir 14 November. Perpanjang dua malam di Mcsrh (14–16 November) supaya koper tetap di kamar selama Siguniangshan dan day trip Chongqing, sebelum D239 08.33 pada 16 November.',
-      'Harga per malam di bawah dicek untuk 14–15 November.',
-      'Cadangan dekat Masjid Huangcheng: Chengdu Qingxian Hotel (成都清闲酒店), CNY 120 per malam untuk 13–15 November (dicek 5 November).',
+      'Sudah dipesan di Trip.com pada 13 November: dua malam, 14–16 November, menyambung pesanan 11–14 November di hotel yang sama. Koper tetap di kamar selama Siguniangshan dan day trip Chongqing, sebelum D239 08.33 pada 16 November.',
+      'Batal gratis sampai 14 November 18.00 waktu setempat; setelah itu biaya batal Rp486.725.',
     ],
-    hotel: mcsrh,
+    hotel: {
+      ...mcsrh,
+      price: 'CNY 139 per malam',
+      priceNote: 'Sudah dipesan di Trip.com: Rp754.697 untuk 14–16 November (dua malam, setelah potongan Trip Coins Rp17.682), sekitar CNY 139 per malam. Pesanan terkonfirmasi.',
+      reason: 'Sudah dipesan untuk 14–15 November, hotel yang sama dengan 11–13 November.',
+      links: [trip('https://us.trip.com/hotels/detail/?hotelId=115543776&checkIn=2026-11-14&checkOut=2026-11-16&adult=1&crn=1&curr=CNY')],
+    },
     hostel: desti,
   },
   {
