@@ -14,7 +14,7 @@ const unpriced = calmCostLines.filter(line => !line.cost);
 const calmNotIncluded = [
   ...notIncluded,
   `Pilihan cadangan, yang menggantikan pos utamanya bila dipakai: ${alternatives.map(item => `${Number(item.date.slice(-2))} November, ${item.item.replace(/^[^:]+:\s*/, '')}`).join('; ')}.`,
-  'Taksi dan metro dalam kota yang belum ada di daftar pemesanan: Chadianzi ke Chunxi Road 14 November, Chengdu South dan Stasiun Lijiang 15 November, serta Napahai 17 November.',
+  'Taksi dan metro dalam kota yang belum ada di daftar pemesanan: Chadianzi ke Chunxi Road 14 November, metro dan DiDi di Chongqing 15 November, Chengdu South dan Stasiun Lijiang 16 November, serta Napahai 17 November.',
   ...(unpriced.length ? [`Pos tanpa harga: ${unpriced.map(line => line.label).join('; ')}.`] : []),
 ];
 

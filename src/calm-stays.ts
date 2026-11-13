@@ -74,7 +74,7 @@ const desti: Stay = {
   price: 'CNY 52 per ranjang (promo menginap pertama)',
   priceNote: 'Trip.com untuk satu orang, 14–15 November (dicek 6 November 2026): ranjang di dorm pria 10 orang, CNY 52 termasuk pajak. Harga promo menginap pertama (potongan 19%), bisa dibatalkan gratis sampai 14 November 14.00.',
   foreignGuests: 'Trip.com: menerima tamu dari semua negara, berlabel "Hi China!". Nilai 9,3 dari 4.161 ulasan.',
-  rooms: 'Kamar mandi bersama, resepsionis 24 jam, jam tenang 23.00–07.00. Berangkat 07.30 pada 15 November dari dorm bisa mengganggu tamu lain.',
+  rooms: 'Kamar mandi bersama, resepsionis 24 jam, jam tenang 23.00–07.00. Berangkat 07.30 pada 16 November dari dorm bisa mengganggu tamu lain.',
   reason: 'Ranjang termurah bernilai tinggi di Chunxi Road, dekat masjid.',
   links: [trip('https://us.trip.com/hotels/detail/?hotelId=19644601&checkIn=2026-11-14&checkOut=2026-11-15&adult=1&crn=1&curr=CNY')],
   sources: [
@@ -156,9 +156,9 @@ export const calmStayBases: CalmStayBase[] = [
     hostel: desti,
   },
   {
-    ...chengdu, id: '2026-11-14', nights: ['2026-11-14'], fromMain: false,
+    ...chengdu, id: '2026-11-14', nights: ['2026-11-14', '2026-11-15'], fromMain: false,
     notes: [
-      'Malam 14 November belum dipesan: pesanan Mcsrh berakhir 14 November. Perpanjang satu malam di Mcsrh supaya tidak pindah koper setelah tur Siguniangshan, atau pilih hotel dekat Chengdu South untuk D239 08.33 besok.',
+      'Malam 14 dan 15 November belum dipesan: pesanan Mcsrh berakhir 14 November. Perpanjang dua malam di Mcsrh (14–16 November) supaya koper tetap di kamar selama Siguniangshan dan day trip Chongqing, sebelum D239 08.33 pada 16 November.',
       'Harga per malam di bawah dicek untuk 14–15 November.',
       'Cadangan dekat Masjid Huangcheng: Chengdu Qingxian Hotel (成都清闲酒店), CNY 120 per malam untuk 13–15 November (dicek 5 November).',
     ],
@@ -166,9 +166,9 @@ export const calmStayBases: CalmStayBase[] = [
     hostel: desti,
   },
   {
-    ...lijiang, id: '2026-11-15', nights: ['2026-11-15', '2026-11-16', '2026-11-17'], fromMain: false,
+    ...lijiang, id: '2026-11-16', nights: ['2026-11-16', '2026-11-17'], fromMain: false,
     notes: [
-      'Tiga malam di kota tua sebelum tur 18 November; malam 17 November berdua, jadi pesan kamar twin untuk dua orang mulai 17 November. Harga di bawah dicek untuk 15–16 November satu orang; harga 16–18 November belum dicek.',
+      'Dua malam di kota tua sebelum tur 18 November; malam 17 November berdua, jadi pesan kamar twin untuk dua orang mulai 17 November. Harga di bawah dicek untuk 15–16 November satu orang; harga 16–18 November belum dicek.',
       'Tanyakan apakah koper boleh dititip 18–19 November sambil ke Shangri-La, karena 19 November kembali ke Lijiang.',
       'Mama Naxi Guesthouse, pilihan rencana utama untuk 18 November, kini CNY 209 untuk kamar privat 15 November, di atas batas dan tinggal satu kamar. Ranjang di dorm campur 8 orang CNY 44–58 termasuk pajak.',
       'Taksi berhenti di gerbang kota tua; 166 Hotel bisa dijangkau mobil sampai pintu, Huaqian Yuexia Inn tidak.',
@@ -178,7 +178,7 @@ export const calmStayBases: CalmStayBase[] = [
       price: 'CNY 76 per malam',
       priceNote: 'Trip.com untuk satu orang, 15–16 November: Special Upgraded Room twin CNY 76 termasuk pajak dan parkir, label "Early Bird Deal" 7%, bisa dibatalkan gratis; tinggal 4 kamar dengan harga ini pada 5 November. Family room CNY 88. Pilih Upgraded Twin, karena sebagian tipe kamar tanpa AC.',
       rooms: 'Kamar mandi dalam, AC pemanas, lift, resepsionis 24 jam, penitipan bagasi. Tabung oksigen CNY 10 per tabung. Tanpa sarapan.',
-      reason: 'Hotel rencana utama untuk 18 November, dengan harga yang sama untuk 15 November; mobil 08.30 tanggal 16 bisa menjemput di pintu.',
+      reason: 'Hotel rencana utama untuk 18 November, dengan harga yang sama untuk 15 November; mobil bisa menjemput sampai pintu.',
       links: [trip('https://us.trip.com/hotels/detail/?hotelId=109842432&checkIn=2026-11-15&checkOut=2026-11-16&adult=1&crn=1&curr=CNY')],
       sources: [
         { title: 'Trip.com list filtered to 166 Hotel, 15–16 Nov 2026', url: 'https://us.trip.com/hotels/list?city=37&checkin=2026-11-15&checkout=2026-11-16&adult=1&crn=1&curr=CNY&listFilters=31~109842432*31*109842432' },

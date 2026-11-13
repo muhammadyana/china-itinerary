@@ -42,6 +42,8 @@ export { calmPlaces, placeFor } from './calm-places.ts';
 
 // New map points (WGS84 from OpenStreetMap, checked 5 November 2026); the shared towns reuse the main map's points.
 export const calmMapPoints: Record<string, MapPoint> = {
+  // Chongqing (106.55° E) lies outside the frame both maps share, so, like the flight labels, a marker at the east edge points to it.
+  chongqing: { name: 'ke Chongqing', latitude: 29.9, longitude: 104.45, label: 'w' },
   // Unlabelled: on a 390px map it sits close to the Huanglongjiuzhai station point, and every label side collides or clips.
   huanglong: { name: 'Huanglong', latitude: 32.7571, longitude: 103.82939 },
   'long-lake': { name: 'Long Lake', latitude: 33.0436025, longitude: 103.9318624 },
@@ -59,8 +61,8 @@ export const calmLegs: Record<string, MapLeg[]> = {
   '2026-11-12': go('bus', 'chengdu', 'bipenggou', 'chengdu'),
   '2026-11-13': [],
   '2026-11-14': go('bus', 'chengdu', 'rilong', 'chengdu'),
-  '2026-11-15': go('train', 'chengdu', 'lijiang'),
-  '2026-11-16': [],
+  '2026-11-15': go('train', 'chengdu', 'chongqing', 'chengdu'),
+  '2026-11-16': go('train', 'chengdu', 'lijiang'),
   '2026-11-17': [],
   '2026-11-18': go('car', 'lijiang', 'upper-gorge', 'shangri-la'),
   '2026-11-19': go('train', 'shangri-la', 'lijiang'),
@@ -224,7 +226,7 @@ const calmOwnDays: CalmDay[] = [
   {
     date: '2026-11-12', title: 'Bipenggou & Danau Panyang', shortTitle: 'Bipenggou',
     route: ['Chengdu', 'Bipenggou', 'Danau Panyang', 'Yanziyan', 'Chengdu'],
-    overnight: { name: 'Chengdu', detail: 'Malam kedua dari empat di Chunxi Road.' },
+    overnight: { name: 'Chengdu', detail: 'Malam kedua dari lima di Chunxi Road.' },
     transport: 'Bus pulang-pergi Trip.com (sudah dibeli): kumpul 07.20 di Mirai Square / Stasiun Metro Tonghuimen (通惠门), berangkat 07.30, pulang dari Bipenggou sekitar 17.00 (jam pasti dikabari sehari sebelumnya). Tiket Bipenggou dibeli terpisah (sudah dibeli): tiket masuk, bus taman, dan mobil listrik Shanghaizi–Danau Panyang serta Teluk Bulan–Yanziyan.',
     intro: 'Satu hari penuh ke Bipenggou dan kembali ke Chengdu malamnya, tanpa menginap di lembah. Bus berangkat 07.30 dan baru pulang sekitar 17.00, jadi ada waktu untuk seluruh lembah sampai Yanziyan. Hari ini masih libur sekolah Chengdu, jadi taman bisa ramai.',
     steps: [
@@ -251,7 +253,7 @@ const calmOwnDays: CalmDay[] = [
   {
     date: '2026-11-13', title: 'Chengdu & salat Jumat', shortTitle: 'Chengdu & salat Jumat',
     route: ['Chunxi Road', 'Huangchengba', 'Chunxi Road'],
-    overnight: { name: 'Chengdu', detail: 'Malam ketiga dari empat di Chunxi Road.' },
+    overnight: { name: 'Chengdu', detail: 'Malam ketiga dari lima di Chunxi Road.' },
     transport: 'Jalan kaki, Metro, atau DiDi di pusat kota; tidak ada perjalanan antarkota hari ini.',
     intro: 'Hari kosong di antara Bipenggou dan Siguniangshan. Pagi istirahat, siang salat Jumat di Masjid Huangcheng, sore belanja bekal untuk Siguniangshan, lalu tidur awal.',
     steps: [
@@ -271,33 +273,69 @@ const calmOwnDays: CalmDay[] = [
   {
     date: '2026-11-14', title: 'Siguniangshan & Shuangqiao Valley', shortTitle: 'Siguniangshan',
     route: ['Chengdu', 'Terowongan Balang', 'Shuangqiao Valley', 'Chengdu'],
-    overnight: { name: 'Chengdu', detail: `Malam keempat di Chunxi Road, sebelum D239 besok pagi. ${calmStayPicks('2026-11-14')}` },
+    overnight: { name: 'Chengdu', detail: `Malam keempat dari lima di Chunxi Road; besok day trip ke Chongqing. ${calmStayPicks('2026-11-14')}` },
     transport: 'Tur gabung Trip.com 89377156 (paket J): kumpul 06.00 di Asia Pacific Building (亚太大厦) atau Zongfu Building, Jinjiang; bus besar sekitar 4 jam sekali jalan lewat terowongan Balang; tiket, bus wisata Shuangqiao Valley, dan pemandu termasuk.',
-    intro: 'Tur sehari ke Siguniangshan, ke Shuangqiao Valley (双桥沟) di balik terowongan Balang: lembah dengan puncak salju dan hutan larch. Makan siang bayar sendiri, jadi bawa bekal. Malam ini tidur awal karena D239 berangkat 08.33 besok.',
+    intro: 'Tur sehari ke Siguniangshan, ke Shuangqiao Valley (双桥沟) di balik terowongan Balang: lembah dengan puncak salju dan hutan larch. Makan siang bayar sendiri, jadi bawa bekal. Malam ini tidur awal karena besok kereta pagi ke Chongqing.',
     steps: [
       ['±05.30', 'Ke titik kumpul', 'Ke titik kumpul di Jinjiang; detail dikirim lewat SMS pukul 19.00–21.00 malam sebelumnya. Bawa paspor, bekal, baju hangat.'],
       ['06.00', 'Bus berangkat', 'Bus besar ke Siguniangshan. Subuh di kursi atau saat bus berhenti.'],
       ['Pagi', 'Perjalanan', 'Sekitar 4 jam lewat Dujiangyan, Wolong, dan terowongan Balang (perkiraan dari tur sejenis).'],
       ['Siang', 'Shuangqiao Valley', 'Bus wisata di dalam lembah sudah termasuk. Zuhur dijamak dengan Asar, dengan bekal makan siang. Lama di lembah belum tercantum di halaman tur.'],
       ['Sore–malam', 'Kembali ke Chengdu', 'Kembali ke titik kumpul; jam tiba belum tercantum. Maghrib dan Isya dijamak takhir di hotel.'],
-      ['Malam', 'Siapkan D239', 'Beli bekal halal untuk kereta 9 jam besok dan untuk 16–17 November di Shangri-La. Kemas koper besar; check-out 07.30.'],
+      ['Malam', 'Siapkan Chongqing', 'Siapkan tas kecil untuk day trip besok; koper besar tetap di hotel sampai 16 November. Pastikan tiket kereta pagi ke Chongqing.'],
     ],
     stops: [
       { place: 'maobiliang', note: 'Siguniangshan: tur ke Shuangqiao Valley; titik pandang Maobiliang hanya bila bus berhenti di sana (tidak disebut paket ini).' },
-      { place: 'chengdu', note: 'Malam terakhir di Chunxi Road sebelum D239.' },
+      { place: 'chengdu', note: 'Malam di Chunxi Road sebelum day trip Chongqing.' },
     ],
     notes: [],
     risks: [
-      'Dua tur subuh berturut-turut, lalu D239 08.33: hari yang berat. Bila lelah, batalkan salah satu sebelum batas pembatalan.',
+      'Siguniangshan hari ini, Chongqing besok, lalu D239 08.33: tiga hari padat. Bila lelah, lewati Chongqing.',
       'Larch mungkin sudah lewat puncak warna pada pertengahan November; laporan 2026 belum dicari.',
       'Jalan gunung lewat Balang bisa bersalju; jam pulang belum tercantum.',
     ],
     fromMain: false,
   },
   {
-    date: '2026-11-15', title: 'Kota Tua Lijiang', shortTitle: 'Lijiang',
+    date: '2026-11-15', title: 'Chongqing: Liziba, Jiefangbei & Hongyadong', shortTitle: 'Chongqing',
+    route: ['Chengdu East', 'Chongqing', 'Liziba', 'Jiefangbei', 'Kereta gantung Sungai Yangtze', 'Chaotianmen', 'Hongyadong', 'Chengdu East'],
+    overnight: { name: 'Chengdu', detail: `Kembali tidur di Chunxi Road, sebelum D239 besok pagi. ${calmStayPicks('2026-11-15')}` },
+    transport: 'Kereta cepat pagi Chengdu East → Chongqing (±1–1,5 jam; pilih yang tiba di Chongqing North atau Shapingba), metro Chongqing dengan Alipay 乘车码 kota 重庆, DiDi dari Hongyadong ke stasiun, lalu kereta malam ke Chengdu East (kereta terakhir 22.47). Tiket kereta belum dibeli.',
+    intro: 'Sehari di Chongqing, kota bertingkat di tebing pertemuan Sungai Jialing dan Yangtze: monorel yang menembus gedung di Liziba, kawasan Jiefangbei, kereta gantung di atas Sungai Yangtze, lalu lampu malam Hongyadong sebelum kereta pulang ke Chengdu. Koper tetap di hotel Chengdu.',
+    steps: [
+      ['±05.59', 'Subuh', 'Subuh di hotel. Bawa tas kecil saja; koper besar tetap di kamar.'],
+      ['±06.45', 'Ke Chengdu East', 'Metro jalur 2 dari 春熙路 langsung ke 成都东客站 (tanpa ganti), atau DiDi. Masuk stasiun dengan paspor ±30 menit sebelum kereta.'],
+      ['±07.30', 'Kereta ke Chongqing', 'Kereta cepat (G lebih cepat, ±1–1,5 jam) ke Chongqing North (重庆北) atau Shapingba (沙坪坝); hindari Chongqing West dan East yang lebih jauh dari pusat. Kereta pertama dari Chengdu 06.10.'],
+      ['±09.00–09.30', 'Metro ke Liziba', 'Buka Alipay → Transport → kota 重庆 → Metro, scan 乘车码 saat masuk dan keluar. Dari Chongqing North: jalur 3 ke 牛角沱, ganti jalur 2 satu stasiun ke 李子坝 (cek rute di Amap, tab 公交/地铁).'],
+      ['±09.30–10.30', 'Liziba', 'Dek pandang 李子坝轻轨穿楼观景平台 di bawah stasiun: monorel jalur 2 keluar-masuk gedung apartemen. Kereta lewat beberapa menit sekali; hari Minggu ramai, jadi datang pagi.'],
+      ['±10.30–12.00', 'Jiefangbei', 'Lanjut jalur 2 ke 较场口, lalu jalan kaki ke kawasan pejalan kaki Jiefangbei (解放碑).'],
+      ['±12.00–13.30', 'Makan siang & Zuhur + Asar', 'Makan siang di kedai bertanda 清真 (cari di Amap; belum diverifikasi). Zuhur dijamak takdim dengan Asar.'],
+      ['±13.30–15.30', 'Kereta gantung Sungai Yangtze', 'Kereta gantung 长江索道 menyeberangi Yangtze dari Yuzhong; antrean hari Minggu bisa panjang, jadi naik sekali jalan bila perlu.'],
+      ['±15.30–17.30', 'Chaotianmen', 'Ujung semenanjung 朝天门, tempat Sungai Jialing bertemu Yangtze, di bawah Raffles City. Opsional: kota tua Ciqikou (磁器口) di barat sebagai gantinya.'],
+      ['±17.30–19.30', 'Hongyadong malam', 'Hongyadong (洪崖洞) setelah gelap, saat lampunya menyala. Maghrib dan Isya dijamak.'],
+      ['±19.30', 'DiDi ke stasiun', 'Pesan DiDi dari jalan atas di sisi Jiefangbei, bukan dari dalam kompleks bertingkat Hongyadong. Berangkat paling lambat 1 jam sebelum kereta.'],
+      ['±20.30–21.00', 'Kereta ke Chengdu', 'Kereta ke Chengdu East; D lebih murah, G lebih cepat. Kereta terakhir 22.47, tetapi besok D239 berangkat 08.33.'],
+      ['±22.00–23.00', 'Kembali ke hotel', 'Metro jalur 2 atau DiDi ke Chunxi Road; kemas koper untuk D239 dan tidur.'],
+    ],
+    stops: [
+      { place: 'liziba', note: 'Pagi, sebelum ramai.' },
+      { place: 'jiefangbei', note: 'Menjelang siang, dengan makan siang di sekitarnya.' },
+      { place: 'yangtze-cableway', note: 'Siang; antrean hari Minggu bisa panjang.' },
+      { place: 'chaotianmen', note: 'Sore, pertemuan dua sungai.' },
+      { place: 'hongyadong', note: 'Setelah gelap, sebelum kereta pulang.' },
+    ],
+    notes: [],
+    risks: [
+      'Jadwal dan harga kereta 15 November belum dicek; harga kelas dua dari snapshot Ctrip Juli–Agustus 2026: D/C CNY 85–96, G CNY 129–217 sekali jalan.',
+      'Rute metro jalur 3 → jalur 2 ke Liziba dari peta metro, belum dicek di Amap; lama DiDi dari Hongyadong ke stasiun juga belum dicek.',
+      'Siguniangshan kemarin, Chongqing hari ini, dan 9 jam D239 besok: tiga hari padat berturut-turut. Bila lelah, lewati Chongqing dan istirahat di Chengdu.',
+    ],
+    fromMain: false,
+  },
+  {
+    date: '2026-11-16', title: 'Kota Tua Lijiang', shortTitle: 'Lijiang',
     route: ['Chengdu South', 'D239', 'Lijiang', 'Dayan'],
-    overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Dekat Kota Tua Lijiang; 166 Hotel juga pilihan rencana utama untuk 18 November. ${calmStayPicks('2026-11-15')}` },
+    overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Dekat Kota Tua Lijiang; 166 Hotel juga pilihan rencana utama untuk 18 November. ${calmStayPicks('2026-11-16')}` },
     transport: 'DiDi 8,3 km ke Chengdu South (sisihkan 20–30 menit); D239 08.33–17.46 (kelas dua CNY 376); taksi ke kota tua, sekitar 10 km, 25–40 menit, CNY 30–50 per mobil.',
     intro: 'Sembilan jam kereta pemandangan dari cekungan Sichuan ke Yunnan. Malam ini di Lijiang dulu, bukan langsung ke Shangri-La, supaya tidak naik dari 500 m ke 3.300 m dalam sehari.',
     steps: [
@@ -308,8 +346,8 @@ const calmOwnDays: CalmDay[] = [
       ['±12.51–13.10', 'Zuhur + Asar di kereta', 'Zuhur di kereta (12.51 di Chengdu, 13.06 di Lijiang), dijamak takdim dengan Asar.'],
       ['17.46', 'Tiba di Lijiang', 'Tiba di Stasiun Lijiang. Matahari terbenam 18.29.'],
       ['±18.00–18.45', 'Ke hotel, Maghrib', 'Taksi atau DiDi ke hotel. Maghrib 18.31; bila perlu dijamak dengan Isya (19.51) di hotel.'],
-      ['±19.15–20.30', 'Makan malam halal', 'Makan malam di kedai Hui bertanda 清真 dekat kota tua (belum diverifikasi, sama seperti rencana utama). Beli bekal halal untuk sarapan 16 November.'],
-      ['Malam', 'Siapkan mobil besok', 'Pastikan mobil 08.30 dan tempat untuk koper.'],
+      ['±19.15–20.30', 'Makan malam halal', 'Makan malam di kedai Hui bertanda 清真 dekat kota tua (belum diverifikasi, sama seperti rencana utama). Beli bekal halal untuk sarapan 17 November.'],
+      ['Malam', 'Istirahat', 'Besok hari bebas di Lijiang.'],
     ],
     stops: [
       { place: 'chengdu-south', note: 'D239 berangkat 08.33; tiba 30–45 menit lebih awal.' },
@@ -324,36 +362,21 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-16', title: 'Kota Tua Lijiang & Sifangjie', shortTitle: 'Lijiang & Sifangjie',
+    date: '2026-11-17', title: 'Kota Tua Lijiang & Sifangjie', shortTitle: 'Lijiang & Sifangjie',
     route: ['Kota Tua Lijiang', 'Sifangjie'],
-    overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Malam kedua dari tiga di kota tua. ${calmStayPicks('2026-11-16')}` },
+    overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Malam kedua di kota tua. ${calmStayPicks('2026-11-17')}` },
     transport: 'Jalan kaki di kota tua; tidak ada perjalanan antarkota hari ini.',
-    intro: 'Hari kosong setelah 9 jam di D239: tidur cukup, lalu kota tua Lijiang dengan langkah pelan. Tur ke Shangri-La baru 18 November.',
+    intro: 'Hari bebas setelah 9 jam di D239: tidur cukup, kota tua Lijiang dengan langkah pelan, lalu siapkan tur sehari ke Shangri-La yang berangkat sangat pagi besok.',
     steps: [
       ['Pagi', 'Istirahat', 'Bangun tanpa alarm di ±2.400 m; banyak minum.'],
-      ['Siang', 'Kota tua Dayan', 'Kanal dan gang kota tua; makan siang di kedai Hui bertanda 清真 (belum diverifikasi; tanyakan di tempat).'],
-      ['Sore', 'Sifangjie & cahaya emas', 'Lapangan Sifangjie dan atap kota tua saat cahaya sore (lihat panduan Kota Tua Lijiang).'],
+      ['Siang', 'Kota tua Dayan', 'Kanal dan gang kota tua; makan siang di kedai Hui bertanda 清真 (belum diverifikasi; tanyakan di tempat). Beli bekal halal untuk dua orang besok.'],
+      ['Sore', 'Sifangjie & siapkan tur', 'Lapangan Sifangjie dan atap kota tua saat cahaya sore. Konfirmasi jemput tur besok (halaman tur menyebut ±06.10) dan siapkan koper untuk ikut seharian.'],
+      ['Malam', 'Tidur awal', 'Tidur awal: jemput tur ±06.10.'],
     ],
     stops: [
       { place: 'dayan', note: 'Siang, jalan pelan.' },
       { place: 'sifangjie', note: 'Sore sampai senja.' },
     ],
-    notes: [],
-    risks: [],
-    fromMain: false,
-  },
-  {
-    date: '2026-11-17', title: 'Kota Tua Lijiang, hari bebas', shortTitle: 'Lijiang bebas',
-    route: ['Kota Tua Lijiang'],
-    overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Malam ketiga di kota tua. ${calmStayPicks('2026-11-17')}` },
-    transport: 'Jalan kaki di kota tua; tidak ada perjalanan antarkota hari ini.',
-    intro: 'Hari bebas kedua di Lijiang. Malam ini siapkan tur sehari ke Shangri-La yang berangkat sangat pagi besok.',
-    steps: [
-      ['Siang', 'Bebas', 'Istirahat atau kota tua lagi; beli bekal halal untuk dua orang besok.'],
-      ['Sore', 'Siapkan tur', 'Konfirmasi jemput tur besok (halaman tur menyebut ±06.10) dan siapkan koper untuk ikut seharian.'],
-      ['Malam', 'Tidur awal', 'Tidur awal: jemput tur ±06.10.'],
-    ],
-    stops: [{ place: 'dayan', note: 'Bebas.' }],
     notes: [],
     risks: [],
     fromMain: false,
@@ -482,10 +505,10 @@ export const calmGlance: Record<string, CalmGlance> = {
   '2026-11-11': { bring: 'Paspor, bekal siang, air, jaket, baterai cadangan', remember: 'Tur jemput 07.30 di Leyu; kereta C6374 17.30 dari 黄龙九寨 ke Chengdu.' },
   '2026-11-12': { bring: 'Paspor, bekal siang, baju hangat berlapis, baterai cadangan', remember: 'Kumpul 07.20 di Mirai Square / Tonghuimen; cek SMS titik kumpul malam sebelumnya.' },
   '2026-11-13': { bring: 'Pakaian untuk salat Jumat, uang tunai untuk bekal', remember: 'Salat Jumat di Masjid Huangcheng; tidur paling lambat 21.30.' },
-  '2026-11-14': { bring: 'Paspor, bekal siang, baju hangat', remember: 'Kumpul 06.00 di Jinjiang; malam kemas koper untuk D239 08.33.' },
-  '2026-11-15': { bring: 'Bekal halal untuk 9 jam di kereta', remember: 'D239 berangkat 08.33 dari Chengdu South.' },
-  '2026-11-16': { bring: 'Air dan jaket tipis', remember: 'Hari istirahat setelah D239.' },
-  '2026-11-17': { bring: 'Bekal halal untuk dua orang besok', remember: 'Tur besok jemput ±06.10; tidur awal.' },
+  '2026-11-14': { bring: 'Paspor, bekal siang, baju hangat', remember: 'Kumpul 06.00 di Jinjiang; besok kereta pagi ke Chongqing.' },
+  '2026-11-15': { bring: 'Paspor, tas kecil, power bank', remember: 'Metro Chongqing pakai Alipay 乘车码 kota 重庆; kereta pulang paling lambat ±21.00.' },
+  '2026-11-16': { bring: 'Bekal halal untuk 9 jam di kereta', remember: 'D239 berangkat 08.33 dari Chengdu South.' },
+  '2026-11-17': { bring: 'Air, jaket tipis, bekal halal untuk dua orang besok', remember: 'Tur besok jemput ±06.10; tidur awal.' },
   '2026-11-18': { bring: 'Paspor, bekal makan siang halal, jaket hangat', remember: 'Makan siang tur tidak halal; tur selesai di Dukezong.' },
   '2026-11-19': { bring: 'Paspor untuk dua tiket, jaket', remember: 'C988 15.01 dari Stasiun Shangri-La.' },
   '2026-11-20': { bring: 'Jaket tebal, bekal, dan paspor', remember: 'Mobil 06.30; slot kereta gantung 15.00–15.30; C442 20.22 ke Dali.' },
@@ -510,13 +533,15 @@ export const calmComparison = {
     'Huanglong seharian dengan tur kecil (11 November), lalu kereta sore ke Chengdu.',
     'Empat malam di Chengdu (11–14 November): tur sehari ke Bipenggou (12 November), hari istirahat dan salat Jumat (13 November), lalu tur sehari ke Siguniangshan, Shuangqiao Valley (14 November).',
     'Toko buku Zhongshu Ge di Dujiangyan, wajib: Senin 9 November pagi saat toko baru buka; sore Taikoo Li / IFS; lalu C5756 ke Jiuzhaigou.',
-    'Kereta pemandangan D239 Chengdu South → Lijiang (15 November).',
-    'Tiga malam di Lijiang (15–17 November), lalu tur sehari ke Shangri-La lewat Upper Tiger Leaping Gorge dan Napahai (18 November).',
+    'Day trip ke Chongqing (15 November): monorel Liziba, Jiefangbei, kereta gantung Sungai Yangtze, dan Hongyadong malam hari.',
+    'Kereta pemandangan D239 Chengdu South → Lijiang (16 November).',
+    'Dua malam di Lijiang (16–17 November), lalu tur sehari ke Shangri-La lewat Upper Tiger Leaping Gorge dan Napahai (18 November).',
     'Songzanlin pagi dan kereta sore kembali ke Lijiang (19 November); Jade Dragon dan Impression Lijiang 20 November, lalu C442 malam ke Dali; Erhai pagi 21 November dan kereta siang ke Kunming.',
   ],
 };
 
 export const calmTradeOffs = [
+  'Chongqing hanya sehari tanpa menginap: kereta ±1–1,5 jam sekali jalan, kembali ke Chengdu sekitar 22.00–23.00, lalu D239 08.33 besok paginya. Hari santai pertama di Lijiang dipakai untuk Chongqing.',
   'Dataran tinggi Sichuan barat dan Yading hilang seluruhnya: tidak ada Litang (4.014 m), danau Yading, atau G318. Risiko ketinggian dan jalan tanah ikut berkurang.',
   'Bipenggou dan Siguniangshan jadi tur sehari dari Chengdu, sekitar 3–4 jam sekali jalan: tidak ada pagi atau sore di lembah, tetapi tanpa mobil pribadi dan tanpa pindah penginapan.',
   '9 November jadi hari panjang: DiDi pulang-pergi sekitar 58 km sekali jalan ke Zhongshu Ge pagi, sore di Taikoo Li, lalu C5756 17.05 (tiba Huanglongjiuzhai 19.10) dan taksi ke gukou.',
@@ -556,7 +581,9 @@ export const calmBookingGroups: CalmBookingGroup[] = [
       { date: '2026-11-20', item: 'Impression Lijiang 13.20, 2 orang', urgency: 'now', price: 'Sekitar CNY 180 per orang per 4 November (tarif biasa CNY 280); tidak perlu bila mengambil paket Jade Dragon CNY 488.', cost: { min: 180, max: 280, per: 'orang' }, channel: 'Trip.com.', opens: 'Pesan sesi 13.20 untuk 20 November.', link: { label: 'Panduan Impression Lijiang', url: placePath('impression-lijiang') } },
       { date: '2026-11-20', item: 'C442 Lijiang 20.22 → Dali 22.21, 2 kursi', urgency: 'now', mode: 'train', price: 'Jadwal dari Trip.com (dicek 9 November 2026). Kelas dua CNY 80 pada 19 November menurut rencana utama; harga dan kursi 20 November belum dicek. Cadangan: C400 19.54 → 22.02.', cost: { min: 80, max: 80, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan; dua kursi atas nama paspor masing-masing.', opens: 'Sudah dijual.', link: { label: 'Trip.com: Lijiang ke Dali', url: tripcomTrain('lijiang', 'dali') } },
       { date: '2026-11-21', item: 'Kereta siang Dali → Kunming, 2 kursi, tiba paling lambat ±16.00', urgency: 'now', mode: 'train', price: 'Jadwal siang belum dicek: Trip.com menyebut ±87 kereta per hari, 07.04–21.30 (9 November 2026). Acuan harga: D8704 kelas dua CNY 145 (rencana utama).', cost: { min: 145, max: 145, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan; turun di 昆明站 bila bisa.', opens: 'Sudah dijual.', link: { label: 'Trip.com: Dali ke Kunming', url: tripcomTrain('dali', 'kunming') } },
-      { date: '2026-11-15', item: 'D239 Chengdu South 08.33 → Lijiang 17.46, satu kursi', urgency: 'now', mode: 'train', price: 'CNY 376 kelas dua (12306, 5 November); kelas satu CNY 602, tinggal 3 kursi. Tidak ada kereta tidur.', cost: { min: 376, max: 376, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan.', opens: 'Sudah dijual: tiket dibuka 15 hari sebelumnya, dan 12306 masih menunjukkan kursi kelas dua untuk 15 November pada 5 November.', link: { label: 'Trip.com: Chengdu ke Lijiang', url: tripcomTrain('chengdu', 'lijiang') } },
+      { date: '2026-11-15', item: 'Kereta pagi Chengdu East → Chongqing (North atau Shapingba), satu kursi', urgency: 'now', mode: 'train', price: 'Kelas dua sekali jalan: D/C CNY 85–96, G CNY 129–217 (snapshot Ctrip Juli–Agustus 2026); harga 15 November belum dicek. Kereta pertama 06.10, sekitar 160 kereta per hari.', cost: { min: 85, max: 217, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan; tujuan Chongqing (Any), pilih tiba di 重庆北 atau 沙坪坝.', opens: 'Sudah dijual.', link: { label: 'Trip.com: Chengdu ke Chongqing', url: tripcomTrain('chengdu', 'chongqing') } },
+      { date: '2026-11-15', item: 'Kereta malam Chongqing → Chengdu East, satu kursi', urgency: 'now', mode: 'train', price: 'Kelas dua sekali jalan: D/C CNY 85–96, G CNY 129–217 (snapshot Ctrip Juli–Agustus 2026). Contoh jadwal: G8694 Chongqing North 19.59 → 21.30, D2207 19.36 → 21.53; kereta terakhir 22.47 (Trip.com, dicek 12 November 2026).', cost: { min: 85, max: 217, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan.', opens: 'Sudah dijual.', link: { label: 'Trip.com: Chongqing ke Chengdu', url: tripcomTrain('chongqing', 'chengdu') } },
+      { date: '2026-11-16', item: 'D239 Chengdu South 08.33 → Lijiang 17.46, satu kursi', urgency: 'now', mode: 'train', price: 'CNY 376 kelas dua (12306, 5 November). Untuk 15 November Trip.com menunjukkan Rp1.027.323 kelas dua, Rp1.128.495 dengan biaya pemesanan, kelas satu dan bisnis habis (12 November); harga dan kursi 16 November belum dicek. Tidak ada kereta tidur.', cost: { min: 376, max: 376, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan.', opens: 'Sudah dijual; pesan segera karena kelas dua mulai menipis.', link: { label: 'Trip.com: Chengdu ke Lijiang', url: tripcomTrain('chengdu', 'lijiang') } },
       { date: '2026-11-09', item: 'Toko Buku Zhongshu Ge, Dujiangyan: masuk gratis, DiDi pulang-pergi dari hotel', urgency: 'onsite', mode: 'taxi', price: 'Masuk gratis (Trip.com dan Third Eye Traveller). DiDi belum punya tarif resmi: satu pelancong (Third Eye Traveller, artikel Juni 2026) membayar sekitar CNY 100 sekali jalan, jadi sekitar CNY 200 pulang-pergi. Sekitar 58 km sekali jalan, ±45 menit tanpa macet menurut OSRM; tarif jam sibuk Senin pagi bisa berbeda.', cost: { min: 200, max: 200, per: 'mobil' }, channel: 'DiDi ke 钟书阁(融创茂店) sekitar 08.45, kembali ±11.30. Cadangan untuk pergi: Metro jalur 2 ke 犀浦, kereta S ke 都江堰 (CNY 10 di 12306 atau Trip.com; sebagian kereta tinggal sedikit kursi), lalu DiDi 10–15 menit dari stasiun.', opens: 'Tidak perlu membeli tiket. Lihat estimasi waktu dan tarif DiDi di aplikasi sebelum memesan.', link: { label: 'Panduan Zhongshu Ge', url: placePath('zhongshuge-bookstore') } },
     ],
   },
@@ -604,6 +631,7 @@ export const calmDoNotBuy = [
 ];
 
 export const calmUnknowns = [
+  'Chongqing 15 November: jadwal dan harga kereta pergi-pulang, rute metro ke Liziba, kedai halal di Jiefangbei, dan antrean kereta gantung Sungai Yangtze hari Minggu.',
   '9 November: lama shuttle Trip.com Chengdu → Jiuzhaigou, titik turunnya, dan apakah koper 28–30 inci muat. Untuk cadangan kereta: apakah 团子出行 menerima paspor asing untuk bus 17.30, dan lama perjalanan bus itu (tidak tercantum; 1,5–2 jam menurut panduan pihak ketiga).',
   'Tur 18 November: harga untuk tanggal itu, apakah koper boleh ikut seharian dan diantar ke Dukezong, dan apakah titik jemputnya hotel kalian di kota tua.',
   'Kereta siang Dali → Kunming 21 November: nomor, jam, dan harga (jadwal siang belum terlihat di Trip.com; 12306 tidak bisa diakses 9 November). Juga kursi C442 20 November dan jarak stasiun Kunming ke bandara.',
@@ -621,6 +649,9 @@ export const calmUnknowns = [
 
 // Trains, the station transfers around them and the luggage rule; the calm trains page lists these, the calm page all.
 export const calmTrainSources: Link[] = [
+  { label: 'Trip.com: Chengdu ke Chongqing, sekitar 163 kereta per hari, kereta pertama 06.10 (dicek 12 November 2026)', url: 'https://www.trip.com/trains/china/route/chengdu-to-chongqing/' },
+  { label: 'Trip.com: Chongqing ke Chengdu, kereta terakhir 22.47, contoh kereta 19.36–20.04 (dicek 12 November 2026)', url: 'https://www.trip.com/trains/china/route/chongqing-to-chengdu/' },
+  { label: 'Ctrip: Chengdu East ke Chongqing, harga kelas dua D/C CNY 85–96 dan G CNY 129–217 (snapshot Juli–Agustus 2026)', url: 'https://trains.ctrip.com/TrainBooking/chengdudong-chongqing/gaotie' },
   { label: 'Trip.com: Lijiang ke Dali, C400 19.54 → 22.02 dan C442 20.22 → 22.21 (dicek 9 November 2026)', url: 'https://www.trip.com/trains/china/route/lijiang-to-dali/' },
   { label: 'Trip.com: Dali ke Kunming, ±87 kereta per hari 07.04–21.30; hanya kereta sore yang terlihat (dicek 9 November 2026)', url: 'https://www.trip.com/trains/china/route/dali-to-kunming/' },
   { label: 'Trip.com: Shangri-La ke Lijiang, kereta pertama C988 15.01 → 16.14, lalu C374 15.25, C88 17.25, C400 18.21, C442 19.02, C990 20.25 (dicek 9 November 2026)', url: 'https://id.trip.com/trains/china/route/shangri-la-to-lijiang/' },

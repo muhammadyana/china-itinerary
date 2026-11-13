@@ -118,8 +118,8 @@ function intro(heading: 'h1' | 'h2') {
 // Runs before the panels are parsed, so calm.css shows only the linked day from the first paint instead of 14 days that then collapse.
 const earlyScript = '<script data-cfasync="false">document.documentElement.classList.add(\'js\')</script>';
 
-// 15 November already sleeps in Lijiang, so the sidebar's Yunnan group starts there.
-const regionOf = (date: string) => date >= '2026-11-15' ? 'Yunnan' : 'Sichuan';
+// The 15 November day trip gets its own group; 16 November already sleeps in Lijiang, so the Yunnan group starts there.
+const regionOf = (date: string) => date === '2026-11-15' ? 'Chongqing' : date >= '2026-11-16' ? 'Yunnan' : 'Sichuan';
 const calmSidebarDays = (): SidebarDay[] => calmDays.map(day => ({ ...day, region: regionOf(day.date), modes: calmRoute.days.find(item => item.date === day.date)?.modes ?? [] }));
 
 const dayLayout = (first: string) => `<div class="journey-layout" id="calm-itinerary-days">${daySidebar(sidebarItems(calmSidebarDays(), first), `<a class="route-link" href="${calmPath}#calm-map">Lihat peta rute santai${icon('right')}</a>`)}<div class="calm-day-panels">${calmDays.map(dayPanel).join('')}</div></div>`;

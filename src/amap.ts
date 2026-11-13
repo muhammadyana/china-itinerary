@@ -110,6 +110,12 @@ const amapPlaces: Record<string, AmapPlace> = {
   'tea-horse-guesthouse': { keyword: '茶马客栈', city: '533401', near: 'tea-horse', marker: true },
   'moye-cliff-cafe': { keyword: '墨野雪山悬崖酒店', city: '533401', near: 'moye', marker: true },
   napahai: { keyword: '纳帕海', city: '533401' },
+  // Chongqing day trip (calm option, 15 November); 500000 is the Chongqing municipality adcode.
+  liziba: { keyword: '李子坝轻轨穿楼观景平台', city: '500000' },
+  jiefangbei: { keyword: '解放碑', city: '500000' },
+  'yangtze-cableway': { keyword: '长江索道', city: '500000' },
+  chaotianmen: { keyword: '朝天门广场', city: '500000' },
+  hongyadong: { keyword: '洪崖洞', city: '500000' },
 };
 
 // Pages covering places too far apart for one search get one link per place (Sister Lakes is 100+ km from the viewpoint).

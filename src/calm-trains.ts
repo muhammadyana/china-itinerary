@@ -71,7 +71,7 @@ const transferNotes: Record<string, string[]> = {
     stepText('2026-11-19', '±14.15'),
     stepText('2026-11-19', '±16.30–17.30'),
   ],
-  '2026-11-15': [
+  '2026-11-16': [
     'Stasiun Chengdu South juga dilayani metro 火车南站 (jalur 1, 7, dan 18); jalur 1 ke Tianfu Square sekitar 10 menit (WanderInChina, Juli 2026). Jam kereta pertamanya belum dicek, jadi DiDi tetap pilihan utama; OSRM memberi 9 menit tanpa macet.',
     'Dari Stasiun Lijiang ke kota tua (8,4 km menurut OSRM), catatan Ctrip Desember 2022 juga menyebut bus 16 dan 18 serta minibus biru CNY 10–15 per orang; belum dicek untuk 2026.',
   ],
@@ -103,7 +103,7 @@ const calmTrainsPage: TrainsPage = {
   path: calmTrainsPath, parent: { label: 'Opsi santai', url: calmPath }, current: 'Kereta & timeline santai', title: 'Kereta opsi santai, jam demi jam.',
   intro: `Link Trip.com untuk setiap kereta opsi santai, cara dari stasiun ke gerbang Jiuzhaigou, transfer di setiap hari kereta, aturan bagasi, dan timeline jam demi jam untuk ${trainDays.length} hari kereta.`,
   sections: [
-    ticketsSection('Jam rilis tiket dalam WIB; jam kereta memakai waktu China (WIB + 1 jam). Sampai 15 November kamu sendiri, jadi satu kursi; mulai 19 November temanmu ikut, jadi dua kursi atas nama paspor masing-masing. Kereta 12 November dicek di Trip.com pada 6 November 2026 dan kereta 15 November di 12306 pada 5 November 2026, cadangan 9 November pada 6 November; jadwal 19 November Shangri-La → Lijiang dicek di Trip.com pada 9 November 2026; jadwal Lijiang → Dali dicek di Trip.com pada 9 November 2026; kursi C442 20 November dan kereta siang 21 November Dali → Kunming belum dicek.', cards),
+    ticketsSection('Jam rilis tiket dalam WIB; jam kereta memakai waktu China (WIB + 1 jam). Sampai 16 November kamu sendiri, jadi satu kursi; mulai 19 November temanmu ikut, jadi dua kursi atas nama paspor masing-masing. Kereta 12 November dicek di Trip.com pada 6 November 2026 dan kereta 15 November di 12306 pada 5 November 2026, cadangan 9 November pada 6 November; jadwal 19 November Shangri-La → Lijiang dicek di Trip.com pada 9 November 2026; jadwal Lijiang → Dali dicek di Trip.com pada 9 November 2026; kursi C442 20 November dan kereta siang 21 November Dali → Kunming belum dicek.', cards),
     slotsSection('Ke gerbang Jiuzhaigou', `Opsi santai memakai satu tiket <strong>Ticket + Sightseeing Bus Ticket (Adult, Non-Chinese mainland visitors)</strong> di Trip.com: ${parkTicket('2026-11-10')} untuk 10 November, slot 08.00–10.00, dipakai pagi dari penginapan. Ke Jiuzhaigou pada 9 November naik <strong>C5756</strong> Chengdu East 17.05 → Huanglongjiuzhai 19.10, lalu taksi atau shuttle stasiun ke gukou (lihat Hari 2). Baris cadangan di bawah untuk berangkat lebih awal dari East:`, calmSlots, list(gateNotes)),
     transfersSection(),
     luggageSection(),
