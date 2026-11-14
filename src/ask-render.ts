@@ -6,12 +6,12 @@ export const askPath = '/places/ask/';
 type Variant = 'page' | 'dialog';
 
 const suggestions = ['Besok jadwalnya apa?', 'Tiket apa yang harus dibeli sekarang?', 'Jelaskan halaman ini'];
-const locationHint = 'Ketuk ikon lokasi di samping kolom tanya, lalu tanya rute, misalnya "ke hotel naik apa dari sini?". Aku buatkan link Amap-nya.';
+const locationHint = 'Ketuk ikon lokasi di samping kolom tanya, lalu tanya rute, misalnya "ke hotel naik apa dari sini?". Nanti gue bikinin link Amap-nya.';
 
 const suggestionChip = (text: string) => `<li><button type="button" class="ask-chip" data-ask-suggestion>${e(text)}</button></li>`;
 
 const emptyState = () => `<div class="ask-empty" data-ask-empty>
-  <p>Tanya apa saja soal perjalananmu. Aku hafal jadwal 14 hari, opsi santai, setiap tempat, penginapan, biaya, kereta, dan persiapan.</p>
+  <p>Tanya apa aja soal trip lo, bro. Gue hafal jadwal 14 hari, tiap tempat, penginapan, biaya, kereta, sampe persiapannya. Bisa juga cek halal, tips foto, sama cara ngomong Mandarin.</p>
   <ul class="ask-suggestions" role="list" aria-label="Contoh pertanyaan">${suggestions.map(suggestionChip).join('')}</ul>
   <p class="ask-hint">${e(locationHint)}</p>
 </div>`;

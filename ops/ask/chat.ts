@@ -33,7 +33,7 @@ const NOT_CONFIGURED = 'Layanan AI belum dikonfigurasi dengan benar.';
 const CONNECTION = 'Koneksi ke layanan AI terputus. Coba lagi sebentar.';
 const FAILED = 'Maaf, terjadi kesalahan saat menjawab. Coba lagi sebentar.';
 const SEARCHING = 'Mencari di web…';
-const REFUSED = 'Maaf, aku tidak bisa membantu pertanyaan itu. Coba tanyakan dengan cara lain.';
+const REFUSED = 'Sori bro, yang itu gue ga bisa bantu. Coba tanya dengan cara lain ya.';
 const STOP_NOTES: Record<string, string> = {
   max_tokens: 'Jawabannya terpotong karena terlalu panjang. Ketik "lanjut" untuk sambungannya.',
   pause_turn: 'Pencarian web belum selesai. Coba tanyakan lagi sebentar lagi.',
