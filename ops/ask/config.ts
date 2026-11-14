@@ -18,6 +18,7 @@ export interface AskConfig {
   port: number;
   origin: string;
   webSearchMaxUses: number;
+  toolMaxRounds: number;
   dev: boolean;
 }
 
@@ -25,6 +26,7 @@ const DEFAULT_SITE_ROOT = '/home/deploy/apps/china.muhammadyana.me/current/publi
 const DEFAULT_ORIGIN = 'https://china.muhammadyana.me';
 const MIN_SESSION_SECRET_BYTES = 32;
 const MAX_WEB_SEARCH_USES = 10;
+const MAX_TOOL_ROUNDS = 8;
 
 class ConfigError extends Error {}
 
@@ -94,6 +96,7 @@ function readConfig(env: NodeJS.ProcessEnv): AskConfig {
     port: integer(env, 'ASK_PORT', 8790, 1, 65535),
     origin: parseOrigin(env.ASK_ORIGIN?.trim() || DEFAULT_ORIGIN),
     webSearchMaxUses: integer(env, 'ASK_WEB_SEARCH_MAX_USES', 3, 0, MAX_WEB_SEARCH_USES),
+    toolMaxRounds: integer(env, 'ASK_TOOL_MAX_ROUNDS', 4, 0, MAX_TOOL_ROUNDS),
     dev: env.ASK_DEV === '1',
   };
 }

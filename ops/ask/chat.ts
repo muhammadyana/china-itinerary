@@ -2,6 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import type { AskConfig } from './config.ts';
 import type { Corpus } from './corpus.ts';
 import { INSTRUCTIONS, dynamicContext, type PageContext, type UserLocation } from './prompt.ts';
+import { MAX_CALLS_PER_ROUND, clientTools, runTool, toolStatus } from './tools.ts';
 
 export interface ChatMessage {
   role: 'user' | 'assistant';
@@ -37,6 +38,7 @@ const REFUSED = 'Sori bro, yang itu gue ga bisa bantu. Coba tanya dengan cara la
 const STOP_NOTES: Record<string, string> = {
   max_tokens: 'Jawabannya terpotong karena terlalu panjang. Ketik "lanjut" untuk sambungannya.',
   pause_turn: 'Pencarian web belum selesai. Coba tanyakan lagi sebentar lagi.',
+  tool_use: 'Pengecekannya kebanyakan langkah, jadi gue berhenti di sini. Coba tanya yang lebih spesifik ya.',
   model_context_window_exceeded: 'Percakapan sudah terlalu panjang. Mulai percakapan baru, ya.',
 };
 
@@ -127,18 +129,35 @@ export function createChat(config: AskConfig): ChatRunner {
   // ("Claude 4.6 and later models", run through code execution); web_search_20250305 is basic search that
   // every listed model and platform accepts. Basic search keeps the stream to plain server_tool_use /
   // web_search_tool_result blocks, which is all this endpoint streams and parses.
-  const tools: Anthropic.ToolUnion[] = config.webSearchMaxUses > 0
-    ? [{
-      type: 'web_search_20250305',
-      name: 'web_search',
-      max_uses: config.webSearchMaxUses,
-      user_location: { type: 'approximate', country: 'CN', timezone: 'Asia/Shanghai' },
-    }]
-    : [];
+  const tools: Anthropic.ToolUnion[] = [
+    ...(config.webSearchMaxUses > 0
+      ? [{
+        type: 'web_search_20250305' as const,
+        name: 'web_search' as const,
+        max_uses: config.webSearchMaxUses,
+        user_location: { type: 'approximate' as const, country: 'CN', timezone: 'Asia/Shanghai' },
+      }]
+      : []),
+    // Client tools (live trains, web pages, weather, routes) run in this process; see tools.ts.
+    ...(config.toolMaxRounds > 0 ? clientTools : []),
+  ];
+
+  // Runs one round of tool_use blocks (capped per round) and returns the tool_result blocks for the next request.
+  async function runTools(message: Anthropic.Message, sources: Map<string, string>, signal: AbortSignal): Promise<Anthropic.ToolResultBlockParam[]> {
+    const calls = message.content.filter((block): block is Anthropic.ToolUseBlock => block.type === 'tool_use');
+    return Promise.all(calls.map(async (call, index): Promise<Anthropic.ToolResultBlockParam> => {
+      if (index >= MAX_CALLS_PER_ROUND) {
+        return { type: 'tool_result', tool_use_id: call.id, is_error: true, content: `Only ${MAX_CALLS_PER_ROUND} tool calls run at once; this one was skipped. Call it again if still needed.` };
+      }
+      const output = await runTool(call.name, call.input, signal);
+      if (output.source && !sources.has(output.source.url)) sources.set(output.source.url, output.source.title);
+      return { type: 'tool_result', tool_use_id: call.id, content: output.content, ...(output.isError ? { is_error: true } : {}) };
+    }));
+  }
 
   return async (request, corpus, send, signal) => {
     const started = Date.now();
-    const usage = { input: 0, cacheRead: 0, cacheWrite: 0, output: 0, searches: 0 };
+    const usage = { input: 0, cacheRead: 0, cacheWrite: 0, output: 0, searches: 0, tools: 0 };
     const sources = new Map<string, string>();
     const system: Anthropic.TextBlockParam[] = [
       { type: 'text', text: `${corpus.text}\n\n${INSTRUCTIONS}`, cache_control: { type: 'ephemeral', ttl: '1h' } },
@@ -150,7 +169,11 @@ export function createChat(config: AskConfig): ChatRunner {
     // Text after a web search is a new text block; without a break it runs into the sentence before the search.
     let breakBeforeText = false;
     try {
-      for (let turn = 0; turn <= MAX_CONTINUATIONS; turn++) {
+      let continuations = 0;
+      let toolRounds = 0;
+      for (;;) {
+        // After the last allowed tool round the model must answer with what it has.
+        const toolsLeft = toolRounds < config.toolMaxRounds;
         const stream = client.messages.stream({
           model: MODEL,
           max_tokens: MAX_TOKENS,
@@ -158,12 +181,17 @@ export function createChat(config: AskConfig): ChatRunner {
           system,
           messages,
           ...(tools.length ? { tools } : {}),
+          ...(tools.length && !toolsLeft ? { tool_choice: { type: 'none' as const } } : {}),
         }, { signal });
         for await (const event of stream) {
           if (event.type === 'content_block_start' && event.content_block.type !== 'text') {
             // Consecutive text blocks (split by citations) join as they are; any other block between them is a break.
             breakBeforeText ||= wroteText;
             if (event.content_block.type === 'server_tool_use' && event.content_block.name === 'web_search') send({ type: 'status', text: SEARCHING });
+            else if (event.content_block.type === 'tool_use') {
+              const status = toolStatus(event.content_block.name);
+              if (status) send({ type: 'status', text: status });
+            }
           } else if (event.type === 'content_block_delta' && event.delta.type === 'text_delta' && event.delta.text) {
             send({ type: 'text', text: breakBeforeText ? `\n\n${event.delta.text}` : event.delta.text });
             wroteText = true;
@@ -183,9 +211,17 @@ export function createChat(config: AskConfig): ChatRunner {
           send({ type: 'error', message: REFUSED });
           return;
         }
-        if (stopReason !== 'pause_turn') break;
-        // The API resumes a paused server-tool turn when the paused assistant content is sent back unchanged.
-        messages = [...messages, { role: 'assistant', content: message.content }];
+        if (stopReason === 'pause_turn') {
+          if (continuations++ >= MAX_CONTINUATIONS) break;
+          // The API resumes a paused server-tool turn when the paused assistant content is sent back unchanged.
+          messages = [...messages, { role: 'assistant', content: message.content }];
+          continue;
+        }
+        if (stopReason !== 'tool_use' || !toolsLeft) break;
+        toolRounds++;
+        const results = await runTools(message, sources, signal);
+        usage.tools += results.length;
+        messages = [...messages, { role: 'assistant', content: message.content }, { role: 'user', content: results }];
       }
       const note = STOP_NOTES[stopReason];
       if (note) send({ type: 'text', text: wroteText ? `\n\n${note}` : note });
@@ -202,7 +238,7 @@ export function createChat(config: AskConfig): ChatRunner {
         send({ type: 'error', message: failureMessage(error) });
       }
     } finally {
-      console.log(`ask: chat ms=${Date.now() - started} stop=${stopReason} input=${usage.input} cache_read=${usage.cacheRead} cache_write=${usage.cacheWrite} output=${usage.output} searches=${usage.searches} corpus_chars=${corpus.text.length}`);
+      console.log(`ask: chat ms=${Date.now() - started} stop=${stopReason} input=${usage.input} cache_read=${usage.cacheRead} cache_write=${usage.cacheWrite} output=${usage.output} searches=${usage.searches} tools=${usage.tools} corpus_chars=${corpus.text.length}`);
     }
   };
 }

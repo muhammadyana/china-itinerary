@@ -183,7 +183,7 @@ const server = createServer((req, res) => {
 server.requestTimeout = 30_000; // time to receive a request; streamed responses are not limited by it
 
 server.listen(config.port, config.host, () => {
-  console.log(`ask: listening on ${config.host}:${config.port} site_root=${config.siteRoot} origin=${config.origin} web_search_max_uses=${config.webSearchMaxUses} dev=${config.dev}`);
+  console.log(`ask: listening on ${config.host}:${config.port} site_root=${config.siteRoot} origin=${config.origin} web_search_max_uses=${config.webSearchMaxUses} tool_max_rounds=${config.toolMaxRounds} dev=${config.dev}`);
   getCorpus(config.siteRoot).catch(() => undefined); // warm the cache; failures are logged by getCorpus
 });
 
