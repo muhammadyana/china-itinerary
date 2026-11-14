@@ -21,7 +21,11 @@ const ENTITIES: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"'
 // Lines this long carry content; shorter ones are mostly headings and labels (dt, h3, "Pilihan").
 const MIN_DEDUPED_LINE = 61;
 const SKIPPED_PREFIX = 'places/ask/';
-const PRINT_FILE = 'print/index.html';
+// The owner travels the calm option; the old main plan's pages stay out so the assistant never answers from them.
+const MAIN_PLAN_FILES = new Set(['print/index.html', 'places/main-itinerary/index.html', 'places/map/index.html',
+  'places/stays/index.html', 'places/prepare/index.html', 'places/costs/index.html', 'places/trains/index.html']);
+// The homepage carries the calm option's 14 days, so it comes first and whole.
+const HOME_FILE = 'index.html';
 
 export function decodeEntities(text: string): string {
   return text.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (entity, name: string) => {
@@ -82,8 +86,8 @@ function pageUrl(file: string): string {
 }
 
 function pageOrder(file: string): string {
-  if (file === PRINT_FILE) return '0';
-  if (file === 'index.html') return '1';
+  if (file === HOME_FILE) return '0';
+  if (file.startsWith('places/calm') || file.startsWith('places/expenses/')) return `1${file}`;
   return `2${file}`;
 }
 
@@ -111,7 +115,7 @@ export async function buildCorpus(siteRoot: string): Promise<Corpus> {
   const entries = await readdir(siteRoot, { recursive: true });
   const files = entries
     .map(entry => entry.split('\\').join('/'))
-    .filter(file => (file === 'index.html' || file.endsWith('/index.html')) && !file.startsWith(SKIPPED_PREFIX))
+    .filter(file => (file === 'index.html' || file.endsWith('/index.html')) && !file.startsWith(SKIPPED_PREFIX) && !MAIN_PLAN_FILES.has(file))
     .sort((a, b) => pageOrder(a) < pageOrder(b) ? -1 : 1);
   const seen = new Set<string>();
   const pages: string[] = [];
@@ -119,9 +123,9 @@ export async function buildCorpus(siteRoot: string): Promise<Corpus> {
   for (const file of files) {
     const { title, text } = extractPage(await readFile(join(siteRoot, file), 'utf8'));
     const all = text.split('\n');
-    // print/index.html comes first, whole: its 14 days repeat items on purpose. A later page drops a block only when
+    // The homepage comes first, whole: its 14 days repeat items on purpose. A later page drops a block only when
     // every line of it, heading included, already appeared, so no heading or label is left without its content.
-    const lines = file === PRINT_FILE
+    const lines = file === HOME_FILE
       ? all
       : blocks(all).filter(block => !(block.some(line => line.length >= MIN_DEDUPED_LINE) && block.every(line => seen.has(line)))).flat();
     for (const line of all) seen.add(line);
