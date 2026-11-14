@@ -51,7 +51,7 @@ const dandelion: Stay = {
 const mcsrh: Stay = {
   kind: 'Hotel', name: 'Mcsrh Hotel Chunxi Road Taikoo Li', chinese: 'Mcsrh麦嘉·拾趣酒店(成都春熙路太古里店)', chineseAddress: '商业场街1号附89号',
   room: 'Kamar privat',
-  location: 'Dekat Chunxi Road dan Taikoo Li: sekitar 1,5 km garis lurus (1,7 km berkendara) dari Masjid Huangcheng. Ke Chengdu South 8,2 km, ±8 menit tanpa macet; sisihkan 20–30 menit untuk D239 08.33.',
+  location: 'Dekat Chunxi Road dan Taikoo Li: sekitar 1,5 km garis lurus (1,7 km berkendara) dari Masjid Huangcheng. Ke Chengdu South 8,2 km, ±8 menit tanpa macet; cabut ±07.00, DiDi sekitar 15–20 menit untuk C57 08.00.',
   price: 'CNY 138 per malam',
   priceNote: 'Trip.com untuk satu orang, 14–15 November (dicek 6 November 2026): Room M1 dengan satu ranjang double, CNY 138 termasuk pajak, bisa dibatalkan gratis sampai 14 November 18.00; tinggal 3 kamar dengan harga ini. Sebagian kamar M1 berjendela ke koridor.',
   foreignGuests: 'Trip.com: menerima tamu dari semua negara, berlabel "Hi China!". 238 dari 5.163 ulasan berbahasa Inggris.',
@@ -158,7 +158,7 @@ export const calmStayBases: CalmStayBase[] = [
   {
     ...chengdu, id: '2026-11-14', nights: ['2026-11-14', '2026-11-15'], fromMain: false, booked: true, paid: 754697,
     notes: [
-      'Sudah dipesan di Trip.com pada 13 November: dua malam, 14–16 November, menyambung pesanan 11–14 November di hotel yang sama. Koper tetap di kamar selama Siguniangshan dan day trip Chongqing, sebelum D239 08.33 pada 16 November.',
+      'Sudah dipesan di Trip.com pada 13 November: dua malam, 14–16 November, menyambung pesanan 11–14 November di hotel yang sama. Koper tetap di kamar selama Siguniangshan dan day trip Chongqing, sebelum C57 08.00 pada 16 November.',
       'Batal gratis sampai 14 November 18.00 waktu setempat; setelah itu biaya batal Rp486.725.',
     ],
     hotel: {

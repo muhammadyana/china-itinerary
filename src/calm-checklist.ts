@@ -18,7 +18,7 @@ const checklistGroups: ChecklistGroup[] = [
       { id: 'bipenggou-bus-13nov', label: 'Bus PP Chengdu → Bipenggou 07.30 + tiket Bipenggou 12 Nov', booked: true },
       { id: 'siguniang-14nov', label: 'Tur Siguniangshan 14 Nov (Trip.com 89377156 paket J)', booked: true },
       { id: 'chongqing-trains-15nov', label: 'Kereta Chengdu East ⇄ Chongqing 15 Nov (pagi pergi, pulang ±20.30)' },
-      { id: 'd239-15nov', label: 'D239 Chengdu South 08.33 → Lijiang 17.46 (16 Nov)' },
+      { id: 'd239-15nov', label: 'C57 Chengdu South 08.00 → Xichang West + D239 11.41 → Lijiang 17.46 (16 Nov, sudah dipesan)', booked: true },
       { id: 'shangri-la-tour-18nov', label: 'Tur Lijiang → Shangri-La 18 Nov (Trip.com 104549480, 2 orang, turun di Dukezong)' },
       { id: 'c988-songzanlin-19nov', label: 'C988 Shangri-La 15.01 → Lijiang 19 Nov (2 kursi) + Songzanlin 19 Nov (2 tiket)' },
       { id: 'impression-jade-20nov', label: 'Impression Lijiang 13.20 + Jade Dragon kawasan/shuttle/Big Cable Car 15.00–15.30 (20 Nov, 2 orang; buka 13 Nov)' },

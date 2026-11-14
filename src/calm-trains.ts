@@ -72,6 +72,8 @@ const transferNotes: Record<string, string[]> = {
     stepText('2026-11-19', '±16.30–17.30'),
   ],
   '2026-11-16': [
+    stepText('2026-11-16', '±07.00'),
+    stepText('2026-11-16', '10.55'),
     'Stasiun Chengdu South juga dilayani metro 火车南站 (jalur 1, 7, dan 18); jalur 1 ke Tianfu Square sekitar 10 menit (WanderInChina, Juli 2026). Jam kereta pertamanya belum dicek, jadi DiDi tetap pilihan utama; OSRM memberi 9 menit tanpa macet.',
     'Dari Stasiun Lijiang ke kota tua (8,4 km menurut OSRM), catatan Ctrip Desember 2022 juga menyebut bus 16 dan 18 serta minibus biru CNY 10–15 per orang; belum dicek untuk 2026.',
   ],
