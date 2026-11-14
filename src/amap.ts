@@ -112,6 +112,7 @@ const amapPlaces: Record<string, AmapPlace> = {
   napahai: { keyword: '纳帕海', city: '533401' },
   'peoples-park': { keyword: '人民公园', city: '510100', near: 'chengdu' },
   // Chongqing day trip (calm option, 15 November); 500000 is the Chongqing municipality adcode.
+  'the-ring': { keyword: '重庆光环购物公园', city: '500000' },
   liziba: { keyword: '李子坝轻轨穿楼观景平台', city: '500000' },
   jiefangbei: { keyword: '解放碑', city: '500000' },
   'yangtze-cableway': { keyword: '长江索道', city: '500000' },
