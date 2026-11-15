@@ -326,7 +326,7 @@ const calmOwnDays: CalmDay[] = [
   {
     date: '2026-11-16', title: 'Kota Tua Lijiang', shortTitle: 'Lijiang',
     route: ['Chengdu South', 'C57', 'Xichang West', 'D239', 'Lijiang', 'Dayan'],
-    overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Dekat Kota Tua Lijiang; 166 Hotel juga pilihan rencana utama untuk 18 November. ${calmStayPicks('2026-11-16')}` },
+    overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Dekat Kota Tua Lijiang; penginapan malam ini belum dipesan. ${calmStayPicks('2026-11-16')}` },
     transport: 'DiDi ke Chengdu South sekitar 15–20 menit (~6 km); cabut dari Mcsrh Chunxi ±07.00, bawa koper besar. C57 Chengdu South (成都南) 08.00 → Xichang West (西昌西) 10.55, transfer 46 menit di stasiun yang sama (ikuti papan 换乘), lalu D239 11.41 → Lijiang (丽江) 17.46, kelas dua; tiket sudah dibeli. Taksi ke kota tua, sekitar 10 km, 25–40 menit, CNY 30–50 per mobil.',
     intro: 'Seharian di kereta dari cekungan Sichuan ke Yunnan, ganti di Xichang West. Malam ini di Lijiang dulu, bukan langsung ke Shangri-La, supaya tidak naik dari 500 m ke 3.300 m dalam sehari.',
     steps: [
@@ -344,7 +344,7 @@ const calmOwnDays: CalmDay[] = [
     stops: [
       { place: 'chengdu-south', note: 'C57 berangkat 08.00; cabut dari hotel ±07.00.' },
       { place: 'lijiang-station', note: 'Tiba 17.46.' },
-      { place: 'dayan', note: 'Malam pertama di Lijiang, hotel yang sama dengan 18 November.' },
+      { place: 'dayan', note: 'Malam pertama di Lijiang; penginapan malam ini belum dipesan. Malam 17 November di Hemuju Homestay (sudah dipesan).' },
     ],
     notes: [],
     risks: [
@@ -356,13 +356,13 @@ const calmOwnDays: CalmDay[] = [
   {
     date: '2026-11-17', title: 'Kota Tua Lijiang & Sifangjie', shortTitle: 'Lijiang & Sifangjie',
     route: ['Kota Tua Lijiang', 'Sifangjie'],
-    overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Malam kedua di kota tua. ${calmStayPicks('2026-11-17')}` },
+    overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Malam kedua di kota tua, di Hemuju Homestay (Gucheng South Gate). ${calmStayPicks('2026-11-17')}` },
     transport: 'Jalan kaki di kota tua; tidak ada perjalanan antarkota hari ini.',
     intro: 'Hari bebas setelah seharian di C57 dan D239: tidur cukup, kota tua Lijiang dengan langkah pelan, lalu siapkan tur sehari ke Shangri-La yang berangkat sangat pagi besok.',
     steps: [
       ['Pagi', 'Istirahat', 'Bangun tanpa alarm di ±2.400 m; banyak minum.'],
       ['Siang', 'Kota tua Dayan', 'Kanal dan gang kota tua; makan siang di kedai Hui bertanda 清真 (belum diverifikasi; tanyakan di tempat). Beli bekal halal untuk dua orang besok.'],
-      ['Sore', 'Sifangjie & siapkan tur', 'Lapangan Sifangjie dan atap kota tua saat cahaya sore. Konfirmasi jemput tur besok (halaman tur menyebut ±06.10) dan siapkan koper untuk ikut seharian.'],
+      ['Sore', 'Sifangjie & check-in Hemuju', 'Lapangan Sifangjie dan atap kota tua saat cahaya sore. Check-in di Lijiang Hemuju Homestay (Gucheng South Gate) setelah 14.00; Elegant Queen Room, sudah dipesan, kamar dibagi dua. Konfirmasi jemput tur besok (halaman tur menyebut ±06.10) dan siapkan koper untuk ikut seharian.'],
       ['Malam', 'Tidur awal', 'Tidur awal: jemput tur ±06.10.'],
     ],
     stops: [
@@ -376,7 +376,7 @@ const calmOwnDays: CalmDay[] = [
   {
     date: '2026-11-18', title: 'Tiger Leaping Gorge, Napahai & Shangri-La', shortTitle: 'Tiger Leaping & Shangri-La',
     route: ['Lijiang', 'First Bend', 'Upper Tiger Leaping Gorge', 'Haba', 'Xiaozhongdian', 'Dukezong', 'Napahai', 'Shangri-La'],
-    overnight: { name: 'Shangri-La', elevation: '3.300 m', detail: `Dukezong, satu malam berdua di kamar twin. ${calmStayPicks('2026-11-18')}` },
+    overnight: { name: 'Shangri-La', elevation: '3.300 m', detail: `Dukezong, satu malam di Jianyi B&B, Sunlit Street View Double Bed Room (satu ranjang king). ${calmStayPicks('2026-11-18')}` },
     transport: 'Tur gabung Trip.com 104549480 (Package E): jemput ±06.10 di Lijiang, mobil seharian lewat First Bend, Upper Gorge, Haba, dan Xiaozhongdian ke Shangri-La; turun di Dukezong, tidak kembali ke Lijiang.',
     intro: 'Hari pertama berdua: satu tur yang membawa kalian dari Lijiang ke Shangri-La sambil singgah di First Bend Sungai Yangtze, Upper Tiger Leaping Gorge, titik pandang Haba, Dukezong, dan Napahai. Makan siang tur adalah jamuan Tibet yang tidak halal, jadi bawa bekal.',
     steps: [
@@ -384,11 +384,11 @@ const calmOwnDays: CalmDay[] = [
       ['Pagi', 'First Bend & Upper Gorge', 'First Bend Sungai Yangtze, lalu Upper Tiger Leaping Gorge sekitar 1,5 jam menurut halaman tur. Subuh di mobil atau saat berhenti.'],
       ['Siang', 'Haba & Xiaozhongdian', 'Titik pandang Gunung Salju Haba dan padang Xiaozhongdian. Makan siang dari bekal halal, bukan jamuan tur. Zuhur dijamak dengan Asar.'],
       ['Sore', 'Shangri-La & Napahai', 'Bendera doa raksasa, Dukezong, roda doa Kuil Dafo, lalu Napahai sekitar 1,5 jam menurut halaman tur.'],
-      ['Malam', 'Turun di Dukezong', 'Tur selesai di Shangri-La; check-in kamar twin. Maghrib dan Isya dijamak di hotel. Tidur di ±3.300 m: banyak minum.'],
+      ['Malam', 'Turun di Dukezong', 'Tur selesai di Shangri-La; check-in di Shangri-la Jianyi light luxury intelligent B&B, No. 123 Dalalang, Sunlit Street View Double Bed Room (satu ranjang king, sudah dipesan). Maghrib dan Isya dijamak di hotel. Tidur di ±3.300 m: banyak minum.'],
     ],
     stops: [
       { place: 'upper-tiger-leaping-gorge', note: 'Sekitar 1,5 jam di tur.' },
-      { place: 'dukezong', note: 'Tur selesai di sini; menginap berdua.' },
+      { place: 'dukezong', note: 'Tur selesai di sini; menginap di Jianyi B&B (sudah dipesan).' },
     ],
     notes: [],
     risks: [
@@ -410,7 +410,7 @@ const calmOwnDays: CalmDay[] = [
       ['±11.00–13.30', 'Dukezong, check-out', 'Kembali ke Dukezong, check-out, makan siang halal bila ada (belum diverifikasi), Zuhur dan Asar dijamak.'],
       ['±14.15', 'Ke Stasiun Shangri-La', 'Taksi ±6 km ke Stasiun Shangri-La; tarif belum dicek.'],
       ['15.01', 'C988 ke Lijiang', 'C988 Shangri-La 15.01 → Lijiang 16.14 (jadwal Trip.com, dicek 9 November 2026). Cadangan: C374 15.25 → 16.48.'],
-      ['±16.30–17.30', 'Ke kota tua, check-in', 'Taksi ±10 km ke kota tua; check-in. Maghrib dan Isya di hotel.'],
+      ['±16.30–17.30', 'Ke kota tua, check-in', 'Taksi ±10 km ke kota tua; check-in di 166 Hotel (Lijiang Ancient City), Sunshine Wonderful Twin Room (sudah dipesan; check-in setelah 10.00). Maghrib dan Isya di hotel.'],
       ['Malam', 'Siapkan Jade Dragon', 'Tidur awal: besok mobil 06.30 ke Jade Dragon. Pastikan tiket kawasan, shuttle, kereta gantung, dan Impression Lijiang untuk 20 November.'],
     ],
     stops: [
@@ -551,7 +551,7 @@ const stayBooking = (base: CalmStayBase): CalmBooking => ({
   date: base.nights[0], until: base.nights.length > 1 ? base.nights[base.nights.length - 1] : undefined,
   item: `${base.name}, malam ${nightList(base.nights)}`, urgency: 'now',
   price: base.booked ? base.hotel.price : stayPicksText(base), booked: base.booked ? base.hotel.priceNote : undefined,
-  channel: `${[...new Set([base.hotel, base.hostel].map(stay => stay.links[0].label))].join(' atau ')}; dua pilihan per malam beserta sumbernya di halaman Hotel & hostel santai.`,
+  channel: `${[...new Set([base.hotel, base.hostel].flatMap(stay => stay.links[0] ? [stay.links[0].label] : []))].join(' atau ') || 'Trip.com'}; dua pilihan per malam beserta sumbernya di halaman Hotel & hostel santai.`,
   opens: 'Bisa dipesan sekarang.', link: { label: 'Hotel & hostel santai', url: calmStaysHref(base.nights[0]) },
 });
 

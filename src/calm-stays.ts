@@ -8,8 +8,9 @@ export const calmStaysPath = '/places/calm-stays/';
 export const calmStaysCheckedAt = '2026-11-05';
 
 /** A stays.ts base for consecutive calm nights; `id` is the first night's date, the section anchor on the calm stays page. */
-/** `paid` is the rupiah amount charged for a booked base, from the owner's order screenshot. */
-export interface CalmStayBase extends StayBase { nights: string[]; fromMain: boolean; paid?: number }
+/** `paid` is the rupiah amount recorded on the expenses page, from the owner's order screenshot.
+ * For a room shared with a friend it is the owner's half (`paidShare`). */
+export interface CalmStayBase extends StayBase { nights: string[]; fromMain: boolean; paid?: number; paidShare?: boolean }
 
 const mainBase = (id: string) => {
   const base = stayBases.find(item => item.id === id);
@@ -100,6 +101,19 @@ const huaqianYuexia: Stay = {
   ],
 };
 
+const hemuju: Stay = {
+  kind: 'Guesthouse', name: 'Lijiang Hemuju Homestay (Gucheng South Gate)',
+  room: 'Kamar privat',
+  location: 'No. 24 Jibaowu West Section, Xiabahe Community, Gucheng District, Lijiang (Gucheng South Gate).',
+  price: 'sekitar CNY 70 per kamar',
+  priceNote: 'Sudah dipesan di Trip.com pada 15 November: total Rp191.201 untuk satu malam, 17–18 November, Elegant Queen Room. Bagianmu Rp95.600 (50%). Batal gratis sampai 17 November 18.00 waktu setempat.',
+  foreignGuests: 'Dipesan di Trip.com pada 15 November; kebijakan tamu asing selain itu belum dicek terpisah.',
+  rooms: 'Elegant Queen Room. Check-in setelah 14.00, check-out sebelum 12.00.',
+  reason: 'Sudah dipesan untuk malam 17 November; kamar dibagi dua.',
+  links: [],
+  sources: [],
+};
+
 const jiuzhaigou = mainBase('jiuzhaigou');
 const chengdu = mainBase('chengdu');
 const lijiang = mainBase('lijiang');
@@ -171,11 +185,9 @@ export const calmStayBases: CalmStayBase[] = [
     hostel: desti,
   },
   {
-    ...lijiang, id: '2026-11-16', nights: ['2026-11-16', '2026-11-17'], fromMain: false,
+    ...lijiang, id: '2026-11-16', nights: ['2026-11-16'], fromMain: false,
     notes: [
-      'Dua malam di kota tua sebelum tur 18 November; malam 17 November berdua, jadi pesan kamar twin untuk dua orang mulai 17 November. Harga di bawah dicek untuk 15–16 November satu orang; harga 16–18 November belum dicek.',
-      'Tanyakan apakah koper boleh dititip 18–19 November sambil ke Shangri-La, karena 19 November kembali ke Lijiang.',
-      'Mama Naxi Guesthouse, pilihan rencana utama untuk 18 November, kini CNY 209 untuk kamar privat 15 November, di atas batas dan tinggal satu kamar. Ranjang di dorm campur 8 orang CNY 44–58 termasuk pajak.',
+      'Satu malam sendiri di kota tua, 16–17 November; penginapan malam ini belum dipesan. Malam 17 November sudah dipesan di Hemuju Homestay (kamar dibagi dua). Harga di bawah dicek untuk 15–16 November satu orang; harga 16–17 November belum dicek.',
       'Taksi berhenti di gerbang kota tua; 166 Hotel bisa dijangkau mobil sampai pintu, Huaqian Yuexia Inn tidak.',
     ],
     hotel: {
@@ -194,42 +206,48 @@ export const calmStayBases: CalmStayBase[] = [
     hostel: huaqianYuexia,
   },
   {
-    ...shangriLa, id: '2026-11-18', nights: ['2026-11-18'], fromMain: false,
+    ...lijiang, id: '2026-11-17', nights: ['2026-11-17'], fromMain: false, booked: true, paid: 95600, paidShare: true,
     notes: [
-      'Satu malam berdua di Dukezong setelah tur; pesan kamar twin untuk dua orang. Harga di bawah dicek 5 November untuk 16–18 November; harga 18–19 November belum dicek.',
-      'Kamar twin dengan oksigen: Haorui Xiangting Mountain View Hotel (香格里拉·浩瑞|香庭山语酒店(独克宗古城店), 长征大道24号), CNY 67 per kamar per malam berdua untuk 16–18 November, bisa dibatalkan gratis. Resepsionis 24 jam dan lift; nilai 8,6 dengan fasilitas agak tua, dan dua ranjang single tidak dijamin, jadi minta saat memesan.',
+      'Sudah dipesan di Trip.com pada 15 November: satu malam, 17–18 November, Elegant Queen Room. Total Rp191.201, bagianmu Rp95.600 (50%).',
+      'Batal gratis sampai 17 November 18.00 waktu setempat. Check-in setelah 14.00, check-out sebelum 12.00.',
     ],
-    hotel: {
-      ...shangriLa.hotel,
-      price: 'CNY 82 per malam (promo menginap pertama)',
-      priceNote: 'Trip.com: Deluxe Standard dengan dua ranjang double, sampai 4 orang, CNY 82 per kamar per malam termasuk pajak, sama untuk 16–17 November satu orang dan 17–18 November dua orang; CNY 164 bila dipesan sekaligus 16–18 November. Harga promo menginap pertama (potongan 11%), tanpa promo sekitar CNY 87. Bisa dibatalkan gratis.',
-      rooms: 'Pemanas di setiap kamar, dan menurut ulasan AC dataran tinggi menghangatkan dengan baik. Resepsionis 24 jam. Tanpa sarapan dan oksigen, padahal malam 18 November naik sekitar 900 m dari Lijiang.',
-      reason: 'Hotel rencana utama untuk Shangri-La; dua ranjang double cocok untuk berbagi kamar.',
-      links: [trip('https://us.trip.com/hotels/detail/?hotelId=3396520&checkIn=2026-11-16&checkOut=2026-11-18&adult=2&crn=1&curr=CNY'), ...shangriLa.hotel.links.slice(1)],
-      sources: [
-        { title: 'Trip.com list filtered to Duge Grand, 16–18 Nov 2026, 2 adults', url: 'https://us.trip.com/hotels/list?city=660&checkin=2026-11-16&checkout=2026-11-18&adult=2&crn=1&curr=CNY&listFilters=31~3396520*31*3396520' },
-        { title: 'Trip.com list filtered to Duge Grand, 16–17 Nov 2026, 1 adult', url: 'https://us.trip.com/hotels/list?city=660&checkin=2026-11-16&checkout=2026-11-17&adult=1&crn=1&curr=CNY&listFilters=31~3396520*31*3396520' },
-        { title: 'Trip.com: Duge Grand Hotel detail (policy, heating)', url: 'https://us.trip.com/hotels/detail/?hotelId=3396520&curr=CNY' },
-        { title: 'Trip.com list, Shangri-La, 16–18 Nov 2026, 2 adults, CNY 60–183 (Haorui Xiangting twin CNY 134 for 2 nights)', url: 'https://us.trip.com/hotels/list?city=660&checkin=2026-11-16&checkout=2026-11-18&adult=2&crn=1&curr=CNY&listFilters=15~Range*15*60~183,17~3*17*3,6~9*6*9' },
-        { title: 'Trip.com: Haorui Xiangting detail (policy, reviews)', url: 'https://us.trip.com/hotels/detail/?hotelId=1460861&curr=CNY' },
-      ],
-    },
-    hostel: {
-      ...shangriLa.hostel,
-      price: 'CNY 118 per malam',
-      priceNote: 'Trip.com: Light Luxury Double dengan satu ranjang queen CNY 118 per malam termasuk pajak, untuk 16–17 November satu orang dan 17–18 November dua orang; CNY 235 untuk 16–18 November. Tanpa promo, bisa dibatalkan gratis. Tidak ada kamar twin sampai CNY 250 per malam.',
-      rooms: 'Pemanas seluruh rumah, suplai oksigen, dan pelembap. Hanya satu ranjang queen, jadi kurang cocok untuk dua teman. Resepsionis 08.30–24.00.',
-      reason: 'Pilihan kedua rencana utama, dengan oksigen di kamar dan nilai 9,7 dari 931 ulasan.',
-      links: [trip('https://us.trip.com/hotels/detail/?hotelId=5663751&checkIn=2026-11-16&checkOut=2026-11-18&adult=2&crn=1&curr=CNY')],
-      sources: [
-        { title: 'Trip.com list filtered to Jianyi, 16–18 Nov 2026, 2 adults', url: 'https://us.trip.com/hotels/list?city=660&checkin=2026-11-16&checkout=2026-11-18&adult=2&crn=1&curr=CNY&listFilters=31~5663751*31*5663751' },
-        { title: 'Trip.com: Jianyi detail (policy)', url: 'https://us.trip.com/hotels/detail/?hotelId=5663751&curr=CNY' },
-      ],
-    },
+    hotel: hemuju,
+    hostel: huaqianYuexia,
   },
   {
-    ...sharedNight('lijiang', '2026-11-19'), fromMain: false,
-    notes: ['Hotel rencana utama untuk malam sebelum Jade Dragon, sehari lebih lambat: harga dicek 4 November untuk 18 November, harga 19 November belum dicek.', 'Mobil Jade Dragon menjemput 06.30 dengan koper; 166 Hotel bisa dijangkau mobil sampai pintu.', ...lijiang.notes],
+    ...shangriLa, id: '2026-11-18', nights: ['2026-11-18'], fromMain: false, booked: true, paid: 178342, paidShare: true,
+    notes: [
+      'Sudah dipesan di Trip.com pada 15 November: satu malam, 18–19 November, Sunlit Street View Double Bed Room (satu ranjang king). Total Rp356.684, bagianmu Rp178.342 (50%).',
+      'Batal gratis sampai 17 November 23.59 waktu setempat.',
+    ],
+    hotel: {
+      ...shangriLa.hostel,
+      name: 'Shangri-la Jianyi light luxury intelligent B&B',
+      location: 'No. 123 Dalalang, Dukezong Ancient Town, Shangri-La; sekitar 6 menit jalan kaki ke roda doa Guishan.',
+      price: 'sekitar CNY 131 per kamar',
+      priceNote: 'Sudah dipesan di Trip.com pada 15 November: total Rp356.684 untuk satu malam, 18–19 November, Sunlit Street View Double Bed Room (satu ranjang king). Bagianmu Rp178.342 (50%). Batal gratis sampai 17 November 23.59 waktu setempat.',
+      rooms: 'Sunlit Street View Double Bed Room, satu ranjang king. Pemanas seluruh rumah, suplai oksigen, dan pelembap. Resepsionis 08.30–24.00.',
+      reason: 'Sudah dipesan untuk malam 18 November; kamar dibagi dua.',
+      links: [trip('https://us.trip.com/hotels/detail/?hotelId=5663751&checkIn=2026-11-18&checkOut=2026-11-19&adult=2&crn=1&curr=CNY')],
+    },
+    hostel: shangriLa.hotel,
+  },
+  {
+    ...lijiang, id: '2026-11-19', nights: ['2026-11-19'], fromMain: false, booked: true, paid: 110127, paidShare: true,
+    notes: [
+      'Sudah dipesan di Trip.com pada 15 November: satu malam, 19–20 November, Sunshine Wonderful Twin Room (dua ranjang double). Total Rp220.254, bagianmu Rp110.127 (50%).',
+      'Batal gratis sampai 17 November 18.00 waktu setempat. Check-in setelah 10.00, check-out sebelum 14.00. Mobil Jade Dragon menjemput 06.30 dengan koper; 166 Hotel bisa dijangkau mobil sampai pintu.',
+    ],
+    hotel: {
+      ...lijiang.hotel,
+      name: '166 Hotel (Lijiang Ancient City)',
+      price: 'sekitar CNY 81 per kamar',
+      priceNote: 'Sudah dipesan di Trip.com pada 15 November: total Rp220.254 untuk satu malam, 19–20 November, Sunshine Wonderful Twin Room (dua ranjang double). Bagianmu Rp110.127 (50%). Batal gratis sampai 17 November 18.00 waktu setempat.',
+      rooms: 'Sunshine Wonderful Twin Room, dua ranjang double. Check-in setelah 10.00, check-out sebelum 14.00. Kamar mandi dalam, AC pemanas, resepsionis 24 jam, penitipan bagasi. Tanpa sarapan.',
+      reason: 'Sudah dipesan untuk malam 19 November; kamar dibagi dua.',
+      links: [trip('https://us.trip.com/hotels/detail/?hotelId=109842432&checkIn=2026-11-19&checkOut=2026-11-20&adult=2&crn=1&curr=CNY')],
+    },
+    hostel: lijiang.hostel,
   },
   {
     ...sharedNight('dali', '2026-11-20'), fromMain: false,
