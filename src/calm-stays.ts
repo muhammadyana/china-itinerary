@@ -103,13 +103,14 @@ const huaqianYuexia: Stay = {
 
 const hemuju: Stay = {
   kind: 'Guesthouse', name: 'Lijiang Hemuju Homestay (Gucheng South Gate)',
+  chinese: '丽江和睦居民宿(古城南门店)',
   room: 'Kamar privat',
-  location: 'No. 24 Jibaowu West Section, Xiabahe Community, Gucheng District, Lijiang (Gucheng South Gate).',
-  price: 'sekitar CNY 70 per kamar',
-  priceNote: 'Sudah dipesan di Trip.com pada 15 November: total Rp191.201 untuk satu malam, 17–18 November, Elegant Queen Room. Bagianmu Rp95.600 (50%). Batal gratis sampai 17 November 18.00 waktu setempat.',
+  location: 'No. 24 Jibaowu West Section, Xiabahe Community, Gucheng District, Lijiang (Gucheng South Gate / 古城南门).',
+  price: 'sudah dipesan',
+  priceNote: 'Sudah dipesan di Trip.com pada 15 November.',
   foreignGuests: 'Dipesan di Trip.com pada 15 November; kebijakan tamu asing selain itu belum dicek terpisah.',
-  rooms: 'Elegant Queen Room. Check-in setelah 14.00, check-out sebelum 12.00.',
-  reason: 'Sudah dipesan untuk malam 17 November; kamar dibagi dua.',
+  rooms: 'Check-in setelah 14.00, check-out sebelum 12.00.',
+  reason: 'Sudah dipesan di Hemuju Homestay, dekat 古城南门.',
   links: [],
   sources: [],
 };
@@ -185,23 +186,17 @@ export const calmStayBases: CalmStayBase[] = [
     hostel: desti,
   },
   {
-    ...lijiang, id: '2026-11-16', nights: ['2026-11-16'], fromMain: false,
+    ...lijiang, id: '2026-11-16', nights: ['2026-11-16'], fromMain: false, booked: true, paid: 223391,
     notes: [
-      'Satu malam sendiri di kota tua, 16–17 November; penginapan malam ini belum dipesan. Malam 17 November sudah dipesan di Hemuju Homestay (kamar dibagi dua). Harga di bawah dicek untuk 15–16 November satu orang; harga 16–17 November belum dicek.',
-      'Taksi berhenti di gerbang kota tua; 166 Hotel bisa dijangkau mobil sampai pintu, Huaqian Yuexia Inn tidak.',
+      'Sudah dipesan di Trip.com pada 15 November: satu malam, 16–17 November, sendiri (bukan dibagi dua). Dibayar Rp223.391.',
+      'Batal gratis sampai 16 November 18.00 waktu setempat; setelah itu biaya batal paling sedikit Rp67.017. Check-in setelah 14.00, check-out sebelum 12.00.',
+      'Malam 17 November di penginapan yang sama; tidak pindah hotel saat teman tiba.',
     ],
     hotel: {
-      ...lijiang.hotel,
-      price: 'CNY 76 per malam',
-      priceNote: 'Trip.com untuk satu orang, 15–16 November: Special Upgraded Room twin CNY 76 termasuk pajak dan parkir, label "Early Bird Deal" 7%, bisa dibatalkan gratis; tinggal 4 kamar dengan harga ini pada 5 November. Family room CNY 88. Pilih Upgraded Twin, karena sebagian tipe kamar tanpa AC.',
-      rooms: 'Kamar mandi dalam, AC pemanas, lift, resepsionis 24 jam, penitipan bagasi. Tabung oksigen CNY 10 per tabung. Tanpa sarapan.',
-      reason: 'Hotel rencana utama untuk 18 November, dengan harga yang sama untuk 15 November; mobil bisa menjemput sampai pintu.',
-      links: [trip('https://us.trip.com/hotels/detail/?hotelId=109842432&checkIn=2026-11-15&checkOut=2026-11-16&adult=1&crn=1&curr=CNY')],
-      sources: [
-        { title: 'Trip.com list filtered to 166 Hotel, 15–16 Nov 2026', url: 'https://us.trip.com/hotels/list?city=37&checkin=2026-11-15&checkout=2026-11-16&adult=1&crn=1&curr=CNY&listFilters=31~109842432*31*109842432' },
-        { title: 'Trip.com: 166 Hotel detail (policy, facilities, oxygen fee)', url: 'https://us.trip.com/hotels/detail/?hotelId=109842432&curr=CNY' },
-        { title: 'Trip.com list filtered to Mama Naxi, 15–16 Nov 2026', url: 'https://us.trip.com/hotels/list?city=37&checkin=2026-11-15&checkout=2026-11-16&adult=1&crn=1&curr=CNY&listFilters=31~61483794*31*61483794' },
-      ],
+      ...hemuju,
+      price: 'sekitar CNY 82',
+      priceNote: 'Sudah dipesan di Trip.com pada 15 November: Rp223.391 untuk satu malam, 16–17 November, sendiri (bukan dibagi dua). Batal gratis sampai 16 November 18.00 waktu setempat; setelah itu biaya batal paling sedikit Rp67.017.',
+      reason: 'Sudah dipesan untuk malam 16 November, sendiri, di penginapan yang sama dengan malam 17 November.',
     },
     hostel: huaqianYuexia,
   },
@@ -210,8 +205,15 @@ export const calmStayBases: CalmStayBase[] = [
     notes: [
       'Sudah dipesan di Trip.com pada 15 November: satu malam, 17–18 November, Elegant Queen Room. Total Rp191.201, bagianmu Rp95.600 (50%).',
       'Batal gratis sampai 17 November 18.00 waktu setempat. Check-in setelah 14.00, check-out sebelum 12.00.',
+      'Penginapan yang sama dengan malam 16 November; tidak pindah hotel saat teman tiba.',
     ],
-    hotel: hemuju,
+    hotel: {
+      ...hemuju,
+      price: 'sekitar CNY 70 per kamar',
+      priceNote: 'Sudah dipesan di Trip.com pada 15 November: total Rp191.201 untuk satu malam, 17–18 November, Elegant Queen Room. Bagianmu Rp95.600 (50%). Batal gratis sampai 17 November 18.00 waktu setempat.',
+      rooms: 'Elegant Queen Room. Check-in setelah 14.00, check-out sebelum 12.00.',
+      reason: 'Sudah dipesan untuk malam 17 November; kamar dibagi dua, di penginapan yang sama dengan malam 16 November.',
+    },
     hostel: huaqianYuexia,
   },
   {

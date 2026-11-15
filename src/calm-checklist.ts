@@ -34,7 +34,7 @@ const checklistGroups: ChecklistGroup[] = [
       { id: 'jiuzhaigou-9-10', label: 'Jiuzhaigou 9–10 (Leyu Youth Hostel)', booked: true },
       { id: 'chengdu-11-14', label: 'Chengdu 11–13 (Mcsrh, 3 malam)', booked: true },
       { id: 'chengdu-14', label: 'Chengdu malam 14–15 (Mcsrh, 2 malam)', booked: true },
-      { id: 'lijiang-15-17', label: 'Lijiang 16 (sendiri, belum dipesan)' },
+      { id: 'lijiang-15-17', label: 'Lijiang Hemuju Homestay 16 Nov (sudah dipesan, sendiri)', booked: true },
       { id: 'lijiang-17', label: 'Lijiang Hemuju Homestay 17 Nov (sudah dipesan, bagianmu 50%)', booked: true },
       { id: 'shangri-la-18', label: 'Shangri-la Jianyi B&B 18 Nov (sudah dipesan, bagianmu 50%)', booked: true },
       { id: 'lijiang-19', label: '166 Hotel Lijiang 19 Nov (sudah dipesan, bagianmu 50%)', booked: true },

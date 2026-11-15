@@ -326,8 +326,8 @@ const calmOwnDays: CalmDay[] = [
   {
     date: '2026-11-16', title: 'Kota Tua Lijiang', shortTitle: 'Lijiang',
     route: ['Chengdu South', 'C57', 'Xichang West', 'D239', 'Lijiang', 'Dayan'],
-    overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Dekat Kota Tua Lijiang; penginapan malam ini belum dipesan. ${calmStayPicks('2026-11-16')}` },
-    transport: 'DiDi ke Chengdu South sekitar 15–20 menit (~6 km); cabut dari Mcsrh Chunxi ±07.00, bawa koper besar. C57 Chengdu South (成都南) 08.00 → Xichang West (西昌西) 10.55, transfer 46 menit di stasiun yang sama (ikuti papan 换乘), lalu D239 11.41 → Lijiang (丽江) 17.46, kelas dua; tiket sudah dibeli. Taksi ke kota tua, sekitar 10 km, 25–40 menit, CNY 30–50 per mobil.',
+    overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Lijiang Hemuju Homestay (Gucheng South Gate / 丽江和睦居民宿(古城南门店)). Malam 17 November di penginapan yang sama, tidak pindah hotel. ${calmStayPicks('2026-11-16')}` },
+    transport: 'DiDi ke Chengdu South sekitar 15–20 menit (~6 km); cabut dari Mcsrh Chunxi ±07.00, bawa koper besar. C57 Chengdu South (成都南) 08.00 → Xichang West (西昌西) 10.55, transfer 46 menit di stasiun yang sama (ikuti papan 换乘), lalu D239 11.41 → Lijiang (丽江) 17.46, kelas dua; tiket sudah dibeli. Dari 丽江站, taksi atau DiDi ke 古城南门, sekitar 7–9 km.',
     intro: 'Seharian di kereta dari cekungan Sichuan ke Yunnan, ganti di Xichang West. Malam ini di Lijiang dulu, bukan langsung ke Shangri-La, supaya tidak naik dari 500 m ke 3.300 m dalam sehari.',
     steps: [
       ['±05.59', 'Subuh', 'Subuh di hotel.'],
@@ -337,14 +337,14 @@ const calmOwnDays: CalmDay[] = [
       ['11.41', 'Kereta D239 ke Lijiang', 'D239 dari Xichang West 11.41, tiba Lijiang (丽江) 17.46, kelas dua. Rekam video dari jendela; makan dari bekal halal.'],
       ['±12.51–13.10', 'Zuhur + Asar di kereta', 'Zuhur di kereta (12.51 di Chengdu, 13.06 di Lijiang), dijamak takdim dengan Asar.'],
       ['17.46', 'Tiba di Lijiang', 'Tiba di Stasiun Lijiang. Matahari terbenam 18.29.'],
-      ['±18.00–18.45', 'Ke hotel, Maghrib', 'Taksi atau DiDi ke hotel. Maghrib 18.31; bila perlu dijamak dengan Isya (19.51) di hotel.'],
+      ['±18.00–18.45', 'Ke Hemuju, Maghrib', 'Taksi atau DiDi dari 丽江站 ke 古城南门 (gerbang selatan), sekitar 7–9 km, lalu check-in di Lijiang Hemuju Homestay (丽江和睦居民宿(古城南门店)); sudah dipesan, check-in setelah 14.00. Malam 17 November di penginapan yang sama, tidak pindah hotel saat teman tiba. Maghrib 18.31; bila perlu dijamak dengan Isya (19.51) di hotel.'],
       ['±19.15–20.30', 'Makan malam halal', 'Makan malam di kedai Hui bertanda 清真 dekat kota tua (belum diverifikasi, sama seperti rencana utama). Beli bekal halal untuk sarapan 17 November.'],
       ['Malam', 'Istirahat', 'Besok hari bebas di Lijiang.'],
     ],
     stops: [
       { place: 'chengdu-south', note: 'C57 berangkat 08.00; cabut dari hotel ±07.00.' },
       { place: 'lijiang-station', note: 'Tiba 17.46.' },
-      { place: 'dayan', note: 'Malam pertama di Lijiang; penginapan malam ini belum dipesan. Malam 17 November di Hemuju Homestay (sudah dipesan).' },
+      { place: 'dayan', note: 'Malam pertama di Lijiang Hemuju Homestay (古城南门); malam 17 November di penginapan yang sama, tidak pindah hotel.' },
     ],
     notes: [],
     risks: [
@@ -356,13 +356,13 @@ const calmOwnDays: CalmDay[] = [
   {
     date: '2026-11-17', title: 'Kota Tua Lijiang & Sifangjie', shortTitle: 'Lijiang & Sifangjie',
     route: ['Kota Tua Lijiang', 'Sifangjie'],
-    overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Malam kedua di kota tua, di Hemuju Homestay (Gucheng South Gate). ${calmStayPicks('2026-11-17')}` },
+    overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Malam kedua di Hemuju Homestay (Gucheng South Gate), penginapan yang sama dengan malam 16 November; tidak pindah hotel. ${calmStayPicks('2026-11-17')}` },
     transport: 'Jalan kaki di kota tua; tidak ada perjalanan antarkota hari ini.',
     intro: 'Hari bebas setelah seharian di C57 dan D239: tidur cukup, kota tua Lijiang dengan langkah pelan, lalu siapkan tur sehari ke Shangri-La yang berangkat sangat pagi besok.',
     steps: [
       ['Pagi', 'Istirahat', 'Bangun tanpa alarm di ±2.400 m; banyak minum.'],
       ['Siang', 'Kota tua Dayan', 'Kanal dan gang kota tua; makan siang di kedai Hui bertanda 清真 (belum diverifikasi; tanyakan di tempat). Beli bekal halal untuk dua orang besok.'],
-      ['Sore', 'Sifangjie & check-in Hemuju', 'Lapangan Sifangjie dan atap kota tua saat cahaya sore. Check-in di Lijiang Hemuju Homestay (Gucheng South Gate) setelah 14.00; Elegant Queen Room, sudah dipesan, kamar dibagi dua. Konfirmasi jemput tur besok (halaman tur menyebut ±06.10) dan siapkan koper untuk ikut seharian.'],
+      ['Sore', 'Sifangjie & siapkan tur', 'Lapangan Sifangjie dan atap kota tua saat cahaya sore. Tetap di Lijiang Hemuju Homestay, penginapan yang sama dengan malam 16 November; tidak pindah hotel saat teman tiba. Kamar 17 November: Elegant Queen Room, sudah dipesan, dibagi dua. Konfirmasi jemput tur besok (halaman tur menyebut ±06.10) dan siapkan koper untuk ikut seharian.'],
       ['Malam', 'Tidur awal', 'Tidur awal: jemput tur ±06.10.'],
     ],
     stops: [
