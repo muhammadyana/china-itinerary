@@ -19,7 +19,7 @@ const checklistGroups: ChecklistGroup[] = [
       { id: 'siguniang-14nov', label: 'Tur Siguniangshan 14 Nov (Trip.com 89377156 paket J)', booked: true },
       { id: 'xipu-dujiangyan-15nov', label: 'Kereta S 犀浦 → 都江堰 15 Nov (CNY 10, belum dipesan)' },
       { id: 'd239-15nov', label: 'C57 Chengdu South 08.00 → Xichang West + D239 11.41 → Lijiang 17.46 (16 Nov, sudah dipesan)', booked: true },
-      { id: 'shangri-la-tour-18nov', label: 'Tur Lijiang → Shangri-La 18 Nov (Trip.com 104549480, 2 orang, turun di Dukezong)' },
+      { id: 'shangri-la-tour-18nov', label: 'Tur Lijiang → Shangri-La 18 Nov (Trip.com 104549480, sudah dipesan, bagianmu 50%)', booked: true },
       { id: 'c988-songzanlin-19nov', label: 'C988 Shangri-La 15.01 → Lijiang 19 Nov (2 kursi) + Songzanlin 19 Nov (2 tiket)' },
       { id: 'impression-jade-20nov', label: 'Impression Lijiang 13.20 + Jade Dragon kawasan/shuttle/Big Cable Car 15.00–15.30 (20 Nov, 2 orang; buka 13 Nov)' },
       { id: 'c442-20nov', label: 'C442 Lijiang 20.22 → Dali 20 Nov (2 kursi)' },

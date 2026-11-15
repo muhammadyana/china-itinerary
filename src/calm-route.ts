@@ -29,11 +29,11 @@ export interface CalmDay {
  * shown; `cost` is the same figure as numbers for the cost breakdown, set only when the text gives a price or estimate.
  * An `alternative` is a fallback or optional item: listed for booking, left out of the totals. `booked` is the owner's
  * confirmed purchase (from their own screenshot); a booked item leaves the to-book lists and `cost` is what was paid.
- * `paid` is the amount charged in rupiah, as the order screenshot shows it; it feeds the expenses page. */
+ * `paid` is the amount recorded on the expenses page, from the owner's order screenshot; for a shared item it is the owner's half (`paidShare`). */
 export interface CalmBooking {
   date: string; until?: string; item: string; price: string; channel: string; opens: string; urgency: Urgency; mode?: TransportMode; link?: Link;
   cost?: Booking['cost']; alternative?: boolean; booked?: string;
-  paid?: number;
+  paid?: number; paidShare?: boolean;
 }
 /** `stays` items are the nights; the day panels list only the other groups, like the homepage. */
 export interface CalmBookingGroup { id: 'tickets' | 'cars' | 'stays'; title: string; lead: string; items: CalmBooking[] }
@@ -377,10 +377,10 @@ const calmOwnDays: CalmDay[] = [
     date: '2026-11-18', title: 'Tiger Leaping Gorge, Napahai & Shangri-La', shortTitle: 'Tiger Leaping & Shangri-La',
     route: ['Lijiang', 'First Bend', 'Upper Tiger Leaping Gorge', 'Haba', 'Xiaozhongdian', 'Dukezong', 'Napahai', 'Shangri-La'],
     overnight: { name: 'Shangri-La', elevation: '3.300 m', detail: `Dukezong, satu malam di Jianyi B&B, Sunlit Street View Double Bed Room (satu ranjang king). ${calmStayPicks('2026-11-18')}` },
-    transport: 'Tur gabung Trip.com 104549480 (Package E): jemput ±06.10 di Lijiang, mobil seharian lewat First Bend, Upper Gorge, Haba, dan Xiaozhongdian ke Shangri-La; turun di Dukezong, tidak kembali ke Lijiang.',
-    intro: 'Hari pertama berdua: satu tur yang membawa kalian dari Lijiang ke Shangri-La sambil singgah di First Bend Sungai Yangtze, Upper Tiger Leaping Gorge, titik pandang Haba, Dukezong, dan Napahai. Makan siang tur adalah jamuan Tibet yang tidak halal, jadi bawa bekal.',
+    transport: 'Tur gabung Trip.com 104549480 (Package E), sudah dipesan pada 9 November: jemput ±06.10 di Lijiang menurut halaman tur, mobil seharian lewat First Bend, Upper Gorge, Haba, dan Xiaozhongdian ke Shangri-La; turun di Dukezong, tidak kembali ke Lijiang.',
+    intro: 'Hari pertama berdua: tur gabung Trip.com 104549480 (Package E), sudah dipesan, dari Lijiang ke Shangri-La sambil singgah di First Bend Sungai Yangtze, Upper Tiger Leaping Gorge, titik pandang Haba, Dukezong, dan Napahai. Makan siang tur adalah jamuan Tibet yang tidak halal, jadi bawa bekal.',
     steps: [
-      ['±06.10', 'Dijemput tur', 'Jemput di hotel Lijiang (jam pasti dikirim pengelola); koper ikut seharian bila diizinkan (tanyakan saat memesan).'],
+      ['±06.10', 'Dijemput tur', 'Jemput di hotel Lijiang (jam pasti dikirim pengelola; halaman tur menyebut ±06.10). Tiket sudah dipesan di Trip.com pada 9 November. Tanyakan ke pengelola apakah koper boleh ikut seharian dan diantar ke hotel di Dukezong.'],
       ['Pagi', 'First Bend & Upper Gorge', 'First Bend Sungai Yangtze, lalu Upper Tiger Leaping Gorge sekitar 1,5 jam menurut halaman tur. Subuh di mobil atau saat berhenti.'],
       ['Siang', 'Haba & Xiaozhongdian', 'Titik pandang Gunung Salju Haba dan padang Xiaozhongdian. Makan siang dari bekal halal, bukan jamuan tur. Zuhur dijamak dengan Asar.'],
       ['Sore', 'Shangri-La & Napahai', 'Bendera doa raksasa, Dukezong, roda doa Kuil Dafo, lalu Napahai sekitar 1,5 jam menurut halaman tur.'],
@@ -392,7 +392,7 @@ const calmOwnDays: CalmDay[] = [
     ],
     notes: [],
     risks: [
-      'Harga tur dicek untuk 16 November; harga 18 November belum dicek.',
+      'Jam jemput pasti dikirim pengelola; halaman tur menyebut ±06.10.',
       'Naik ke ±3.300 m dalam sehari; jalan pelan dan banyak minum.',
       'Tiger Leaping Gorge High Trail tetap dilarang; tur hanya ke Upper Gorge.',
     ],
@@ -500,7 +500,7 @@ export const calmGlance: Record<string, CalmGlance> = {
   '2026-11-14': { bring: 'Paspor, bekal siang, baju hangat', remember: 'Kumpul 05.40 di Yatai Building, bus berangkat tepat 05.50; besok Dujiangyan dengan metro jalur 2 dan kereta S, bukan Chongqing.' },
   '2026-11-15': { bring: 'Paspor, tas kecil, power bank, kamera', remember: 'Metro jalur 2 春熙路 → 犀浦, kereta S CNY 10 ke 都江堰; Zhongshu Ge di 融创茂 lantai 2. Besok C57 08.00, cabut ±07.00.' },
   '2026-11-16': { bring: 'Bekal halal untuk seharian di kereta', remember: 'C57 berangkat 08.00 dari Chengdu South; transfer 46 menit di Xichang West.' },
-  '2026-11-17': { bring: 'Air, jaket tipis, bekal halal untuk dua orang besok', remember: 'Tur besok jemput ±06.10; tidur awal.' },
+  '2026-11-17': { bring: 'Air, jaket tipis, bekal halal untuk dua orang besok', remember: 'Tur besok sudah dipesan (halaman tur menyebut jemput ±06.10); tidur awal.' },
   '2026-11-18': { bring: 'Paspor, bekal makan siang halal, jaket hangat', remember: 'Makan siang tur tidak halal; tur selesai di Dukezong.' },
   '2026-11-19': { bring: 'Paspor untuk dua tiket, jaket', remember: 'C988 15.01 dari Stasiun Shangri-La.' },
   '2026-11-20': { bring: 'Jaket tebal, bekal, dan paspor', remember: 'Mobil 06.30; slot kereta gantung 15.00–15.30; C442 20.22 ke Dali.' },
@@ -588,7 +588,7 @@ export const calmBookingGroups: CalmBookingGroup[] = [
       { date: '2026-11-20', item: 'Taksi Stasiun Dali → kota tua Dali (malam)', urgency: 'onsite', mode: 'taxi', price: '±17–18 km, ±35 menit; acuan taksi sekitar CNY 55 (rencana utama, tanpa tanggal).', cost: { min: 55, max: 55, per: 'mobil' }, channel: 'DiDi atau taksi resmi di 大理站 (Xiaguan); pastikan tujuannya Kota Tua Dali.', opens: 'C442 tiba 22.21; kabari hotel jam tiba.' },
       { date: '2026-11-21', item: 'Taksi kota tua Dali → Stasiun Dali, dengan koper', urgency: 'onsite', mode: 'taxi', price: '±17–18 km, 30–40 menit; acuan taksi sekitar CNY 55 (tanpa tanggal).', cost: { min: 55, max: 55, per: 'mobil' }, channel: 'DiDi atau taksi ke 大理站 di Xiaguan.', opens: 'Pesan di tempat.' },
       { date: '2026-11-21', item: 'DiDi atau taksi stasiun Kunming → Bandara Changshui', urgency: 'onsite', mode: 'car', price: 'Tarif belum dicek; dari pusat kota sekitar 28 km, ±41 menit.', channel: 'DiDi, taksi resmi, atau transfer bandara Trip.com.', opens: 'Pesan di tempat setelah kereta tiba.' },
-      { date: '2026-11-18', item: 'Tur gabung Lijiang 06.10 → Upper Gorge → Haba → Dukezong → Napahai, berakhir di Shangri-La, 2 orang', urgency: 'week', mode: 'car', price: 'Rp457.027 per orang untuk 16 November (Trip.com 104549480 Package E, rombongan maksimal 13 orang, dicek 6 November 2026; harga 18 November belum dicek), termasuk tiket, mobil, sopir, dan makan siang jamuan Tibet yang tidak halal. Upper Gorge 1,5 jam dan Napahai 1,5 jam. Nilai 4,9 dari 551 ulasan.', cost: { min: 168, max: 168, per: 'orang' }, channel: 'Trip.com; tanyakan dulu apakah koper boleh ikut seharian dan diantar ke hotel di Dukezong.', opens: 'Pesan paling lambat 02.59 hari itu; batal gratis sampai 18.00 sehari sebelumnya.', link: { label: 'Trip.com: tur Shangri-La + Tiger Leaping Gorge', url: 'https://id.trip.com/things-to-do/detail/104549480?locale=en-ID&curr=IDR' } },
+      { date: '2026-11-18', item: 'Tur Shangri-La + Tiger Leaping Gorge, 18 November, 2 orang', paid: 459082, paidShare: true, urgency: 'week', mode: 'car', price: 'Trip.com 104549480 Package E. Dibayar 9 November 2026: total Rp918.164 untuk 2 orang, bagianmu Rp459.082 (50%, sekitar CNY 168). Termasuk tiket, mobil, sopir, dan makan siang jamuan Tibet yang tidak halal.', cost: { min: 168, max: 168, per: 'orang' }, booked: 'Sudah dipesan di Trip.com pada 9 November: 2 orang, total Rp918.164, bagianmu Rp459.082 (50%). Trip.com 104549480 Package E.', channel: 'Trip.com; tanyakan ke pengelola apakah koper boleh ikut seharian dan diantar ke hotel di Dukezong.', opens: 'Sudah dipesan.', link: { label: 'Trip.com: tur Shangri-La + Tiger Leaping Gorge', url: 'https://id.trip.com/things-to-do/detail/104549480?locale=en-ID&curr=IDR' } },
     ],
   },
   {

@@ -21,7 +21,7 @@ const beforeTrip: PaidItem[] = [
 
 export const paidItems: PaidItem[] = [
   ...beforeTrip,
-  ...calmBookingGroups.flatMap(group => group.items).flatMap(item => item.paid ? [{ date: item.date, label: item.item, idr: item.paid }] : []),
+  ...calmBookingGroups.flatMap(group => group.items).flatMap(item => item.paid ? [{ date: item.date, label: `${item.item}${item.paidShare ? ' (bagianmu, 50%)' : ''}`, idr: item.paid }] : []),
   ...calmStayBases.flatMap(base => base.paid ? [{ date: base.nights[0], label: `${base.hotel.name}, ${base.nights.length} malam${base.paidShare ? ' (bagianmu, 50%)' : ''}`, idr: base.paid }] : []),
 ].sort((a, b) => a.date.localeCompare(b.date));
 
