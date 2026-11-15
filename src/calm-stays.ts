@@ -158,7 +158,7 @@ export const calmStayBases: CalmStayBase[] = [
   {
     ...chengdu, id: '2026-11-14', nights: ['2026-11-14', '2026-11-15'], fromMain: false, booked: true, paid: 754697,
     notes: [
-      'Sudah dipesan di Trip.com pada 13 November: dua malam, 14–16 November, menyambung pesanan 11–14 November di hotel yang sama. Koper tetap di kamar selama Siguniangshan dan day trip Chongqing, sebelum C57 08.00 pada 16 November.',
+      'Sudah dipesan di Trip.com pada 13 November: dua malam, 14–16 November, menyambung pesanan 11–14 November di hotel yang sama. Koper tetap di kamar selama Siguniangshan dan day trip Dujiangyan, sebelum C57 08.00 pada 16 November.',
       'Batal gratis sampai 14 November 18.00 waktu setempat; setelah itu biaya batal Rp486.725.',
     ],
     hotel: {
