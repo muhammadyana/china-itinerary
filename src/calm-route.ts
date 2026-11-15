@@ -344,7 +344,7 @@ const calmOwnDays: CalmDay[] = [
       ['17.46', 'Tiba di Lijiang', 'Tiba di Stasiun Lijiang. Matahari terbenam 18.29.'],
       ['±18.00–18.45', 'Ke Hemuju, Maghrib', 'Taksi atau DiDi dari 丽江站 ke 古城南门 (gerbang selatan), sekitar 7–9 km, lalu check-in di Lijiang Hemuju Homestay (丽江和睦居民宿(古城南门店)); sudah dipesan, check-in setelah 14.00. Malam 17 November di penginapan yang sama, tidak pindah hotel saat teman tiba. Maghrib 18.31; bila perlu dijamak dengan Isya (19.51) di hotel.'],
       ['±19.15–20.30', 'Makan malam halal', 'Makan malam di kedai Hui bertanda 清真 dekat kota tua (belum diverifikasi, sama seperti rencana utama). Beli bekal halal untuk sarapan 17 November.'],
-      ['Malam', 'Istirahat', 'Besok hari bebas di Lijiang.'],
+      ['Malam', 'Istirahat', 'Besok tur Jade Dragon Glacier Park, jemput di hotel ±05.30; tidur awal, siapkan paspor dan pakaian hangat berlapis malam ini.'],
     ],
     stops: [
       { place: 'chengdu-south', note: 'C57 berangkat 08.00; cabut dari hotel ±07.00.' },
