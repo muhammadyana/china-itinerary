@@ -20,6 +20,7 @@ const checklistGroups: ChecklistGroup[] = [
       { id: 'xipu-dujiangyan-15nov', label: 'S5023 犀浦 12.53 → 都江堰 13.11 (15 Nov, sudah dipesan)', booked: true },
       { id: 'dujiangyan-xipu-15nov', label: 'S5060 都江堰 20.52 → 犀浦 21.11 (15 Nov, sudah dipesan)', booked: true },
       { id: 'd239-15nov', label: 'C57 Chengdu South 08.00 → Xichang West + D239 11.41 → Lijiang 17.46 (16 Nov, sudah dipesan)', booked: true },
+      { id: 'jade-dragon-tour-17nov', label: 'Tur Jade Dragon Glacier Park + Blue Moon Valley 17 Nov (Package G, sudah dipesan)', booked: true },
       { id: 'shangri-la-tour-18nov', label: 'Tur Lijiang → Shangri-La 18 Nov (Trip.com 104549480, sudah dipesan, bagianmu 50%)', booked: true },
       { id: 'c988-songzanlin-19nov', label: 'C988 Shangri-La 15.01 → Lijiang 19 Nov (2 kursi) + Songzanlin 19 Nov (2 tiket)' },
       { id: 'impression-jade-20nov', label: 'Impression Lijiang 13.20 + Jade Dragon kawasan/shuttle/Big Cable Car 15.00–15.30 (20 Nov, 2 orang; buka 13 Nov)' },
