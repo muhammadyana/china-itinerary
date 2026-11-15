@@ -26,6 +26,7 @@ export const calmPlaces: Record<string, Place> = {
   chaotianmen: { name: 'Chaotianmen', chinese: '朝天门', description: 'Ujung semenanjung Yuzhong tempat Sungai Jialing bertemu Sungai Yangtze, di bawah Raffles City.' },
   hongyadong: { name: 'Hongyadong', chinese: '洪崖洞', description: 'Bangunan bertingkat yang menempel di tebing tepi Sungai Jialing; paling terang setelah gelap.' },
   napahai: { name: 'Napahai', chinese: '纳帕海', description: 'Danau musiman dan padang rumput di cagar alam sekitar 8 km barat laut Dukezong.', photo: 'tripcom-napahai', alt: "Danau Napa biru yang memantulkan awan putih, dengan jalan setapak menyusuri lereng hijau di tepinya dan deretan pegunungan di kejauhan." },
+  nanqiao: { name: 'Jembatan Nanqiao, Dujiangyan', chinese: '南桥', description: 'Jembatan di Dujiangyan untuk lampu malam. Sumber berbeda soal jam lampu: sekitar 18.00 dan “air mata biru” (蓝眼泪) sekitar 18.40, musim dingin 17.30–18.40, atau 19.00–19.30. Cari di Amap dengan 南桥 都江堰.' },
 };
 
 export const placeFor = (id: string): Place | undefined => calmPlaces[id] ?? places[id];

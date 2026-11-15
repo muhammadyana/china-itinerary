@@ -20,6 +20,8 @@ const amapPlaces: Record<string, AmapPlace> = {
   'chengdu-skp-tower': { keyword: '生机之塔', city: '510100' },
   // Zhongshuge is a chain with another store in Chengdu (in99); pin the Dujiangyan store's OpenStreetMap point.
   'zhongshuge-bookstore': { keyword: '钟书阁（融创茂店）', city: '510181', near: 'dujiangyan', marker: true },
+  // Search name given for the 15 November evening stop; city adcode biases to Dujiangyan. No verified point, so this is a keyword search, not a pin.
+  nanqiao: { keyword: '南桥 都江堰', city: '510181' },
   'chengdu-east': { keyword: '成都东站', city: '510100' },
   huanglongjiuzhai: { keyword: '黄龙九寨站', city: '513224' },
   jiuzhaigou: { keyword: '九寨沟风景名胜区', city: '513225', near: 'jiuzhaigou' },
