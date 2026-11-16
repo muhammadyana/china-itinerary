@@ -363,15 +363,17 @@ const calmOwnDays: CalmDay[] = [
     route: ['Hemuju', 'Ganhaizi', 'Glacier Park', 'Blue Moon Valley', '白水河', 'Hemuju'],
     overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Malam kedua di Hemuju Homestay (Gucheng South Gate), penginapan yang sama dengan malam 16 November; tidak pindah hotel. ${calmStayPicks('2026-11-17')}` },
     transport: 'Tur kecil Trip.com Package G, sudah dipesan, status Confirmed: jemput antar di Lijiang Hemuju Homestay (古城南门) sekitar 05.30, tur 05.30–15.30, maksimal 8 orang. Konfirmasikan jam jemput pasti dengan pemandu atau WeChat sehari sebelumnya. Kembali ke Hemuju sekitar 15.30–16.00.',
-    intro: 'Tur kecil ke Jade Dragon Snow Mountain (玉龙雪山), sudah dipesan: Glacier Park lewat 冰川公园大索道 (±4.506 m), Blue Moon Valley (蓝月谷), Ganhaizi (甘海子), Sungai Baishui (白水河), dan Lanyue Lake (蓝月湖). Baru tiba di Lijiang 16 November, jadi jalan pelan di puncak dan pakai oksigen bila perlu. Sore istirahat di Hemuju. Bawa paspor, pakaian hangat berlapis, dan bekal halal; makanan halal di kawasan jarang. Jangan terbangkan drone di kawasan Jade Dragon.',
+    intro: 'Tur kecil ke Jade Dragon Snow Mountain (玉龙雪山), sudah dipesan: Glacier Park lewat 冰川公园大索道 (±4.506 m), Blue Moon Valley (蓝月谷), Ganhaizi (甘海子), Sungai Baishui (白水河), dan Lanyue Lake (蓝月湖). Baru tiba di Lijiang 16 November, jadi jalan pelan di puncak dan pakai oksigen bila perlu. Sore pulang ke Hemuju, lalu jalan-jalan di kota tua sambil cari makan malam. Bawa paspor, pakaian hangat berlapis, dan bekal halal; makanan halal di kawasan jarang. Jangan terbangkan drone di kawasan Jade Dragon.',
     steps: [
       ['±05.30', 'Dijemput di Hemuju', 'Jemput antar di Lijiang Hemuju Homestay (古城南门), sekitar 05.30. Konfirmasikan jam jemput pasti dengan pemandu atau WeChat sehari sebelumnya. Bawa paspor, pakaian hangat berlapis, dan bekal halal.'],
       ['05.30–15.30', 'Tur Jade Dragon', 'Tur kecil Package G (maksimal 8 orang, status Confirmed): Glacier Park lewat 冰川公园大索道 (±4.506 m), Blue Moon Valley (蓝月谷), Ganhaizi (甘海子), Sungai Baishui (白水河), dan Lanyue Lake (蓝月湖). Baru tiba di Lijiang 16 November, jadi aklimatisasi belum lama: jalan pelan di atas dan pakai oksigen bila perlu. Makan dari bekal; makanan halal di kawasan jarang. Drone dilarang di kawasan Jade Dragon.'],
-      ['±15.30–16.00', 'Kembali ke Hemuju', 'Tur selesai; kembali ke Hemuju Homestay sekitar 15.30–16.00, lalu istirahat. Tidak pindah hotel. Kamar malam ini Elegant Queen Room, sudah dipesan, dibagi dua. Siapkan bekal halal untuk tur Shangri-La besok. Tidur awal: tur Shangri-La besok jemput ±06.10.'],
+      ['±15.30–16.00', 'Kembali ke Hemuju', 'Tur selesai; kembali ke Hemuju Homestay sekitar 15.30–16.00. Tidak pindah hotel. Kamar malam ini Elegant Queen Room, sudah dipesan, dibagi dua.'],
+      ['Sore–malam', 'Kota tua & makan malam', 'Jalan-jalan di kota tua Lijiang, lewat 南门街 ke 四方街, sambil cari makan malam halal. Bisa kembali ke 伊馨清真园(古城南门店) di 祥和路140号, dekat gerbang selatan. Kembali ke Hemuju; siapkan bekal halal untuk tur Shangri-La besok. Tidur awal: tur Shangri-La besok jemput ±06.10.'],
     ],
     stops: [
       { place: 'jade-dragon', note: 'Glacier Park lewat 冰川公园大索道, sekitar 4.506 m. Jalan pelan dan pakai oksigen bila perlu; baru tiba Lijiang 16 November.' },
       { place: 'blue-moon', note: 'Blue Moon Valley (蓝月谷), bersama Ganhaizi (甘海子), Sungai Baishui (白水河), dan Lanyue Lake (蓝月湖).' },
+      { place: 'dayan', note: 'Sore setelah tur: jalan-jalan di kota tua, lewat 南门街 ke 四方街, sambil cari makan malam halal.' },
     ],
     notes: [],
     risks: [
@@ -510,7 +512,7 @@ export const calmGlance: Record<string, CalmGlance> = {
   '2026-11-14': { bring: 'Paspor, bekal siang, baju hangat', remember: 'Kumpul 05.40 di Yatai Building, bus berangkat tepat 05.50; besok Dujiangyan dengan metro jalur 2 dan kereta S, bukan Chongqing.' },
   '2026-11-15': { bring: 'Paspor, tas kecil, power bank, kamera, jaket (malam sekitar 11°C)', remember: 'S5023 犀浦 12.53 → 都江堰 13.11; Zhongshu Ge sekitar 13.30–15.00; Nanqiao sekitar 18.00. Cabut Nanqiao ±20.15, DiDi ke 都江堰站, S5060 20.52 → 犀浦 21.11 (sudah dipesan). Metro terakhir 犀浦 23.00. Besok C57 08.00, cabut ±07.00.' },
   '2026-11-16': { bring: 'Bekal halal untuk seharian di kereta', remember: 'C57 berangkat 08.00 dari Chengdu South; transfer 46 menit di Xichang West.' },
-  '2026-11-17': { bring: 'Paspor, pakaian hangat berlapis, bekal halal, kamera (tanpa drone)', remember: 'Jemput Hemuju ±05.30 (konfirmasi jam pasti semalam lewat pemandu atau WeChat). Jalan pelan di Glacier Park ±4.506 m; baru tiba Lijiang 16 November. Pulang ±15.30–16.00. Tidur awal, tur besok ±06.10.' },
+  '2026-11-17': { bring: 'Paspor, pakaian hangat berlapis, bekal halal, kamera (tanpa drone)', remember: 'Jemput Hemuju ±05.30 (konfirmasi jam pasti semalam lewat pemandu atau WeChat). Jalan pelan di Glacier Park ±4.506 m; baru tiba Lijiang 16 November. Pulang ±15.30–16.00, lalu jalan-jalan di kota tua sambil cari makan malam. Tidur awal, tur besok ±06.10.' },
   '2026-11-18': { bring: 'Paspor, bekal makan siang halal, jaket hangat', remember: 'Makan siang tur tidak halal; tur selesai di Dukezong.' },
   '2026-11-19': { bring: 'Paspor untuk dua tiket, jaket', remember: 'C988 15.01 dari Stasiun Shangri-La.' },
   '2026-11-20': { bring: 'Jaket tebal, bekal, dan paspor', remember: 'Mobil 06.30; slot kereta gantung 15.00–15.30; C442 20.22 ke Dali.' },
