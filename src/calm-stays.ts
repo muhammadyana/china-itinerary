@@ -190,7 +190,7 @@ export const calmStayBases: CalmStayBase[] = [
     notes: [
       'Sudah dipesan di Trip.com pada 15 November: satu malam, 16–17 November, sendiri (bukan dibagi dua). Dibayar Rp223.391.',
       'Batal gratis sampai 16 November 18.00 waktu setempat; setelah itu biaya batal paling sedikit Rp67.017. Check-in setelah 14.00, check-out sebelum 12.00.',
-      'Malam 17 November di penginapan yang sama; tidak pindah hotel saat teman tiba.',
+      'Malam 17 November di penginapan yang sama; tidak pindah hotel.',
     ],
     hotel: {
       ...hemuju,
@@ -205,7 +205,7 @@ export const calmStayBases: CalmStayBase[] = [
     notes: [
       'Sudah dipesan di Trip.com pada 15 November: satu malam, 17–18 November, Elegant Queen Room. Total Rp191.201, bagianmu Rp95.600 (50%).',
       'Batal gratis sampai 17 November 18.00 waktu setempat. Check-in setelah 14.00, check-out sebelum 12.00.',
-      'Penginapan yang sama dengan malam 16 November; tidak pindah hotel saat teman tiba.',
+      'Penginapan yang sama dengan malam 16 November; tidak pindah hotel.',
     ],
     hotel: {
       ...hemuju,
