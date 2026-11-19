@@ -22,7 +22,7 @@ const checklistGroups: ChecklistGroup[] = [
       { id: 'd239-15nov', label: 'C57 Chengdu South 08.00 → Xichang West + D239 11.41 → Lijiang 17.46 (16 Nov, sudah dipesan)', booked: true },
       { id: 'jade-dragon-tour-17nov', label: 'Tur Jade Dragon Glacier Park + Blue Moon Valley 17 Nov (Package G, sudah dipesan)', booked: true },
       { id: 'shangri-la-tour-18nov', label: 'Tur Lijiang → Shangri-La 18 Nov (Trip.com 104549480, sudah dipesan, bagianmu 50%)', booked: true },
-      { id: 'c988-songzanlin-19nov', label: 'C988 Shangri-La 15.01 → Lijiang 19 Nov (2 kursi) + Songzanlin 19 Nov (2 tiket)' },
+      { id: 'c988-songzanlin-19nov', label: 'C990 Shangri-La 20.25 → Lijiang 21.51 (19 Nov, 2 kursi, sudah dipesan, bagianmu 50%) + Songzanlin 19 Nov (2 tiket, beli di loket)' },
       { id: 'impression-jade-20nov', label: 'Impression Lijiang 13.20 + Jade Dragon kawasan/shuttle/Big Cable Car 15.00–15.30 (20 Nov, 2 orang; buka 13 Nov)' },
       { id: 'c442-20nov', label: 'C442 Lijiang 20.22 → Dali 20 Nov (2 kursi)' },
       { id: 'dali-kunming-21nov', label: 'D3950 Dali 12.01 → Kunming 14.05 (21 Nov, sudah dipesan)', booked: true },
