@@ -411,16 +411,16 @@ const calmOwnDays: CalmDay[] = [
     fromMain: false,
   },
   {
-    date: '2026-11-19', title: 'Songzanlin & Lijiang', shortTitle: 'Songzanlin & Lijiang',
-    route: ['Dukezong', 'Songzanlin', 'Stasiun Shangri-La', 'Lijiang'],
+    date: '2026-11-19', title: 'Songzanlin, Pudacuo & Lijiang', shortTitle: 'Pudacuo & Lijiang',
+    route: ['Dukezong', 'Songzanlin', 'Pudacuo', 'Stasiun Shangri-La', 'Lijiang'],
     overnight: { name: 'Lijiang', elevation: '2.400 m', detail: `Satu malam berdua dekat kota tua, sebelum Jade Dragon. ${calmStayPicks('2026-11-19')}` },
-    transport: 'Taksi atau DiDi ke Songzanlin (±6 km), lalu ke Stasiun Shangri-La ±19.15 (antar gratis hotel Jianyi bila dipesan sehari sebelumnya, atau taksi/DiDi ±6–7 km); C990 20.25 → Lijiang 21.51, kelas dua, dua kursi, sudah dipesan di Trip.com; taksi ke kota tua.',
-    intro: 'Pagi atap emas Biara Songzanlin, sore luang di Dukezong, lalu kereta malam C990 20.25 kembali ke Lijiang (sudah dipesan). Jade Dragon tetap besok.',
+    transport: 'Taksi atau DiDi ke Songzanlin (±6 km), siang ke Pudacuo (sekitar 35 menit dari Dukezong, dikonfirmasi 19 November), kembali ke Jianyi ambil koper, lalu ke Stasiun Shangri-La ±19.15 (antar gratis hotel Jianyi bila dipesan sehari sebelumnya, atau taksi/DiDi ±6–7 km); C990 20.25 → Lijiang 21.51, kelas dua, dua kursi, sudah dipesan di Trip.com; taksi ke kota tua.',
+    intro: 'Pagi atap emas Biara Songzanlin, siang ke Taman Pudacuo (普达措), lalu kereta malam C990 20.25 kembali ke Lijiang (sudah dipesan). Jade Dragon tetap besok.',
     steps: [
       ['Pagi', 'Subuh & sarapan', 'Subuh di hotel (cek jam di aplikasi); sarapan dari bekal.'],
       ['±07.45–10.30', 'Biara Songzanlin', 'Taksi ±6 km ke pusat pengunjung Songzanlin (buka sekitar 07.30), lalu Danau Lamuyangcuo dan tangga ke aula utama. Jalan pelan di ±3.300 m.'],
       ['±11.00–13.30', 'Dukezong, check-out', 'Kembali ke Dukezong, check-out sebelum 12.00; koper bisa dititip di hotel (行李寄存, gratis menurut halaman Trip.com). Makan siang halal bila ada (belum diverifikasi), Zuhur dan Asar dijamak.'],
-      ['±13.30–19.15', 'Santai di Dukezong', 'Sore luang di kota tua Dukezong, istirahat atau jalan-jalan, sampai berangkat ke stasiun ±19.15.'],
+      ['±13.30–17.00', 'Taman Pudacuo', 'Siang ke Taman Pudacuo (普达措). Dari Dukezong sekitar 35 menit (dikonfirmasi di perjalanan 19 November). Tiket masuk + bus wajib CNY 138 per orang (situs resmi pdcuo.cn, dicek 19 November); 1 tiket sudah dibayar Rp386.037,27 lewat WeChat pada 19 November. Loop inti Danau Bitahai tutup perawatan ekologi (pemberitahuan Qunar berlaku 22 Mei–31 Desember 2026); Danau Shudu buka. Pulang sore, kembali ke Jianyi ambil koper, lalu berangkat ke stasiun ±19.15.'],
       ['±19.15', 'Ke Stasiun Shangri-La', 'Hotel Jianyi B&B (简忆轻奢智能供氧民宿) punya antar gratis ke stasiun (送站) jam 09.00–21.00, pesan minimal sehari sebelumnya (halaman hotel Trip.com). Cadangan: taksi atau DiDi ±6–7 km; tarif belum dicek.'],
       ['20.25', 'C990 ke Lijiang', 'C990 Shangri-La 20.25 → Lijiang 21.51, kelas dua, dua kursi, sudah dipesan di Trip.com.'],
       ['±21.51–22.30', 'Ke kota tua, check-in', 'Taksi ±10 km ke kota tua; check-in di 166 Hotel (Lijiang Ancient City), Sunshine Wonderful Twin Room (sudah dipesan; check-in setelah 10.00). Maghrib dan Isya dijamak, di hotel atau sebelum naik kereta.'],
@@ -428,6 +428,7 @@ const calmOwnDays: CalmDay[] = [
     ],
     stops: [
       { place: 'songzanlin', note: 'Pagi, sebelum check-out.' },
+      { place: 'pudacuo', note: 'Siang, setelah check-out.' },
       { place: 'dayan', note: 'Malam di dekat kota tua.' },
     ],
     notes: [],
@@ -515,7 +516,7 @@ export const calmGlance: Record<string, CalmGlance> = {
   '2026-11-16': { bring: 'Bekal halal untuk seharian di kereta', remember: 'C57 berangkat 08.00 dari Chengdu South; transfer 46 menit di Xichang West.' },
   '2026-11-17': { bring: 'Paspor, pakaian hangat berlapis, bekal halal, kamera (tanpa drone)', remember: 'Jemput Hemuju ±05.30 (konfirmasi jam pasti semalam lewat pemandu atau WeChat). Jalan pelan di Glacier Park ±4.506 m; baru tiba Lijiang 16 November. Pulang ±15.30–16.00, lalu jalan-jalan di kota tua sambil cari makan malam. Tidur awal, tur besok ±06.10.' },
   '2026-11-18': { bring: 'Paspor, bekal makan siang halal, jaket hangat', remember: 'Makan siang tur tidak halal; tur selesai di Dukezong.' },
-  '2026-11-19': { bring: 'Paspor untuk dua tiket, jaket', remember: 'C990 20.25 dari Stasiun Shangri-La, dua kursi sudah dipesan. Antar hotel ke stasiun perlu dipesan sehari sebelumnya. Berangkat ±19.15.' },
+  '2026-11-19': { bring: 'Paspor untuk dua tiket, jaket', remember: 'Sudah ke Pudacuo siang (1 tiket sudah dibayar). C990 20.25 dari Stasiun Shangri-La, dua kursi sudah dipesan. Antar hotel ke stasiun perlu dipesan sehari sebelumnya. Berangkat ±19.15.' },
   '2026-11-20': { bring: 'Jaket tebal, bekal, dan paspor', remember: 'Mobil 06.30; slot kereta gantung 15.00–15.30; C442 20.22 ke Dali.' },
   '2026-11-21': { bring: 'Paspor, koper, dan jaket penahan angin', remember: 'D3950 12.01 dari Dali, gerbang 二层6号, tiba Kunming 14.05; lalu ke bandara, MF8426 20.05.' },
 };
@@ -541,7 +542,7 @@ export const calmComparison = {
     'Day trip ke Dujiangyan (15 November), pengganti Chongqing yang dibatalkan: metro jalur 2 dan S5023 ke Zhongshu Ge di 融创茂, sore opsional 灌县古城, malam lampu Nanqiao, pulang S5060 20.52 dari 都江堰站.',
     'Kereta C57 Chengdu South → Xichang West, lalu D239 ke Lijiang (16 November).',
     'Dua malam di Lijiang (16–17 November): 17 November tur kecil Jade Dragon Glacier Park dan Blue Moon Valley (sudah dipesan), lalu tur sehari ke Shangri-La lewat Upper Tiger Leaping Gorge dan Napahai (18 November).',
-    'Songzanlin pagi dan kereta malam C990 20.25 kembali ke Lijiang (19 November); Jade Dragon dan Impression Lijiang 20 November, lalu C442 malam ke Dali; Erhai pagi 21 November dan kereta siang ke Kunming.',
+    'Songzanlin pagi, Pudacuo siang, dan kereta malam C990 20.25 kembali ke Lijiang (19 November); Jade Dragon dan Impression Lijiang 20 November, lalu C442 malam ke Dali; Erhai pagi 21 November dan kereta siang ke Kunming.',
   ],
 };
 
@@ -551,7 +552,7 @@ export const calmTradeOffs = [
   'Bipenggou dan Siguniangshan jadi tur sehari dari Chengdu, sekitar 3–4 jam sekali jalan: tidak ada pagi atau sore di lembah, tetapi tanpa mobil pribadi dan tanpa pindah penginapan.',
   '9 November jadi hari panjang: DiDi pulang-pergi sekitar 58 km sekali jalan ke Zhongshu Ge pagi, sore di Taikoo Li, lalu C5756 17.05 (tiba Huanglongjiuzhai 19.10) dan taksi ke gukou.',
   'Libur sekolah Chengdu 11–13 November, ditambah akhir pekan, jatuh tepat di Huanglong dan Bipenggou: siap antre dan beli tiket lebih dulu.',
-  'Malam 18 November naik sekitar 900 m sekaligus dari Lijiang ke Shangri-La; 19 November sore sudah turun lagi ke Lijiang.',
+  'Malam 18 November naik sekitar 900 m sekaligus dari Lijiang ke Shangri-La; 19 November siang ke Pudacuo, malam sudah turun lagi ke Lijiang.',
   'Tidak ada kereta pagi Shangri-La → Lijiang, jadi Jade Dragon pindah ke 20 November dan Dali tinggal setengah hari 21 November. D3950 12.01 → 14.05 sudah dibeli, lalu pesawat 20.05. Salat Jumat 20 November terlewat.',
   'Penginapan dekat gerbang Bipenggou di atas batas Rp500.000 selama libur sekolah; yang di bawah batas sekitar 10 menit berkendara dari gerbang.',
 ];
@@ -582,6 +583,7 @@ export const calmBookingGroups: CalmBookingGroup[] = [
       { date: '2026-11-14', item: 'Tur gabung Chengdu → Siguniangshan (Shuangqiao Valley) → Chengdu', paid: 977622, booked: 'Sudah dibeli di Trip.com pada 12 November: paket J (Group Tour), satu orang, Rp977.622, status Confirmed. Batal gratis sampai 13 November 18.00.', urgency: 'now', mode: 'bus', price: 'CNY 359 per orang untuk 14 November (Trip.com 89377156 paket J, dicek 8 November 2026): bus besar, tiket, bus wisata lembah, dan pemandu; makan siang tidak termasuk; kumpul 06.00 di Jinjiang.', cost: { min: 359, max: 359, per: 'orang' }, channel: 'Trip.com; pilih paket J (Group Tour), bukan paket K (privat).', opens: 'Sudah dijual.', link: { label: 'Trip.com: tur Siguniangshan', url: 'https://id.trip.com/things-to-do/detail/89377156?locale=en-ID&curr=IDR' } },
       { date: '2026-11-19', item: 'Songzanlin, 2 orang', urgency: 'onsite', price: 'Trip.com CNY 55, atau CNY 75 dengan shuttle pulang-pergi; acuan loket CNY 90. Tarif shuttle di loket belum pasti sejak pengumuman 27 Agustus 2026.', cost: { min: 55, max: 90, per: 'orang' }, channel: 'Trip.com (pesan paling lambat 18 November) atau loket dengan paspor.', opens: 'Tidak perlu reservasi; buka sekitar 07.30.', link: { label: 'Trip.com: Songzanlin', url: 'https://www.trip.com/travel-guide/attraction/shangri-la/songzanlin-scenic-spot-76335/?scene=ticket' } },
       { date: '2026-11-19', item: 'C990 Shangri-La 20.25 → Lijiang 21.51, kelas dua, dua kursi', paid: 215494, paidShare: true, urgency: 'now', mode: 'train', price: 'Kelas dua, dua kursi. Dibayar di Trip.com pada 19 November 2026: total Rp430.988 untuk 2 kursi (termasuk biaya), bagianmu Rp215.494 (50%). Tarif kelas dua CNY 70 per orang menurut Qunar pada 18 November 2026.', cost: { min: 70, max: 70, per: 'orang' }, booked: 'Sudah dibeli di Trip.com pada 19 November: 2 kursi kelas dua, total Rp430.988, bagianmu Rp215.494 (50%).', channel: 'Trip.com, atau 12306 sebagai cadangan; dua kursi atas nama paspor masing-masing.', opens: 'Sudah dipesan.', link: { label: 'Trip.com: Shangri-La ke Lijiang', url: tripcomTrain('shangri-la', 'lijiang') } },
+      { date: '2026-11-19', item: 'Tiket Pudacuo (普达措), 1 orang', paid: 386037.27, urgency: 'now', price: 'Masuk + bus wajib CNY 138 per orang menurut situs resmi pdcuo.cn (dicek 19 November 2026). Dibayar 19 November 2026: Rp386.037,27 untuk 1 tiket (CNY 138).', cost: { min: 138, max: 138, per: 'orang' }, booked: 'Sudah dibayar pada 19 November 2026: 1 tiket masuk + bus wajib, CNY 138, Rp386.037,27 lewat WeChat.', channel: 'WeChat resmi taman / pdcuo; dibayar pada 19 November.', opens: 'Sudah dibeli.', link: { label: 'Pudacuo resmi', url: 'https://www.pdcuo.cn/' } },
       { date: '2026-11-20', item: 'Jade Dragon: kawasan, shuttle, dan kereta gantung, 2 orang', urgency: 'week', price: 'Tiket kawasan CNY 100, shuttle CNY 20, kereta gantung CNY 120 per orang (rencana utama, dicek untuk 19 November); slot kereta gantung 15.00–15.30. Satu paspor hanya bisa membeli kereta gantung Glacier Park sekali per 90 hari. Bila paspor ditolak: paket Trip.com CNY 488 per orang (kawasan, kereta gantung, Impression Lijiang, antar-jemput kota tua).', channel: 'Tiket kawasan dan shuttle: mini program 玉龙雪山服务 atau Trip.com. Kereta gantung: mini program 丽江旅游集团. Semua atas nama paspor; gerbang tidak menjual tiket.', cost: { min: 240, max: 280, per: 'orang' }, opens: 'Dibuka 7 hari sebelumnya, yaitu 13 November untuk 20 November.', link: { label: 'Panduan Jade Dragon', url: placePath('jade-dragon') } },
       { date: '2026-11-20', item: 'Impression Lijiang 13.20, 2 orang', urgency: 'now', price: 'Sekitar CNY 180 per orang per 4 November (tarif biasa CNY 280); tidak perlu bila mengambil paket Jade Dragon CNY 488.', cost: { min: 180, max: 280, per: 'orang' }, channel: 'Trip.com.', opens: 'Pesan sesi 13.20 untuk 20 November.', link: { label: 'Panduan Impression Lijiang', url: placePath('impression-lijiang') } },
       { date: '2026-11-20', item: 'C442 Lijiang 20.22 → Dali 22.21, 2 kursi', urgency: 'now', mode: 'train', price: 'Jadwal dari Trip.com (dicek 9 November 2026). Kelas dua CNY 80 pada 19 November menurut rencana utama; harga dan kursi 20 November belum dicek. Cadangan: C400 19.54 → 22.02.', cost: { min: 80, max: 80, per: 'orang' }, channel: 'Trip.com, atau 12306 sebagai cadangan; dua kursi atas nama paspor masing-masing.', opens: 'Sudah dijual.', link: { label: 'Trip.com: Lijiang ke Dali', url: tripcomTrain('lijiang', 'dali') } },

@@ -41,7 +41,7 @@ const calmPlanNotes: PlanNotes = {
   signal: '',
   hospitals: [diqingHospital],
   altitude: 'Rute ini naik ke Yanziyan 3.837 m di Bipenggou, tidur dua malam di Shangri-La 3.300 m, dan naik ke gletser Jade Dragon pada 19 November.',
-  ascent: 'Malam 18 November naik sekitar 900 m dari Lijiang ke Shangri-La; 19 November pagi Songzanlin dengan langkah pelan, lalu sore turun lagi ke Lijiang.',
+  ascent: 'Malam 18 November naik sekitar 900 m dari Lijiang ke Shangri-La; 19 November pagi Songzanlin dengan langkah pelan, siang ke Pudacuo, lalu malam turun lagi ke Lijiang.',
 };
 
 const pageLink = (url: string, label: string) => link({ url, label });

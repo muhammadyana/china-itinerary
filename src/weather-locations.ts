@@ -165,6 +165,7 @@ export const weatherLocationForGuide: Record<string, string> = {
   xiangcheng: 'xiangcheng',
   dukezong: 'shangri-la',
   songzanlin: 'shangri-la',
+  pudacuo: 'shangri-la',
   lijiang: 'lijiang',
   'jade-dragon': 'ganhaizi',
   'impression-lijiang': 'ganhaizi',
