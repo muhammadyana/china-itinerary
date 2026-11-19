@@ -24,7 +24,7 @@ const checklistGroups: ChecklistGroup[] = [
       { id: 'shangri-la-tour-18nov', label: 'Tur Lijiang → Shangri-La 18 Nov (Trip.com 104549480, sudah dipesan, bagianmu 50%)', booked: true },
       { id: 'c988-songzanlin-19nov', label: 'C990 Shangri-La 20.25 → Lijiang 21.51 (19 Nov, 2 kursi, sudah dipesan, bagianmu 50%) + Songzanlin 19 Nov (2 tiket, beli di loket)' },
       { id: 'pudacuo-19nov', label: 'Tiket Pudacuo 19 Nov (1 orang, sudah dibayar)', booked: true },
-      { id: 'impression-jade-20nov', label: 'Impression Lijiang 13.20 + Jade Dragon kawasan/shuttle/Big Cable Car 15.00–15.30 (20 Nov, 2 orang; buka 13 Nov)' },
+      { id: 'impression-jade-20nov', label: 'Tur Yulong 20 Nov: Spruce Meadow + Impression Lijiang + Blue Moon Valley + sunrise (2 orang, sudah dipesan, bagianmu 50%)', booked: true },
       { id: 'c442-20nov', label: 'C442 Lijiang 20.22 → Dali 20 Nov (2 kursi)' },
       { id: 'dali-kunming-21nov', label: 'D3950 Dali 12.01 → Kunming 14.05 (21 Nov, sudah dipesan)', booked: true },
     ],
@@ -48,7 +48,6 @@ const checklistGroups: ChecklistGroup[] = [
     id: 'cars',
     title: 'Mobil & transfer',
     items: [
-      { id: 'lijiang-driver-20nov', label: 'Mobil + sopir Lijiang 20 Nov 06.30 (Jade Dragon → Stasiun Lijiang, dengan koper)' },
       { id: 'tfu-hotel-8nov', label: 'Transfer TFU→hotel 8 Nov' },
     ],
   },

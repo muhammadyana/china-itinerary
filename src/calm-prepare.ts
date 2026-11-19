@@ -40,7 +40,7 @@ const calmPlanNotes: PlanNotes = {
   cash: 'Bawa uang tunai cadangan untuk kota kecil di Aba; belum ada data penerimaan kartu di Huanglong atau Bipenggou. ATM Bank of China menerima Visa dan Mastercard, maksimal CNY 3000 per penarikan.',
   signal: '',
   hospitals: [diqingHospital],
-  altitude: 'Rute ini naik ke Yanziyan 3.837 m di Bipenggou, tidur dua malam di Shangri-La 3.300 m, dan naik ke gletser Jade Dragon pada 19 November.',
+  altitude: 'Rute ini naik ke Yanziyan 3.837 m di Bipenggou, tidur dua malam di Shangri-La 3.300 m, naik ke gletser Jade Dragon pada 17 November, dan ke Spruce Meadow (云杉坪) pada 20 November.',
   ascent: 'Malam 18 November naik sekitar 900 m dari Lijiang ke Shangri-La; 19 November pagi Songzanlin dengan langkah pelan, siang ke Pudacuo, lalu malam turun lagi ke Lijiang.',
 };
 
@@ -62,7 +62,7 @@ const bookingsSection = () => section('bookings', 'Pesan dan kapan', `<p class="
 const doNotBuySection = () => section('do-not-buy', 'Jangan dibeli kalau pilih opsi ini', `<p class="prepare-section-lead">${e(calmDoNotBuyLead)}</p>${list(calmDoNotBuy.map(currencyText))}`);
 
 // The main preparation page's cost table, summed from the calm option's own lines (calm-costs.ts).
-const costsSection = () => section('costs', 'Perkiraan biaya', `<p class="prepare-section-lead">Dijumlahkan dari harga di halaman ini dan pilihan penginapan termurah sampai termahal per malam di halaman Hotel &amp; hostel santai. Mobil Jade Dragon 20 November baru perkiraan dari tarif sewa per jam Trip.com. Dihitung untuk bagianmu: sendiri sampai 16 November, lalu kamar mulai malam 17 November dan mobil mulai 18 November dibagi dua dengan temanmu. Belum termasuk makan, oleh-oleh, makan dan menginap sopir, biaya kembali kosong mobil, pilihan cadangan, taksi kota yang belum terdaftar, serta biaya pemesanan Trip.com.</p>
+const costsSection = () => section('costs', 'Perkiraan biaya', `<p class="prepare-section-lead">Dijumlahkan dari harga di halaman ini dan pilihan penginapan termurah sampai termahal per malam di halaman Hotel &amp; hostel santai. Dihitung untuk bagianmu: sendiri sampai 16 November, lalu kamar mulai malam 17 November dan mobil mulai 18 November dibagi dua dengan temanmu. Belum termasuk makan, oleh-oleh, makan dan menginap sopir, biaya kembali kosong mobil, pilihan cadangan, taksi kota yang belum terdaftar, serta biaya pemesanan Trip.com.</p>
       ${costSummary(calmCostLines, calmCostsPath)}`);
 
 // The calm page shows no Ganzi hospital, so it drops that source.
