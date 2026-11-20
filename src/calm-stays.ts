@@ -19,12 +19,6 @@ const mainBase = (id: string) => {
 };
 const trip = (url: string) => ({ label: 'Trip.com', url, gallery: true });
 
-// Shared nights: the main plan's base and picks, priced by the main plan for the same night.
-const sharedNight = (id: string, date: string): CalmStayBase => {
-  const base = mainBase(id);
-  return { ...base, id: date, nights: [date], fromMain: true, notes: ['Sama dengan rencana utama; harga dicek 4 November untuk malam ini.', ...base.notes] };
-};
-
 const jiuzhaigouList = (checkin: string, checkout: string) => `https://us.trip.com/hotels/list?cityId=91&provinceId=22&countryId=1&cityName=Jiuzhaigou&checkin=${checkin}&checkout=${checkout}&crn=1&adult=1&listFilters=29~1*29*1~1*2,50~8~406*8*406~33.26680143146601~103.9193668996518~2,17~3*17*3&curr=CNY&locale=en-US`;
 const jiuzhaigouGate = { title: 'OpenStreetMap Nominatim: 九寨沟景区沟口游客中心 (straight-line distances from each Trip.com pin)', url: 'https://nominatim.openstreetmap.org/search?q=九寨沟游客中心&format=json' };
 
@@ -252,8 +246,30 @@ export const calmStayBases: CalmStayBase[] = [
     hostel: lijiang.hostel,
   },
   {
-    ...sharedNight('dali', '2026-11-20'), fromMain: false,
-    notes: ['Hotel rencana utama untuk Dali, sehari lebih lambat: harga dicek 4 November untuk 19 November, harga 20 November belum dicek. C442 tiba 22.21, jadi kabari hotel jam tiba.', ...mainBase('dali').notes],
+    ...mainBase('dali'), id: '2026-11-20', nights: ['2026-11-20'], fromMain: false, booked: true, paid: 140687, paidShare: true,
+    notes: [
+      'Sudah dipesan di Trip.com pada 20 November: satu malam, 20–21 November. Total Rp281.374, bagianmu Rp140.687 (50%). Tidak bisa dibatalkan atau diubah.',
+      'Check-in setelah 14.00, check-out sebelum 12.00. Tanpa sarapan. Resepsionis 24 jam; penitipan bagasi menurut halaman Trip.com hotel ini.',
+      'Dekat 古城南门: sekitar 5–10 menit jalan kaki ke gerbang selatan (Trip.com: 830 m ke Kota Tua Dali, 590 m ke 文献楼).',
+    ],
+    hotel: {
+      ...mainBase('dali').hotel,
+      kind: 'Guesthouse',
+      name: 'Dali Nanlu · Yinsu (Ancient City South Gate Store)',
+      chinese: '大理南麓·隐宿(古城南门店)',
+      chineseAddress: '大理市大理镇南门村委会2组文献路286号',
+      room: 'Kamar privat',
+      location: 'No. 286 Wenxian Road (文献路286号), Nanmen, Dali Town: sekitar 5–10 menit jalan kaki ke 古城南门. Trip.com: 830 m ke Kota Tua Dali, 590 m ke 文献楼, sekitar 16 km dari 大理站.',
+      price: 'sudah dipesan',
+      priceNote: 'Sudah dipesan di Trip.com pada 20 November: total Rp281.374 untuk satu malam, 20–21 November. Bagianmu Rp140.687 (50%). Tidak bisa dibatalkan atau diubah.',
+      rooms: 'Check-in setelah 14.00, check-out sebelum 12.00. Resepsionis 24 jam, penitipan bagasi menurut halaman Trip.com. Tanpa sarapan.',
+      reason: 'Sudah dipesan untuk malam 20 November; kamar dibagi dua, dekat 古城南门.',
+      foreignGuests: 'Trip.com: menerima tamu dari semua negara/wilayah.',
+      links: [trip('https://us.trip.com/hotels/detail/?hotelId=48562433&checkIn=2026-11-20&checkOut=2026-11-21&adult=2&crn=1&curr=CNY')],
+      sources: [
+        { title: 'Trip.com: Dali Nanlu · Yinsu (Ancient City South Gate Store) detail (address, policy, 20 November 2026)', url: 'https://sg.trip.com/hotels/dali-hotel-detail-48562433/dali-nanlu-yinsu/' },
+      ],
+    },
   },
 ];
 
