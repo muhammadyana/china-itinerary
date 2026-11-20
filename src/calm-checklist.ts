@@ -25,7 +25,7 @@ const checklistGroups: ChecklistGroup[] = [
       { id: 'c988-songzanlin-19nov', label: 'C990 Shangri-La 20.25 → Lijiang 21.51 (19 Nov, 2 kursi, sudah dipesan, bagianmu 50%) + Songzanlin 19 Nov (2 tiket, beli di loket)' },
       { id: 'pudacuo-19nov', label: 'Tiket Pudacuo 19 Nov (1 orang, sudah dibayar)', booked: true },
       { id: 'impression-jade-20nov', label: 'Tur Yulong 20 Nov: Spruce Meadow + Impression Lijiang + Blue Moon Valley + sunrise (2 orang, sudah dipesan, bagianmu 50%)', booked: true },
-      { id: 'c374-20nov', label: 'C374 Lijiang 17.04 → Dali 19.20 (20 Nov, sudah dinaiki)', booked: true },
+      { id: 'c374-20nov', label: 'C374 Lijiang 17.04 → Dali 19.20 (20 Nov, sudah dinaiki, bagianmu 50%)', booked: true },
       { id: 'dali-kunming-21nov', label: 'D3950 Dali 12.01 → Kunming 14.05 (21 Nov, sudah dipesan)', booked: true },
     ],
   },
