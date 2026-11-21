@@ -464,24 +464,25 @@ const calmOwnDays: CalmDay[] = [
     };
   })(),
   (() => {
-    const dali = fromMainPlan('2026-11-20');
-    const daliSteps = titledSteps('2026-11-20');
     const airport = titledSteps('2026-11-21').slice(-2);
     return {
-      date: '2026-11-21', title: 'Erhai, Kota Tua Dali & Kunming', shortTitle: 'Erhai, Dali & Kunming',
-      route: ['Erhai', 'Kota Tua Dali', 'Stasiun Dali', 'Kunming', 'Bandara Changshui'],
+      date: '2026-11-21', title: 'Erhai, Dali & Kunming', shortTitle: 'Erhai, Dali & Kunming',
+      route: ['Erhai', 'Stasiun Dali', 'Kunming', 'Bandara Changshui'],
       overnight: fromMainPlan('2026-11-21').overnight,
-      transport: 'Taksi ke Dermaga Caicun dan kembali; taksi dengan koper ke 大理站; D3950 Dali 12.01 → Kunming 14.05, kelas dua, tiket sudah dibeli; DiDi atau taksi ke Bandara Changshui untuk MF8426 20.05.',
-      intro: 'Setengah hari di Dali: cahaya pagi di Erhai dan sarapan halal, lalu D3950 12.01 ke Kunming (tiba 14.05) dan langsung ke bandara. Pesawat MF8426 berangkat 20.05.',
+      transport: 'Pagi sepedahan di pinggir 洱海 (koper dititip di hotel); taksi dengan koper ke 大理站, tiba sekitar 11.06; D3950 Dali 12.01 → Kunming 14.05, kelas dua, tiket sudah dibeli; DiDi atau taksi ke Bandara Changshui untuk MF8426 20.05.',
+      intro: 'Pagi sepedahan di pinggir Danau Erhai (洱海) sudah dijalani. Check-out di 大理南麓·隐宿(古城南门店) sudah selesai sekitar 07.50, tiba 大理站 sekitar 11.06, lalu D3950 12.01 ke Kunming (tiba 14.05) dan langsung ke bandara. Pesawat MF8426 berangkat 20.05.',
       steps: [
-        ...daliSteps.slice(0, 4),
-        ['±10.15–10.40', 'Check-out & Menara Wuhua', 'Check-out di 大理南麓·隐宿(古城南门店) sebelum 12.00, dengan koper. Menara Wuhua (五华楼) dan gang Kota Tua Dali hanya sebentar, lalu langsung ke stasiun. Kereta D3950 12.01, jadi cabut sekitar 10.40.'],
-        ['±10.40–11.20', 'Taksi ke Stasiun Dali', 'Taksi atau DiDi dengan koper ke 大理站 di Xiaguan, ±17–18 km, 30–40 menit (acuan CNY 55 per mobil, tanpa tanggal). Target tiba sekitar 11.20, ±40 menit sebelum D3950 12.01. Gerbang tiket 二层6号.'],
+        ['±07.50', 'Check-out', 'Check-out di 大理南麓·隐宿(古城南门店) sudah selesai sekitar 07.50. Koper dititip di hotel dulu.'],
+        ['±09.00', 'Sepedahan di pinggir 洱海', 'Pagi sepedahan di pinggir Danau Erhai (洱海), di koridor tepi barat danau. Berangkat sekitar jam 09.00.'],
+        ['±11.06', 'Tiba di Stasiun Dali', 'Ambil koper di hotel, lalu taksi atau DiDi ke 大理站 di Xiaguan, ±17–18 km (acuan CNY 55 per mobil, tanpa tanggal). Tiba di stasiun sekitar 11.06, sebelum D3950 12.01. Gerbang tiket 二层6号.'],
         ['12.01', 'Kereta D3950 ke Kunming', 'D3950 Dali 12.01 → Kunming 14.05 (2 jam 4 menit), kelas dua, kereta 07, kursi 07-12B; tiket sudah dibeli di Trip.com pada 15 November. Zuhur dan Asar dijamak di stasiun atau di bandara.'],
         ['±14.15', 'Ke Bandara Changshui', 'Setelah tiba 14.05, DiDi atau taksi dari stasiun Kunming ke Bandara Changshui (昆明长水国际机场). Dari pusat kota (Shuncheng) sekitar 28 km, ±41 menit; dari stasiun belum dicek.'],
         ...airport,
       ],
-      stops: dali.stops,
+      stops: [
+        { place: 'erhai', note: 'Pagi sepedahan di pinggir danau, di koridor tepi barat 洱海.' },
+        { place: 'kunming-station', note: 'Turun di sini, bukan di 昆明南站. Foto memperlihatkan Stasiun Kunming di pusat kota.' },
+      ],
       notes: [],
       risks: [
         'D3950 tiba Kunming 14.05; jarak dan lama tempuh dari stasiun ke Bandara Changshui belum dicek. Pesawat MF8426 berangkat 20.05.',
@@ -530,7 +531,7 @@ export const calmGlance: Record<string, CalmGlance> = {
   '2026-11-18': { bring: 'Paspor, bekal makan siang halal, jaket hangat', remember: 'Makan siang tur tidak halal; tur selesai di Dukezong.' },
   '2026-11-19': { bring: 'Paspor untuk dua tiket, jaket', remember: 'Sudah ke Pudacuo siang (1 tiket sudah dibayar). C990 20.25 dari Stasiun Shangri-La, dua kursi sudah dipesan. Antar hotel ke stasiun perlu dipesan sehari sebelumnya. Berangkat ±19.15.' },
   '2026-11-20': { bring: 'Jaket tebal, bekal halal, dan paspor', remember: 'Tur Spruce Meadow sudah dijalani. C374 17.04 → 19.20 ke Dali sudah dinaiki. Menginap di 大理南麓·隐宿(古城南门店), 文献路286号, dekat 古城南门. Besok check-out sebelum 12.00; D3950 12.01 ke Kunming.' },
-  '2026-11-21': { bring: 'Paspor, koper, dan jaket penahan angin', remember: 'D3950 12.01 dari Dali, gerbang 二层6号, tiba Kunming 14.05; lalu ke bandara, MF8426 20.05.' },
+  '2026-11-21': { bring: 'Paspor, koper, dan jaket penahan angin', remember: 'Pagi sepedahan di pinggir 洱海 sudah dijalani; tiba 大理站 sekitar 11.06. D3950 12.01, gerbang 二层6号, tiba Kunming 14.05; lalu ke bandara, MF8426 20.05.' },
 };
 
 export const calmStopIds = calmDays.flatMap(day => day.stops.map(stop => stop.place));
@@ -554,7 +555,7 @@ export const calmComparison = {
     'Day trip ke Dujiangyan (15 November), pengganti Chongqing yang dibatalkan: metro jalur 2 dan S5023 ke Zhongshu Ge di 融创茂, sore opsional 灌县古城, malam lampu Nanqiao, pulang S5060 20.52 dari 都江堰站.',
     'Kereta C57 Chengdu South → Xichang West, lalu D239 ke Lijiang (16 November).',
     'Dua malam di Lijiang (16–17 November): 17 November tur kecil Jade Dragon Glacier Park dan Blue Moon Valley (sudah dipesan), lalu tur sehari ke Shangri-La lewat Upper Tiger Leaping Gorge dan Napahai (18 November).',
-    'Songzanlin pagi, Pudacuo siang, dan kereta malam C990 20.25 kembali ke Lijiang (19 November); tur Spruce Meadow, Impression Lijiang, dan Blue Moon Valley 20 November (sudah dipesan), lalu C374 17.04 ke Dali dan menginap di 大理南麓·隐宿(古城南门店); Erhai pagi 21 November dan kereta siang ke Kunming.',
+    'Songzanlin pagi, Pudacuo siang, dan kereta malam C990 20.25 kembali ke Lijiang (19 November); tur Spruce Meadow, Impression Lijiang, dan Blue Moon Valley 20 November (sudah dipesan), lalu C374 17.04 ke Dali dan menginap di 大理南麓·隐宿(古城南门店); sepedahan di pinggir Erhai pagi 21 November dan kereta siang ke Kunming.',
   ],
 };
 
