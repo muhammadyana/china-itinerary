@@ -12,15 +12,21 @@ export const expensesPath = '/places/expenses/';
 /** `date` is empty for costs paid before the trip without a trip date (the visa). */
 export interface PaidItem { date: string; label: string; idr: number }
 
-// Only the visa and the flights (outbound and return) live outside the calm booking and stay data (owner's figures, 7–8 November 2026).
+// The visa and the flights (outbound and return) live outside the calm booking and stay data (owner's figures, 7–8 November 2026).
+// Walk-in costs that are not a calm stay or booking are listed in extraPaid.
 const beforeTrip: PaidItem[] = [
   { date: '', label: 'Visa China', idr: 1500000 },
   { date: '2026-11-07', label: 'Tiket pesawat Juneyao CGK → Shanghai Pudong → Chengdu Tianfu', idr: 2460880 },
   { date: '2026-11-21', label: 'Tiket pulang Xiamen Airlines KMG → Xiamen → Jakarta', idr: 3076210 },
 ];
 
+const extraPaid: PaidItem[] = [
+  { date: '2026-11-21', label: '住宿 guesthouse dekat Bandara Xiamen (金尚路), 1 malam', idr: 398616 },
+];
+
 export const paidItems: PaidItem[] = [
   ...beforeTrip,
+  ...extraPaid,
   ...calmBookingGroups.flatMap(group => group.items).flatMap(item => item.paid ? [{ date: item.date, label: `${item.item}${item.paidShare ? ' (bagianmu, 50%)' : ''}`, idr: item.paid }] : []),
   ...calmStayBases.flatMap(base => base.paid ? [{ date: base.nights[0], label: `${base.hotel.name}, ${base.nights.length} malam${base.paidShare ? ' (bagianmu, 50%)' : ''}`, idr: base.paid }] : []),
 ].sort((a, b) => a.date.localeCompare(b.date));
@@ -98,7 +104,7 @@ export function expensesView() {
       <section class="prepare-section" aria-labelledby="expense-paid-title">
         <h2 id="expense-paid-title">Dibayar sebelum berangkat</h2>
         <ul class="expense-list" role="list">${paidItems.map(paidRow).join('')}</ul>
-        <p class="expense-note">Dari bukti pemesanan Trip.com dan biaya visa. Perkiraan sisa biaya ada di <a class="text-link" href="${calmCostsPath}">rincian biaya santai</a>.</p>
+        <p class="expense-note">Dari bukti pemesanan Trip.com, biaya visa, dan penginapan transit di Xiamen. Perkiraan sisa biaya ada di <a class="text-link" href="${calmCostsPath}">rincian biaya santai</a>.</p>
       </section>
     </div>
   </main>
