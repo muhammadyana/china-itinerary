@@ -22,6 +22,7 @@ const beforeTrip: PaidItem[] = [
 
 const extraPaid: PaidItem[] = [
   { date: '2026-11-21', label: '住宿 guesthouse dekat Bandara Xiamen (金尚路), 1 malam', idr: 398616 },
+  { date: '2026-11-22', label: 'Travel Cititrans Bandara Soekarno-Hatta → Bandung', idr: 215000 },
 ];
 
 export const paidItems: PaidItem[] = [
@@ -104,7 +105,7 @@ export function expensesView() {
       <section class="prepare-section" aria-labelledby="expense-paid-title">
         <h2 id="expense-paid-title">Dibayar sebelum berangkat</h2>
         <ul class="expense-list" role="list">${paidItems.map(paidRow).join('')}</ul>
-        <p class="expense-note">Dari bukti pemesanan Trip.com, biaya visa, dan penginapan transit di Xiamen. Perkiraan sisa biaya ada di <a class="text-link" href="${calmCostsPath}">rincian biaya santai</a>.</p>
+        <p class="expense-note">Dari bukti pemesanan Trip.com, biaya visa, penginapan transit di Xiamen, dan travel Cititrans ke Bandung. Perkiraan sisa biaya ada di <a class="text-link" href="${calmCostsPath}">rincian biaya santai</a>.</p>
       </section>
     </div>
   </main>
