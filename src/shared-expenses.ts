@@ -6,6 +6,40 @@ export const sharedExpensesPath = '/places/shared-expenses/';
 export const sharedExpensesApi = '/api/shared-expenses';
 
 export type SharedPayer = 'Yana' | 'Teman';
+export type PayerFilter = 'all' | 'Yana' | 'Teman' | 'unset';
+
+export interface PayerFilterTotals {
+  count: number;
+  idr: number;
+  cny?: number;
+  cnyApproximate: boolean;
+  missingCny: number;
+}
+
+export function parsePayerFilter(value: string | null | undefined): PayerFilter {
+  switch ((value ?? '').trim().toLowerCase()) {
+    case 'yana': return 'Yana';
+    case 'teman': return 'Teman';
+    case 'belum':
+    case 'unset':
+    case 'none': return 'unset';
+    default: return 'all';
+  }
+}
+
+export function payerFilterParam(filter: PayerFilter): string | null {
+  if (filter === 'Yana') return 'yana';
+  if (filter === 'Teman') return 'teman';
+  if (filter === 'unset') return 'belum';
+  return null;
+}
+
+export function matchesPayerFilter(item: { paidBy: SharedPayer | null }, filter: PayerFilter): boolean {
+  if (filter === 'all') return true;
+  if (filter === 'unset') return item.paidBy === null;
+  return item.paidBy === filter;
+}
+
 export type SharedExpenseCategory = 'Hotel' | 'Transport' | 'Tur & Tiket Masuk' | 'Makanan';
 
 export const sharedExpenseCategories: SharedExpenseCategory[] = [
@@ -76,3 +110,28 @@ export function settleSharedExpenses(items: SharedExpenseItem[]): SharedExpenseS
     transferAmount,
   };
 }
+
+export function totalsForItems(items: SharedExpenseItem[]): PayerFilterTotals {
+  let idr = 0;
+  let cny = 0;
+  let hasCny = false;
+  let cnyApproximate = false;
+  let missingCny = 0;
+  for (const item of items) {
+    idr += item.idr;
+    if (item.cny === undefined) missingCny += 1;
+    else {
+      hasCny = true;
+      cny += item.cny;
+      if (item.cnyApproximate) cnyApproximate = true;
+    }
+  }
+  return {
+    count: items.length,
+    idr,
+    ...(hasCny ? { cny: Math.round(cny * 100) / 100 } : {}),
+    cnyApproximate,
+    missingCny,
+  };
+}
+

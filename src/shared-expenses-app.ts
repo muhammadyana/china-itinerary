@@ -1,7 +1,12 @@
-import { itemsSectionHtml, settlementCardHtml, summaryTilesHtml } from './shared-expenses-render.ts';
+import { itemsSectionHtml, payerFilterHtml, settlementCardHtml, summaryTilesHtml } from './shared-expenses-render.ts';
 import {
+  matchesPayerFilter,
+  parsePayerFilter,
+  payerFilterParam,
   sharedExpenseCategories,
   sharedExpensesApi,
+  totalsForItems,
+  type PayerFilter,
   type SharedExpenseInput,
   type SharedExpenseItem,
   type SharedExpenseSettlement,
@@ -205,15 +210,36 @@ function clipRowsUnderStickyHead(): void {
   }
 }
 
-function watchStickyToolbar(toolbar: HTMLElement): void {
+function watchStickyToolbar(toolbar: HTMLElement, page: HTMLElement): () => void {
   const update = () => {
     const clearance = navigationClearance();
+    const height = Math.round(toolbar.getBoundingClientRect().height);
+    if (height > 0) page.style.setProperty('--shared-toolbar-offset', `${height}px`);
     toolbar.classList.toggle('is-stuck', toolbar.getBoundingClientRect().top <= clearance + 1);
     clipRowsUnderStickyHead();
   };
   update();
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
+  return update;
+}
+
+function payerFilterFromLocation(): PayerFilter {
+  try {
+    return parsePayerFilter(new URL(window.location.href).searchParams.get('payer'));
+  } catch {
+    return 'all';
+  }
+}
+
+function writePayerFilterToLocation(filter: PayerFilter): void {
+  const url = new URL(window.location.href);
+  const param = payerFilterParam(filter);
+  if (param) url.searchParams.set('payer', param);
+  else url.searchParams.delete('payer');
+  const next = `${url.pathname}${url.search}${url.hash}`;
+  const current = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+  if (next !== current) history.replaceState(null, '', next);
 }
 
 export function initializeSharedExpenses(): void {
@@ -236,9 +262,11 @@ export function initializeSharedExpenses(): void {
   const categorySelect = form.querySelector<HTMLSelectElement>('[name="category"]')!;
 
   let items: SharedExpenseItem[] = [];
+  let payerFilter: PayerFilter = payerFilterFromLocation();
+  const filterSlot = root.querySelector<HTMLElement>('[data-shared-payer-filter]')!;
   root.hidden = false;
   const toolbar = root.querySelector<HTMLElement>('.shared-toolbar');
-  if (toolbar) watchStickyToolbar(toolbar);
+  const syncSticky = toolbar ? watchStickyToolbar(toolbar, view) : () => { clipRowsUnderStickyHead(); };
 
   const lead = page.querySelector<HTMLElement>('.prepare-intro .lead');
   const lockedLead = lead?.textContent ?? '';
@@ -260,13 +288,41 @@ export function initializeSharedExpenses(): void {
     ledger.hidden = false;
   }
 
+  function visibleItems(): SharedExpenseItem[] {
+    return items.filter(item => matchesPayerFilter(item, payerFilter));
+  }
+
+  function syncFilterOption(): void {
+    if (payerFilter === 'unset' && !items.some(item => item.paidBy === null)) {
+      payerFilter = 'all';
+      writePayerFilterToLocation(payerFilter);
+    }
+  }
+
+  function renderFilter(): void {
+    filterSlot.innerHTML = payerFilterHtml(payerFilter, items.some(item => item.paidBy === null));
+  }
+
+  function renderItems(): void {
+    itemsSlot.innerHTML = itemsSectionHtml(visibleItems(), { filter: payerFilter, totals: totalsForItems(visibleItems()) });
+    renderFilter();
+    showLedger();
+    syncSticky();
+  }
+
+  function setPayerFilter(next: PayerFilter): void {
+    if (next === payerFilter) return;
+    payerFilter = next;
+    writePayerFilterToLocation(payerFilter);
+    renderItems();
+  }
+
   function render(next: Ledger) {
     items = next.items;
+    syncFilterOption();
     settleSlot.innerHTML = settlementCardHtml(next.settlement);
     summarySlot.innerHTML = summaryTilesHtml(next.settlement);
-    itemsSlot.innerHTML = itemsSectionHtml(next.items, next.settlement);
-    showLedger();
-    clipRowsUnderStickyHead();
+    renderItems();
   }
 
   async function load() {
@@ -341,6 +397,21 @@ export function initializeSharedExpenses(): void {
 
   root.querySelector('[data-shared-add]')?.addEventListener('click', () => openForm());
   root.querySelector('[data-shared-form-cancel]')?.addEventListener('click', () => closeForm());
+
+  filterSlot.addEventListener('click', event => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const button = target.closest<HTMLElement>('[data-payer-filter]');
+    if (!button) return;
+    setPayerFilter(parsePayerFilter(button.dataset.payerFilter));
+  });
+
+  window.addEventListener('popstate', () => {
+    const next = payerFilterFromLocation();
+    if (next === payerFilter) return;
+    payerFilter = next;
+    if (items.length) renderItems();
+  });
 
   itemsSlot.addEventListener('click', async event => {
     const target = event.target;

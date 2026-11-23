@@ -6,6 +6,8 @@ import { calmPath } from './calm-route.ts';
 import {
   sharedExpenseCategories,
   sharedExpensesPath,
+  type PayerFilter,
+  type PayerFilterTotals,
   type SharedExpenseItem,
   type SharedExpenseSettlement,
   type SharedPayer,
@@ -25,6 +27,56 @@ export function formatYuan(item: Pick<SharedExpenseItem, 'cny' | 'cnyApproximate
   if (item.cny === undefined) return '—';
   const amount = item.cnyApproximate ? yuanWhole.format(item.cny) : yuanExact.format(item.cny);
   return `${item.cnyApproximate ? '≈ ' : ''}¥${amount}`;
+}
+
+const payerFilterLabel: Record<PayerFilter, string> = {
+  all: 'Semua',
+  Yana: 'Yana',
+  Teman: 'Teman',
+  unset: 'Belum dicatat',
+};
+
+const itemsHeading: Record<PayerFilter, string> = {
+  all: 'Semua item',
+  Yana: 'Item pakai uang Yana',
+  Teman: 'Item pakai uang Teman',
+  unset: 'Item belum dicatat',
+};
+
+const totalHeading: Record<PayerFilter, string> = {
+  all: 'Total tampilan ini',
+  Yana: 'Total pakai uang Yana',
+  Teman: 'Total pakai uang Teman',
+  unset: 'Total belum dicatat',
+};
+
+export function formatCnyTotal(totals: PayerFilterTotals): string {
+  if (totals.cny === undefined) return '—';
+  const amount = totals.cnyApproximate && Number.isInteger(totals.cny)
+    ? yuanWhole.format(totals.cny)
+    : yuanExact.format(totals.cny);
+  const base = `${totals.cnyApproximate ? '≈ ' : ''}¥${amount}`;
+  return totals.missingCny > 0 ? `${base} (sebagian tanpa CNY)` : base;
+}
+
+export function payerFilterHtml(filter: PayerFilter, hasUnset: boolean): string {
+  const options: PayerFilter[] = hasUnset ? ['all', 'Yana', 'Teman', 'unset'] : ['all', 'Yana', 'Teman'];
+  const buttons = options.map(value => {
+    const selected = value === filter;
+    return `<button type="button" class="shared-payer-filter-btn" data-payer-filter="${e(value)}" aria-pressed="${selected ? 'true' : 'false'}">${e(payerFilterLabel[value])}</button>`;
+  }).join('');
+  return `<div class="shared-payer-filter" role="group" aria-label="Filter pakai uang siapa">${buttons}</div>`;
+}
+
+function filterTotalHtml(filter: PayerFilter, totals: PayerFilterTotals): string {
+  const count = `${totals.count} item`;
+  const note = filter === 'all'
+    ? ''
+    : '<p class="shared-filter-total-note">Hasil akhir dan ringkasan pembagian di atas tetap dihitung dari semua item.</p>';
+  return `<div class="shared-filter-total" aria-live="polite">
+    <p class="shared-filter-total-line"><span class="shared-filter-total-label">${e(totalHeading[filter])}</span><span class="shared-filter-total-meta">${e(count)}</span><span class="shared-filter-total-cny">${e(formatCnyTotal(totals))}</span><span class="shared-filter-total-idr">${e(formatRupiah(totals.idr))}</span></p>
+    ${note}
+  </div>`;
 }
 
 const payerPill = (payer: SharedPayer | null) =>
@@ -82,10 +134,19 @@ function itemRow(item: SharedExpenseItem): string {
   </tr>`;
 }
 
-export function itemsSectionHtml(items: SharedExpenseItem[], settlement: SharedExpenseSettlement): string {
-  const { totalIdr, perPerson } = settlement;
+export function itemsSectionHtml(
+  items: SharedExpenseItem[],
+  options: { filter: PayerFilter; totals: PayerFilterTotals },
+): string {
+  const { filter, totals } = options;
+  const body = items.length
+    ? items.map(itemRow).join('')
+    : '<tr class="shared-empty"><td class="shared-empty-cell" colspan="9">Tidak ada item untuk filter ini.</td></tr>';
+  const cnyTotal = formatCnyTotal(totals);
+  const totalLabel = filter === 'all' ? 'TOTAL' : `TOTAL · ${payerFilterLabel[filter]}`;
   return `<section class="shared-items" aria-labelledby="shared-items-title">
-    <h2 id="shared-items-title">Semua item</h2>
+    <h2 id="shared-items-title">${e(itemsHeading[filter])}</h2>
+    ${filterTotalHtml(filter, totals)}
     <div class="shared-table-wrap">
       <table class="shared-table">
         <caption class="visually-hidden">Pengeluaran bersama 17–21 November 2026, dibagi 50/50</caption>
@@ -102,12 +163,13 @@ export function itemsSectionHtml(items: SharedExpenseItem[], settlement: SharedE
             <th scope="col" class="shared-col-actions"><span class="visually-hidden">Aksi</span></th>
           </tr>
         </thead>
-        <tbody>${items.map(itemRow).join('')}</tbody>
+        <tbody>${body}</tbody>
         <tfoot>
           <tr>
-            <th scope="row" colspan="5" data-label="Ringkasan">TOTAL</th>
-            <td class="shared-col-num" data-label="Total (IDR)">${e(formatRupiah(totalIdr))}</td>
-            <td class="shared-col-num" data-label="Bagian per orang">${e(formatRupiah(perPerson))}</td>
+            <th scope="row" colspan="4" data-label="Ringkasan">${e(totalLabel)}</th>
+            <td class="shared-col-num" data-label="Total (CNY)">${e(cnyTotal)}</td>
+            <td class="shared-col-num" data-label="Total (IDR)">${e(formatRupiah(totals.idr))}</td>
+            <td class="shared-col-num" data-label="Bagian per orang">${e(formatRupiah(totals.idr * 0.5))}</td>
             <td data-label=""></td>
             <td class="shared-col-actions" data-label=""></td>
           </tr>
@@ -172,6 +234,7 @@ function appShell() {
     <div class="shared-ledger" data-shared-ledger hidden>
       <div class="shared-toolbar">
         <button type="button" class="primary-button" data-shared-add>Tambah item</button>
+        <div data-shared-payer-filter></div>
         <button type="button" class="quiet-button" data-shared-logout>Keluar</button>
       </div>
       <p class="shared-status" data-shared-status role="status" aria-live="polite"></p>
