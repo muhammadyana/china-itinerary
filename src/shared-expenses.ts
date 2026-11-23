@@ -6,12 +6,13 @@ export const sharedExpensesPath = '/places/shared-expenses/';
 export const sharedExpensesApi = '/api/shared-expenses';
 
 export type SharedPayer = 'Yana' | 'Teman';
-export type SharedExpenseCategory = 'Hotel' | 'Transport' | 'Tur & Tiket Masuk';
+export type SharedExpenseCategory = 'Hotel' | 'Transport' | 'Tur & Tiket Masuk' | 'Makanan';
 
 export const sharedExpenseCategories: SharedExpenseCategory[] = [
   'Hotel',
   'Transport',
   'Tur & Tiket Masuk',
+  'Makanan',
 ];
 
 export interface SharedExpenseItem {

@@ -56,6 +56,13 @@ const DATE = /^\d{4}-\d{2}-\d{2}$/;
 const MAX_LABEL = 500;
 const MAX_CATEGORY = 80;
 
+export const EXPENSE_CATEGORIES = ['Hotel', 'Transport', 'Tur & Tiket Masuk', 'Makanan'] as const;
+export type ExpenseCategory = typeof EXPENSE_CATEGORIES[number];
+
+function isExpenseCategory(value: string): value is ExpenseCategory {
+  return (EXPENSE_CATEGORIES as readonly string[]).includes(value);
+}
+
 export function nowIso(): string {
   return new Date().toISOString();
 }
@@ -115,6 +122,7 @@ export function parseInput(body: unknown): ExpenseInput | string {
   const label = typeof raw.label === 'string' ? raw.label.trim() : '';
   if (!DATE.test(date)) return 'Tanggal harus dalam format YYYY-MM-DD.';
   if (!category || category.length > MAX_CATEGORY) return 'Kategori wajib diisi.';
+  if (!isExpenseCategory(category)) return 'Kategori tidak valid.';
   if (!label || label.length > MAX_LABEL) return 'Keterangan wajib diisi.';
   const idr = typeof raw.idr === 'number' ? raw.idr : typeof raw.idr === 'string' ? Number(raw.idr.replace(/[^\d.-]/g, '')) : NaN;
   if (!Number.isFinite(idr) || !Number.isInteger(idr) || idr < 0) return 'Total IDR harus angka bulat 0 atau lebih.';
