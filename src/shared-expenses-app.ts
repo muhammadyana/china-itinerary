@@ -19,6 +19,36 @@ class ExpensesError extends Error {
   }
 }
 
+
+/** Indonesian grouping for a rupiah integer: 704795 → "704.795". */
+export function formatIdrGroup(value: number | string): string {
+  const digits = String(value).replace(/\D/g, '');
+  if (!digits) return '';
+  return digits.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+export function parseIdrGroup(value: string): number {
+  const digits = value.replace(/\D/g, '');
+  return digits ? Number(digits) : NaN;
+}
+
+function keepIdrCaret(input: HTMLInputElement): void {
+  const caret = input.selectionStart ?? input.value.length;
+  const digitsBefore = input.value.slice(0, caret).replace(/\D/g, '').length;
+  const formatted = formatIdrGroup(input.value);
+  input.value = formatted;
+  let seen = 0;
+  let pos = formatted.length;
+  for (let i = 0; i < formatted.length; i += 1) {
+    if (/\d/.test(formatted[i])) seen += 1;
+    if (seen >= digitsBefore) {
+      pos = i + 1;
+      break;
+    }
+  }
+  input.setSelectionRange(pos, pos);
+}
+
 interface Ledger {
   items: SharedExpenseItem[];
   settlement: SharedExpenseSettlement;
@@ -122,7 +152,7 @@ function readInput(form: HTMLFormElement): SharedExpenseInput {
   const date = String(data.get('date') ?? '');
   const category = String(data.get('category') ?? '').trim();
   const label = String(data.get('label') ?? '').trim();
-  const idr = Number(data.get('idr'));
+  const idr = parseIdrGroup(String(data.get('idr') ?? ''));
   const cnyText = String(data.get('cny') ?? '').trim();
   const paidRaw = String(data.get('paidBy') ?? '');
   const paidBy: SharedPayer | null = paidRaw === 'Yana' || paidRaw === 'Teman' ? paidRaw : null;
@@ -134,10 +164,31 @@ function readInput(form: HTMLFormElement): SharedExpenseInput {
   return input;
 }
 
+
+function navigationClearance(): number {
+  const probe = document.createElement('div');
+  probe.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;height:var(--site-navigation-clearance)';
+  document.body.append(probe);
+  const value = probe.getBoundingClientRect().height;
+  probe.remove();
+  return value || 80;
+}
+
+function watchStickyToolbar(toolbar: HTMLElement): void {
+  const update = () => {
+    const clearance = navigationClearance();
+    toolbar.classList.toggle('is-stuck', toolbar.getBoundingClientRect().top <= clearance + 1);
+  };
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+}
+
 export function initializeSharedExpenses(): void {
   const page = document.querySelector<HTMLElement>('[data-shared-expenses-page]');
   const root = page?.querySelector<HTMLElement>('[data-shared-root]');
   if (!page || !root) return;
+  const view = page;
 
   const loginForm = root.querySelector<HTMLFormElement>('[data-shared-login]')!;
   const loginError = root.querySelector<HTMLElement>('[data-shared-login-error]')!;
@@ -154,8 +205,16 @@ export function initializeSharedExpenses(): void {
 
   let items: SharedExpenseItem[] = [];
   root.hidden = false;
+  const toolbar = root.querySelector<HTMLElement>('.shared-toolbar');
+  if (toolbar) watchStickyToolbar(toolbar);
+
+  const lead = page.querySelector<HTMLElement>('.prepare-intro .lead');
+  const lockedLead = lead?.textContent ?? '';
+  const openLead = 'Biaya yang dibagi 50/50 antara Yana dan Teman untuk trip Yunnan, 17–21 November 2026. Tambah, ubah, atau hapus item di bawah; total dan hasil transfer dihitung ulang otomatis.';
 
   function showLogin(message = '') {
+    view.classList.remove('is-unlocked');
+    if (lead) lead.textContent = lockedLead;
     ledger.hidden = true;
     loginForm.hidden = false;
     loginError.textContent = message;
@@ -163,6 +222,8 @@ export function initializeSharedExpenses(): void {
   }
 
   function showLedger() {
+    view.classList.add('is-unlocked');
+    if (lead) lead.textContent = openLead;
     loginForm.hidden = true;
     ledger.hidden = false;
   }
@@ -200,7 +261,7 @@ export function initializeSharedExpenses(): void {
       form.querySelector<HTMLInputElement>('[name="label"]')!.value = item.label;
       form.querySelector<HTMLInputElement>('[name="cny"]')!.value = item.cny === undefined ? '' : String(item.cny);
       form.querySelector<HTMLInputElement>('[name="cnyApproximate"]')!.checked = item.cnyApproximate === true;
-      form.querySelector<HTMLInputElement>('[name="idr"]')!.value = String(item.idr);
+      form.querySelector<HTMLInputElement>('[name="idr"]')!.value = formatIdrGroup(item.idr);
       form.querySelector<HTMLSelectElement>('[name="paidBy"]')!.value = item.paidBy ?? '';
     }
     if (typeof dialog.showModal === 'function') dialog.showModal();
@@ -213,6 +274,10 @@ export function initializeSharedExpenses(): void {
     form.reset();
     formError.textContent = '';
   }
+
+  form.querySelector<HTMLInputElement>('[name="idr"]')?.addEventListener('input', event => {
+    keepIdrCaret(event.currentTarget as HTMLInputElement);
+  });
 
   loginForm.addEventListener('submit', async event => {
     event.preventDefault();

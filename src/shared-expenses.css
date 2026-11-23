@@ -10,10 +10,10 @@
 .shared-settle-note { margin: 0; font-size: 15px; }
 
 .shared-summary h2, .shared-items h2, .shared-notes h2 { color: var(--color-muted); font-size: 15px; font-weight: 500; letter-spacing: 0; }
-.shared-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-sm); margin: var(--space-md) 0 0; }
-.shared-tile { padding: var(--space-sm) var(--space-md); border-radius: 16px; background: var(--color-paper-2); }
-.shared-tile dt { color: var(--color-muted); font-size: 13px; }
-.shared-tile dd { margin: var(--space-2xs) 0 0; color: var(--color-ink); font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.shared-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-sm); margin: var(--space-md) 0 0; align-items: stretch; }
+.shared-tile { display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; min-height: 6.75rem; height: auto; overflow: visible; padding: var(--space-md); border-radius: 16px; background: var(--color-paper-2); }
+.shared-tile dt { color: var(--color-muted); font-size: 13px; line-height: 1.35; overflow: visible; }
+.shared-tile dd { margin: var(--space-2xs) 0 0; color: var(--color-ink); font-size: 18px; font-weight: 600; line-height: 1.3; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; overflow: visible; }
 
 .shared-payer { display: inline-flex; align-items: center; min-height: 24px; padding: 0 10px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; white-space: nowrap; }
 .shared-payer-yana { background: var(--color-autumn); color: var(--color-on-autumn); }
@@ -36,15 +36,15 @@
 .shared-table tbody tr:nth-child(even) td { background: var(--color-paper-2); }
 .shared-table thead th {
   position: sticky;
-  top: var(--site-navigation-clearance);
+  top: calc(var(--site-navigation-clearance) + var(--shared-toolbar-offset));
   z-index: 1;
   color: var(--color-muted);
   font-size: 12px;
   font-weight: 500;
   white-space: nowrap;
   background-color: var(--color-paper);
-  /* Opaque shelf up to the top of the viewport so rows cannot show beside the nav pill. */
-  box-shadow: 0 calc(-1 * var(--site-navigation-clearance)) 0 8px var(--color-paper), 0 1px 0 var(--color-rule);
+  /* Opaque shelf up to the sticky toolbar so rows cannot peek through. */
+  box-shadow: 0 calc(-1 * var(--shared-toolbar-offset)) 0 8px var(--color-paper), 0 1px 0 var(--color-rule);
   border-bottom: 0;
 }
 .shared-col-no { width: 1%; color: var(--color-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -170,9 +170,52 @@
 .shared-login .primary-button { flex: none; display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-pill); font-weight: 600; }
 .shared-login-error { min-height: 1.5em; color: var(--color-warning); font-size: var(--text-sm); }
 
-.shared-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm); margin: 0 0 var(--space-md); }
+.shared-expenses-page {
+  --shared-toolbar-offset: 76px;
+}
+.shared-expenses-page .prepare-intro h1 {
+  max-width: none;
+  font-size: clamp(2rem, 5vw, 2.85rem);
+  line-height: 1.1;
+}
+.shared-expenses-page.is-unlocked .prepare-intro { gap: var(--space-sm); }
+.shared-expenses-page.is-unlocked .shared-layout {
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+.shared-expenses-page .shared-settle {
+  padding: var(--space-md) var(--space-lg);
+  gap: var(--space-xs);
+}
+.shared-expenses-page .shared-settle-amount {
+  font-size: clamp(1.75rem, 5vw, 2.4rem);
+}
+
+.shared-toolbar {
+  position: sticky;
+  top: var(--site-navigation-clearance);
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: 0 0 var(--space-md);
+  padding: var(--space-sm) 0;
+  background-color: var(--color-paper);
+}
+.shared-toolbar.is-stuck::before {
+  /* Full-width paper shelf under the nav pill, only while the bar is stuck. */
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--site-navigation-clearance);
+  background: var(--color-paper);
+  pointer-events: none;
+}
 .shared-toolbar .primary-button { margin-right: auto; }
-.shared-status { min-height: 1.5em; margin: 0 0 var(--space-md); color: var(--color-ink-2); font-size: var(--text-sm); }
+.shared-status { min-height: 1.25em; margin: 0 0 var(--space-sm); color: var(--color-ink-2); font-size: var(--text-sm); }
 
 .shared-form-dialog { width: min(32rem, calc(100vw - 2rem)); padding: 0; border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-paper); color: var(--color-ink); box-shadow: 0 16px 40px color-mix(in srgb, var(--color-ink) 16%, transparent); }
 .shared-form-dialog::backdrop { background: color-mix(in srgb, var(--color-ink) 28%, transparent); }

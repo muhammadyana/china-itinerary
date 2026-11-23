@@ -144,7 +144,7 @@ function itemForm() {
       <label>Keterangan <input name="label" type="text" maxlength="500" required autocomplete="off"></label>
       <label>Total (CNY) <input name="cny" type="number" min="0" step="0.01" inputmode="decimal"></label>
       <label class="shared-form-check"><input name="cnyApproximate" type="checkbox"> CNY perkiraan (≈)</label>
-      <label>Total (IDR) <input name="idr" type="number" min="0" step="1" inputmode="numeric" required></label>
+      <label>Total (IDR) <input name="idr" type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" required></label>
       <label>Pakai uang siapa
         <select name="paidBy">
           <option value="">Belum dicatat</option>
@@ -175,10 +175,12 @@ function appShell() {
         <button type="button" class="quiet-button" data-shared-logout>Keluar</button>
       </div>
       <p class="shared-status" data-shared-status role="status" aria-live="polite"></p>
-      <div data-shared-settle></div>
-      <div data-shared-summary></div>
-      <div data-shared-items></div>
-      ${notes()}
+      <div class="shared-layout">
+        <div data-shared-settle></div>
+        <div data-shared-summary></div>
+        <div data-shared-items></div>
+        ${notes()}
+      </div>
     </div>
     ${itemForm()}
   </div>`;

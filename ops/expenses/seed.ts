@@ -12,7 +12,6 @@ export interface SeedItem {
 
 export const seedItems: SeedItem[] = [
   { id: 'seed-01', date: '2026-11-17', category: 'Hotel', label: 'Lijiang Hemuju Homestay, 1 malam (17–18 Nov), Elegant Queen Room', cny: 70, cnyApproximate: true, idr: 191201, paidBy: 'Teman' },
-  { id: 'seed-02', date: '2026-11-17', category: 'Transport', label: 'DiDi (滴滴快车), Stasiun Lijiang → Hemuju Homestay, 17 Nov 22.43 (order 16 Nov 17.54)', cny: 26.1, idr: 74327, paidBy: 'Yana' },
   { id: 'seed-03', date: '2026-11-18', category: 'Tur & Tiket Masuk', label: 'Lift Tiger Leaping Gorge, 18 Nov 09.16', cny: 160, idr: 456208, paidBy: 'Yana' },
   { id: 'seed-04', date: '2026-11-18', category: 'Tur & Tiket Masuk', label: 'Tur Shangri-La + Tiger Leaping Gorge (Package E), 2 orang; termasuk tiket, mobil, sopir, makan siang', idr: 918164, paidBy: 'Teman' },
   { id: 'seed-05', date: '2026-11-18', category: 'Hotel', label: 'Shangri-la Jianyi light luxury intelligent B&B, Dukezong, 1 malam (18–19 Nov), Sunlit Street View Double Bed Room', cny: 131, cnyApproximate: true, idr: 356684, paidBy: 'Teman' },
