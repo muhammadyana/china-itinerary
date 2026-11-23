@@ -44,3 +44,6 @@ dist-ssr
 __pycache__/
 *.pyc
 .omc/
+
+# Local shared-expenses store (dev only; production uses StateDirectory)
+/ops/expenses/data/

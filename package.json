@@ -9,7 +9,9 @@
     "preview": "vite preview",
     "test:e2e": "playwright test",
     "build:ask": "vite build --config ops/ask/vite.config.ts",
-    "check:ask": "tsc -p ops/ask/tsconfig.json"
+    "check:ask": "tsc -p ops/ask/tsconfig.json",
+    "build:expenses": "vite build --config ops/expenses/vite.config.ts",
+    "check:expenses": "tsc -p ops/expenses/tsconfig.json"
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "^1.5.0",

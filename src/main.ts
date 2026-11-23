@@ -28,6 +28,7 @@ import { initializeCalmItinerary } from './calm-itinerary-main.ts';
 import { initializeHome } from './home-main.ts';
 import { initializeCalmChecklist } from './calm-checklist.ts';
 import { initializeExpenses } from './expenses-main.ts';
+import { initializeSharedExpenses } from './shared-expenses-app.ts';
 import { days, daysByDate, places } from './itinerary.ts';
 import { dayView, pickerItems, overviewContent, fullDate } from './render.ts';
 
@@ -179,4 +180,5 @@ initializeSiteSearch();
 initializeAsk();
 initializeCalmChecklist();
 initializeExpenses();
+initializeSharedExpenses();
 document.documentElement.classList.add('js');

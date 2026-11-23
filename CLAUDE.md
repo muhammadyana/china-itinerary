@@ -69,7 +69,7 @@ npm run check:ask                 # typecheck ops/ask/ (npx tsc does not cover i
 
 ## Deployment
 
-`.github/workflows/deploy.yml`: on PRs and pushes to `main`, run `npm run build`, then `ops/package.py`. CI runs no tests (owner's decision, 6 November 2026). Only `main` deploys, over a restricted SSH key to `ops/deploy.py` on the server.
+`.github/workflows/deploy.yml`: on PRs, pushes to `main`, and `workflow_dispatch`, run `npm run build`, then `ops/package.py`. CI runs no tests (owner's decision, 6 November 2026). Only `main` deploys, over a restricted SSH key to `ops/deploy.py` on the server. `/places/shared-expenses/` is a password-gated ledger; item data is not in the static build. The public unauthenticated page and JS bundle must not include the friend's real name or any ledger item data. The friend is labeled "Teman" after login.
 
 `allowed_path()` in `ops/deploy.py` (also used by `ops/package.py`) is a strict allowlist of output paths: root `index.html`/`release.json`/icons, `assets/*.{js,css,woff2}`, `photos/*.{webp,avif}`, `places/<slug>/index.html`, `social/<photo-id>.jpg` (one card per place page, made by `ops/prepare-social-images.mjs`), two exact PDF names and `print/index.html`. Any new output path fails packaging. Adding one means updating `allowed_path()` and its coverage in `ops/test_deploy.py`, and the root-owned installed copy on the server must be updated separately before deploying (see `ops/README.md`).
 

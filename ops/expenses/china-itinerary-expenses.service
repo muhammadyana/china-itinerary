@@ -1,0 +1,23 @@
+[Unit]
+Description=China itinerary shared expenses API (/api/shared-expenses/)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/china-itinerary-expenses.env
+ExecStart=/usr/bin/node /opt/china-itinerary-expenses/expenses-server.mjs
+Restart=on-failure
+RestartSec=2
+DynamicUser=yes
+StateDirectory=china-itinerary-expenses
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+MemoryMax=128M
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

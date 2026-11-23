@@ -78,7 +78,7 @@ const calmTrainsHtml = (html: string) => pageHtml(html, 'Kereta & timeline santa
 // The spending page is personal; it stays out of search engines like the assistant's page.
 const expensesHtml = (html: string) => pageHtml(html, 'Pengeluaran trip | China 2026', 'Pengeluaran perjalanan Sichuan dan Yunnan 8–21 November 2026: yang sudah dibayar dan catatan harian.', expensesPath, expensesView())
  .replace('</head>', ' <meta name="robots" content="noindex, nofollow">\n</head>');
-const sharedExpensesHtml = (html: string) => pageHtml(html, 'Pengeluaran bersama | China 2026', 'Pembagian biaya 50/50 untuk trip Yunnan, 17–21 November 2026: rincian item, ringkasan, dan hasil transfer.', sharedExpensesPath, sharedExpensesView())
+const sharedExpensesHtml = (html: string) => pageHtml(html, 'Pengeluaran bersama | China 2026', 'Catatan pembagian biaya 50/50 untuk trip Yunnan, 17–21 November 2026. Khusus pemilik catatan.', sharedExpensesPath, sharedExpensesView())
  .replace('</head>', ' <meta name="robots" content="noindex, nofollow">\n</head>');
 // The assistant's unlock page stays out of search engines; the extra tag leaves the replaced meta tags untouched.
 const askHtml = (html: string) => pageHtml(html, 'Tanya AI | China 2026', 'Asisten perjalanan pribadi untuk rencana Sichuan dan Yunnan 8–21 November 2026. Khusus pemilik perjalanan.', askPath, askView())
@@ -86,8 +86,8 @@ const askHtml = (html: string) => pageHtml(html, 'Tanya AI | China 2026', 'Asist
 const staysHtml = (html: string) => pageHtml(html, 'Hotel & hostel per malam | China 2026', 'Satu hotel dan satu hostel untuk setiap kota menginap di Sichuan dan Yunnan, 8 sampai 20 November 2026, dengan harga perkiraan dan bukti menerima paspor asing.', staysPath, staysView());
 export default defineConfig({
  base: '/',
- // Development only: the assistant service runs beside the dev server. Preview would inherit the proxy, so it opts out.
- server: { proxy: { '/api/ask': 'http://127.0.0.1:8790' } },
+ // Development only: the assistant and shared-expenses services run beside the dev server. Preview would inherit the proxy, so it opts out.
+ server: { proxy: { '/api/ask': 'http://127.0.0.1:8790', '/api/shared-expenses': 'http://127.0.0.1:8791' } },
  preview: { proxy: {} },
  plugins: [{
   name: 'prerender-itinerary',

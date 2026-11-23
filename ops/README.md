@@ -74,6 +74,38 @@ The files stay in `deploy`'s home, not in `/tmp`: root runs them, so no other ac
 
 Cost: the model is `claude-haiku-5-5`. The site text is about 505,000 characters, roughly 170,000–200,000 tokens (Anthropic's rule of thumb is about 2.5 characters per token; not yet counted with the API), so requests fall in Haiku 5.5's higher price tier for prompts over 100,000 tokens. That text is cached for one hour: a question after an idle hour writes the cache at twice the input rate, questions within the hour read it at a tenth and keep it alive. Web search runs at most 3 times per question and is billed per search. In-process limits apply to everyone together and reset on restart: 30 chats per 10 minutes, 300 per 24 hours, and 10 failed logins per 15 minutes (which also locks out the owner for that time). Set a monthly spend limit for the key's workspace in the Anthropic Console as the hard cap.
 
+
+## Shared expenses service
+
+`/places/shared-expenses/` is a password-protected ledger for the Yunnan 50/50 split. The static page is only a login shell: item data, totals, and settlement are loaded from the API after a session is established. The Google Sheet is not the source of truth and is not fetched at build time.
+
+- `china-itinerary-expenses.service`: systemd unit (`DynamicUser`, `StateDirectory=china-itinerary-expenses`) running `/usr/bin/node /opt/china-itinerary-expenses/expenses-server.mjs` on `127.0.0.1:8791`. The live store is `/var/lib/china-itinerary-expenses/data.json`. A new empty store is seeded once with the 17 known items (including the Tiger Leaping Gorge lift). Any payer other than Yana is stored as Teman.
+- `nginx-expenses.conf`: installed as `/etc/nginx/snippets/china-itinerary-expenses.conf`; proxies `/api/shared-expenses/`.
+- `install.sh`: installs or updates the bundle, unit, env file and snippet; rolls nginx back if `nginx -t` fails. It never reads or writes `/etc/china-itinerary-ask.env`.
+- Source, bundled by `npm run build:expenses` into `ops/expenses/dist/expenses-server.mjs` and typechecked by `npm run check:expenses`: `server.ts`, `auth.ts` (scrypt password, signed `HttpOnly; Secure; SameSite=Strict` session cookie on path `/api/shared-expenses`), `store.ts`, `seed.ts`, `limits.ts` (10 failed logins per 15 minutes), `config.ts`.
+
+Endpoints: `GET /api/shared-expenses/health`, `GET /api/shared-expenses/session`, `POST /api/shared-expenses/login`, `POST /api/shared-expenses/logout`, and (session required) `GET`/`POST /api/shared-expenses/items`, `PUT`/`DELETE /api/shared-expenses/items/:id`. Settlement is recomputed from the stored rows with the same rule as before (`Math.round` of the 50/50 net).
+
+`/etc/china-itinerary-expenses.env` (root:root `0600`, written by `install.sh`) holds `EXPENSES_PASSWORD_HASH` (scrypt) and `EXPENSES_SESSION_SECRET` (generated). Optional keys keep their defaults when absent: `EXPENSES_ORIGIN` (`https://china.muhammadyana.me`), `EXPENSES_HOST`, `EXPENSES_PORT` (`8791`), `EXPENSES_DATA_FILE`. `EXPENSES_DEV=1` also accepts the Vite origin and omits the `Secure` cookie flag; it is for local runs only.
+
+The login password is kept only in `~/travel/shared-expenses-password.txt` on the owner's Mac Mini (`chmod 600`). Do not print it, commit it, or put it in chat or logs.
+
+Install or update from a Mac:
+
+```sh
+npm run build:expenses
+ssh deploy@119.28.110.221 'install -d -m 0700 ~/china-itinerary-expenses'
+scp ops/expenses/dist/expenses-server.mjs ops/expenses/china-itinerary-expenses.service ops/expenses/nginx-expenses.conf ops/expenses/install.sh deploy@119.28.110.221:china-itinerary-expenses/
+# First install: pipe the password on stdin (never argv). An empty line on a rerun keeps the current hash.
+ssh -t deploy@119.28.110.221 'sudo bash ~/china-itinerary-expenses/install.sh' < ~/travel/shared-expenses-password.txt
+```
+
+The files stay in `deploy`'s home, not in `/tmp`. `install.sh` refuses a staging directory or file that is not owned by root or the sudo user, or that group or others can write. It restarts the service, waits for `/api/shared-expenses/health`, reloads nginx and prints the public `/api/shared-expenses/session` check. A new password signs out every device.
+
+Local development: set `EXPENSES_DEV=1` plus `EXPENSES_PASSWORD_HASH` and `EXPENSES_SESSION_SECRET`, run `npm run build:expenses && node ops/expenses/dist/expenses-server.mjs`, then `npm run dev`. The Vite proxy forwards `/api/shared-expenses` to port 8791.
+
+Logs: `journalctl -u china-itinerary-expenses -f`. Do not log passwords, session tokens, or item payloads.
+
 ## Activation and recovery
 
 The handler serializes deployments with a file lock, writes a fresh release, retains previous hashed CSS/JS/font assets for in-flight pages, and atomically switches `current`. A direct-origin HTTPS check verifies both `release.json` and the index hash. Failure restores the previous symlink; successful deployment prints a JSON receipt and saves it outside the public directory as `deployment.json`.
