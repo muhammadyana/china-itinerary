@@ -33,7 +33,7 @@ const payerPill = (payer: SharedPayer | null) =>
     : '—';
 
 const cell = (label: string, value: string, className = '') =>
-  `<td${className ? ` class="${className}"` : ''} data-label="${e(label)}">${value}</td>`;
+  `<td${className ? ` class="${className}"` : ''} data-label="${e(label)}"><div class="shared-cell-clip"><div class="shared-cell-inner">${value}</div></div></td>`;
 
 export function settlementCardHtml(settlement: SharedExpenseSettlement): string {
   const { transferFrom, transferTo, transferAmount } = settlement;
@@ -78,7 +78,7 @@ function itemRow(item: SharedExpenseItem): string {
     ${cell('Total (IDR)', e(formatRupiah(item.idr)), 'shared-col-num')}
     ${cell('Bagian per orang', e(formatRupiah(item.idr * 0.5)), 'shared-col-num')}
     ${cell('Pakai uang siapa', payerPill(item.paidBy), 'shared-col-payer')}
-    ${cell('Aksi', `<button type="button" class="quiet-button shared-row-edit" data-shared-edit="${e(item.id)}">Ubah</button> <button type="button" class="quiet-button shared-row-delete" data-shared-delete="${e(item.id)}">Hapus</button>`, 'shared-col-actions')}
+    ${cell('Aksi', `<button type="button" class="shared-row-action shared-row-edit" data-shared-edit="${e(item.id)}" aria-label="Ubah" title="Ubah">${icon('edit')}</button><button type="button" class="shared-row-action shared-row-delete" data-shared-delete="${e(item.id)}" aria-label="Hapus" title="Hapus">${icon('trash')}</button>`, 'shared-col-actions')}
   </tr>`;
 }
 

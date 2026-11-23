@@ -174,10 +174,42 @@ function navigationClearance(): number {
   return value || 80;
 }
 
+function clipRowsUnderStickyHead(): void {
+  const th = document.querySelector<HTMLElement>('.shared-table thead th');
+  const clips = [...document.querySelectorAll<HTMLElement>('.shared-table .shared-cell-clip')];
+  const sticky = !!th && getComputedStyle(th).position === 'sticky';
+  const band = th?.getBoundingClientRect();
+  for (const clip of clips) {
+    const inner = clip.firstElementChild as HTMLElement | null;
+    if (!inner) continue;
+    if (!sticky || !band) {
+      clip.style.clipPath = '';
+      continue;
+    }
+    const row = clip.closest('tr');
+    const r = (row ?? clip).getBoundingClientRect();
+    const overlaps = r.top < band.bottom - 0.5 && r.bottom > band.top + 0.5;
+    const next = overlaps ? `inset(${Math.max(0, band.bottom - r.top)}px 0 0 0)` : '';
+    if ((clip.style.clipPath || '') === next) continue;
+    if (!next) {
+      clip.style.clipPath = '';
+      continue;
+    }
+    // Chrome paints scrolling table text above overflow/clip-path unless the
+    // clipping box is a fresh parent around the cell content.
+    const fresh = document.createElement('div');
+    fresh.className = 'shared-cell-clip';
+    fresh.style.clipPath = next;
+    clip.replaceWith(fresh);
+    fresh.appendChild(inner);
+  }
+}
+
 function watchStickyToolbar(toolbar: HTMLElement): void {
   const update = () => {
     const clearance = navigationClearance();
     toolbar.classList.toggle('is-stuck', toolbar.getBoundingClientRect().top <= clearance + 1);
+    clipRowsUnderStickyHead();
   };
   update();
   window.addEventListener('scroll', update, { passive: true });
@@ -234,6 +266,7 @@ export function initializeSharedExpenses(): void {
     summarySlot.innerHTML = summaryTilesHtml(next.settlement);
     itemsSlot.innerHTML = itemsSectionHtml(next.items, next.settlement);
     showLedger();
+    clipRowsUnderStickyHead();
   }
 
   async function load() {
