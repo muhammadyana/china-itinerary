@@ -16,6 +16,7 @@ import { calmPrepareView } from './src/calm-prepare.ts';
 import { calmStaysPath, calmStaysView } from './src/calm-stays-render.ts';
 import { calmCostsPath, calmCostsView } from './src/calm-costs-render.ts';
 import { expensesPath, expensesView } from './src/expenses.ts';
+import { sharedExpensesPath, sharedExpensesView } from './src/shared-expenses-render.ts';
 import { calmTrainsPath, calmTrainsView } from './src/calm-trains.ts';
 import { prepareView, preparePath } from './src/prepare.ts';
 import { trainsView, trainsPath } from './src/trains.ts';
@@ -76,6 +77,8 @@ const calmCostsHtml = (html: string) => pageHtml(html, 'Rincian biaya santai | C
 const calmTrainsHtml = (html: string) => pageHtml(html, 'Kereta & timeline santai | China 2026', 'Link Trip.com untuk setiap kereta opsi santai Sichuan dan Yunnan 9–20 November 2026, dari stasiun ke gerbang Jiuzhaigou, transfer stasiun, aturan bagasi, dan timeline jam demi jam hari-hari kereta.', calmTrainsPath, calmTrainsView());
 // The spending page is personal; it stays out of search engines like the assistant's page.
 const expensesHtml = (html: string) => pageHtml(html, 'Pengeluaran trip | China 2026', 'Pengeluaran perjalanan Sichuan dan Yunnan 8–21 November 2026: yang sudah dibayar dan catatan harian.', expensesPath, expensesView())
+ .replace('</head>', ' <meta name="robots" content="noindex, nofollow">\n</head>');
+const sharedExpensesHtml = (html: string) => pageHtml(html, 'Pengeluaran bersama | China 2026', 'Pembagian biaya 50/50 untuk trip Yunnan, 17–21 November 2026: rincian item, ringkasan, dan hasil transfer.', sharedExpensesPath, sharedExpensesView())
  .replace('</head>', ' <meta name="robots" content="noindex, nofollow">\n</head>');
 // The assistant's unlock page stays out of search engines; the extra tag leaves the replaced meta tags untouched.
 const askHtml = (html: string) => pageHtml(html, 'Tanya AI | China 2026', 'Asisten perjalanan pribadi untuk rencana Sichuan dan Yunnan 8–21 November 2026. Khusus pemilik perjalanan.', askPath, askView())
@@ -146,6 +149,7 @@ export default defineConfig({
    if (path === calmCostsPath || `${path}/` === calmCostsPath) return calmCostsHtml(html);
    if (path === calmTrainsPath || `${path}/` === calmTrainsPath) return calmTrainsHtml(html);
    if (path === expensesPath || `${path}/` === expensesPath) return expensesHtml(html);
+   if (path === sharedExpensesPath || `${path}/` === sharedExpensesPath) return sharedExpensesHtml(html);
    if (path === askPath || `${path}/` === askPath) return askHtml(html);
    const slug = path.match(/^\/places\/([a-z0-9-]+)\/?$/)?.[1];
    const page = slug ? pageBySlug.get(slug) : undefined;
@@ -188,6 +192,8 @@ export default defineConfig({
     this.emitFile({ type: 'asset', fileName: 'places/calm-trains/index.html', source: calmTrainsHtml(template) });
     if (pageBySlug.has('expenses')) throw new Error('A place guide cannot use the reserved expenses slug');
     this.emitFile({ type: 'asset', fileName: 'places/expenses/index.html', source: expensesHtml(template) });
+    if (pageBySlug.has('shared-expenses')) throw new Error('A place guide cannot use the reserved shared-expenses slug');
+    this.emitFile({ type: 'asset', fileName: 'places/shared-expenses/index.html', source: sharedExpensesHtml(template) });
     if (pageBySlug.has('ask')) throw new Error('A place guide cannot use the reserved ask slug');
     this.emitFile({ type: 'asset', fileName: 'places/ask/index.html', source: askHtml(template) });
     for (const page of placePages) {

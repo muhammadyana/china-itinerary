@@ -56,7 +56,8 @@ export const planTopics: PlanTopic[] = [
 ];
 // The trip's own spending page has no plan twin.
 export const expensesPage: PlanningPage = { href: '/places/expenses/', label: 'Pengeluaran trip', keywords: 'pengeluaran expense catat uang belanja dibayar total visa pesawat' };
-export const planningPages: PlanningPage[] = [...planTopics.map(topic => topic.main), calmItineraryPage, ...planTopics.map(topic => topic.calm), expensesPage];
+export const sharedExpensesPage: PlanningPage = { href: '/places/shared-expenses/', label: 'Pengeluaran bersama', keywords: 'pengeluaran bersama split bill bagi dua transfer yana teman yunnan hotel didi kereta' };
+export const planningPages: PlanningPage[] = [...planTopics.map(topic => topic.main), calmItineraryPage, ...planTopics.map(topic => topic.calm), expensesPage, sharedExpensesPage];
 
 const tripDate = (date: string) => new Date(`${date}T12:00:00+08:00`);
 const dayMonth = new Intl.DateTimeFormat('id-ID', { day: 'numeric', month: 'long', timeZone: tripTimeZone });

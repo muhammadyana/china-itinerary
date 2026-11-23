@@ -1,0 +1,55 @@
+.shared-layout { display: grid; gap: var(--space-xl); max-width: 1120px; }
+
+.shared-settle { display: grid; gap: var(--space-sm); padding: var(--space-lg); border-radius: var(--radius-card); background: var(--color-autumn); color: var(--color-on-autumn); }
+.shared-settle-kicker { margin: 0; font-size: 13px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+.shared-settle-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-xs); margin: 0; font-size: 18px; font-weight: 500; }
+.shared-settle-arrow { opacity: .8; }
+.shared-settle-amount { margin: 0; font-size: clamp(2rem, 8vw, 3rem); font-weight: 600; letter-spacing: -.03em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.shared-settle-note { margin: 0; font-size: 15px; }
+
+.shared-summary h2, .shared-items h2, .shared-notes h2 { color: var(--color-muted); font-size: 15px; font-weight: 500; letter-spacing: 0; }
+.shared-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-sm); margin: var(--space-md) 0 0; }
+.shared-tile { padding: var(--space-sm) var(--space-md); border-radius: 16px; background: var(--color-paper-2); }
+.shared-tile dt { color: var(--color-muted); font-size: 13px; }
+.shared-tile dd { margin: var(--space-2xs) 0 0; color: var(--color-ink); font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+.shared-payer { display: inline-flex; align-items: center; min-height: 24px; padding: 0 10px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; }
+.shared-payer-yana { background: var(--color-autumn); color: var(--color-on-autumn); }
+.shared-payer-friend { background: var(--color-paper-3); color: var(--color-ink-2); }
+
+.shared-table-wrap { margin-top: var(--space-md); }
+.shared-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.shared-table th, .shared-table td { padding: var(--space-sm) var(--space-xs); text-align: left; vertical-align: top; border-bottom: 1px solid var(--color-rule); }
+.shared-table thead th { color: var(--color-muted); font-size: 12px; font-weight: 500; white-space: nowrap; }
+.shared-col-num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.shared-col-no { width: 2.5rem; color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.shared-col-date { white-space: nowrap; color: var(--color-ink-2); }
+.shared-col-label { min-width: 14rem; overflow-wrap: anywhere; }
+.shared-table tfoot th, .shared-table tfoot td { font-weight: 600; border-bottom: 0; padding-top: var(--space-md); }
+
+.shared-notes ul { display: grid; gap: var(--space-xs); margin: var(--space-md) 0 0; padding-left: 1.2em; color: var(--color-ink-2); font-size: 14px; max-width: 68ch; }
+
+@media (min-width: 800px) {
+  .shared-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (max-width: 799px) {
+  .shared-table thead { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+  .shared-table, .shared-table tbody, .shared-table tfoot { display: grid; gap: var(--space-sm); }
+  .shared-table tr { display: grid; gap: var(--space-xs); padding: var(--space-md); border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-glass-solid); }
+  .shared-table th, .shared-table td { display: grid; grid-template-columns: minmax(7.5rem, 34%) minmax(0, 1fr); gap: var(--space-sm); align-items: baseline; padding: 0; border: 0; text-align: left; }
+  .shared-table td::before, .shared-table tfoot th::before { content: attr(data-label); color: var(--color-muted); font-size: 13px; font-weight: 500; }
+  .shared-col-num { text-align: left; white-space: normal; }
+  .shared-col-date { white-space: normal; }
+  .shared-table td.shared-col-no { display: none; }
+  .shared-table td.shared-col-label { display: block; margin: var(--space-2xs) 0 var(--space-xs); font-weight: 500; }
+  .shared-table td.shared-col-label::before { display: none; }
+  .shared-table td.shared-col-payer { justify-items: start; }
+  .shared-table tfoot tr { background: var(--color-paper-2); }
+  .shared-table tfoot th { font-size: 15px; }
+  .shared-table tfoot td[data-label=""] { display: none; }
+}
+
+@media (max-width: 359px) {
+  .shared-tiles { grid-template-columns: minmax(0, 1fr); }
+}

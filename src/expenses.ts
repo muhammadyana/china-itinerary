@@ -4,6 +4,7 @@ import { formatRupiah } from './currency.ts';
 import { calmBookingGroups, calmItineraryPath, calmPath } from './calm-route.ts';
 import { calmStayBases } from './calm-stays.ts';
 import { calmCostsPath } from './calm-costs.ts';
+import { sharedExpensesPath } from './shared-expenses.ts';
 
 // The trip's spending page: what was paid before leaving (from the owner's order screenshots, already on the site) and a
 // tracker for what is spent on the road, kept in this phone's browser only so personal entries never reach the public repo.
@@ -91,7 +92,7 @@ export function expensesView() {
     <nav class="guide-breadcrumb" aria-label="Jejak halaman"><a href="/">Beranda</a>${icon('right')}<a href="${calmPath}">Opsi santai</a>${icon('right')}<span>Pengeluaran trip</span></nav>
     <div class="prepare-intro">
       <h1 id="expenses-title">Pengeluaran trip.</h1>
-      <p class="lead">Yang sudah dibayar sebelum berangkat, ditambah catatan belanja harian selama 8–21 November. Catatan harian tersimpan di browser ponsel ini saja.</p>
+      <p class="lead">Yang sudah dibayar sebelum berangkat, ditambah catatan belanja harian selama 8–21 November. Catatan harian tersimpan di browser ponsel ini saja. Pembagian 50/50 ada di <a class="text-link" href="${sharedExpensesPath}">pengeluaran bersama</a>.</p>
     </div>
     <div class="expenses-layout">
       ${summary()}
