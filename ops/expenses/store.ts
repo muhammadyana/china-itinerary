@@ -14,6 +14,7 @@ export interface ExpenseItem {
   cnyApproximate?: boolean;
   idr: number;
   paidBy: Payer | null;
+  updatedAt: string;
 }
 
 export interface ExpenseInput {
@@ -39,14 +40,25 @@ export interface Settlement {
   transferAmount: number;
 }
 
-interface StoreFile {
-  version: 1;
+export interface Tombstone {
+  id: string;
+  deletedAt: string;
+}
+
+export interface StoreFile {
+  version: 2;
   items: ExpenseItem[];
+  deleted: Tombstone[];
+  sheetSync?: { lastPulledAt: string };
 }
 
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 const MAX_LABEL = 500;
 const MAX_CATEGORY = 80;
+
+export function nowIso(): string {
+  return new Date().toISOString();
+}
 
 export function settle(items: ExpenseItem[]): Settlement {
   const totalIdr = items.reduce((sum, item) => sum + item.idr, 0);
@@ -91,6 +103,7 @@ function isItem(value: unknown): value is ExpenseItem {
   if (typeof item.idr !== 'number' || !Number.isFinite(item.idr)) return false;
   if (item.cny !== undefined && (typeof item.cny !== 'number' || !Number.isFinite(item.cny))) return false;
   if (item.cnyApproximate !== undefined && typeof item.cnyApproximate !== 'boolean') return false;
+  if (item.updatedAt !== undefined && (typeof item.updatedAt !== 'string')) return false;
   return isPayer(item.paidBy);
 }
 
@@ -119,7 +132,25 @@ export function parseInput(body: unknown): ExpenseInput | string {
   return { date, category, label, ...(cny !== undefined ? { cny, cnyApproximate } : {}), idr, paidBy };
 }
 
+function withUpdatedAt(item: ExpenseItem, fallback: string): ExpenseItem {
+  return { ...item, updatedAt: item.updatedAt || fallback };
+}
+
+function migrate(parsed: unknown, fallback: string): StoreFile | undefined {
+  if (!parsed || typeof parsed !== 'object') return undefined;
+  const record = parsed as { version?: unknown; items?: unknown; deleted?: unknown; sheetSync?: StoreFile['sheetSync'] };
+  if (!Array.isArray(record.items)) return undefined;
+  if (record.version !== 1 && record.version !== 2) return undefined;
+  const items = record.items.filter(isItem).map(item => withUpdatedAt(item, fallback));
+  const deleted = Array.isArray(record.deleted)
+    ? record.deleted.filter((entry): entry is Tombstone => !!entry && typeof entry === 'object'
+      && typeof (entry as Tombstone).id === 'string' && typeof (entry as Tombstone).deletedAt === 'string')
+    : [];
+  return { version: 2, items: sortItems(items), deleted, ...(record.sheetSync ? { sheetSync: record.sheetSync } : {}) };
+}
+
 function seedRecord(): StoreFile {
+  const updatedAt = nowIso();
   const items = seedItems.map((item: SeedItem): ExpenseItem => ({
     id: item.id,
     date: item.date,
@@ -129,8 +160,9 @@ function seedRecord(): StoreFile {
     ...(item.cnyApproximate ? { cnyApproximate: true } : {}),
     idr: item.idr,
     paidBy: item.paidBy,
+    updatedAt,
   }));
-  return { version: 1, items };
+  return { version: 2, items, deleted: [] };
 }
 
 export function createStore(dataFile: string) {
@@ -139,10 +171,8 @@ export function createStore(dataFile: string) {
   async function readFileOrSeed(): Promise<StoreFile> {
     try {
       const parsed: unknown = JSON.parse(await readFile(dataFile, 'utf8'));
-      if (parsed && typeof parsed === 'object' && (parsed as StoreFile).version === 1 && Array.isArray((parsed as StoreFile).items)) {
-        const items = (parsed as StoreFile).items.filter(isItem);
-        return { version: 1, items: sortItems(items) };
-      }
+      const migrated = migrate(parsed, nowIso());
+      if (migrated) return migrated;
     } catch (error) {
       const code = error instanceof Error && 'code' in error ? (error as NodeJS.ErrnoException).code : undefined;
       if (code !== 'ENOENT') throw error;
@@ -156,7 +186,8 @@ export function createStore(dataFile: string) {
   async function writeAtomic(data: StoreFile): Promise<void> {
     await mkdir(dirname(dataFile), { recursive: true });
     const temp = `${dataFile}.tmp`;
-    await writeFile(temp, `${JSON.stringify({ version: 1, items: sortItems(data.items) }, null, 2)}\n`, { mode: 0o600 });
+    const payload: StoreFile = { version: 2, items: sortItems(data.items), deleted: data.deleted, ...(data.sheetSync ? { sheetSync: data.sheetSync } : {}) };
+    await writeFile(temp, `${JSON.stringify(payload, null, 2)}\n`, { mode: 0o600 });
     await rename(temp, dataFile);
   }
 
@@ -170,32 +201,42 @@ export function createStore(dataFile: string) {
     list(): Promise<Array<ExpenseItem & { no: number }>> {
       return run(async () => numbered((await readFileOrSeed()).items));
     },
-    create(input: ExpenseInput): Promise<Array<ExpenseItem & { no: number }>> {
+    create(input: ExpenseInput): Promise<{ items: Array<ExpenseItem & { no: number }>; record: ExpenseItem }> {
       return run(async () => {
         const data = await readFileOrSeed();
-        data.items.push({ id: randomUUID(), ...input });
+        const record: ExpenseItem = { id: randomUUID(), ...input, updatedAt: nowIso() };
+        data.items.push(record);
         await writeAtomic(data);
-        return numbered(data.items);
+        return { items: numbered(data.items), record };
       });
     },
-    update(id: string, input: ExpenseInput): Promise<Array<ExpenseItem & { no: number }> | null> {
+    update(id: string, input: ExpenseInput): Promise<{ items: Array<ExpenseItem & { no: number }>; record: ExpenseItem } | null> {
       return run(async () => {
         const data = await readFileOrSeed();
         const index = data.items.findIndex(item => item.id === id);
         if (index < 0) return null;
-        data.items[index] = { id, ...input };
+        const record: ExpenseItem = { id, ...input, updatedAt: nowIso() };
+        data.items[index] = record;
         await writeAtomic(data);
-        return numbered(data.items);
+        return { items: numbered(data.items), record };
       });
     },
-    remove(id: string): Promise<Array<ExpenseItem & { no: number }> | null> {
+    remove(id: string): Promise<{ items: Array<ExpenseItem & { no: number }>; id: string } | null> {
       return run(async () => {
         const data = await readFileOrSeed();
         const next = data.items.filter(item => item.id !== id);
         if (next.length === data.items.length) return null;
         data.items = next;
+        data.deleted = [...data.deleted.filter(entry => entry.id !== id), { id, deletedAt: nowIso() }];
         await writeAtomic(data);
-        return numbered(data.items);
+        return { items: numbered(data.items), id };
+      });
+    },
+    applySheetPull(reconcile: (data: StoreFile) => Promise<StoreFile>): Promise<Array<ExpenseItem & { no: number }>> {
+      return run(async () => {
+        const next = await reconcile(await readFileOrSeed());
+        await writeAtomic(next);
+        return numbered(next.items);
       });
     },
   };

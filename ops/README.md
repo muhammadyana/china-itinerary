@@ -77,7 +77,7 @@ Cost: the model is `claude-haiku-5-5`. The site text is about 505,000 characters
 
 ## Shared expenses service
 
-`/places/shared-expenses/` is a password-protected ledger for the Yunnan 50/50 split. The static page is only a login shell: item data, totals, and settlement are loaded from the API after a session is established. The Google Sheet is not the source of truth and is not fetched at build time.
+`/places/shared-expenses/` is a password-protected ledger for the Yunnan 50/50 split. The static page is only a login shell: item data, totals, and settlement are loaded from the API after a session is established. The static build does not fetch the Google Sheet. After login, the live web ledger is the working copy; the private sheet stays in two-way sync when sheet credentials are configured.
 
 - `china-itinerary-expenses.service`: systemd unit (`DynamicUser`, `StateDirectory=china-itinerary-expenses`) running `/usr/bin/node /opt/china-itinerary-expenses/expenses-server.mjs` on `127.0.0.1:8791`. The live store is `/var/lib/china-itinerary-expenses/data.json`. A new empty store is seeded once with the known items (16 as of 23 November 2026, including the Tiger Leaping Gorge lift; the 17 November DiDi to Hemuju is not included). Any payer other than Yana is stored as Teman.
 - `nginx-expenses.conf`: installed as `/etc/nginx/snippets/china-itinerary-expenses.conf`; proxies `/api/shared-expenses/`.
@@ -87,6 +87,9 @@ Cost: the model is `claude-haiku-5-5`. The site text is about 505,000 characters
 Endpoints: `GET /api/shared-expenses/health`, `GET /api/shared-expenses/session`, `POST /api/shared-expenses/login`, `POST /api/shared-expenses/logout`, and (session required) `GET`/`POST /api/shared-expenses/items`, `PUT`/`DELETE /api/shared-expenses/items/:id`. Settlement is recomputed from the stored rows with the same rule as before (`Math.round` of the 50/50 net).
 
 `/etc/china-itinerary-expenses.env` (root:root `0600`, written by `install.sh`) holds `EXPENSES_PASSWORD_HASH` (scrypt) and `EXPENSES_SESSION_SECRET` (generated). Optional keys keep their defaults when absent: `EXPENSES_ORIGIN` (`https://china.muhammadyana.me`), `EXPENSES_HOST`, `EXPENSES_PORT` (`8791`), `EXPENSES_DATA_FILE`. `EXPENSES_DEV=1` also accepts the Vite origin and omits the `Secure` cookie flag; it is for local runs only.
+
+Two-way sync with the private settlement spreadsheet is optional and off until `/etc/china-itinerary-expenses-sheet.env` (root:root `0600`, a separate file, never the ask env) is present. That file holds `EXPENSES_SHEET_ID`, `EXPENSES_SHEET_TAB` (default `Pengeluaran Bersama`), `EXPENSES_SHEET_FRIEND_LABEL` (the payer name used in the sheet; the web store keeps `Teman`), `EXPENSES_SHEET_POLL_MS` (default `60000`, range 30–180 seconds), and `EXPENSES_SHEET_CREDENTIALS_B64` (base64 of a Google service account JSON key). `install.sh` does not write this file. The sheet stays private: share it only with the service account email, not anyone-with-the-link. Each data row has a hidden/narrow `ID` and `Updated` column. Web creates, edits, and deletes are pushed immediately; the service also polls the sheet on the interval and applies last-write-wins using `updatedAt`. Deletions are remembered as tombstones so they do not come back. Do not log credentials, payer labels, or item payloads.
+
 
 The login password is kept only in `~/travel/shared-expenses-password.txt` on the owner's Mac Mini (`chmod 600`). Do not print it, commit it, or put it in chat or logs.
 

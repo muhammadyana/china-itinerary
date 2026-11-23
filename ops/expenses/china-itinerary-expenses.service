@@ -6,6 +6,7 @@ After=network-online.target
 [Service]
 Type=simple
 EnvironmentFile=/etc/china-itinerary-expenses.env
+EnvironmentFile=-/etc/china-itinerary-expenses-sheet.env
 ExecStart=/usr/bin/node /opt/china-itinerary-expenses/expenses-server.mjs
 Restart=on-failure
 RestartSec=2

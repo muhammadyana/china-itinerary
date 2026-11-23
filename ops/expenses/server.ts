@@ -3,6 +3,7 @@ import { loadConfig } from './config.ts';
 import { createAuth, expiredSessionCookie, readSessionCookie, sessionCookie } from './auth.ts';
 import { loginFailures } from './limits.ts';
 import { createStore, parseInput, settle } from './store.ts';
+import { createSheetSync, type SheetSync } from './sheet.ts';
 
 const PREFIX = '/api/shared-expenses';
 const MAX_BODY = 16_384;
@@ -13,6 +14,38 @@ const config = loadConfig();
 const auth = createAuth(config.passwordHash, config.sessionSecret);
 const store = createStore(config.dataFile);
 const cookieSecure = !config.dev;
+const sheet: SheetSync | undefined = config.sheet ? createSheetSync(config.sheet) : undefined;
+const sheetPollMs = config.sheet?.pollMs ?? 60_000;
+
+async function pushItem(item: Parameters<NonNullable<SheetSync['pushItem']>>[0]): Promise<void> {
+  if (!sheet) return;
+  try {
+    await sheet.pushItem(item);
+  } catch (error) {
+    console.error('expenses: sheet push failed');
+    console.error(error);
+  }
+}
+
+async function deleteOnSheet(id: string): Promise<void> {
+  if (!sheet) return;
+  try {
+    await sheet.deleteItem(id);
+  } catch (error) {
+    console.error('expenses: sheet delete failed');
+    console.error(error);
+  }
+}
+
+async function pullSheet(): Promise<void> {
+  if (!sheet) return;
+  try {
+    await store.applySheetPull(data => sheet.pullAndReconcile(data));
+  } catch (error) {
+    console.error('expenses: sheet pull failed');
+    console.error(error);
+  }
+}
 
 function requestOrigin(req: IncomingMessage): string | undefined {
   const origin = req.headers.origin;
@@ -164,19 +197,22 @@ const server = createServer(async (req, res) => {
         send(res, 400, { error: parsed });
         return;
       }
-      send(res, 201, ledger(await store.create(parsed)));
+      const created = await store.create(parsed);
+      await pushItem(created.record);
+      send(res, 201, ledger(created.items));
       return;
     }
 
     if (matched.path === '/items/:id' && (method === 'PUT' || method === 'DELETE')) {
       const id = matched.id ?? '';
       if (method === 'DELETE') {
-        const items = await store.remove(id);
-        if (!items) {
+        const removed = await store.remove(id);
+        if (!removed) {
           send(res, 404, { error: 'not found' });
           return;
         }
-        send(res, 200, ledger(items));
+        await deleteOnSheet(removed.id);
+        send(res, 200, ledger(removed.items));
         return;
       }
       let body: unknown;
@@ -191,12 +227,13 @@ const server = createServer(async (req, res) => {
         send(res, 400, { error: parsed });
         return;
       }
-      const items = await store.update(id, parsed);
-      if (!items) {
+      const updated = await store.update(id, parsed);
+      if (!updated) {
         send(res, 404, { error: 'not found' });
         return;
       }
-      send(res, 200, ledger(items));
+      await pushItem(updated.record);
+      send(res, 200, ledger(updated.items));
       return;
     }
 
@@ -213,6 +250,11 @@ void store.list().catch(error => {
 }).then(() => {
   server.listen(config.port, config.host, () => {
     console.log(`expenses listening on ${config.host}:${config.port}`);
+    if (sheet) {
+      console.log(`expenses: sheet sync every ${sheetPollMs / 1000}s`);
+      void pullSheet();
+      setInterval(() => { void pullSheet(); }, sheetPollMs).unref();
+    }
   });
 });
 

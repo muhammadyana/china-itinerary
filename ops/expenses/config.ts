@@ -1,5 +1,6 @@
 import { mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import { parseServiceAccount, type ServiceAccount } from './google.ts';
 
 export interface PasswordHash {
   N: number;
@@ -10,6 +11,14 @@ export interface PasswordHash {
   raw: string;
 }
 
+export interface SheetConfig {
+  spreadsheetId: string;
+  tab: string;
+  friendLabel: string;
+  pollMs: number;
+  credentials: ServiceAccount;
+}
+
 export interface ExpensesConfig {
   passwordHash: PasswordHash;
   sessionSecret: Buffer;
@@ -18,6 +27,7 @@ export interface ExpensesConfig {
   port: number;
   origin: string;
   dev: boolean;
+  sheet?: SheetConfig;
 }
 
 const DEFAULT_ORIGIN = 'https://china.muhammadyana.me';
@@ -74,6 +84,38 @@ function defaultDataFile(env: NodeJS.ProcessEnv): string {
   return resolve('ops/expenses/data/data.json');
 }
 
+
+function readSheetConfig(env: NodeJS.ProcessEnv): SheetConfig | undefined {
+  const spreadsheetId = env.EXPENSES_SHEET_ID?.trim() ?? '';
+  const friendLabel = env.EXPENSES_SHEET_FRIEND_LABEL?.trim() ?? '';
+  const rawB64 = env.EXPENSES_SHEET_CREDENTIALS_B64?.trim() ?? '';
+  const rawJson = env.EXPENSES_SHEET_CREDENTIALS_JSON?.trim() ?? '';
+  if (!spreadsheetId && !friendLabel && !rawB64 && !rawJson) return undefined;
+  if (!spreadsheetId || !friendLabel || (!rawB64 && !rawJson)) {
+    console.error('expenses: sheet sync is not fully configured; set EXPENSES_SHEET_ID, EXPENSES_SHEET_FRIEND_LABEL, and the sheet credentials');
+    return undefined;
+  }
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(rawB64 ? Buffer.from(rawB64, 'base64').toString('utf8') : rawJson);
+  } catch {
+    console.error('expenses: sheet credentials were not valid JSON');
+    return undefined;
+  }
+  try {
+    return {
+      spreadsheetId,
+      tab: env.EXPENSES_SHEET_TAB?.trim() || 'Pengeluaran Bersama',
+      friendLabel,
+      pollMs: integer(env, 'EXPENSES_SHEET_POLL_MS', 60_000, 30_000, 180_000),
+      credentials: parseServiceAccount(parsed),
+    };
+  } catch (error) {
+    console.error(`expenses: ${error instanceof Error ? error.message : 'sheet credentials were rejected'}`);
+    return undefined;
+  }
+}
+
 function readConfig(env: NodeJS.ProcessEnv): ExpensesConfig {
   const secretHex = required(env, 'EXPENSES_SESSION_SECRET');
   if (!/^(?:[0-9a-fA-F]{2})+$/.test(secretHex) || secretHex.length < MIN_SESSION_SECRET_BYTES * 2) {
@@ -89,6 +131,7 @@ function readConfig(env: NodeJS.ProcessEnv): ExpensesConfig {
     port: integer(env, 'EXPENSES_PORT', 8791, 1, 65535),
     origin: parseOrigin(env.EXPENSES_ORIGIN?.trim() || DEFAULT_ORIGIN),
     dev: env.EXPENSES_DEV === '1',
+    sheet: readSheetConfig(env),
   };
 }
 

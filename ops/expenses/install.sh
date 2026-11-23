@@ -8,6 +8,7 @@
 #   printf '%s\n' "$PASSWORD" | sudo bash install.sh   # line 1 password; empty keeps current
 # The password is read with the read builtin and passed to node only through stdin, never argv, env or logs.
 # This script never reads or writes /etc/china-itinerary-ask.env.
+# Sheet sync credentials, if present, live in /etc/china-itinerary-expenses-sheet.env (root:root 0600) and are not rewritten here.
 set -euo pipefail
 umask 077
 
