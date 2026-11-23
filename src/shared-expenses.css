@@ -178,7 +178,7 @@
   vertical-align: middle;
 }
 .shared-row-action + .shared-row-action { margin-left: 2px; }
-.shared-row-action svg { width: 16px; height: 16px; }
+.shared-row-action svg { width: 16px; height: 16px; pointer-events: none; }
 .shared-row-edit:hover, .shared-row-edit:focus-visible { background: var(--color-paper-3); color: var(--color-ink); }
 .shared-row-delete:hover, .shared-row-delete:focus-visible { background: #f8e6e3; color: #9b3b2e; }
 
@@ -272,6 +272,6 @@
   }
   .shared-table td.shared-col-actions::before { display: none; }
   .shared-row-action { width: 44px; height: 44px; min-width: 44px; min-height: 44px; }
-  .shared-row-action svg { width: 18px; height: 18px; }
+  .shared-row-action svg { width: 18px; height: 18px; pointer-events: none; }
   .shared-login-row { flex-direction: column; }
 }

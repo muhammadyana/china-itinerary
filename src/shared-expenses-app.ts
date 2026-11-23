@@ -344,7 +344,8 @@ export function initializeSharedExpenses(): void {
 
   itemsSlot.addEventListener('click', async event => {
     const target = event.target;
-    if (!(target instanceof HTMLElement)) return;
+    // The icon buttons wrap an <svg>; clicks land on SVGElement, which is not an HTMLElement.
+    if (!(target instanceof Element)) return;
     const editId = target.closest<HTMLElement>('[data-shared-edit]')?.dataset.sharedEdit;
     if (editId) {
       const item = items.find(row => row.id === editId);
