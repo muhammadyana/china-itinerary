@@ -15,6 +15,7 @@ export interface PaidItem { date: string; label: string; idr: number }
 
 // The visa and the flights (outbound and return) live outside the calm booking and stay data (owner's figures, 7–8 November 2026).
 // Walk-in costs that are not a calm stay or booking are listed in extraPaid.
+// Shared Yunnan walk-in items use the owner's half (Math.round of the live ledger total).
 const beforeTrip: PaidItem[] = [
   { date: '', label: 'Visa China', idr: 1500000 },
   { date: '2026-11-07', label: 'Tiket pesawat Juneyao CGK → Shanghai Pudong → Chengdu Tianfu', idr: 2460880 },
@@ -22,7 +23,15 @@ const beforeTrip: PaidItem[] = [
 ];
 
 const extraPaid: PaidItem[] = [
+  { date: '2026-11-18', label: 'Lift Tiger Leaping Gorge, 18 Nov 09.16 (bagianmu, 50%)', idr: 228104 },
+  { date: '2026-11-19', label: 'DiDi greet pray wheel — Songzanlin (bagianmu, 50%)', idr: 40139 },
+  { date: '2026-11-20', label: 'Oyster 4 biji (bagianmu, 50%)', idr: 9830 },
+  { date: '2026-11-20', label: 'Paha ayam (bagianmu, 50%)', idr: 5617 },
+  { date: '2026-11-20', label: 'Sate China kucay (bagianmu, 50%)', idr: 9830 },
   { date: '2026-11-21', label: '住宿 guesthouse dekat Bandara Xiamen (金尚路), 1 malam', idr: 398616 },
+  { date: '2026-11-21', label: 'Sewa motor (bagianmu, 50%)', idr: 42125 },
+  { date: '2026-11-21', label: 'Sewa sepeda (bagianmu, 50%)', idr: 21063 },
+  { date: '2026-11-21', label: 'DiDi, hotel Dali → Stasiun Dali (bagianmu, 50%)', idr: 61924 },
   { date: '2026-11-22', label: 'Travel Cititrans Bandara Soekarno-Hatta → Bandung', idr: 215000 },
 ];
 
