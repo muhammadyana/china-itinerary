@@ -16,6 +16,7 @@ export interface PaidItem { date: string; label: string; idr: number }
 // The visa and the flights (outbound and return) live outside the calm booking and stay data (owner's figures, 7–8 November 2026).
 // Walk-in costs that are not a calm stay or booking are listed in extraPaid.
 // Shared Yunnan walk-in items use the owner's half (Math.round of the live ledger total).
+// November Alipay / blu / Jago walk-in items use the matching email IDR (Math.round), or a nearest-day rate marked perkiraan.
 const beforeTrip: PaidItem[] = [
   { date: '', label: 'Visa China', idr: 1500000 },
   { date: '2026-11-07', label: 'Tiket pesawat Juneyao CGK → Shanghai Pudong → Chengdu Tianfu', idr: 2460880 },
@@ -23,15 +24,44 @@ const beforeTrip: PaidItem[] = [
 ];
 
 const extraPaid: PaidItem[] = [
+  { date: '2026-11-08', label: 'Transport, 8 Nov 13.31, 四川智能交通 (perkiraan)', idr: 108166 },
+  { date: '2026-11-08', label: 'Makan & jajan 8 Nov', idr: 350845 },
+  { date: '2026-11-08', label: 'Jaket BABIBOY', idr: 940211 },
+  { date: '2026-11-09', label: 'eSIM China, 9 Nov', idr: 219937 },
+  { date: '2026-11-09', label: 'Makan & jajan 9 Nov', idr: 393835 },
+  { date: '2026-11-09', label: 'Jaket Anta', idr: 1780854 },
+  { date: '2026-11-10', label: 'Makan & jajan 10 Nov', idr: 216178 },
+  { date: '2026-11-11', label: 'Tiket/biaya kawasan Huanglong, 11 Nov', idr: 41503 },
+  { date: '2026-11-11', label: 'Makan, jajan & belanja kecil 11 Nov', idr: 278955 },
+  { date: '2026-11-12', label: 'Makan & jajan 12 Nov', idr: 217775 },
+  { date: '2026-11-13', label: 'Makan & jajan 13 Nov', idr: 730719 },
+  { date: '2026-11-13', label: 'Belanja 大布山男装, 13 Nov', idr: 164803 },
+  { date: '2026-11-13', label: 'Jaket Poloshield', idr: 1840768 },
+  { date: '2026-11-14', label: 'Makan & jajan 14 Nov', idr: 163642 },
+  { date: '2026-11-15', label: 'Makan & jajan 15 Nov', idr: 264112 },
+  { date: '2026-11-15', label: 'Tiket MRT Chengdu, 15 Nov 12.14 (perkiraan)', idr: 16784 },
+  { date: '2026-11-15', label: 'Tiket MRT Chengdu, 15 Nov 21.54', idr: 17055 },
+  { date: '2026-11-16', label: 'Transport, 16 Nov 07.30', idr: 65377 },
+  { date: '2026-11-16', label: 'Makan & jajan 16 Nov', idr: 410740 },
+  { date: '2026-11-16', label: 'Belanja 鑫鑫百货店, 16 Nov', idr: 562813 },
+  { date: '2026-11-17', label: 'Makan & jajan 17 Nov', idr: 49235 },
+  { date: '2026-11-17', label: 'Tiket shuttle Blue Moon Valley (电瓶车)', idr: 341731 },
   { date: '2026-11-18', label: 'Lift Tiger Leaping Gorge, 18 Nov 09.16 (bagianmu, 50%)', idr: 228104 },
+  { date: '2026-11-18', label: 'Makan & jajan 18 Nov', idr: 139636 },
+  { date: '2026-11-18', label: 'Belanja sabun 香格里拉花制皂, 18 Nov', idr: 193889 },
   { date: '2026-11-19', label: 'DiDi greet pray wheel — Songzanlin (bagianmu, 50%)', idr: 40139 },
+  { date: '2026-11-19', label: 'Makan & jajan 19 Nov', idr: 974225 },
   { date: '2026-11-20', label: 'Oyster 4 biji (bagianmu, 50%)', idr: 9830 },
   { date: '2026-11-20', label: 'Paha ayam (bagianmu, 50%)', idr: 5617 },
   { date: '2026-11-20', label: 'Sate China kucay (bagianmu, 50%)', idr: 9830 },
+  { date: '2026-11-20', label: 'Makan & jajan 20 Nov', idr: 136594 },
+  { date: '2026-11-20', label: 'Belanja 阿杰的小铺子, 20 Nov', idr: 142214 },
   { date: '2026-11-21', label: '住宿 guesthouse dekat Bandara Xiamen (金尚路), 1 malam', idr: 398616 },
   { date: '2026-11-21', label: 'Sewa motor (bagianmu, 50%)', idr: 42125 },
   { date: '2026-11-21', label: 'Sewa sepeda (bagianmu, 50%)', idr: 21063 },
   { date: '2026-11-21', label: 'DiDi, hotel Dali → Stasiun Dali (bagianmu, 50%)', idr: 61924 },
+  { date: '2026-11-21', label: 'Makan & jajan 21 Nov', idr: 193614 },
+  { date: '2026-11-21', label: 'Leisure bandara Changshui, 21 Nov', idr: 127557 },
   { date: '2026-11-22', label: 'Travel Cititrans Bandara Soekarno-Hatta → Bandung', idr: 215000 },
 ];
 
