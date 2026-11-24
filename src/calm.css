@@ -1,11 +1,12 @@
 /* Calm option page: the route map and day strip from route-map.css, then comparison, day cards and booking cards from prepare.css. */
 .calm-intro .prepare-link { margin-top: calc(var(--space-xs) * -1); }
 
+.calm-compare, .calm-compare > h2 { scroll-margin-top: var(--site-navigation-clearance); }
 .calm-compare h3 { font-size: var(--text-title); line-height: 1.2; }
 .calm-compare > h3 { margin-top: var(--space-xl); }
-.calm-compare-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-md); margin-top: var(--space-lg); }
+.calm-compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--space-md); margin-top: var(--space-lg); align-items: start; }
 .calm-compare-column { padding: var(--space-lg); border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-glass-solid); }
-.calm-compare-column:nth-child(2) { border-color: var(--color-accent); }
+.calm-compare-added { border-color: var(--color-accent); }
 
 .calm-list { display: grid; gap: var(--space-xs); max-width: 72ch; margin: var(--space-sm) 0 0; padding-left: 1.2em; color: var(--color-ink-2); }
 .calm-list li::marker { color: var(--color-accent); }

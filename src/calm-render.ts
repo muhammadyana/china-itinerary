@@ -85,7 +85,9 @@ function dayCard(day: CalmDay, index: number) {
 
 const bookingGroup = (group: typeof calmBookingGroups[number]) => `<div class="prepare-group"><h3>${e(group.title)}<span>${e(group.lead)}</span></h3><div class="prepare-bookings">${group.items.map(item => bookingCard(calmCard(item))).join('')}</div></div>`;
 
-const compareColumn = (title: string, items: string[]) => `<div class="calm-compare-column"><h3>${title}</h3>${textList(items)}</div>`;
+const compareColumn = (title: string, items: string[], extraClass = '') => items.length
+  ? `<div class="calm-compare-column${extraClass ? ` ${extraClass}` : ''}"><h3>${e(title)}</h3>${textList(items)}</div>`
+  : '';
 
 function intro() {
   const nights = calmDays.filter(day => day.overnight).length;
@@ -98,7 +100,7 @@ function intro() {
       <p class="prepare-link calm-page-links">${internalLink(calmItineraryPath, 'Itinerary santai, hari demi hari')}${internalLink(calmPreparePath, 'Persiapan santai')}</p>
     </div>
     <section class="prepare-section calm-compare" aria-labelledby="calm-compare-title"><h2 id="calm-compare-title">Dibanding rencana utama</h2>
-      <div class="calm-compare-grid">${compareColumn('Hilang', calmComparison.dropped)}${compareColumn('Bertambah', calmComparison.added)}${compareColumn('Tetap sama', same)}</div>
+      <div class="calm-compare-grid">${compareColumn('Hilang', calmComparison.dropped)}${compareColumn('Bertambah', calmComparison.added, 'calm-compare-added')}${compareColumn('Tetap sama', same)}</div>
       <h3>Yang perlu ditimbang</h3>${textList(calmTradeOffs)}
     </section>`;
 }
